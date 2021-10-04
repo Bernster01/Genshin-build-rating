@@ -1,3 +1,4 @@
+<!DOCTYPE html> 
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 </head>
 
 
-<body>
+<body onload="LoadCharacters()">
 <header>
 
 <h1>Rate my build<h1>
@@ -27,202 +28,13 @@
 
 <div id="CharacterContainer" class="noselect">
 
-<div class="CharacterBox">
+<div class="CharacterBox" id="CharacterBox">
 
 <div class="Character" title="Albedo" onmouseup="selectCharacter(this)">
 <img alt="Albedo" src="Characters/Albedo.png"  >
 <div class="GeoCharacter"><span>Albedo</span></div>
 </div>
 
-<div class="Character" title="Amber" onmouseup="selectCharacter(this)">
-<img alt="Amber" src="Characters/Amber.png" >
-<div class="PyroCharacter"><span>Amber</span></div>
-</div>
-
-<div class="Character" title="Ayaka" onmouseup="selectCharacter(this)">
-<img alt="Ayaka" src="Characters/Ayaka.png" >
-<div class="CryoCharacter"><span>Ayaka</span></div>
-</div>
-
-<div class="Character" title="Barbara" onmouseup="selectCharacter(this)">
-<img alt="Barbara" src="Characters/Barbara.png" >
-<div class="HydroCharacter"><span>Barbara</span></div>
-</div>
-
-<div class="Character" title="Beidou" onmouseup="selectCharacter(this)">
-<img alt="Beidou" src="Characters/Beidou.png" >
-<div class="ElectroCharacter"><span>Beidou</span></div>
-</div>
-
-<div class="Character" title="Bennett" onmouseup="selectCharacter(this)">
-<img alt="Bennett" src="Characters/Bennett.png" >
-<div class="PyroCharacter"><span>Bennett</span></div>
-</div>
-
-<div class="Character" title="Chongyun" onmouseup="selectCharacter(this)">
-<img alt="Chongyun" src="Characters/Chongyun.png" >
-<div class="CryoCharacter"><span>Chongyun</span></div>
-</div>
-
-<div class="Character" title="Diluc" onmouseup="selectCharacter(this)">
-<img alt="Diluc" src="Characters/Diluc.png" >
-<div class="PyroCharacter"><span>Diluc</span></div>
-</div>
-
-<div class="Character" title="Diona" onmouseup="selectCharacter(this)">
-<img alt="Diona" src="Characters/Diona.png" >
-<div class="CryoCharacter"><span>Diona</span></div>
-</div>
-
-<div class="Character" title="Eula" onmouseup="selectCharacter(this)">
-<img alt="Eula" src="Characters/Eula.png" >
-<div class="CryoCharacter"><span>Eula</span></div>
-</div>
-
-<div class="Character" title="Fischl" onmouseup="selectCharacter(this)">
-<img alt="Fischl" src="Characters/Fischl.png" >
-<div class="ElectroCharacter"><span>Fischl</span></div>
-</div>
-
-<div class="Character" title="Ganyu" onmouseup="selectCharacter(this)">
-<img alt="Ganyu" src="Characters/Ganyu.png" >
-<div class="CryoCharacter"><span>Ganyu</span></div>
-</div>
-
-<div class="Character" title="Hu Tao" onmouseup="selectCharacter(this)">
-<img alt="Hu Tao" src="Characters/Hu Tao.png" >
-<div class="PyroCharacter"><span>Hu Tao</span></div>
-</div>
-
-<div class="Character" title="Jean" onmouseup="selectCharacter(this)">
-<img alt="Jean" src="Characters/Jean.png" >
-<div class="AnemoCharacter"><span>Jean</span></div>
-</div>
-
-<div class="Character" title="Kaeya" onmouseup="selectCharacter(this)">
-<img alt="Kaeya" src="Characters/Kaeya.png" >
-<div class="CryoCharacter"><span>Kaeya</span></div>
-</div>
-
-<div class="Character" title="Kazuha" onmouseup="selectCharacter(this)">
-<img alt="Kazuha" src="Characters/Kazuha.png" >
-<div class="AnemoCharacter"><span>Kazuha</span></div>
-</div>
-
-<div class="Character" title="Keqing" onmouseup="selectCharacter(this)">
-<img alt="Keqing" src="Characters/Keqing.png" >
-<div class="ElectroCharacter"><span>Keqing</span></div>
-</div>
-
-<div class="Character" title="Klee" onmouseup="selectCharacter(this)">
-<img alt="Klee" src="Characters/Klee.png" >
-<div class="PyroCharacter"><span>Klee</span></div>
-</div>
-
-<div class="Character" title="Lisa" onmouseup="selectCharacter(this)">
-<img alt="Lisa" src="Characters/Lisa.png" >
-<div class="ElectroCharacter"><span>Lisa</span></div>
-</div>
-
-<div class="Character" title="Mona" onmouseup="selectCharacter(this)">
-<img alt="Mona" src="Characters/Mona.png" >
-<div class="HydroCharacter"><span>Mona</span></div>
-</div>
-
-<div class="Character" title="Ningguang" onmouseup="selectCharacter(this)">
-<img alt="Ningguang" src="Characters/Ningguang.png" >
-<div class="GeoCharacter"><span>Ningguang</span></div>
-</div>
-
-<div class="Character" title="Noelle" onmouseup="selectCharacter(this)">
-<img alt="Noelle" src="Characters/Noelle.png" >
-<div class="GeoCharacter"><span>Noelle</span></div>
-</div>
-
-<div class="Character" title="Qiqi" onmouseup="selectCharacter(this)">
-<img alt="Qiqi" src="Characters/Qiqi.png" >
-<div class="CryoCharacter"><span>Qiqi</span></div>
-</div>
-
-<div class="Character" title="Razor" onmouseup="selectCharacter(this)">
-<img alt="Razor" src="Characters/Razor.png" >
-<div class="ElectroCharacter"><span>Razor</span></div>
-</div>
-
-<div class="Character" title="Rosaria" onmouseup="selectCharacter(this)">
-<img alt="Rosaria" src="Characters/Rosaria.png"  >
-<div class="CryoCharacter"><span>Rosaria</span></div>
-</div>
-
-<div class="Character" title="Sayu" onmouseup="selectCharacter(this)">
-<img alt="Sayu" src="Characters/Sayu.png"  >
-<div class="AnemoCharacter"><span>Sayu</span></div>
-</div>
-
-<div class="Character" title="Sucrose" onmouseup="selectCharacter(this)">
-<img alt="Sucrose" src="Characters/Sucrose.png"  >
-<div class="AnemoCharacter"><span>Sucrose</span></div>
-</div>
-
-<div class="Character" title="Tartaglia" onmouseup="selectCharacter(this)">
-<img alt="Tartaglia" src="Characters/Tartaglia.png"  >
-<div class="HydroCharacter"><span>Tartaglia</span></div>
-</div>
-
-<div class="Character"  title="Traveler(Anemo)" onmouseup="selectCharacter(this)">
-<img alt="Traveler(Anemo)" src="Characters/Traveler.png"  >
-<div class="AnemoCharacter"><span>Traveler</span></div>
-</div>
-
-<div class="Character" title="Traveler(Electro)" onmouseup="selectCharacter(this)">
-<img alt="Traveler(Electro)" src="Characters/Traveler.png"  >
-<div class="ElectroCharacter"><span>Traveler</span></div>
-</div>
-
-<div class="Character" title="Traveler(Geo)" onmouseup="selectCharacter(this)">
-<img alt="Traveler(Geo)" src="Characters/Traveler.png"  >
-<div class="GeoCharacter"><span>Traveler</span></div>
-</div>
-
-<div class="Character" title="Venti"onmouseup="selectCharacter(this)">
-<img alt="Venti" src="Characters/Venti.png"  >
-<div class="AnemoCharacter"><span>Venti</span></div>
-</div>
-
-<div class="Character" title="Xiangling" onmouseup="selectCharacter(this)">
-<img alt="Xiangling" src="Characters/Xiangling.png"  >
-<div class="PyroCharacter"><span>Xiangling</span></div>
-</div>
-
-<div class="Character" title="Xiao" onmouseup="selectCharacter(this)">
-<img alt="Xiao" src="Characters/Xiao.png"  >
-<div class="AnemoCharacter"><span>Xiao</span></div>
-</div>
-
-<div class="Character" title="Xingqiu" onmouseup="selectCharacter(this)">
-<img alt="Xingqiu" src="Characters/Xingqiu.png"  >
-<div class="HydroCharacter"><span>Xingqiu</span></div>
-</div>
-
-<div class="Character" title="Xinyan" onmouseup="selectCharacter(this)">
-<img alt="Xinyan" src="Characters/Xinyan.png"  >
-<div class="PyroCharacter"><span>Xinyan</span></div>
-</div>
-
-<div class="Character" title="Yanfei" onmouseup="selectCharacter(this)">
-<img alt="Yanfei" src="Characters/Yanfei.png"  >
-<div class="PyroCharacter"><span>Yanfei</span></div>
-</div>
-
-<div class="Character" title="Yoimiya" onmouseup="selectCharacter(this)">
-<img alt="Yoimiya" src="Characters/Yoimiya.png"  >
-<div class="PyroCharacter"><span>Yoimiya</span></div>
-</div>
-
-<div class="Character" title="Zhongli" onmouseup="selectCharacter(this)">
-<img alt="Zhongli" src="Characters/Zhongli.png"  >
-<div class="GeoCharacter"><span>Zhongli</span></div>
-</div>
 
 
 
@@ -1098,7 +910,12 @@
 <footer>
 
 </footer>
+<script src="js/LoadCharactersHtml.js">
 
+</script>
+<script>
+
+</script>
 <script>
 document.addEventListener('mouseup', function(e) {
     var container = document.getElementById('CharacterContainer');
