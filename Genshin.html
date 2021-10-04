@@ -1,0 +1,1231 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="CSS/CSS.css">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
+</head>
+
+
+<body>
+<header>
+
+<h1>Rate my build<h1>
+
+</header>
+<div>
+<h1>Select Character</h1>
+</div>
+<div id="CharacterSelection">
+<div class="EmptyCharacter" onclick="displayCharcters()" id="SelectCharcter">
+<img alt="Select" src="Characters/Paimon.png" title="Select" id="SelectCharcterImg"></img>
+<p id="SelectCharcterText"><span>Select</span></p>
+</div>
+
+<div id="CharacterContainer" class="noselect">
+
+<div class="CharacterBox">
+
+<div class="Character" title="Albedo" onmouseup="selectCharacter(this)">
+<img alt="Albedo" src="Characters/Albedo.png"  >
+<div class="GeoCharacter"><span>Albedo</span></div>
+</div>
+
+<div class="Character" title="Amber" onmouseup="selectCharacter(this)">
+<img alt="Amber" src="Characters/Amber.png" >
+<div class="PyroCharacter"><span>Amber</span></div>
+</div>
+
+<div class="Character" title="Ayaka" onmouseup="selectCharacter(this)">
+<img alt="Ayaka" src="Characters/Ayaka.png" >
+<div class="CryoCharacter"><span>Ayaka</span></div>
+</div>
+
+<div class="Character" title="Barbara" onmouseup="selectCharacter(this)">
+<img alt="Barbara" src="Characters/Barbara.png" >
+<div class="HydroCharacter"><span>Barbara</span></div>
+</div>
+
+<div class="Character" title="Beidou" onmouseup="selectCharacter(this)">
+<img alt="Beidou" src="Characters/Beidou.png" >
+<div class="ElectroCharacter"><span>Beidou</span></div>
+</div>
+
+<div class="Character" title="Bennett" onmouseup="selectCharacter(this)">
+<img alt="Bennett" src="Characters/Bennett.png" >
+<div class="PyroCharacter"><span>Bennett</span></div>
+</div>
+
+<div class="Character" title="Chongyun" onmouseup="selectCharacter(this)">
+<img alt="Chongyun" src="Characters/Chongyun.png" >
+<div class="CryoCharacter"><span>Chongyun</span></div>
+</div>
+
+<div class="Character" title="Diluc" onmouseup="selectCharacter(this)">
+<img alt="Diluc" src="Characters/Diluc.png" >
+<div class="PyroCharacter"><span>Diluc</span></div>
+</div>
+
+<div class="Character" title="Diona" onmouseup="selectCharacter(this)">
+<img alt="Diona" src="Characters/Diona.png" >
+<div class="CryoCharacter"><span>Diona</span></div>
+</div>
+
+<div class="Character" title="Eula" onmouseup="selectCharacter(this)">
+<img alt="Eula" src="Characters/Eula.png" >
+<div class="CryoCharacter"><span>Eula</span></div>
+</div>
+
+<div class="Character" title="Fischl" onmouseup="selectCharacter(this)">
+<img alt="Fischl" src="Characters/Fischl.png" >
+<div class="ElectroCharacter"><span>Fischl</span></div>
+</div>
+
+<div class="Character" title="Ganyu" onmouseup="selectCharacter(this)">
+<img alt="Ganyu" src="Characters/Ganyu.png" >
+<div class="CryoCharacter"><span>Ganyu</span></div>
+</div>
+
+<div class="Character" title="Hu Tao" onmouseup="selectCharacter(this)">
+<img alt="Hu Tao" src="Characters/Hu Tao.png" >
+<div class="PyroCharacter"><span>Hu Tao</span></div>
+</div>
+
+<div class="Character" title="Jean" onmouseup="selectCharacter(this)">
+<img alt="Jean" src="Characters/Jean.png" >
+<div class="AnemoCharacter"><span>Jean</span></div>
+</div>
+
+<div class="Character" title="Kaeya" onmouseup="selectCharacter(this)">
+<img alt="Kaeya" src="Characters/Kaeya.png" >
+<div class="CryoCharacter"><span>Kaeya</span></div>
+</div>
+
+<div class="Character" title="Kazuha" onmouseup="selectCharacter(this)">
+<img alt="Kazuha" src="Characters/Kazuha.png" >
+<div class="AnemoCharacter"><span>Kazuha</span></div>
+</div>
+
+<div class="Character" title="Keqing" onmouseup="selectCharacter(this)">
+<img alt="Keqing" src="Characters/Keqing.png" >
+<div class="ElectroCharacter"><span>Keqing</span></div>
+</div>
+
+<div class="Character" title="Klee" onmouseup="selectCharacter(this)">
+<img alt="Klee" src="Characters/Klee.png" >
+<div class="PyroCharacter"><span>Klee</span></div>
+</div>
+
+<div class="Character" title="Lisa" onmouseup="selectCharacter(this)">
+<img alt="Lisa" src="Characters/Lisa.png" >
+<div class="ElectroCharacter"><span>Lisa</span></div>
+</div>
+
+<div class="Character" title="Mona" onmouseup="selectCharacter(this)">
+<img alt="Mona" src="Characters/Mona.png" >
+<div class="HydroCharacter"><span>Mona</span></div>
+</div>
+
+<div class="Character" title="Ningguang" onmouseup="selectCharacter(this)">
+<img alt="Ningguang" src="Characters/Ningguang.png" >
+<div class="GeoCharacter"><span>Ningguang</span></div>
+</div>
+
+<div class="Character" title="Noelle" onmouseup="selectCharacter(this)">
+<img alt="Noelle" src="Characters/Noelle.png" >
+<div class="GeoCharacter"><span>Noelle</span></div>
+</div>
+
+<div class="Character" title="Qiqi" onmouseup="selectCharacter(this)">
+<img alt="Qiqi" src="Characters/Qiqi.png" >
+<div class="CryoCharacter"><span>Qiqi</span></div>
+</div>
+
+<div class="Character" title="Razor" onmouseup="selectCharacter(this)">
+<img alt="Razor" src="Characters/Razor.png" >
+<div class="ElectroCharacter"><span>Razor</span></div>
+</div>
+
+<div class="Character" title="Rosaria" onmouseup="selectCharacter(this)">
+<img alt="Rosaria" src="Characters/Rosaria.png"  >
+<div class="CryoCharacter"><span>Rosaria</span></div>
+</div>
+
+<div class="Character" title="Sayu" onmouseup="selectCharacter(this)">
+<img alt="Sayu" src="Characters/Sayu.png"  >
+<div class="AnemoCharacter"><span>Sayu</span></div>
+</div>
+
+<div class="Character" title="Sucrose" onmouseup="selectCharacter(this)">
+<img alt="Sucrose" src="Characters/Sucrose.png"  >
+<div class="AnemoCharacter"><span>Sucrose</span></div>
+</div>
+
+<div class="Character" title="Tartaglia" onmouseup="selectCharacter(this)">
+<img alt="Tartaglia" src="Characters/Tartaglia.png"  >
+<div class="HydroCharacter"><span>Tartaglia</span></div>
+</div>
+
+<div class="Character"  title="Traveler(Anemo)" onmouseup="selectCharacter(this)">
+<img alt="Traveler(Anemo)" src="Characters/Traveler.png"  >
+<div class="AnemoCharacter"><span>Traveler</span></div>
+</div>
+
+<div class="Character" title="Traveler(Electro)" onmouseup="selectCharacter(this)">
+<img alt="Traveler(Electro)" src="Characters/Traveler.png"  >
+<div class="ElectroCharacter"><span>Traveler</span></div>
+</div>
+
+<div class="Character" title="Traveler(Geo)" onmouseup="selectCharacter(this)">
+<img alt="Traveler(Geo)" src="Characters/Traveler.png"  >
+<div class="GeoCharacter"><span>Traveler</span></div>
+</div>
+
+<div class="Character" title="Venti"onmouseup="selectCharacter(this)">
+<img alt="Venti" src="Characters/Venti.png"  >
+<div class="AnemoCharacter"><span>Venti</span></div>
+</div>
+
+<div class="Character" title="Xiangling" onmouseup="selectCharacter(this)">
+<img alt="Xiangling" src="Characters/Xiangling.png"  >
+<div class="PyroCharacter"><span>Xiangling</span></div>
+</div>
+
+<div class="Character" title="Xiao" onmouseup="selectCharacter(this)">
+<img alt="Xiao" src="Characters/Xiao.png"  >
+<div class="AnemoCharacter"><span>Xiao</span></div>
+</div>
+
+<div class="Character" title="Xingqiu" onmouseup="selectCharacter(this)">
+<img alt="Xingqiu" src="Characters/Xingqiu.png"  >
+<div class="HydroCharacter"><span>Xingqiu</span></div>
+</div>
+
+<div class="Character" title="Xinyan" onmouseup="selectCharacter(this)">
+<img alt="Xinyan" src="Characters/Xinyan.png"  >
+<div class="PyroCharacter"><span>Xinyan</span></div>
+</div>
+
+<div class="Character" title="Yanfei" onmouseup="selectCharacter(this)">
+<img alt="Yanfei" src="Characters/Yanfei.png"  >
+<div class="PyroCharacter"><span>Yanfei</span></div>
+</div>
+
+<div class="Character" title="Yoimiya" onmouseup="selectCharacter(this)">
+<img alt="Yoimiya" src="Characters/Yoimiya.png"  >
+<div class="PyroCharacter"><span>Yoimiya</span></div>
+</div>
+
+<div class="Character" title="Zhongli" onmouseup="selectCharacter(this)">
+<img alt="Zhongli" src="Characters/Zhongli.png"  >
+<div class="GeoCharacter"><span>Zhongli</span></div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+
+<div id="LoadoutContainer">
+<div id="CharacterPageContainer">
+
+<div id="LevelContainer">
+
+<label for="Level"> Enter character level</label>	
+			<select id="Level">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20/20</option>
+				<option value="20/40">20/40</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+				<option value="32">32</option>
+				<option value="33">33</option>
+				<option value="34">34</option>
+				<option value="35">35</option>
+				<option value="36">36</option>
+				<option value="37">37</option>
+				<option value="38">38</option>
+				<option value="39">39</option>
+				<option value="40/40">40/40</option>
+				<option value="40/50">40/50</option>
+				<option value="51">51</option>
+				<option value="52">52</option>
+				<option value="53">53</option>
+				<option value="54">54</option>
+				<option value="55">55</option>
+				<option value="56">56</option>
+				<option value="57">57</option>
+				<option value="58">58</option>
+				<option value="59">59</option>
+				<option value="60/60">60/60</option>
+				<option value="60/70">60/70</option>
+				<option value="61">61</option>
+				<option value="62">62</option>
+				<option value="63">63</option>
+				<option value="64">64</option>
+				<option value="65">65</option>
+				<option value="66">66</option>
+				<option value="67">67</option>
+				<option value="68">68</option>
+				<option value="69">69</option>
+				<option value="70/70">70/70</option>
+				<option value="70/80">70/80</option>
+				<option value="71">71</option>
+				<option value="72">72</option>
+				<option value="73">73</option>
+				<option value="74">74</option>
+				<option value="75">75</option>
+				<option value="76">76</option>
+				<option value="77">77</option>
+				<option value="78">78</option>
+				<option value="79">79</option>
+				<option value="80/80">80/80</option>
+				<option value="80/90">80/90</option>
+				<option value="81">81</option>
+				<option value="82">82</option>
+				<option value="83">83</option>
+				<option value="84">84</option>
+				<option value="85">85</option>
+				<option value="86">86</option>
+				<option value="87">87</option>
+				<option value="88">88</option>
+				<option value="89">89</option>
+				<option value="90">90</option>
+				
+				
+			</select>
+
+</div>
+<div class="Constellations">
+<label>Constellation</label>
+	<select id="Constellation">
+		<option value="0">C0</option>
+		<option value="1">C1</option>
+		<option value="2">C2</option>
+		<option value="3">C3</option>
+		<option value="4">C4</option>
+		<option value="5">C5</option>
+		<option value="6">C6</option>
+	</select>
+</div>
+
+<div id="WeaponContainer">
+<h2>Weapon</h2>
+<div class="Weapon" onclick="displayWeapons()" id="SelectWeapon">
+<img alt="Select" src="Weapons/Icon_Sword.png" title="Select" id="SelectWeaponImg"></img>
+<p id="SelectWeaponText"><span>Select</span></p>
+</div>
+<div id="WeaponLevel">
+<label>Enter weapon level</label>
+<select id="WeaponLevel">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20/20</option>
+				<option value="20/40">20/40</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+				<option value="32">32</option>
+				<option value="33">33</option>
+				<option value="34">34</option>
+				<option value="35">35</option>
+				<option value="36">36</option>
+				<option value="37">37</option>
+				<option value="38">38</option>
+				<option value="39">39</option>
+				<option value="40/40">40/40</option>
+				<option value="40/50">40/50</option>
+				<option value="51">51</option>
+				<option value="52">52</option>
+				<option value="53">53</option>
+				<option value="54">54</option>
+				<option value="55">55</option>
+				<option value="56">56</option>
+				<option value="57">57</option>
+				<option value="58">58</option>
+				<option value="59">59</option>
+				<option value="60/60">60/60</option>
+				<option value="60/70">60/70</option>
+				<option value="61">61</option>
+				<option value="62">62</option>
+				<option value="63">63</option>
+				<option value="64">64</option>
+				<option value="65">65</option>
+				<option value="66">66</option>
+				<option value="67">67</option>
+				<option value="68">68</option>
+				<option value="69">69</option>
+				<option value="70/70">70/70</option>
+				<option value="70/80">70/80</option>
+				<option value="71">71</option>
+				<option value="72">72</option>
+				<option value="73">73</option>
+				<option value="74">74</option>
+				<option value="75">75</option>
+				<option value="76">76</option>
+				<option value="77">77</option>
+				<option value="78">78</option>
+				<option value="79">79</option>
+				<option value="80/80">80/80</option>
+				<option value="80/90">80/90</option>
+				<option value="81">81</option>
+				<option value="82">82</option>
+				<option value="83">83</option>
+				<option value="84">84</option>
+				<option value="85">85</option>
+				<option value="86">86</option>
+				<option value="87">87</option>
+				<option value="88">88</option>
+				<option value="89">89</option>
+				<option value="90">90</option>
+				
+				
+			</select>
+
+</div>
+</div>
+<div id="TalentContainer">
+<h2>Talents</h2>
+	<div class="Talent" id="Talent_1">
+		<label for="Talent_1"> Enter level for Basic Attacks</label>	
+			<select>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+			</select>
+				
+			
+	</div>	
+	<div class="Talent" id="Talent_2">
+		<label for="Talent_2"> Enter level for Elemental Skill</label>
+			<select>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+			</select>
+			
+				
+	</div>	
+	<div class="Talent" id="Talent_3">
+		<label for="Talent_3"> Enter level for Elemental Burst</label>
+			<select>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+			</select>
+			
+		
+	</div>
+</div>
+
+
+
+
+
+</div>
+<h2>Artifacts</h2>
+<div id="ArtifactContainer">
+
+	<form class="Artifacts">
+	<fieldset id="Artifact_circlet">
+	<legend align="center">
+		<img id="Circlet" src="Artifacts/Circlet.png" alt="Circlet" title="Circlet"></img>
+			<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
+				<option value="None">None</option>
+				<option value="Archaic Petra">Archaic Petra</option>
+				<option value="Blizzard Strayer">Blizzard Strayer</option>
+				<option value="Bloodstained Chivalry">Bloodstained Chivalry</option>
+				<option value="Crimson Witch of Flames">Crimson Witch of Flames</option>
+				<option value="Emblem of Severed Fate">Emblem of Severed Fate</option>
+				<option value="Gladiator's Finale">Gladiator's Finale</option>
+				<option value="Heart of Depth">Heart of Depth</option>
+				<option value="Lavawalker">Lavawalker</option>
+				<option value="Maiden Beloved">Maiden Beloved</option>
+				<option value="Noblesse Oblige">Noblesse Oblige</option>
+				<option value="Pale Flame">Pale Flame</option>
+				<option value="Retracing Bolide">Retracing Bolide</option>
+				<option value="Shimenawa's Reminiscence">Shimenawa's Reminiscence</option>
+				<option value="Tenacity of the Millelith">Tenacity of the Millelith</option>
+				<option value="Thundering Fury">Thundering Fury</option>
+				<option value="Thundersoother">Thundersoother</option>
+				<option value="Viridescent Venerer">Viridescent Venerer</option>
+				<option value="Wanderer's Troupe">Wanderer's Troupe</option>
+			</select>
+	</legend>
+		
+		<label for="Artifact_circlet_mainstat">Choose Main stat</label>
+			<select id="Circlet_mainstat">
+				<option value="hp%">HP%</option>
+				<option value="atk%">ATK%</option>
+				<option value="def%">DEF%</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+				<option value="hb%">Healing Bonus%</option>
+			</select>
+						<label for="Circlet_mainstat_value">Enter value</label>
+						<input type="text" id="Circlet_mainstat_value"></input>
+						<br />
+						
+	
+	
+		<label for="Artifact_circlet_substat_1">Choose sub stat &nbsp </label>
+			<select id="Circlet_substat_1">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+			<label for="Circlet_substat_1_value">Enter value</label>
+			<input type="text" id="Circlet_substat_1_value"></input>
+				<br />
+						
+	
+		<label for="Artifact_circlet_substat_2">Choose sub stat &nbsp </label>
+			<select id="Circlet_substat_2">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+			<label for="Circlet_substat_2_value">Enter value</label>
+			<input type="text" id="Circlet_substat_2_value"></input>
+				<br />
+						
+	
+		<label for="Artifact_circlet_substat_3">Choose sub stat &nbsp </label>
+			<select id="Circlet_substat_3">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+			<label for="Circlet_substat_3_value">Enter value</label>
+			<input type="text" id="Circlet_substat_3_value"></input>
+				<br />
+						
+	
+		<label for="Artifact_circlet_substat_4">Choose sub stat &nbsp </label>
+			<select id="Circlet_substat_4">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+			<label for="Circlet_substat_4_value">Enter value</label>
+			<input type="text" id="Circlet_substat_4_value"></input>
+				<br />
+						
+
+</fieldset>
+	</form>
+	
+	<form class="Artifacts">
+	<fieldset id="Artifact_flower">
+	<legend>
+		<img id="Flower" src="Artifacts/Flower.png" alt="Flower" title="Flower" height="30px" width="30px"></img>
+			<select id="Flower_set" onchange="displayArtifact(Artifact_flower)">
+				<option value="None">None</option>
+				<option value="Archaic Petra">Archaic Petra</option>
+				<option value="Blizzard Strayer">Blizzard Strayer</option>
+				<option value="Bloodstained Chivalry">Bloodstained Chivalry</option>
+				<option value="Crimson Witch of Flames">Crimson Witch of Flames</option>
+				<option value="Emblem of Severed Fate">Emblem of Severed Fate</option>
+				<option value="Gladiator's Finale">Gladiator's Finale</option>
+				<option value="Heart of Depth">Heart of Depth</option>
+				<option value="Lavawalker">Lavawalker</option>
+				<option value="Maiden Beloved">Maiden Beloved</option>
+				<option value="Noblesse Oblige">Noblesse Oblige</option>
+				<option value="Pale Flame">Pale Flame</option>
+				<option value="Retracing Bolide">Retracing Bolide</option>
+				<option value="Shimenawa's Reminiscence">Shimenawa's Reminiscence</option>
+				<option value="Tenacity of the Millelith">Tenacity of the Millelith</option>
+				<option value="Thundering Fury">Thundering Fury</option>
+				<option value="Thundersoother">Thundersoother</option>
+				<option value="Viridescent Venerer">Viridescent Venerer</option>
+				<option value="Wanderer's Troupe">Wanderer's Troupe</option>
+			</select>
+	</legend>
+		
+		<label>Choose Main stat</label>
+			<select id="Flower_mainstat">
+				<option value="HP">HP</option>
+			</select>
+						<label>Enter value</label>
+						<input type="text" id="Flower_mainstat_value"></input>
+						<br />
+	
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Flower_substat_1">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+						<label>Enter value</label>
+						<input type="text" id="Flower_substat_1_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Flower_substat_2">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+						<label>Enter value</label>
+						<input type="text" id="Flower_substat_2_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Flower_substat_3">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+						<label>Enter value</label>
+						<input type="text" id="Flower_substat_3_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Flower_substat_4">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+						<label>Enter value</label>
+						<input type="text" id="Flower_substat_4_value"></input>
+						<br />
+
+</fieldset>
+	</form>
+	
+	<form class="Artifacts">
+	<fieldset id="Artifact_plume">
+	<legend>
+		<img id="Plume" src="Artifacts/Plume.png" alt="Plume" title="Plume" height="30px" width="30px"></img>
+			<select id="Plume_set" onchange="displayArtifact(Artifact_plume)">
+				<option value="None">None</option>
+				<option value="Archaic Petra">Archaic Petra</option>
+				<option value="Blizzard Strayer">Blizzard Strayer</option>
+				<option value="Bloodstained Chivalry">Bloodstained Chivalry</option>
+				<option value="Crimson Witch of Flames">Crimson Witch of Flames</option>
+				<option value="Emblem of Severed Fate">Emblem of Severed Fate</option>
+				<option value="Gladiator's Finale">Gladiator's Finale</option>
+				<option value="Heart of Depth">Heart of Depth</option>
+				<option value="Lavawalker">Lavawalker</option>
+				<option value="Maiden Beloved">Maiden Beloved</option>
+				<option value="Noblesse Oblige">Noblesse Oblige</option>
+				<option value="Pale Flame">Pale Flame</option>
+				<option value="Retracing Bolide">Retracing Bolide</option>
+				<option value="Shimenawa's Reminiscence">Shimenawa's Reminiscence</option>
+				<option value="Tenacity of the Millelith">Tenacity of the Millelith</option>
+				<option value="Thundering Fury">Thundering Fury</option>
+				<option value="Thundersoother">Thundersoother</option>
+				<option value="Viridescent Venerer">Viridescent Venerer</option>
+				<option value="Wanderer's Troupe">Wanderer's Troupe</option>
+			</select>
+	</legend>
+		
+		<label>Choose Main stat</label>
+			<select id="Plume_mainstat">
+				<option value="ATK">ATK</option>
+			</select>
+			<label>Enter value</label>
+						<input type="text" id="Plume_mainstat_value"></input>
+							<br />
+	
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Plume_substat_1">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Plume_substat_1_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Plume_substat_2">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Plume_substat_2_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Plume_substat_3">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Plume_substat_3_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Plume_substat_4">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Plume_substat_4_value"></input>
+						<br />
+
+</fieldset>
+	</form>
+
+	<form class="Artifacts" id="ArtifactSands">
+	<fieldset id="Artifact_sands">
+	<legend>
+		<img id="Sands" src="Artifacts/Sands.png" alt="Sands" title="Sands" height="30px" width="30px"></img>
+			<select id="Sands_set" onchange="displayArtifact(Artifact_sands)">
+				<option value="None">None</option>
+				<option value="Archaic Petra">Archaic Petra</option>
+				<option value="Blizzard Strayer">Blizzard Strayer</option>
+				<option value="Bloodstained Chivalry">Bloodstained Chivalry</option>
+				<option value="Crimson Witch of Flames">Crimson Witch of Flames</option>
+				<option value="Emblem of Severed Fate">Emblem of Severed Fate</option>
+				<option value="Gladiator's Finale">Gladiator's Finale</option>
+				<option value="Heart of Depth">Heart of Depth</option>
+				<option value="Lavawalker">Lavawalker</option>
+				<option value="Maiden Beloved">Maiden Beloved</option>
+				<option value="Noblesse Oblige">Noblesse Oblige</option>
+				<option value="Pale Flame">Pale Flame</option>
+				<option value="Retracing Bolide">Retracing Bolide</option>
+				<option value="Shimenawa's Reminiscence">Shimenawa's Reminiscence</option>
+				<option value="Tenacity of the Millelith">Tenacity of the Millelith</option>
+				<option value="Thundering Fury">Thundering Fury</option>
+				<option value="Thundersoother">Thundersoother</option>
+				<option value="Viridescent Venerer">Viridescent Venerer</option>
+				<option value="Wanderer's Troupe">Wanderer's Troupe</option>
+			</select>
+	</legend>
+		
+		<label>Choose Main stat</label>
+			<select id="Sands_mainstat">
+				<option value="hp%">HP%</option>
+				<option value="atk%">ATK%</option>
+				<option value="def%">DEF%</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Sands_mainstat_value"></input>
+						<br />
+	
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Sands_substat_1">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Sands_substat_1_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Sands_substat_2">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Sands_substat_2_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Sands_substat_3">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Sands_substat_3_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Sands_substat_4">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Sands_substat_4_value"></input>
+						<br />
+
+</fieldset>
+	</form>
+
+	<form class="Artifacts" >
+	<fieldset id="Artifact_goblet">
+	<legend>
+		<img id="Goblet" src="Artifacts/Goblet.png" alt="Goblet" title="Goblet" height="30px" width="30px"></img>
+			<select id="Goblet_set" onchange="displayArtifact(Artifact_goblet)">
+				<option value="None">None</option>
+				<option value="Archaic Petra">Archaic Petra</option>
+				<option value="Blizzard Strayer">Blizzard Strayer</option>
+				<option value="Bloodstained Chivalry">Bloodstained Chivalry</option>
+				<option value="Crimson Witch of Flames">Crimson Witch of Flames</option>
+				<option value="Emblem of Severed Fate">Emblem of Severed Fate</option>
+				<option value="Gladiator's Finale">Gladiator's Finale</option>
+				<option value="Heart of Depth">Heart of Depth</option>
+				<option value="Lavawalker">Lavawalker</option>
+				<option value="Maiden Beloved">Maiden Beloved</option>
+				<option value="Noblesse Oblige">Noblesse Oblige</option>
+				<option value="Pale Flame">Pale Flame</option>
+				<option value="Retracing Bolide">Retracing Bolide</option>
+				<option value="Shimenawa's Reminiscence">Shimenawa's Reminiscence</option>
+				<option value="Tenacity of the Millelith">Tenacity of the Millelith</option>
+				<option value="Thundering Fury">Thundering Fury</option>
+				<option value="Thundersoother">Thundersoother</option>
+				<option value="Viridescent Venerer">Viridescent Venerer</option>
+				<option value="Wanderer's Troupe">Wanderer's Troupe</option>
+			</select>
+	</legend>
+		
+		<label>Choose Main stat</label>
+			<select id="Goblet_mainstat">
+				<option value="hp%">HP%</option>
+				<option value="atk%">ATK%</option>
+				<option value="def%">DEF%</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="eDMG%">Elemental DMG Bonus%</option>
+				<option value="pDMG%">Physical DMG Bonus%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Goblet_mainstat_value"></input>
+						<br />
+	
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Goblet_substat_1">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Goblet_substat_1_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Goblet_substat_2">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Goblet_substat_2_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Goblet_substat_3">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Goblet_substat_3_value"></input>
+						<br />
+	
+		<label>Choose sub stat &nbsp </label>
+			<select id="Goblet_substat_4">
+				<option value="none">None</option>
+				<option value="hp%">HP%</option>
+				<option value="hp">HP</option>
+				<option value="atk%">ATK%</option>
+				<option value="atk">ATK</option>
+				<option value="def%">DEF%</option>
+				<option value="def">DEF</option>
+				<option value="em">Elemental Mastery</option>
+				<option value="er%">Energy Recharge%</option>
+				<option value="cr">CRIT Rate%</option>
+				<option value="cd">CRIT DMG%</option>
+			</select>
+				<label>Enter value</label>
+						<input type="text" id="Goblet_substat_4_value"></input>
+						<br />
+
+</fieldset>
+	</form>
+
+
+</div>
+
+
+</div>
+
+<div id="ResultSplashContainer">
+	<img id="CharacterSplashArt"></img>
+
+</div>
+<footer>
+
+</footer>
+
+<script>
+document.addEventListener('mouseup', function(e) {
+    var container = document.getElementById('CharacterContainer');
+    if (!container.contains(e.target)) {
+        container.style.visibility = "hidden";
+		document.getElementById('SelectCharcter').style.visibility = "visible";
+    }
+});
+</script>
+<script>
+function displayArtifact(select)
+{
+if(select.childNodes[1].childNodes[3].value == "None")
+select.childNodes[1].childNodes[1].src = "Artifacts/"+select.childNodes[1].childNodes[1].id+".png";
+else
+select.childNodes[1].childNodes[1].src = "Artifacts/"+select.childNodes[1].childNodes[3].value+" "+select.childNodes[1].childNodes[1].id+".png";
+
+}
+</script>
+<script>
+let dragging = false;
+var selectedCharacter = null;
+function selectCharacter(character){
+
+if(dragging == false )
+{
+var img = document.getElementById("SelectCharcterImg");
+
+var text = document.getElementById("SelectCharcterText");
+
+if(character.title == "Traveler(Anemo)" || character.title == "Traveler(Geo)" || character.title == "Traveler(Electro)")
+{
+switch(character.title)
+{
+case "Traveler(Anemo)":
+text.className = "AnemoCharacter";
+break;
+case "Traveler(Electro)":
+text.className = "ElectroCharacter";
+break;
+case "Traveler(Geo)":
+text.className = "GeoCharacter";
+break;
+}
+img.src = "Characters/Traveler.png";
+
+text.innerHTML = "<span>Traveler</span>";
+}
+else
+{
+
+img.src = "Characters/"+character.title+".png";
+
+text.innerHTML = "<span>"+character.title+"</span>";
+text.className = character.childNodes[3].className;
+}
+displayCharcters();
+document.getElementById("LoadoutContainer").style.display = "inline-block";
+
+}
+
+}
+function displayCharcters(){
+var doc = document.getElementById("CharacterContainer");
+var loadoutContainer = document.getElementById("LoadoutContainer");
+
+if(doc.style.visibility == "hidden" || doc.style.hidden == "")
+{
+doc.style.visibility = "visible";
+document.getElementById('SelectCharcter').style.visibility = "hidden";
+
+
+}
+else
+{
+doc.style.visibility = "hidden"
+document.getElementById('SelectCharcter').style.visibility = "visible";
+
+}
+
+}
+
+
+</script>
+<script> //By ToddWebDev at https://codepen.io/toddwebdev/pen/yExKoj (modifed)
+
+
+
+
+
+const slider = document.querySelector('.CharacterBox');
+let isDown = false;
+let startX;
+let scrollLeft;
+let update = 0;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  slider.classList.add('active');
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  dragging = false;
+});
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.classList.remove('active');
+  dragging = false;
+});
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.classList.remove('active');
+  dragging = false;
+});
+slider.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX)
+  slider.scrollLeft = scrollLeft - walk;
+  dragging = true;
+  
+  
+
+  });
+ 
+  
+
+</script>
+</body>
+</html>
