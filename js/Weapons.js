@@ -23,6 +23,7 @@ Init:function(){
     return this;
 }
 }.Init();
+
 let SkywarBlade = {
     name: "Slyward Blade",
     src: "Weapons/Skyward_Blade.png",

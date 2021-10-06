@@ -12,7 +12,26 @@ let Ayaka ={
     name: "Ayaka",
     src: "Characters/Ayaka.png",
     element: "CryoCharacter",
-    attack: 1000 ,
+    level: "1b",
+    baseAttack: function(){
+        let baseattack ={
+            ["1b"]:27,
+            ["20b"]:69,
+            ["20a"]:92,
+            ["40b"]:138,
+            ["40a"]:154,
+            ["50b"]:177,
+            ["50a"]:198,
+            ["60b"]:222,
+            ["60a"]:238,
+            ["70b"]:262,
+            ["70a"]:278,
+            ["80b"]:302,
+            ["80a"]:318,
+            ["90b"]:342
+        }
+        return baseattack[this.level];
+    },
     stamina: 240,
     normalAttackTalent: 1,
     sequence:[],
@@ -276,3 +295,6 @@ const AllCharacters = [
     Yoimiya,
     Zhongli
 ];
+function GetCharacterBaseAttack(startingBaseAttack,lvl){
+
+}

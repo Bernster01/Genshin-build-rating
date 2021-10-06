@@ -10,18 +10,20 @@ for (let index = 0; index < times; index++) {
         character.name,
         character.src,
         character.element,
-        character.attack,
+        character.baseAttack,
         character.stamina,
         character.normalAttack1,
         character.normalAttack2,
         character.normalAttack3,
         character.normalAttack4,
         character.normalAttack5,
-        character.chargedAttack
+        character.chargedAttack,
+        null,
+        SkywarBlade,
+        character.level
         );
        
     newCharacter.sequence = newSequence;
-    
     newDamage = Simulation(newCharacter,time);
     if(newDamage> currentBestDamage){
     currentBestSequence = newSequence;
@@ -90,11 +92,11 @@ function GenerateSequence(){
     
    
 }
-function Createcharacter(name,src,element,baseattack,stamina,normalAttack1,normalAttack2,normalAttack3,normalAttack4,normalAttack5,chargedAttack,sequence){
+function Createcharacter(name,src,element,baseAttack,stamina,normalAttack1,normalAttack2,normalAttack3,normalAttack4,normalAttack5,chargedAttack,sequence,weapon,level,artifacts){
 this.name = name;
 this.src = src;
 this.element = element;
-this.baseattack = baseattack;
+this.baseAttack = baseAttack;
 this.stamina = stamina;
 this.normalAttack1 = normalAttack1;
 this.normalAttack2 = normalAttack2;
@@ -103,6 +105,16 @@ this.normalAttack4 = normalAttack4;
 this.normalAttack5 = normalAttack5;
 this.chargedAttack = chargedAttack;
 this.sequence = sequence;
+this.weapon = weapon;
+this.level = level;
+this.artifacts = artifacts;
+this.attack = CalculateAttack(this.artifacts,this.baseAttack(),this.weapon.baseAttack());
+function CalculateAttack(artifacts,baseattack,weapon){
+    let totalAtkIncrease = 0;
+    
+    return baseattack+weapon;
+}
+
 }
 
 function Simulation(character,time, accuracy, type){
@@ -114,7 +126,7 @@ function Simulation(character,time, accuracy, type){
     let nextAction = Character.sequence[0];
     let nextActionIndex = 0;
     let nextActionCooldown = 0;
-  
+    console.log(character);
     do{
       
         switch(nextAction){
@@ -194,7 +206,6 @@ function Simulation(character,time, accuracy, type){
         }
         }
         nextAction= this.Character.sequence[nextActionIndex];
-        
     }
     while(simulationTime<=this.Time)
     return Math.floor(totalDmg);
