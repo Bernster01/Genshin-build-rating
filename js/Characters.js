@@ -1,3 +1,8 @@
+let Albedo = {
+    name: "Albedo",
+    src: "Characters/Albedo.png",
+    element: "GeoCharacter"
+};
 let Amber = {
     name: "Amber",
     src: "Characters/Amber.png",
@@ -7,39 +12,41 @@ let Ayaka ={
     name: "Ayaka",
     src: "Characters/Ayaka.png",
     element: "CryoCharacter",
-    attack:1000 ,
+    attack: 1000 ,
+    stamina: 240,
     normalAttackTalent: 1,
-    sequence:["N1","N2","N3","C","N1","N2","N3","C"],
+    sequence:[],
     normalAttack1:{
         TalentLevel: 1,
         Multiplier:(45.73/100),
-        AnimationTime:150
+        AnimationTime:333
     },
     normalAttack2:{
         TalentLevel: 1,
         Multiplier:(48.68/100),
-        AnimationTime:100
+        AnimationTime:416
         
     },
     normalAttack3:{
         TalentLevel: 1,
         Multiplier:(62.62/100),
-        AnimationTime:300
+        AnimationTime:666
     },
     normalAttack4:{
         TalentLevel: 1,
         Multiplier:((22.65*3)/100),
-        AnimationTime:50
+        AnimationTime:333
     },
     normalAttack5:{
         TalentLevel: 1,
         Multiplier:(78.18/100),
-        AnimationTime:400
+        AnimationTime:1000
     },
     chargedAttack:{
         TalentLevel: 1,
         Multiplier:((55.13*3)/100),
-        AnimationTime:800
+        AnimationTime:1166,
+        StaminaCost:20
     },
     plungeAttack:{
         TalentLevel: 1,
@@ -228,6 +235,7 @@ let Zhongli ={
     element: "GeoCharacter"
 };
 const AllCharacters = [
+    Albedo,
     Amber,
     Ayaka, 
     Barbara, 
