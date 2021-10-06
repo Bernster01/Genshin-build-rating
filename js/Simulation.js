@@ -126,7 +126,6 @@ function Simulation(character,time, accuracy, type){
     let nextAction = Character.sequence[0];
     let nextActionIndex = 0;
     let nextActionCooldown = 0;
-    console.log(character);
     do{
       
         switch(nextAction){
