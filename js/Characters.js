@@ -32,47 +32,156 @@ let Ayaka ={
         }
         return baseattack[this.level];
     },
+    baseHP: function(){
+        let baseHP ={
+            ["1b"]:1001,
+            ["20b"]:2597,
+            ["20a"]:3455,
+            ["40b"]:5170,
+            ["40a"]:5779,
+            ["50b"]:6649,
+            ["50a"]:7462,
+            ["60b"]:8341,
+            ["60a"]:8951,
+            ["70b"]:9838,
+            ["70a"]:10448,
+            ["80b"]:11345,
+            ["80a"]:11954,
+            ["90b"]:12858
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function(){
+        let baseDEF ={
+            ["1b"]:61,
+            ["20b"]:158,
+            ["20a"]:211,
+            ["40b"]:315,
+            ["40a"]:352,
+            ["50b"]:405,
+            ["50a"]:455,
+            ["60b"]:509,
+            ["60a"]:546,
+            ["70b"]:600,
+            ["70a"]:637,
+            ["80b"]:692,
+            ["80a"]:729,
+            ["90b"]:784
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats:{
+        ["critRate"]: 5,
+        ["critDMG"]:50,
+        ["healingBonus"]:0,
+        ["incomingHealingBonus"]:0,
+        ["energyRecharge"]:100,
+        ["cdReduction"]:0,
+        ["shieldStrength"]:0
+    },
+    elementalBonuses:{
+        ["pyroDMG"]: 0,
+        ["hydroDMG"]: 0,
+        ["dendroDMG"]: 0,
+        ["electroDMG"]: 0,
+        ["anemoDMG"]: 0,
+        ["cryoDMG"]: 0,
+        ["geoDMG"]: 0,
+        ["physicalDMG"]:0
+
+    },
     stamina: 240,
     normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalen: 1,
     sequence:[],
     weaponType: "Sword",
     normalAttack1:{
-        TalentLevel: 1,
         Multiplier:(45.73/100),
         AnimationTime:333
     },
     normalAttack2:{
-        TalentLevel: 1,
         Multiplier:(48.68/100),
         AnimationTime:416
         
     },
     normalAttack3:{
-        TalentLevel: 1,
         Multiplier:(62.62/100),
         AnimationTime:666
     },
     normalAttack4:{
-        TalentLevel: 1,
         Multiplier:((22.65*3)/100),
         AnimationTime:333
     },
     normalAttack5:{
-        TalentLevel: 1,
         Multiplier:(78.18/100),
         AnimationTime:1000
     },
     chargedAttack:{
-        TalentLevel: 1,
         Multiplier:((55.13*3)/100),
         AnimationTime:1166,
         StaminaCost:20
     },
     plungeAttack:{
-        TalentLevel: 1,
         Multiplier:(63.93/100),
         AnimationTime:500
     },
+    ascensionStat:{
+        Type:"critDMG",
+        value:function(){
+            let values={["1b"]:0,
+                ["20b"]:0,
+                ["20a"]:0,
+                ["40b"]:0,
+                ["40a"]:9.6,
+                ["50b"]:9.6,
+                ["50a"]:19.2,
+                ["60b"]:19.2,
+                ["60a"]:19.2,
+                ["70b"]:19.2,
+                ["70a"]:28.8,
+                ["80b"]:28.8,
+                ["80a"]:38.4,
+                ["90b"]:38.4
+            }
+            return values[this.level];
+        }
+    },
+    elementalSKill:null,
+    elementalBurst:null,
+    passive1:{
+        Type:"BonusDMG%",
+        values:{
+            ["chargedAttackBonus"]:30
+        }
+    },
+    passive2:{
+        Type:"BonusDMG%",
+        values:{
+            ["cryoDMGBonus"]:18
+        }
+    },
+    constellations:{
+        Amount:0,
+        constellation:function(){
+            let allConstellations={
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+                
+            }
+            return activeConstellations;
+        }
+    } 
+    
 };
 let Barbara ={
     name: "Barbara",
@@ -295,6 +404,3 @@ const AllCharacters = [
     Yoimiya,
     Zhongli
 ];
-function GetCharacterBaseAttack(startingBaseAttack,lvl){
-
-}
