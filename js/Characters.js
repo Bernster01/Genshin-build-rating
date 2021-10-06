@@ -16,6 +16,7 @@ let Ayaka ={
     stamina: 240,
     normalAttackTalent: 1,
     sequence:[],
+    weaponType: "Sword",
     normalAttack1:{
         TalentLevel: 1,
         Multiplier:(45.73/100),

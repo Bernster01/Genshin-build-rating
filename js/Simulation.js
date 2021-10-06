@@ -31,7 +31,6 @@ for (let index = 0; index < times; index++) {
 }
 return [currentBestSequence, currentBestDamage];
 }
-
 function GenerateSequence(){
     let sequence = [""];
     let maxLength = Math.round(Math.random()*10 +2);
