@@ -1,4 +1,4 @@
-let AquilaFavonia = {
+const AquilaFavonia = {
 name: "Aquila Favonia",
 src: "Weapons/Aquila_Favonia.png",
 weaponType: "Sword",
@@ -24,7 +24,7 @@ Init:function(){
 }
 }.Init();
 
-let SkywarBlade = {
+const SkywarBlade = {
     name: "Slyward Blade",
     src: "Weapons/Skyward_Blade.png",
     weaponType: "Sword",

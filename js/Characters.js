@@ -1,14 +1,14 @@
-let Albedo = {
+const Albedo = {
     name: "Albedo",
     src: "Characters/Albedo.png",
     element: "GeoCharacter"
 };
-let Amber = {
+const Amber = {
     name: "Amber",
     src: "Characters/Amber.png",
     element: "PyroCharacter"
 };
-let Ayaka ={
+const Ayaka ={
     name: "Ayaka",
     src: "Characters/Ayaka.png",
     element: "CryoCharacter",
@@ -78,19 +78,20 @@ let Ayaka ={
         ["incomingHealingBonus"]:0,
         ["energyRecharge"]:100,
         ["cdReduction"]:0,
-        ["shieldStrength"]:0
+        ["shieldStrength"]:0,
+        elementalBonuses:{
+            ["pyroDMG"]: 0,
+            ["hydroDMG"]: 0,
+            ["dendroDMG"]: 0,
+            ["electroDMG"]: 0,
+            ["anemoDMG"]: 0,
+            ["cryoDMG"]: 0,
+            ["geoDMG"]: 0,
+            ["physicalDMG"]:0
+    
+        }
     },
-    elementalBonuses:{
-        ["pyroDMG"]: 0,
-        ["hydroDMG"]: 0,
-        ["dendroDMG"]: 0,
-        ["electroDMG"]: 0,
-        ["anemoDMG"]: 0,
-        ["cryoDMG"]: 0,
-        ["geoDMG"]: 0,
-        ["physicalDMG"]:0
-
-    },
+    
     stamina: 240,
     energy: 0,
     normalAttackTalent: 1,
@@ -184,182 +185,182 @@ let Ayaka ={
     } 
     
 };
-let Barbara ={
+const Barbara ={
     name: "Barbara",
     src: "Characters/Barbara.png",
     element: "HydroCharacter"
 };
-let Beidou ={
+const Beidou ={
     name: "Beidou",
     src: "Characters/Beidou.png",
     element: "ElectroCharacter"
 };
-let Bennett ={
+const Bennett ={
     name: "Bennett",
     src: "Characters/Bennett.png",
     element: "PyroCharacter"
 };
-let Chongyun ={
+const Chongyun ={
     name: "Chongyun",
     src: "Characters/Chongyun.png",
     element: "CryoCharacter"
 };
-let Diluc ={
+const Diluc ={
     name: "Diluc",
     src: "Characters/Diluc.png",
     element: "PyroCharacter"
 };
-let Diona ={
+const Diona ={
         name: "Diona",
         src: "Characters/Diona.png",
         element: "CryoCharacter"
 };
-let Eula ={
+const Eula ={
     name: "Eula",
     src: "Characters/Eula.png",
     element: "CryoCharacter"
 };
-let Fischl ={
+const Fischl ={
     name: "Fischl",
     src: "Characters/Fischl.png",
     element: "ElectroCharacter"
 };
-let Ganyu ={
+const Ganyu ={
     name: "Ganyu",
     src: "Characters/Ganyu.png",
     element: "CryoCharacter"
 };
-let Hu_Tao ={
+const Hu_Tao ={
     name: "Hu Tao",
     src: "Characters/Hu Tao.png",
     element: "PyroCharacter"
 };
-let Jean ={
+const Jean ={
     name: "Jean",
     src: "Characters/Jean.png",
     element: "AnemoCharacter"
 };
-let Kaeya ={
+const Kaeya ={
     name: "Kaeya",
     src: "Characters/Kaeya.png",
     element: "CryoCharacter"
 };
-let Kazuha ={
+const Kazuha ={
     name: "Kazuha",
     src: "Characters/Kazuha.png",
     element: "AnemoCharacter"
 };
-let Keqing ={
+const Keqing ={
     name: "Keqing",
     src: "Characters/Keqing.png",
     element: "ElectroCharacter"
 };
-let Klee ={
+const Klee ={
     name: "Klee",
     src: "Characters/Klee.png",
     element: "PyroCharacter"
 };
-let Lisa ={
+const Lisa ={
     name: "Lisa",
     src: "Characters/Lisa.png",
     element: "ElectroCharacter"
 };
-let Mona ={
+const Mona ={
     name: "Mona",
     src: "Characters/Mona.png",
     element: "HydroCharacter"
 };
-let Ningguang ={
+const Ningguang ={
     name: "Ningguang",
     src: "Characters/Ningguang.png",
     element: "GeoCharacter"
 };
-let Noelle ={
+const Noelle ={
     name: "Noelle",
     src: "Characters/Noelle.png",
     element: "GeoCharacter"
 };
-let Qiqi ={
+const Qiqi ={
     name: "Qiqi",
     src: "Characters/Qiqi.png",
     element: "CryoCharacter"
 };
-let Razor ={
+const Razor ={
     name: "Razor",
     src: "Characters/Razor.png",
     element: "ElectroCharacter"
 };
-let Rosaria ={
+const Rosaria ={
     name: "Rosaria",
     src: "Characters/Rosaria.png",
     element: "CryoCharacter"
 };
-let Sayu ={
+const Sayu ={
     name: "Sayu",
     src: "Characters/Sayu.png",
     element: "AnemoCharacter"
 };
-let Sucrose ={
+const Sucrose ={
     name: "Sucrose",
     src: "Characters/Sucrose.png",
     element: "AnemoCharacter"
 };
-let Tartaglia ={
+const Tartaglia ={
     name: "Tartaglia",
     src: "Characters/Tartaglia.png",
     element: "HydroCharacter"
 };
-let Traveler_Anemo ={
+const Traveler_Anemo ={
     name: "Traveler",
     src: "Characters/Traveler.png",
     element: "AnemoCharacter"
 };
-let Traveler_Electro ={
+const Traveler_Electro ={
     name: "Traveler",
     src: "Characters/Traveler.png",
     element: "ElectroCharacter"
 };
-let Traveler_Geo ={
+const Traveler_Geo ={
     name: "Traveler",
     src: "Characters/Traveler.png",
     element: "GeoCharacter"
 };
-let Venti ={
+const Venti ={
     name: "Venti",
     src: "Characters/Venti.png",
     element: "AnemoCharacter"
 };
-let Xiangling ={
+const Xiangling ={
     name: "Xiangling",
     src: "Characters/Xiangling.png",
     element: "AnemoCharacter"
 };
-let Xiao ={
+const Xiao ={
     name: "Xiao",
     src: "Characters/Xiao.png",
     element: "AnemoCharacter"
 };
-let Xingqiu ={
+const Xingqiu ={
     name: "Xingqiu",
     src: "Characters/Xingqiu.png",
     element: "HydroCharacter"
 };
-let Xinyan ={
+const Xinyan ={
     name: "Xinyan",
     src: "Characters/Xinyan.png",
     element: "PyroCharacter"
 };
-let Yanfei ={
+const Yanfei ={
     name: "Yanfei",
     src: "Characters/Yanfei.png",
     element: "PyroCharacter"
 };
-let Yoimiya ={
+const Yoimiya ={
     name: "Yoimiya",
     src: "Characters/Yoimiya.png",
     element: "PyroCharacter"
 };
-let Zhongli ={
+const Zhongli ={
     name: "Zhongli",
     src: "Characters/Zhongli.png",
     element: "GeoCharacter"
