@@ -35,9 +35,7 @@ return [currentBestSequence, currentBestDamage];
 }
 function GenerateSequence(){
     let sequence = [""];
-    let maxLength = Math.round(Math.random()*10 +2);
-    if(maxLength>6)
-        maxLength = 6;
+    let maxLength = GetRandomNumber(2,6);
     for (let index = 0; index < maxLength; index++) {
         let random = Math.floor(Math.random()*10);      
         let input;

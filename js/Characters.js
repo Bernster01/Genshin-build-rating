@@ -92,6 +92,7 @@ let Ayaka ={
 
     },
     stamina: 240,
+    energy: 0,
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalen: 1,
