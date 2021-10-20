@@ -1,37 +1,28 @@
-function FindBestSequence(character, time,times){
-let currentBestSequence = [];
+function FindBestBuild(character,times){
 let currentBestDamage = 0;
-let newSequence;
 let newDamage;
-
+let currentBestArtifacts;
+let indexForBetterDmg =[];
 for (let index = 0; index < times; index++) {
-    newSequence = GenerateSequence();
     let newCharacter =new Createcharacter(
-        character.name,
-        character.src,
-        character.element,
-        character.baseAttack,
-        character.stamina,
-        character.normalAttack1,
-        character.normalAttack2,
-        character.normalAttack3,
-        character.normalAttack4,
-        character.normalAttack5,
-        character.chargedAttack,
-        null,
+        character,
         SkywarBlade,
-        character.level
+        GenerateArtifacts(character.scalingType)
         );
        
-    newCharacter.sequence = newSequence;
-    newDamage = Simulation(newCharacter,time);
+    newDamage = Simulation(newCharacter);
     if(newDamage> currentBestDamage){
-    currentBestSequence = newSequence;
+    currentBestArtifacts = newCharacter.artifacts;
     currentBestDamage = newDamage;
+    const newObj ={Time:index,MultiplerToFind:(indexForBetterDmg.length>=2) ? (index / indexForBetterDmg[indexForBetterDmg.length-1].Time):index,DMG:newDamage};
+ 
+    indexForBetterDmg.push(newObj);
     }
     
 }
-return [currentBestSequence, currentBestDamage];
+
+console.log(indexForBetterDmg);
+return [currentBestDamage,currentBestArtifacts];
 }
 function GenerateSequence(){
     let sequence = [""];
@@ -90,122 +81,187 @@ function GenerateSequence(){
     
    
 }
-function Createcharacter(name,src,element,baseAttack,stamina,normalAttack1,normalAttack2,normalAttack3,normalAttack4,normalAttack5,chargedAttack,sequence,weapon,level,artifacts){
-this.name = name;
-this.src = src;
-this.element = element;
-this.baseAttack = baseAttack;
-this.stamina = stamina;
-this.normalAttack1 = normalAttack1;
-this.normalAttack2 = normalAttack2;
-this.normalAttack3 = normalAttack3;
-this.normalAttack4 = normalAttack4;
-this.normalAttack5 = normalAttack5;
-this.chargedAttack = chargedAttack;
-this.sequence = sequence;
+function Createcharacter(baseCharacter,weapon,artifacts){
+this.name = baseCharacter.name;
+this.src = baseCharacter.src;
+this.element = baseCharacter.element;
+this.baseAttack = baseCharacter.baseAttack;
+this.stamina = baseCharacter.stamina;
+this.normalAttack1 = baseCharacter.normalAttack1;
+this.normalAttack2 = baseCharacter.normalAttack2;
+this.normalAttack3 = baseCharacter.normalAttack3;
+this.normalAttack4 = baseCharacter.normalAttack4;
+this.normalAttack5 = baseCharacter.normalAttack5;
+this.chargedAttack = baseCharacter.chargedAttack;
+this.sequence = baseCharacter.sequence;
 this.weapon = weapon;
-this.level = level;
+this.level = baseCharacter.level;
 this.artifacts = artifacts;
-this.attack = CalculateAttack(this.artifacts,this.baseAttack(),this.weapon.baseAttack());
-function CalculateAttack(artifacts,baseattack,weapon){
+this.currentBuffs;
+this.advancedStats = baseCharacter.advancedstats;
+this.ascensionstats = baseCharacter.ascensionStat;
+this.attack = CalculateAttack(this.artifacts,this.baseAttack(),this.weapon.baseAttack(),this.currentBuffs);
+this.critRate = CalculateCritRate(this.artifacts,this.advancedStats["critRate"],this.ascensionstats());
+this.critDMG = CalculateCritDMG(this.artifacts,this.advancedStats["critDMG"],this.ascensionstats());
+
+function CalculateAttack(artifacts,baseattack,weapon,buffs){
     let totalAtkIncrease = 0;
+    let flatAttack = 0;
+    let piece = "Circlet"
+    for (let index = 0; index <= 4; index++) {
+        if(artifacts[piece].Mainstat.Type =="ATK%"){
+            
+            totalAtkIncrease += artifacts[piece].Mainstat.Value;
+        }
+        else if(artifacts[piece].Mainstat.Type =="ATKflat"){
+            flatAttack += artifacts[piece].Mainstat.Value;
+        }
+        let substat = "";
+        
+        for (let index = 1; index <= 4; index++) {
+            substat = "Substat"+(index)
+            if(artifacts[piece][substat].Type == "ATK%"){
+                
+                totalAtkIncrease +=artifacts[piece][substat].Value;
+            }
+            else if(artifacts[piece][substat].Type == "ATKflat")
+            {
+                flatAttack += artifacts[piece][substat].Value;
+            }
+            
+            substat = "Substat"+(index);
+        }
+        switch(index){
+            case 1:
+                piece ="Flower";
+                break;
+            case 2:
+                piece ="Plume";
+                break;
+            case 3:
+                piece ="Sands";
+                break;
+            case 4:
+                piece = "Goblet";
+                break;
+        }
+       
+          
+        
+    }
+    return Math.floor(((baseattack+weapon)*(1+(totalAtkIncrease/100)))+flatAttack);
+}
+function CalculateCritRate(artifacts,baseCritRate,ascension){
+    let critRate = baseCritRate;
     
-    return baseattack+weapon;
-}
-
-}
-
-function Simulation(character,time, accuracy, type){
-
-    this.Character = character;
-    this.Time = time * 1000;
-    let totalDmg = 0;
-    let simulationTime = 0;
-    let nextAction = Character.sequence[0];
-    let nextActionIndex = 0;
-    let nextActionCooldown = 0;
-    do{
-      
-        switch(nextAction){
-            case "N1":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.normalAttack1.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.normalAttack1.AnimationTime;
-                    nextActionIndex++;
-                }
-                break;
-            case "N2":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.normalAttack2.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.normalAttack2.AnimationTime;
-                    nextActionIndex++;
-                }
-                break;
-            case "N3":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.normalAttack3.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.normalAttack3.AnimationTime;
-                    nextActionIndex++;
-                }
-                break;
-            case "N4":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.normalAttack4.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.normalAttack4.AnimationTime;
-                    nextActionIndex++;
-                }
-                break;
-            case "N5":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.normalAttack5.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.normalAttack5.AnimationTime;
-                    nextActionIndex++;
-                }
-                break;
-            case "P":
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=this.Character.plungeAttack.Multiplier * this.Character.attack;
-                    nextActionCooldown = simulationTime + this.Character.plungeAttack.AnimationTime;
-                    nextActionIndex++;
-                }
-            case "C":
-                if((this.Character.stamina - this.Character.chargedAttack.StaminaCost)>=0){
-                if(nextActionCooldown<=simulationTime){
-                    totalDmg+=((this.Character.chargedAttack.Multiplier/3) * this.Character.attack)*3;
-                    nextActionCooldown = simulationTime + this.Character.chargedAttack.AnimationTime;
-                    nextActionIndex++;
-                    this.Character.stamina -= this.Character.chargedAttack.StaminaCost;
-                }
-                }
-                else{
-                    nextActionCooldown = simulationTime + this.Character.chargedAttack.AnimationTime;
-                    
-                }
-                break;
-            case "E":
-                if(nextActionCooldown<=simulationTime){
-                    
-                }
-                break;
-            case "Q":
-                if(nextActionCooldown<=simulationTime){
-                    
-                }
-                break;
+    let piece = "Circlet"
+    for (let index = 0; index <= 4; index++) {
+        if(artifacts[piece].Mainstat.Type =="CritRate"){
+            
+            critRate += artifacts[piece].Mainstat.Value;
+           
         }
         
-        simulationTime++;
-        this.Character.stamina+= 0.0125;
-        if(nextActionIndex>=this.Character.sequence.length){
-        nextActionIndex = 0;
-        if(StoppedCombo(this.Character.sequence)){
-        nextActionCooldown +=2000;
+        let substat = "";
+        
+        for (let index = 1; index <= 4; index++) {
+            substat = "Substat"+(index)
+            if(artifacts[piece][substat].Type == "CritRate"){
+                
+                critRate +=artifacts[piece][substat].Value;
+            }
+            substat = "Substat"+(index);
         }
+        switch(index){
+            case 1:
+                piece ="Flower";
+                break;
+            case 2:
+                piece ="Plume";
+                break;
+            case 3:
+                piece ="Sands";
+                break;
+            case 4:
+                piece = "Goblet";
+                break;
         }
-        nextAction= this.Character.sequence[nextActionIndex];
+       
+          
+        
     }
-    while(simulationTime<=this.Time)
+    if(ascension.Type=="CritRate"){
+        criteRate+=ascension.Value;
+    }
+   
+    return Math.floor(critRate);
+}
+function CalculateCritDMG(artifacts,baseCritDMG,ascension){
+    let critDMG = baseCritDMG;
+   
+    let piece = "Circlet"
+    for (let index = 0; index <= 4; index++) {
+        if(artifacts[piece].Mainstat.Type =="CritDMG"){
+            
+            critDMG += artifacts[piece].Mainstat.Value;
+        }
+        
+        let substat = "";
+        
+        for (let index = 1; index <= 4; index++) {
+            substat = "Substat"+(index)
+            if(artifacts[piece][substat].Type == "CritDMG"){
+                
+                critDMG +=artifacts[piece][substat].Value;
+                
+            }
+            substat = "Substat"+(index);
+        }
+        switch(index){
+            case 1:
+                piece ="Flower";
+                break;
+            case 2:
+                piece ="Plume";
+                break;
+            case 3:
+                piece ="Sands";
+                break;
+            case 4:
+                piece = "Goblet";
+                break;
+        }
+       
+          
+        
+    }
+    if(ascension.Type=="critDMG"){
+        
+        critDMG+=ascension.Value;
+    }
+   return Math.floor(critDMG);
+}
+}
+
+function Simulation(character){
+
+    this.Character = character;
+    let totalDmg =
+    isCrit((character.normalAttack1.Multiplier * character.attack),character.critRate,character.critDMG) +
+    isCrit((character.normalAttack2.Multiplier * character.attack),character.critRate,character.critDMG) +
+    isCrit((character.normalAttack3.Multiplier * character.attack),character.critRate,character.critDMG) +
+    isCrit((character.normalAttack4.Multiplier * character.attack),character.critRate,character.critDMG) +
+    isCrit((character.normalAttack5.Multiplier * character.attack),character.critRate,character.critDMG) +
+    isCrit((character.chargedAttack.Multiplier * character.attack),character.critRate,character.critDMG) 
+    ;
+   
     return Math.floor(totalDmg);
+}
+function isCrit(dmg,criteRate,critDMG){
+    if(criteRate>=GetRandomNumber(0,100)){
+        dmg = dmg*(1+(critDMG/100));
+    }
+    return dmg;
 }
 function StoppedCombo(sequence){
     let lastIndex;

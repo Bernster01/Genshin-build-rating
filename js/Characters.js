@@ -91,13 +91,13 @@ const Ayaka ={
     
         }
     },
-    
+    scalingType:"ATK",
     stamina: 240,
     energy: 0,
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalen: 1,
-    sequence:[],
+    sequence:["N1","N2","N3","N4","N5","C"],
     weaponType: "Sword",
     normalAttack1:{
         Multiplier:(45.73/100),
@@ -129,9 +129,7 @@ const Ayaka ={
         Multiplier:(63.93/100),
         AnimationTime:500
     },
-    ascensionStat:{
-        Type:"critDMG",
-        value:function(){
+    ascensionStat:function(){
             let values={["1b"]:0,
                 ["20b"]:0,
                 ["20a"]:0,
@@ -145,10 +143,10 @@ const Ayaka ={
                 ["70a"]:28.8,
                 ["80b"]:28.8,
                 ["80a"]:38.4,
-                ["90b"]:38.4
-            }
-            return values[this.level];
-        }
+                ["90b"]:38.4}
+            
+            return {Type:"critDMG",Value:values[this.level]};
+      
     },
     elementalSKill:null,
     elementalBurst:null,

@@ -19,7 +19,7 @@ let mainStatCircletOptions={
     [2]:"DEF%",
     [3]:"ElementalMastery",
     [4]:"CritRate",
-    [5]:"CriteDMG",
+    [5]:"CritDMG",
     [6]:"HealingBonus"
 };
 let mainStatFlowerOptions={[0]:"HPflat"};
@@ -53,8 +53,8 @@ let mainStatValues = {
     ["DEF%"]:58.3,
     ["ElementalMastery"]:187,
     ["EnergyRecharge"]:51.8,
-    ["CriteRate"]:31.1,
-    ["CriteDMG"]:62.2,
+    ["CritRate"]:31.1,
+    ["CritDMG"]:62.2,
     ["HealingBonus"]:35.9,
     ["PhysicalDMGBonus"]: 58.3,
     ["PyroDMGBonus"]:46.6,
@@ -74,7 +74,7 @@ let subStatOptions={
     [5]:"DEFflat",
     [6]:"ElementalMastery",
     [7]:"CritRate",
-    [8]:"CriteDMG",
+    [8]:"CritDMG",
     [9]:"EnergyRecharge"
 };
 let subStatValues={
@@ -86,6 +86,6 @@ let subStatValues={
     ["DEFflat"]:23,
     ["ElementalMastery"]:23,
     ["CritRate"]:3.9,
-    ["CriteDMG"]:7.8,
+    ["CritDMG"]:7.8,
     ["EnergyRecharge"]:6.5
 }
