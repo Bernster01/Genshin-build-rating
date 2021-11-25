@@ -2,6 +2,7 @@ function Artifact(type,mainstat,substat1,substat2,substat3,substat4){
     this.Type = type;
     this.Mainstat = mainstat;
     this.Substats = [substat1,substat2,substat3,substat4];
+    this.Set;
 }
 let artifactPieces ={
     [0]: "Circlet",

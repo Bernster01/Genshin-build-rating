@@ -1,3 +1,19 @@
+
+function compareCharacters(usersCharacter){
+    let simulatedCharacter;
+    AllCharacters.forEach(character => {
+        if(character.name == usersCharacter.name){
+            simulatedCharacter = character;
+        }
+    }); 
+    let result = FindBestBuild(simulatedCharacter,10000);
+    console.log(usersCharacter.attack(),usersCharacter.critRate(),usersCharacter.critDMG());
+    let result2 = Simulation(usersCharacter);
+    console.log(result[0],result2.dmg);
+    return `${Math.floor((result2.dmg/result[0])*10)}/10`;
+}
+
+
 function FindBestBuild(character,times){
 let currentBestDamage = 0;
 let newDamage;
@@ -11,6 +27,7 @@ for (let index = 0; index < times; index++) {
         SkywarBlade,
         GenerateArtifacts(character.scalingType)
         );
+    newCharacter.level = "90b";
     newCharacter = applyArtifactBuffs(newCharacter);
     let result = Simulation(newCharacter);
     newDamage = result.dmg;
@@ -220,9 +237,9 @@ return Character;
 }
 function Simulation(character){
 
-    this.Character = character;
+    let Character = character;
     let totalDmg = 0;
-    this.Character.sequence.forEach(action =>{
+    Character.sequence.forEach(action =>{
         switch(action){
             case "N1":
             case "N2":
@@ -234,31 +251,31 @@ function Simulation(character){
                 let attackAction;
                 switch(action){
                     case "N1":
-                        attackAction = this.Character.normalAttack1;
+                        attackAction = Character.normalAttack1;
                         break;
                 
                     case "N2":
-                        attackAction = this.Character.normalAttack2;
+                        attackAction = Character.normalAttack2;
                         break;
                 
                     case "N3":
-                        attackAction = this.Character.normalAttack3;
+                        attackAction = Character.normalAttack3;
                         break;
             
                     case "N4":
-                        attackAction = this.Character.normalAttack4;
+                        attackAction = Character.normalAttack4;
                         break;
               
                     case "N5":
-                        attackAction = this.Character.normalAttack5;
+                        attackAction = Character.normalAttack5;
                         break;
             
                     case "C":
-                        attackAction = this.Character.chargedAttack;
+                        attackAction = Character.chargedAttack;
                         break;
               
                     case "P":
-                        attackAction = this.Character.plungeAttack;
+                        attackAction = Character.plungeAttack;
                         break;
                 }
                 
@@ -267,17 +284,17 @@ function Simulation(character){
             break;
 
             case "E":
-                totalDmg += this.Character.elementalSkill();
+                totalDmg += Character.elementalSkill();
                 break;
 
             case "Q":
-                totalDmg += this.Character.elementalBurst();
+                totalDmg += Character.elementalBurst();
                 break;
 
         }
     });
     
-    return {dmg:Math.floor(totalDmg/((this.Character.energyOffset - this.Character.advancedStats["energyRecharge"])/100)),char:this.Character};
+    return {dmg:Math.floor(totalDmg/((Character.energyOffset - Character.advancedStats["energyRecharge"])/100)),char:Character};
 }
 function dmgCalc(attackAction,Character,type){
     let dmg = attackAction.Multiplier*Character.attack()*((1+(Character.critRate()/100))*(Character.critDMG()/100));
