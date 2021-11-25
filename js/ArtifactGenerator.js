@@ -1,11 +1,11 @@
 function GenerateArtifacts(scaling){
-    let artifacts={
-        ["Circlet"]:GenerateRandomArtifact("Circlet",scaling),
-        ["Flower"]:GenerateRandomArtifact("Flower",scaling),
-        ["Plume"]:GenerateRandomArtifact("Plume",scaling),
-        ["Sands"]:GenerateRandomArtifact("Sands",scaling),
-        ["Goblet"]:GenerateRandomArtifact("Goblet",scaling)
-    };
+    let artifacts=[
+        GenerateRandomArtifact("Circlet",scaling),
+        GenerateRandomArtifact("Flower",scaling),
+        GenerateRandomArtifact("Plume",scaling),
+        GenerateRandomArtifact("Sands",scaling),
+        GenerateRandomArtifact("Goblet",scaling)
+    ];
     return artifacts;
 }
 function GenerateRandomArtifact(piece,scaling){

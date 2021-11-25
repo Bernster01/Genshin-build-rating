@@ -79,55 +79,61 @@ const Ayaka ={
         ["energyRecharge"]:100,
         ["cdReduction"]:0,
         ["shieldStrength"]:0,
-        elementalBonuses:{
-            ["pyroDMG"]: 0,
-            ["hydroDMG"]: 0,
-            ["dendroDMG"]: 0,
-            ["electroDMG"]: 0,
-            ["anemoDMG"]: 0,
-            ["cryoDMG"]: 0,
-            ["geoDMG"]: 0,
-            ["physicalDMG"]:0
+        elementalBonuses:[
+            {type:"PyroDMGBonus",value: 0},
+            {type: "HydroDMGBonus",value: 0},
+            {type:"DendroDMGBonus",value: 0},
+            {type:"ElectroDMGBonus",value: 0},
+            {type:"AnemoDMGBonus",value: 0},
+            {type:"CryoDMGBonus",value: 0},
+            {type:"GeoDMGBonus",value: 0},
+            {type:"PhysicalDMGBonus",value: 0}
     
-        }
+        ]
     },
     scalingType:"ATK",
-    stamina: 240,
-    energy: 0,
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalen: 1,
-    sequence:["N1","N2","N3","N4","N5","C"],
+    energyOffset: 400,
+    sequence:["N1","Q","E","N1","N2","N3","N4","C"],
     weaponType: "Sword",
     normalAttack1:{
         Multiplier:(45.73/100),
-        AnimationTime:333
+        Element:"CryoDMGBonus",
+        isReaction: true
     },
     normalAttack2:{
         Multiplier:(48.68/100),
-        AnimationTime:416
+        Element:"CryoDMGBonus",
+        isReaction: false
+        
         
     },
     normalAttack3:{
         Multiplier:(62.62/100),
-        AnimationTime:666
+        Element:"CryoDMGBonus",
+        isReaction: false
     },
     normalAttack4:{
         Multiplier:((22.65*3)/100),
-        AnimationTime:333
+        Element:"CryoDMGBonus",
+        isReaction: false
     },
     normalAttack5:{
         Multiplier:(78.18/100),
-        AnimationTime:1000
+        Element:"CryoDMGBonus",
+        isReaction: true
     },
     chargedAttack:{
         Multiplier:((55.13*3)/100),
-        AnimationTime:1166,
-        StaminaCost:20
+        Element:"CryoDMGBonus",
+        isReaction: true
     },
     plungeAttack:{
         Multiplier:(63.93/100),
-        AnimationTime:500
+        Element:"CryoDMGBonus",
+        isReaction: true
     },
     ascensionStat:function(){
             let values={["1b"]:0,
@@ -148,7 +154,7 @@ const Ayaka ={
             return {Type:"critDMG",Value:values[this.level]};
       
     },
-    elementalSKill:null,
+    elementalSkill:null,
     elementalBurst:null,
     passive1:{
         Type:"BonusDMG%",
