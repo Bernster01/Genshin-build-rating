@@ -180,16 +180,12 @@ const Ayaka ={
     elementalSkill:null,
     elementalBurst:null,
     passive1:{
-        Type:"BonusDMG%",
-        values:{
-            ["chargedAttackBonus"]:30
-        }
+        Type:"ChargedAttack",
+        Value:0.3
     },
     passive2:{
-        Type:"BonusDMG%",
-        values:{
-            ["cryoDMGBonus"]:18
-        }
+        Type:"CryoDMGBonus",
+        Value:18
     },
     constellations:{
         Amount:0,
