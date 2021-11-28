@@ -6,7 +6,7 @@ function compareCharacters(usersCharacter){
             simulatedCharacter = character;
         }
     }); 
-    let result = FindBestBuild(simulatedCharacter,10000);
+    let result = FindBestBuild(simulatedCharacter,1000);
     console.log(usersCharacter.attack(),usersCharacter.critRate(),usersCharacter.critDMG());
     let result2 = Simulation(usersCharacter);
     console.log(result[0],result2.dmg);
@@ -14,21 +14,25 @@ function compareCharacters(usersCharacter){
 }
 
 
-function FindBestBuild(character,times){
+function FindBestBuild(baseChar,times){
 let currentBestDamage = 0;
+
+
 let newDamage;
 let currentBestArtifacts;
 let indexForBetterDmg =[];
 let chara;
 let startTime = Date.now();
 for (let index = 0; index < times; index++) {
-    let newCharacter =new Createcharacter(
+   
+    let character = _.cloneDeep(baseChar);
+    let newCharacter = new Createcharacter(
         character,
         SkywarBlade,
         GenerateArtifacts(character.scalingType)
         );
     newCharacter.level = "90b";
-    newCharacter = applyArtifactBuffs(newCharacter);
+    applyArtifactBonuses(newCharacter);
     let result = Simulation(newCharacter);
     newDamage = result.dmg;
     let char = result.char;
@@ -36,11 +40,15 @@ for (let index = 0; index < times; index++) {
     currentBestArtifacts = newCharacter.artifacts;
     currentBestDamage = newDamage;
     const newObj ={Time:index,MultiplerToFind:(indexForBetterDmg.length>=2) ? (index / indexForBetterDmg[indexForBetterDmg.length-1].Time):index,DMG:newDamage};
-    chara = [char.attack(),char.critRate(),char.critDMG(),char.advancedStats.elementalBonuses];
+    chara = [char.attack(),char.critRate(),char.critDMG(),char.advancedstats.elementalBonuses];
+   
     indexForBetterDmg.push(newObj);
+    
     }
+    newCharacter = undefined;
     
 }
+character = undefined;
 let stopTime = Date.now();
 console.log((stopTime-startTime)/1000+"seconds");
 console.log(indexForBetterDmg);
@@ -104,7 +112,7 @@ function GenerateSequence(){
     
    
 }
-function Createcharacter(baseCharacter,weapon,artifacts){
+class Createcharacter{constructor(baseCharacter,weapon,artifacts){
 this.name = baseCharacter.name;
 this.src = baseCharacter.src;
 this.element = baseCharacter.element;
@@ -126,12 +134,12 @@ this.sequence = baseCharacter.sequence;
 this.artifacts = artifacts;
 this.currentBuffs = [];
 this.ExtraMultiplier = baseCharacter.ExtraMultiplier;
-this.advancedStats = baseCharacter.advancedstats;
+this.advancedstats = baseCharacter.advancedstats;
 this.ascensionstats = baseCharacter.ascensionStat;
 this.attack = function CalculateAttack(){
     let artifacts = this.artifacts;
     let baseattack = this.baseAttack;
-    let weapon = this.weapon;
+    
     let buffs = this.currentBuffs;
     let totalAtkIncrease = 0;
     let flatAttack = 0;
@@ -157,7 +165,7 @@ this.attack = function CalculateAttack(){
     return Math.floor((baseattack*(1+(totalAtkIncrease/100)))+flatAttack);
 }
 this.critRate = function CalculateCritRate(){
-    let critRate = this.advancedStats["critRate"];
+    let critRate = this.advancedstats.critRate;
     let artifacts = this.artifacts;
     let ascension = this.ascensionstats();
     let buffs = this.currentBuffs;
@@ -187,7 +195,7 @@ this.critRate = function CalculateCritRate(){
     return Math.floor(critRate);
 }
 this.critDMG = function CalculateCritDmg(){
-    let critDMG = this.advancedStats["critDMG"];
+    let critDMG = this.advancedstats.critDMG;
     let artifacts = this.artifacts;
     let ascension = this.ascensionstats();
     let buffs = this.currentBuffs;
@@ -220,23 +228,19 @@ this.critDMG = function CalculateCritDmg(){
 
 
 
-}
-function applyArtifactBuffs(Character){
-    let artifacts = Character.artifacts;
-    
-if(artifacts[4].Mainstat.Type != "ATK%" && artifacts[4].Mainstat.Type != "DEF%" && artifacts[4].Mainstat.Type != "HP%" && artifacts[4].Mainstat.Type != "ElementalMastery"){
-    
-    Character.advancedStats.elementalBonuses = {Type:artifacts[4].Mainstat.Type,Value:artifacts[4].Mainstat.Value};
-    
-    
-}
-else{
-    Character.advancedStats.elementalBonuses = undefined;
-}
-return Character;
+}}
+function applyArtifactBonuses(character){
+    let mainstat = character.artifacts[4].Mainstat;
+    if(mainstat.Type != "ATK%" || mainstat.Type != "DEF%" || mainstat.Type != "HP%" || mainstat.Type !="Elemental Mastery"){
+        character.advancedstats.elementalBonuses.forEach(element =>{
+            if(element.Type == mainstat.Type){
+                element.Value = mainstat.Value;
+            }
+        });
+    }
 }
 function Simulation(character){
-
+   
     let Character = character;
     let totalDmg = 0;
     Character.sequence.forEach(action =>{
@@ -294,17 +298,20 @@ function Simulation(character){
         }
     });
     
-    return {dmg:Math.floor(totalDmg/((Character.energyOffset - Character.advancedStats["energyRecharge"])/100)),char:Character};
+    return {dmg:Math.floor(totalDmg/((Character.energyOffset - Character.advancedstats.energyRecharge)/100)),char:Character};
 }
 function dmgCalc(attackAction,Character,type){
     let dmg = attackAction.Multiplier*Character.attack()*((1+(Character.critRate()/100))*(Character.critDMG()/100));
-    if(Character.advancedStats.elementalBonuses != undefined){
-    if(Character.advancedStats.elementalBonuses.Type == attackAction.Element){
+
+   Character.advancedstats.elementalBonuses.forEach(element=>{
+       if(element.Type == attackAction.Element){
+        dmg = dmg * (1+(element.Value/100));
+       
+       }
+   });
+       
     
-        dmg = dmg * (1+(Character.advancedStats.elementalBonuses.Value/100));
     
-    }
-    }
    
     if(Character.ExtraMultiplier != null && Character.ExtraMultiplier != undefined){
 

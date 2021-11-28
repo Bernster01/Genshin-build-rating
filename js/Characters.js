@@ -6,7 +6,28 @@ const Albedo = {
 const Amber = {
     name: "Amber",
     src: "Characters/Amber.png",
-    element: "PyroCharacter"
+    element: "PyroCharacter",
+    advancedstats:{
+        critRate: 5,
+        critDMG:50,
+        healingBonus:0,
+        incomingHealingBonus:0,
+        energyRecharge:100,
+        cdReduction:0,
+        shieldStrength:0, 
+        elementalBonuses:[
+            {Type:"PyroDMGBonus",Value: 0},
+            {Type: "HydroDMGBonus",Value: 0},
+            {Type:"DendroDMGBonus",Value: 0},
+            {Type:"ElectroDMGBonus",Value: 0},
+            {Type:"AnemoDMGBonus",Value: 0},
+            {Type:"CryoDMGBonus",Value: 0},
+            {Type:"GeoDMGBonus",Value: 0},
+            {Type:"PhysicalDMGBonus",Value: 0}
+   
+       ]
+        
+    }
 };
 const Ayaka ={
     name: "Ayaka",
@@ -72,25 +93,27 @@ const Ayaka ={
     },
     elementalMastery: 0,
     advancedstats:{
-        ["critRate"]: 5,
-        ["critDMG"]:50,
-        ["healingBonus"]:0,
-        ["incomingHealingBonus"]:0,
-        ["energyRecharge"]:100,
-        ["cdReduction"]:0,
-        ["shieldStrength"]:0,
+        critRate: 5,
+        critDMG:50,
+        healingBonus:0,
+        incomingHealingBonus:0,
+        energyRecharge:100,
+        cdReduction:0,
+        shieldStrength:0, 
         elementalBonuses:[
-            {type:"PyroDMGBonus",value: 0},
-            {type: "HydroDMGBonus",value: 0},
-            {type:"DendroDMGBonus",value: 0},
-            {type:"ElectroDMGBonus",value: 0},
-            {type:"AnemoDMGBonus",value: 0},
-            {type:"CryoDMGBonus",value: 0},
-            {type:"GeoDMGBonus",value: 0},
-            {type:"PhysicalDMGBonus",value: 0}
-    
-        ]
+            {Type:"PyroDMGBonus",Value: 0},
+            {Type: "HydroDMGBonus",Value: 0},
+            {Type:"DendroDMGBonus",Value: 0},
+            {Type:"ElectroDMGBonus",Value: 0},
+            {Type:"AnemoDMGBonus",Value: 0},
+            {Type:"CryoDMGBonus",Value: 0},
+            {Type:"GeoDMGBonus",Value: 0},
+            {Type:"PhysicalDMGBonus",Value: 0}
+   
+       ]
+        
     },
+   
     scalingType:"ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
