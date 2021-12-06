@@ -9,9 +9,9 @@ baseAttackType: "baseAttack48",
 baseAttack: function(){
     return GetBaseAttack(this);},
 subStat: {
-    type: "PhysicalDMGBonus",
+    Type: "PhysicalDMGBonus",
     startValue:"9%",
-    value: function(){
+    Value: function(){
         return getSubStat(this);
     }
 },
@@ -25,7 +25,7 @@ Init:function(){
 }.Init();
 
 const SkywarBlade = {
-    name: "Slyward Blade",
+    name: "Skyward Blade",
     src: "Weapons/Skyward_Blade.png",
     weaponType: "Sword",
     rarity: 5,
@@ -35,9 +35,55 @@ const SkywarBlade = {
     baseAttack: function(){
         return GetBaseAttack(this);},
     subStat: {
-        type: "EnergyRecharge",
+        Type: "EnergyRecharge",
         startValue:"12%",
-        value: function(){
+        Value: function(){
+            return getSubStat(this);
+        }
+    },
+    passiveName: "Sky-Piercing Fang",
+    passive: SkyPiercingFang(this.characterEquiping),
+    Init:function(){
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+    }.Init();
+
+
+function getSubStat(weapon){
+    if(weapon.Parent.level =="1b"){
+        return weapon.startValue;
+    }
+    else{
+    let lvl = "Lv";
+    for (let index = 0; index < weapon.Parent.level.length-1; index++) {
+        lvl = lvl + weapon.Parent.level[index];
+        
+    }
+    
+    return subStatScaling[weapon.startValue][lvl];
+}
+}
+
+function GetBaseAttack(weapon){
+    return baseAttack[weapon.baseAttackType][weapon.level];
+}
+
+const MistsplitterReforged = {
+    name: "Mistsplitter Reforged",
+    src: "Weapons/Mistsplitter_Reforged.png",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function(){
+        return GetBaseAttack(this);},
+    subStat: {
+        Type: "CritDMG",
+        startValue:"9.6%b",
+        Value: function(){
             return getSubStat(this);
         }
     },

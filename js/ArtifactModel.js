@@ -1,8 +1,129 @@
-function Artifact(type,mainstat,substat1,substat2,substat3,substat4){
+function Artifact(type,mainstat,substat1,substat2,substat3,substat4,set){
     this.Type = type;
     this.Mainstat = mainstat;
     this.Substats = [substat1,substat2,substat3,substat4];
-    this.Set;
+    this.Set = set;
+}
+const sets ={
+    [0]:"Archaic Petra",
+    [1]:"Blizzard Strayer",
+    [2]:"Bloodstained Chivalry",
+    [3]:"Crimson Witch of Flames",
+    [4]:"Emblem of Severed Fate",
+    [5]:"Gladiator's Finale",
+    [6]:"Heart of Depth",
+    [7]:"Lavawalker",
+    [8]:"Maiden Beloved",
+    [9]:"Noblesse Oblige",
+    [10]:"Pale Flame",
+    [11]:"Retracing Bolide",
+    [12]:"Shimenawa's Reminiscence",
+    [13]:"Tenacity of the Millelith",
+    [14]:"Thundering Fury",
+    [15]:"Thundersoother",
+    [16]:"Viridescent Venerer",
+    [17]:"Wanderer's Troupe"
+}
+const artifactSets ={
+    ["Archaic Petra"]:{
+        Type: "Archaic Petra",
+        twoPiece:{Type:"GeoDMGBonus",Value:15},
+        fourPiece:{Type:"BonusDMG%",Value:0.35}
+    },
+    ["Blizzard Strayer"]:{
+        Type: "Blizzard Strayer",
+        twoPiece:{Type:"CryoBonusDMG",Value:15},
+        fourPiece:{Type:"CritRate",Value:40}
+    },
+    ["Bloodstained Chivalry"]:{
+        Type: "Bloodstained Chivalry",
+        twoPiece:{Type:"PhysicalDMGBonus",Value:25},
+        fourPiece:{Type:"ChargedAttack",Value:0.5}
+    },
+    ["Crimson Witch of Flames"]:{
+        Type: "Crimson Witch of Flames",
+        twoPiece:{Type:"PyroDMGBonus",Value:15}
+        
+    },
+    ["Emblem of Severed Fate"]:{
+        Type: "Emblem of Severed Fate",
+        twoPiece:{Type:"EnergyRecharge",Value:20}
+        
+    },
+    ["Gladiator's Finale"]:{
+        Type: "Gladiator's Finale",
+        twoPiece:{Type:"ATK%",Value:18},
+        fourPiece:{Type:"NormalAttack",Value:0.35},
+        
+    },
+    ["Heart of Depth"]:{
+        Type: "Heart of Depth",
+        twoPiece:{Type:"HydroDMGBonus",Value:15},
+        
+    },
+    ["Lavawalker"]:{
+        Type: "Lavawalker",
+        twoPiece:{Type:"",Value:null},
+        fourPiece:{Type:"BonusDMG%",Value:0.35},
+        
+    },
+    ["Maiden Beloved"]:{
+        Type: "Maiden Beloved",
+        twoPiece:{Type:"HealingBonus%",Value:15},
+        
+    },
+    ["Noblesse Oblige"]:{
+        Type: "Noblesse Oblige",
+        twoPiece:{Type:"BurstDMG%",Value:0.2},
+        
+    },
+    ["Pale Flame"]:{
+        Type: "Pale Flame",
+        twoPiece:{Type:"PhysicalDMGBonus",Value:25}
+    },
+    ["Retracing Bolide"]:{
+        Type: "Retracing Bolide",
+        twoPiece:{Type:"ShieldStrength",Value:35},
+        fourPiece:[
+            {Type:"ChargedAttack",Value:0.4},
+            {Type:"NormalAttack",Value:0.4}
+        ]
+    },
+    ["Shimenawa's Reminiscence"]:{
+        Type: "Shimenawa's Reminiscence",
+        twoPiece:{Type:"ATK%",Value:18},
+        fourPiece:[
+            {Type:"ChargedAttack",Value:0.5},
+            {Type:"NormalAttack",Value:0.5},
+            {Type:"PlungeAttack",Value:0.5}
+        ]
+    },
+    ["Tenacity of the Millelith"]:{
+        Type: "Tenacity of the Millelith",
+        twoPiece:{Type:"HP%",Value:20}
+        
+    },
+    ["Thundering Fury"]:{
+        Type: "Thundering Fury",
+        twoPiece:{Type:"ElectroDMGBonus",Value:15}
+        
+    },
+    ["Thundersoother"]:{
+        Type: "Thundersoother",
+        twoPiece:{Type:"",Value:null},
+        fourPiece:{Type:"",Value:35}
+        
+    },
+    ["Viridescent Venerer"]:{
+        Type: "Viridescent Venerer",
+        twoPiece:{Type:"AnemoDMGBonus",Value:15}
+        
+    },
+    ["Wanderer's Troupe"]:{
+        Type: "Wanderer's Troupe",
+        twoPiece:{Type:"ElementalMastery",Value:80},
+        fourPiece:{Type:"ChargedAttack",Value:0.35},
+    }
 }
 let artifactPieces ={
     [0]: "Circlet",
