@@ -1,30 +1,24 @@
 let bestDMG = 0;
 let bestArtifacts = null;
 function compareCharacters(usersCharacter) {
-    let simulatedCharacter;
-    AllCharacters.forEach(character => {
-        if (character.name == usersCharacter.name) {
-            simulatedCharacter = character;
-        }
-    });
+    let simulatedCharacter = AllCharacters[usersCharacter.name];
     let result = FindBestBuild(simulatedCharacter, 100000);
-    console.log(usersCharacter.attack(), usersCharacter.critRate(), usersCharacter.critDMG());
+    
     let result2 = Simulation(usersCharacter);
     console.log(result[0], result2.dmg);
-    console.log(result[3]);
-    console.log(["Attack: "+result2.char.attack(),"Base Attack: "+result2.char.baseAttack,"Crit Rate: "+result2.char.critRate(),"Crit DMG: "+result2.char.critDMG(),result2.char.advancedstats.elementalBonuses]);
+    console.log("User",result2.char);
+    console.log(result[2]);
+    console.log(["Attack: " + result2.char.attack(), "Base Attack: " + result2.char.baseAttack, "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
     return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
 }
 
 
 function FindBestBuild(baseChar, times) {
-    
-
-
     let newDamage;
     let currentBestArtifacts;
     let indexForBetterDmg = [];
     let chara;
+    let charac;
     let startTime = Date.now();
     for (let index = 0; index < times; index++) {
 
@@ -32,12 +26,22 @@ function FindBestBuild(baseChar, times) {
         let weapon = _.cloneDeep(MistsplitterReforged);
         weapon.level = "90b";
         character.level = "90b";
+        character.elementalSkill.Level = 10;
+        character.elementalBurst.Level = 10;
+        if (character.name != "Tartaglia") {
+           
+            character.normalAttackLevel = 10;
+        }
+        else {
+            character.normalAttackLevel = 11;
+
+        }
         let newCharacter = new Createcharacter(
             character,
             weapon,
             GenerateArtifacts(character.scalingType)
         );
-        
+
         applyBonuses(newCharacter);
         let result = Simulation(newCharacter);
         newDamage = result.dmg;
@@ -45,10 +49,10 @@ function FindBestBuild(baseChar, times) {
         if (newDamage > bestDMG) {
             currentBestArtifacts = newCharacter.artifacts;
             bestArtifacts = newCharacter.artifacts;
-            bestDMG= newDamage;
+            bestDMG = newDamage;
             const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
             charac = char;
-            chara = ["Attack: "+char.attack(),"Base Attack: "+ char.baseAttack, "Crit Rate: "+char.critRate(), "Crit DMG: "+char.critDMG(), char.advancedstats.elementalBonuses];
+            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
 
             indexForBetterDmg.push(newObj);
 
@@ -60,10 +64,8 @@ function FindBestBuild(baseChar, times) {
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
     console.log(indexForBetterDmg);
-    if(chara == undefined)
-        return "Nothing Found";
-    else
-        return [bestDMG, currentBestArtifacts, charac,chara];
+
+    return [bestDMG, currentBestArtifacts, charac, chara];
 }
 function GenerateSequence() {
     let sequence = [""];
@@ -139,8 +141,9 @@ class Createcharacter {
         this.normalAttack4 = baseCharacter.normalAttack4;
         this.normalAttack5 = baseCharacter.normalAttack5;
         this.chargedAttack = baseCharacter.chargedAttack;
-        this.elementalSkill = function () { return 0 };
-        this.elementalBurst = function () { return 0 };
+        this.elementalSkill = baseCharacter.elementalSkill;
+        this.elementalBurst = baseCharacter.elementalBurst;
+        this.normalAttackLevel = baseCharacter.normalAttackLevel;
         this.sequence = baseCharacter.sequence;
         this.artifacts = artifacts;
         this.currentBuffs = [baseCharacter.passive1, baseCharacter.passive2];
@@ -157,7 +160,7 @@ class Createcharacter {
             artifacts.forEach(artifact => {
                 if (artifact.Mainstat.Type == "ATK%") {
                     totalAtkIncrease += artifact.Mainstat.Value;
-                } else if(artifact.Mainstat.Type == "ATKflat"){
+                } else if (artifact.Mainstat.Type == "ATKflat") {
                     flatAttack += artifact.Mainstat.Value;
                 }
                 artifact.Substats.forEach(substat => {
@@ -176,7 +179,7 @@ class Createcharacter {
                     }
                 })
             }
-           
+
             return Math.floor((baseattack * (1 + (totalAtkIncrease / 100))) + flatAttack);
         }
         this.critRate = function CalculateCritRate() {
@@ -208,7 +211,7 @@ class Createcharacter {
                 criteRate += ascension.Value;
             }
 
-            return Math.round(critRate*10)/10;
+            return Math.round(critRate * 10) / 10;
         }
         this.critDMG = function CalculateCritDmg() {
             let critDMG = this.advancedstats.critDMG;
@@ -239,9 +242,10 @@ class Createcharacter {
                 critDMG += ascension.Value;
             }
 
-            return Math.round(critDMG*10)/10;
+            return Math.round(critDMG * 10) / 10;
         }
         
+
 
 
 
@@ -256,12 +260,25 @@ function applyBonuses(character) {
             }
         });
     }
-    character.currentBuffs.push({Type:character.weapon.subStat.Type,Value: character.weapon.subStat.Value()})
+    character.currentBuffs.push({ Type: character.weapon.subStat.Type, Value: character.weapon.subStat.Value() })
     let sets = [];
-    character.artifacts.forEach(artifact =>{
+    character.artifacts.forEach(artifact => {
         sets.push(artifact.Set);
+        if(artifact.Mainstat.Type =="EnergyRecharge")
+            character.advancedstats.energyRecharge += artifact.Mainstat.Value;
+        else{
+            artifact.Substats.forEach(substat=>{
+                if(substat.Type =="EnergyRecharge")
+                character.advancedstats.energyRecharge += substat.Value;
+            });
+        }
+        
     });
-    getSetBonus(sets,character);
+    getSetBonus(sets, character);
+
+    character.weapon.passive().forEach(passive =>{
+        character.currentBuffs.push(passive);
+    });
     character.currentBuffs.forEach(buff => {
 
         switch (buff.Type) {
@@ -326,67 +343,79 @@ function applyBonuses(character) {
                 break;
             case "ChargedAttack":
                 character.ExtraMultiplier.push({ Type: "NormalAttack", Value: buff.Value });
-            break;
+                break;
             case "BonusDMG%":
-            character.ExtraMultiplier.push({ Type: "BonusDMG%", Value: buff.Value });
-            break;
+                character.ExtraMultiplier.push({ Type: "BonusDMG%", Value: buff.Value });
+                break;
             case "EnergyRecharge":
                 character.advancedstats.energyRecharge += buff.Value;
                 break;
-            
+            case "ElementalDMG":
+                character.advancedstats.elementalBonuses.forEach(element=>{
+                    element.Value += buff.Value;
+                });
+                break;
+
             default:
                 break;
         }
     });
-}
-function getSetBonus(array,character){
-   
-for(let i = 0;i<array.length;i++){
     
-    let currentSet = array[i];
-    let count = 1;
-    for (let index = i+1; index < array.length; index++) {
-        if(array[index] == currentSet){
-           
-            count++;
-        }
-        
-    }
-    if(count >=4){
-        character.currentBuffs.push(artifactSets[array[i]].twoPiece);
-      
-        if(artifactSets[array[i]].fourPiece != undefined){
-        if(currentSet == "Gladiator's Finale"){
-            if(character.weaponType =="Sword" || character.weaponType =="Claymore" || character.weaponType =="Polearm"){
-                character.currentBuffs.push(artifactSets[array[i]].fourPiece);
-            }
-        }
-        else if(currentSet == "Wanderer's Troupe"){
-            if(character.weaponType =="Bow" || character.weaponType =="Catalyst"){
-                character.currentBuffs.push(artifactSets[array[i]].fourPiece);
-            }
-        }
-        else if(currentSet == "Shimenawa's Reminiscence"){
+}
+function getSetBonus(array, character) {
 
-        }else{
-            if(artifactSets[array[i]].fourPiece.Type==undefined){
-                artifactSets[array[i]].fourPiece.forEach(buff=>{character.currentBuffs.push(buff)});
+    for (let i = 0; i < array.length; i++) {
+
+        let currentSet = array[i];
+        let count = 1;
+        for (let index = i + 1; index < array.length; index++) {
+            if (array[index] == currentSet) {
+
+                count++;
             }
-            else{
-                character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+
+        }
+        if (count >= 4) {
+            character.currentBuffs.push(artifactSets[array[i]].twoPiece);
+
+            if (artifactSets[array[i]].fourPiece != undefined) {
+                if (currentSet == "Gladiator's Finale") {
+                    if (character.weaponType == "Sword" || character.weaponType == "Claymore" || character.weaponType == "Polearm") {
+                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                    }
+                }
+                else if (currentSet == "Wanderer's Troupe") {
+                    if (character.weaponType == "Bow" || character.weaponType == "Catalyst") {
+                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                    }
+                }
+                else if (currentSet == "Shimenawa's Reminiscence") {
+
+                }
+                else if (currentSet == "Blizzard Strayer") {
+                    if (character.element = "CryoCharacter") {
+                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                    }
+                }
+                else {
+                    if (artifactSets[array[i]].fourPiece.Type == undefined) {
+                        artifactSets[array[i]].fourPiece.forEach(buff => { character.currentBuffs.push(buff) });
+                    }
+                    else {
+                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                    }
+
+                }
+
             }
-            
+            break;
         }
-        
+        else if (count >= 2) {
+
+            character.currentBuffs.push(artifactSets[array[i]].twoPiece);
         }
-        break;
+
     }
-    else if(count>=2){
-        
-        character.currentBuffs.push(artifactSets[array[i]].twoPiece);
-    }
-    
-}
 }
 function Simulation(character) {
 
@@ -394,6 +423,7 @@ function Simulation(character) {
     let totalDmg = 0;
     Character.sequence.forEach(action => {
         let type = "basicAttack";
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false };
         switch (action) {
             case "N1":
             case "N2":
@@ -402,35 +432,50 @@ function Simulation(character) {
             case "N5":
             case "C":
             case "P":
-                let attackAction;
+
                 switch (action) {
                     case "N1":
-                        attackAction = Character.normalAttack1;
+                        attackAction.Multiplier = Character.normalAttack1.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.normalAttack1.Element;
+                        attackAction.isReaction = Character.normalAttack1.isReaction;
                         break;
 
                     case "N2":
-                        attackAction = Character.normalAttack2;
+                        attackAction.Multiplier = Character.normalAttack2.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.normalAttack2.Element;
+                        attackAction.isReaction = Character.normalAttack2.isReaction;
                         break;
 
                     case "N3":
-                        attackAction = Character.normalAttack3;
+                        attackAction.Multiplier = Character.normalAttack3.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.normalAttack3.Element;
+                        attackAction.isReaction = Character.normalAttack3.isReaction;
                         break;
 
                     case "N4":
-                        attackAction = Character.normalAttack4;
+                        attackAction.Multiplier = Character.normalAttack4.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.normalAttack4.Element;
+                        attackAction.isReaction = Character.normalAttack4.isReaction;
                         break;
 
                     case "N5":
-                        attackAction = Character.normalAttack5;
+                        attackAction.Multiplier = Character.normalAttack5.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.normalAttack5.Element;
+                        attackAction.isReaction = Character.normalAttack5.isReaction;
                         break;
 
                     case "C":
-                        attackAction = Character.chargedAttack;
+                        attackAction.Multiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.chargedAttack.Element;
+                        attackAction.isReaction = Character.chargedAttack.isReaction;
                         type = "ChargedAttack";
                         break;
 
                     case "P":
-                        attackAction = Character.plungeAttack;
+                        attackAction.Multiplier = Character.plungeAttack.Multiplier(Character.normalAttackLevel);
+                        attackAction.Element = Character.plungeAttack.Element;
+                        attackAction.isReaction = Character.plungeAttack.isReaction;
+                        type = "PlungeAttack";
                         break;
                 }
 
@@ -439,20 +484,36 @@ function Simulation(character) {
                 break;
 
             case "E":
-                totalDmg += Character.elementalSkill();
+
+                totalDmg += Character.elementalSkill.Skill(Character);
+
                 break;
 
             case "Q":
-                totalDmg += Character.elementalBurst();
+                let dmg = Character.elementalBurst.Skill(Character);
+                character.currentBuffs.forEach(buff=>{
+                    if(buff.Type=="Emblem")
+                    {
+                        let multiplier = character.advancedstats.energyRecharge/100;
+                        if(multiplier>1.75)
+                        multiplier = 1.75
+                        dmg *=multiplier
+                    }
+                })
+                let energyMultiplier = character.advancedstats.energyRecharge / character.energyOffset;
+                if(energyMultiplier>1)
+                energyMultiplier = 1;
+                dmg *= energyMultiplier;
+                totalDmg += dmg
                 break;
 
         }
     });
-    
-    return { dmg: Math.floor(totalDmg / ((Character.energyOffset - Character.advancedstats.energyRecharge) / 100)), char: Character };
+
+    return { dmg: Math.floor(totalDmg), char: Character };
 }
 function dmgCalc(attackAction, Character, type) {
-    let dmg = attackAction.Multiplier * Character.attack() * ((1 + (Character.critRate() / 100)) * (Character.critDMG() / 100));
+    let dmg = attackAction.Multiplier * Character.attack() * (1+((Character.critRate()/100)*(Character.critDMG()/100)));
 
     Character.advancedstats.elementalBonuses.forEach(element => {
         if (element.Type == attackAction.Element) {
@@ -469,9 +530,9 @@ function dmgCalc(attackAction, Character, type) {
         Character.ExtraMultiplier.forEach(multiplier => {
 
             if (type = multiplier.Type) {
-               
+
                 dmg = dmg * multiplier.Value;
-                
+
             }
         });
     }
@@ -480,6 +541,15 @@ function dmgCalc(attackAction, Character, type) {
         dmg = elementalMasteryCalc(dmg, Character);
 
     return dmg;
+}
+function Crit(character){
+if(GetRandomNumber(0,1000)/10<=character.critRate())
+{
+return 1+(character.critDMG()/100);
+}
+else{
+return 1;
+}
 }
 function defReduction(dmg, character) {
     let vv = 0;

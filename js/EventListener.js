@@ -1,9 +1,14 @@
 document.addEventListener('mouseup', function(e) {
     var container = document.getElementById('CharacterContainer');
-    if (!container.contains(e.target)) {
+    var container2 = document.getElementById('Weapons');
+    if(!container.contains(e.target)) {
         container.style.visibility = "hidden";
 		document.getElementById('SelectCharcter').style.visibility = "visible";
     }
+    if(!container2.contains(e.target)) {
+      container2.style.visibility = "hidden";
+     
+  }
 });
 
 

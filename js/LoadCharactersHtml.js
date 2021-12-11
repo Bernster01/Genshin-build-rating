@@ -1,11 +1,18 @@
 function LoadCharacters(){
-    var doc = document.getElementById('CharacterBox');
-    for(let index = 0; index < AllCharacters.length; index++) {
-        
-       let htmlCode = "<div class='Character' title='"+AllCharacters[index].name+"' onmouseup='selectCharacter(this)'> <img src='"+AllCharacters[index].src+"' alt='"+AllCharacters[index].name+"'> <div class='"+AllCharacters[index].element+"'><span>"+AllCharacters[index].name+"</span></div></div>";
+    let doc = document.getElementById('CharacterBox');
+    let weapon = document.getElementById('WeaponsContainer');
+    AllCharacters.index.forEach(character => {
+        let htmlCode = "<div class='Character' title='"+AllCharacters[character].name+"' onmouseup='selectCharacter(this)'> <img src='"+AllCharacters[character].src+"' alt='"+AllCharacters[character].name+"'> <div class='"+AllCharacters[character].element+"'><span>"+AllCharacters[character].name+"</span></div></div>";
         doc.insertAdjacentHTML("beforeend",htmlCode);
       
-    }
+    });
+    AllWeapons.index.forEach(Weapon =>{
+        let htmlCode = "<div class='Weapons' title='"+AllWeapons[Weapon].name+"' onmouseup='selectWeapon(this)'> <img src='"+AllWeapons[Weapon].src+"' alt='"+AllWeapons[Weapon].name+"'> <div class='WeaponsText'><span>"+AllWeapons[Weapon].name+"</span></div></div>";
+        weapon.insertAdjacentHTML("beforeend",htmlCode);
+    });
+        
+       
+    
     loadMockArtifacts();
 }
 function loadMockArtifacts(){
@@ -72,8 +79,8 @@ function loadMockArtifacts(){
     document.getElementById("Goblet_substat_3_value").value = 25.6;
     document.getElementById("Goblet_substat_4").value = "EnergyRecharge";
     document.getElementById("Goblet_substat_4_value").value = 5.8;
-    document.getElementById("Goblet_set").value = "Viridescent Venerer's";
-    document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer's.png";
+    document.getElementById("Goblet_set").value = "Viridescent Venerer";
+    document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer Goblet.png";
 }
 function loadMockArtifacts2(){
     let procent = 40;

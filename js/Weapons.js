@@ -1,30 +1,31 @@
 const AquilaFavonia = {
-name: "Aquila Favonia",
-src: "Weapons/Aquila_Favonia.png",
-weaponType: "Sword",
-rarity: 5,
-level: "1b",
-characterEquiping: null,
-baseAttackType: "baseAttack48",
-baseAttack: function(){
-    return GetBaseAttack(this);},
-subStat: {
-    Type: "PhysicalDMGBonus",
-    startValue:"9%",
-    Value: function(){
-        return getSubStat(this);
+    name: "Aquila Favonia",
+    src: "Weapons/Aquila_Favonia.png",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "PhysicalDMGBonus",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passiveName: "Falcon's Defiance",
+    passive: function(){return [{Type:"ATK%",Value:20}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
     }
-},
-passiveName: "Falcon's Defiance",
-passive: FalconsDefiance(this.characterEquiping),
-Init:function(){
-    this.subStat.Parent = this;
-    delete this.Init;
-    return this;
-}
 }.Init();
 
-const SkywarBlade = {
+const SkywardBlade = {
     name: "Skyward Blade",
     src: "Weapons/Skyward_Blade.png",
     weaponType: "Sword",
@@ -32,41 +33,39 @@ const SkywarBlade = {
     level: "1b",
     characterEquiping: null,
     baseAttackType: "baseAttack46",
-    baseAttack: function(){
-        return GetBaseAttack(this);},
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
     subStat: {
         Type: "EnergyRecharge",
-        startValue:"12%",
-        Value: function(){
+        startValue: "12%",
+        Value: function () {
             return getSubStat(this);
         }
     },
     passiveName: "Sky-Piercing Fang",
-    passive: SkyPiercingFang(this.characterEquiping),
-    Init:function(){
+    passive: function(){return[{Type:"CritRate",Value:4}]},
+    Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
         return this;
     }
-    }.Init();
+}.Init();
 
 
-function getSubStat(weapon){
-    if(weapon.Parent.level =="1b"){
-        return weapon.startValue;
-    }
-    else{
+function getSubStat(weapon) {
+
     let lvl = "Lv";
-    for (let index = 0; index < weapon.Parent.level.length-1; index++) {
+    for (let index = 0; index < weapon.Parent.level.length - 1; index++) {
         lvl = lvl + weapon.Parent.level[index];
-        
+
     }
-    
+
     return subStatScaling[weapon.startValue][lvl];
-}
+
 }
 
-function GetBaseAttack(weapon){
+function GetBaseAttack(weapon) {
     return baseAttack[weapon.baseAttackType][weapon.level];
 }
 
@@ -78,40 +77,35 @@ const MistsplitterReforged = {
     level: "1b",
     characterEquiping: null,
     baseAttackType: "baseAttack48",
-    baseAttack: function(){
-        return GetBaseAttack(this);},
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
     subStat: {
         Type: "CritDMG",
-        startValue:"9.6%b",
-        Value: function(){
+        startValue: "9.6%b",
+        Value: function () {
             return getSubStat(this);
         }
     },
-    passiveName: "Sky-Piercing Fang",
-    passive: SkyPiercingFang(this.characterEquiping),
-    Init:function(){
+    passiveStacks: 0,
+    passive: function(){
+    return [{Type:"ElementalDMG",Value:12},{Type:"ElementalDMG",Value:17.3}]},
+    Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
         return this;
     }
-    }.Init();
+}.Init();
 
 
-function getSubStat(weapon){
-    if(weapon.Parent.level =="1b"){
-        return weapon.startValue;
-    }
-    else{
-    let lvl = "Lv";
-    for (let index = 0; index < weapon.Parent.level.length-1; index++) {
-        lvl = lvl + weapon.Parent.level[index];
-        
-    }
-    
-    return subStatScaling[weapon.startValue][lvl];
-}
-}
 
-function GetBaseAttack(weapon){
+
+function GetBaseAttack(weapon) {
     return baseAttack[weapon.baseAttackType][weapon.level];
+}
+const AllWeapons = {
+    ["Aquila Favonia"]: AquilaFavonia,
+    ["Skyward Blade"]: SkywardBlade,
+    ["Mistsplitter Reforged"]: MistsplitterReforged,
+    index: ["Aquila Favonia", "Skyward Blade", "Mistsplitter Reforged"]
 }

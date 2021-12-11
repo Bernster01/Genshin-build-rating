@@ -47,7 +47,8 @@ const artifactSets ={
     },
     ["Emblem of Severed Fate"]:{
         Type: "Emblem of Severed Fate",
-        twoPiece:{Type:"EnergyRecharge",Value:20}
+        twoPiece:{Type:"EnergyRecharge",Value:20},
+        fourPiece:{Type:"Emblem"}
         
     },
     ["Gladiator's Finale"]:{
