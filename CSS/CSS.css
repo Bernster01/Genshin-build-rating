@@ -261,6 +261,7 @@ h2
 	height: fit-content;
 	border: #323031 2px solid;
 	border-radius: 15px;
+	margin:0.75em;
 }
 .Weapons img{
 	height: 185px;
@@ -277,16 +278,17 @@ h2
 }
 #Weapons{
 	position: absolute;
-	height: 400px;
+	height: 600px;
+	width: 660px;
 	visibility: hidden;
 	border-radius:1vw;
-	overflow-x:hidden;
 	overflow-y: scroll;
 	background: #323031;
 	border: 0.3vw solid #5F5B6B;
 	box-shadow: 0em 0.4em 4em -1em;
 	display: flex;
 	flex-flow: column;
+	scrollbar-width:10px;
 	
 }
 #Weapons h3{
@@ -298,6 +300,7 @@ h2
 }
 #WeaponsContainer{
 	display: flex;
+	flex-wrap: wrap;
 }
 .Weapon p
 {

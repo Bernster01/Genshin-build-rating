@@ -3,12 +3,13 @@ let bestArtifacts = null;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
     let result = FindBestBuild(simulatedCharacter, 100000);
-    
+
     let result2 = Simulation(usersCharacter);
     console.log(result[0], result2.dmg);
-    console.log("User",result2.char);
+    console.log("User", result2.char);
     console.log(result[2]);
-    console.log(["Attack: " + result2.char.attack(), "Base Attack: " + result2.char.baseAttack, "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
+    console.log(result[3]);
+    console.log(["Attack: " + result2.char.attack(), "Base Attack: " + result2.char.baseAttack, "Defense: " + result2.char.DEF(), "Base Defense: " + result2.char.baseDEF, "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
     return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
 }
 
@@ -29,7 +30,7 @@ function FindBestBuild(baseChar, times) {
         character.elementalSkill.Level = 10;
         character.elementalBurst.Level = 10;
         if (character.name != "Tartaglia") {
-           
+
             character.normalAttackLevel = 10;
         }
         else {
@@ -52,7 +53,7 @@ function FindBestBuild(baseChar, times) {
             bestDMG = newDamage;
             const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
             charac = char;
-            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "Defense: " + char.DEF(), "Base Def: " + char.baseDEF, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
 
             indexForBetterDmg.push(newObj);
 
@@ -133,6 +134,10 @@ class Createcharacter {
         this.energyOffset = baseCharacter.energyOffset;
         this.weapon = weapon;
         this.baseAttack = baseCharacter.baseAttack;
+        this.baseDEF = baseCharacter.baseDEF;
+        this.baseDEF = this.baseDEF();
+        this.baseHP = baseCharacter.baseHP;
+        this.baseHP = this.baseHP();
         this.baseAttack = this.baseAttack() + weapon.baseAttack();
         this.stamina = baseCharacter.stamina;
         this.normalAttack1 = baseCharacter.normalAttack1;
@@ -174,8 +179,11 @@ class Createcharacter {
             });
             if (buffs != null && buffs != undefined) {
                 buffs.forEach(buff => {
-                    if (buff.Type == "Atk%") {
-                        totalAtakIncrease += buff.Value;
+                    if (buff.Type == "ATK%") {
+                        totalAtkIncrease += buff.Value;
+                    }
+                    else if (buff.Type == "ATKflat") {
+                        flatAttack += buff.Value;
                     }
                 })
             }
@@ -244,7 +252,86 @@ class Createcharacter {
 
             return Math.round(critDMG * 10) / 10;
         }
-        
+        this.DEF = function () {
+            let DEF = 0;
+            let DEFflat = 0;
+            let artifacts = this.artifacts;
+            let ascension = this.ascensionstats();
+            let buffs = this.currentBuffs;
+
+            artifacts.forEach(artifact => {
+                if (artifact.Mainstat.Type == "DEF%") {
+                    DEF += artifact.Mainstat.Value;
+                }
+                artifact.Substats.forEach(substat => {
+                    if (substat.Type == "DEF%") {
+                        DEF += substat.Value;
+                    }
+                    else if (substat.Type == "DEFflat") {
+                        DEFflat += substat.Value;
+                    }
+
+                });
+            });
+            if (buffs != null && buffs != undefined) {
+                buffs.forEach(buff => {
+                    if (buff.Type == "DEF%") {
+                        DEF += buff.Value;
+                    }
+                    else if (buff.Type == "DEFflat") {
+                        DEFflat += buff.Value;
+                    }
+                })
+            }
+
+            if (ascension.Type == "DEF%") {
+                DEF += ascension.Value;
+            }
+
+            return Math.round(((this.baseDEF * (1+(DEF/100))) + DEFflat) * 10) / 10;
+        }
+        this.HP = function () {
+            let HP = 0;
+            let HPflat = 0;
+            let artifacts = this.artifacts;
+            let ascension = this.ascensionstats();
+            let buffs = this.currentBuffs;
+
+            artifacts.forEach(artifact => {
+                if (artifact.Mainstat.Type == "HP%") {
+                    HP += artifact.Mainstat.Value;
+                }
+                else if (artifact.Mainstat.Type == "HPflat") {
+                    HPflat += artifact.Mainstat.Value;
+                }
+                artifact.Substats.forEach(substat => {
+                    if (substat.Type == "HP%") {
+                        HP += substat.Value;
+                    }
+                    else if (substat.Type = "HPflat") {
+                        HPflat += substat.Value;
+                    }
+
+                });
+            });
+            if (buffs != null && buffs != undefined) {
+                buffs.forEach(buff => {
+                    if (buff.Type == "HP%") {
+                        HP += buff.Value;
+                    }
+                    else if (buff.Type == "HPflat") {
+                        HPflat += buff.Value;
+                    }
+                })
+            }
+
+            if (ascension.Type == "HP%") {
+                HP += ascension.Value;
+            }
+
+            return Math.round(((this.baseHP * (1+(HP/100))) + HPflat) * 10) / 10;
+        }
+
 
 
 
@@ -264,19 +351,19 @@ function applyBonuses(character) {
     let sets = [];
     character.artifacts.forEach(artifact => {
         sets.push(artifact.Set);
-        if(artifact.Mainstat.Type =="EnergyRecharge")
+        if (artifact.Mainstat.Type == "EnergyRecharge")
             character.advancedstats.energyRecharge += artifact.Mainstat.Value;
-        else{
-            artifact.Substats.forEach(substat=>{
-                if(substat.Type =="EnergyRecharge")
-                character.advancedstats.energyRecharge += substat.Value;
+        else {
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "EnergyRecharge")
+                    character.advancedstats.energyRecharge += substat.Value;
             });
         }
-        
+
     });
     getSetBonus(sets, character);
 
-    character.weapon.passive().forEach(passive =>{
+    character.weapon.passive().forEach(passive => {
         character.currentBuffs.push(passive);
     });
     character.currentBuffs.forEach(buff => {
@@ -351,16 +438,17 @@ function applyBonuses(character) {
                 character.advancedstats.energyRecharge += buff.Value;
                 break;
             case "ElementalDMG":
-                character.advancedstats.elementalBonuses.forEach(element=>{
+                character.advancedstats.elementalBonuses.forEach(element => {
                     element.Value += buff.Value;
                 });
                 break;
+
 
             default:
                 break;
         }
     });
-    
+
 }
 function getSetBonus(array, character) {
 
@@ -484,27 +572,40 @@ function Simulation(character) {
                 break;
 
             case "E":
-
-                totalDmg += Character.elementalSkill.Skill(Character);
+                switch(Character.weapon.name){
+                    case "Festering Desire":
+                        Character.advancedstats.critRate += 12;
+                        break;
+                }
+                let eDmg = Character.elementalSkill.Skill(Character);
+                switch(Character.weapon.name){
+                    case "Cinnabar Spindle":
+                        eDmg += Character.DEF() * 0.8;
+                        break;
+                    case "Festering Desire":
+                        eDmg *= 1.32;
+                        Character.advancedstats.critRate -= 12;
+                        break;
+                }
+                totalDmg += eDmg;
 
                 break;
 
             case "Q":
-                let dmg = Character.elementalBurst.Skill(Character);
-                character.currentBuffs.forEach(buff=>{
-                    if(buff.Type=="Emblem")
-                    {
-                        let multiplier = character.advancedstats.energyRecharge/100;
-                        if(multiplier>1.75)
-                        multiplier = 1.75
-                        dmg *=multiplier
+                let qDmg = Character.elementalBurst.Skill(Character);
+                character.currentBuffs.forEach(buff => {
+                    if (buff.Type == "Emblem") {
+                        let multiplier = character.advancedstats.energyRecharge / 100;
+                        if (multiplier > 1.75)
+                            multiplier = 1.75
+                        qDmg *= multiplier
                     }
                 })
                 let energyMultiplier = character.advancedstats.energyRecharge / character.energyOffset;
-                if(energyMultiplier>1)
-                energyMultiplier = 1;
-                dmg *= energyMultiplier;
-                totalDmg += dmg
+                if (energyMultiplier > 1)
+                    energyMultiplier = 1;
+                qDmg *= energyMultiplier;
+                totalDmg += qDmg
                 break;
 
         }
@@ -513,7 +614,7 @@ function Simulation(character) {
     return { dmg: Math.floor(totalDmg), char: Character };
 }
 function dmgCalc(attackAction, Character, type) {
-    let dmg = attackAction.Multiplier * Character.attack() * (1+((Character.critRate()/100)*(Character.critDMG()/100)));
+    let dmg = attackAction.Multiplier * Character.attack() * (1 + ((Character.critRate() / 100) * (Character.critDMG() / 100)));
 
     Character.advancedstats.elementalBonuses.forEach(element => {
         if (element.Type == attackAction.Element) {
@@ -542,14 +643,13 @@ function dmgCalc(attackAction, Character, type) {
 
     return dmg;
 }
-function Crit(character){
-if(GetRandomNumber(0,1000)/10<=character.critRate())
-{
-return 1+(character.critDMG()/100);
-}
-else{
-return 1;
-}
+function Crit(character) {
+    if (GetRandomNumber(0, 1000) / 10 <= character.critRate()) {
+        return 1 + (character.critDMG() / 100);
+    }
+    else {
+        return 1;
+    }
 }
 function defReduction(dmg, character) {
     let vv = 0;
