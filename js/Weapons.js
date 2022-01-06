@@ -1,3 +1,5 @@
+//#region Swords 
+
 const AmenomaKageuchi = {
     name: "Amenoma Kageuchi",
     src: "Weapons/Amenoma_Kageuchi.png",
@@ -24,7 +26,6 @@ const AmenomaKageuchi = {
         return this;
     }
 }.Init();
-
 
 const AquilaFavonia = {
     name: "Aquila Favonia",
@@ -573,19 +574,12 @@ function getSubStat(weapon) {
     return subStatScaling[weapon.startValue][lvl];
 
 }
+//#endregion
 
 function GetBaseAttack(weapon) {
     return baseAttack[weapon.baseAttackType][weapon.level];
 }
 
-
-
-
-
-
-function GetBaseAttack(weapon) {
-    return baseAttack[weapon.baseAttackType][weapon.level];
-}
 const AllWeapons = {
     ["Amenoma Kageuchi"]: AmenomaKageuchi,
     ["Aquila Favonia"]: AquilaFavonia,
@@ -629,5 +623,28 @@ const AllWeapons = {
         "The Alley Flash",
         "The Flute",
         
-    ]
+    ],
+    ["Sword"]:[
+        "Amenoma Kageuchi",
+        "Aquila Favonia",
+        "Blackcliff Longsword",
+        "Cinnabar Spindle",
+        "Favonius Sword",
+        "Festering Desire",
+        "Freedom-Sworn",
+        "Harbinger of Dawn",
+        "Iron Sting",
+        "Lion's Roar",
+        "Mistsplitter Reforged",
+        "Primordial Jade Cutter",
+        "Prototype Rancour",
+        "Royal Longsword",
+        "Sacrifical Sword",
+        "Skyward Blade",
+        "Summit Shaper",
+        "Sword of Descension",
+        "The Alley Flash",
+        "The Flute",
+        
+    ],
 }

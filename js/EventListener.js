@@ -48,5 +48,26 @@ slider.addEventListener('mousemove', (e) => {
   
 
   });
- 
+function selectSupportingElement(element,obj){
+let doc;
+let doc2 = document.getElementById("CurrentlySelectedSupportingElement");
+if(document.getElementById("CurrentlySelected")!=null){
+  doc = document.getElementById("CurrentlySelected");
+
+  doc.style.width = "fit-content";
+
+  doc.style.height = "85px";
+  doc.removeAttribute("id");
+  obj.parentElement.appendChild(doc);
+}
+
+
+document.getElementById("SelectedSupportingElement").innerText = element;
+obj.setAttribute("id","CurrentlySelected");
+obj.remove();
+doc2.appendChild(obj);
+obj.style.width = "92px";
+obj.style.height = "130px";
+supportingElement = element;
+}
   

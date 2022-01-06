@@ -759,7 +759,37 @@
 
 
 		</div>
-
+		<div>
+			<h2>Supporting Element</h2>
+			<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span id="SelectedSupportingElement"></span></div>
+	
+			<div class="supportingElementContainer">
+				<div onclick="selectSupportingElement('Pyro',this)">
+					<img src="Elements/pyro.png" />
+					<span>Pyro</span>
+				</div>
+				<div onclick="selectSupportingElement('Hydro',this)">
+					<img src="Elements/hydro.png" />
+					<span>Hydro</span>
+				</div>
+				<div onclick="selectSupportingElement('Anemo',this)">
+					<img src="Elements/anemo.png" />
+					<span>Anemo</span>
+				</div>
+				<div onclick="selectSupportingElement('Electro',this)">
+					<img src="Elements/electro.png" />
+					<span>Electro</span>
+				</div>
+				<div onclick="selectSupportingElement('Dendro',this)"> 
+					<img src="Elements/dendro.png" />
+					<span>Dendro</span>
+				</div>
+				<div onclick="selectSupportingElement('Cryo',this)">
+					<img src="Elements/cryo.png" />
+					<span>Cryo</span>
+				</div>
+			</div>
+		</div>
 		<button onclick="userCharacter()">Rate my build!</button>
 	</div>
 
@@ -821,6 +851,7 @@
 				}
 				displayCharcters();
 				document.getElementById("LoadoutContainer").style.display = "inline-block";
+				loadWeapons(character.title);
 
 			}
 
@@ -858,13 +889,13 @@
 	</script>
 	<script src="js/CreateCharacter.js"></script>
 	<script src="js/WeaponScaling.js"></script>
-	
+
 	<script src="js/Weapons.js"></script>
 	<script src="js/ArtifactModel.js"></script>
 	<script src="js/ArtifactGenerator.js"></script>
 	<script src="js/EventListener.js"> </script>
 	<script src="js/Simulation.js"></script>
-	
+
 	<script src="js/LoadCharactersHtml.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 

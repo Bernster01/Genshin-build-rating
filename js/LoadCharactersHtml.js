@@ -1,22 +1,30 @@
-function LoadCharacters(){
+function LoadCharacters() {
     let doc = document.getElementById('CharacterBox');
-    let weapon = document.getElementById('WeaponsContainer');
+
     AllCharacters.index.forEach(character => {
-        let htmlCode = "<div class='Character' title='"+AllCharacters[character].name+"' onmouseup='selectCharacter(this)'> <img src='"+AllCharacters[character].src+"' alt='"+AllCharacters[character].name+"'> <div class='"+AllCharacters[character].element+"'><span>"+AllCharacters[character].name+"</span></div></div>";
-        doc.insertAdjacentHTML("beforeend",htmlCode);
-      
+        let htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>" + AllCharacters[character].name + "</span></div></div>";
+        doc.insertAdjacentHTML("beforeend", htmlCode);
+
     });
-    AllWeapons.index.forEach(Weapon =>{
-        let htmlCode = "<div class='Weapons' title='"+AllWeapons[Weapon].name+"' onmouseup='selectWeapon(this)'> <img src='"+AllWeapons[Weapon].src+"' alt='"+AllWeapons[Weapon].name+"'> <div class='WeaponsText'><span>"+AllWeapons[Weapon].name+"</span></div></div>";
-        weapon.insertAdjacentHTML("beforeend",htmlCode);
-    });
-        
-       
-    
+
+
+
+
     loadMockArtifacts();
 }
-function loadMockArtifacts(){
-    let procent = 40;
+function loadWeapons(character) {
+    let weapon = document.getElementById('WeaponsContainer');
+    weapon.innerHTML = "";
+
+    AllWeapons[AllCharacters[character].weaponType].forEach(Weapon => {
+        let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
+        weapon.insertAdjacentHTML("beforeend", htmlCode);
+    });
+
+
+}
+function loadMockArtifacts() {
+
     document.getElementById("Circlet_mainstat").value = "CritDMG";
     document.getElementById("Circlet_mainstat_value").value = 46.6;
     document.getElementById("Circlet_substat_1").value = "CritRate";
@@ -24,7 +32,7 @@ function loadMockArtifacts(){
     document.getElementById("Circlet_substat_2").value = "DEFflat";
     document.getElementById("Circlet_substat_2_value").value = 39;
     document.getElementById("Circlet_substat_3").value = "ATK%";
-    document.getElementById("Circlet_substat_3_value").value = 4.7; 
+    document.getElementById("Circlet_substat_3_value").value = 4.7;
     document.getElementById("Circlet_substat_4").value = "HP%";
     document.getElementById("Circlet_substat_4_value").value = 4.7;
     document.getElementById("Circlet_set").value = "Blizzard Strayer";
@@ -82,7 +90,7 @@ function loadMockArtifacts(){
     document.getElementById("Goblet_set").value = "Viridescent Venerer";
     document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer Goblet.png";
 }
-function loadMockArtifacts2(){
+function loadMockArtifacts2() {
     let procent = 40;
     document.getElementById("Circlet_mainstat").value = "ATK%";
     document.getElementById("Circlet_mainstat_value").value = 46.6;
@@ -91,7 +99,7 @@ function loadMockArtifacts2(){
     document.getElementById("Circlet_substat_2").value = "ElementalMastery";
     document.getElementById("Circlet_substat_2_value").value = 83;
     document.getElementById("Circlet_substat_3").value = "EnergyRecharge";
-    document.getElementById("Circlet_substat_3_value").value = 6.5; 
+    document.getElementById("Circlet_substat_3_value").value = 6.5;
     document.getElementById("Circlet_substat_4").value = "HPflat";
     document.getElementById("Circlet_substat_4_value").value = 508;
     document.getElementById("Circlet_set").value = "Blizzard Strayer";

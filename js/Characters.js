@@ -1,7 +1,326 @@
 const Albedo = {
     name: "Albedo",
     src: "Characters/Albedo.png",
-    element: "GeoCharacter"
+    element: "GeoCharacter",
+    level: "1b",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 20,
+            ["20b"]: 51,
+            ["20a"]: 68,
+            ["40b"]: 101,
+            ["40a"]: 113,
+            ["50b"]: 130,
+            ["50a"]: 146,
+            ["60b"]: 163,
+            ["60a"]: 175,
+            ["70b"]: 192,
+            ["70a"]: 204,
+            ["80b"]: 222,
+            ["80a"]: 233,
+            ["90b"]: 251
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 1030,
+            ["20b"]: 2671,
+            ["20a"]: 3554,
+            ["40b"]: 5317,
+            ["40a"]: 5944,
+            ["50b"]: 6839,
+            ["50a"]: 7675,
+            ["60b"]: 8579,
+            ["60a"]: 9207,
+            ["70b"]: 10119,
+            ["70a"]: 10746,
+            ["80b"]: 11669,
+            ["80a"]: 12296,
+            ["90b"]: 13226
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 68,
+            ["20b"]: 177,
+            ["20a"]: 235,
+            ["40b"]: 352,
+            ["40a"]: 394,
+            ["50b"]: 453,
+            ["50a"]: 508,
+            ["60b"]: 568,
+            ["60a"]: 610,
+            ["70b"]: 670,
+            ["70a"]: 712,
+            ["80b"]: 773,
+            ["80a"]: 815,
+            ["90b"]: 876
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "Hybrid",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 140,
+    sequence: ["E", "Q", "N1", "N2", "N3", "N4", "N5", "C"],
+    weaponType: "Sword",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 36.74 / 100
+                case 2:
+                    return 39.73 / 100
+                case 3:
+                    return 42.72 / 100
+                case 4:
+                    return 46.99 / 100
+                case 5:
+                    return 49.98 / 100
+                case 6:
+                    return 53.4 / 100
+                case 7:
+                    return 58.1 / 100
+                case 8:
+                    return 62.8 / 100
+                case 9:
+                    return 67.5 / 100
+                case 10:
+                    return 72.62 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 36.74 / 100
+                case 2:
+                    return 39.73 / 100
+                case 3:
+                    return 42.72 / 100
+                case 4:
+                    return 46.99 / 100
+                case 5:
+                    return 49.98 / 100
+                case 6:
+                    return 53.4 / 100
+                case 7:
+                    return 58.1 / 100
+                case 8:
+                    return 62.8 / 100
+                case 9:
+                    return 67.5 / 100
+                case 10:
+                    return 72.62 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 47.45 / 100
+                case 2:
+                    return 51.32 / 100
+                case 3:
+                    return 55.18/ 100
+                case 4:
+                    return 60.17 / 100
+                case 5:
+                    return 64.56 / 100
+                case 6:
+                    return 68.97 / 100
+                case 7:
+                    return 75.04 / 100
+                case 8:
+                    return 81.11 / 100
+                case 9:
+                    return 87.18 / 100
+                case 10:
+                    return 93.81 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 49.75 / 100
+                case 2:
+                    return 53.8 / 100
+                case 3:
+                    return 57.85 / 100
+                case 4:
+                    return 63.63 / 100
+                case 5:
+                    return 67.68 / 100
+                case 6:
+                    return 72.31 / 100
+                case 7:
+                    return 78.68 / 100
+                case 8:
+                    return 85.04 / 100
+                case 9:
+                    return 91.4 / 100
+                case 10:
+                    return 98.34 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 62.07 / 100
+                case 2:
+                    return 67.13 / 100
+                case 3:
+                    return 72.18 / 100
+                case 4:
+                    return 79.4 / 100
+                case 5:
+                    return 84.45 / 100
+                case 6:
+                    return 90.22 / 100
+                case 7:
+                    return 98.16 / 100
+                case 8:
+                    return 106.1 / 100
+                case 9:
+                    return 114.04 / 100
+                case 10:
+                    return 122.7 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 107.5 / 100
+                case 2:
+                    return 116.25 / 100
+                case 3:
+                    return 125 / 100
+                case 4:
+                    return 137.5 / 100
+                case 5:
+                    return 146.25/ 100
+                case 6:
+                    return 156.25 / 100
+                case 7:
+                    return 170 / 100
+                case 8:
+                    return 183.75 / 100
+                case 9:
+                    return 197.5 / 100
+                case 10:
+                    return 212.5 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    plungeAttack: {
+        Multiplier: function (level) { return 0 },
+        Element: "PhysicalDMGBonus",
+        isReaction: false
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 7.2,
+            ["50b"]: 7.2,
+            ["50a"]: 14.4,
+            ["60b"]: 14.4,
+            ["60a"]: 14.4,
+            ["70b"]: 14.4,
+            ["70a"]: 21.6,
+            ["80b"]: 21.6,
+            ["80a"]: 28.8,
+            ["90b"]: 28.8
+        }
+
+        return { Type: "GeoDMGBonus", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: solarIsotoma,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: tectonicTide,
+        Level: 1
+    },
+    passive1: {
+        Type: "BonusDMG%",
+        Value: 12
+    },
+    passive2: {
+        Type: "",
+        Value: null
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
 };
 const Amber = {
     name: "Amber",
@@ -117,7 +436,7 @@ const Ayaka = {
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
-    elementalBurstTalen: 1,
+    elementalBurstTalent: 1,
     energyOffset: 150,
     sequence: ["N1", "Q", "E", "N1", "N2", "N3", "N4", "C"],
     weaponType: "Sword",

@@ -33,7 +33,7 @@ const artifactSets ={
     ["Blizzard Strayer"]:{
         Type: "Blizzard Strayer",
         twoPiece:{Type:"CryoBonusDMG",Value:15},
-        fourPiece:{Type:"CritRate",Value:40}
+        fourPiece:{Type:"CritRate",Value:20}
     },
     ["Bloodstained Chivalry"]:{
         Type: "Bloodstained Chivalry",
