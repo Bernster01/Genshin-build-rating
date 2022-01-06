@@ -41,7 +41,74 @@ function hyouka(Character) {
             skillMultiplier = 5.083
             break;
     }
-    let attack = {Multiplier: skillMultiplier, Element:"CryoDMGBonus"}
+    let attack = {Multiplier: skillMultiplier, Element:"CryoDMGBonus",Scaling:"ATK"}
     let dmg = dmgCalc(attack,Character,"ElementalSkill");
     return dmg*3;
+}
+
+function solarIsotoma(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 1.304
+            skillMultiplier2 = 1.336
+            break;
+        case 2:
+            skillMultiplier = 1.4018
+            skillMultiplier2 = 1.4362
+            break;
+        case 3:
+            skillMultiplier = 1.4996
+            skillMultiplier2 = 1.5364
+            break;
+        case 4:
+            skillMultiplier = 1.63
+            skillMultiplier2 = 1.67
+            break;
+        case 5:
+            skillMultiplier = 1.7278
+            skillMultiplier2 = 1.7702
+            break;
+        case 6:
+            skillMultiplier = 1.8256
+            skillMultiplier2 = 1.8704
+            break;
+        case 7:
+            skillMultiplier = 1.956
+            skillMultiplier2 = 2.004
+            break;
+        case 8:
+            skillMultiplier = 2.0864
+            skillMultiplier2 = 2.1376
+            break;
+        case 9:
+            skillMultiplier = 2.2168
+            skillMultiplier2 = 2.2712
+            break;
+        case 10:
+            skillMultiplier = 2.3472
+            skillMultiplier2 = 2.4048
+            break;
+        case 11:
+            skillMultiplier = 2.4776
+            skillMultiplier2 = 2.5384
+            break;
+        case 12:
+            skillMultiplier = 2.608
+            skillMultiplier2 = 2.672
+            break;
+        case 13:
+            skillMultiplier = 2.771
+            skillMultiplier2 = 2.839
+            break;
+    }
+    let attack = {Multiplier: skillMultiplier, Element:"GeoDMGBonus",Scaling:"ATK"}
+    let dmg = dmgCalc(attack,Character,"ElementalSkill");
+    dmg *=3;
+    attack = {Multiplier: skillMultiplier2, Element:"GeoDMGBonus",Scaling:"DEF"}
+    let dmg2 = dmgCalc(attack,Character,"ElementalSkill");
+    dmg2*=45;
+    dmg+=dmg2;
+    return dmg;
 }
