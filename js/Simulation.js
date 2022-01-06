@@ -402,6 +402,10 @@ function applyBonuses(character) {
     character.weapon.passive().forEach(passive => {
         character.currentBuffs.push(passive);
     });
+    character.advancedstats.elementalBonuses.forEach(element=>{
+        if(character.ascensionstats().Type == element.Type)
+        character.currentBuffs.push({Type:element.Type,Value:character.ascensionstats().Value});
+    })
     character.currentBuffs.forEach(buff => {
 
         switch (buff.Type) {
@@ -518,7 +522,7 @@ function getSetBonus(array, character) {
 
                 }
                 else if (currentSet == "Blizzard Strayer") {
-                    if (character.element = "CryoCharacter") {
+                    if (character.element == "CryoCharacter") {
                         character.currentBuffs.push(artifactSets[array[i]].fourPiece);
                     }
                 }

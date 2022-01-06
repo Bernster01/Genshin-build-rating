@@ -117,16 +117,14 @@ function userCharacter(){
     };
 
     let artifacts = [circlet, flower, plume, sands, goblet];
-    console.log(artifacts);
+    
     baseCharacter = _.cloneDeep(baseCharacter);
     let baseWeapon = _.cloneDeep(weapon);
-    console.log(baseWeapon);
     baseWeapon.level = document.getElementById("WeaponLevels").value;
     baseCharacter.level = document.getElementById("Level").value;
     baseCharacter.normalAttackLevel = Number.parseInt(document.getElementById("Talent_1").value);
     baseCharacter.elementalSkill.Level = Number.parseInt(document.getElementById("Talent_2").value);
     baseCharacter.elementalBurst.Level = Number.parseInt(document.getElementById("Talent_3").value);
-    console.log(baseCharacter.elementalSkill)
     let character = new Createcharacter(baseCharacter,baseWeapon,artifacts);
     applyBonuses(character);
     alert(compareCharacters(character));
