@@ -134,3 +134,53 @@ function tectonicTide(Character){
    
     return dmg;
 }
+function fieryRain(Character){
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 5.0544;
+            break;
+        case 2:
+            Multiplier = 5.4335;
+            break;
+        case 3:
+            Multiplier = 5.8126;
+            break;
+        case 4:
+            Multiplier = 6.318;
+            break;
+        case 5:
+            Multiplier = 6.6971;
+            break;
+        case 6:
+            Multiplier = 7.0762;
+            break;
+        case 7:
+            Multiplier = 7.5816;
+            break;
+        case 8:
+            Multiplier = 8.087;
+            break;
+        case 9:
+            Multiplier = 8.5925;
+            break;
+        case 10:
+            Multiplier = 9.0979;
+            break;
+        case 11:
+            Multiplier = 9.6034;
+            break;
+        case 12:
+            Multiplier = 10.1088;
+            break;
+        case 13:
+            Multiplier = 10.7406;
+            break;
+    }
+    let attack = {Multiplier: Multiplier, Element:"PyroDMGBonus",Scaling:"ATK"}
+    let dmg = dmgCalc(attack,Character,"ElementalBurst")*3;
+    
+
+    
+    return dmg;
+}

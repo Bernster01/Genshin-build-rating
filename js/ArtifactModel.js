@@ -28,7 +28,7 @@ const artifactSets ={
     ["Archaic Petra"]:{
         Type: "Archaic Petra",
         twoPiece:{Type:"GeoDMGBonus",Value:15},
-        fourPiece:{Type:"BonusDMG%",Value:0.35}
+        fourPiece:{Type:"BonusDMG%",Value:35}
     },
     ["Blizzard Strayer"]:{
         Type: "Blizzard Strayer",
@@ -38,7 +38,7 @@ const artifactSets ={
     ["Bloodstained Chivalry"]:{
         Type: "Bloodstained Chivalry",
         twoPiece:{Type:"PhysicalDMGBonus",Value:25},
-        fourPiece:{Type:"ChargedAttack",Value:0.5}
+        fourPiece:{Type:"ChargedAttack",Value:50}
     },
     ["Crimson Witch of Flames"]:{
         Type: "Crimson Witch of Flames",
@@ -75,7 +75,7 @@ const artifactSets ={
     },
     ["Noblesse Oblige"]:{
         Type: "Noblesse Oblige",
-        twoPiece:{Type:"BurstDMG%",Value:0.2},
+        twoPiece:{Type:"BurstDMG%",Value:20},
         
     },
     ["Pale Flame"]:{
@@ -86,17 +86,17 @@ const artifactSets ={
         Type: "Retracing Bolide",
         twoPiece:{Type:"ShieldStrength",Value:35},
         fourPiece:[
-            {Type:"ChargedAttack",Value:0.4},
-            {Type:"NormalAttack",Value:0.4}
+            {Type:"ChargedAttack",Value:40},
+            {Type:"NormalAttack",Value:40}
         ]
     },
     ["Shimenawa's Reminiscence"]:{
         Type: "Shimenawa's Reminiscence",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:[
-            {Type:"ChargedAttack",Value:0.5},
-            {Type:"NormalAttack",Value:0.5},
-            {Type:"PlungeAttack",Value:0.5}
+            {Type:"ChargedAttack",Value:50},
+            {Type:"NormalAttack",Value:50},
+            {Type:"PlungeAttack",Value:50}
         ]
     },
     ["Tenacity of the Millelith"]:{
@@ -123,7 +123,7 @@ const artifactSets ={
     ["Wanderer's Troupe"]:{
         Type: "Wanderer's Troupe",
         twoPiece:{Type:"ElementalMastery",Value:80},
-        fourPiece:{Type:"ChargedAttack",Value:0.35},
+        fourPiece:{Type:"ChargedAttack",Value:35},
     }
 }
 let artifactPieces ={

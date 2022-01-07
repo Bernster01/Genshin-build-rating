@@ -70,4 +70,16 @@ obj.style.width = "92px";
 obj.style.height = "130px";
 supportingElement = element;
 }
+
+function selectRole(value){
+  value = Number.parseInt(value);
+  switch(value){
+    case 0:
+      role = "Support";
+      break;
+    case 1:
+      role = "Dps";
+      break;
+  }
   
+}

@@ -112,3 +112,50 @@ function solarIsotoma(Character) {
     dmg+=dmg2;
     return dmg;
 }
+function explosivePuppet(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 1.232
+            break;
+        case 2:
+            skillMultiplier = 1.3244
+            break;
+        case 3:
+            skillMultiplier = 1.4168
+            break;
+        case 4:
+            skillMultiplier = 1.54
+            break;
+        case 5:
+            skillMultiplier = 1.6324
+            break;
+        case 6:
+            skillMultiplier = 1.7248
+            break;
+        case 7:
+            skillMultiplier = 1.848
+            break;
+        case 8:
+            skillMultiplier = 1.9712
+            break;
+        case 9:
+            skillMultiplier = 2.0944
+            break;
+        case 10:
+            skillMultiplier = 2.2176
+            break;
+        case 11:
+            skillMultiplier = 2.3408
+            break;
+        case 12:
+            skillMultiplier = 2.464
+            break;
+        case 13:
+            skillMultiplier = 2.618
+            break;
+    }
+    let attack = {Multiplier: skillMultiplier, Element:"PyroDMGBonus",Scaling:"ATK"}
+    let dmg = dmgCalc(attack,Character,"ElementalSkill");
+    return dmg*3;
+}

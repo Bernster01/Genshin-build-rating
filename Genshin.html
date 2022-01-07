@@ -177,6 +177,14 @@
 
 
 		</div>
+		<div id="RoleSelectionContainer">
+			<h2>Role</h2>
+			<div>
+				<span>Support</span>
+				<input type="range" min="0" max="1" onchange="selectRole(this.value)">
+				<span>Dps</span>
+			</div>
+		</div>
 		<h2>Artifacts</h2>
 		<div id="ArtifactContainer">
 
@@ -761,8 +769,9 @@
 		</div>
 		<div>
 			<h2>Supporting Element</h2>
-			<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span id="SelectedSupportingElement"></span></div>
-	
+			<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
+					id="SelectedSupportingElement"></span></div>
+
 			<div class="supportingElementContainer">
 				<div onclick="selectSupportingElement('Pyro',this)">
 					<img src="Elements/pyro.png" />
@@ -780,7 +789,7 @@
 					<img src="Elements/electro.png" />
 					<span>Electro</span>
 				</div>
-				<div onclick="selectSupportingElement('Dendro',this)"> 
+				<div onclick="selectSupportingElement('Dendro',this)">
 					<img src="Elements/dendro.png" />
 					<span>Dendro</span>
 				</div>
@@ -790,7 +799,7 @@
 				</div>
 			</div>
 		</div>
-		<button onclick="userCharacter()">Rate my build!</button>
+		<button onclick="userCharacter(this)">Rate my build!</button>
 	</div>
 
 	<div id="ResultSplashContainer">

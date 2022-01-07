@@ -366,7 +366,8 @@ h2
 	margin-top: -5px;
 	border-top:2px solid #3D3B3C;
 	background-color: #5F5B6B;
-	
+	font-size: 12pt;
+	word-wrap: break-word
 	
 }
 #SelectWeaponImg
@@ -528,5 +529,24 @@ transform: scale(1.05);
 	flex-direction: column;
 	align-items: center;
 }
-
+#RoleSelectionContainer{
+display: flex;
+flex-direction: column;
+justify-content: center;
+width: 60%;
+	background:#C1BDB3;
+	text-align:center;
+	border-radius:1vw;
+	border:2px solid #5F5B6B;
+	margin:1em;
+	padding:0.75em;
+	box-shadow: 0em 0.4em 4em -1em;
+	
+margin-left:20%;
+}
+#RoleSelectionContainer div{
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
 

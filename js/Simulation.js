@@ -2,9 +2,10 @@ let bestDMG = 0;
 let bestArtifacts = null;
 let supportingElement = null;
 let enemiesFrozen = false;
+let role = "Dps";
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 1);
+    let result = FindBestBuild(simulatedCharacter, 100);
 
     let result2 = Simulation(usersCharacter);
     console.log(result[0], result2.dmg);
@@ -24,7 +25,7 @@ function FindBestBuild(baseChar, times) {
     let charac;
     let startTime = Date.now();
     for (let index = 0; index < times; index++) {
-        AllWeapons[baseChar.weaponType].forEach(weaponToUse=>{
+        AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = _.cloneDeep(baseChar);
             let weapon = _.cloneDeep(AllWeapons[weaponToUse]);
             weapon.level = "90b";
@@ -32,19 +33,19 @@ function FindBestBuild(baseChar, times) {
             character.elementalSkill.Level = 10;
             character.elementalBurst.Level = 10;
             if (character.name != "Tartaglia") {
-    
+
                 character.normalAttackLevel = 10;
             }
             else {
                 character.normalAttackLevel = 11;
-    
+
             }
             let newCharacter = new Createcharacter(
                 character,
                 weapon,
                 GenerateArtifacts(character.scalingType)
             );
-    
+
             applyBonuses(newCharacter);
             let result = Simulation(newCharacter);
             newDamage = result.dmg;
@@ -56,14 +57,14 @@ function FindBestBuild(baseChar, times) {
                 const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
                 charac = char;
                 chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "Defense: " + char.DEF(), "Base Def: " + char.baseDEF, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-    
+
                 indexForBetterDmg.push(newObj);
-    
+
             }
             newCharacter = undefined;
         })
 
-       
+
 
     }
     character = undefined;
@@ -355,7 +356,7 @@ class Createcharacter {
             });
             if (buffs != null && buffs != undefined) {
                 buffs.forEach(buff => {
-                    if (buff.Type == "ElementalMAstery") {
+                    if (buff.Type == "ElementalMastery") {
                         em += buff.Value;
                     }
                 })
@@ -402,9 +403,18 @@ function applyBonuses(character) {
     character.weapon.passive().forEach(passive => {
         character.currentBuffs.push(passive);
     });
-    character.advancedstats.elementalBonuses.forEach(element=>{
-        if(character.ascensionstats().Type == element.Type)
-        character.currentBuffs.push({Type:element.Type,Value:character.ascensionstats().Value});
+    switch (character.weapon.name) {
+        case "Everlasting Moonglow":
+            character.currentBuffs.push({ Type: "NormalAttack", Value: 0.1 * character.HP() });
+            break;
+        case "Redhorn Stonethresher":
+            character.currentBuffs.push({ Type: "NormalAttack", Value: character.DEF() * 0.40 });
+            character.currentBuffs.push({ Type: "ChargedAttack", Value: character.DEF() * 0.40 });
+            break;
+    }
+    character.advancedstats.elementalBonuses.forEach(element => {
+        if (character.ascensionstats().Type == element.Type)
+            character.currentBuffs.push({ Type: element.Type, Value: character.ascensionstats().Value });
     })
     character.currentBuffs.forEach(buff => {
 
@@ -509,13 +519,15 @@ function getSetBonus(array, character) {
 
             if (artifactSets[array[i]].fourPiece != undefined) {
                 if (currentSet == "Gladiator's Finale") {
-                    if (character.weaponType == "Sword" || character.weaponType == "Claymore" || character.weaponType == "Polearm") {
+                    if (character.weapon.weaponType == "Sword" || character.weapon.weaponType == "Claymore" || character.weapon.weaponType == "Polearm") {
                         character.currentBuffs.push(artifactSets[array[i]].fourPiece);
                     }
                 }
                 else if (currentSet == "Wanderer's Troupe") {
-                    if (character.weaponType == "Bow" || character.weaponType == "Catalyst") {
+
+                    if (character.weapon.weaponType == "Bow" || character.weapon.weaponType == "Catalyst") {
                         character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+
                     }
                 }
                 else if (currentSet == "Shimenawa's Reminiscence") {
@@ -551,9 +563,9 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     enemiesFrozen = false;
-    Character.sequence.forEach(action => {
-        let type = "basicAttack";
-        let attackAction = { Multiplier: 0, Element: "", isReaction: false,Scaling:"ATK" };
+    Character.sequence[role].forEach(action => {
+        let type = "NormalAttack";
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: "ATK" };
         switch (action) {
             case "N1":
             case "N2":
@@ -598,7 +610,7 @@ function Simulation(character) {
                         attackAction.Multiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.chargedAttack.Element;
                         attackAction.isReaction = Character.chargedAttack.isReaction;
-                        
+
                         type = "ChargedAttack";
                         break;
 
@@ -611,16 +623,20 @@ function Simulation(character) {
                 }
 
                 totalDmg += dmgCalc(attackAction, Character, type);
-
+                if (Character.weapon.name == "Mistsplitter Reforged") {
+                    if (attackAction.Element != "PhysicalDMGBonus") {
+                        Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
+                    }
+                }
                 break;
 
             case "E":
                 switch (Character.weapon.name) {
                     case "Cinnabar Spindle":
-                        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Flat",Source:"Cinnabar Spindle",Value:Character.DEF() * 0.8}});
+                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: Character.DEF() * 0.8 } });
                         break;
                     case "Festering Desire":
-                        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Source:"Festering Desire",Value:32}});
+                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
                         Character.advancedstats.critRate += 12;
                         break;
                 }
@@ -628,10 +644,10 @@ function Simulation(character) {
                 totalDmg += eDmg;
                 switch (Character.weapon.name) {
                     case "Cinnabar Spindle":
-                        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Flat",Source:"Cinnabar Spindle",Value:-Character.DEF() * 0.8}});
+                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: -Character.DEF() * 0.8 } });
                         break;
                     case "Festering Desire":
-                        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Source:"Festering Desire",Value:-32}});
+                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: -32 } });
                         Character.advancedstats.critRate -= 12;
                         break;
                 }
@@ -640,14 +656,29 @@ function Simulation(character) {
             case "Q":
                 Character.currentBuffs.forEach(buff => {
                     if (buff.Type == "Emblem") {
-                        let multiplier = 1+((Character.advancedstats.energyRecharge / 100)*0.25);
+                        let multiplier = 1 + ((Character.advancedstats.energyRecharge / 100) * 0.25);
                         if (multiplier > 1.75)
                             multiplier = 1.75;
-                            Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Source:"Emblem",Value:multiplier}})
+                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Emblem", Value: multiplier } })
                     }
                 })
+                switch(Character.weapon.name){
+                    case "The Catch":
+                        Character.advancedstats.critRate+=12;
+                        break;
+                }
                 let qDmg = Character.elementalBurst.Skill(Character);
-                
+                switch (Character.weapon.name) {
+                    case "Mistsplitter Reforged":
+                        Character.currentBuffs.push({ Type: "ElementalDMG", Value: 34.6 });
+                        break;
+                    case "Engulfing Lightning":
+                        Character.advancedstats.energyRecharge += 30;
+                        break;
+                    case "The Catch":
+                        Character.advancedstats.critRate-=12;
+                        break;
+                }
                 let energyMultiplier = Character.advancedstats.energyRecharge / Character.energyOffset;
                 if (energyMultiplier > 1)
                     energyMultiplier = 1;
@@ -655,9 +686,9 @@ function Simulation(character) {
                 totalDmg += qDmg
                 Character.currentBuffs.forEach(buff => {
                     if (buff.Type == "AddativeBonusDMG") {
-                        if(buff.buff.Source == "Emblem")
+                        if (buff.buff.Source == "Emblem")
                             buff.buff.Value = 0;
-                      
+
                     }
                 });
                 break;
@@ -668,9 +699,21 @@ function Simulation(character) {
     return { dmg: Math.floor(totalDmg), char: Character };
 }
 function dmgCalc(attackAction, Character, type) {
+    switch (Character.weapon.name) {
+        case "Engulfing Lightning":
+            let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
+            if (atkIncrease > 80) {
+                atkIncrease = 80;
+            }
+            Character.currentBuffs.push({ Type: "ATK%", Value: atkIncrease });
+            break;
+        case "Staff of Homa":
+            Character.currentBuffs.push({ Type: "ATK%", Value: Character.HP() * 0.01 });
+            break;
+    }
     //Personal damage
     let dmg = 0;
-    switch(attackAction.Scaling){
+    switch (attackAction.Scaling) {
         case "ATK":
             dmg = (attackAction.Multiplier * Character.attack());
             break;
@@ -682,14 +725,14 @@ function dmgCalc(attackAction, Character, type) {
             break;
 
     }
-   
- 
+
+
     //BonusDMG
     let baseBonusDMGFlat = 0;
     let baseBonusDMGMultiple = 1;
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "AddativeBonusDMG") {
-            if (buff.buff == "Flat") {
+            if (buff.buff.Type == "Flat") {
                 baseBonusDMGFlat += buff.buff.Value;
             }
             else {
@@ -700,6 +743,11 @@ function dmgCalc(attackAction, Character, type) {
     dmg *= baseBonusDMGMultiple;
     dmg += baseBonusDMGFlat;
     //Crit
+    if (Character.critRate() > 100) {
+        let tot = Character.critRate();
+        Character.advancedstats.critRate -= tot - 100;
+
+    }
     dmg *= (1 + ((Character.critRate() / 100) * (Character.critDMG() / 100)));
     let bonusDMG = 1;
     Character.advancedstats.elementalBonuses.forEach(element => {
@@ -716,19 +764,37 @@ function dmgCalc(attackAction, Character, type) {
 
         Character.ExtraMultiplier.forEach(multiplier => {
 
-            if (type == multiplier.Type) {
+            if (type == multiplier.Type || multiplier.Type == "BonusDMG%") {
 
                 bonusDMG += (multiplier.Value / 100);
 
             }
         });
+        Character.currentBuffs.forEach(buff => {
+            if (type == buff.Type) {
+
+                bonusDMG += (buff.Value / 100);
+
+            }
+        })
     }
     dmg *= bonusDMG;
     dmg *= defCalc(Character);
-    dmg *= resCalc(Character,attackAction.Element);
+    dmg *= resCalc(Character, attackAction.Element);
     if (attackAction.isReaction)
         dmg = elementalMasteryCalc(dmg, attackAction.Element, Character);
-
+    switch (Character.weapon.name) {
+        case "Engulfing Lightning":
+            let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
+            if (atkIncrease > 80) {
+                atkIncrease = 80;
+            }
+            Character.currentBuffs.push({ Type: "ATK%", Value: -atkIncrease })
+            break;
+        case "Staff of Homa":
+            Character.currentBuffs.push({ Type: "ATK%", Value: -Character.HP() * 0.01 });
+            break;
+    }
     return dmg;
 }
 
@@ -822,7 +888,7 @@ function elementalMasteryCalc(dmg, type, character) {
                         dmg *= vaporizeMultiplier;
                         break;
                     case "Electro":
-                        dmg += overloaded(em, lvl,"Pyro",character,overloadedBonus);
+                        dmg += overloaded(em, lvl, "Pyro", character, overloadedBonus);
                         break;
                     case "Cryo":
                         dmg *= reverseMeltMultiplier;
@@ -841,20 +907,20 @@ function elementalMasteryCalc(dmg, type, character) {
                         dmg *= reverseVaporizeMultiplier;
                         break;
                     case "Electro":
-                        dmg += electroCharged(em, lvl, "Electro",character,electroChargedBonus);
+                        dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Hydro", character, swirlBonus);
                         break;
                     case "Cryo":
-                        if(!enemiesFrozen){
-                            let bs =0;
-                            character.artifacts.forEach(artifact=>{
-                                if(artifact.Set = "Blizzard Strayer")
+                        if (!enemiesFrozen) {
+                            let bs = 0;
+                            character.artifacts.forEach(artifact => {
+                                if (artifact.Set = "Blizzard Strayer")
                                     bs++
                             });
-                            if(bs =>4)
-                            character.currentBuffs.push({Type:"CritRate",Value:20});
+                            if (bs => 4)
+                                character.currentBuffs.push({ Type: "CritRate", Value: 20 });
                             enemiesFrozen = true;
                         }
                         break;
@@ -865,25 +931,25 @@ function elementalMasteryCalc(dmg, type, character) {
             case "Cryo":
                 switch (type) {
                     case "Electro":
-                        dmg += superconduct(em, lvl,"Cryo", character,superconductBonus);
+                        dmg += superconduct(em, lvl, "Cryo", character, superconductBonus);
                         break;
                     case "Pyro":
                         dmg *= meltMultiplier;
                         break;
                     case "Anemo":
-                        dmg += swirl(em, lvl, "Cryo", character,swirlBonus);
+                        dmg += swirl(em, lvl, "Cryo", character, swirlBonus);
                         break;
                     case "Hydro":
-                        if(!enemiesFrozen){
-                        let bs =0;
-                        character.artifacts.forEach(artifact=>{
-                            if(artifact.Set = "Blizzard Strayer")
-                                bs++
-                        });
-                        if(bs =>4)
-                        character.currentBuffs.push({Type:"CritRate",Value:20});
-                        enemiesFrozen = true;
-                    }
+                        if (!enemiesFrozen) {
+                            let bs = 0;
+                            character.artifacts.forEach(artifact => {
+                                if (artifact.Set = "Blizzard Strayer")
+                                    bs++
+                            });
+                            if (bs => 4)
+                                character.currentBuffs.push({ Type: "CritRate", Value: 20 });
+                            enemiesFrozen = true;
+                        }
                         break;
                     case "Dendro":
                         break;
@@ -892,13 +958,13 @@ function elementalMasteryCalc(dmg, type, character) {
             case "Electro":
                 switch (type) {
                     case "Hydro":
-                        dmg += electroCharged(em, lvl, "Electro",character,electroChargedBonus);
+                        dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
                         break;
                     case "Pyro":
-                        dmg += overloaded(em, lvl, "Pyro",character,overloadedBonus);
+                        dmg += overloaded(em, lvl, "Pyro", character, overloadedBonus);
                         break;
                     case "Cryo":
-                        dmg += superconduct(em, lvl, "Cryo",character,superconductBonus);
+                        dmg += superconduct(em, lvl, "Cryo", character, superconductBonus);
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Electro", character, swirlBonus)
@@ -914,7 +980,7 @@ function elementalMasteryCalc(dmg, type, character) {
             case "Dendro":
                 switch (type) {
                     case "Pyro":
-                        dmg += burning(em, lvl, "Pyro",character,burningBonus);
+                        dmg += burning(em, lvl, "Pyro", character, burningBonus);
                         break;
 
                 }
@@ -924,16 +990,16 @@ function elementalMasteryCalc(dmg, type, character) {
         return dmg;
     }
 }
-function overloaded(em,lvl,element,character,overloadedBonus) {
-    return ((superconductBaseDMG[lvl] * 4) * (1 + ((1600 * (em / (em + 2000))) / 100)+overloadedBonus) * resCalc(character,element));
+function overloaded(em, lvl, element, character, overloadedBonus) {
+    return ((superconductBaseDMG[lvl] * 4) * (1 + ((1600 * (em / (em + 2000))) / 100) + overloadedBonus) * resCalc(character, element));
 }
 
-function electroCharged(em, lvl,element,character,electroChargedBonus) {
-    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((1600 * (em / (em + 2000))) / 100)+electroChargedBonus) * resCalc(character,element)) * 3.5 * 3;
+function electroCharged(em, lvl, element, character, electroChargedBonus) {
+    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((1600 * (em / (em + 2000))) / 100) + electroChargedBonus) * resCalc(character, element)) * 3.5 * 3;
 }
 
-function superconduct(em, lvl,element,character,superconductBonus) {
-    return ((superconductBaseDMG[lvl]) * (1 + ((1600 * (em / (em + 2000))) / 100)+superconductBonus) * resCalc(character,element));
+function superconduct(em, lvl, element, character, superconductBonus) {
+    return ((superconductBaseDMG[lvl]) * (1 + ((1600 * (em / (em + 2000))) / 100) + superconductBonus) * resCalc(character, element));
 }
 
 function swirl(em, lvl, element, character, swirlBonus) {
@@ -943,10 +1009,10 @@ function swirl(em, lvl, element, character, swirlBonus) {
             isShreded = true;
 
     });
-   
-    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((1600 * (em / (em + 2000))) / 100) + swirlBonus) * resCalc(character,element));
+
+    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((1600 * (em / (em + 2000))) / 100) + swirlBonus) * resCalc(character, element));
     if (!isShreded)
-    character.currentBuffs.push({ Type: "VVShred", Element: element, Value: 40 });
+        character.currentBuffs.push({ Type: "VVShred", Element: element, Value: 40 });
     return dmg;
 }
 const superconductBaseDMG = {

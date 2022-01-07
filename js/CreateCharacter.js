@@ -1,7 +1,7 @@
-function userCharacter(){
+function userCharacter(button){
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterText").innerText];
     let weapon = AllWeapons[document.getElementById("SelectWeaponText").innerText];
-    
+    button.isDisabled = true;
 
     //#region import artifact values
     const circletMainstat = {Type:document.getElementById("Circlet_mainstat").value, Value: Number.parseFloat(document.getElementById("Circlet_mainstat_value").value)};
