@@ -15,7 +15,7 @@ function LoadCharacters() {
 function loadWeapons(character) {
     let weapon = document.getElementById('WeaponsContainer');
     weapon.innerHTML = "";
-
+    
     AllWeapons[AllCharacters[character].weaponType].forEach(Weapon => {
         let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
         weapon.insertAdjacentHTML("beforeend", htmlCode);
