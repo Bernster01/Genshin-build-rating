@@ -564,17 +564,7 @@ const TheFlute = {
     }
 }.Init();
 
-function getSubStat(weapon) {
 
-    let lvl = "Lv";
-    for (let index = 0; index < weapon.Parent.level.length - 1; index++) {
-        lvl = lvl + weapon.Parent.level[index];
-
-    }
-
-    return subStatScaling[weapon.startValue][lvl];
-
-}
 //#endregion
 
 //#region Bows
@@ -1247,7 +1237,7 @@ const FavoniusCodex = {
     },
     subStat: {
         Type: "EnergyRecharge",
-        startValue: "10%",
+        startValue: "10.0%",
         Value: function () {
             return getSubStat(this);
         }
@@ -1710,7 +1700,7 @@ const KatsuragikiriNagamasa = {
     },
     subStat: {
         Type: "EnergyRecharge",
-        startValue: "10%",
+        startValue: "10.0%",
         Value: function () {
             return getSubStat(this);
         }
@@ -2680,7 +2670,17 @@ const WhiteTassel = {
 function GetBaseAttack(weapon) {
     return baseAttack[weapon.baseAttackType][weapon.level];
 }
+function getSubStat(weapon) {
 
+    let lvl = "Lv";
+    for (let index = 0; index < weapon.Parent.level.length - 1; index++) {
+        lvl = lvl + weapon.Parent.level[index];
+
+    }
+    // console.log(lvl,weapon);
+    return subStatScaling[weapon.startValue][lvl];
+
+}
 const AllWeapons = {
     ["Alley Hunter"]:AlleyHunter,
     ["Akuoumaru"]:Akuoumaru,

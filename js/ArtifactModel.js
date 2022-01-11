@@ -70,7 +70,7 @@ const artifactSets ={
     },
     ["Maiden Beloved"]:{
         Type: "Maiden Beloved",
-        twoPiece:{Type:"HealingBonus%",Value:15},
+        twoPiece:{Type:"HealingBonus",Value:15},
         
     },
     ["Noblesse Oblige"]:{

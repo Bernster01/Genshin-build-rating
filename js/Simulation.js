@@ -1,24 +1,50 @@
 let bestDMG = 0;
+let bestSupportScore = 0;
 let bestArtifacts = null;
 let supportingElement = null;
 let enemiesFrozen = false;
 let role = "Dps";
+let mistSplitterNormalStack = false;
+let mistSplitterBurstStack = false;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 100);
+    let result = FindBestBuild(simulatedCharacter, 1000);
 
     let result2 = Simulation(usersCharacter);
-    console.log(result[0], result2.dmg);
-    console.log("User", result2.char);
-    console.log(result[2]);
-    console.log(result[3]);
-    console.log(["Attack: " + result2.char.attack(), "Base Attack: " + result2.char.baseAttack, "Defense: " + result2.char.DEF(), "Base Defense: " + result2.char.baseDEF, "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-    return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
+    let userScore;
+    if (simulatedCharacter.supportType != "Healer" && role != "Support") {
+        console.log(result[0], result2.dmg);
+        console.log("User", result2.char);
+        console.log(result[2]);
+        console.log(result[3]);
+        console.log(["Attack: " + result2.char.attack(), "Defense: " + result2.char.DEF(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
+        return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
+    }
+    else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
+        userScore = result2.healing + (result2.dmg * 0.1);
+        console.log("User: " + userScore, "Best score: " + result[0])
+        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+    }
+    else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
+        if (simulatedCharacter.supportType2 != undefined) {
+            if (simulatedCharacter.supportType2 == "Healer") {
+                userScore = (result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1);
+
+                console.log("User: " + userScore, "Best score: " + result[0])
+            }
+        }
+        else {
+            userScore = (result2.attackBuff * 2) + (result2.dmg * 0.1);
+        }
+        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+    }
 }
 
 
 function FindBestBuild(baseChar, times) {
     let newDamage;
+    let supportType;
+    let totalHealing;
     let currentBestArtifacts;
     let indexForBetterDmg = [];
     let chara;
@@ -27,6 +53,7 @@ function FindBestBuild(baseChar, times) {
     for (let index = 0; index < times; index++) {
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = _.cloneDeep(baseChar);
+            supportType = character.supportType;
             let weapon = _.cloneDeep(AllWeapons[weaponToUse]);
             weapon.level = "90b";
             character.level = "90b";
@@ -50,15 +77,62 @@ function FindBestBuild(baseChar, times) {
             let result = Simulation(newCharacter);
             newDamage = result.dmg;
             let char = result.char;
-            if (newDamage > bestDMG) {
-                currentBestArtifacts = newCharacter.artifacts;
-                bestArtifacts = newCharacter.artifacts;
-                bestDMG = newDamage;
-                const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
-                charac = char;
-                chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "Defense: " + char.DEF(), "Base Def: " + char.baseDEF, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+            let score = 0;
+            if (character.supportType != "Healer" && role == "Dps" || role == "Sub-dps") {
+                if (newDamage > bestDMG) {
+                    currentBestArtifacts = newCharacter.artifacts;
+                    bestArtifacts = newCharacter.artifacts;
+                    bestDMG = newDamage;
+                    const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
+                    charac = char;
+                    chara = ["Attack: " + char.attack(), "Defense: " + char.DEF(), "HP: " + char.HP(), "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
 
-                indexForBetterDmg.push(newObj);
+                    indexForBetterDmg.push(newObj);
+
+                }
+            }
+            else if (character.supportType == "Healer") {
+
+                score = result.healing + (result.dmg * 0.1);
+
+                if (score > bestSupportScore) {
+                    currentBestArtifacts = newCharacter.artifacts;
+                    bestArtifacts = newCharacter.artifacts;
+                    bestSupportScore = score;
+                    const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                    charac = char;
+                    chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+
+                    indexForBetterDmg.push(newObj);
+                }
+            }
+            else if (character.supportType == "ATKBooster" && role == "Support") {
+                if (character.supportType2 != undefined) {
+                    if (character.supportType2 == "Healer") {
+                        score = (result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.1);
+                        if (score > bestSupportScore) {
+                            currentBestArtifacts = newCharacter.artifacts;
+                            bestArtifacts = newCharacter.artifacts;
+                            bestSupportScore = score;
+                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                            charac = char;
+                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                            indexForBetterDmg.push(newObj);
+                        }
+                    }
+                }
+                else {
+                    score = (result.attackBuff * 2) + (result.dmg * 0.1);
+                    if (score > bestSupportScore) {
+                        currentBestArtifacts = newCharacter.artifacts;
+                        bestArtifacts = newCharacter.artifacts;
+                        bestSupportScore = score;
+                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                        charac = char;
+                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                        indexForBetterDmg.push(newObj);
+                    }
+                }
 
             }
             newCharacter = undefined;
@@ -67,12 +141,15 @@ function FindBestBuild(baseChar, times) {
 
 
     }
+
     character = undefined;
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
     console.log(indexForBetterDmg);
-
-    return [bestDMG, currentBestArtifacts, charac, chara];
+    if (role == "Support" && supportType != "Sub-dps")
+        return [bestSupportScore, currentBestArtifacts, charac, chara];
+    else
+        return [bestDMG, currentBestArtifacts, charac, chara];
 }
 function GenerateSequence() {
     let sequence = [""];
@@ -135,6 +212,7 @@ class Createcharacter {
     constructor(baseCharacter, weapon, artifacts) {
         this.name = baseCharacter.name;
         this.src = baseCharacter.src;
+        this.supportType = baseCharacter.supportType;
         this.element = baseCharacter.element;
         this.level = baseCharacter.level;
         this.energyOffset = baseCharacter.energyOffset;
@@ -314,7 +392,7 @@ class Createcharacter {
                     if (substat.Type == "HP%") {
                         HP += substat.Value;
                     }
-                    else if (substat.Type = "HPflat") {
+                    else if (substat.Type == "HPflat") {
                         HPflat += substat.Value;
                     }
 
@@ -377,12 +455,15 @@ class Createcharacter {
 }
 function applyBonuses(character) {
     let mainstat = character.artifacts[4].Mainstat;
-    if (mainstat.Type != "ATK%" || mainstat.Type != "DEF%" || mainstat.Type != "HP%" || mainstat.Type != "Elemental Mastery") {
+    if (mainstat.Type != "ATK%" || mainstat.Type != "DEF%" || mainstat.Type != "HP%" || mainstat.Type != "Elemental Mastery" || mainstat.Type != "HealingBonus") {
         character.advancedstats.elementalBonuses.forEach(element => {
             if (element.Type == mainstat.Type) {
                 element.Value += mainstat.Value;
             }
         });
+    }
+    else if (mainstat.Type == "HealingBonus") {
+        character.advancedstats.healingBonus += mainstat.Value;
     }
     character.currentBuffs.push({ Type: character.weapon.subStat.Type, Value: character.weapon.subStat.Value() })
     let sets = [];
@@ -390,6 +471,8 @@ function applyBonuses(character) {
         sets.push(artifact.Set);
         if (artifact.Mainstat.Type == "EnergyRecharge")
             character.advancedstats.energyRecharge += artifact.Mainstat.Value;
+        else if (artifact.Mainstat.Type == "HealingBonus")
+            character.advancedstats.healingBonus += artifact.Mainstat.Value;
         else {
             artifact.Substats.forEach(substat => {
                 if (substat.Type == "EnergyRecharge")
@@ -405,11 +488,10 @@ function applyBonuses(character) {
     });
     switch (character.weapon.name) {
         case "Everlasting Moonglow":
-            character.currentBuffs.push({ Type: "NormalAttack", Value: 0.1 * character.HP() });
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff:{Type:"Flat",Value: character.HP() * 0.10 },Value:null});
             break;
         case "Redhorn Stonethresher":
-            character.currentBuffs.push({ Type: "NormalAttack", Value: character.DEF() * 0.40 });
-            character.currentBuffs.push({ Type: "ChargedAttack", Value: character.DEF() * 0.40 });
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff:{Type:"Flat",Value: character.DEF() * 0.40 },Value:null});
             break;
     }
     character.advancedstats.elementalBonuses.forEach(element => {
@@ -492,6 +574,9 @@ function applyBonuses(character) {
                     element.Value += buff.Value;
                 });
                 break;
+            case "HealingBonus":
+                character.advancedstats.healingBonus += buff.Value;
+                break;
 
 
 
@@ -558,14 +643,21 @@ function getSetBonus(array, character) {
 
     }
 }
+function resetVariables() {
+    mistSplitterNormalStack = false;
+    mistSplitterBurstStack = false;
+    enemiesFrozen = false;
+}
 function Simulation(character) {
 
+    resetVariables();
+    let heal = 0;
+    let atkBuff = 0;
     let Character = character;
     let totalDmg = 0;
-    enemiesFrozen = false;
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
-        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: "ATK" };
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null };
         switch (action) {
             case "N1":
             case "N2":
@@ -580,36 +672,42 @@ function Simulation(character) {
                         attackAction.Multiplier = Character.normalAttack1.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.normalAttack1.Element;
                         attackAction.isReaction = Character.normalAttack1.isReaction;
+                        attackAction.Scaling = Character.normalAttack1.scaling;
                         break;
 
                     case "N2":
                         attackAction.Multiplier = Character.normalAttack2.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.normalAttack2.Element;
                         attackAction.isReaction = Character.normalAttack2.isReaction;
+                        attackAction.Scaling = Character.normalAttack2.scaling;
                         break;
 
                     case "N3":
                         attackAction.Multiplier = Character.normalAttack3.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.normalAttack3.Element;
                         attackAction.isReaction = Character.normalAttack3.isReaction;
+                        attackAction.Scaling = Character.normalAttack3.scaling;
                         break;
 
                     case "N4":
                         attackAction.Multiplier = Character.normalAttack4.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.normalAttack4.Element;
                         attackAction.isReaction = Character.normalAttack4.isReaction;
+                        attackAction.Scaling = Character.normalAttack4.scaling;
                         break;
 
                     case "N5":
                         attackAction.Multiplier = Character.normalAttack5.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.normalAttack5.Element;
                         attackAction.isReaction = Character.normalAttack5.isReaction;
+                        attackAction.Scaling = Character.normalAttack5.scaling;
                         break;
 
                     case "C":
                         attackAction.Multiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.chargedAttack.Element;
                         attackAction.isReaction = Character.chargedAttack.isReaction;
+                        attackAction.Scaling = Character.chargedAttack.scaling;
 
                         type = "ChargedAttack";
                         break;
@@ -618,85 +716,110 @@ function Simulation(character) {
                         attackAction.Multiplier = Character.plungeAttack.Multiplier(Character.normalAttackLevel);
                         attackAction.Element = Character.plungeAttack.Element;
                         attackAction.isReaction = Character.plungeAttack.isReaction;
+                        attackAction.Scaling = Character.plungeAttack.scaling;
                         type = "PlungeAttack";
                         break;
                 }
 
                 totalDmg += dmgCalc(attackAction, Character, type);
-                if (Character.weapon.name == "Mistsplitter Reforged") {
+                if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
                     if (attackAction.Element != "PhysicalDMGBonus") {
                         Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
+                        mistSplitterNormalStack = true;
                     }
                 }
                 break;
 
             case "E":
-                switch (Character.weapon.name) {
-                    case "Cinnabar Spindle":
-                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: Character.DEF() * 0.8 } });
-                        break;
-                    case "Festering Desire":
-                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
-                        Character.advancedstats.critRate += 12;
-                        break;
+                if (Character.supportType == "Healer") {
+                    heal += Character.elementalSkill.Skill(Character);
                 }
-                let eDmg = Character.elementalSkill.Skill(Character);
-                totalDmg += eDmg;
-                switch (Character.weapon.name) {
-                    case "Cinnabar Spindle":
-                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: -Character.DEF() * 0.8 } });
-                        break;
-                    case "Festering Desire":
-                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: -32 } });
-                        Character.advancedstats.critRate -= 12;
-                        break;
+                else {
+
+                    switch (Character.weapon.name) {
+                        case "Cinnabar Spindle":
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: Character.DEF() * 0.8 } });
+                            break;
+                        case "Festering Desire":
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
+                            Character.advancedstats.critRate += 12;
+                            break;
+                    }
+                    let eDmg = Character.elementalSkill.Skill(Character);
+                    totalDmg += eDmg;
+                    switch (Character.weapon.name) {
+                        case "Cinnabar Spindle":
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Source: "Cinnabar Spindle", Value: -Character.DEF() * 0.8 } });
+                            break;
+                        case "Festering Desire":
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: -32 } });
+                            Character.advancedstats.critRate -= 12;
+                            break;
+                    }
                 }
                 break;
 
             case "Q":
-                Character.currentBuffs.forEach(buff => {
-                    if (buff.Type == "Emblem") {
-                        let multiplier = 1 + ((Character.advancedstats.energyRecharge / 100) * 0.25);
-                        if (multiplier > 1.75)
-                            multiplier = 1.75;
-                        Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Emblem", Value: multiplier } })
-                    }
-                })
-                switch(Character.weapon.name){
-                    case "The Catch":
-                        Character.advancedstats.critRate+=12;
-                        break;
+                if (Character.supportType == "Healer") {
+                    heal += Character.elementalBurst.Skill(Character);
                 }
-                let qDmg = Character.elementalBurst.Skill(Character);
-                switch (Character.weapon.name) {
-                    case "Mistsplitter Reforged":
-                        Character.currentBuffs.push({ Type: "ElementalDMG", Value: 34.6 });
-                        break;
-                    case "Engulfing Lightning":
-                        Character.advancedstats.energyRecharge += 30;
-                        break;
-                    case "The Catch":
-                        Character.advancedstats.critRate-=12;
-                        break;
+                else if (Character.supportType == "ATKBooster") {
+                    let result = Character.elementalBurst.Skill(Character);
+                    if (result.dmg != undefined)
+                        totalDmg += result.dmg;
+                    if (result.healing != undefined)
+                        heal += result.healing;
+                    if (result.attackBuff != undefined)
+                        atkBuff += result.attackBuff;
                 }
-                let energyMultiplier = Character.advancedstats.energyRecharge / Character.energyOffset;
-                if (energyMultiplier > 1)
-                    energyMultiplier = 1;
-                qDmg *= energyMultiplier;
-                totalDmg += qDmg
-                Character.currentBuffs.forEach(buff => {
-                    if (buff.Type == "AddativeBonusDMG") {
-                        if (buff.buff.Source == "Emblem")
-                            buff.buff.Value = 0;
+                else {
 
+                    Character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "Emblem") {
+                            let multiplier = 1 + ((Character.advancedstats.energyRecharge / 100) * 0.25);
+                            if (multiplier > 1.75)
+                                multiplier = 1.75;
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Emblem", Value: multiplier } })
+                        }
+                    })
+                    switch (Character.weapon.name) {
+                        case "The Catch":
+                            Character.advancedstats.critRate += 12;
+                            break;
                     }
-                });
+                    let qDmg = Character.elementalBurst.Skill(Character);
+                    switch (Character.weapon.name) {
+                        case "Mistsplitter Reforged":
+                            if (!mistSplitterBurstStack)
+                                Character.currentBuffs.push({ Type: "ElementalDMG", Value: 34.6 });
+                            break;
+                        case "Engulfing Lightning":
+                            Character.advancedstats.energyRecharge += 30;
+                            break;
+                        case "The Catch":
+                            Character.advancedstats.critRate -= 12;
+                            break;
+                    }
+                    let energyMultiplier = Character.advancedstats.energyRecharge / Character.energyOffset;
+                    if (energyMultiplier > 1)
+                        energyMultiplier = 1;
+                    qDmg *= energyMultiplier;
+                    totalDmg += qDmg
+                    Character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "AddativeBonusDMG") {
+                            if (buff.buff.Source == "Emblem")
+                                buff.buff.Value = 0;
+
+                        }
+                    });
+                }
                 break;
 
         }
     });
 
-    return { dmg: Math.floor(totalDmg), char: Character };
+    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff };
+
 }
 function dmgCalc(attackAction, Character, type) {
     switch (Character.weapon.name) {
