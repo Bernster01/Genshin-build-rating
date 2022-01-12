@@ -6,13 +6,16 @@ let enemiesFrozen = false;
 let role = "Dps";
 let mistSplitterNormalStack = false;
 let mistSplitterBurstStack = false;
+let crimsonWitchStacks = 0;
+let grimheartStack = 0;
+let superconductRes = false;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 1000);
+    let result = FindBestBuild(simulatedCharacter, 1);
 
     let result2 = Simulation(usersCharacter);
     let userScore;
-    if (simulatedCharacter.supportType != "Healer" && role != "Support") {
+    if (role != "Support" || simulatedCharacter.supportType == "Sub-dps") {
         console.log(result[0], result2.dmg);
         console.log("User", result2.char);
         console.log(result[2]);
@@ -20,6 +23,7 @@ function compareCharacters(usersCharacter) {
         console.log(["Attack: " + result2.char.attack(), "Defense: " + result2.char.DEF(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
         return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
     }
+
     else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
         userScore = result2.healing + (result2.dmg * 0.1);
         console.log("User: " + userScore, "Best score: " + result[0])
@@ -35,6 +39,19 @@ function compareCharacters(usersCharacter) {
         }
         else {
             userScore = (result2.attackBuff * 2) + (result2.dmg * 0.1);
+        }
+        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+    }
+    else if (simulatedCharacter.supportType == "Shield" && role == "Support") {
+        if (simulatedCharacter.supportType2 != undefined) {
+            if (simulatedCharacter.supportType2 == "Healer") {
+                userScore = (result2.shield * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1);
+
+                console.log("User: " + userScore, "Best score: " + result[0])
+            }
+        }
+        else {
+            userScore = (result2.shield * 2) + (result2.dmg * 0.1);
         }
         return `${Math.floor((userScore / result[0]) * 10)}/10`;
     }
@@ -78,7 +95,7 @@ function FindBestBuild(baseChar, times) {
             newDamage = result.dmg;
             let char = result.char;
             let score = 0;
-            if (character.supportType != "Healer" && role == "Dps" || role == "Sub-dps") {
+            if ((character.supportType == "Sub-dps" && role == "Support") || role == "Dps") {
                 if (newDamage > bestDMG) {
                     currentBestArtifacts = newCharacter.artifacts;
                     bestArtifacts = newCharacter.artifacts;
@@ -123,6 +140,35 @@ function FindBestBuild(baseChar, times) {
                 }
                 else {
                     score = (result.attackBuff * 2) + (result.dmg * 0.1);
+                    if (score > bestSupportScore) {
+                        currentBestArtifacts = newCharacter.artifacts;
+                        bestArtifacts = newCharacter.artifacts;
+                        bestSupportScore = score;
+                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                        charac = char;
+                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                        indexForBetterDmg.push(newObj);
+                    }
+                }
+
+            }
+            else if (character.supportType == "Shield" && role == "Support") {
+                if (character.supportType2 != undefined) {
+                    if (character.supportType2 == "Healer") {
+                        score = (result.shield * 2) + (result.healing * 0.95) + (result.dmg * 0.1);
+                        if (score > bestSupportScore) {
+                            currentBestArtifacts = newCharacter.artifacts;
+                            bestArtifacts = newCharacter.artifacts;
+                            bestSupportScore = score;
+                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                            charac = char;
+                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                            indexForBetterDmg.push(newObj);
+                        }
+                    }
+                }
+                else {
+                    score = (result.shield * 2) + (result.dmg * 0.1);
                     if (score > bestSupportScore) {
                         currentBestArtifacts = newCharacter.artifacts;
                         bestArtifacts = newCharacter.artifacts;
@@ -300,7 +346,7 @@ class Createcharacter {
             }
 
             if (ascension.Type == "CritRate") {
-                criteRate += ascension.Value;
+                critRate += ascension.Value;
             }
 
             return Math.round(critRate * 10) / 10;
@@ -488,10 +534,16 @@ function applyBonuses(character) {
     });
     switch (character.weapon.name) {
         case "Everlasting Moonglow":
-            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff:{Type:"Flat",Value: character.HP() * 0.10 },Value:null});
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: character.HP() * 0.10 }, Value: null });
             break;
         case "Redhorn Stonethresher":
-            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff:{Type:"Flat",Value: character.DEF() * 0.40 },Value:null});
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: character.DEF() * 0.40 }, Value: null });
+            break;
+        case "Primordial Jade Cutter":
+            character.currentBuffs.push({ Type: "ATK%", Value: character.HP() * 0.012 });
+            break;
+        case "Staff of Homa":
+            character.currentBuffs.push({ Type: "ATK%", Value: character.HP() * 0.018 });
             break;
     }
     character.advancedstats.elementalBonuses.forEach(element => {
@@ -577,6 +629,9 @@ function applyBonuses(character) {
             case "HealingBonus":
                 character.advancedstats.healingBonus += buff.Value;
                 break;
+            case "ShieldStrength":
+                character.advancedstats.shieldStrength += buff.Value;
+                break;
 
 
 
@@ -647,6 +702,9 @@ function resetVariables() {
     mistSplitterNormalStack = false;
     mistSplitterBurstStack = false;
     enemiesFrozen = false;
+    crimsonWitchStacks = 0;
+    grimheartStack = 0;
+    superconductRes = false;
 }
 function Simulation(character) {
 
@@ -655,6 +713,7 @@ function Simulation(character) {
     let atkBuff = 0;
     let Character = character;
     let totalDmg = 0;
+    let shield = 0;
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
         let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null };
@@ -731,8 +790,16 @@ function Simulation(character) {
                 break;
 
             case "E":
-                if (Character.supportType == "Healer") {
-                    heal += Character.elementalSkill.Skill(Character);
+                if (Character.supportType != "Sub-dps") {
+                    let result = Character.elementalSkill.Skill(Character);
+                    if (result.dmg != undefined)
+                        totalDmg += result.dmg;
+                    if (result.healing != undefined)
+                        heal += result.healing;
+                    if (result.attackBuff != undefined)
+                        atkBuff += result.attackBuff;
+                    if (result.shield != undefined)
+                        shield += result.shield;
                 }
                 else {
 
@@ -760,10 +827,7 @@ function Simulation(character) {
                 break;
 
             case "Q":
-                if (Character.supportType == "Healer") {
-                    heal += Character.elementalBurst.Skill(Character);
-                }
-                else if (Character.supportType == "ATKBooster") {
+                if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalBurst.Skill(Character);
                     if (result.dmg != undefined)
                         totalDmg += result.dmg;
@@ -771,6 +835,9 @@ function Simulation(character) {
                         heal += result.healing;
                     if (result.attackBuff != undefined)
                         atkBuff += result.attackBuff;
+                    if (result.shield != undefined)
+                        shield += result.shield;
+
                 }
                 else {
 
@@ -818,7 +885,7 @@ function Simulation(character) {
         }
     });
 
-    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff };
+    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff, shield: shield };
 
 }
 function dmgCalc(attackAction, Character, type) {
@@ -938,7 +1005,9 @@ function resCalc(character, element) {
 
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "ResShred") {
-            resShred += buff.Value;
+            if (buff.Element == element) {
+                resShred += buff.Value;
+            }
         } else if (buff.Type == "VVShred") {
             if (buff.Element == element) {
                 resShred += buff.Value;
@@ -1122,6 +1191,10 @@ function electroCharged(em, lvl, element, character, electroChargedBonus) {
 }
 
 function superconduct(em, lvl, element, character, superconductBonus) {
+    if(!superconductRes){
+    character.currentBuffs.push({Type:"ResShred",Value:40,Element:"PhysicalDMGBonus"});
+    superconductRes = true;
+}
     return ((superconductBaseDMG[lvl]) * (1 + ((1600 * (em / (em + 2000))) / 100) + superconductBonus) * resCalc(character, element));
 }
 

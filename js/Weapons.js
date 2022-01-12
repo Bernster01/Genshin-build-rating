@@ -317,7 +317,7 @@ const PrimordialJadeCutter = {
         }
     },
     
-    passive: function(){return [{Type:"BonusDMG%",Value:20}]},
+    passive: function(){return [{Type:"HP%",Value:20}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
