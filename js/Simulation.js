@@ -11,7 +11,7 @@ let grimheartStack = 0;
 let superconductRes = false;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 1);
+    let result = FindBestBuild(simulatedCharacter, 10000);
 
     let result2 = Simulation(usersCharacter);
     let userScore;
@@ -21,13 +21,13 @@ function compareCharacters(usersCharacter) {
         console.log(result[2]);
         console.log(result[3]);
         console.log(["Attack: " + result2.char.attack(), "Defense: " + result2.char.DEF(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-        return `${Math.floor((result2.dmg / result[0]) * 10)}/10`;
+        return `${Math.floor((result2.dmg / result[0]) * 100)}/100`;
     }
 
     else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
         userScore = result2.healing + (result2.dmg * 0.1);
         console.log("User: " + userScore, "Best score: " + result[0])
-        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
@@ -40,7 +40,7 @@ function compareCharacters(usersCharacter) {
         else {
             userScore = (result2.attackBuff * 2) + (result2.dmg * 0.1);
         }
-        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "Shield" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
@@ -53,7 +53,20 @@ function compareCharacters(usersCharacter) {
         else {
             userScore = (result2.shield * 2) + (result2.dmg * 0.1);
         }
-        return `${Math.floor((userScore / result[0]) * 10)}/10`;
+        return `${Math.floor((userScore / result[0]) * 100)}/100`;
+    }
+    else if (simulatedCharacter.supportType == "ElementalBuffer" && role == "Support") {
+        if (simulatedCharacter.supportType2 != undefined) {
+
+        }
+        else {
+            userScore = (result2.attackBuff * 20) + (result2.dmg * 0.0025);
+            console.log("User: " + userScore, "Best score: " + result[0])
+        }
+
+        console.log(result[3]);
+        console.log(["Attack: " + result2.char.attack(), "EM: " + result2.char.EM(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
+        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
 }
 
@@ -181,6 +194,25 @@ function FindBestBuild(baseChar, times) {
                 }
 
             }
+            else if (character.supportType == "ElementalBuffer" && role == "Support") {
+                if (character.supportType2 != undefined) {
+
+                }
+                else {
+                    score = (result.attackBuff * 20) + (result.dmg * 0.0025);
+                    if (score > bestSupportScore) {
+                        currentBestArtifacts = newCharacter.artifacts;
+                        bestArtifacts = newCharacter.artifacts;
+                        bestSupportScore = score;
+                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                        charac = char;
+                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), "EM: " + char.EM(), char.advancedstats.elementalBonuses];
+                        indexForBetterDmg.push(newObj);
+                    }
+                }
+
+            }
+
             newCharacter = undefined;
         })
 
@@ -276,6 +308,7 @@ class Createcharacter {
         this.normalAttack4 = baseCharacter.normalAttack4;
         this.normalAttack5 = baseCharacter.normalAttack5;
         this.chargedAttack = baseCharacter.chargedAttack;
+        this.plungeAttack = baseCharacter.plungeAttack;
         this.elementalSkill = baseCharacter.elementalSkill;
         this.elementalBurst = baseCharacter.elementalBurst;
         this.normalAttackLevel = baseCharacter.normalAttackLevel;
@@ -511,6 +544,29 @@ function applyBonuses(character) {
     else if (mainstat.Type == "HealingBonus") {
         character.advancedstats.healingBonus += mainstat.Value;
     }
+    elementalResonance.forEach(resonance => {
+        switch (resonance) {
+            case "Pyro":
+                character.currentBuffs.push({ Type: "ATK%", Value: 25 });
+                break;
+            case "Hydro":
+                break;
+            case "Anemo":
+                break;
+            case "Geo":
+                character.currentBuffs.push({ Type: "BonusDMG%", Value: 15 });
+                character.currentBuffs.push({ Type: "ResShred", Element: "GeoDMGBonus", Value: 15 });
+                break;
+            case "Electro":
+                break;
+            case "Dendro":
+                break;
+            case "Cryo":
+                if (character.element == "CryoCharacter")
+                    character.currentBuffs.push({ Type: "CritRate", Value: 15 });
+                break;
+        }
+    });
     character.currentBuffs.push({ Type: character.weapon.subStat.Type, Value: character.weapon.subStat.Value() })
     let sets = [];
     character.artifacts.forEach(artifact => {
@@ -540,11 +596,9 @@ function applyBonuses(character) {
             character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: character.DEF() * 0.40 }, Value: null });
             break;
         case "Primordial Jade Cutter":
-            character.currentBuffs.push({ Type: "ATK%", Value: character.HP() * 0.012 });
+            character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.012 });
             break;
-        case "Staff of Homa":
-            character.currentBuffs.push({ Type: "ATK%", Value: character.HP() * 0.018 });
-            break;
+
     }
     character.advancedstats.elementalBonuses.forEach(element => {
         if (character.ascensionstats().Type == element.Type)
@@ -642,12 +696,18 @@ function applyBonuses(character) {
 
 }
 function getSetBonus(array, character) {
-
+    let setsDone = [];
     for (let i = 0; i < array.length; i++) {
-
+        let alreadyDone = false;
         let currentSet = array[i];
-        let count = 1;
-        for (let index = i + 1; index < array.length; index++) {
+        setsDone.forEach(set=>{
+            if(currentSet == set)
+            alreadyDone = true;
+        });
+        if(alreadyDone)
+            continue;
+        let count = 0;
+        for (let index = 0; index < array.length; index++) {
             if (array[index] == currentSet) {
 
                 count++;
@@ -695,7 +755,7 @@ function getSetBonus(array, character) {
 
             character.currentBuffs.push(artifactSets[array[i]].twoPiece);
         }
-
+        setsDone.push(currentSet);
     }
 }
 function resetVariables() {
@@ -779,12 +839,45 @@ function Simulation(character) {
                         type = "PlungeAttack";
                         break;
                 }
+                if (Character.name == "Ganyu") {
+                    let newAttack = attackAction;
+                    let index = 0;
+                    attackAction.Multiplier.forEach(multiplier => {
+                        index++;
+                        attackAction.Multiplier = multiplier;
+                        if (index >= 2) {
+                            character.currentBuffs.forEach(buff => {
+                                if (buff.Type == "Undivided Heart")
+                                    character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Undivided Heart" });
+                            });
+                        }
+                        let dmg = dmgCalc(newAttack, Character, type);
+                        if (index >= 2)
+                            totalDmg += dmg * 3;
+                        else
+                            totalDmg += dmg;
+                        let toRemoveIndex = -1;
+                        let toRemove = 0;
+                        if (index >= 2) {
+                            character.currentBuffs.forEach(buff => {
+                                toRemoveIndex++;
+                                if (buff.Source == "Undivided Heart") {
+                                    toRemove = toRemoveIndex;
+                                }
+                            });
+                            character.currentBuffs.splice(toRemove, 1);
+                        }
+                    });
 
-                totalDmg += dmgCalc(attackAction, Character, type);
-                if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
-                    if (attackAction.Element != "PhysicalDMGBonus") {
-                        Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
-                        mistSplitterNormalStack = true;
+                } else {
+
+
+                    totalDmg += dmgCalc(attackAction, Character, type);
+                    if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
+                        if (attackAction.Element != "PhysicalDMGBonus") {
+                            Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
+                            mistSplitterNormalStack = true;
+                        }
                     }
                 }
                 break;
@@ -810,6 +903,13 @@ function Simulation(character) {
                         case "Festering Desire":
                             Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
                             Character.advancedstats.critRate += 12;
+                            break;
+                        case "Sacrificial Bow":
+                            switch (Character.name) {
+                                case "Fischl":
+                                    Character.currentBuffs.push({ Type: "ElementalSkill", Value: -180 });
+                                    break;
+                            }
                             break;
                     }
                     let eDmg = Character.elementalSkill.Skill(Character);
@@ -884,7 +984,13 @@ function Simulation(character) {
 
         }
     });
-
+    if (Character.name == "Kazuha") {
+        Character.currentBuffs.forEach(buff => {
+            if (buff.Source == "Poetics of Fuubutsu") {
+                atkBuff += buff.Value;
+            }
+        });
+    }
     return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff, shield: shield };
 
 }
@@ -898,7 +1004,7 @@ function dmgCalc(attackAction, Character, type) {
             Character.currentBuffs.push({ Type: "ATK%", Value: atkIncrease });
             break;
         case "Staff of Homa":
-            Character.currentBuffs.push({ Type: "ATK%", Value: Character.HP() * 0.01 });
+            Character.currentBuffs.push({ Type: "ATKflat", Value: Character.HP() * 0.01, Source: "Staff of Homa" });
             break;
     }
     //Personal damage
@@ -933,12 +1039,21 @@ function dmgCalc(attackAction, Character, type) {
     dmg *= baseBonusDMGMultiple;
     dmg += baseBonusDMGFlat;
     //Crit
-    if (Character.critRate() > 100) {
-        let tot = Character.critRate();
-        Character.advancedstats.critRate -= tot - 100;
-
+    
+    let bonusCritRate = 0;
+    if(Character.name == "Ganyu"){
+        Character.currentBuffs.forEach(buff=>{
+            if(buff.Source == "Undivided Heart"){
+                bonusCritRate += buff.Value;
+            }
+        });
     }
-    dmg *= (1 + ((Character.critRate() / 100) * (Character.critDMG() / 100)));
+    if(Character.critRate()+bonusCritRate>100){
+        
+        bonusCritRate -= Character.critRate()+bonusCritRate - 100;
+    }
+    dmg *= (1 + (((Character.critRate()+bonusCritRate) / 100) * (Character.critDMG() / 100)));
+
     let bonusDMG = 1;
     Character.advancedstats.elementalBonuses.forEach(element => {
         if (element.Type == attackAction.Element) {
@@ -971,8 +1086,10 @@ function dmgCalc(attackAction, Character, type) {
     dmg *= bonusDMG;
     dmg *= defCalc(Character);
     dmg *= resCalc(Character, attackAction.Element);
-    if (attackAction.isReaction)
+
+    if (attackAction.isReaction) {
         dmg = elementalMasteryCalc(dmg, attackAction.Element, Character);
+    }
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -982,9 +1099,20 @@ function dmgCalc(attackAction, Character, type) {
             Character.currentBuffs.push({ Type: "ATK%", Value: -atkIncrease })
             break;
         case "Staff of Homa":
-            Character.currentBuffs.push({ Type: "ATK%", Value: -Character.HP() * 0.01 });
+            let toRemoveIndex = -1;
+            let toRemove = 0;
+
+            Character.currentBuffs.forEach(buff => {
+                toRemoveIndex++;
+                if (buff.Source == "Staff of Homa") {
+                    toRemove = toRemoveIndex;
+                }
+            });
+            Character.currentBuffs.splice(toRemove, 1);
+
             break;
     }
+
     return dmg;
 }
 
@@ -1106,13 +1234,13 @@ function elementalMasteryCalc(dmg, type, character) {
                         break;
                     case "Cryo":
                         if (!enemiesFrozen) {
-                            let bs = 0;
+                            let set = 0;
                             character.artifacts.forEach(artifact => {
-                                if (artifact.Set = "Blizzard Strayer")
-                                    bs++
+                                if (artifact.Set == "Blizzard Strayer")
+                                    set++
                             });
-                            if (bs => 4)
-                                character.currentBuffs.push({ Type: "CritRate", Value: 20 });
+                            if (set >= 4)
+                                character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "FrozenWithBlizz" });
                             enemiesFrozen = true;
                         }
                         break;
@@ -1135,11 +1263,11 @@ function elementalMasteryCalc(dmg, type, character) {
                         if (!enemiesFrozen) {
                             let bs = 0;
                             character.artifacts.forEach(artifact => {
-                                if (artifact.Set = "Blizzard Strayer")
+                                if (artifact.Set == "Blizzard Strayer")
                                     bs++
                             });
                             if (bs => 4)
-                                character.currentBuffs.push({ Type: "CritRate", Value: 20 });
+                                character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "FrozenWithBlizz" });
                             enemiesFrozen = true;
                         }
                         break;
@@ -1187,14 +1315,14 @@ function overloaded(em, lvl, element, character, overloadedBonus) {
 }
 
 function electroCharged(em, lvl, element, character, electroChargedBonus) {
-    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((1600 * (em / (em + 2000))) / 100) + electroChargedBonus) * resCalc(character, element)) * 3.5 * 3;
+    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((1600 * (em / (em + 2000))) / 100) + electroChargedBonus) * resCalc(character, element)) * 3.5;
 }
 
 function superconduct(em, lvl, element, character, superconductBonus) {
-    if(!superconductRes){
-    character.currentBuffs.push({Type:"ResShred",Value:40,Element:"PhysicalDMGBonus"});
-    superconductRes = true;
-}
+    if (!superconductRes) {
+        character.currentBuffs.push({ Type: "ResShred", Value: 40, Element: "PhysicalDMGBonus" });
+        superconductRes = true;
+    }
     return ((superconductBaseDMG[lvl]) * (1 + ((1600 * (em / (em + 2000))) / 100) + superconductBonus) * resCalc(character, element));
 }
 
@@ -1209,6 +1337,19 @@ function swirl(em, lvl, element, character, swirlBonus) {
     let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((1600 * (em / (em + 2000))) / 100) + swirlBonus) * resCalc(character, element));
     if (!isShreded)
         character.currentBuffs.push({ Type: "VVShred", Element: element, Value: 40 });
+    if (character.name = "Kazuha") {
+        let haveBuff = false;
+        let havePassive = false;
+        character.currentBuffs.forEach(buff => {
+            if (buff.Type == "Poetics of Fuubutsu")
+                havePassive = true;
+            else if (buff.Source == "Poetics of Fuubutsu")
+                haveBuff = true;
+        });
+        if (!haveBuff && havePassive) {
+            character.currentBuffs.push({ Type: supportingElement, Source: "Poetics of Fuubutsu", Value: character.EM() * 0.04 })
+        }
+    }
     return dmg;
 }
 const superconductBaseDMG = {

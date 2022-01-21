@@ -549,4 +549,15 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 }
+.elementalResonanceContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+.elementalResonance{
+	
+	background:#C1BDB3;
+	border-radius:1vw;
+	border:2px solid #5F5B6B;
 
+}

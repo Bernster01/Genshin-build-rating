@@ -2461,7 +2461,7 @@ const PrototypeStarglitter = {
     },
     subStat: {
         Type: "EnergyRecharge",
-        startValue: "10%",
+        startValue: "10.0%",
         Value: function () {
             return getSubStat(this);
         }
@@ -2623,7 +2623,7 @@ const WavebreakersFin = {
     },
     subStat: {
         Type: "ATK%",
-        startValue: "3%",
+        startValue: "3.0%",
         Value: function () {
             return getSubStat(this);
         }
@@ -2676,8 +2676,8 @@ function getSubStat(weapon) {
     for (let index = 0; index < weapon.Parent.level.length - 1; index++) {
         lvl = lvl + weapon.Parent.level[index];
 
-    }
-    // console.log(lvl,weapon);
+}
+// console.log(lvl,weapon);
     return subStatScaling[weapon.startValue][lvl];
 
 }

@@ -26,7 +26,7 @@ function loadWeapons(character) {
 function loadMockArtifacts() {
 
     document.getElementById("Circlet_mainstat").value = "CritDMG";
-    document.getElementById("Circlet_mainstat_value").value = 46.6;
+    document.getElementById("Circlet_mainstat_value").value = 62.2;
     document.getElementById("Circlet_substat_1").value = "CritRate";
     document.getElementById("Circlet_substat_1_value").value = 12.4;
     document.getElementById("Circlet_substat_2").value = "DEFflat";

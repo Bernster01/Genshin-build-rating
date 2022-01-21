@@ -768,11 +768,39 @@
 
 		</div>
 		<div>
+			<h2>Elemental Resonance</h2>
+			
+
+			<div class="elementalResonanceContainer">
+				<div onclick="selectResonance('Pyro',this)">
+					<img src="Elements/pyro.png" />
+				</div>
+				<div onclick="selectResonance('Hydro',this)">
+					<img src="Elements/hydro.png" />
+				</div>
+				<div onclick="selectResonance('Anemo',this)">
+					<img src="Elements/anemo.png" />
+				</div>
+				<div onclick="selectResonance('Geo',this)">
+					<img src="Elements/geo.png" />
+				</div>
+				<div onclick="selectResonance('Electro',this)">
+					<img src="Elements/electro.png" />
+				</div>
+				<div onclick="selectResonance('Dendro',this)">
+					<img src="Elements/dendro.png" />
+				</div>
+				<div onclick="selectResonance('Cryo',this)">
+					<img src="Elements/cryo.png" />
+				</div>
+			</div>
+		</div>
+		<div>
 			<h2>Supporting Element</h2>
 			<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
 					id="SelectedSupportingElement"></span></div>
 
-			<div class="supportingElementContainer">
+			<div class="supportingElementContainer" id="supportingElement">
 				<div onclick="selectSupportingElement('Pyro',this)">
 					<img src="Elements/pyro.png" />
 					<span>Pyro</span>
