@@ -1120,3 +1120,55 @@ function stellarRestoration(Character) {
    
     return dmg;
 }
+
+function lemniscaticWindCycling(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 252.8 / 100;
+            break;
+        case 2:
+            skillMultiplier = 271.76 / 100;
+            break;
+        case 3:
+            skillMultiplier = 290.72 / 100;
+            break;
+        case 4:
+            skillMultiplier = 316 / 100;
+            break;
+        case 5:
+            skillMultiplier = 334.96 / 100;
+            break;
+        case 6:
+            skillMultiplier = 353.92 / 100;
+            break;
+        case 7:
+            skillMultiplier = 379.2 / 100;
+            break;
+        case 8:
+            skillMultiplier = 404.48 / 100;
+            break;
+        case 9:
+            skillMultiplier = 429.76 / 100;
+            break;
+        case 10:
+            skillMultiplier = 455.04 / 100;
+            break;
+        case 11:
+            skillMultiplier = 480.32 / 100;
+            break;
+        case 12:
+            skillMultiplier = 505.6 / 100;
+            break;
+        case 13:
+            skillMultiplier = 537.2 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    if(Character.hasBuffOfType("Dissolution Eon: Heaven Fall")){
+        Character.currentBuffs.push({Type:"ElementalSkill",Value:5});
+    }
+   
+    return dmg;
+}

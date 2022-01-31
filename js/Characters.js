@@ -5235,7 +5235,252 @@ const Xiangling = {
 const Xiao = {
     name: "Xiao",
     src: "Characters/Xiao.png",
-    element: "AnemoCharacter"
+    element: "AnemoCharacter",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 27,
+            ["20b"]: 71,
+            ["20a"]: 94,
+            ["40b"]: 141,
+            ["40a"]: 157,
+            ["50b"]: 181,
+            ["50a"]: 203,
+            ["60b"]: 227,
+            ["60a"]: 243,
+            ["70b"]: 267,
+            ["70a"]: 284,
+            ["80b"]: 308,
+            ["80a"]: 325,
+            ["90b"]: 349
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 991,
+            ["20b"]: 2572,
+            ["20a"]: 3422,
+            ["40b"]: 5120,
+            ["40a"]: 5724,
+            ["50b"]: 6586,
+            ["50a"]: 7391,
+            ["60b"]: 8262,
+            ["60a"]: 8866,
+            ["70b"]: 9744,
+            ["70a"]: 10348,
+            ["80b"]: 11236,
+            ["80a"]: 11840,
+            ["90b"]: 12736
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 62,
+            ["20b"]: 161,
+            ["20a"]: 215,
+            ["40b"]: 321,
+            ["40a"]: 359,
+            ["50b"]: 413,
+            ["50a"]: 464,
+            ["60b"]: 519,
+            ["60a"]: 556,
+            ["70b"]: 612,
+            ["70a"]: 649,
+            ["80b"]: 705,
+            ["80a"]: 743,
+            ["90b"]: 799
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "ATK",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 140,
+    supportType: "Sub-dps",
+    sequence: {
+        ["Dps"]: ["E", "E", "Q", "P", "N1", "P", "N1", "P", "N1", "P", "N1","P", "N1", "P", "N1", "P", "N1", "P", "N1","P","N1","P","N1" ],
+        ["Support"]: ["E", "E",]
+    },
+    weaponType: "Polearm",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 44.12 / 100
+                case 2:
+                    return 47.71 / 100
+                case 3:
+                    return 51.3 / 100
+                case 4:
+                    return 56.43 / 100
+                case 5:
+                    return 60.02 / 100
+                case 6:
+                    return 64.13 / 100
+                case 7:
+                    return 69.77 / 100
+                case 8:
+                    return 75.41 / 100
+                case 9:
+                    return 81.05 / 100
+                case 10:
+                    return 87.21 / 100
+            }
+        },
+        Element: "AnemoDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+           return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            return 0
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) {    switch (level) {
+            case 1:
+                return 204.39 / 100
+            case 2:
+                return 221.02 / 100
+            case 3:
+                return 237.66 / 100
+            case 4:
+                return 261.42 / 100
+            case 5:
+                return 278.06 / 100
+            case 6:
+                return 297.07 / 100
+            case 7:
+                return 323.21 / 100
+            case 8:
+                return 349.36 / 100
+            case 9:
+                return 375.5 / 100
+            case 10:
+                return 404.02 / 100
+        } },
+        Element: "AnemoDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 4.8,
+            ["50b"]: 4.8,
+            ["50a"]: 9.6,
+            ["60b"]: 9.6,
+            ["60a"]: 9.6,
+            ["70b"]: 9.6,
+            ["70a"]: 14.4,
+            ["80b"]: 14.4,
+            ["80a"]: 19.2,
+            ["90b"]: 19.2
+        }
+
+        return { Type: "CritRate", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: lemniscaticWindCycling,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: baneOfAllEvil,
+        Level: 1
+    },
+    passive1: {
+        Type: "Conqueror of Evil: Tamer of Demons",
+        Value: null
+    },
+    passive2: {
+        Type: "Dissolution Eon: Heaven Fall",
+        Value: null
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
 };
 const Xingqiu = {
     name: "Xingqiu",

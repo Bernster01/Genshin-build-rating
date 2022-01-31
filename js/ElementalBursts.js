@@ -1203,3 +1203,55 @@ function starwardSword(Character) {
 
     return dmg;
 }
+
+function baneOfAllEvil(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 58.45;
+            break;
+        case 2:
+            Multiplier = 61.95;
+            break;
+        case 3:
+            Multiplier = 65.45;
+            break;
+        case 4:
+            Multiplier = 70;
+            break;
+        case 5:
+            Multiplier = 73.5;
+            break;
+        case 6:
+            Multiplier = 77;
+            break;
+        case 7:
+            Multiplier = 81.55;
+            break;
+        case 8:
+            Multiplier = 86.1;
+            break;
+        case 9:
+            Multiplier = 90.65;
+            break;
+        case 10:
+            Multiplier = 95.2;
+            break;
+        case 11:
+            Multiplier = 99.75;
+            break;
+        case 12:
+            Multiplier = 104.3;
+            break;
+        case 13:
+            Multiplier = 113;
+            break;
+    }
+    
+    Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:Multiplier}});
+    if(Character.hasBuffOfType("Conqueror of Evil: Tamer of Demons")){
+        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:15}});
+    }
+
+    return 0;
+}

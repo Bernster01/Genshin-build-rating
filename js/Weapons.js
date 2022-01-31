@@ -2197,7 +2197,7 @@ const CalamityQueller = {
         }
     },
     
-    passive: function(){return [{Type:"ElementalDMG",Value:12},{Type:"ATK%",Value:28.8}]},
+    passive: function(){return [{Type:"ElementalDMG",Value:12},{Type:"ATK%",Value:19.2}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;

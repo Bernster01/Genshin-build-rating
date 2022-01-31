@@ -318,6 +318,34 @@ class Createcharacter {
         this.ExtraMultiplier = baseCharacter.ExtraMultiplier || [];
         this.advancedstats = baseCharacter.advancedstats;
         this.ascensionstats = baseCharacter.ascensionStat;
+        this.getBuffOfType = function(type){
+            let buffs = this.currentBuffs;
+            buffs.forEach(buff=>{
+                if(buff.Type == type){
+                    return buff;
+                }
+            })
+        }
+        this.getBuffsOfType = function(type){
+            let buffs = this.currentBuffs;
+            for(let i = 0; i<type.length;i++){
+            buffs.forEach(buff=>{
+                if(buff.Type == type[i]){
+                    return buff;
+                }
+            })
+        }
+        }
+        this.hasBuffOfType = function(type){
+            let buffs = this.currentBuffs;
+            buffs.forEach(buff=>{
+                if(buff.Type == type){
+                    return true;
+                }
+            });
+            return false;
+        }
+
         this.attack = function CalculateAttack() {
             let artifacts = this.artifacts;
             let baseattack = this.baseAttack;
@@ -911,6 +939,9 @@ function Simulation(character) {
                                     break;
                             }
                             break;
+                        case "Calamity Queller":
+                        
+                            break;
                     }
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
@@ -974,9 +1005,10 @@ function Simulation(character) {
                     totalDmg += qDmg
                     Character.currentBuffs.forEach(buff => {
                         if (buff.Type == "AddativeBonusDMG") {
+                            if(buff.buff != undefined){
                             if (buff.buff.Source == "Emblem")
                                 buff.buff.Value = 0;
-
+                            }
                         }
                     });
                 }
