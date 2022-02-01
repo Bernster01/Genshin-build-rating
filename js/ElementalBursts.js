@@ -1255,3 +1255,62 @@ function baneOfAllEvil(Character) {
 
     return 0;
 }
+
+function sparksnSplash(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 42.64/100;
+            break;
+        case 2:
+            Multiplier = 45.84/100;
+            break;
+        case 3:
+            Multiplier = 49.04/100;
+            break;
+        case 4:
+            Multiplier = 53.3/100;
+            break;
+        case 5:
+            Multiplier = 56.5/100;
+            break;
+        case 6:
+            Multiplier = 59.7/100;
+            break;
+        case 7:
+            Multiplier = 63.96/100;
+            break;
+        case 8:
+            Multiplier = 68.22/100;
+            break;
+        case 9:
+            Multiplier = 72.49/100;
+            break;
+        case 10:
+            Multiplier = 76.75/100;
+            break;
+        case 11:
+            Multiplier = 81.02/100;
+            break;
+        case 12:
+            Multiplier = 85.28/100;
+            break;
+        case 13:
+            Multiplier = 90.61/100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = 0;
+    for (let index = 1; index <= 24; index++) {
+        if(index%3==0){
+            attack.isReaction = true;
+            dmg += dmgCalc(attack, Character, "ElementalBurst");
+        }
+        else{
+            attack.isReaction = false;
+            dmg += dmgCalc(attack, Character, "ElementalBurst");
+        }
+        
+    }
+    return dmg;
+}

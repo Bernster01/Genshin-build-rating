@@ -11,7 +11,7 @@ let grimheartStack = 0;
 let superconductRes = false;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 10000);
+    let result = FindBestBuild(simulatedCharacter, 100);
 
     let result2 = Simulation(usersCharacter);
     let userScore;

@@ -1172,3 +1172,70 @@ function lemniscaticWindCycling(Character) {
    
     return dmg;
 }
+
+function jumpyDumpty(Character) {
+    let skillMultiplier = 0;
+    let Multipler2 = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 95.2 / 100;
+            Multipler2 = 32.8 / 100;
+            break;
+        case 2:
+            skillMultiplier = 102.34 / 100;
+            Multipler2 = 35.26 / 100;
+            break;
+        case 3:
+            skillMultiplier = 109.48 / 100;
+            Multipler2 = 37.72 / 100;
+            break;
+        case 4:
+            skillMultiplier = 119 / 100;
+            Multipler2 = 41 / 100;
+            break;
+        case 5:
+            skillMultiplier = 126.14 / 100;
+            Multipler2 = 43.46 / 100;
+            break;
+        case 6:
+            skillMultiplier = 133.28 / 100;
+            Multipler2 = 45.92 / 100;
+            break;
+        case 7:
+            skillMultiplier = 142.8 / 100;
+            Multipler2 = 49.2 / 100;
+            break;
+        case 8:
+            skillMultiplier = 152.32 / 100;
+            Multipler2 = 52.48 / 100;
+            break;
+        case 9:
+            skillMultiplier = 161.84 / 100;
+            Multipler2 = 55.76 / 100;
+            break;
+        case 10:
+            skillMultiplier = 171.36 / 100;
+            Multipler2 = 59.04 / 100;
+            break;
+        case 11:
+            skillMultiplier = 180.88 / 100;
+            Multipler2 = 62.32 / 100;
+            break;
+        case 12:
+            skillMultiplier = 190.4 / 100;
+            Multipler2 = 65.6 / 100;
+            break;
+        case 13:
+            skillMultiplier = 202.3 / 100;
+            Multipler2 = 69.7 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    attack.isReaction = false;
+    dmg+= dmgCalc(attack,Character,"ElementalSkill") * 3;
+    dmg+= dmgCalc(attack,Character,"ElementalSkill") * 3;
+    attack.Multiplier = Multipler2;
+    dmg+= dmgCalc(attack,Character,"ElementalSkill") * 3*8;
+    return dmg;
+}
