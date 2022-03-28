@@ -617,12 +617,6 @@ function applyBonuses(character) {
         character.currentBuffs.push(passive);
     });
     switch (character.weapon.name) {
-        case "Everlasting Moonglow":
-            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: character.HP() * 0.10 }, Value: null });
-            break;
-        case "Redhorn Stonethresher":
-            character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: character.DEF() * 0.40 }, Value: null });
-            break;
         case "Primordial Jade Cutter":
             character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.012 });
             break;
@@ -804,7 +798,7 @@ function Simulation(character) {
     let shield = 0;
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
-        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null };
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action };
         switch (action) {
             case "N1":
             case "N2":
@@ -813,7 +807,7 @@ function Simulation(character) {
             case "N5":
             case "C":
             case "P":
-
+                
                 switch (action) {
                     case "N1":
                         attackAction.Multiplier = Character.normalAttack1.Multiplier(Character.normalAttackLevel);
@@ -974,9 +968,9 @@ function Simulation(character) {
 
                     Character.currentBuffs.forEach(buff => {
                         if (buff.Type == "Emblem") {
-                            let multiplier = 1 + ((Character.advancedstats.energyRecharge / 100) * 0.25);
-                            if (multiplier > 1.75)
-                                multiplier = 1.75;
+                            let multiplier = Character.advancedstats.energyRecharge * 0.25;
+                            if (multiplier > 75)
+                                multiplier = 75;
                             Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Emblem", Value: multiplier } })
                         }
                     })
@@ -1027,6 +1021,7 @@ function Simulation(character) {
 
 }
 function dmgCalc(attackAction, Character, type) {
+   
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -1037,6 +1032,24 @@ function dmgCalc(attackAction, Character, type) {
             break;
         case "Staff of Homa":
             Character.currentBuffs.push({ Type: "ATKflat", Value: Character.HP() * 0.01, Source: "Staff of Homa" });
+            break;
+        case "Everlasting Moonglow":
+            if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type != "C" && attackAction.Type !="P" && attackAction.Type != undefined)
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: Character.HP() * 0.10 }, Value: null });
+                break;
+        case "Redhorn Stonethresher":
+            if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type !="P" && attackAction.Type != undefined)
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: Character.DEF() * 0.40 }, Value: null });
+                break;
+    }
+    switch(Character.name){
+        case "Mona":
+            Character.currentBuffs.forEach(buff=>{
+                if(buff.Type == "Waterborn Destiny"){
+                    Character.advancedstats.elementalBonuses[1].Value+=Character.advancedstats.energyRecharge*0.2;
+                }
+            })
+            
             break;
     }
     //Personal damage
@@ -1143,15 +1156,28 @@ function dmgCalc(attackAction, Character, type) {
             Character.currentBuffs.splice(toRemove, 1);
 
             break;
+        case "Everlasting Moonglow":
+            if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type != "C" && attackAction.Type !="P" && attackAction.Type != undefined)
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: Character.HP() * 0.10 *-1 }, Value: null });
+                break;
+        case "Redhorn Stonethresher":
+            if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type !="P" && attackAction.Type != undefined)
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: Character.DEF() * 0.40 *-1}, Value: null });
+                break;
     }
-
+    switch(Character.name){
+        case "Mona":
+            if(buff.Type == "Waterborn Destiny"){
+                Character.advancedstats.elementalBonuses[1].Value-=Character.advancedstats.energyRecharge*0.2;
+            };
+    }
     return dmg;
 }
 
 function defCalc(character) {
     let defReduction = 0;
-    character.currentBuffs.forEach(buffs => {
-        if (buffs.Type == "defReduction") {
+    character.currentBuffs.forEach(buff => {
+        if (buff.Type == "defReduction") {
             defReduction += 1 + (buff.Value / 100);
         }
     });

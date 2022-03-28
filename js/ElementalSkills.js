@@ -1239,3 +1239,262 @@ function jumpyDumpty(Character) {
     dmg+= dmgCalc(attack,Character,"ElementalSkill") * 3*8;
     return dmg;
 }
+
+function violetArc(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 487.2 / 100;
+            break;
+        case 2:
+            skillMultiplier = 523.74 / 100;
+            break;
+        case 3:
+            skillMultiplier = 560.28 / 100;
+            break;
+        case 4:
+            skillMultiplier = 609 / 100;
+            break;
+        case 5:
+            skillMultiplier = 645.54 / 100;
+            break;
+        case 6:
+            skillMultiplier = 682.08 / 100;
+            break;
+        case 7:
+            skillMultiplier = 730.8 / 100;
+            break;
+        case 8:
+            skillMultiplier = 779.52 / 100;
+            break;
+        case 9:
+            skillMultiplier = 828.24 / 100;
+            break;
+        case 10:
+            skillMultiplier = 876.96 / 100;
+            break;
+        case 11:
+            skillMultiplier = 925.68 / 100;
+            break;
+        case 12:
+            skillMultiplier = 974.4 / 100;
+            break;
+        case 13:
+            skillMultiplier = 1035.3 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+   
+   
+    return dmg;
+}
+
+function mirrorReflectionofDoom(Character) {
+    let skillMultiplier = 0;
+    let Multipler2 = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 32 / 100;
+            Multipler2 = 132.8 / 100;
+            break;
+        case 2:
+            skillMultiplier = 34.4 / 100;
+            Multipler2 = 142.76 / 100;
+            break;
+        case 3:
+            skillMultiplier = 36.8 / 100;
+            Multipler2 = 152.72 / 100;
+            break;
+        case 4:
+            skillMultiplier = 40 / 100;
+            Multipler2 = 166 / 100;
+            break;
+        case 5:
+            skillMultiplier = 42.4 / 100;
+            Multipler2 = 175.96 / 100;
+            break;
+        case 6:
+            skillMultiplier = 44.8 / 100;
+            Multipler2 = 185.92 / 100;
+            break;
+        case 7:
+            skillMultiplier = 48 / 100;
+            Multipler2 = 199.2 / 100;
+            break;
+        case 8:
+            skillMultiplier = 51.2 / 100;
+            Multipler2 = 212.48 / 100;
+            break;
+        case 9:
+            skillMultiplier = 54.4 / 100;
+            Multipler2 = 225.76 / 100;
+            break;
+        case 10:
+            skillMultiplier = 57.6 / 100;
+            Multipler2 = 239.04 / 100;
+            break;
+        case 11:
+            skillMultiplier = 60.8 / 100;
+            Multipler2 = 252.32 / 100;
+            break;
+        case 12:
+            skillMultiplier = 64 / 100;
+            Multipler2 = 265.6 / 100;
+            break;
+        case 13:
+            skillMultiplier = 68 / 100;
+            Multipler2 = 282.2 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3 * 2;
+    attack.isReaction = false;
+    dmg += dmgCalc(attack, Character, "ElementalSkill") * 3*2;
+    attack.Multiplier = Multipler2;
+    dmg += dmgCalc(attack, Character, "ElementalSkill") * 3;
+    return dmg;
+}
+
+function jadeScreen(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 230.4 / 100;
+            break;
+        case 2:
+            skillMultiplier = 247.68 / 100;
+            break;
+        case 3:
+            skillMultiplier = 264.96 / 100;
+            break;
+        case 4:
+            skillMultiplier = 288 / 100;
+            break;
+        case 5:
+            skillMultiplier = 305.28 / 100;
+            break;
+        case 6:
+            skillMultiplier = 322.56 / 100;
+            break;
+        case 7:
+            skillMultiplier = 345.6 / 100;
+            break;
+        case 8:
+            skillMultiplier = 368.64 / 100;
+            break;
+        case 9:
+            skillMultiplier = 391.68 / 100;
+            break;
+        case 10:
+            skillMultiplier = 414.72 / 100;
+            break;
+        case 11:
+            skillMultiplier = 437.76 / 100;
+            break;
+        case 12:
+            skillMultiplier = 460.8/ 100;
+            break;
+        case 13:
+            skillMultiplier = 489.6 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+   
+   
+    return dmg;
+}
+
+function breastplate(Character) {
+    let skillMultiplier = 0;
+    let shield = 0;
+    let healing = 0;
+    let chance = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 120 / 100;
+            shield = (Character.DEF()*1.60)+769;
+            healing = (Character.DEF()*(21.28/100))+102;
+            chance = 50;
+            break;
+        case 2:
+            skillMultiplier = 129 / 100;
+            shield = (Character.DEF()*1.72)+846;
+            healing = (Character.DEF()*(22.88/100))+112;
+            chance = 51;
+            break;
+        case 3:
+            skillMultiplier = 138 / 100;
+            shield = (Character.DEF()*1.84)+930;
+            healing = (Character.DEF()*(24.47/100))+124;
+            chance = 52;
+            break;
+        case 4:
+            skillMultiplier = 150 / 100;
+            shield = (Character.DEF()*2)+1020;
+            healing = (Character.DEF()*(26.6/100))+136;
+            chance = 53;
+            break;
+        case 5:
+            skillMultiplier = 159 / 100;
+            shield = (Character.DEF()*2.12)+1116;
+            healing = (Character.DEF()*(28.2/100))+148;
+            chance = 54;
+            break;
+        case 6:
+            skillMultiplier = 168 / 100;
+            shield = (Character.DEF()*2.24)+1218;
+            healing = (Character.DEF()*(29.79/100))+162;
+            chance = 55;
+            break;
+        case 7:
+            skillMultiplier = 180 / 100;
+            shield = (Character.DEF()*2.40)+1327;
+            healing = (Character.DEF()*(31.92/100))+177;
+            chance = 56;
+            break;
+        case 8:
+            skillMultiplier = 192 / 100;
+            shield = (Character.DEF()*2.56)+1443;
+            healing = (Character.DEF()*(34.05/100))+192;
+            chance = 57;
+            break;
+        case 9:
+            skillMultiplier = 204 / 100;
+            shield = (Character.DEF()*2.72)+1565;
+            healing = (Character.DEF()*(36.18/100))+208;
+            chance = 58;
+            break;
+        case 10:
+            skillMultiplier = 216 / 100;
+            shield = (Character.DEF()*2.88)+1693;
+            healing = (Character.DEF()*(38.3/100))+225;
+            chance = 59;
+            break;
+        case 11:
+            skillMultiplier = 228 / 100;
+            shield = (Character.DEF()*3.04)+1828;
+            healing = (Character.DEF()*(40.43/100))+243;
+            chance = 59;
+            break;
+        case 12:
+            skillMultiplier = 240/ 100;
+            shield = (Character.DEF()*3.20)+1969;
+            healing = (Character.DEF()*(42.56/100))+262;
+            chance = 60;
+            break;
+        case 13:
+            skillMultiplier = 255 / 100;
+            shield = (Character.DEF()*3.40)+2117;
+            healing = (Character.DEF()*(45.22/100))+282;
+            chance = 60;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    let heal= healing *(chance/100) * 12;
+   
+   
+    return {dmg:dmg,shield:shield,healing:heal};
+}

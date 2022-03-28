@@ -1314,3 +1314,245 @@ function sparksnSplash(Character) {
     }
     return dmg;
 }
+function lightningRose(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 36.56/100;
+            break;
+        case 2:
+            Multiplier = 39.3/100;
+            break;
+        case 3:
+            Multiplier = 42.04/100;
+            break;
+        case 4:
+            Multiplier = 45.7/100;
+            break;
+        case 5:
+            Multiplier = 48.44/100;
+            break;
+        case 6:
+            Multiplier = 51.18/100;
+            break;
+        case 7:
+            Multiplier = 54.84/100;
+            break;
+        case 8:
+            Multiplier = 58.5/100;
+            break;
+        case 9:
+            Multiplier = 62.15/100;
+            break;
+        case 10:
+            Multiplier = 65.81/100;
+            break;
+        case 11:
+            Multiplier = 69.46/100;
+            break;
+        case 12:
+            Multiplier = 73.12/100;
+            break;
+        case 13:
+            Multiplier = 77.69/100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    Character.currentBuffs.push({Type: "defReduction",Value: 15});
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 29;
+    return dmg;
+}
+function stellarisPhantasm(Character) {
+    let Multiplier = 0;
+    let dmgBonus = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 442.4 / 100;
+            dmgBonus = 42;
+            break;
+        case 2:
+            Multiplier = 475.58 / 100;
+            dmgBonus = 44;
+            break;
+        case 3:
+            Multiplier = 508.76 / 100;
+            dmgBonus = 46;
+            break;
+        case 4:
+            Multiplier = 553 / 100;
+            dmgBonus = 48;
+            break;
+        case 5:
+            Multiplier = 586.18 / 100;
+            dmgBonus = 50;
+            break;
+        case 6:
+            Multiplier = 619.36 / 100;
+            dmgBonus = 52;
+            break;
+        case 7:
+            Multiplier = 663.6 / 100;
+            dmgBonus = 54;
+            break;
+        case 8:
+            Multiplier = 707.84 / 100;
+            dmgBonus = 56;
+            break;
+        case 9:
+            Multiplier = 752.08 / 100;
+            dmgBonus = 58;
+            break;
+        case 10:
+            Multiplier = 796.32 / 100;
+            dmgBonus = 60;
+            break;
+        case 11:
+            Multiplier = 840.56 / 100;
+            dmgBonus = 60;
+            break;
+        case 12:
+            Multiplier = 884.8/ 100;
+            dmgBonus = 60;
+            break;
+        case 13:
+            Multiplier = 940.1 / 100;
+            dmgBonus = 60;
+            break;
+    }
+    Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:dmgBonus}})
+    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    return dmg;
+}
+function starshatter(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 86.96/100;
+            break;
+        case 2:
+            Multiplier = 93.48/100;
+            break;
+        case 3:
+            Multiplier = 100/100;
+            break;
+        case 4:
+            Multiplier = 108.7/100;
+            break;
+        case 5:
+            Multiplier = 115.22/100;
+            break;
+        case 6:
+            Multiplier = 121.74/100;
+            break;
+        case 7:
+            Multiplier = 130.44/100;
+            break;
+        case 8:
+            Multiplier = 139.14/100;
+            break;
+        case 9:
+            Multiplier = 147.83/100;
+            break;
+        case 10:
+            Multiplier = 156.53/100;
+            break;
+        case 11:
+            Multiplier = 165.22/100;
+            break;
+        case 12:
+            Multiplier = 173.92/100;
+            break;
+        case 13:
+            Multiplier = 184.79/100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 12;
+    return dmg;
+}
+function sweepingTime(Character) {
+    let Multiplier = 0;
+    let Multipler2 = 0;
+    let atkBonus = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 67.2/100;
+            Multipler2 = 92.8/100;
+            atkBonus = Character.DEF()*0.40;
+            break;
+        case 2:
+            Multiplier = 72.24/100;
+            Multipler2 = 99.76/100;
+            atkBonus = Character.DEF()*0.43;
+            break;
+        case 3:
+            Multiplier = 77.28/100;
+            Multipler2 = 106.72/100;
+            atkBonus = Character.DEF()*0.46;
+            break;
+        case 4:
+            Multiplier = 84/100;
+            Multipler2 = 116/100;
+            atkBonus = Character.DEF()*0.50;
+            break;
+        case 5:
+            Multiplier = 89.04/100;
+            Multipler2 = 122.96/100;
+            atkBonus = Character.DEF()*0.53;
+            break;
+        case 6:
+            Multiplier = 94.08/100;
+            Multipler2 = 129.92/100;
+            atkBonus = Character.DEF()*0.56;
+            break;
+        case 7:
+            Multiplier = 100.8/100;
+            Multipler2 = 139.2/100;
+            atkBonus = Character.DEF()*0.60;
+            break;
+        case 8:
+            Multiplier = 107.52/100;
+            Multipler2 = 148.48/100;
+            atkBonus = Character.DEF()*0.64;
+            break;
+        case 9:
+            Multiplier = 114.24/100;
+            Multipler2 = 157.76/100;
+            atkBonus = Character.DEF()*0.68;
+            break;
+        case 10:
+            Multiplier = 120.96/100;
+            Multipler2 = 167.04/100;
+            atkBonus = Character.DEF()*0.72;
+            break;
+        case 11:
+            Multiplier = 127.68/100;
+            Multipler2 = 176.32/100;
+            atkBonus = Character.DEF()*0.76;
+            break;
+        case 12:
+            Multiplier = 134.4/100;
+            Multipler2 = 185.6/100;
+            atkBonus = Character.DEF()*0.80;
+            break;
+        case 13:
+            Multiplier = 142.8/100;
+            Multipler2 = 197.2/100;
+            atkBonus = Character.DEF()*0.85;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    attack.isReaction = false;
+    attack.Multiplier = Multipler2;
+    
+    dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+    Character.currentBuffs.push({Type:"ATKflat",Value:atkBonus});
+    Character.normalAttack1.element = "GeoDMGBonus";
+    Character.normalAttack2.element = "GeoDMGBonus";
+    Character.normalAttack3.element = "GeoDMGBonus";
+    Character.normalAttack4.element = "GeoDMGBonus";
+    return dmg;
+}
