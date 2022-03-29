@@ -9,12 +9,16 @@ let mistSplitterBurstStack = false;
 let crimsonWitchStacks = 0;
 let grimheartStack = 0;
 let superconductRes = false;
+let vvActive = false;
 function compareCharacters(usersCharacter) {
     let simulatedCharacter = AllCharacters[usersCharacter.name];
     let result = FindBestBuild(simulatedCharacter, 100);
 
     let result2 = Simulation(usersCharacter);
     let userScore;
+    let bonsuMultiplier = 1;
+    if(vvActive)
+        bonsuMultiplier = 2;
     if (role != "Support" || simulatedCharacter.supportType == "Sub-dps") {
         console.log(result[0], result2.dmg);
         console.log("User", result2.char);
@@ -25,33 +29,33 @@ function compareCharacters(usersCharacter) {
     }
 
     else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
-        userScore = result2.healing + (result2.dmg * 0.1);
+        userScore = (result2.healing + (result2.dmg * 0.1))*bonsuMultiplier;
         console.log("User: " + userScore, "Best score: " + result[0])
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
             if (simulatedCharacter.supportType2 == "Healer") {
-                userScore = (result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1);
+                userScore = ((result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1))*bonsuMultiplier;
 
                 console.log("User: " + userScore, "Best score: " + result[0])
             }
         }
         else {
-            userScore = (result2.attackBuff * 2) + (result2.dmg * 0.1);
+            userScore = ((result2.attackBuff * 2) + (result2.dmg * 0.1))*bonsuMultiplier;
         }
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "Shield" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
             if (simulatedCharacter.supportType2 == "Healer") {
-                userScore = (result2.shield * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1);
+                userScore = ((result2.shield * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1))*bonsuMultiplier;
 
                 console.log("User: " + userScore, "Best score: " + result[0])
             }
         }
         else {
-            userScore = (result2.shield * 2) + (result2.dmg * 0.1);
+            userScore = ((result2.shield * 2) + (result2.dmg * 0.1))*bonsuMultiplier;
         }
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
@@ -60,7 +64,8 @@ function compareCharacters(usersCharacter) {
 
         }
         else {
-            userScore = (result2.attackBuff * 20) + (result2.dmg * 0.0025);
+            
+            userScore = ((result2.attackBuff * 20) + (result2.dmg * 0.0025))*bonsuMultiplier;
             console.log("User: " + userScore, "Best score: " + result[0])
         }
 
@@ -108,6 +113,9 @@ function FindBestBuild(baseChar, times) {
             newDamage = result.dmg;
             let char = result.char;
             let score = 0;
+            let bonsuMultiplier = 1;
+            if(vvActive)
+                bonsuMultiplier = 2;
             if ((character.supportType == "Sub-dps" && role == "Support") || role == "Dps") {
                 if (newDamage > bestDMG) {
                     currentBestArtifacts = newCharacter.artifacts;
@@ -123,7 +131,7 @@ function FindBestBuild(baseChar, times) {
             }
             else if (character.supportType == "Healer") {
 
-                score = result.healing + (result.dmg * 0.1);
+                score = (result.healing + (result.dmg * 0.1))*bonsuMultiplier;
 
                 if (score > bestSupportScore) {
                     currentBestArtifacts = newCharacter.artifacts;
@@ -139,7 +147,7 @@ function FindBestBuild(baseChar, times) {
             else if (character.supportType == "ATKBooster" && role == "Support") {
                 if (character.supportType2 != undefined) {
                     if (character.supportType2 == "Healer") {
-                        score = (result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.1);
+                        score = ((result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.1))*bonsuMultiplier;
                         if (score > bestSupportScore) {
                             currentBestArtifacts = newCharacter.artifacts;
                             bestArtifacts = newCharacter.artifacts;
@@ -152,7 +160,7 @@ function FindBestBuild(baseChar, times) {
                     }
                 }
                 else {
-                    score = (result.attackBuff * 2) + (result.dmg * 0.1);
+                    score = ((result.attackBuff * 2) + (result.dmg * 0.1))*bonsuMultiplier;
                     if (score > bestSupportScore) {
                         currentBestArtifacts = newCharacter.artifacts;
                         bestArtifacts = newCharacter.artifacts;
@@ -168,7 +176,7 @@ function FindBestBuild(baseChar, times) {
             else if (character.supportType == "Shield" && role == "Support") {
                 if (character.supportType2 != undefined) {
                     if (character.supportType2 == "Healer") {
-                        score = (result.shield * 2) + (result.healing * 0.95) + (result.dmg * 0.1);
+                        score = ((result.shield * 2) + (result.healing * 0.95) + (result.dmg * 0.1))*bonsuMultiplier;
                         if (score > bestSupportScore) {
                             currentBestArtifacts = newCharacter.artifacts;
                             bestArtifacts = newCharacter.artifacts;
@@ -181,7 +189,7 @@ function FindBestBuild(baseChar, times) {
                     }
                 }
                 else {
-                    score = (result.shield * 2) + (result.dmg * 0.1);
+                    score = ((result.shield * 2) + (result.dmg * 0.1))*bonsuMultiplier;
                     if (score > bestSupportScore) {
                         currentBestArtifacts = newCharacter.artifacts;
                         bestArtifacts = newCharacter.artifacts;
@@ -199,7 +207,7 @@ function FindBestBuild(baseChar, times) {
 
                 }
                 else {
-                    score = (result.attackBuff * 20) + (result.dmg * 0.0025);
+                    score = ((result.attackBuff * 20) + (result.dmg * 0.0025))*bonsuMultiplier;
                     if (score > bestSupportScore) {
                         currentBestArtifacts = newCharacter.artifacts;
                         bestArtifacts = newCharacter.artifacts;
@@ -219,7 +227,7 @@ function FindBestBuild(baseChar, times) {
 
 
     }
-
+    vvActive = false;
     character = undefined;
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
@@ -622,10 +630,7 @@ function applyBonuses(character) {
             break;
 
     }
-    character.advancedstats.elementalBonuses.forEach(element => {
-        if (character.ascensionstats().Type == element.Type)
-            character.currentBuffs.push({ Type: element.Type, Value: character.ascensionstats().Value });
-    })
+    character.currentBuffs.push({Type:character.ascensionstats().Type,Value:character.ascensionstats().Value})
     character.currentBuffs.forEach(buff => {
 
         switch (buff.Type) {
@@ -787,10 +792,12 @@ function resetVariables() {
     crimsonWitchStacks = 0;
     grimheartStack = 0;
     superconductRes = false;
+    vvActive = false;
 }
 function Simulation(character) {
 
     resetVariables();
+    
     let heal = 0;
     let atkBuff = 0;
     let Character = character;
@@ -907,6 +914,9 @@ function Simulation(character) {
             case "E":
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
+                    if(Number.isInteger(result)){
+                        totalDmg += result;
+                    }else{
                     if (result.dmg != undefined)
                         totalDmg += result.dmg;
                     if (result.healing != undefined)
@@ -915,6 +925,7 @@ function Simulation(character) {
                         atkBuff += result.attackBuff;
                     if (result.shield != undefined)
                         shield += result.shield;
+                    }
                 }
                 else {
 
@@ -954,6 +965,9 @@ function Simulation(character) {
             case "Q":
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalBurst.Skill(Character);
+                    if(Number.isInteger(result)){
+                        totalDmg += result;
+                    }else{
                     if (result.dmg != undefined)
                         totalDmg += result.dmg;
                     if (result.healing != undefined)
@@ -962,7 +976,7 @@ function Simulation(character) {
                         atkBuff += result.attackBuff;
                     if (result.shield != undefined)
                         shield += result.shield;
-
+                    }
                 }
                 else {
 
@@ -1017,7 +1031,10 @@ function Simulation(character) {
             }
         });
     }
-    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff, shield: shield };
+    let bonsuMultiplier = 1;
+    if(character.weapon.name == "Thrilling Tales of Dragon Slayers")
+    bonsuMultiplier = 2;
+    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff*bonsuMultiplier, shield: shield };
 
 }
 function dmgCalc(attackAction, Character, type) {
@@ -1393,8 +1410,15 @@ function swirl(em, lvl, element, character, swirlBonus) {
     });
 
     let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((1600 * (em / (em + 2000))) / 100) + swirlBonus) * resCalc(character, element));
-    if (!isShreded)
-        character.currentBuffs.push({ Type: "VVShred", Element: element, Value: 40 });
+    if (!isShreded){
+        character.currentBuffs.forEach(buff => {
+            if (buff.Type == "VV"){
+            character.currentBuffs.push({ Type: "VVShred", Element: element, Value: 40 });
+            vvActive = true;
+            }
+        });
+        
+    }
     if (character.name = "Kazuha") {
         let haveBuff = false;
         let havePassive = false;

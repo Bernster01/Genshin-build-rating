@@ -54,7 +54,7 @@ const artifactSets ={
     ["Gladiator's Finale"]:{
         Type: "Gladiator's Finale",
         twoPiece:{Type:"ATK%",Value:18},
-        fourPiece:{Type:"NormalAttack",Value:0.35},
+        fourPiece:{Type:"NormalAttack",Value:35},
         
     },
     ["Heart of Depth"]:{
@@ -117,7 +117,8 @@ const artifactSets ={
     },
     ["Viridescent Venerer"]:{
         Type: "Viridescent Venerer",
-        twoPiece:{Type:"AnemoDMGBonus",Value:15}
+        twoPiece:{Type:"AnemoDMGBonus",Value:15},
+        fourPiece:{Type:"VV",Value:null}
         
     },
     ["Wanderer's Troupe"]:{

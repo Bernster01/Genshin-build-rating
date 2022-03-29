@@ -1498,3 +1498,504 @@ function breastplate(Character) {
    
     return {dmg:dmg,shield:shield,healing:heal};
 }
+
+function heraldofFrost(Character) {
+    let skillMultiplier = 0;
+    let regenHit = 0;
+    let regenCon = 0;
+    let frostDmg = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 96 / 100;
+            regenHit = (Character.attack()*(10.56/100))+67.4;
+            regenCon = (Character.attack()*(69.6/100))+450.55;
+            frostDmg = 36/ 100;
+            break;
+        case 2:
+            skillMultiplier = 103.2 / 100;
+            regenHit = (Character.attack()*(11.35/100))+74.14;
+            regenCon = (Character.attack()*(74.82/100))+495.61;
+            frostDmg = 38.7/ 100;
+            break;
+        case 3:
+            skillMultiplier = 110.4 / 100;
+            regenHit = (Character.attack()*(12.14/100))+81.45;
+            regenCon = (Character.attack()*(80.04/100))+544.42;
+            frostDmg = 41.4/ 100;
+            break;
+        case 4:
+            skillMultiplier = 120 / 100;
+            regenHit = (Character.attack()*(13.2/100))+89.31;
+            regenCon = (Character.attack()*(87/100))+597;
+            frostDmg = 45/ 100;
+            break;
+        case 5:
+            skillMultiplier = 127.2 / 100;
+            regenHit = (Character.attack()*(13.99/100))+97.74;
+            regenCon = (Character.attack()*(92.22/100))+653.32;
+            frostDmg = 47.7/ 100;
+            break;
+        case 6:
+            skillMultiplier = 134.4 / 100;
+            regenHit = (Character.attack()*(14.78/100))+106.73;
+            regenCon = (Character.attack()*(97.44/100))+713.4;
+            frostDmg = 50.4/ 100;
+            break;
+        case 7:
+            skillMultiplier = 144 / 100;
+            regenHit = (Character.attack()*(15.84/100))+116.28;
+            regenCon = (Character.attack()*(104.4/100))+777.24;
+            frostDmg = 54/ 100;
+            break;
+        case 8:
+            skillMultiplier = 153.6 / 100;
+            regenHit = (Character.attack()*(16.9/100))+126.39;
+            regenCon = (Character.attack()*(111.36/100))+844.83;
+            frostDmg = 57.6/ 100;
+            break;
+        case 9:
+            skillMultiplier = 163.2 / 100;
+            regenHit = (Character.attack()*(17.95/100))+137.07;
+            regenCon = (Character.attack()*(118.32/100))+916.18;
+            frostDmg = 61.2/ 100;
+            break;
+        case 10:
+            skillMultiplier = 172.8 / 100;
+            regenHit = (Character.attack()*(19.01/100))+148.3;
+            regenCon = (Character.attack()*(125.28/100))+991.28;
+            frostDmg = 64.8/ 100;
+            break;
+        case 11:
+            skillMultiplier = 182.4 / 100;
+            regenHit = (Character.attack()*(20.06/100))+160.1;
+            regenCon = (Character.attack()*(132.24/100))+1070;
+            frostDmg = 68.4/ 100;
+            break;
+        case 12:
+            skillMultiplier = 192 / 100;
+            regenHit = (Character.attack()*(21.12/100))+172.46;
+            regenCon = (Character.attack()*(139.2/100))+1152;
+            frostDmg = 72/ 100;
+            break;
+        case 13:
+            skillMultiplier = 204 / 100;
+            regenHit = (Character.attack()*(22.44/100))+185.38;
+            regenCon = (Character.attack()*(147.9/100))+1239;
+            frostDmg = 76.5/ 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    attack.Multiplier = frostDmg;
+    for (let index = 0; index < 4; index++) {
+        if(index % 3 == 0){
+            attack.isReaction = true;
+            dmg += dmgCalc(attack,Character,"ElementalSkill") *3;
+        }
+        else {
+            attack.isReaction = false;
+            
+            dmg += dmgCalc(attack,Character,"ElementalSkill") *3;
+        }
+        
+    }
+   
+    let heal= regenCon * 4 + (regenHit * 8*4)*(1+(Character.advancedstats.healingBonus/100));
+    
+   
+   
+    return {dmg:dmg,healing:heal};
+}
+
+function clawandThunder(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 295.2 / 100;
+            break;
+        case 2:
+            skillMultiplier = 317.3 / 100;
+            break;
+        case 3:
+            skillMultiplier = 339.48 / 100;
+            break;
+        case 4:
+            skillMultiplier = 369 / 100;
+            break;
+        case 5:
+            skillMultiplier = 391.14 / 100;
+            break;
+        case 6:
+            skillMultiplier = 413.28 / 100;
+            break;
+        case 7:
+            skillMultiplier = 442.8 / 100;
+            break;
+        case 8:
+            skillMultiplier = 472.32 / 100;
+            break;
+        case 9:
+            skillMultiplier = 501.84 / 100;
+            break;
+        case 10:
+            skillMultiplier = 531.36 / 100;
+            break;
+        case 11:
+            skillMultiplier = 560.88 / 100;
+            break;
+        case 12:
+            skillMultiplier = 590.4/ 100;
+            break;
+        case 13:
+            skillMultiplier = 627.3 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+   
+   
+    return dmg;
+}
+
+function ravagingConfession(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = (58.4+136) / 100;
+            break;
+        case 2:
+            skillMultiplier = (62.78+146.2) / 100;
+            break;
+        case 3:
+            skillMultiplier = (67.16+156.4) / 100;
+            break;
+        case 4:
+            skillMultiplier = (73+170) / 100;
+            break;
+        case 5:
+            skillMultiplier = (77.38+180.2) / 100;
+            break;
+        case 6:
+            skillMultiplier = (81.76+190.4) / 100;
+            break;
+        case 7:
+            skillMultiplier = (87.6+204) / 100;
+            break;
+        case 8:
+            skillMultiplier = (93.44+217.6) / 100;
+            break;
+        case 9:
+            skillMultiplier = (99.28+231.2) / 100;
+            break;
+        case 10:
+            skillMultiplier = (105.12+244.8) / 100;
+            break;
+        case 11:
+            skillMultiplier = (110.96+258.4) / 100;
+            break;
+        case 12:
+            skillMultiplier = (116.8+272) / 100;
+            break;
+        case 13:
+            skillMultiplier = (124.1+289) / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    return dmg;
+}
+
+function fuuinDash(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  36 / 100;
+            skillMultiplier2 = 158.4 / 100;
+            break;
+        case 2:
+            skillMultiplier = 38.7 / 100;
+            skillMultiplier2 = 170.3 / 100;
+            break;
+        case 3:
+            skillMultiplier = 41.4 / 100;
+            skillMultiplier2 = 182.2 / 100;
+            break;
+        case 4:
+            skillMultiplier = 45 / 100;
+            skillMultiplier2 = 198 / 100;
+            break;
+        case 5:
+            skillMultiplier = 47.7 / 100;
+            skillMultiplier2 = 209.88 / 100;
+            break;
+        case 6:
+            skillMultiplier = 50.4 / 100;
+            skillMultiplier2 = 221.76 / 100;
+            break;
+        case 7:
+            skillMultiplier = 54 / 100;
+            skillMultiplier2 = 237.6 / 100;
+            break;
+        case 8:
+            skillMultiplier = 57.6 / 100;
+            skillMultiplier2 = 253.44 / 100;
+            break;
+        case 9:
+            skillMultiplier = 61.2 / 100;
+            skillMultiplier2 = 269.28 / 100;
+            break;
+        case 10:
+            skillMultiplier = 64.8 / 100;
+            skillMultiplier2 = 285.12 / 100;
+            break;
+        case 11:
+            skillMultiplier = 68.4 / 100;
+            skillMultiplier2 = 300.96 / 100;
+            break;
+        case 12:
+            skillMultiplier = 72 / 100;
+            skillMultiplier2 = 316.8 / 100;
+            break;
+        case 13:
+            skillMultiplier = 76.5 / 100;
+            skillMultiplier2 = 336.6 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill");
+    let heal = 0;
+    attack.isReaction = false;
+    attack.Multiplier = skillMultiplier2;
+    dmg += dmgCalc(attack,Character,"ElementalSkill") * 3;
+    Character.currentBuffs.forEach(buff=>{
+        if(buff.Type == "Someone More Capable"){
+            heal = ((Character.EM() * 1.2) + 300) * 4;
+        }
+    })
+   
+    return {dmg:dmg,healing:heal};
+}
+
+function astableAnemohypostasisCreation(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  211.2 / 100;
+            break;
+        case 2:
+            skillMultiplier = 227.04 / 100;
+            break;
+        case 3:
+            skillMultiplier = 242.88 / 100;
+            break;
+        case 4:
+            skillMultiplier = 264 / 100;
+            break;
+        case 5:
+            skillMultiplier = 279.84 / 100;
+            break;
+        case 6:
+            skillMultiplier = 295.68 / 100;
+            break;
+        case 7:
+            skillMultiplier = 316.8 / 100;
+            break;
+        case 8:
+            skillMultiplier = 337.92 / 100;
+            break;
+        case 9:
+            skillMultiplier = 359.04 / 100;
+            break;
+        case 10:
+            skillMultiplier = 380.16 / 100;
+            break;
+        case 11:
+            skillMultiplier = 401.28 / 100;
+            break;
+        case 12:
+            skillMultiplier = 422.4 / 100;
+            break;
+        case 13:
+            skillMultiplier = 448.8 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill");
+   
+   
+    return dmg;
+}
+
+function ragingTide(Character) {
+    let skillMultiplier = 0;
+    let oneHit = 0;
+    let twoHit = 0;
+    let threeHit = 0;
+    let charged1 = 0;
+    let charged2 = 0;
+    let riptideSlash = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  72 / 100;
+            oneHit = 38.87 / 100;
+            twoHit = 41.62 / 100;
+            threeHit = 56.33 / 100;
+            charged1 = 60.2 / 100;
+            charged2 = 71.98 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 2:
+            skillMultiplier = 77.4 / 100;
+            oneHit = 42.04 / 100;
+            twoHit = 45.01 / 100;
+            threeHit = 60.91 / 100;
+            charged1 = 65.1 / 100;
+            charged2 = 77.84 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 3:
+            skillMultiplier = 82.8 / 100;
+            oneHit = 45.2 / 100;
+            twoHit = 48.4 / 100;
+            threeHit = 65.5 / 100;
+            charged1 = 70 / 100;
+            charged2 = 83.7 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 4:
+            skillMultiplier = 90 / 100;
+            oneHit = 49.72 / 100;
+            twoHit = 53.24 / 100;
+            threeHit = 72.05 / 100;
+            charged1 = 77 / 100;
+            charged2 = 92.07 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 5:
+            skillMultiplier = 95.4 / 100;
+            oneHit = 52.88 / 100;
+            twoHit = 56.63 / 100;
+            threeHit = 76.63 / 100;
+            charged1 = 81.9 / 100;
+            charged2 = 97.93 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 6:
+            skillMultiplier = 100.8 / 100;
+            oneHit = 56.5 / 100;
+            twoHit = 60.5 / 100;
+            threeHit = 81.88 / 100;
+            charged1 = 87.5 / 100;
+            charged2 = 104.62 / 100;
+            charged1 = 60.2 / 100;
+            break;
+        case 7:
+            skillMultiplier = 108 / 100;
+            oneHit = 61.47 / 100;
+            twoHit = 65.82 / 100;
+            threeHit = 89.08 / 100;
+            charged1 = 113.83 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 8:
+            skillMultiplier = 115.2 / 100;
+            oneHit = 66.44 / 100;
+            twoHit = 71.15 / 100;
+            threeHit = 96.28 / 100;
+            charged1 = 102.9 / 100;
+            charged2 = 123.04 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 9:
+            skillMultiplier = 122.4 / 100;
+            oneHit = 71.42 / 100;
+            twoHit = 76.47 / 100;
+            threeHit = 103.49 / 100;
+            charged1 = 110.6 / 100;
+            charged2 = 132.25 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 10:
+            skillMultiplier = 129.6 / 100;
+            oneHit = 76.84 / 100;
+            twoHit = 82.28 / 100;
+            threeHit = 111.35 / 100;
+            charged1 = 119 / 100;
+            charged2 = 142.29 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 11:
+            skillMultiplier = 136.8 / 100;
+            oneHit = 82.26 / 100;
+            twoHit = 88.09 / 100;
+            threeHit = 119.21 / 100;
+            charged1 = 127.4 / 100;
+            charged2 = 152.33 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 12:
+            skillMultiplier = 144 / 100;
+            oneHit = 87.69 / 100;
+            twoHit = 93.9 / 100;
+            threeHit = 127.07 / 100;
+            charged1 = 135.8 / 100;
+            charged2 = 162.38 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+        case 13:
+            skillMultiplier = 153 / 100;
+            oneHit = 93.11 / 100;
+            twoHit = 99.7 / 100;
+            threeHit = 134.93 / 100;
+            charged1 = 144.2 / 100;
+            charged2 = 172.42 / 100;
+            riptideSlash = 60.2 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill")*3;
+    let sequence = ["N1","N2","N3","C"];
+    for (let index = 0; index < 3; index++) {
+        sequence.forEach(action => {
+            switch (action) {
+                case "N1":
+                    attack.isReaction = true;
+                    attack.Multiplier = oneHit;
+                    dmg += dmgCalc(attack,Character,"NormalAttack");
+                    break;
+                case "N2":
+                    attack.isReaction = false;
+                    attack.Multiplier = twoHit;
+                    dmg += dmgCalc(attack,Character,"NormalAttack");
+                    break;
+                case "N3":
+                    attack.isReaction = false;
+                    attack.Multiplier = threeHit;
+                    dmg += dmgCalc(attack,Character,"NormalAttack");
+                    
+                    break;
+                case "C":
+                    attack.isReaction = true;
+                    attack.Multiplier = charged1;
+                    dmg += dmgCalc(attack,Character,"NormalAttack");
+                    attack.isReaction = false;
+                    attack.Multiplier = charged2;
+                    dmg += dmgCalc(attack,Character,"NormalAttack");
+                    break;
+            
+                default:
+                    break;
+            }
+            attack.isReaction = false;
+            attack.Multiplier = riptideSlash;
+            //Three enemies, n^2 scaling so 3^2 = 9
+            dmg += dmgCalc(attack,Character,"ElementalSkill") * 9;
+        });
+        
+    }
+
+   
+   
+    return dmg;
+}

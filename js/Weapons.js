@@ -641,7 +641,7 @@ const BlackcliffWarbow = {
         }
     },
     
-    passive: function(){return [{Type:"ATK%",Value:72}]},
+    passive: function(){return [{Type:"ATK%",Value:56}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -965,7 +965,7 @@ const SacrificialBow = {
         }
     },
     
-    passive: function(){return [{Type:"ElementalSkill",Value:180}]},
+    passive: function(){return [{Type:"",value:null}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1895,7 +1895,7 @@ const SacrificialGreatsword = {
         }
     },
     
-    passive: function(){return [{Type:"ElementalSkill",Value:180}]},
+    passive: function(){return [{Type:"ElementalSkill",Value:80}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
