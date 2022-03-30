@@ -1,5 +1,5 @@
 function userCharacter(button){
-    let baseCharacter = AllCharacters[document.getElementById("SelectCharcterText").innerText];
+    let baseCharacter = AllCharacters[document.getElementById("SelectCharcterText").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponText").innerText];
     button.isDisabled = true;
 

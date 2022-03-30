@@ -898,7 +898,40 @@ function Simulation(character) {
                         }
                     });
 
-                } else {
+                }else if(Character.name == "Traveler (Anemo)" ||Character.name == "Traveler (Geo)"){
+                    totalDmg += dmgCalc(attackAction, Character, type);
+                    if(action == "N5"){
+                        Character.currentBuffs.forEach(buff=>{
+                            if(buff.Type == "Slitting Wind"){
+                                totalDmg += dmgCalc (
+                                    {Multiplier: 0.6, 
+                                        Element: "AnemoDMGBonus", 
+                                        isReaction: true, 
+                                        Scaling: "ATK", 
+                                        Type: "NormalAttack"},
+                                    Character,
+                                    "NormalAttack");
+                            } else if(buff.Type == "Frenzied Rockslide"){
+                                totalDmg += dmgCalc (
+                                    {Multiplier: 0.6, 
+                                        Element: "GeoDMGBonus", 
+                                        isReaction: true, 
+                                        Scaling: "ATK", 
+                                        Type: "NormalAttack"},
+                                    Character,
+                                    "NormalAttack");
+                            }
+                        })
+                        
+                    }
+                    if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
+                        if (attackAction.Element != "PhysicalDMGBonus") {
+                            Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
+                            mistSplitterNormalStack = true;
+                        }
+                    }
+                } 
+                else {
 
 
                     totalDmg += dmgCalc(attackAction, Character, type);

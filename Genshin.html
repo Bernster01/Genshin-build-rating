@@ -863,15 +863,15 @@
 
 				let text = document.getElementById("SelectCharcterText");
 
-				if (character.title == "Traveler(Anemo)" || character.title == "Traveler(Geo)" || character.title == "Traveler(Electro)") {
+				if (character.title == "Traveler (Anemo)" || character.title == "Traveler (Geo)" || character.title == "Traveler (Electro)") {
 					switch (character.title) {
-						case "Traveler(Anemo)":
+						case "Traveler (Anemo)":
 							text.className = "AnemoCharacter";
 							break;
-						case "Traveler(Electro)":
+						case "Traveler (Electro)":
 							text.className = "ElectroCharacter";
 							break;
-						case "Traveler(Geo)":
+						case "Traveler (Geo)":
 							text.className = "GeoCharacter";
 							break;
 					}
@@ -886,6 +886,7 @@
 					text.innerHTML = "<span>" + character.title + "</span>";
 					text.className = character.childNodes[3].className;
 				}
+				text.title = character.title;
 				displayCharcters();
 				document.getElementById("LoadoutContainer").style.display = "inline-block";
 				loadWeapons(character.title);

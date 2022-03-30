@@ -2,8 +2,13 @@ function LoadCharacters() {
     let doc = document.getElementById('CharacterBox');
 
     AllCharacters.index.forEach(character => {
-        let htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>" + AllCharacters[character].name + "</span></div></div>";
-        doc.insertAdjacentHTML("beforeend", htmlCode);
+        let htmlCode = "";
+        if(AllCharacters[character].name == "Traveler (Anemo)" || AllCharacters[character].name =="Traveler (Geo)" || AllCharacters[character].name == "Traveler (Electro)"){
+            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>Traveler</span></div></div>";
+        }else{
+            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>" + AllCharacters[character].name + "</span></div></div>";
+        }
+         doc.insertAdjacentHTML("beforeend", htmlCode);
 
     });
 
@@ -15,7 +20,7 @@ function LoadCharacters() {
 function loadWeapons(character) {
     let weapon = document.getElementById('WeaponsContainer');
     weapon.innerHTML = "";
-    
+    console.log(character)
     AllWeapons[AllCharacters[character].weaponType].forEach(Weapon => {
         let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
         weapon.insertAdjacentHTML("beforeend", htmlCode);

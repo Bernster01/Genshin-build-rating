@@ -1989,6 +1989,7 @@ function ragingTide(Character) {
             }
             attack.isReaction = false;
             attack.Multiplier = riptideSlash;
+            //Riptide slash
             //Three enemies, n^2 scaling so 3^2 = 9
             dmg += dmgCalc(attack,Character,"ElementalSkill") * 9;
         });
@@ -1997,5 +1998,307 @@ function ragingTide(Character) {
 
    
    
+    return dmg;
+}
+
+function palmVortex(Character) {
+    let initialCuttingDmg = 0;
+    let maxCuttingDmg = 0;
+    let initialStormDmg = 0;
+    let maxStormDmg = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            initialCuttingDmg = 12 / 100;
+            maxCuttingDmg = 16.8 / 100;
+            initialStormDmg = 176 / 100;
+            maxStormDmg = 192 / 100;
+            break;
+        case 2:
+            initialCuttingDmg =12.9 / 100;
+            maxCuttingDmg = 18.06 / 100;
+            initialStormDmg = 189.2 / 100;
+            maxStormDmg = 206.4 / 100;
+            break;
+        case 3:
+            initialCuttingDmg = 13.8 / 100;
+            maxCuttingDmg = 19.32 / 100;
+            initialStormDmg = 202.4 / 100;
+            maxStormDmg = 220.8 / 100;
+            break;
+        case 4:
+            initialCuttingDmg = 15 / 100;
+            maxCuttingDmg = 21 / 100;
+            initialStormDmg = 220 / 100;
+            maxStormDmg = 240 / 100;
+            break;
+        case 5:
+            initialCuttingDmg = 15.9 / 100;
+            maxCuttingDmg = 22.26 / 100;
+            initialStormDmg = 233.2 / 100;
+            maxStormDmg = 254.4 / 100;
+            break;
+        case 6:
+            initialCuttingDmg = 16.8 / 100;
+            maxCuttingDmg = 23.52 / 100;
+            initialStormDmg = 246.4 / 100;
+            maxStormDmg = 268.8 / 100;
+            break;
+        case 7:
+            initialCuttingDmg = 18 / 100;
+            maxCuttingDmg = 25.2 / 100;
+            initialStormDmg = 264 / 100;
+            maxStormDmg = 288 / 100;
+            break;
+        case 8:
+            initialCuttingDmg = 19.2 / 100;
+            maxCuttingDmg = 26.88 / 100;
+            initialStormDmg = 281.6 / 100;
+            maxStormDmg = 307.2 / 100;
+            break;
+        case 9:
+            initialCuttingDmg = 20.4 / 100;
+            maxCuttingDmg = 28.56 / 100;
+            initialStormDmg = 299.2 / 100;
+            maxStormDmg = 326.4 / 100;
+            break;
+        case 10:
+            initialCuttingDmg = 21.6 / 100;
+            maxCuttingDmg = 30.24 / 100;
+            initialStormDmg = 316.8 / 100;
+            maxStormDmg = 345.6 / 100;
+            break;
+        case 11:
+            initialCuttingDmg = 22.8 / 100;
+            maxCuttingDmg = 31.92 / 100;
+            initialStormDmg = 334.4 / 100;
+            maxStormDmg = 364.8 / 100;
+            break;
+        case 12:
+            initialCuttingDmg = 24 / 100;
+            maxCuttingDmg = 33.6 / 100;
+            initialStormDmg = 352 / 100;
+            maxStormDmg = 384 / 100;
+            break;
+        case 13:
+            initialCuttingDmg = 25.5 / 100;
+            maxCuttingDmg = 35.7 / 100;
+            initialStormDmg = 374 / 100;
+            maxStormDmg = 408 / 100;
+            break;
+    }
+    let attack = { Multiplier: initialStormDmg, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill")*3;
+    for (let index = 0; index < 6; index++) {
+        if(index>1){
+            if(index==3)
+            attack.isReaction = true;
+            else
+            attack.isReaction = false;
+            attack.Multiplier = maxCuttingDmg;
+            dmg += dmgCalc(attack, Character, "ElementalSkill")*3;
+        }else{
+            attack.Multiplier = initialCuttingDmg;
+            dmg += dmgCalc(attack, Character, "ElementalSkill")*3;
+        }
+    }
+    attack.isReaction = true;
+    attack.Multiplier = maxStormDmg;
+    dmg += dmgCalc(attack, Character, "ElementalSkill")*3;
+    return dmg;
+}
+
+function starfellSword(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  248 / 100;
+            break;
+        case 2:
+            skillMultiplier = 266.6 / 100;
+            break;
+        case 3:
+            skillMultiplier = 285.2 / 100;
+            break;
+        case 4:
+            skillMultiplier = 310 / 100;
+            break;
+        case 5:
+            skillMultiplier = 328.6 / 100;
+            break;
+        case 6:
+            skillMultiplier = 347.2 / 100;
+            break;
+        case 7:
+            skillMultiplier = 372 / 100;
+            break;
+        case 8:
+            skillMultiplier = 396.8 / 100;
+            break;
+        case 9:
+            skillMultiplier = 421.6 / 100;
+            break;
+        case 10:
+            skillMultiplier = 446.4 / 100;
+            break;
+        case 11:
+            skillMultiplier = 471.2 / 100;
+            break;
+        case 12:
+            skillMultiplier = 496 / 100;
+            break;
+        case 13:
+            skillMultiplier = 527 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+   
+   
+    return dmg;
+}
+
+function lightningBlade(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  78.66 / 100;
+            break;
+        case 2:
+            skillMultiplier = 84.56 / 100;
+            break;
+        case 3:
+            skillMultiplier = 90.46 / 100;
+            break;
+        case 4:
+            skillMultiplier = 98.33 / 100;
+            break;
+        case 5:
+            skillMultiplier = 104.23 / 100;
+            break;
+        case 6:
+            skillMultiplier = 110.13 / 100;
+            break;
+        case 7:
+            skillMultiplier = 118 / 100;
+            break;
+        case 8:
+            skillMultiplier = 125.86 / 100;
+            break;
+        case 9:
+            skillMultiplier = 133.73 / 100;
+            break;
+        case 10:
+            skillMultiplier = 141.6 / 100;
+            break;
+        case 11:
+            skillMultiplier = 149.46 / 100;
+            break;
+        case 12:
+            skillMultiplier = 157.33 / 100;
+            break;
+        case 13:
+            skillMultiplier = 167.16 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+   
+   
+    return dmg;
+}
+
+function skywardSonnet(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 276 / 100;
+            break;
+        case 2:
+            skillMultiplier = 296.7 / 100;
+            break;
+        case 3:
+            skillMultiplier = 317.4 / 100;
+            break;
+        case 4:
+            skillMultiplier = 345 / 100;
+            break;
+        case 5:
+            skillMultiplier = 365.7 / 100;
+            break;
+        case 6:
+            skillMultiplier = 386.4 / 100;
+            break;
+        case 7:
+            skillMultiplier = 414 / 100;
+            break;
+        case 8:
+            skillMultiplier = 441.6 / 100;
+            break;
+        case 9:
+            skillMultiplier = 469.2 / 100;
+            break;
+        case 10:
+            skillMultiplier = 496.8 / 100;
+            break;
+        case 11:
+            skillMultiplier = 524.4 / 100;
+            break;
+        case 12:
+            skillMultiplier = 552 / 100;
+            break;
+        case 13:
+            skillMultiplier = 586.5 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    return dmg;
+}
+
+function goubaAttack(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 111.28 / 100;
+            break;
+        case 2:
+            skillMultiplier = 119.63 / 100;
+            break;
+        case 3:
+            skillMultiplier = 127.97 / 100;
+            break;
+        case 4:
+            skillMultiplier = 139.1 / 100;
+            break;
+        case 5:
+            skillMultiplier = 147.45 / 100;
+            break;
+        case 6:
+            skillMultiplier = 155.79 / 100;
+            break;
+        case 7:
+            skillMultiplier = 166.92 / 100;
+            break;
+        case 8:
+            skillMultiplier = 178.05 / 100;
+            break;
+        case 9:
+            skillMultiplier = 189.18 / 100;
+            break;
+        case 10:
+            skillMultiplier = 200.3 / 100;
+            break;
+        case 11:
+            skillMultiplier = 211.43 / 100;
+            break;
+        case 12:
+            skillMultiplier = 222.56 / 100;
+            break;
+        case 13:
+            skillMultiplier = 236.47 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3 * 4;
     return dmg;
 }
