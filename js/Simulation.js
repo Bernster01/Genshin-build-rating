@@ -23,7 +23,7 @@ function validateAllCharacters(){
         console.log(character);
         reset();
         let result = FindBestBuild(AllCharacters[character], 100);
-        if(result.!=null || result!=undefined){
+        if(result!=null || result!=undefined){
             console.log(character+" Succeded");
         }
     });
