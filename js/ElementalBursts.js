@@ -1250,9 +1250,9 @@ function baneOfAllEvil(Character) {
             break;
     }
     
-    Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:Multiplier}});
+    Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:Multiplier});
     if(Character.hasBuffOfType("Conqueror of Evil: Tamer of Demons")){
-        Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:15}});
+        Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:15});
     }
 
     return 0;
@@ -1424,8 +1424,8 @@ function stellarisPhantasm(Character) {
             dmgBonus = 60;
             break;
     }
-    Character.currentBuffs.push({Type:"AddativeBonusDMG",buff:{Type:"Multiple",Value:dmgBonus}})
-    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:dmgBonus});
+    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true };
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     return dmg;
 }
