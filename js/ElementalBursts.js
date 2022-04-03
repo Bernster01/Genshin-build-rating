@@ -134,6 +134,7 @@ function tectonicTide(Character) {
 
     return dmg;
 }
+
 function fieryRain(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
@@ -184,6 +185,7 @@ function fieryRain(Character) {
 
     return dmg;
 }
+
 function shiningMiracle(Character) {
     let skillMultiplier = 0;
     switch (Character.elementalBurst.Level) {
@@ -2393,6 +2395,314 @@ function pyronado(Character) {
     for (let index = 0; index < 7; index++) {
         dmg+= dmgCalc(attack,Character,"ElementalBurst") * 3;
     }
+   
+    return dmg;
+}
+
+function raincutter(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 54.27 /100;
+            break;
+        case 2:
+            Multiplier = 58.34 /100;
+            break;
+        case 3:
+            Multiplier = 62.41 /100;
+            break;
+        case 4:
+            Multiplier = 67.84 /100;
+            break;
+        case 5:
+            Multiplier = 71.91 /100;
+            break;
+        case 6:
+            Multiplier = 75.98 /100;
+            break;
+        case 7:
+            Multiplier = 81.41 /100;
+            break;
+        case 8:
+            Multiplier = 86.84 /100;
+            break;
+        case 9:
+            Multiplier = 92.26 /100;
+            break;
+        case 10:
+            Multiplier = 97.69 /100;
+            break;
+        case 11:
+            Multiplier = 103.12 /100;
+            break;
+        case 12:
+            Multiplier = 108.54 /100;
+            break;
+        case 13:
+            Multiplier = 115.33 /100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: false }
+    let dmg = 0;
+    for (let index = 0; index < 37; index++) {
+        if(index % 3 == 0){
+            attack.isReaction = true;
+            dmg += dmgCalc(attack, Character, "ElementalBurst");
+        }else{
+            attack.isReaction = false;
+            dmg += dmgCalc(attack, Character, "ElementalBurst");
+        }
+        
+    }
+    return dmg;
+}
+
+function riffRevolution(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            skillMultiplier =  340.8 / 100;
+            skillMultiplier2 = 40 / 100;
+            break;
+        case 2:
+            skillMultiplier = 366.36 / 100;
+            skillMultiplier2 = 43 / 100;
+            break;
+        case 3:
+            skillMultiplier = 391.92 / 100;
+            skillMultiplier2 = 46 / 100;
+            break;
+        case 4:
+            skillMultiplier = 426 / 100;
+            skillMultiplier2 = 50 / 100;
+            break;
+        case 5:
+            skillMultiplier = 451.56 / 100;
+            skillMultiplier2 = 53 / 100;
+            break;
+        case 6:
+            skillMultiplier = 477.12 / 100;
+            skillMultiplier2 = 56 / 100;
+            break;
+        case 7:
+            skillMultiplier = 511.2 / 100;
+            skillMultiplier2 = 60 / 100;
+            break;
+        case 8:
+            skillMultiplier = 545.28 / 100;
+            skillMultiplier2 = 64 / 100;
+            break;
+        case 9:
+            skillMultiplier = 579.36 / 100;
+            skillMultiplier2 = 68 / 100;
+            break;
+        case 10:
+            skillMultiplier = 613.44 / 100;
+            skillMultiplier2 = 72 / 100;
+            break;
+        case 11:
+            skillMultiplier = 647.52 / 100;
+            skillMultiplier2 = 76 / 100;
+            break;
+        case 12:
+            skillMultiplier = 681.6 / 100;
+            skillMultiplier2 = 80 / 100;
+            break;
+        case 13:
+            skillMultiplier = 724.2 / 100;
+            skillMultiplier2 = 85 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    attack.Multiplier = skillMultiplier2;
+    attack.element = "PyroDMGBonus";
+    for (let index = 0; index < 5; index++) {
+        dmg += dmgCalc(attack,Character,"ElementalBurst") * 3;
+    }
+    
+   
+    return {dmg:dmg};
+   
+}
+
+function doneDeal(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            skillMultiplier =  182.4 / 100;
+            skillMultiplier2 = 33.4;
+            break;
+        case 2:
+            skillMultiplier = 196.08 / 100;
+            skillMultiplier2 = 35.4;
+            break;
+        case 3:
+            skillMultiplier = 209.76 / 100;
+            skillMultiplier2 = 37.4;
+            break;
+        case 4:
+            skillMultiplier = 228 / 100;
+            skillMultiplier2 = 40;
+            break;
+        case 5:
+            skillMultiplier = 241.68 / 100;
+            skillMultiplier2 = 42;
+            break;
+        case 6:
+            skillMultiplier = 255.36 / 100;
+            skillMultiplier2 = 44;
+            break;
+        case 7:
+            skillMultiplier = 273.6 / 100;
+            skillMultiplier2 = 46.6;
+            break;
+        case 8:
+            skillMultiplier = 291.84 / 100;
+            skillMultiplier2 = 49.2;
+            break;
+        case 9:
+            skillMultiplier = 310.08 / 100;
+            skillMultiplier2 = 51.8;
+            break;
+        case 10:
+            skillMultiplier = 328.32 / 100;
+            skillMultiplier2 = 54.4;
+            break;
+        case 11:
+            skillMultiplier = 346.56 / 100;
+            skillMultiplier2 = 57;
+            break;
+        case 12:
+            skillMultiplier = 364.8 / 100;
+            skillMultiplier2 = 59.6;
+            break;
+        case 13:
+            skillMultiplier = 387.6 / 100;
+            skillMultiplier2 = 62.2 ;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    Character.currentBuffs.push({Type:"ChargedAttack",Value:skillMultiplier2});
+    
+   
+    return dmg;
+   
+}
+
+function ryuukinSaxifrage(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            skillMultiplier =  127.2 / 100;
+            skillMultiplier2 = 122 / 100;
+            break;
+        case 2:
+            skillMultiplier = 136.74 / 100;
+            skillMultiplier2 = 131.15 / 100;
+            break;
+        case 3:
+            skillMultiplier = 146.28 / 100;
+            skillMultiplier2 = 140.3 / 100;
+            break;
+        case 4:
+            skillMultiplier = 159 / 100;
+            skillMultiplier2 = 152.5 / 100;
+            break;
+        case 5:
+            skillMultiplier = 168.54 / 100;
+            skillMultiplier2 = 161.65 / 100;
+            break;
+        case 6:
+            skillMultiplier = 178.08 / 100;
+            skillMultiplier2 = 170.8 / 100;
+            break;
+        case 7:
+            skillMultiplier = 190.8 / 100;
+            skillMultiplier2 = 183 / 100;
+            break;
+        case 8:
+            skillMultiplier = 203.52 / 100;
+            skillMultiplier2 = 195.2 / 100;
+            break;
+        case 9:
+            skillMultiplier = 216.24 / 100;
+            skillMultiplier2 = 207.4 / 100;
+            break;
+        case 10:
+            skillMultiplier = 228.96 / 100;
+            skillMultiplier2 = 219.6 / 100;
+            break;
+        case 11:
+            skillMultiplier = 241.68 / 100;
+            skillMultiplier2 = 231.8 / 100;
+            break;
+        case 12:
+            skillMultiplier = 254.4 / 100;
+            skillMultiplier2 = 244 / 100;
+            break;
+        case 13:
+            skillMultiplier = 270.3 / 100;
+            skillMultiplier2 = 259.25 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    attack.Multiplier = skillMultiplier2;
+    dmg += dmgCalc(attack, Character, "ElementalBurst")*5*3;
+    return dmg;
+   
+}
+
+function planetBefall(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 401.08 / 100;
+            break;
+        case 2:
+            Multiplier = 444.44 / 100;
+            break;
+        case 3:
+            Multiplier = 487.8 / 100;
+            break;
+        case 4:
+            Multiplier = 542 / 100;
+            break;
+        case 5:
+            Multiplier = 590.78 / 100;
+            break;
+        case 6:
+            Multiplier = 639.56 / 100;
+            break;
+        case 7:
+            Multiplier = 704.6 / 100;
+            break;
+        case 8:
+            Multiplier = 769.64 / 100;
+            break;
+        case 9:
+            Multiplier = 834.68 / 100;
+            break;
+        case 10:
+            Multiplier = 899.72 / 100;
+            break;
+        case 11:
+            Multiplier = 964.76 / 100;
+            break;
+        case 12:
+            Multiplier = 1029.8 / 100;
+            break;
+        case 13:
+            Multiplier = 1084 / 100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
    
     return dmg;
 }

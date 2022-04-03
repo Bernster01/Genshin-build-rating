@@ -6,6 +6,9 @@ let enemiesFrozen = false;
 let role = "Dps";
 let mistSplitterNormalStack = false;
 let mistSplitterBurstStack = false;
+let thunderingPulseNormalStack = false;
+let thunderingPulseSkillStack = false;
+let thunderingPulseBurstStack = false;
 let crimsonWitchStacks = 0;
 let grimheartStack = 0;
 let superconductRes = false;
@@ -40,9 +43,11 @@ function compareCharacters(usersCharacter) {
 
                 console.log("User: " + userScore, "Best score: " + result[0])
             }
+            
         }
         else {
             userScore = ((result2.attackBuff * 2) + (result2.dmg * 0.1))*bonsuMultiplier;
+            console.log("User: " + userScore, "Best score: " + result[0])
         }
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
@@ -53,9 +58,14 @@ function compareCharacters(usersCharacter) {
 
                 console.log("User: " + userScore, "Best score: " + result[0])
             }
+            if (simulatedCharacter.supportType2 == "Sub-dps") {
+                userScore = (result2.shield + result2.dmg)*bonsuMultiplier;
+                console.log("User: " + userScore, "Best score: " + result[0])
+            }
         }
         else {
             userScore = ((result2.shield * 2) + (result2.dmg * 0.1))*bonsuMultiplier;
+            console.log("User: " + userScore, "Best score: " + result[0])
         }
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
@@ -177,6 +187,18 @@ function FindBestBuild(baseChar, times) {
                 if (character.supportType2 != undefined) {
                     if (character.supportType2 == "Healer") {
                         score = ((result.shield * 2) + (result.healing * 0.95) + (result.dmg * 0.1))*bonsuMultiplier;
+                        if (score > bestSupportScore) {
+                            currentBestArtifacts = newCharacter.artifacts;
+                            bestArtifacts = newCharacter.artifacts;
+                            bestSupportScore = score;
+                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                            charac = char;
+                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                            indexForBetterDmg.push(newObj);
+                        }
+                    }
+                    if (character.supportType2 == "Sub-dps") {
+                        score = (result.shield + result.dmg)*bonsuMultiplier;
                         if (score > bestSupportScore) {
                             currentBestArtifacts = newCharacter.artifacts;
                             bestArtifacts = newCharacter.artifacts;
@@ -628,6 +650,9 @@ function applyBonuses(character) {
         case "Primordial Jade Cutter":
             character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.012 });
             break;
+        case "Staff of Homa":
+            character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.01, Source: "Staff of Homa" });
+            break;
 
     }
     character.currentBuffs.push({Type:character.ascensionstats().Type,Value:character.ascensionstats().Value})
@@ -758,7 +783,12 @@ function getSetBonus(array, character) {
                     }
                 }
                 else if (currentSet == "Shimenawa's Reminiscence") {
-
+                    if(character.name !="Yoimiya"){
+                    artifactSets[array[i]].fourPiece.forEach(buff => {
+                            
+                        character.currentBuffs.push(buff);
+                        });
+                    }
                 }
                 else if (currentSet == "Blizzard Strayer") {
                     if (character.element == "CryoCharacter") {
@@ -788,6 +818,9 @@ function getSetBonus(array, character) {
 function resetVariables() {
     mistSplitterNormalStack = false;
     mistSplitterBurstStack = false;
+    thunderingPulseNormalStack = false;
+    thunderingPulseBurstStack = false;
+    thunderingPulseNormalStack = false;
     enemiesFrozen = false;
     crimsonWitchStacks = 0;
     grimheartStack = 0;
@@ -930,16 +963,60 @@ function Simulation(character) {
                             mistSplitterNormalStack = true;
                         }
                     }
+                }else if(Character.name=="Yanfei"){
+                    let hasChargedBuff = false;
+                    Character.currentBuffs.forEach(buff=>{
+                        if(buff.Type =="ChargedBuff"){
+                            hasChargedBuff = true;
+                        }
+                    });
+                    if(!hasChargedBuff){
+                        Character.currentBuffs.push({Type:"ChargedBuff",Value:0});
+                    }
+                    else{
+                        let newAttack = attackAction;
+                        newAttack.Multiplier = Character.attack()*0.8;
+                        newAttack.Type = "ChargedAttack";
+                        newAttack.isReaction = false;
+                        newAttack.Scaling = "Blazing Eye";
+                        totalDmg += dmgCalc(attackAction, Character, type);
+                    }
+                    totalDmg += dmgCalc(attackAction, Character, type);
+
                 } 
                 else {
-
-
-                    totalDmg += dmgCalc(attackAction, Character, type);
+                    
+                    let enemies = 1;
+                    if(Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst"){
+                        enemies = 3;
+                    }
+                    totalDmg += dmgCalc(attackAction, Character, type) * enemies;
+                    if(Character.name == "Yoimiya"){
+                        switch(action){
+                            case "N1":
+                                if(attackAction.isReaction){
+                                    attackAction.isReaction = false;
+                                }else{
+                                    attackAction.isReaction = true;     
+                                }
+                                break;
+                            case "N4":
+                                if(attackAction.isReaction){
+                                    attackAction.isReaction = false;
+                                }else{
+                                    attackAction.isReaction = true;     
+                                }
+                                break;
+                        }
+                    }
                     if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
                         if (attackAction.Element != "PhysicalDMGBonus") {
                             Character.currentBuffs.push({ Type: "ElementalDMG", Value: 17.3 })
                             mistSplitterNormalStack = true;
                         }
+                    }else if(Character.weapon.name == "Thundering Pulse" && thunderingPulseNormalStack != true){
+                        Character.currentBuffs.push({Type:"NormalAttack",Value:13});
+                        thunderingPulseNormalStack = true;
                     }
                 }
                 break;
@@ -970,13 +1047,7 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
                             Character.advancedstats.critRate += 12;
                             break;
-                        case "Sacrificial Bow":
-                            switch (Character.name) {
-                                case "Fischl":
-                                    Character.currentBuffs.push({ Type: "ElementalSkill", Value: -180 });
-                                    break;
-                            }
-                            break;
+                        
                         case "Calamity Queller":
                         
                             break;
@@ -990,6 +1061,12 @@ function Simulation(character) {
                         case "Festering Desire":
                             Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: -32 } });
                             Character.advancedstats.critRate -= 12;
+                            break;
+                        case "Thundering Pulse":
+                            if(!thunderingPulseNormalStack){
+                                Character.currentBuffs.push({Type:"NormalAttack",Value:13});
+                                thunderingPulseSkillStack = true
+                            }
                             break;
                     }
                 }
@@ -1038,6 +1115,11 @@ function Simulation(character) {
                         case "The Catch":
                             Character.advancedstats.critRate -= 12;
                             break;
+                        case "Thundering Pulse":
+                            if(!thunderingPulseBurstStack){
+                                Character.currentBuffs.push({Type:"NormalAttack",Value:14});
+                                thunderingPulseSkillStack = true
+                            }
                     }
                     let energyMultiplier = Character.advancedstats.energyRecharge / Character.energyOffset;
                     if (energyMultiplier > 1)
@@ -1080,9 +1162,7 @@ function dmgCalc(attackAction, Character, type) {
             }
             Character.currentBuffs.push({ Type: "ATK%", Value: atkIncrease });
             break;
-        case "Staff of Homa":
-            Character.currentBuffs.push({ Type: "ATKflat", Value: Character.HP() * 0.01, Source: "Staff of Homa" });
-            break;
+     
         case "Everlasting Moonglow":
             if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type != "C" && attackAction.Type !="P" && attackAction.Type != undefined)
                 Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Flat", Value: Character.HP() * 0.10 }, Value: null });
@@ -1114,11 +1194,45 @@ function dmgCalc(attackAction, Character, type) {
         case "HP":
             dmg = (attackAction.Multiplier * Character.HP());
             break;
+        case "Blazing Eye":
+            dmg = (attackAction.Multiplier);
+            break;
 
+    }
+    if(Character.name == "Yoimiya"){
+        let eMultiplier = 0;
+        Character.currentBuffs.forEach(buff=>{
+            if(buff.Type == "YoimiyaEBuff"){
+                eMultiplier += buff.Value;
+            }
+        });
+        
+        dmg *= eMultiplier;
+    } else if(Character.name == "Zhongli"){
+        let hasPassive = false;
+        Character.currentBuffs.forEach(buff=>{
+            if(buff.Type == "Dominance of Earth"){
+                hasPassive = true;
+            }
+        })
+        if(hasPassive){
+            switch(attackAction.action){
+                case "NormalAttack":
+                    dmg += Character.HP()*0.0139;
+                    break;
+                case "ElementalSkill":
+                    dmg += Character.HP()*0.019;
+                    break;
+                case "ElementalBurst":
+                    dmg += Character.HP()*0.33;
+                    break;
+            }
+        }
     }
 
 
     //BonusDMG
+    let bonusDMG = 1;
     let baseBonusDMGFlat = 0;
     let baseBonusDMGMultiple = 1;
     Character.currentBuffs.forEach(buff => {
@@ -1133,32 +1247,6 @@ function dmgCalc(attackAction, Character, type) {
     });
     dmg *= baseBonusDMGMultiple;
     dmg += baseBonusDMGFlat;
-    //Crit
-    
-    let bonusCritRate = 0;
-    if(Character.name == "Ganyu"){
-        Character.currentBuffs.forEach(buff=>{
-            if(buff.Source == "Undivided Heart"){
-                bonusCritRate += buff.Value;
-            }
-        });
-    }
-    if(Character.critRate()+bonusCritRate>100){
-        
-        bonusCritRate -= Character.critRate()+bonusCritRate - 100;
-    }
-    dmg *= (1 + (((Character.critRate()+bonusCritRate) / 100) * (Character.critDMG() / 100)));
-
-    let bonusDMG = 1;
-    Character.advancedstats.elementalBonuses.forEach(element => {
-        if (element.Type == attackAction.Element) {
-            bonusDMG += (element.Value / 100);
-
-        }
-    });
-
-
-
 
     if (Character.ExtraMultiplier != null && Character.ExtraMultiplier != undefined && Character.ExtraMultiplier != []) {
 
@@ -1178,7 +1266,31 @@ function dmgCalc(attackAction, Character, type) {
             }
         })
     }
+    Character.advancedstats.elementalBonuses.forEach(element => {
+        if (element.Type == attackAction.Element) {
+            bonusDMG += (element.Value / 100);
+
+        }
+    });
     dmg *= bonusDMG;
+
+    //Crit
+    let bonusCritRate = 0;
+    if(Character.name == "Ganyu"){
+        Character.currentBuffs.forEach(buff=>{
+            if(buff.Source == "Undivided Heart"){
+                bonusCritRate += buff.Value;
+            }
+        });
+    }
+    if(Character.critRate()+bonusCritRate>100){
+        
+        bonusCritRate -= Character.critRate()+bonusCritRate - 100;
+    }
+    dmg *= (1 + (((Character.critRate()+bonusCritRate) / 100) * (Character.critDMG() / 100)));
+
+   
+   
     dmg *= defCalc(Character);
     dmg *= resCalc(Character, attackAction.Element);
 
@@ -1192,19 +1304,6 @@ function dmgCalc(attackAction, Character, type) {
                 atkIncrease = 80;
             }
             Character.currentBuffs.push({ Type: "ATK%", Value: -atkIncrease })
-            break;
-        case "Staff of Homa":
-            let toRemoveIndex = -1;
-            let toRemove = 0;
-
-            Character.currentBuffs.forEach(buff => {
-                toRemoveIndex++;
-                if (buff.Source == "Staff of Homa") {
-                    toRemove = toRemoveIndex;
-                }
-            });
-            Character.currentBuffs.splice(toRemove, 1);
-
             break;
         case "Everlasting Moonglow":
             if(attackAction.type!= "E"&& attackAction.Type !="Q" && attackAction.Type != "C" && attackAction.Type !="P" && attackAction.Type != undefined)

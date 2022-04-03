@@ -398,7 +398,7 @@ const SacrificialSword = {
         }
     },
     
-    passive: function(){return [{Type:"ElementalSkill",Value:180}]},
+    passive: function(){return [{Type:"",Value:null}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1073,7 +1073,7 @@ const ThunderingPulse = {
         }
     },
     
-    passive: function(){return [{Type:"NormalAttack",Value:25.3},{Type:"ATK%",Value:20}]},
+    passive: function(){return [{Type:"ATK%",Value:20}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1895,7 +1895,7 @@ const SacrificialGreatsword = {
         }
     },
     
-    passive: function(){return [{Type:"ElementalSkill",Value:80}]},
+    passive: function(){return [{Type:"",Value:null}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;

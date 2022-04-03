@@ -2302,3 +2302,340 @@ function goubaAttack(Character) {
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3 * 4;
     return dmg;
 }
+
+function fatalRainscreen(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  168 / 100;
+            skillMultiplier2 = 191.2 / 100;
+            break;
+        case 2:
+            skillMultiplier = 180.6 / 100;
+            skillMultiplier2 = 205.54 / 100;
+            break;
+        case 3:
+            skillMultiplier = 193.2 / 100;
+            skillMultiplier2 = 219.88 / 100;
+            break;
+        case 4:
+            skillMultiplier = 210 / 100;
+            skillMultiplier2 = 239 / 100;
+            break;
+        case 5:
+            skillMultiplier = 222.6 / 100;
+            skillMultiplier2 = 253.34 / 100;
+            break;
+        case 6:
+            skillMultiplier = 235.2 / 100;
+            skillMultiplier2 = 267.68 / 100;
+            break;
+        case 7:
+            skillMultiplier = 252 / 100;
+            skillMultiplier2 = 286.8 / 100;
+            break;
+        case 8:
+            skillMultiplier = 268.8 / 100;
+            skillMultiplier2 = 305.92 / 100;
+            break;
+        case 9:
+            skillMultiplier = 285.6 / 100;
+            skillMultiplier2 = 325.04 / 100;
+            break;
+        case 10:
+            skillMultiplier = 302.4 / 100;
+            skillMultiplier2 = 344.16 / 100;
+            break;
+        case 11:
+            skillMultiplier = 319.2 / 100;
+            skillMultiplier2 = 363.28 / 100;
+            break;
+        case 12:
+            skillMultiplier = 336 / 100;
+            skillMultiplier2 = 382.4 / 100;
+            break;
+        case 13:
+            skillMultiplier = 357 / 100;
+            skillMultiplier2 = 406.3 / 100;
+            break;
+    }
+    let eNotUsed = true;
+    Character.currentBuffs.forEach(buff=>{
+        if(buff.Type == "eUsed" && Character.weapon.name !="Sacrificial Sword"){
+            console.log("eUsed");
+           eNotUsed = false;
+        }
+    });
+    if(eNotUsed){
+    console.log("!eUsed");
+    let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill");
+    attack.isReaction = false;
+    attack.Multiplier = skillMultiplier2;
+    dmg += dmgCalc(attack,Character,"ElementalSkill") * 3;
+    Character.currentBuffs.push({Type:"eUsed",Value:null});
+   
+    return dmg;
+    }else{
+        return 0;
+    }
+}
+
+function sweepingFervor(Character) {
+    let skillMultiplier = 0;
+    let skillMultiplier2 = 0;
+    let shieldMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier =  169.6 / 100;
+            skillMultiplier2 = 33.6 / 100;
+            shieldMultiplier = (Character.DEF()*(144/100)) + 692.8;
+            break;
+        case 2:
+            skillMultiplier = 182.32 / 100;
+            skillMultiplier2 = 36.12 / 100;
+            shieldMultiplier = (Character.DEF()*(154.8/100)) + 762.09;
+            break;
+        case 3:
+            skillMultiplier = 195.04 / 100;
+            skillMultiplier2 = 38.64 / 100;
+            shieldMultiplier = (Character.DEF()*(165.6/100)) + 837.16;
+            break;
+        case 4:
+            skillMultiplier = 212 / 100;
+            skillMultiplier2 = 42 / 100;
+            shieldMultiplier = (Character.DEF()*(180/100)) + 918;
+            break;
+        case 5:
+            skillMultiplier = 224.72 / 100;
+            skillMultiplier2 = 44.52 / 100;
+            shieldMultiplier = (Character.DEF()*(190.8/100)) + 1004;
+            break;
+        case 6:
+            skillMultiplier = 237.44 / 100;
+            skillMultiplier2 = 47.04 / 100;
+            shieldMultiplier = (Character.DEF()*(201.6/100)) + 1096;
+            break;
+        case 7:
+            skillMultiplier = 254.4 / 100;
+            skillMultiplier2 = 50.4 / 100;
+            shieldMultiplier = (Character.DEF()*(216/100)) + 1195;
+            break;
+        case 8:
+            skillMultiplier = 271.36 / 100;
+            skillMultiplier2 = 53.76 / 100;
+            shieldMultiplier = (Character.DEF()*(230.4/100)) + 1299;
+            break;
+        case 9:
+            skillMultiplier = 288.32 / 100;
+            skillMultiplier2 = 57.12 / 100;
+            shieldMultiplier = (Character.DEF()*(244.8/100)) + 1408;
+            break;
+        case 10:
+            skillMultiplier = 305.28 / 100;
+            skillMultiplier2 = 60.48 / 100;
+            shieldMultiplier = (Character.DEF()*(259.2/100)) + 1524;
+            break;
+        case 11:
+            skillMultiplier = 322.24 / 100;
+            skillMultiplier2 = 63.84 / 100;
+            shieldMultiplier = (Character.DEF()*(273.6/100)) + 1645;
+            break;
+        case 12:
+            skillMultiplier = 339.2 / 100;
+            skillMultiplier2 = 67.2 / 100;
+            shieldMultiplier = (Character.DEF()*(288/100)) + 1772;
+            break;
+        case 13:
+            skillMultiplier = 360.4 / 100;
+            skillMultiplier2 = 71.4 / 100;
+            shieldMultiplier = (Character.DEF()*(306/100)) + 1905;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill")*3;
+    attack.Multiplier = skillMultiplier2;
+    for (let index = 0; index < 6; index++) {
+        dmg += dmgCalc(attack,Character,"ElementalSkill") * 3;
+    }
+    
+    let shield = shieldMultiplier * (1+Character.advancedstats.shieldStrength);
+    return {dmg:dmg,shield:shield};
+   
+}
+
+function signedEdict(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 169.6 / 100;
+            break;
+        case 2:
+            skillMultiplier = 182.32 / 100;
+            break;
+        case 3:
+            skillMultiplier = 195.04 / 100;
+            break;
+        case 4:
+            skillMultiplier = 212 / 100;
+            break;
+        case 5:
+            skillMultiplier = 224.72 / 100;
+            break;
+        case 6:
+            skillMultiplier = 237.44 / 100;
+            break;
+        case 7:
+            skillMultiplier = 254.4 / 100;
+            break;
+        case 8:
+            skillMultiplier = 271.36 / 100;
+            break;
+        case 9:
+            skillMultiplier = 288.32 / 100;
+            break;
+        case 10:
+            skillMultiplier = 305.28 / 100;
+            break;
+        case 11:
+            skillMultiplier = 322.24 / 100;
+            break;
+        case 12:
+            skillMultiplier = 339.2 / 100;
+            break;
+        case 13:
+            skillMultiplier = 360.4 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill")*3;
+    return dmg;
+}
+
+function niwabiFireDance(Character) {
+    let skillMultiplier = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 137.91 / 100;
+            break;
+        case 2:
+            skillMultiplier = 140.18 / 100;
+            break;
+        case 3:
+            skillMultiplier = 142.45 / 100;
+            break;
+        case 4:
+            skillMultiplier = 145.40 / 100;
+            break;
+        case 5:
+            skillMultiplier = 147.67 / 100;
+            break;
+        case 6:
+            skillMultiplier = 149.94 / 100;
+            break;
+        case 7:
+            skillMultiplier = 152.89 / 100;
+            break;
+        case 8:
+            skillMultiplier = 155.84 / 100;
+            break;
+        case 9:
+            skillMultiplier = 158.79 / 100;
+            break;
+        case 10:
+            skillMultiplier = 161.74 / 100;
+            break;
+        case 11:
+            skillMultiplier = 164.69 / 100;
+            break;
+        case 12:
+            skillMultiplier = 167.65 / 100;
+            break;
+        case 13:
+            skillMultiplier = 170.60 / 100;
+            break;
+    }
+    Character.currentBuffs.push({Type:"YoimiyaEBuff",Value:skillMultiplier});
+    return 0;
+}
+function dominusLapidis(Character) {
+    let skillMultiplier = 0;
+    let holdDmg = 0;
+    let shield = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 16 / 100;
+            holdDmg = 80 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1232;
+            break;
+        case 2:
+            skillMultiplier = 17.2 / 100;
+            holdDmg = 86 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1355;
+            break;
+        case 3:
+            skillMultiplier = 18.4 / 100;
+            holdDmg = 92 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1489;
+            break;
+        case 4:
+            skillMultiplier = 20 / 100;
+            holdDmg =  100 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1633;
+            break;
+        case 5:
+            skillMultiplier = 21.2 / 100;
+            holdDmg = 106 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1787;
+            break;
+        case 6:
+            skillMultiplier = 22.4 / 100;
+            holdDmg = 112 / 100;
+            shield = (Character.HP()*(12.80/100)) + 1951;
+            break;
+        case 7:
+            skillMultiplier = 24 / 100;
+            holdDmg = 120 / 100;
+            shield = (Character.HP()*(12.80/100)) + 2126;
+            break;
+        case 8:
+            skillMultiplier = 25.6 / 100;
+            holdDmg = 128 / 100;
+            shield = (Character.HP()*(12.80/100)) + 2310;
+            break;
+        case 9:
+            skillMultiplier = 27.2 / 100;
+            holdDmg = 136 / 100;
+            shield = (Character.HP()*(12.80/100)) + 2506;
+            break;
+        case 10:
+            skillMultiplier = 28.8 / 100;
+            holdDmg = 144 / 100;
+            shield = (Character.HP()*(12.80/100)) + 2711;
+            break;
+        case 11:
+            skillMultiplier = 30.4 / 100;
+            holdDmg = 152 / 100;
+            shield = (Character.HP()*(12.80/100)) + 2927;
+            break;
+        case 12:
+            skillMultiplier = 32 / 100;
+            holdDmg = 160 / 100;
+            shield = (Character.HP()*(12.80/100)) + 3153;
+            break;
+        case 13:
+            skillMultiplier = 34 / 100;
+            holdDmg = 170 / 100;
+            shield = (Character.HP()*(12.80/100)) + 3389;
+            break;
+    }
+    let dmg = dmgCalc({Multiplier:holdDmg,Element:"GeoDMGBonus",Scaling:"ATK",isReaction:false},Character,"ElementalSkill")*3;
+    for (let index = 0; index < 15; index++) {
+    dmgCalc({Multiplier:skillMultiplier,Element:"GeoDMGBonus",Scaling:"ATK",isReaction:false},Character,"ElementalSkill")*3;
+    }
+        
+    
+    shield *= 1 + (Character.advancedstats.shieldStrength/100);
+    return {dmg:dmg,shield:shield};
+}

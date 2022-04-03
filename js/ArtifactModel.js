@@ -96,7 +96,8 @@ const artifactSets ={
         fourPiece:[
             {Type:"ChargedAttack",Value:50},
             {Type:"NormalAttack",Value:50},
-            {Type:"PlungeAttack",Value:50}
+            {Type:"PlungeAttack",Value:50},
+            {Type:"EnergyRecharge",Value:-20}
         ]
     },
     ["Tenacity of the Millelith"]:{
