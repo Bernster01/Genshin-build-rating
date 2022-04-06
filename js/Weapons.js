@@ -189,6 +189,33 @@ const FreedomSworn = {
     }
 }.Init();
 
+const HaranGeppakuFutsu = {
+    name: "Haran Geppaku Futsu",
+    src: "Weapons/Haran_Geppaku_Futsu.png",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "7.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"AddativeBonusDMG",Value:12}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
 const HarbingerOfDawn = {
     name: "Harbinger of Dawn",
     src: "Weapons/Harbinger_of_Dawn.png",
@@ -1305,6 +1332,33 @@ const HakushinRing = {
     }
 }.Init();
 
+const KagurasVerity = {
+    name: "Kagura's Verity",
+    src: "Weapons/Kagura's_Verity .png",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "14.4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"",Value:null}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
 const LostPrayerToTheSacredWinds = {
     name: "Lost Prayer to the Sacred Winds",
     src: "Weapons/Lost_Prayer_to_the_Sacred_Winds.png",
@@ -1379,6 +1433,33 @@ const MemoryOfDust = {
     },
     
     passive: function(){return [{Type:"ShieldStrength",Value:20},{Type:"ATK%",Value:40}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const OathswornEye = {
+    name: "Oathsworn Eye",
+    src: "Weapons/Oathsworn_Eye.png",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"",Value:null}]},
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2715,8 +2796,10 @@ const AllWeapons = {
     ["Frostbearer"]:Frostbearer,
     ["Hakushin Ring"]:HakushinRing,
     ["Hamayumi"]:Hamayumi,
+    ["Haran Geppaku Futsu"]:HaranGeppakuFutsu,
     ["Harbinger of Dawn"]:HarbingerOfDawn,
     ["Iron Sting"]:IronSting,
+    ["Kagura's Verity"]:KagurasVerity,
     ["Katsuragikiri Nagamasa"]:KatsuragikiriNagamasa,
     ["Kitain Cross Spear"]:KitainCrossSpear,
     ["Lion's Roar"]:LionsRoar,
@@ -2729,6 +2812,7 @@ const AllWeapons = {
     ["Mistsplitter Reforged"]: MistsplitterReforged,
     ["Mitternachts Waltz"]:MitternachtsWaltz,
     ["Mouun's Moon"]:MouunsMoon,
+    ["Oathsworn Eye"]:OathswornEye,
     ["Polar Star"]: PolarStar,
     ["Predator"]:Predator,
     ["Primordial Jade Cutter"]:PrimordialJadeCutter,
@@ -2813,8 +2897,10 @@ const AllWeapons = {
         "Frostbearer",
         "Hakushin Ring",
         "Hamayumi",
+        "Haran Geppaku Futsu",
         "Harbinger of Dawn",
         "Iron Sting",
+        "Kagura's Verity",
         "Katsuragikiri Nagamasa",
         "Kitain Cross Spear",
         "Lion's Roar",
@@ -2826,6 +2912,8 @@ const AllWeapons = {
         "Memory of Dust",
         "Mistsplitter Reforged",
         "Mitternachts Waltz",
+        "Mouun's Moon",
+        "Oathsworn Eye",
         "Polar Star",
         "Predator",
         "Primordial Jade Cutter",
@@ -2886,6 +2974,7 @@ const AllWeapons = {
         "Favonius Sword",
         "Festering Desire",
         "Freedom-Sworn",
+        "Haran Geppaku Futsu",
         "Harbinger of Dawn",
         "Iron Sting",
         "Lion's Roar",
@@ -2931,9 +3020,11 @@ const AllWeapons = {
         "Favonius Codex",
         "Frostbearer",
         "Hakushin Ring",
+        "Kagura's Verity",
         "Lost Prayer to the Sacred Winds",
         "Mappa Mare",
         "Memory of Dust",
+        "Oathsworn Eye",
         "Prototype Amber",
         "Royal Grimoire",
         "Sacrificial Fragments",

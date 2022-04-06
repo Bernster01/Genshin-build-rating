@@ -2706,3 +2706,52 @@ function planetBefall(Character) {
    
     return dmg;
 }
+
+function propheciesofDawn(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 401.08 / 100;
+            break;
+        case 2:
+            Multiplier = 444.44 / 100;
+            break;
+        case 3:
+            Multiplier = 487.8 / 100;
+            break;
+        case 4:
+            Multiplier = 542 / 100;
+            break;
+        case 5:
+            Multiplier = 590.78 / 100;
+            break;
+        case 6:
+            Multiplier = 639.56 / 100;
+            break;
+        case 7:
+            Multiplier = 704.6 / 100;
+            break;
+        case 8:
+            Multiplier = 769.64 / 100;
+            break;
+        case 9:
+            Multiplier = 834.68 / 100;
+            break;
+        case 10:
+            Multiplier = 899.72 / 100;
+            break;
+        case 11:
+            Multiplier = 964.76 / 100;
+            break;
+        case 12:
+            Multiplier = 1029.8 / 100;
+            break;
+        case 13:
+            Multiplier = 1084 / 100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+   
+    return dmg;
+}

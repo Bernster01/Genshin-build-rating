@@ -1043,6 +1043,54 @@ function Simulation(character) {
                 break;
 
             case "E":
+                
+
+                switch (Character.weapon.name) {
+                    case "Festering Desire":
+                        Character.currentBuffs.push({ Type: "ElementalSkill",Value: 32 });
+                        Character.advancedstats.critRate += 12;
+                        break;
+
+                    case "Calamity Queller":
+
+                        break;
+                    case "Oathsworn Eye":
+                        let hasOathBuff = false;
+                        Character.currentBuffs.forEach(buff => {
+                            if (buff.Source == "Oathsworn Eye") {
+                                hasOathBuff = true;
+                            }
+                        });
+                        if (!hasOathBuff) {
+                        Character.currentBuffs.push({Type:"EnergyRecharge",Value:48,Source:"Oathsworn Eye"});
+                        }
+                        break;
+                    case "Kagura's Verity":
+                        let totalBuffs = 0;
+                        Character.currentBuffs.forEach(buff => {
+                            if (buff.Source == "Kagura's Verity") {
+                                totalBuffs ++;
+                            }
+                        })
+                        if(totalBuffs<3){
+                            Character.currentBuffs.push({Type:"ElementalSkill",Value:12, Source:"Kagura's Verity"});
+
+                        }else if(totalBuffs==3){
+                            Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:12});
+                        }
+                        break;
+                    case "Haran Geppaku Futsu":
+                        let hasHaranBuff = false;
+                        Character.currentBuffs.forEach(buff => {
+                            if (buff.Source == "Haran Geppaku Futsu") {
+                                hasHaranBuff = true;
+                            }
+                        });
+                        if (!hasHaranBuff) {
+                        Character.currentBuffs.push({Type:"NormalAttack",Value:40,Source:"Haran Geppaku Futsu"});
+                        }
+                        break;
+                }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
                     if (Number.isInteger(result)) {
@@ -1059,31 +1107,20 @@ function Simulation(character) {
                     }
                 }
                 else {
-
-                    switch (Character.weapon.name) {
-                        case "Festering Desire":
-                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: 32 } });
-                            Character.advancedstats.critRate += 12;
-                            break;
-
-                        case "Calamity Queller":
-
-                            break;
-                    }
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
-                    switch (Character.weapon.name) {
-                        case "Festering Desire":
-                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", buff: { Type: "Multiple", Source: "Festering Desire", Value: -32 } });
-                            Character.advancedstats.critRate -= 12;
-                            break;
-                        case "Thundering Pulse":
-                            if (!thunderingPulseNormalStack) {
-                                Character.currentBuffs.push({ Type: "NormalAttack", Value: 13 });
-                                thunderingPulseSkillStack = true
-                            }
-                            break;
-                    }
+                    
+                }
+                switch (Character.weapon.name) {
+                    case "Festering Desire":
+                        Character.advancedstats.critRate -= 12;
+                        break;
+                    case "Thundering Pulse":
+                        if (!thunderingPulseNormalStack) {
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 13 });
+                            thunderingPulseSkillStack = true
+                        }
+                        break;
                 }
                 break;
 

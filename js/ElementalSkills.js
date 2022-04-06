@@ -2637,3 +2637,83 @@ function dominusLapidis(Character) {
     shield *= 1 + (Character.advancedstats.shieldStrength / 100);
     return { dmg: dmg, shield: shield };
 }
+function frozenWilds(Character) {
+    let skillMultiplier = 0;
+    let holdDmg = 0;
+    let shield = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 16 / 100;
+            holdDmg = 80 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1232;
+            break;
+        case 2:
+            skillMultiplier = 17.2 / 100;
+            holdDmg = 86 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1355;
+            break;
+        case 3:
+            skillMultiplier = 18.4 / 100;
+            holdDmg = 92 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1489;
+            break;
+        case 4:
+            skillMultiplier = 20 / 100;
+            holdDmg = 100 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1633;
+            break;
+        case 5:
+            skillMultiplier = 21.2 / 100;
+            holdDmg = 106 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1787;
+            break;
+        case 6:
+            skillMultiplier = 22.4 / 100;
+            holdDmg = 112 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 1951;
+            break;
+        case 7:
+            skillMultiplier = 24 / 100;
+            holdDmg = 120 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 2126;
+            break;
+        case 8:
+            skillMultiplier = 25.6 / 100;
+            holdDmg = 128 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 2310;
+            break;
+        case 9:
+            skillMultiplier = 27.2 / 100;
+            holdDmg = 136 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 2506;
+            break;
+        case 10:
+            skillMultiplier = 28.8 / 100;
+            holdDmg = 144 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 2711;
+            break;
+        case 11:
+            skillMultiplier = 30.4 / 100;
+            holdDmg = 152 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 2927;
+            break;
+        case 12:
+            skillMultiplier = 32 / 100;
+            holdDmg = 160 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 3153;
+            break;
+        case 13:
+            skillMultiplier = 34 / 100;
+            holdDmg = 170 / 100;
+            shield = (Character.HP() * (12.80 / 100)) + 3389;
+            break;
+    }
+    let dmg = dmgCalc({ Multiplier: holdDmg, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }, Character, "ElementalSkill") * 3;
+    for (let index = 0; index < 15; index++) {
+        dmgCalc({ Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }, Character, "ElementalSkill") * 3;
+    }
+
+
+    shield *= 1 + (Character.advancedstats.shieldStrength / 100);
+    return { dmg: dmg, shield: shield };
+}

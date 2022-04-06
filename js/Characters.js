@@ -333,6 +333,299 @@ const Albedo = {
         }
     }
 };
+const Aloy = {
+    name: "Aloy",
+    src: "Characters/Aloy.png",
+    element: "CryoCharacter",
+    level: "1b",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 18,
+            ["20b"]: 47,
+            ["20a"]: 63,
+            ["40b"]: 94,
+            ["40a"]: 105,
+            ["50b"]: 121,
+            ["50a"]: 136,
+            ["60b"]: 152,
+            ["60a"]: 163,
+            ["70b"]: 179,
+            ["70a"]: 190,
+            ["80b"]: 206,
+            ["80a"]: 217,
+            ["90b"]: 234
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 848,
+            ["20b"]: 2201,
+            ["20a"]: 2928,
+            ["40b"]: 4382,
+            ["40a"]: 4899,
+            ["50b"]: 5636,
+            ["50a"]: 6325,
+            ["60b"]: 7070,
+            ["60a"]: 7587,
+            ["70b"]: 8339,
+            ["70a"]: 8856,
+            ["80b"]: 9616,
+            ["80a"]: 10133,
+            ["90b"]: 10899
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 53,
+            ["20b"]: 137,
+            ["20a"]: 182,
+            ["40b"]: 272,
+            ["40a"]: 304,
+            ["50b"]: 350,
+            ["50a"]: 393,
+            ["60b"]: 439,
+            ["60a"]: 471,
+            ["70b"]: 517,
+            ["70a"]: 550,
+            ["80b"]: 597,
+            ["80a"]: 629,
+            ["90b"]: 676
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "ATK",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 140,
+    supportType: "Sub-dps",
+    sequence: {
+        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "Q"],
+        ["Support"]: ["E", "Q"],
+    },
+    weaponType: "Sword",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 44.88 / 100
+                case 2:
+                    return 47.94 / 100
+                case 3:
+                    return 51 / 100
+                case 4:
+                    return 55.08 / 100
+                case 5:
+                    return 58.14 / 100
+                case 6:
+                    return 61.71 / 100
+                case 7:
+                    return 66.3 / 100
+                case 8:
+                    return 70.89 / 100
+                case 9:
+                    return 75.48 / 100
+                case 10:
+                    return 80.07 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 43.12 / 100
+                case 2:
+                    return 46.06 / 100
+                case 3:
+                    return 49 / 100
+                case 4:
+                    return 52.92 / 100
+                case 5:
+                    return 55.86 / 100
+                case 6:
+                    return 59.29 / 100
+                case 7:
+                    return 63.7 / 100
+                case 8:
+                    return 68.11 / 100
+                case 9:
+                    return 72.52 / 100
+                case 10:
+                    return 76.93 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 52.8 / 100
+                case 2:
+                    return 56.4 / 100
+                case 3:
+                    return 60 / 100
+                case 4:
+                    return 64.8 / 100
+                case 5:
+                    return 68.4 / 100
+                case 6:
+                    return 72.6 / 100
+                case 7:
+                    return 78 / 100
+                case 8:
+                    return 83.4 / 100
+                case 9:
+                    return 88.8 / 100
+                case 10:
+                    return 94.2 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 65.65 / 100
+                case 2:
+                    return 70.12 / 100
+                case 3:
+                    return 74.6 / 100
+                case 4:
+                    return 80.57 / 100
+                case 5:
+                    return 85.04 / 100
+                case 6:
+                    return 90.27 / 100
+                case 7:
+                    return 96.98 / 100
+                case 8:
+                    return 103.69 / 100
+                case 9:
+                    return 110.41 / 100
+                case 10:
+                    return 117.12 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "CryoDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) { return 0 },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 7.2,
+            ["50b"]: 7.2,
+            ["50a"]: 14.4,
+            ["60b"]: 14.4,
+            ["60a"]: 14.4,
+            ["70b"]: 14.4,
+            ["70a"]: 21.6,
+            ["80b"]: 21.6,
+            ["80a"]: 28.8,
+            ["90b"]: 28.8
+        }
+
+        return { Type: "CryoDMGBonus", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: frozenWilds,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: propheciesofDawn,
+        Level: 1
+    },
+    passive1: {
+        Type: "CombatOverride",
+        Value: null
+    },
+    passive2: {
+        Type: "CryoDMGBonus",
+        Value: 23.67
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
 const Amber = {
     name: "Amber",
     src: "Characters/Amber.png",
@@ -1002,6 +1295,12 @@ const Ayaka = {
         }
     }
 
+};
+const Ayato = {
+    name: "Ayato",
+    src: "Characters/Ayato.png",
+    element: "HydroCharacter",
+    level: "1b",
 };
 const Barbara = {
     name: "Barbara",
@@ -2623,7 +2922,7 @@ const Diona = {
     supportType: "Shield",
     supportType2: "Healer",
     sequence: {
-        ["Dps"]: ["Q", "E","N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5", "C", "E"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5", "C", "E"],
         ["Support"]: ["Q", "E",]
     },
     weaponType: "Bow",
@@ -3723,6 +4022,12 @@ const Ganyu = {
         }
     }
 };
+const Gorou = {
+    name: "Gorou",
+    src: "Characters/Gorou.png",
+    element: "GeoCharacter",
+    level: "1b",
+};
 const Hu_Tao = {
     name: "Hu Tao",
     src: "Characters/Hu Tao.png",
@@ -3975,6 +4280,12 @@ const Hu_Tao = {
             return activeConstellations;
         }
     }
+};
+const Itto = {
+    name: "Itto",
+    src: "Characters/Itto.png",
+    element: "GeoCharacter",
+    level: "1b",
 };
 const Jean = {
     name: "Jean",
@@ -5243,8 +5554,8 @@ const Klee = {
     energyOffset: 120,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "E", "Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C","N1", "N2", "C"],
-        ["Support"]: ["E", "E","Q"],
+        ["Dps"]: ["E", "E", "Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
+        ["Support"]: ["E", "E", "Q"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -5426,6 +5737,12 @@ const Klee = {
         }
     }
 };
+const Kokomi = {
+    name: "Kokomi",
+    src: "Characters/Kokomi.png",
+    element: "HydroCharacter",
+    level: "1b",
+};
 const Lisa = {
     name: "Lisa",
     src: "Characters/Lisa.png",
@@ -5517,7 +5834,7 @@ const Lisa = {
     energyOffset: 120,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C", "E"],
+        ["Dps"]: ["Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C", "E"],
         ["Support"]: ["Q", "E"],
     },
     weaponType: "Catalyst",
@@ -5791,7 +6108,7 @@ const Mona = {
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C",],
+        ["Dps"]: ["Q", "E", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C",],
         ["Support"]: ["Q", "E"],
     },
     weaponType: "Catalyst",
@@ -6065,7 +6382,7 @@ const Ningguang = {
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","Q","N1", "N1", "N1", "C", "N1", "N1", "N1", "C", "N1","N1","N1","C"],
+        ["Dps"]: ["E", "Q", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C"],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Catalyst",
@@ -6073,25 +6390,25 @@ const Ningguang = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (28*2) / 100;
+                    return (28 * 2) / 100;
                 case 2:
-                    return (30.1*2) / 100;
+                    return (30.1 * 2) / 100;
                 case 3:
-                    return (32.2*2) / 100;
+                    return (32.2 * 2) / 100;
                 case 4:
-                    return (35*2) / 100;
+                    return (35 * 2) / 100;
                 case 5:
-                    return (37.1*2) / 100;
+                    return (37.1 * 2) / 100;
                 case 6:
-                    return (39.2*2) / 100;
+                    return (39.2 * 2) / 100;
                 case 7:
-                    return (42*2) / 100;
+                    return (42 * 2) / 100;
                 case 8:
-                    return (44.8*2) / 100;
+                    return (44.8 * 2) / 100;
                 case 9:
-                    return (47.6*2) / 100;
+                    return (47.6 * 2) / 100;
                 case 10:
-                    return (50.4*2) / 100;
+                    return (50.4 * 2) / 100;
             }
 
         },
@@ -6136,25 +6453,25 @@ const Ningguang = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (174.08 + (49.6*3)) / 100;
+                    return (174.08 + (49.6 * 3)) / 100;
                 case 2:
-                    return (187.14 + (53.32*3))  / 100;
+                    return (187.14 + (53.32 * 3)) / 100;
                 case 3:
-                    return (200.19 + (57.04*3))  / 100;
+                    return (200.19 + (57.04 * 3)) / 100;
                 case 4:
-                    return (217.6 + (62*3))  / 100;
+                    return (217.6 + (62 * 3)) / 100;
                 case 5:
-                    return (230.66 + (65.72*3))  / 100;
+                    return (230.66 + (65.72 * 3)) / 100;
                 case 6:
-                    return (243.71 + (69.44*3))  / 100;
+                    return (243.71 + (69.44 * 3)) / 100;
                 case 7:
-                    return (261.12 + (74.4*3))  / 100;
+                    return (261.12 + (74.4 * 3)) / 100;
                 case 8:
-                    return (278.53 + (79.36*3))  / 100;
+                    return (278.53 + (79.36 * 3)) / 100;
                 case 9:
-                    return (295.94 + (84.32*3))  / 100;
+                    return (295.94 + (84.32 * 3)) / 100;
                 case 10:
-                    return (313.34 + (89.28*3))  / 100;
+                    return (313.34 + (89.28 * 3)) / 100;
             }
         },
         Element: "GeoDMGBonus",
@@ -6319,8 +6636,8 @@ const Noelle = {
     supportType: "Shield",
     supportType2: "Healer",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4","N1","N2","N3","N4"],
-        ["Support"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -6333,7 +6650,7 @@ const Noelle = {
                 case 3:
                     return 92 / 100;
                 case 4:
-                    return  101.2 / 100;
+                    return 101.2 / 100;
                 case 5:
                     return 107.64 / 100;
                 case 6:
@@ -6363,7 +6680,7 @@ const Noelle = {
                 case 3:
                     return 85.3 / 100;
                 case 4:
-                    return  93.83 / 100;
+                    return 93.83 / 100;
                 case 5:
                     return 99.8 / 100;
                 case 6:
@@ -6394,7 +6711,7 @@ const Noelle = {
                 case 3:
                     return 100.3 / 100;
                 case 4:
-                    return  110.33 / 100;
+                    return 110.33 / 100;
                 case 5:
                     return 117.35 / 100;
                 case 6:
@@ -6424,7 +6741,7 @@ const Noelle = {
                 case 3:
                     return 131.9 / 100;
                 case 4:
-                    return  145.09 / 100;
+                    return 145.09 / 100;
                 case 5:
                     return 154.32 / 100;
                 case 6:
@@ -6617,8 +6934,8 @@ const Qiqi = {
     energyOffset: 140,
     supportType: "Healer",
     sequence: {
-        ["Dps"]: ["Q","E","N1","C","N1","C","N1","C","N1","C","N1","C","N1","C"],
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C"],
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -6631,7 +6948,7 @@ const Qiqi = {
                 case 3:
                     return 43.9 / 100;
                 case 4:
-                    return  48.29 / 100;
+                    return 48.29 / 100;
                 case 5:
                     return 51.36 / 100;
                 case 6:
@@ -6691,25 +7008,25 @@ const Qiqi = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (64.33*2) / 100;
+                    return (64.33 * 2) / 100;
                 case 2:
-                    return (69.56*2) / 100;
+                    return (69.56 * 2) / 100;
                 case 3:
-                    return (74.8*2) / 100;
+                    return (74.8 * 2) / 100;
                 case 4:
-                    return (82.28*2) / 100;
+                    return (82.28 * 2) / 100;
                 case 5:
-                    return (87.52*2) / 100;
+                    return (87.52 * 2) / 100;
                 case 6:
-                    return (93.5*2) / 100;
+                    return (93.5 * 2) / 100;
                 case 7:
-                    return (101.73*2) / 100;
+                    return (101.73 * 2) / 100;
                 case 8:
-                    return (109.96*2) / 100;
+                    return (109.96 * 2) / 100;
                 case 9:
-                    return (118.18*2) / 100;
+                    return (118.18 * 2) / 100;
                 case 10:
-                    return (127.16*2) / 100;
+                    return (127.16 * 2) / 100;
             }
 
         },
@@ -6782,6 +7099,12 @@ const Qiqi = {
             return activeConstellations;
         }
     }
+};
+const Raiden = {
+    name: "Raiden",
+    src: "Characters/Raiden.png",
+    element: "ElectroCharacter",
+    level: "1b",
 };
 const Razor = {
     name: "Razor",
@@ -6874,8 +7197,8 @@ const Razor = {
     energyOffset: 100,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","Q","E","N1","N2","N3","N1","N2","N3","N1","N2","N3","E","N1","N2","N3"],
-        ["Support"]: ["E","Q","E"],
+        ["Dps"]: ["E", "Q", "E", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "E", "N1", "N2", "N3"],
+        ["Support"]: ["E", "Q", "E"],
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -7151,8 +7474,8 @@ const Rosaria = {
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N1","N2","N3","N1","N2","N3"],
-        ["Support"]: ["E","Q",],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3"],
+        ["Support"]: ["E", "Q",],
     },
     weaponType: "Polearm",
     normalAttack1: {
@@ -7220,25 +7543,25 @@ const Rosaria = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (31.82*2) / 100;
+                    return (31.82 * 2) / 100;
                 case 2:
-                    return (34.41*2) / 100;
+                    return (34.41 * 2) / 100;
                 case 3:
-                    return (37*2) / 100;
+                    return (37 * 2) / 100;
                 case 4:
-                    return (40.7*2) / 100;
+                    return (40.7 * 2) / 100;
                 case 5:
-                    return (43.29*2) / 100;
+                    return (43.29 * 2) / 100;
                 case 6:
-                    return (46.25*2) / 100;
+                    return (46.25 * 2) / 100;
                 case 7:
-                    return (50.32*2) / 100;
+                    return (50.32 * 2) / 100;
                 case 8:
-                    return (54.39*2) / 100;
+                    return (54.39 * 2) / 100;
                 case 9:
-                    return (58.46*2) / 100;
+                    return (58.46 * 2) / 100;
                 case 10:
-                    return (62.9*2) / 100;
+                    return (62.9 * 2) / 100;
             }
 
         },
@@ -7337,6 +7660,12 @@ const Rosaria = {
         }
     }
 };
+const Sara = {
+    name: "Sara",
+    src: "Characters/Sara.png",
+    element: "ElectroCharacter",
+    level: "1b",
+};
 const Sayu = {
     name: "Sayu",
     src: "Characters/Sayu.png",
@@ -7428,8 +7757,8 @@ const Sayu = {
     energyOffset: 150,
     supportType: "Healer",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4","N1","N2","N3","N4"],
-        ["Support"]: ["E","Q",],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "Q",],
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -7497,25 +7826,25 @@ const Sayu = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (43.4*2) / 100;
+                    return (43.4 * 2) / 100;
                 case 2:
-                    return (47*2) / 100;
+                    return (47 * 2) / 100;
                 case 3:
-                    return (50.5*2) / 100;
+                    return (50.5 * 2) / 100;
                 case 4:
-                    return (55.55*2) / 100;
+                    return (55.55 * 2) / 100;
                 case 5:
-                    return (59.09*2) / 100;
+                    return (59.09 * 2) / 100;
                 case 6:
-                    return (63.13*2) / 100;
+                    return (63.13 * 2) / 100;
                 case 7:
-                    return (68.68*2) / 100;
+                    return (68.68 * 2) / 100;
                 case 8:
-                    return (74.23*2) / 100;
+                    return (74.23 * 2) / 100;
                 case 9:
-                    return (79.79*2) / 100;
+                    return (79.79 * 2) / 100;
                 case 10:
-                    return (85.85*2) / 100;
+                    return (85.85 * 2) / 100;
             }
 
         },
@@ -7635,6 +7964,12 @@ const Sayu = {
         }
     }
 };
+const Shenhe = {
+    name: "Shenhe",
+    src: "Characters/Shenhe.png",
+    element: "CryoCharacter",
+    level: "1b",
+};
 const Sucrose = {
     name: "Sucrose",
     src: "Characters/Sucrose.png",
@@ -7726,8 +8061,8 @@ const Sucrose = {
     energyOffset: 150,
     supportType: "ElementalBuffer",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4","N1","N2","N3","N4"],
-        ["Support"]: ["E","Q",],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "Q",],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -7933,6 +8268,12 @@ const Sucrose = {
         }
     }
 };
+const Thoma = {
+    name: "Thoma",
+    src: "Characters/Thoma.png",
+    element: "PyroCharacter",
+    level: "1b",
+};
 const Tartaglia = {
     name: "Tartaglia",
     src: "Characters/Tartaglia.png",
@@ -8024,13 +8365,13 @@ const Tartaglia = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","Q"],
+        ["Dps"]: ["Q", "E", "Q"],
         ["Support"]: ["Q"],
     },
     weaponType: "Bow",
     normalAttack1: {
         Multiplier: function (level) {
-           return 0;
+            return 0;
         },
         Element: "PhysicalDMGBonus",
         isReaction: false,
@@ -8300,8 +8641,8 @@ const Traveler_Anemo = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["N1","N2","N3","N4","N5","N1","N2","N3","N4","N5","E","Q"],
-        ["Support"]: ["E","Q"],
+        ["Dps"]: ["N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E", "Q"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -8618,8 +8959,8 @@ const Traveler_Electro = {
     energyOffset: 120,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["N1","N2","N3","N4","N5","N1","N2","N3","N4","N5","E","Q"],
-        ["Support"]: ["E","Q"],
+        ["Dps"]: ["N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E", "Q"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -8936,8 +9277,8 @@ const Traveler_Geo = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["N1","N2","N3","N4","N5","N1","N2","N3","N4","N5","E","Q"],
-        ["Support"]: ["E","Q"],
+        ["Dps"]: ["N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E", "Q"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -9254,8 +9595,8 @@ const Venti = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","C","C","C","C","C","E"],
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "C", "C", "C", "C", "C", "E"],
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Bow",
     normalAttack1: {
@@ -9509,8 +9850,8 @@ const Xiangling = {
     energyOffset: 180,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","N1","N2","N3","N4","N5","N1","N2","N3","N4","N5"],
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Polearm",
     normalAttack1: {
@@ -9577,25 +9918,25 @@ const Xiangling = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (26.06 *2) / 100;
+                    return (26.06 * 2) / 100;
                 case 2:
-                    return (28.18 *2) / 100;
+                    return (28.18 * 2) / 100;
                 case 3:
-                    return (30.3 *2) / 100;
+                    return (30.3 * 2) / 100;
                 case 4:
-                    return (33.33 *2) / 100;
+                    return (33.33 * 2) / 100;
                 case 5:
-                    return (35.45 *2) / 100;
+                    return (35.45 * 2) / 100;
                 case 6:
-                    return (37.88 *2) / 100;
+                    return (37.88 * 2) / 100;
                 case 7:
-                    return (41.21 *2) / 100;
+                    return (41.21 * 2) / 100;
                 case 8:
-                    return (44.54 *2) / 100;
+                    return (44.54 * 2) / 100;
                 case 9:
-                    return (47.87 *2) / 100;
+                    return (47.87 * 2) / 100;
                 case 10:
-                    return (51.51 *2) / 100;
+                    return (51.51 * 2) / 100;
             }
 
 
@@ -9608,9 +9949,9 @@ const Xiangling = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (14.1 *4) / 100;
+                    return (14.1 * 4) / 100;
                 case 2:
-                    return (15.25 *4) / 100;
+                    return (15.25 * 4) / 100;
                 case 3:
                     return (16.4 * 4) / 100;
                 case 4:
@@ -9829,7 +10170,7 @@ const Xiao = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "E", "Q", "P", "N1", "P", "N1", "P", "N1", "P", "N1","P", "N1", "P", "N1", "P", "N1", "P", "N1","P","N1","P","N1" ],
+        ["Dps"]: ["E", "E", "Q", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1"],
         ["Support"]: ["E", "E",]
     },
     weaponType: "Polearm",
@@ -9864,7 +10205,7 @@ const Xiao = {
     },
     normalAttack2: {
         Multiplier: function (level) {
-           return 0;
+            return 0;
         },
         Element: "PhysicalDMGBonus",
         isReaction: false,
@@ -9904,28 +10245,30 @@ const Xiao = {
         scaling: "ATK"
     },
     plungeAttack: {
-        Multiplier: function (level) {    switch (level) {
-            case 1:
-                return 204.39 / 100
-            case 2:
-                return 221.02 / 100
-            case 3:
-                return 237.66 / 100
-            case 4:
-                return 261.42 / 100
-            case 5:
-                return 278.06 / 100
-            case 6:
-                return 297.07 / 100
-            case 7:
-                return 323.21 / 100
-            case 8:
-                return 349.36 / 100
-            case 9:
-                return 375.5 / 100
-            case 10:
-                return 404.02 / 100
-        } },
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 204.39 / 100
+                case 2:
+                    return 221.02 / 100
+                case 3:
+                    return 237.66 / 100
+                case 4:
+                    return 261.42 / 100
+                case 5:
+                    return 278.06 / 100
+                case 6:
+                    return 297.07 / 100
+                case 7:
+                    return 323.21 / 100
+                case 8:
+                    return 349.36 / 100
+                case 9:
+                    return 375.5 / 100
+                case 10:
+                    return 404.02 / 100
+            }
+        },
         Element: "AnemoDMGBonus",
         isReaction: false,
         scaling: "ATK"
@@ -10079,8 +10422,8 @@ const Xingqiu = {
     energyOffset: 180,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","E","N1","N2","N3","N4","N5","N1","N2","N3","N4","N5"],
-        ["Support"]: ["Q","E","E"],
+        ["Dps"]: ["Q", "E", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
+        ["Support"]: ["Q", "E", "E"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -10147,25 +10490,25 @@ const Xingqiu = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (28.55 *2) / 100;
+                    return (28.55 * 2) / 100;
                 case 2:
-                    return (30.88 *2) / 100;
+                    return (30.88 * 2) / 100;
                 case 3:
-                    return (33.2 *2) / 100;
+                    return (33.2 * 2) / 100;
                 case 4:
-                    return (36.52 *2) / 100;
+                    return (36.52 * 2) / 100;
                 case 5:
-                    return (38.84 *2) / 100;
+                    return (38.84 * 2) / 100;
                 case 6:
-                    return (41.5 *2) / 100;
+                    return (41.5 * 2) / 100;
                 case 7:
-                    return (45.15 *2) / 100;
+                    return (45.15 * 2) / 100;
                 case 8:
-                    return (48.8 *2) / 100;
+                    return (48.8 * 2) / 100;
                 case 9:
-                    return (52.46 *2) / 100;
+                    return (52.46 * 2) / 100;
                 case 10:
-                    return (56.44 *2) / 100;
+                    return (56.44 * 2) / 100;
             }
 
 
@@ -10208,25 +10551,25 @@ const Xingqiu = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (35.86 *2) / 100;
+                    return (35.86 * 2) / 100;
                 case 2:
-                    return (38.78 *2) / 100;
+                    return (38.78 * 2) / 100;
                 case 3:
-                    return (41.7 *2) / 100;
+                    return (41.7 * 2) / 100;
                 case 4:
-                    return (45.87 *2) / 100;
+                    return (45.87 * 2) / 100;
                 case 5:
-                    return (48.79 *2) / 100;
+                    return (48.79 * 2) / 100;
                 case 6:
-                    return (52.13 *2) / 100;
+                    return (52.13 * 2) / 100;
                 case 7:
-                    return (56.71 *2) / 100;
+                    return (56.71 * 2) / 100;
                 case 8:
-                    return (61.3 *2) / 100;
+                    return (61.3 * 2) / 100;
                 case 9:
-                    return (65.89 *2) / 100;
+                    return (65.89 * 2) / 100;
                 case 10:
-                    return (70.89 *2) / 100;
+                    return (70.89 * 2) / 100;
             }
 
 
@@ -10401,8 +10744,8 @@ const Xinyan = {
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4","N1","N2","N3","N4"],
-        ["Support"]: ["E","Q"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -10456,7 +10799,7 @@ const Xinyan = {
                 case 9:
                     return 135.88 / 100;
                 case 10:
-                    return 146.2/ 100;
+                    return 146.2 / 100;
             }
 
         },
@@ -10471,7 +10814,7 @@ const Xinyan = {
                 case 1:
                     return 95.46 / 100;
                 case 2:
-                    return 103.23/ 100;
+                    return 103.23 / 100;
                 case 3:
                     return 111 / 100;
                 case 4:
@@ -10610,6 +10953,12 @@ const Xinyan = {
         }
     }
 };
+const Yae_Miko = {
+    name: "Yae Miko",
+    src: "Characters/Yae Miko.png",
+    element: "ElectroCharacter",
+    level: "1b",
+};
 const Yanfei = {
     name: "Yanfei",
     src: "Characters/Yanfei.png",
@@ -10701,8 +11050,8 @@ const Yanfei = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","C","Q","C","N1","N2","C","N1","N2","C","N1","N2","C"],
-        ["Support"]: ["E","C","Q","C"],
+        ["Dps"]: ["E", "C", "Q", "C", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
+        ["Support"]: ["E", "C", "Q", "C"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -10980,7 +11329,7 @@ const Yoimiya = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","N1","N1","N2","N3","N4","N4","N5","N1","N1","N2","N3","N4","N4","N5","N1","N1","N2","N3","N4","N4","N5","Q"],
+        ["Dps"]: ["Q", "E", "N1", "N1", "N2", "N3", "N4", "N4", "N5", "N1", "N1", "N2", "N3", "N4", "N4", "N5", "N1", "N1", "N2", "N3", "N4", "N4", "N5", "Q"],
         ["Support"]: ["Q"],
     },
     weaponType: "Bow",
@@ -11136,7 +11485,7 @@ const Yoimiya = {
     },
     chargedAttack: {
         Multiplier: function (level) {
-           return 0;
+            return 0;
         },
         Element: "PyroDMGBonus",
         isReaction: true,
@@ -11185,7 +11534,7 @@ const Yoimiya = {
         Value: 15.71
     },
     passive2: {
-        Type: "", 
+        Type: "",
         Value: null
     },
     constellations: {
@@ -11207,6 +11556,12 @@ const Yoimiya = {
             return activeConstellations;
         }
     }
+};
+const Yun_Jin = {
+    name: "Yun Jin",
+    src: "Characters/Yun Jin.png",
+    element: "GeoCharacter",
+    level: "1b",
 };
 const Zhongli = {
     name: "Zhongli",
@@ -11299,8 +11654,8 @@ const Zhongli = {
     energyOffset: 130,
     supportType: "Shield",
     sequence: {
-        ["Dps"]: ["Q","E","N1","N2","N3","N1","N2","N3","N1","N2","N3","N1","N2","N3","E"],
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "E"],
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Polearm",
     normalAttack1: {
@@ -11413,7 +11768,7 @@ const Zhongli = {
     },
     chargedAttack: {
         Multiplier: function (level) {
-           return 0;
+            return 0;
         },
         Element: "PhysicalDMGBonus",
         isReaction: false,
@@ -11462,7 +11817,7 @@ const Zhongli = {
         Value: null
     },
     passive2: {
-        Type: "Dominance of Earth", 
+        Type: "Dominance of Earth",
         Value: null
     },
     constellations: {
@@ -11487,8 +11842,10 @@ const Zhongli = {
 };
 const AllCharacters = {
     ["Albedo"]: Albedo,
+    ["Aloy"]: Aloy,
     ["Amber"]: Amber,
     ["Ayaka"]: Ayaka,
+    ["Ayato"]: Ayato,
     ["Barbara"]: Barbara,
     ["Beidou"]: Beidou,
     ["Bennett"]: Bennett,
@@ -11498,21 +11855,28 @@ const AllCharacters = {
     ["Eula"]: Eula,
     ["Fischl"]: Fischl,
     ["Ganyu"]: Ganyu,
+    ["Gorou"]: Gorou,
     ["Hu Tao"]: Hu_Tao,
+    ["Itto"]: Itto,
     ["Jean"]: Jean,
     ["Kaeya"]: Kaeya,
     ["Kazuha"]: Kazuha,
     ["Keqing"]: Keqing,
     ["Klee"]: Klee,
+    ["Kokomi"]: Kokomi,
     ["Lisa"]: Lisa,
     ["Mona"]: Mona,
     ["Ningguang"]: Ningguang,
     ["Noelle"]: Noelle,
     ["Qiqi"]: Qiqi,
+    ["Raiden"]: Raiden,
     ["Razor"]: Razor,
     ["Rosaria"]: Rosaria,
+    ["Sara"]: Sara,
     ["Sayu"]: Sayu,
+    ["Shenhe"]: Shenhe,
     ["Sucrose"]: Sucrose,
+    ["Thoma"]: Thoma,
     ["Tartaglia"]: Tartaglia,
     ["Traveler (Anemo)"]: Traveler_Anemo,
     ["Traveler (Electro)"]: Traveler_Electro,
@@ -11522,8 +11886,10 @@ const AllCharacters = {
     ["Xiao"]: Xiao,
     ["Xingqiu"]: Xingqiu,
     ["Xinyan"]: Xinyan,
+    ["Yae Miko"]: Yae_Miko,
     ["Yanfei"]: Yanfei,
     ["Yoimiya"]: Yoimiya,
+    ["Yun Jin"]: Yun_Jin,
     ["Zhongli"]: Zhongli,
     index: ["Albedo", "Amber", "Ayaka", "Barbara", "Beidou", "Bennett",
         "Chongyun", "Diluc", "Diona", "Eula", "Fischl", "Ganyu", "Hu Tao", "Jean",
