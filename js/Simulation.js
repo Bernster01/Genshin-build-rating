@@ -1043,8 +1043,16 @@ function Simulation(character) {
                 break;
 
             case "E":
-                
-
+                let HoD = false;
+                Character.currentBuffs.forEach(buff => {
+                    if (buff.Type == "Heart of Depth") {
+                        HoD = true;
+                    }
+                });
+                if(HoD){
+                Character.currentBuffs.push({ Type:"NormalAttack", Value: 30});
+                Character.currentBuffs.push({ Type:"ChargedAttack", Value: 30});
+                }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
                         Character.currentBuffs.push({ Type: "ElementalSkill",Value: 32 });
@@ -1284,10 +1292,42 @@ function getFlatDamage(character, attackAction) {
                 switch (attackAction.action) {
                     case "NormalAttack":
                         flatDamage += character.HP() * 0.0139;
+                        break;
                     case "ElementalSkill":
                         flatDamage += character.HP() * 0.019;
+                        break;
                     case "ElementalBurst":
                         flatDamage += character.HP() * 0.33;
+                        break;
+                }
+            }
+            break;
+        case "Gorou":
+            
+            if(attackAction.action == "ElementalSkill" || attackAction.action == "ElementalBurst"){
+               
+                let HotWaW = false;
+                let AFR = false;
+                character.currentBuffs.forEach(buff => {
+                    if (buff.Type == "Heedless of the Wind and Weather") {
+                        HotWaW = true;
+                    }
+                    else if (buff.Type == "A Favor Repaid") {
+                        AFR = true;
+                    }
+                        
+                })
+                switch (attackAction.action) {
+                    case "ElementalSkill":
+                        if(HotWaW){
+                            flatDamage += character.DEF() * 1.56;
+                        }
+                        break;
+                    case "ElementalBurst":
+                        if(AFR){
+                            flatDamage += character.DEF() * 0.156;
+                        }
+                        break;
                 }
             }
             break;

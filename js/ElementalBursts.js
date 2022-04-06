@@ -2711,47 +2711,206 @@ function propheciesofDawn(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 401.08 / 100;
+            Multiplier = 359.2 / 100;
             break;
         case 2:
-            Multiplier = 444.44 / 100;
+            Multiplier = 386.14 / 100;
             break;
         case 3:
-            Multiplier = 487.8 / 100;
+            Multiplier = 413.08 / 100;
             break;
         case 4:
-            Multiplier = 542 / 100;
+            Multiplier = 449 / 100;
             break;
         case 5:
-            Multiplier = 590.78 / 100;
+            Multiplier = 475.94 / 100;
             break;
         case 6:
-            Multiplier = 639.56 / 100;
+            Multiplier = 502.88 / 100;
             break;
         case 7:
-            Multiplier = 704.6 / 100;
+            Multiplier = 538.8 / 100;
             break;
         case 8:
-            Multiplier = 769.64 / 100;
+            Multiplier = 574.72 / 100;
             break;
         case 9:
-            Multiplier = 834.68 / 100;
+            Multiplier = 610.64 / 100;
             break;
         case 10:
-            Multiplier = 899.72 / 100;
+            Multiplier = 646.56 / 100;
             break;
         case 11:
-            Multiplier = 964.76 / 100;
+            Multiplier = 646.56 / 100;
             break;
         case 12:
-            Multiplier = 1029.8 / 100;
+            Multiplier = 646.56 / 100;
             break;
         case 13:
-            Multiplier = 1084 / 100;
+            Multiplier = 646.56 / 100;
             break;
     }
-    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }
+    let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
    
     return dmg;
+}
+
+function suiyuu(Character) {
+    let Multiplier = 0;
+    let buff = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 66.46 / 100;
+            buff = 11;
+            break;
+        case 2:
+            Multiplier = 71.44 / 100;
+            buff = 12;
+            break;
+        case 3:
+            Multiplier = 76.42 / 100;
+            buff = 13;
+            break;
+        case 4:
+            Multiplier = 83.07 / 100;
+            buff = 14;
+            break;
+        case 5:
+            Multiplier = 88.05 / 100;
+            buff = 15;
+            break;
+        case 6:
+            Multiplier = 93.04 / 100;
+            buff = 16;
+            break;
+        case 7:
+            Multiplier = 99.68 / 100;
+            buff = 17;
+            break;
+        case 8:
+            Multiplier = 106.33 / 100;
+            buff = 18;
+            break;
+        case 9:
+            Multiplier = 112.98 / 100;
+            buff = 19;
+            break;
+        case 10:
+            Multiplier = 119.62 / 100;
+            buff = 20;
+            break;
+        case 11:
+            Multiplier = 126.27 / 100;
+            buff = 20;
+            break;
+        case 12:
+            Multiplier = 132.91 / 100;
+            buff = 20;
+            break;
+        case 13:
+            Multiplier = 141.22 / 100;
+            buff = 20;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = 0;
+    Character.currentBuffs.push({Type:"NormalAttack",Value:buff});
+    for (let index = 0; index < 37; index++) {
+        if(index % 4 !=3){
+            dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+        }
+        
+    }
+   
+    return dmg;
+}
+function forwardUntoVictory(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    let defense = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 98.22 / 100;
+            multiplier2 = 61.3 / 100;
+            defense = 206.16;
+            break;
+        case 2:
+            Multiplier = 105.58 / 100;
+            multiplier2 = 65.9 / 100;
+            defense = 221.62;
+            break;
+        case 3:
+            Multiplier = 112.95 / 100;
+            multiplier2 = 70.49 / 100;
+            defense = 237.08;
+            break;
+        case 4:
+            Multiplier = 122.77 / 100;
+            multiplier2 = 76.63 / 100;
+            defense = 257.7;
+            break;
+        case 5:
+            Multiplier = 130.14 / 100;
+            multiplier2 = 81.22 / 100;
+            defense = 273.16;
+            break;
+        case 6:
+            Multiplier = 137.5/ 100;
+            multiplier2 = 85.82 / 100;
+            defense = 288.62;
+            break;
+        case 7:
+            Multiplier = 147.32 / 100;
+            multiplier2 = 91.95 / 100;
+            defense = 309.24;
+            break;
+        case 8:
+            Multiplier = 157.15 / 100;
+            multiplier2 = 98.08 / 100;
+            defense = 329.85;
+            break;
+        case 9:
+            Multiplier = 166.97 / 100;
+            multiplier2 = 104.21 / 100;
+            defense = 350.47;
+            break;
+        case 10:
+            Multiplier = 176.79 / 100;
+            multiplier2 = 110.34 / 100;
+            defense = 371.08;
+            break;
+        case 11:
+            Multiplier = 186.61 / 100;
+            multiplier2 = 116.47 / 100;
+            defense = 391.7;
+            break;
+        case 12:
+            Multiplier = 196.43 / 100;
+            multiplier2 = 122.6 / 100;
+            defense = 412.32;
+            break;
+        case 13:
+            Multiplier = 208.71 / 100;
+            multiplier2 = 130.26 / 100;
+            defense = 438.09;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: false }
+    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    let hasPassive1 = false;
+    Character.currentBuffs.forEach(buff => {
+        if(buff.Type == "Headless of the Wind and Weather")
+        hasPassive1 = true;
+    });
+    if(hasPassive1){
+        Character.currentBuffs.push({Type:"DEF%",Value:25});
+    }
+    for (let index = 0; index < 6; index++) {
+        dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+        
+    }
+    
+   
+    return {dmg:dmg, atkBuff:defense};
 }

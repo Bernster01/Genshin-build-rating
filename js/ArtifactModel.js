@@ -60,6 +60,7 @@ const artifactSets ={
     ["Heart of Depth"]:{
         Type: "Heart of Depth",
         twoPiece:{Type:"HydroDMGBonus",Value:15},
+        fourPiece:{Type:"Heart of Depth",Value:null}
         
     },
     ["Lavawalker"]:{

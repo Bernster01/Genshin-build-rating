@@ -112,6 +112,7 @@ function solarIsotoma(Character) {
     dmg += dmg2;
     return dmg;
 }
+
 function explosivePuppet(Character) {
     let skillMultiplier = 0;
     switch (Character.elementalSkill.Level) {
@@ -159,6 +160,7 @@ function explosivePuppet(Character) {
     let dmg = dmgCalc(attack, Character, "ElementalSkill");
     return dmg * 3;
 }
+
 function letTheShowBegin(Character) {
     let contRegen = 0;
     let regenPerHit = 0;
@@ -2557,6 +2559,7 @@ function niwabiFireDance(Character) {
     Character.currentBuffs.push({ Type: "YoimiyaEBuff", Value: skillMultiplier });
     return 0;
 }
+
 function dominusLapidis(Character) {
     let skillMultiplier = 0;
     let holdDmg = 0;
@@ -2637,83 +2640,285 @@ function dominusLapidis(Character) {
     shield *= 1 + (Character.advancedstats.shieldStrength / 100);
     return { dmg: dmg, shield: shield };
 }
+
 function frozenWilds(Character) {
     let skillMultiplier = 0;
-    let holdDmg = 0;
-    let shield = 0;
+    let bomb = 0;
+    let buff = 0;
     switch (Character.elementalSkill.Level) {
         case 1:
-            skillMultiplier = 16 / 100;
-            holdDmg = 80 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1232;
+            skillMultiplier = 177.6 / 100;
+            bomb = 40 / 100;
+            buff = 29.23;
             break;
         case 2:
-            skillMultiplier = 17.2 / 100;
-            holdDmg = 86 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1355;
+            skillMultiplier = 190.92 / 100;
+            bomb = 43 / 100;
+            buff = 30.98;
             break;
         case 3:
-            skillMultiplier = 18.4 / 100;
-            holdDmg = 92 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1489;
+            skillMultiplier = 204.24 / 100;
+            bomb = 46 / 100;
+            buff = 32.73;
             break;
         case 4:
-            skillMultiplier = 20 / 100;
-            holdDmg = 100 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1633;
+            skillMultiplier = 222 / 100;
+            bomb = 50 / 100;
+            buff = 35;
             break;
         case 5:
-            skillMultiplier = 21.2 / 100;
-            holdDmg = 106 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1787;
+            skillMultiplier = 235.32 / 100;
+            bomb = 53 / 100;
+            buff = 36.75;
             break;
         case 6:
-            skillMultiplier = 22.4 / 100;
-            holdDmg = 112 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 1951;
+            skillMultiplier = 248.64 / 100;
+            bomb = 56 / 100;
+            buff = 38.5;
             break;
         case 7:
-            skillMultiplier = 24 / 100;
-            holdDmg = 120 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 2126;
+            skillMultiplier = 266.4 / 100;
+            bomb = 60 / 100;
+            buff = 40.77;
             break;
         case 8:
-            skillMultiplier = 25.6 / 100;
-            holdDmg = 128 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 2310;
+            skillMultiplier = 284.16 / 100;
+            bomb = 64 / 100;
+            buff = 43.05;
             break;
         case 9:
-            skillMultiplier = 27.2 / 100;
-            holdDmg = 136 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 2506;
+            skillMultiplier = 301.92 / 100;
+            bomb = 68 / 100;
+            buff = 45.32;
             break;
         case 10:
-            skillMultiplier = 28.8 / 100;
-            holdDmg = 144 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 2711;
+            skillMultiplier = 319.68 / 100;
+            bomb = 72 / 100;
+            buff = 47.6;
             break;
         case 11:
-            skillMultiplier = 30.4 / 100;
-            holdDmg = 152 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 2927;
+            skillMultiplier = 319.68 / 100;
+            bomb = 72 / 100;
+            buff = 47.6;
             break;
         case 12:
-            skillMultiplier = 32 / 100;
-            holdDmg = 160 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 3153;
+            skillMultiplier = 319.68 / 100;
+            bomb = 72 / 100;
+            buff = 47.6;
             break;
         case 13:
-            skillMultiplier = 34 / 100;
-            holdDmg = 170 / 100;
-            shield = (Character.HP() * (12.80 / 100)) + 3389;
+            skillMultiplier = 319.68 / 100;
+            bomb = 72 / 100;
+            buff = 47.6;
             break;
     }
-    let dmg = dmgCalc({ Multiplier: holdDmg, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }, Character, "ElementalSkill") * 3;
+    let dmg = dmgCalc({ Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }, Character, "ElementalSkill") * 3;
     for (let index = 0; index < 15; index++) {
-        dmgCalc({ Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }, Character, "ElementalSkill") * 3;
+        dmgCalc({ Multiplier: bomb, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: false }, Character, "ElementalSkill") * 3 * 6;
     }
+    Character.currentBuffs.push({Type:"NormalAttack", Value:buff});
+    return dmg;
+}
+
+function kyouka(Character) {
+    let skillMultiplier = 0;
+    let oneHit = 0;
+    let twoHit = 0;
+    let threeHit = 0;
+    let namisen = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 101.48 / 100;
+            oneHit = 52.89 / 100;
+            twoHit = 58.91 / 100;
+            threeHit = 64.93 / 100;
+            namisen = 0.56;
+            break;
+        case 2:
+            skillMultiplier = 109.74 / 100;
+            oneHit = 57.19 / 100;
+            twoHit = 63.7 / 100;
+            threeHit = 70.22 / 100;
+            namisen = 0.61;
+            break;
+        case 3:
+            skillMultiplier = 118 / 100;
+            oneHit = 61.5 / 100;
+            twoHit = 68.5 / 100;
+            threeHit = 75.5 / 100;
+            namisen = 0.65;
+            break;
+        case 4:
+            skillMultiplier = 129.8 / 100;
+            oneHit = 67.65 / 100;
+            twoHit = 75.35 / 100;
+            threeHit = 83.05 / 100;
+            namisen = 0.72;
+            break;
+        case 5:
+            skillMultiplier = 138.06 / 100;
+            oneHit = 71.95 / 100;
+            twoHit = 80.14 / 100;
+            threeHit = 88.33 / 100;
+            namisen = 0.76;
+            break;
+        case 6:
+            skillMultiplier = 147.5 / 100;
+            oneHit = 76.88 / 100;
+            twoHit = 85.63 / 100;
+            threeHit = 94.38 / 100;
+            namisen = 0.82;
+            break;
+        case 7:
+            skillMultiplier = 160.48 / 100;
+            oneHit = 83.64 / 100;
+            twoHit = 93.16 / 100;
+            threeHit = 102.68 / 100;
+            namisen = 0.89;
+            break;
+        case 8:
+            skillMultiplier = 173.46 / 100;
+            oneHit = 90.41 / 100;
+            twoHit = 100.7 / 100;
+            threeHit = 110.98 / 100;
+            namisen = 0.96;
+            break;
+        case 9:
+            skillMultiplier = 186.44 / 100;
+            oneHit = 97.17 / 100;
+            twoHit = 108.23 / 100;
+            threeHit = 119.29 / 100;
+            namisen = 1.03;
+            break;
+        case 10:
+            skillMultiplier = 200.6 / 100;
+            oneHit = 104.55 / 100;
+            twoHit = 116.45 / 100;
+            threeHit = 128.35 / 100;
+            namisen = 1.11;
+            break;
+        case 11:
+            skillMultiplier = 214.76 / 100;
+            oneHit = 111.93 / 100;
+            twoHit = 124.67 / 100;
+            threeHit = 137.41 / 100;
+            namisen = 1.19;
+            break;
+        case 12:
+            skillMultiplier = 228.92 / 100;
+            oneHit = 119.31 / 100;
+            twoHit = 132.89 / 100;
+            threeHit = 146.47 / 100;
+            namisen = 1.27;
+            break;
+        case 13:
+            skillMultiplier = 243.08 / 100;
+            oneHit = 126.69 / 100;
+            twoHit = 141.11 / 100;
+            threeHit = 155.53 / 100;
+            namisen = 1.34;
+            break;
+    }
+    let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    let namisenStacks = 0;
+    let hasPassive = false;
+    
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Mine Wo Matoishi Kiyoyaki") {
+            hasPassive = true;
+        }
+
+    });
+    if(hasPassive){
+        namisenStacks = 4;
+        for (let index = 0; index < 15; index++) {
+            switch(index % 3){
+                case 0:
+                    attack.isReaction = true;
+                    attack.Multiplier = oneHit * ((namisen * namisenStacks)*Character.HP());
+                    break;
+                case 1:
+                    attack.isReaction = false;
+                    attack.Multiplier = twoHit * ((namisen * namisenStacks)*Character.HP());
+                    break;
+                case 2:
+                    attack.isReaction = false;
+                    attack.Multiplier = threeHit * ((namisen * namisenStacks)*Character.HP());
+                    break;
+
+            }
+            dmg += dmgCalc(attack, Character, "NormalAttack") * 3 ;
+        }
+    }else{
+
+    }
+    
 
 
-    shield *= 1 + (Character.advancedstats.shieldStrength / 100);
-    return { dmg: dmg, shield: shield };
+
+    return dmg;
+}
+
+function inuzakaAllRoundDefense(Character) {
+    let skillMultiplier = 0;
+    let defense = 0;
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            skillMultiplier = 107.2 / 100;
+            defense = 206.16;
+            break;
+        case 2:
+            skillMultiplier = 115.24 / 100;
+            defense = 221.62;
+            break;
+        case 3:
+            skillMultiplier = 123.28 / 100;
+            defense = 237.08;
+            break;
+        case 4:
+            skillMultiplier = 134 / 100;
+            defense = 257.7;
+            break;
+        case 5:
+            skillMultiplier = 142.04 / 100;
+            defense = 273.16;
+            break;
+        case 6:
+            skillMultiplier = 150.08 / 100;
+            defense = 288.62;
+            break;
+        case 7:
+            skillMultiplier = 160.8 / 100;
+            defense = 309.24;
+            break;
+        case 8:
+            skillMultiplier = 171.52 / 100;
+            defense = 329.25;
+            break;
+        case 9:
+            skillMultiplier = 182.24 / 100;
+            defense = 350.47;
+            break;
+        case 10:
+            skillMultiplier = 192.96 / 100;
+            defense = 371.08;
+            break;
+        case 11:
+            skillMultiplier = 203.68 / 100;
+            defense = 391.7;
+            break;
+        case 12:
+            skillMultiplier = 214.4 / 100;
+            defense = 412.32;
+            break;
+        case 13:
+            skillMultiplier = 227.8 / 100;
+            defense = 438.09;
+            break;
+    }
+    let dmg = dmgCalc({ Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }, Character, "ElementalSkill") * 3;
+    Character.currentBuffs.push({Type:"DEFflat", Value:defense});
+    Character.advancedstats.elementalBonuses[6].Value += 15;
+    return {dmg:dmg,atkBuff:defense};
 }
