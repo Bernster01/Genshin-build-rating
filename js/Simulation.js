@@ -13,18 +13,20 @@ let crimsonWitchStacks = 0;
 let grimheartStack = 0;
 let superconductRes = false;
 let vvActive = false;
-function reset(){
+let saraBuff = false;
+let shenheCounter = 0;
+function reset() {
     bestDMG = 0;
     bestSupportScore = 0;
 }
-function validateAllCharacters(){
+function validateAllCharacters() {
     //Goes through all characters and validates them
     AllCharacters.index.forEach(character => {
         console.log(character);
         reset();
         let result = FindBestBuild(AllCharacters[character], 100);
-        if(result!=null || result!=undefined){
-            console.log(character+" Succeded");
+        if (result != null || result != undefined) {
+            console.log(character + " Succeded");
         }
     });
     console.log("ALL SUCCEDED");
@@ -56,14 +58,19 @@ function compareCharacters(usersCharacter) {
     else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
             if (simulatedCharacter.supportType2 == "Healer") {
-                userScore = ((result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1)) * bonsuMultiplier;
+                userScore = ((result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.05)) * bonsuMultiplier;
+
+                console.log("User: " + userScore, "Best score: " + result[0])
+            }
+            else if(simulatedCharacter.supportType2 == "Shield"){
+                userScore = ((result2.attackBuff * 2) + (result2.shield * 0.95) + (result2.dmg * 0.05)) * bonsuMultiplier;
 
                 console.log("User: " + userScore, "Best score: " + result[0])
             }
 
         }
         else {
-            userScore = ((result2.attackBuff * 2) + (result2.dmg * 0.1)) * bonsuMultiplier;
+            userScore = ((result2.attackBuff * 10) + (result2.dmg * 0.1)) * bonsuMultiplier;
             console.log("User: " + userScore, "Best score: " + result[0])
         }
         return `${Math.floor((userScore / result[0]) * 100)}/100`;
@@ -174,7 +181,7 @@ function FindBestBuild(baseChar, times) {
             else if (character.supportType == "ATKBooster" && role == "Support") {
                 if (character.supportType2 != undefined) {
                     if (character.supportType2 == "Healer") {
-                        score = ((result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.1)) * bonsuMultiplier;
+                        score = ((result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.05)) * bonsuMultiplier;
                         if (score > bestSupportScore) {
                             currentBestArtifacts = newCharacter.artifacts;
                             bestArtifacts = newCharacter.artifacts;
@@ -185,9 +192,22 @@ function FindBestBuild(baseChar, times) {
                             indexForBetterDmg.push(newObj);
                         }
                     }
+                    else if(character.supportType2 == "Shield"){
+                        score = ((result.attackBuff * 2) + (result.shield * 0.95) + (result.dmg * 0.05)) * bonsuMultiplier;
+                        if (score > bestSupportScore) {
+                            currentBestArtifacts = newCharacter.artifacts;
+                            bestArtifacts = newCharacter.artifacts;
+                            bestSupportScore = score;
+                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
+                            charac = char;
+                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
+                            indexForBetterDmg.push(newObj);
+                        }
+                    
+                    }
                 }
                 else {
-                    score = ((result.attackBuff * 2) + (result.dmg * 0.1)) * bonsuMultiplier;
+                    score = ((result.attackBuff * 10) + (result.dmg * 0.1)) * bonsuMultiplier;
                     if (score > bestSupportScore) {
                         currentBestArtifacts = newCharacter.artifacts;
                         bestArtifacts = newCharacter.artifacts;
@@ -843,6 +863,8 @@ function resetVariables() {
     grimheartStack = 0;
     superconductRes = false;
     vvActive = false;
+    saraBuff = false;
+    shenheCounter = 0;
 }
 function Simulation(character) {
 
@@ -908,6 +930,18 @@ function Simulation(character) {
                         attackAction.Scaling = Character.chargedAttack.scaling;
 
                         type = "ChargedAttack";
+                        if (Character.name == "Sara") {
+                            if (!saraBuff) {
+                                let value = 0;
+                                Character.currentBuffs.forEach(buff => {
+                                    if (buff.name == "TenguAmbush") {
+                                        value = buff.value;
+                                    }
+                                });
+                                Character.currentBuffs.push({ Type: "ATKflat", Value: value });
+                                saraBuff = true;
+                            }
+                        }
                         break;
 
                     case "P":
@@ -916,6 +950,9 @@ function Simulation(character) {
                         attackAction.isReaction = Character.plungeAttack.isReaction;
                         attackAction.Scaling = Character.plungeAttack.scaling;
                         type = "PlungeAttack";
+                        if (Character.name == "Itto") {
+                            type = "ChargedAttack";
+                        }
                         break;
                 }
                 if (Character.name == "Ganyu") {
@@ -1049,13 +1086,13 @@ function Simulation(character) {
                         HoD = true;
                     }
                 });
-                if(HoD){
-                Character.currentBuffs.push({ Type:"NormalAttack", Value: 30});
-                Character.currentBuffs.push({ Type:"ChargedAttack", Value: 30});
+                if (HoD) {
+                    Character.currentBuffs.push({ Type: "NormalAttack", Value: 30 });
+                    Character.currentBuffs.push({ Type: "ChargedAttack", Value: 30 });
                 }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
-                        Character.currentBuffs.push({ Type: "ElementalSkill",Value: 32 });
+                        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32 });
                         Character.advancedstats.critRate += 12;
                         break;
 
@@ -1070,21 +1107,27 @@ function Simulation(character) {
                             }
                         });
                         if (!hasOathBuff) {
-                        Character.currentBuffs.push({Type:"EnergyRecharge",Value:48,Source:"Oathsworn Eye"});
+                            Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 48, Source: "Oathsworn Eye" });
                         }
                         break;
-                    case "Kagura's Verity":
-                        let totalBuffs = 0;
-                        Character.currentBuffs.forEach(buff => {
-                            if (buff.Source == "Kagura's Verity") {
-                                totalBuffs ++;
-                            }
-                        })
-                        if(totalBuffs<3){
-                            Character.currentBuffs.push({Type:"ElementalSkill",Value:12, Source:"Kagura's Verity"});
+                    case "Kaguras Verity":
+                        if (Character.name != "Yae Miko") {
+                            let totalBuffs = 0;
+                            Character.currentBuffs.forEach(buff => {
+                                if (buff.Source == "Kagura's Verity") {
+                                    totalBuffs++;
+                                }
+                            })
+                            if (totalBuffs < 3) {
+                                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 12, Source: "Kagura's Verity" });
 
-                        }else if(totalBuffs==3){
-                            Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:12});
+                            } else if (totalBuffs == 3) {
+                                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 12 });
+                            }
+                        } else {
+
+                            Character.currentBuffs.push({ Type: "ElementalSkill", Value: 36, Source: "Kagura's Verity" });
+                            Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 12, Source: "Kagura's Verity" });
                         }
                         break;
                     case "Haran Geppaku Futsu":
@@ -1095,7 +1138,7 @@ function Simulation(character) {
                             }
                         });
                         if (!hasHaranBuff) {
-                        Character.currentBuffs.push({Type:"NormalAttack",Value:40,Source:"Haran Geppaku Futsu"});
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "Haran Geppaku Futsu" });
                         }
                         break;
                 }
@@ -1117,7 +1160,7 @@ function Simulation(character) {
                 else {
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
-                    
+
                 }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
@@ -1150,7 +1193,7 @@ function Simulation(character) {
                 }
                 else {
 
-                    
+
                     switch (Character.weapon.name) {
                         case "The Catch":
                             Character.advancedstats.critRate += 12;
@@ -1179,7 +1222,7 @@ function Simulation(character) {
                         energyMultiplier = 1;
                     qDmg *= energyMultiplier;
                     totalDmg += qDmg;
-                   
+
                 }
                 break;
 
@@ -1194,7 +1237,7 @@ function Simulation(character) {
     }
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
-    bonusMultiplier = 2;
+        bonusMultiplier = 2;
     return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield };
 
 }
@@ -1207,7 +1250,7 @@ function dmgCalc(attackAction, Character, type) {
             }
             Character.currentBuffs.push({ Type: "ATK%", Value: atkIncrease });
             break;
-       
+
     }
     switch (Character.name) {
         case "Mona":
@@ -1217,6 +1260,15 @@ function dmgCalc(attackAction, Character, type) {
                 }
             })
 
+            break;
+        case "Raiden":
+            Character.currentBuffs.forEach(buff => {
+                if (buff.Type == "Enlightened Destiny") {
+                    Character.advancedstats.elementalBonuses[3].Value += (Character.advancedstats.energyRecharge - 100) * 0.3;
+                }
+
+
+            });
             break;
     }
 
@@ -1245,6 +1297,15 @@ function dmgCalc(attackAction, Character, type) {
                     Character.advancedstats.elementalBonuses[1].Value -= Character.advancedstats.energyRecharge * 0.2;
                 }
             })
+            break;
+        case "Raiden":
+            Character.currentBuffs.forEach(buff => {
+                if (buff.Type == "Enlightened Destiny") {
+                    Character.advancedstats.elementalBonuses[3].Value -= (Character.advancedstats.energyRecharge - 100) * 0.3;
+                }
+
+
+            });
             break;
     }
     return dmg;
@@ -1303,9 +1364,9 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Gorou":
-            
-            if(attackAction.action == "ElementalSkill" || attackAction.action == "ElementalBurst"){
-               
+
+            if (attackAction.action == "ElementalSkill" || attackAction.action == "ElementalBurst") {
+
                 let HotWaW = false;
                 let AFR = false;
                 character.currentBuffs.forEach(buff => {
@@ -1315,27 +1376,102 @@ function getFlatDamage(character, attackAction) {
                     else if (buff.Type == "A Favor Repaid") {
                         AFR = true;
                     }
-                        
+
                 })
                 switch (attackAction.action) {
                     case "ElementalSkill":
-                        if(HotWaW){
+                        if (HotWaW) {
                             flatDamage += character.DEF() * 1.56;
                         }
                         break;
                     case "ElementalBurst":
-                        if(AFR){
+                        if (AFR) {
                             flatDamage += character.DEF() * 0.156;
                         }
                         break;
                 }
             }
             break;
+        case "Itto":
+            let hasBloodPassive = false;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Type == "Bloodline of the Crimson Oni") {
+                    hasBloodPassive = true;
+                }
+            });
+            if (hasBloodPassive) {
+                switch (attackAction.action) {
+                    case "ChargedAttack":
+                        flatDamage += character.DEF() * 0.35;
+                        break;
+                }
+            }
+            break;
+        case "Kokomi":
+            let hasSongofPearl = false;
+            let kokomiBonusMultipler = 1;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Type == "Song of the Pearl") {
+                    hasSongofPearl = true;
+                }
+            });
+            if (hasSongofPearl) {
+                kokomiBonusMultipler = 1 + (character.advancedstats.healingBonus * 0.15);
+            }
+            switch (attackAction.action) {
+                case "NormalAttack":
+                    character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "KokomiNormal") {
+                            flatDamage += (buff.Value * character.HP()) * kokomiBonusMultipler;
+                        }
+                    });
+                    break;
+                case "ChargedAttack":
+                    character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "KokomiCharged") {
+                            flatDamage += (buff.Value * character.HP()) * kokomiBonusMultipler;
+                        }
+                    });
+                    break;
+                case "ElementalSkill":
+                    character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "KokomiBake") {
+                            flatDamage += (buff.Value * character.HP()) * kokomiBonusMultipler;
+                        }
+                    });
+                    break;
+            }
+
+            break;
+        case "Shenhe":
+            if (attackAction.Element == "CryoDMGBonus") {
+                if (shenheCounter < 5) {
+                    character.currentBuffs.forEach(buff => {
+                        if (buff.Type == "ShenheBuff") {
+
+                            flatDamage += buff.Value;
+                            shenheCounter++;
+                        }
+                    });
+                }
+            }
+            break;
+        case "Yun Jin":
+            if (attackAction.action == "NormalAttack") {
+                character.currentBuffs.forEach(buff => {
+                    if (buff.Type == "YunJinBuff") {
+
+                        flatDamage += buff.Value;
+                    }
+                });
+
+            }
+            break;
     }
     //Weapon buffs
     switch (character.weapon.name) {
         case "Cinnabar Spindle":
-            if(attackAction.type == "ElementaSkill"){
+            if (attackAction.type == "ElementaSkill") {
                 flatDamage += character.DEF() * 0.8;
             }
             break;
@@ -1345,21 +1481,22 @@ function getFlatDamage(character, attackAction) {
         case "Redhorn Stonethresher":
             if (attackAction.type != "ElementaSkill" && attackAction.Type != "ElementaBurst" && attackAction.Type != "P" && attackAction.Type != undefined)
                 flatDamage += character.DEF() * 0.40;
-                break;
+            break;
     }
     return flatDamage;
 }
 function getDamageBonus(character, attackAction, type) {
     let bonus = 1;
-    if(attackAction.action == "ElementalBurst"){
-    character.currentBuffs.forEach(buff => {
-        if (buff.Type == "Emblem") {
-            let multiplier = character.advancedstats.energyRecharge * 0.25;
-            if (multiplier > 75)
-                multiplier = 75;
+    if (attackAction.action == "ElementalBurst") {
+        character.currentBuffs.forEach(buff => {
+            if (buff.Type == "Emblem") {
+                let multiplier = character.advancedstats.energyRecharge * 0.25;
+                if (multiplier > 75)
+                    multiplier = 75;
                 bonus += multiplier;
-        }
-    })}
+            }
+        })
+    }
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "AddativeBonusDMG") {
 
@@ -1380,7 +1517,6 @@ function getDamageBonus(character, attackAction, type) {
     }
     character.currentBuffs.forEach(buff => {
         if (type == buff.Type) {
-
             bonus += (buff.Value / 100);
 
         }
@@ -1395,20 +1531,23 @@ function getDamageBonus(character, attackAction, type) {
 
 }
 function getCrit(character) {
-    let bonusCritRate = 0;
-    if (character.name == "Ganyu") {
-        character.currentBuffs.forEach(buff => {
-            if (buff.Source == "Undivided Heart") {
-                bonusCritRate += buff.Value;
-            }
-        });
-    }
-    if (character.critRate() + bonusCritRate > 100) {
+    if (character.critRate() >= 0) {
+        let bonusCritRate = 0;
+        if (character.name == "Ganyu") {
+            character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Undivided Heart") {
+                    bonusCritRate += buff.Value;
+                }
+            });
+        }
+        if (character.critRate() + bonusCritRate > 100) {
 
-        bonusCritRate -= character.critRate() + bonusCritRate - 100;
+            bonusCritRate -= character.critRate() + bonusCritRate - 100;
+        }
+        return (1 + (((character.critRate() + bonusCritRate) / 100) * (character.critDMG() / 100)));
+    } else {
+        return 1;
     }
-    return (1 + (((character.critRate() + bonusCritRate) / 100) * (character.critDMG() / 100)));
-
 }
 function defCalc(character) {
     let defReduction = 0;

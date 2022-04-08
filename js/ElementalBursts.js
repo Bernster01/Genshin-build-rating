@@ -1106,8 +1106,8 @@ function kazuhaSlash(Character) {
         attack.Element = supportingElement;
         dmg += dmgCalc(attack, Character, "ElementalBurst") * 5 * 3;
     }
-    
-    return {dmg:dmg};
+
+    return { dmg: dmg };
 }
 
 function starwardSword(Character) {
@@ -1181,27 +1181,27 @@ function starwardSword(Character) {
             finalDMG = 401.2 / 100;
             break;
     }
-    Character.currentBuffs.forEach(buff =>{
-        if(buff.Type == "Aristocratic Dignity"){
-            Character.currentBuffs.push({Type:"CritRate",Value:15});
-             Character.advancedstats.energyRecharge += 20;
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Aristocratic Dignity") {
+            Character.currentBuffs.push({ Type: "CritRate", Value: 15 });
+            Character.advancedstats.energyRecharge += 20;
         }
     });
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = slashDMG;
-    for (let index = 1; index <=8; index++) {
-        if(index % 3 == 0){
+    for (let index = 1; index <= 8; index++) {
+        if (index % 3 == 0) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
         }
-        dmg+= dmgCalc(attack,Character,"ElementalBurst") * 3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     }
     attack.Multiplier = finalDMG;
     attack.isReaction = true;
-    dmg += dmgCalc(attack,Character,"ElementalBurst") * 3;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
 
     return dmg;
 }
@@ -1249,10 +1249,10 @@ function baneOfAllEvil(Character) {
             Multiplier = 113;
             break;
     }
-    
-    Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:Multiplier});
-    if(Character.hasBuffOfType("Conqueror of Evil: Tamer of Demons")){
-        Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:15});
+
+    Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: Multiplier });
+    if (Character.hasBuffOfType("Conqueror of Evil: Tamer of Demons")) {
+        Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 15 });
     }
 
     return 0;
@@ -1262,57 +1262,57 @@ function sparksnSplash(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 42.64/100;
+            Multiplier = 42.64 / 100;
             break;
         case 2:
-            Multiplier = 45.84/100;
+            Multiplier = 45.84 / 100;
             break;
         case 3:
-            Multiplier = 49.04/100;
+            Multiplier = 49.04 / 100;
             break;
         case 4:
-            Multiplier = 53.3/100;
+            Multiplier = 53.3 / 100;
             break;
         case 5:
-            Multiplier = 56.5/100;
+            Multiplier = 56.5 / 100;
             break;
         case 6:
-            Multiplier = 59.7/100;
+            Multiplier = 59.7 / 100;
             break;
         case 7:
-            Multiplier = 63.96/100;
+            Multiplier = 63.96 / 100;
             break;
         case 8:
-            Multiplier = 68.22/100;
+            Multiplier = 68.22 / 100;
             break;
         case 9:
-            Multiplier = 72.49/100;
+            Multiplier = 72.49 / 100;
             break;
         case 10:
-            Multiplier = 76.75/100;
+            Multiplier = 76.75 / 100;
             break;
         case 11:
-            Multiplier = 81.02/100;
+            Multiplier = 81.02 / 100;
             break;
         case 12:
-            Multiplier = 85.28/100;
+            Multiplier = 85.28 / 100;
             break;
         case 13:
-            Multiplier = 90.61/100;
+            Multiplier = 90.61 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = 0;
     for (let index = 1; index <= 24; index++) {
-        if(index%3==0){
+        if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
-        else{
+        else {
             attack.isReaction = false;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
-        
+
     }
     return dmg;
 }
@@ -1321,48 +1321,48 @@ function lightningRose(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 36.56/100;
+            Multiplier = 36.56 / 100;
             break;
         case 2:
-            Multiplier = 39.3/100;
+            Multiplier = 39.3 / 100;
             break;
         case 3:
-            Multiplier = 42.04/100;
+            Multiplier = 42.04 / 100;
             break;
         case 4:
-            Multiplier = 45.7/100;
+            Multiplier = 45.7 / 100;
             break;
         case 5:
-            Multiplier = 48.44/100;
+            Multiplier = 48.44 / 100;
             break;
         case 6:
-            Multiplier = 51.18/100;
+            Multiplier = 51.18 / 100;
             break;
         case 7:
-            Multiplier = 54.84/100;
+            Multiplier = 54.84 / 100;
             break;
         case 8:
-            Multiplier = 58.5/100;
+            Multiplier = 58.5 / 100;
             break;
         case 9:
-            Multiplier = 62.15/100;
+            Multiplier = 62.15 / 100;
             break;
         case 10:
-            Multiplier = 65.81/100;
+            Multiplier = 65.81 / 100;
             break;
         case 11:
-            Multiplier = 69.46/100;
+            Multiplier = 69.46 / 100;
             break;
         case 12:
-            Multiplier = 73.12/100;
+            Multiplier = 73.12 / 100;
             break;
         case 13:
-            Multiplier = 77.69/100;
+            Multiplier = 77.69 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
-    Character.currentBuffs.push({Type: "defReduction",Value: 15});
+    Character.currentBuffs.push({ Type: "defReduction", Value: 15 });
     dmg += dmgCalc(attack, Character, "ElementalBurst") * 29;
     return dmg;
 }
@@ -1416,7 +1416,7 @@ function stellarisPhantasm(Character) {
             dmgBonus = 60;
             break;
         case 12:
-            Multiplier = 884.8/ 100;
+            Multiplier = 884.8 / 100;
             dmgBonus = 60;
             break;
         case 13:
@@ -1424,7 +1424,7 @@ function stellarisPhantasm(Character) {
             dmgBonus = 60;
             break;
     }
-    Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:dmgBonus});
+    Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: dmgBonus });
     let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true };
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     return dmg;
@@ -1434,43 +1434,43 @@ function starshatter(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 86.96/100;
+            Multiplier = 86.96 / 100;
             break;
         case 2:
-            Multiplier = 93.48/100;
+            Multiplier = 93.48 / 100;
             break;
         case 3:
-            Multiplier = 100/100;
+            Multiplier = 100 / 100;
             break;
         case 4:
-            Multiplier = 108.7/100;
+            Multiplier = 108.7 / 100;
             break;
         case 5:
-            Multiplier = 115.22/100;
+            Multiplier = 115.22 / 100;
             break;
         case 6:
-            Multiplier = 121.74/100;
+            Multiplier = 121.74 / 100;
             break;
         case 7:
-            Multiplier = 130.44/100;
+            Multiplier = 130.44 / 100;
             break;
         case 8:
-            Multiplier = 139.14/100;
+            Multiplier = 139.14 / 100;
             break;
         case 9:
-            Multiplier = 147.83/100;
+            Multiplier = 147.83 / 100;
             break;
         case 10:
-            Multiplier = 156.53/100;
+            Multiplier = 156.53 / 100;
             break;
         case 11:
-            Multiplier = 165.22/100;
+            Multiplier = 165.22 / 100;
             break;
         case 12:
-            Multiplier = 173.92/100;
+            Multiplier = 173.92 / 100;
             break;
         case 13:
-            Multiplier = 184.79/100;
+            Multiplier = 184.79 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
@@ -1484,78 +1484,78 @@ function sweepingTime(Character) {
     let atkBonus = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 67.2/100;
-            Multipler2 = 92.8/100;
-            atkBonus = Character.DEF()*0.40;
+            Multiplier = 67.2 / 100;
+            Multipler2 = 92.8 / 100;
+            atkBonus = Character.DEF() * 0.40;
             break;
         case 2:
-            Multiplier = 72.24/100;
-            Multipler2 = 99.76/100;
-            atkBonus = Character.DEF()*0.43;
+            Multiplier = 72.24 / 100;
+            Multipler2 = 99.76 / 100;
+            atkBonus = Character.DEF() * 0.43;
             break;
         case 3:
-            Multiplier = 77.28/100;
-            Multipler2 = 106.72/100;
-            atkBonus = Character.DEF()*0.46;
+            Multiplier = 77.28 / 100;
+            Multipler2 = 106.72 / 100;
+            atkBonus = Character.DEF() * 0.46;
             break;
         case 4:
-            Multiplier = 84/100;
-            Multipler2 = 116/100;
-            atkBonus = Character.DEF()*0.50;
+            Multiplier = 84 / 100;
+            Multipler2 = 116 / 100;
+            atkBonus = Character.DEF() * 0.50;
             break;
         case 5:
-            Multiplier = 89.04/100;
-            Multipler2 = 122.96/100;
-            atkBonus = Character.DEF()*0.53;
+            Multiplier = 89.04 / 100;
+            Multipler2 = 122.96 / 100;
+            atkBonus = Character.DEF() * 0.53;
             break;
         case 6:
-            Multiplier = 94.08/100;
-            Multipler2 = 129.92/100;
-            atkBonus = Character.DEF()*0.56;
+            Multiplier = 94.08 / 100;
+            Multipler2 = 129.92 / 100;
+            atkBonus = Character.DEF() * 0.56;
             break;
         case 7:
-            Multiplier = 100.8/100;
-            Multipler2 = 139.2/100;
-            atkBonus = Character.DEF()*0.60;
+            Multiplier = 100.8 / 100;
+            Multipler2 = 139.2 / 100;
+            atkBonus = Character.DEF() * 0.60;
             break;
         case 8:
-            Multiplier = 107.52/100;
-            Multipler2 = 148.48/100;
-            atkBonus = Character.DEF()*0.64;
+            Multiplier = 107.52 / 100;
+            Multipler2 = 148.48 / 100;
+            atkBonus = Character.DEF() * 0.64;
             break;
         case 9:
-            Multiplier = 114.24/100;
-            Multipler2 = 157.76/100;
-            atkBonus = Character.DEF()*0.68;
+            Multiplier = 114.24 / 100;
+            Multipler2 = 157.76 / 100;
+            atkBonus = Character.DEF() * 0.68;
             break;
         case 10:
-            Multiplier = 120.96/100;
-            Multipler2 = 167.04/100;
-            atkBonus = Character.DEF()*0.72;
+            Multiplier = 120.96 / 100;
+            Multipler2 = 167.04 / 100;
+            atkBonus = Character.DEF() * 0.72;
             break;
         case 11:
-            Multiplier = 127.68/100;
-            Multipler2 = 176.32/100;
-            atkBonus = Character.DEF()*0.76;
+            Multiplier = 127.68 / 100;
+            Multipler2 = 176.32 / 100;
+            atkBonus = Character.DEF() * 0.76;
             break;
         case 12:
-            Multiplier = 134.4/100;
-            Multipler2 = 185.6/100;
-            atkBonus = Character.DEF()*0.80;
+            Multiplier = 134.4 / 100;
+            Multipler2 = 185.6 / 100;
+            atkBonus = Character.DEF() * 0.80;
             break;
         case 13:
-            Multiplier = 142.8/100;
-            Multipler2 = 197.2/100;
-            atkBonus = Character.DEF()*0.85;
+            Multiplier = 142.8 / 100;
+            Multipler2 = 197.2 / 100;
+            atkBonus = Character.DEF() * 0.85;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.isReaction = false;
     attack.Multiplier = Multipler2;
-    
-    dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
-    Character.currentBuffs.push({Type:"ATKflat",Value:atkBonus});
+
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+    Character.currentBuffs.push({ Type: "ATKflat", Value: atkBonus });
     Character.normalAttack1.element = "GeoDMGBonus";
     Character.normalAttack2.element = "GeoDMGBonus";
     Character.normalAttack3.element = "GeoDMGBonus";
@@ -1568,62 +1568,62 @@ function preserverofFortune(Character) {
     let Multipler2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 284.8/100;
-            Multipler2 = Character.attack()*(90/100)+577.33;
+            Multiplier = 284.8 / 100;
+            Multipler2 = Character.attack() * (90 / 100) + 577.33;
             break;
         case 2:
             Multiplier = 306.16100;
-            Multipler2 = Character.attack()*(96.75/100)+635.08;
+            Multipler2 = Character.attack() * (96.75 / 100) + 635.08;
             break;
         case 3:
-            Multiplier = 327.52/100;
-            Multipler2 = Character.attack()*(103.5/100)+697.63;
+            Multiplier = 327.52 / 100;
+            Multipler2 = Character.attack() * (103.5 / 100) + 697.63;
             break;
         case 4:
-            Multiplier = 356/100;
-            Multipler2 = Character.attack()*(112.5/100)+765;
+            Multiplier = 356 / 100;
+            Multipler2 = Character.attack() * (112.5 / 100) + 765;
             break;
         case 5:
-            Multiplier = 377.36/100;
-            Multipler2 = Character.attack()*(119.25/100)+837.17;
+            Multiplier = 377.36 / 100;
+            Multipler2 = Character.attack() * (119.25 / 100) + 837.17;
             break;
         case 6:
-            Multiplier = 398.72/100;
-            Multipler2 = Character.attack()*(126/100)+914.16;
+            Multiplier = 398.72 / 100;
+            Multipler2 = Character.attack() * (126 / 100) + 914.16;
             break;
         case 7:
-            Multiplier = 427.2/100;
-            Multipler2 = Character.attack()*(135/100)+995.96;
+            Multiplier = 427.2 / 100;
+            Multipler2 = Character.attack() * (135 / 100) + 995.96;
             break;
         case 8:
-            Multiplier = 455.68/100;
-            Multipler2 = Character.attack()*(144/100)+1082;
+            Multiplier = 455.68 / 100;
+            Multipler2 = Character.attack() * (144 / 100) + 1082;
             break;
         case 9:
-            Multiplier = 484.16/100;
-            Multipler2 = Character.attack()*(153/100)+1174;
+            Multiplier = 484.16 / 100;
+            Multipler2 = Character.attack() * (153 / 100) + 1174;
             break;
         case 10:
-            Multiplier = 512.64/100;
-            Multipler2 = Character.attack()*(162/100)+1270;
+            Multiplier = 512.64 / 100;
+            Multipler2 = Character.attack() * (162 / 100) + 1270;
             break;
         case 11:
-            Multiplier = 541.12/100;
-            Multipler2 = Character.attack()*(171/100)+1371;
+            Multiplier = 541.12 / 100;
+            Multipler2 = Character.attack() * (171 / 100) + 1371;
             break;
         case 12:
-            Multiplier = 569.6/100;
-            Multipler2 = Character.attack()*(180/100)+1477;
+            Multiplier = 569.6 / 100;
+            Multipler2 = Character.attack() * (180 / 100) + 1477;
             break;
         case 13:
-            Multiplier = 605.2/100;
-            Multipler2 = Character.attack()*(191.25/100)+1587;
+            Multiplier = 605.2 / 100;
+            Multipler2 = Character.attack() * (191.25 / 100) + 1587;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
-    let heal = Multipler2 * 11*(1+(Character.advancedstats.healingBonus/100));
-    return {dmg:dmg,healing:heal};
+    let heal = Multipler2 * 11 * (1 + (Character.advancedstats.healingBonus / 100));
+    return { dmg: dmg, healing: heal };
 }
 
 function lightningFang(Character) {
@@ -1631,67 +1631,67 @@ function lightningFang(Character) {
     let Multipler2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 160/100;
-            Multipler2 = 24/100;
+            Multiplier = 160 / 100;
+            Multipler2 = 24 / 100;
             break;
         case 2:
-            Multiplier = 172/100;
-            Multipler2 = 25.8/100;
+            Multiplier = 172 / 100;
+            Multipler2 = 25.8 / 100;
             break;
         case 3:
-            Multiplier = 184/100;
-            Multipler2 = 27.6/100;
+            Multiplier = 184 / 100;
+            Multipler2 = 27.6 / 100;
             break;
         case 4:
-            Multiplier = 200/100;
-            Multipler2 = 30/100;
+            Multiplier = 200 / 100;
+            Multipler2 = 30 / 100;
             break;
         case 5:
-            Multiplier = 212/100;
-            Multipler2 = 31.8/100;
+            Multiplier = 212 / 100;
+            Multipler2 = 31.8 / 100;
             break;
         case 6:
-            Multiplier = 224/100;
-            Multipler2 = 33.6/100;
+            Multiplier = 224 / 100;
+            Multipler2 = 33.6 / 100;
             break;
         case 7:
-            Multiplier = 240/100;
-            Multipler2 = 36/100;
+            Multiplier = 240 / 100;
+            Multipler2 = 36 / 100;
             break;
         case 8:
-            Multiplier = 256/100;
-            Multipler2 = 38.4/100;
+            Multiplier = 256 / 100;
+            Multipler2 = 38.4 / 100;
             break;
         case 9:
-            Multiplier = 272/100;
-            Multipler2 = 40.8/100;
+            Multiplier = 272 / 100;
+            Multipler2 = 40.8 / 100;
             break;
         case 10:
-            Multiplier = 288/100;
-            Multipler2 = 43.2/100;
+            Multiplier = 288 / 100;
+            Multipler2 = 43.2 / 100;
             break;
         case 11:
-            Multiplier = 304/100;
-            Multipler2 = 45.6/100;
+            Multiplier = 304 / 100;
+            Multipler2 = 45.6 / 100;
             break;
         case 12:
-            Multiplier = 320/100;
-            Multipler2 = 48/100;
+            Multiplier = 320 / 100;
+            Multipler2 = 48 / 100;
             break;
         case 13:
-            Multiplier = 340/100;
-            Multipler2 = 51/100;
+            Multiplier = 340 / 100;
+            Multipler2 = 51 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 12 ; index++) {
-        if(index % 3 == 0){
+    for (let index = 0; index < 12; index++) {
+        if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
-        else{
+        else {
             attack.isReaction = false;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
@@ -1704,67 +1704,67 @@ function ritesofTermination(Character) {
     let Multipler2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = (104+152)/100;
-            Multipler2 = 132/100;
+            Multiplier = (104 + 152) / 100;
+            Multipler2 = 132 / 100;
             break;
         case 2:
-            Multiplier = (111.8+163.4)/100;
-            Multipler2 = 141.9/100;
+            Multiplier = (111.8 + 163.4) / 100;
+            Multipler2 = 141.9 / 100;
             break;
         case 3:
-            Multiplier = (119.6+174.8)/100;
-            Multipler2 = 151.8/100;
+            Multiplier = (119.6 + 174.8) / 100;
+            Multipler2 = 151.8 / 100;
             break;
         case 4:
-            Multiplier = (130+190)/100;
-            Multipler2 = 165/100;
+            Multiplier = (130 + 190) / 100;
+            Multipler2 = 165 / 100;
             break;
         case 5:
-            Multiplier = (137.8+201.4)/100;
-            Multipler2 = 174.9/100;
+            Multiplier = (137.8 + 201.4) / 100;
+            Multipler2 = 174.9 / 100;
             break;
         case 6:
-            Multiplier = (145.6+212.8)/100;
-            Multipler2 = 184.8/100;
+            Multiplier = (145.6 + 212.8) / 100;
+            Multipler2 = 184.8 / 100;
             break;
         case 7:
-            Multiplier = (156+228)/100;
-            Multipler2 = 198/100;
+            Multiplier = (156 + 228) / 100;
+            Multipler2 = 198 / 100;
             break;
         case 8:
-            Multiplier = (166.4+243.2)/100;
-            Multipler2 = 211.2/100;
+            Multiplier = (166.4 + 243.2) / 100;
+            Multipler2 = 211.2 / 100;
             break;
         case 9:
-            Multiplier = (176.8+258.4)/100;
-            Multipler2 = 224.4/100;
+            Multiplier = (176.8 + 258.4) / 100;
+            Multipler2 = 224.4 / 100;
             break;
         case 10:
-            Multiplier = (187.2+273.6)/100;
-            Multipler2 = 237.6/100;
+            Multiplier = (187.2 + 273.6) / 100;
+            Multipler2 = 237.6 / 100;
             break;
         case 11:
-            Multiplier = (197.6+288.8)/100;
-            Multipler2 = 250.8/100;
+            Multiplier = (197.6 + 288.8) / 100;
+            Multipler2 = 250.8 / 100;
             break;
         case 12:
-            Multiplier = (208+304)/100;
-            Multipler2 = 264/100;
+            Multiplier = (208 + 304) / 100;
+            Multipler2 = 264 / 100;
             break;
         case 13:
-            Multiplier = (221+323)/100;
-            Multipler2 = 280.5/100;
+            Multiplier = (221 + 323) / 100;
+            Multipler2 = 280.5 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 6 ; index++) {
-        if(index % 3 == 0){
+    for (let index = 0; index < 6; index++) {
+        if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
-        else{
+        else {
             attack.isReaction = false;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
@@ -1779,104 +1779,104 @@ function mujinaaFlurry(Character) {
     let healCont = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 117/100;
-            Multipler2 = 52/100;
-            healActive = Character.attack()*(92.2/100)+577;
-            healCont = Character.attack()*(79.9/100)+500;
+            Multiplier = 117 / 100;
+            Multipler2 = 52 / 100;
+            healActive = Character.attack() * (92.2 / 100) + 577;
+            healCont = Character.attack() * (79.9 / 100) + 500;
             break;
         case 2:
-            Multiplier = 126/100;
-            Multipler2 = 56/100;
-            healActive = Character.attack()*(99.1/100)+635;
-            healCont = Character.attack()*(85.9/100)+550;
+            Multiplier = 126 / 100;
+            Multipler2 = 56 / 100;
+            healActive = Character.attack() * (99.1 / 100) + 635;
+            healCont = Character.attack() * (85.9 / 100) + 550;
             break;
         case 3:
-            Multiplier = 134/100;
-            Multipler2 = 60/100;
-            healActive = Character.attack()*(106/100)+698;
-            healCont = Character.attack()*(91.9/100)+605;
+            Multiplier = 134 / 100;
+            Multipler2 = 60 / 100;
+            healActive = Character.attack() * (106 / 100) + 698;
+            healCont = Character.attack() * (91.9 / 100) + 605;
             break;
         case 4:
-            Multiplier = 146/100;
-            Multipler2 = 65/100;
-            healActive = Character.attack()*(115.2/100)+765;
-            healCont = Character.attack()*(99.8/100)+663;
+            Multiplier = 146 / 100;
+            Multipler2 = 65 / 100;
+            healActive = Character.attack() * (115.2 / 100) + 765;
+            healCont = Character.attack() * (99.8 / 100) + 663;
             break;
         case 5:
-            Multiplier = 154.76/100;
-            Multipler2 = 68.9/100;
-            healActive = Character.attack()*(122.11/100)+837.2;
-            healCont = Character.attack()*(105.83/100)+725;
+            Multiplier = 154.76 / 100;
+            Multipler2 = 68.9 / 100;
+            healActive = Character.attack() * (122.11 / 100) + 837.2;
+            healCont = Character.attack() * (105.83 / 100) + 725;
             break;
         case 6:
-            Multiplier = 163.52/100;
-            Multipler2 = 72.8/100;
-            healActive = Character.attack()*(129.02/100)+914.2;
-            healCont = Character.attack()*(111.82/100)+792;
+            Multiplier = 163.52 / 100;
+            Multipler2 = 72.8 / 100;
+            healActive = Character.attack() * (129.02 / 100) + 914.2;
+            healCont = Character.attack() * (111.82 / 100) + 792;
             break;
         case 7:
-            Multiplier = 175.2/100;
-            Multipler2 = 78/100;
-            healActive = Character.attack()*(138.24/100)+996;
-            healCont = Character.attack()*(119.81/100)+863;
+            Multiplier = 175.2 / 100;
+            Multipler2 = 78 / 100;
+            healActive = Character.attack() * (138.24 / 100) + 996;
+            healCont = Character.attack() * (119.81 / 100) + 863;
             break;
         case 8:
-            Multiplier = 186.88/100;
-            Multipler2 = 83.2/100;
-            healActive = Character.attack()*(147.46/100)+1082;
-            healCont = Character.attack()*(127.8/100)+938;
+            Multiplier = 186.88 / 100;
+            Multipler2 = 83.2 / 100;
+            healActive = Character.attack() * (147.46 / 100) + 1082;
+            healCont = Character.attack() * (127.8 / 100) + 938;
             break;
         case 9:
-            Multiplier = 198.56/100;
-            Multipler2 = 88.4/100;
-            healActive = Character.attack()*(156.67/100)+1174;
-            healCont = Character.attack()*(135.78/100)+1017;
+            Multiplier = 198.56 / 100;
+            Multipler2 = 88.4 / 100;
+            healActive = Character.attack() * (156.67 / 100) + 1174;
+            healCont = Character.attack() * (135.78 / 100) + 1017;
             break;
         case 10:
-            Multiplier = 210.24/100;
-            Multipler2 = 93.6/100;
-            healActive = Character.attack()*(165.89/100)+1270;
-            healCont = Character.attack()*(143.77/100)+1100;
+            Multiplier = 210.24 / 100;
+            Multipler2 = 93.6 / 100;
+            healActive = Character.attack() * (165.89 / 100) + 1270;
+            healCont = Character.attack() * (143.77 / 100) + 1100;
             break;
         case 11:
-            Multiplier = 221.92/100;
-            Multipler2 = 98.8/100;
-            healActive = Character.attack()*(175.1/100)+1371;
-            healCont = Character.attack()*(151.76/100)+1188;
+            Multiplier = 221.92 / 100;
+            Multipler2 = 98.8 / 100;
+            healActive = Character.attack() * (175.1 / 100) + 1371;
+            healCont = Character.attack() * (151.76 / 100) + 1188;
             break;
         case 12:
-            Multiplier = 233.6/100;
-            Multipler2 = 104/100;
-            healActive = Character.attack()*(184.32/100)+1477;
-            healCont = Character.attack()*(159.74/100)+1280;
+            Multiplier = 233.6 / 100;
+            Multipler2 = 104 / 100;
+            healActive = Character.attack() * (184.32 / 100) + 1477;
+            healCont = Character.attack() * (159.74 / 100) + 1280;
             break;
         case 13:
-            Multiplier = 248.2/100;
-            Multipler2 = 110.5/100;
-            healActive = Character.attack()*(195.84/100)+1587;
-            healCont = Character.attack()*(169.73/100)+1376;
+            Multiplier = 248.2 / 100;
+            Multipler2 = 110.5 / 100;
+            healActive = Character.attack() * (195.84 / 100) + 1587;
+            healCont = Character.attack() * (169.73 / 100) + 1376;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     let passive = false;
-    Character.currentBuffs.forEach(buff=>{
-        if(buff.Type == "Someone More Capable"){
-           passive = true;
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Someone More Capable") {
+            passive = true;
         }
     })
     let healing = healActive + (healCont * 7);
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 7 ; index++) {
-        
+    for (let index = 0; index < 7; index++) {
+
         dmg += dmgCalc(attack, Character, "ElementalBurst");
-        if(passive){
+        if (passive) {
             healing += ((Character.EM() * 1.2) + 300) * 4;
         }
-        
+
     }
-   
-    return {dmg:dmg,healing:healing};
+
+    return { dmg: dmg, healing: healing };
 }
 
 function forbiddenCreation(Character) {
@@ -1884,74 +1884,74 @@ function forbiddenCreation(Character) {
     let Multiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 148/100;
-            Multiplier2 = 44/100;
+            Multiplier = 148 / 100;
+            Multiplier2 = 44 / 100;
             break;
         case 2:
-            Multiplier = 159.1/100;
-            Multiplier2 = 47.3/100;
+            Multiplier = 159.1 / 100;
+            Multiplier2 = 47.3 / 100;
             break;
         case 3:
-            Multiplier = 170.2/100;
-            Multiplier2 = 50.6/100;
+            Multiplier = 170.2 / 100;
+            Multiplier2 = 50.6 / 100;
             break;
         case 4:
-            Multiplier = 185/100;
-            Multiplier2 = 55/100;
+            Multiplier = 185 / 100;
+            Multiplier2 = 55 / 100;
             break;
         case 5:
-            Multiplier = 196.1/100;
-            Multiplier2 = 58.3/100;
+            Multiplier = 196.1 / 100;
+            Multiplier2 = 58.3 / 100;
             break;
         case 6:
-            Multiplier = 207.2/100;
-            Multiplier2 = 61.6/100;
+            Multiplier = 207.2 / 100;
+            Multiplier2 = 61.6 / 100;
             break;
         case 7:
-            Multiplier = 222/100;
-            Multiplier2 = 66/100;
+            Multiplier = 222 / 100;
+            Multiplier2 = 66 / 100;
             break;
         case 8:
-            Multiplier = 236.8/100;
-            Multiplier2 = 70.4/100;
+            Multiplier = 236.8 / 100;
+            Multiplier2 = 70.4 / 100;
             break;
         case 9:
-            Multiplier = 251.6/100;
-            Multiplier2 = 74.8/100;
+            Multiplier = 251.6 / 100;
+            Multiplier2 = 74.8 / 100;
             break;
         case 10:
-            Multiplier = 266.4/100;
-            Multiplier2 = 79.2/100;
+            Multiplier = 266.4 / 100;
+            Multiplier2 = 79.2 / 100;
             break;
         case 11:
-            Multiplier = 281.2/100;
-            Multiplier2 = 83.6/100;
+            Multiplier = 281.2 / 100;
+            Multiplier2 = 83.6 / 100;
             break;
         case 12:
-            Multiplier = 296/100;
-            Multiplier2 = 88/100;
+            Multiplier = 296 / 100;
+            Multiplier2 = 88 / 100;
             break;
         case 13:
-            Multiplier = 314.5/100;
-            Multiplier2 = 93.5/100;
+            Multiplier = 314.5 / 100;
+            Multiplier2 = 93.5 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = 0;
     let emBuff = 0;
-    for (let index = 0; index < 3 ; index++) {
+    for (let index = 0; index < 3; index++) {
         attack.Multiplier = Multiplier;
-        dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
         attack.Multiplier = Multiplier2;
-        dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
-      
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+
     }
-    Character.currentBuffs.forEach(buff=>{
-        if(buff.Type == "Mollis Favonius"){
-            emBuff += Character.EM()*0.2;
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Mollis Favonius") {
+            emBuff += Character.EM() * 0.2;
         }
     });
-    return {dmg:dmg,attackBuff:emBuff};
+    return { dmg: dmg, attackBuff: emBuff };
 }
 
 function obliteration(Character) {
@@ -1960,89 +1960,89 @@ function obliteration(Character) {
     let Multipler3 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 464/100;
-            Multiplier2 = 378.4/100;
-            Multipler3 = 120/100;
+            Multiplier = 464 / 100;
+            Multiplier2 = 378.4 / 100;
+            Multipler3 = 120 / 100;
             break;
         case 2:
-            Multiplier = 498.8/100;
-            Multiplier2 = 406.78/100;
-            Multipler3 = 129/100;
+            Multiplier = 498.8 / 100;
+            Multiplier2 = 406.78 / 100;
+            Multipler3 = 129 / 100;
             break;
         case 3:
-            Multiplier = 533.6/100;
-            Multiplier2 = 435.16/100;
-            Multipler3 = 138/100;
+            Multiplier = 533.6 / 100;
+            Multiplier2 = 435.16 / 100;
+            Multipler3 = 138 / 100;
             break;
         case 4:
-            Multiplier = 580/100;
-            Multiplier2 = 473/100;
-            Multipler3 = 150/100;
+            Multiplier = 580 / 100;
+            Multiplier2 = 473 / 100;
+            Multipler3 = 150 / 100;
             break;
         case 5:
-            Multiplier = 614.8/100;
-            Multiplier2 = 501.38/100;
-            Multipler3 = 159/100;
+            Multiplier = 614.8 / 100;
+            Multiplier2 = 501.38 / 100;
+            Multipler3 = 159 / 100;
             break;
         case 6:
-            Multiplier = 649.6/100;
-            Multiplier2 = 529.76/100;
-            Multipler3 = 168/100;
+            Multiplier = 649.6 / 100;
+            Multiplier2 = 529.76 / 100;
+            Multipler3 = 168 / 100;
             break;
         case 7:
-            Multiplier = 696/100;
-            Multiplier2 = 567.6/100;
-            Multipler3 = 180/100;
+            Multiplier = 696 / 100;
+            Multiplier2 = 567.6 / 100;
+            Multipler3 = 180 / 100;
             break;
         case 8:
-            Multiplier = 742.4/100;
-            Multiplier2 = 605.44/100;
-            Multipler3 = 192/100;
+            Multiplier = 742.4 / 100;
+            Multiplier2 = 605.44 / 100;
+            Multipler3 = 192 / 100;
             break;
         case 9:
-            Multiplier = 788.8/100;
-            Multiplier2 = 643.28/100;
-            Multipler3 = 204/100;
+            Multiplier = 788.8 / 100;
+            Multiplier2 = 643.28 / 100;
+            Multipler3 = 204 / 100;
             break;
         case 10:
-            Multiplier = 835.2/100;
-            Multiplier2 = 681.12/100;
-            Multipler3 = 216/100;
+            Multiplier = 835.2 / 100;
+            Multiplier2 = 681.12 / 100;
+            Multipler3 = 216 / 100;
             break;
         case 11:
-            Multiplier = 881.6/100;
-            Multiplier2 = 718.96/100;
-            Multipler3 = 228/100;
+            Multiplier = 881.6 / 100;
+            Multiplier2 = 718.96 / 100;
+            Multipler3 = 228 / 100;
             break;
         case 12:
-            Multiplier = 928/100;
-            Multiplier2 = 756.8/100;
-            Multipler3 = 240/100;
+            Multiplier = 928 / 100;
+            Multiplier2 = 756.8 / 100;
+            Multipler3 = 240 / 100;
             break;
         case 13:
-            Multiplier = 986/100;
-            Multiplier2 = 804.1/100;
-            Multipler3 = 255/100;
+            Multiplier = 986 / 100;
+            Multiplier2 = 804.1 / 100;
+            Multipler3 = 255 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier2, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = 0;
     let obliterationRangedUsed = false;
-    Character.currentBuffs.forEach(buff=>{
-        if(buff.Type =="obliterationRangedUsed")
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "obliterationRangedUsed")
             obliterationRangedUsed = true;
 
     });
-    if(obliterationRangedUsed){
+    if (obliterationRangedUsed) {
         attack.Multiplier = Multiplier;
-        dmg = dmgCalc(attack,Character,"ElementalBurst")*3;
+        dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
         attack.Multiplier = Multipler3;
-        dmg+= dmgCalc(attack,Character,"ElementalBurst")*3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     }
-    else{
+    else {
         attack.Multiplier = Multiplier2;
-        dmg = dmgCalc(attack,Character,"ElementalBurst")*3;
-        Character.currentBuffs.push({Type:"obliterationRangedUsed",Value:null});
+        dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+        Character.currentBuffs.push({ Type: "obliterationRangedUsed", Value: null });
     }
     return dmg;
 }
@@ -2052,64 +2052,64 @@ function gustSurge(Character) {
     let Multiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 80.8/100;
-            Multiplier2 = 24.8/100;
+            Multiplier = 80.8 / 100;
+            Multiplier2 = 24.8 / 100;
             break;
         case 2:
-            Multiplier = 86.86/100;
-            Multiplier2 = 26.66/100;
+            Multiplier = 86.86 / 100;
+            Multiplier2 = 26.66 / 100;
             break;
         case 3:
-            Multiplier = 92.92/100;
-            Multiplier2 = 28.52/100;
+            Multiplier = 92.92 / 100;
+            Multiplier2 = 28.52 / 100;
             break;
         case 4:
-            Multiplier = 101/100;
-            Multiplier2 = 31/100;
+            Multiplier = 101 / 100;
+            Multiplier2 = 31 / 100;
             break;
         case 5:
-            Multiplier = 107.06/100;
-            Multiplier2 = 32.86/100;
+            Multiplier = 107.06 / 100;
+            Multiplier2 = 32.86 / 100;
             break;
         case 6:
-            Multiplier = 113.12/100;
-            Multiplier2 = 34.72/100;
+            Multiplier = 113.12 / 100;
+            Multiplier2 = 34.72 / 100;
             break;
         case 7:
-            Multiplier = 121.2/100;
-            Multiplier2 = 37.2/100;
+            Multiplier = 121.2 / 100;
+            Multiplier2 = 37.2 / 100;
             break;
         case 8:
-            Multiplier = 129.28/100;
-            Multiplier2 = 39.68/100;
+            Multiplier = 129.28 / 100;
+            Multiplier2 = 39.68 / 100;
             break;
         case 9:
-            Multiplier = 137.36/100;
-            Multiplier2 = 42.16/100;
+            Multiplier = 137.36 / 100;
+            Multiplier2 = 42.16 / 100;
             break;
         case 10:
-            Multiplier = 145.44/100;
-            Multiplier2 = 44.64/100;
+            Multiplier = 145.44 / 100;
+            Multiplier2 = 44.64 / 100;
             break;
         case 11:
-            Multiplier = 153.52/100;
-            Multiplier2 = 47.12/100;
+            Multiplier = 153.52 / 100;
+            Multiplier2 = 47.12 / 100;
             break;
         case 12:
-            Multiplier = 161.6/100;
-            Multiplier2 = 49.6/100;
+            Multiplier = 161.6 / 100;
+            Multiplier2 = 49.6 / 100;
             break;
         case 13:
-            Multiplier = 171.7/100;
-            Multiplier2 = 52.7/100;
+            Multiplier = 171.7 / 100;
+            Multiplier2 = 52.7 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack,Character,"ElementalBurst");
+    let dmg = dmgCalc(attack, Character, "ElementalBurst");
     attack.isReaction = false;
-    dmg += dmgCalc(attack,Character,"ElementalBurst") * 8;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 8;
     attack.Multiplier = Multiplier2;
-    dmg+= dmgCalc(attack,Character,"ElementalBurst") * 9;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 9;
     return dmg;
 }
 
@@ -2117,43 +2117,43 @@ function wakeofEarth(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 148 /100;
+            Multiplier = 148 / 100;
             break;
         case 2:
-            Multiplier = 159.1 /100;
+            Multiplier = 159.1 / 100;
             break;
         case 3:
-            Multiplier = 170.2 /100;
+            Multiplier = 170.2 / 100;
             break;
         case 4:
-            Multiplier = 185 /100;
+            Multiplier = 185 / 100;
             break;
         case 5:
-            Multiplier = 196.1 /100;
+            Multiplier = 196.1 / 100;
             break;
         case 6:
-            Multiplier = 207.2 /100;
+            Multiplier = 207.2 / 100;
             break;
         case 7:
-            Multiplier = 222 /100;
+            Multiplier = 222 / 100;
             break;
         case 8:
-            Multiplier = 236.8 /100;
+            Multiplier = 236.8 / 100;
             break;
         case 9:
-            Multiplier = 251.6 /100;
+            Multiplier = 251.6 / 100;
             break;
         case 10:
-            Multiplier = 266.4 /100;
+            Multiplier = 266.4 / 100;
             break;
         case 11:
-            Multiplier = 281.2 /100;
+            Multiplier = 281.2 / 100;
             break;
         case 12:
-            Multiplier = 296 /100;
+            Multiplier = 296 / 100;
             break;
         case 13:
-            Multiplier = 314.5 /100;
+            Multiplier = 314.5 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true }
@@ -2166,62 +2166,62 @@ function bellowingThunder(Character) {
     let Multiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 114.4/100;
-            Multiplier2 = 32.8/100;
+            Multiplier = 114.4 / 100;
+            Multiplier2 = 32.8 / 100;
             break;
         case 2:
-            Multiplier = 122.98/100;
-            Multiplier2 = 35.26/100;
+            Multiplier = 122.98 / 100;
+            Multiplier2 = 35.26 / 100;
             break;
         case 3:
-            Multiplier = 131.56/100;
-            Multiplier2 = 37.72/100;
+            Multiplier = 131.56 / 100;
+            Multiplier2 = 37.72 / 100;
             break;
         case 4:
-            Multiplier = 143/100;
-            Multiplier2 = 41/100;
+            Multiplier = 143 / 100;
+            Multiplier2 = 41 / 100;
             break;
         case 5:
-            Multiplier = 151.58/100;
-            Multiplier2 = 43.46/100;
+            Multiplier = 151.58 / 100;
+            Multiplier2 = 43.46 / 100;
             break;
         case 6:
-            Multiplier = 160.16/100;
-            Multiplier2 = 45.92/100;
+            Multiplier = 160.16 / 100;
+            Multiplier2 = 45.92 / 100;
             break;
         case 7:
-            Multiplier = 171.6/100;
-            Multiplier2 = 49.2/100;
+            Multiplier = 171.6 / 100;
+            Multiplier2 = 49.2 / 100;
             break;
         case 8:
-            Multiplier = 183.04/100;
-            Multiplier2 = 52.48/100;
+            Multiplier = 183.04 / 100;
+            Multiplier2 = 52.48 / 100;
             break;
         case 9:
-            Multiplier = 194.48/100;
-            Multiplier2 = 55.76/100;
+            Multiplier = 194.48 / 100;
+            Multiplier2 = 55.76 / 100;
             break;
         case 10:
-            Multiplier = 205.92/100;
-            Multiplier2 = 59.04/100;
+            Multiplier = 205.92 / 100;
+            Multiplier2 = 59.04 / 100;
             break;
         case 11:
-            Multiplier = 217.36/100;
-            Multiplier2 = 62.32/100;
+            Multiplier = 217.36 / 100;
+            Multiplier2 = 62.32 / 100;
             break;
         case 12:
-            Multiplier = 228.8/100;
-            Multiplier2 = 65.6/100;
+            Multiplier = 228.8 / 100;
+            Multiplier2 = 65.6 / 100;
             break;
         case 13:
-            Multiplier = 243.1/100;
-            Multiplier2 = 69.7/100;
+            Multiplier = 243.1 / 100;
+            Multiplier2 = 69.7 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack,Character,"ElementalBurst")*3;
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = Multiplier2;
-    dmg+= dmgCalc(attack,Character,"ElementalBurst") * 16;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 16;
     return dmg;
 }
 
@@ -2230,73 +2230,73 @@ function windsGrandOde(Character) {
     let Multiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 37.6/100;
-            Multiplier2 = 18.8/100;
+            Multiplier = 37.6 / 100;
+            Multiplier2 = 18.8 / 100;
             break;
         case 2:
-            Multiplier = 40.42/100;
-            Multiplier2 = 20.21/100;
+            Multiplier = 40.42 / 100;
+            Multiplier2 = 20.21 / 100;
             break;
         case 3:
-            Multiplier = 43.24/100;
-            Multiplier2 = 21.62/100;
+            Multiplier = 43.24 / 100;
+            Multiplier2 = 21.62 / 100;
             break;
         case 4:
-            Multiplier = 47/100;
-            Multiplier2 = 23.5/100;
+            Multiplier = 47 / 100;
+            Multiplier2 = 23.5 / 100;
             break;
         case 5:
-            Multiplier = 49.82/100;
-            Multiplier2 = 24.91/100;
+            Multiplier = 49.82 / 100;
+            Multiplier2 = 24.91 / 100;
             break;
         case 6:
-            Multiplier = 52.64/100;
-            Multiplier2 = 26.32/100;
+            Multiplier = 52.64 / 100;
+            Multiplier2 = 26.32 / 100;
             break;
         case 7:
-            Multiplier = 56.4/100;
-            Multiplier2 = 28.2/100;
+            Multiplier = 56.4 / 100;
+            Multiplier2 = 28.2 / 100;
             break;
         case 8:
-            Multiplier = 60.16/100;
-            Multiplier2 = 30.08/100;
+            Multiplier = 60.16 / 100;
+            Multiplier2 = 30.08 / 100;
             break;
         case 9:
-            Multiplier = 63.92/100;
-            Multiplier2 = 31.96/100;
+            Multiplier = 63.92 / 100;
+            Multiplier2 = 31.96 / 100;
             break;
         case 10:
-            Multiplier = 67.68/100;
-            Multiplier2 = 33.84/100;
+            Multiplier = 67.68 / 100;
+            Multiplier2 = 33.84 / 100;
             break;
         case 11:
-            Multiplier = 71.44/100;
-            Multiplier2 = 35.72/100;
+            Multiplier = 71.44 / 100;
+            Multiplier2 = 35.72 / 100;
             break;
         case 12:
-            Multiplier = 75.2/100;
-            Multiplier2 = 37.6/100;
+            Multiplier = 75.2 / 100;
+            Multiplier2 = 37.6 / 100;
             break;
         case 13:
-            Multiplier = 79.9/100;
-            Multiplier2 = 39.95/100;
+            Multiplier = 79.9 / 100;
+            Multiplier2 = 39.95 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = 0;
     for (let index = 0; index < 20; index++) {
-        if(index % 3 == 0){
+        if (index % 3 == 0) {
             attack.isReaction = true;
-            dmg += dmgCalc(attack,Character,"ElementalBurst")*3;
-        }else{
+            dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+        } else {
             attack.isReaction = false;
-            dmg += dmgCalc(attack,Character,"ElementalBurst")*3;
+            dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
         }
-        
+
     }
     attack.Multiplier = Multiplier2;
     attack.element = "";
-    dmg+= dmgCalc(attack,Character,"ElementalBurst") * 20*3;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 20 * 3;
     return dmg;
 }
 
@@ -2307,95 +2307,95 @@ function pyronado(Character) {
     let pyronado = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 72/100;
-            Multiplier2 = 88/100;
-            Multiplier3 = 109.6/100;
+            Multiplier = 72 / 100;
+            Multiplier2 = 88 / 100;
+            Multiplier3 = 109.6 / 100;
             pyronado = 112 / 100;
             break;
         case 2:
-            Multiplier = 77.4/100;
-            Multiplier2 = 94.6/100;
-            Multiplier3 = 117.82/100;
+            Multiplier = 77.4 / 100;
+            Multiplier2 = 94.6 / 100;
+            Multiplier3 = 117.82 / 100;
             pyronado = 120.4 / 100;
             break;
         case 3:
-            Multiplier = 82.8/100;
-            Multiplier2 = 101.2/100;
-            Multiplier3 = 126.04/100;
+            Multiplier = 82.8 / 100;
+            Multiplier2 = 101.2 / 100;
+            Multiplier3 = 126.04 / 100;
             pyronado = 128.8 / 100;
             break;
         case 4:
-            Multiplier = 90/100;
-            Multiplier2 = 110/100;
-            Multiplier3 = 137/100;
+            Multiplier = 90 / 100;
+            Multiplier2 = 110 / 100;
+            Multiplier3 = 137 / 100;
             pyronado = 140 / 100;
             break;
         case 5:
-            Multiplier = 95.4/100;
-            Multiplier2 = 116.6/100;
-            Multiplier3 = 145.22/100;
+            Multiplier = 95.4 / 100;
+            Multiplier2 = 116.6 / 100;
+            Multiplier3 = 145.22 / 100;
             pyronado = 148.4 / 100;
             break;
         case 6:
-            Multiplier = 100.8/100;
-            Multiplier2 = 123.2/100;
-            Multiplier3 = 153.44/100;
+            Multiplier = 100.8 / 100;
+            Multiplier2 = 123.2 / 100;
+            Multiplier3 = 153.44 / 100;
             pyronado = 156.8 / 100;
             break;
         case 7:
-            Multiplier = 108/100;
-            Multiplier2 = 132/100;
-            Multiplier3 = 164.4/100;
+            Multiplier = 108 / 100;
+            Multiplier2 = 132 / 100;
+            Multiplier3 = 164.4 / 100;
             pyronado = 168 / 100;
             break;
         case 8:
-            Multiplier = 115.2/100;
-            Multiplier2 = 140.8/100;
-            Multiplier3 = 175.36/100;
+            Multiplier = 115.2 / 100;
+            Multiplier2 = 140.8 / 100;
+            Multiplier3 = 175.36 / 100;
             pyronado = 179.2 / 100;
             break;
         case 9:
-            Multiplier = 122.4/100;
-            Multiplier2 = 149.6/100;
-            Multiplier3 = 186.32/100;
+            Multiplier = 122.4 / 100;
+            Multiplier2 = 149.6 / 100;
+            Multiplier3 = 186.32 / 100;
             pyronado = 190.4 / 100;
             break;
         case 10:
-            Multiplier = 129.6/100;
-            Multiplier2 = 158.4/100;
-            Multiplier3 = 197.28/100;
+            Multiplier = 129.6 / 100;
+            Multiplier2 = 158.4 / 100;
+            Multiplier3 = 197.28 / 100;
             pyronado = 201.6 / 100;
             break;
         case 11:
-            Multiplier = 136.8/100;
-            Multiplier2 = 167.2/100;
-            Multiplier3 = 208.24/100;
+            Multiplier = 136.8 / 100;
+            Multiplier2 = 167.2 / 100;
+            Multiplier3 = 208.24 / 100;
             pyronado = 212.8 / 100;
             break;
         case 12:
-            Multiplier = 144/100;
-            Multiplier2 = 176/100;
-            Multiplier3 = 219.2/100;
+            Multiplier = 144 / 100;
+            Multiplier2 = 176 / 100;
+            Multiplier3 = 219.2 / 100;
             pyronado = 224 / 100;
             break;
         case 13:
-            Multiplier = 153/100;
-            Multiplier2 = 187/100;
-            Multiplier3 = 232.9/100;
+            Multiplier = 153 / 100;
+            Multiplier2 = 187 / 100;
+            Multiplier3 = 232.9 / 100;
             pyronado = 238 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier2, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack,Character,"ElementalBurst") * 3;
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = Multiplier2;
-    dmg += dmgCalc(attack,Character,"ElementalBurst") * 3;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = Multiplier3;
-    dmg += dmgCalc(attack,Character,"ElementalBurst") * 3;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = pyronado;
     for (let index = 0; index < 7; index++) {
-        dmg+= dmgCalc(attack,Character,"ElementalBurst") * 3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     }
-   
+
     return dmg;
 }
 
@@ -2403,56 +2403,56 @@ function raincutter(Character) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            Multiplier = 54.27 /100;
+            Multiplier = 54.27 / 100;
             break;
         case 2:
-            Multiplier = 58.34 /100;
+            Multiplier = 58.34 / 100;
             break;
         case 3:
-            Multiplier = 62.41 /100;
+            Multiplier = 62.41 / 100;
             break;
         case 4:
-            Multiplier = 67.84 /100;
+            Multiplier = 67.84 / 100;
             break;
         case 5:
-            Multiplier = 71.91 /100;
+            Multiplier = 71.91 / 100;
             break;
         case 6:
-            Multiplier = 75.98 /100;
+            Multiplier = 75.98 / 100;
             break;
         case 7:
-            Multiplier = 81.41 /100;
+            Multiplier = 81.41 / 100;
             break;
         case 8:
-            Multiplier = 86.84 /100;
+            Multiplier = 86.84 / 100;
             break;
         case 9:
-            Multiplier = 92.26 /100;
+            Multiplier = 92.26 / 100;
             break;
         case 10:
-            Multiplier = 97.69 /100;
+            Multiplier = 97.69 / 100;
             break;
         case 11:
-            Multiplier = 103.12 /100;
+            Multiplier = 103.12 / 100;
             break;
         case 12:
-            Multiplier = 108.54 /100;
+            Multiplier = 108.54 / 100;
             break;
         case 13:
-            Multiplier = 115.33 /100;
+            Multiplier = 115.33 / 100;
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: false }
     let dmg = 0;
     for (let index = 0; index < 37; index++) {
-        if(index % 3 == 0){
+        if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
-        }else{
+        } else {
             attack.isReaction = false;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
         }
-        
+
     }
     return dmg;
 }
@@ -2462,7 +2462,7 @@ function riffRevolution(Character) {
     let skillMultiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            skillMultiplier =  340.8 / 100;
+            skillMultiplier = 340.8 / 100;
             skillMultiplier2 = 40 / 100;
             break;
         case 2:
@@ -2515,16 +2515,16 @@ function riffRevolution(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = skillMultiplier2;
     attack.element = "PyroDMGBonus";
     for (let index = 0; index < 5; index++) {
-        dmg += dmgCalc(attack,Character,"ElementalBurst") * 3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
     }
-    
-   
-    return {dmg:dmg};
-   
+
+
+    return { dmg: dmg };
+
 }
 
 function doneDeal(Character) {
@@ -2532,7 +2532,7 @@ function doneDeal(Character) {
     let skillMultiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            skillMultiplier =  182.4 / 100;
+            skillMultiplier = 182.4 / 100;
             skillMultiplier2 = 33.4;
             break;
         case 2:
@@ -2581,16 +2581,16 @@ function doneDeal(Character) {
             break;
         case 13:
             skillMultiplier = 387.6 / 100;
-            skillMultiplier2 = 62.2 ;
+            skillMultiplier2 = 62.2;
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
-    Character.currentBuffs.push({Type:"ChargedAttack",Value:skillMultiplier2});
-    
-   
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    Character.currentBuffs.push({ Type: "ChargedAttack", Value: skillMultiplier2 });
+
+
     return dmg;
-   
+
 }
 
 function ryuukinSaxifrage(Character) {
@@ -2598,7 +2598,7 @@ function ryuukinSaxifrage(Character) {
     let skillMultiplier2 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
-            skillMultiplier =  127.2 / 100;
+            skillMultiplier = 127.2 / 100;
             skillMultiplier2 = 122 / 100;
             break;
         case 2:
@@ -2651,11 +2651,11 @@ function ryuukinSaxifrage(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     attack.Multiplier = skillMultiplier2;
-    dmg += dmgCalc(attack, Character, "ElementalBurst")*5*3;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 5 * 3;
     return dmg;
-   
+
 }
 
 function planetBefall(Character) {
@@ -2702,8 +2702,8 @@ function planetBefall(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
-   
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+
     return dmg;
 }
 
@@ -2751,8 +2751,8 @@ function propheciesofDawn(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
-   
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+
     return dmg;
 }
 
@@ -2815,14 +2815,14 @@ function suiyuu(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = 0;
-    Character.currentBuffs.push({Type:"NormalAttack",Value:buff});
+    Character.currentBuffs.push({ Type: "NormalAttack", Value: buff });
     for (let index = 0; index < 37; index++) {
-        if(index % 4 !=3){
-            dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+        if (index % 4 != 3) {
+            dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
         }
-        
+
     }
-   
+
     return dmg;
 }
 function forwardUntoVictory(Character) {
@@ -2856,7 +2856,7 @@ function forwardUntoVictory(Character) {
             defense = 273.16;
             break;
         case 6:
-            Multiplier = 137.5/ 100;
+            Multiplier = 137.5 / 100;
             multiplier2 = 85.82 / 100;
             defense = 288.62;
             break;
@@ -2897,20 +2897,747 @@ function forwardUntoVictory(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: false }
-    let dmg = dmgCalc(attack, Character, "ElementalBurst")*3;
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
     let hasPassive1 = false;
     Character.currentBuffs.forEach(buff => {
-        if(buff.Type == "Headless of the Wind and Weather")
-        hasPassive1 = true;
+        if (buff.Type == "Headless of the Wind and Weather")
+            hasPassive1 = true;
     });
-    if(hasPassive1){
-        Character.currentBuffs.push({Type:"DEF%",Value:25});
+    if (hasPassive1) {
+        Character.currentBuffs.push({ Type: "DEF%", Value: 25 });
     }
     for (let index = 0; index < 6; index++) {
-        dmg += dmgCalc(attack, Character, "ElementalBurst")*3;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+
+    }
+
+
+    return { dmg: dmg, atkBuff: defense };
+}
+
+function beholdIttotheEvil(Character) {
+    let Multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 57.6 / 100;
+            break;
+        case 2:
+            Multiplier = 61.92 / 100;
+            break;
+        case 3:
+            Multiplier = 66.24 / 100;
+            break;
+        case 4:
+            Multiplier = 72 / 100;
+            break;
+        case 5:
+            Multiplier = 76.32 / 100;
+            break;
+        case 6:
+            Multiplier = 80.64 / 100;
+            break;
+        case 7:
+            Multiplier = 86.4 / 100;
+            break;
+        case 8:
+            Multiplier = 92.16 / 100;
+            break;
+        case 9:
+            Multiplier = 97.92 / 100;
+            break;
+        case 10:
+            Multiplier = 103.68 / 100;
+            break;
+        case 11:
+            Multiplier = 109.44 / 100;
+            break;
+        case 12:
+            Multiplier = 115.2 / 100;
+            break;
+        case 13:
+            Multiplier = 122.4 / 100;
+            break;
+    }
+    Character.currentBuffs.push({ Type: "ATKflat", Value: Character.DEF() * Multiplier });
+
+    return 0;
+}
+
+function nereidsAscension(Character) {
+    let Multiplier = 0;
+    let normalAttack = 0;
+    let chargedAttack = 0;
+    let bakeKurage = 0;
+    let heal = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 10.42 / 100;
+            normalAttack = 4.84 / 100;
+            chargedAttack = 6.78 / 100;
+            bakeKurage = 7.1 / 100;
+            heal = (Character.HP() * (0.81 / 100)) + 77.03;
+            break;
+        case 2:
+            Multiplier = 11.2 / 100;
+            normalAttack = 5.2 / 100;
+            chargedAttack = 7.28 / 100;
+            bakeKurage = 7.63 / 100;
+            heal = (Character.HP() * (0.87 / 100)) + 84.74;
+            break;
+        case 3:
+            Multiplier = 11.98 / 100;
+            normalAttack = 5.57 / 100;
+            chargedAttack = 7.79 / 100;
+            bakeKurage = 8.16 / 100;
+            heal = (Character.HP() * (0.93 / 100)) + 93.08;
+            break;
+        case 4:
+            Multiplier = 13.02 / 100;
+            normalAttack = 6.05 / 100;
+            chargedAttack = 8.47 / 100;
+            bakeKurage = 8.87 / 100;
+            heal = (Character.HP() * (1.01 / 100)) + 102.07;
+            break;
+        case 5:
+            Multiplier = 13.8 / 100;
+            normalAttack = 6.41 / 100;
+            chargedAttack = 8.98 / 100;
+            bakeKurage = 9.4 / 100;
+            heal = (Character.HP() * (1.07 / 100)) + 111.7;
+            break;
+        case 6:
+            Multiplier = 14.58 / 100;
+            normalAttack = 6.78 / 100;
+            chargedAttack = 9.49 / 100;
+            bakeKurage = 9.93 / 100;
+            heal = (Character.HP() * (1.13 / 100)) + 121.98;
+            break;
+        case 7:
+            Multiplier = 15.62 / 100;
+            normalAttack = 7.26 / 100;
+            chargedAttack = 10.16 / 100;
+            bakeKurage = 10.64 / 100;
+            heal = (Character.HP() * (1.21 / 100)) + 132.89;
+            break;
+        case 8:
+            Multiplier = 16.67 / 100;
+            normalAttack = 7.74 / 100;
+            chargedAttack = 10.84 / 100;
+            bakeKurage = 11.35 / 100;
+            heal = (Character.HP() * (1.29 / 100)) + 144.45;
+            break;
+        case 9:
+            Multiplier = 17.71 / 100;
+            normalAttack = 8.23 / 100;
+            chargedAttack = 11.52 / 100;
+            bakeKurage = 12.06 / 100;
+            heal = (Character.HP() * (1.37 / 100)) + 156.65;
+            break;
+        case 10:
+            Multiplier = 18.75 / 100;
+            normalAttack = 8.71 / 100;
+            chargedAttack = 12.2 / 100;
+            bakeKurage = 12.77 / 100;
+            heal = (Character.HP() * (1.45 / 100)) + 169.49;
+            break;
+        case 11:
+            Multiplier = 19.79 / 100;
+            normalAttack = 9.2 / 100;
+            chargedAttack = 12.87 / 100;
+            bakeKurage = 13.48 / 100;
+            heal = (Character.HP() * (1.54 / 100)) + 182.97;
+            break;
+        case 12:
+            Multiplier = 20.83 / 100;
+            normalAttack = 9.68 / 100;
+            chargedAttack = 13.55 / 100;
+            bakeKurage = 14.19 / 100;
+            heal = (Character.HP() * (1.62 / 100)) + 197.1;
+            break;
+        case 13:
+            Multiplier = 22.13 / 100;
+            normalAttack = 10.29 / 100;
+            chargedAttack = 14.4 / 100;
+            bakeKurage = 15.08 / 100;
+            heal = (Character.HP() * (1.72 / 100)) + 211.87;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    Character.currentBuffs.push({ Type: "KokomiNormal", Value: normalAttack });
+    Character.currentBuffs.push({ Type: "KokomiCharged", Value: chargedAttack });
+    Character.currentBuffs.push({ Type: "KokomiBake", Value: bakeKurage });
+    let healing = heal * (1 + (Character.advancedstats.healingBonus / 100)) * 12;
+    return { dmg: dmg, healing: healing };
+}
+
+function musouShinsetsu(Character) {
+    let Multiplier = 0;
+    let resolveBase = 0;
+    let resolveInfused = 0;
+    let oneHit = 0;
+    let twoHit = 0;
+    let threeHit = 0;
+    let chargedOneHit = 0;
+    let chargedTwoHit = 0;
+
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 400.8;
+            resolveBase = 3.89
+            resolveInfused = 0.73
+            oneHit = 44.74;
+            twoHit = 43.96;
+            threeHit = 53.82;
+            chargedOneHit = 61.6;
+            chargedTwoHit = 74.36;
+            break;
+        case 2:
+            Multiplier = 430.86;
+            resolveBase = 4.18
+            resolveInfused = 0.78
+            oneHit = 47.79;
+            twoHit = 46.95;
+            threeHit = 57.49;
+            chargedOneHit = 65.8;
+            chargedTwoHit = 79.43;
+            break;
+        case 3:
+            Multiplier = 460.92;
+            resolveBase = 4.47
+            resolveInfused = 0.84
+            oneHit = 50.84;
+            twoHit = 49.95;
+            threeHit = 61.16;
+            chargedOneHit = 70;
+            chargedTwoHit = 84.5;
+            break;
+        case 4:
+            Multiplier = 501;
+            resolveBase = 4.86
+            resolveInfused = 0.91
+            oneHit = 54.91;
+            twoHit = 53.95;
+            threeHit = 66.05;
+            chargedOneHit = 75.6;
+            chargedTwoHit = 91.26;
+            break;
+        case 5:
+            Multiplier = 531.06;
+            resolveBase = 5.15
+            resolveInfused = 0.96
+            oneHit = 57.96;
+            twoHit = 56.94;
+            threeHit = 69.72;
+            chargedOneHit = 79.8;
+            chargedTwoHit = 96.33;
+            break;
+        case 6:
+            Multiplier = 561.12;
+            resolveBase = 5.44
+            resolveInfused = 1.02
+            oneHit = 61.51;
+            twoHit = 60.44;
+            threeHit = 74;
+            chargedOneHit = 84.7;
+            chargedTwoHit = 102.25;
+            break;
+        case 7:
+            Multiplier = 601.2;
+            resolveBase = 5.83
+            resolveInfused = 1.09
+            oneHit = 66.09;
+            twoHit = 64.94;
+            threeHit = 79.51;
+            chargedOneHit = 91;
+            chargedTwoHit = 109.85;
+            break;
+        case 8:
+            Multiplier = 641.28;
+            resolveBase = 6.22
+            resolveInfused = 1.16
+            oneHit = 70.66;
+            twoHit = 69.4;
+            threeHit = 85.01;
+            chargedOneHit = 97.3;
+            chargedTwoHit = 117.45;
+            break;
+        case 9:
+            Multiplier = 681.36;
+            resolveBase = 6.61
+            resolveInfused = 1.23
+            oneHit = 75.24;
+            twoHit = 73.93;
+            threeHit = 90.52;
+            chargedOneHit = 103.6;
+            chargedTwoHit = 125.06;
+            break;
+        case 10:
+            Multiplier = 721.44;
+            resolveBase = 7;
+            resolveInfused = 1.31;
+            oneHit = 79.82;
+            twoHit = 78.42;
+            threeHit = 96.02;
+            chargedOneHit = 109.9;
+            chargedTwoHit = 132.67;
+            break;
+        case 11:
+            Multiplier = 761.52;
+            resolveBase = 7.39
+            resolveInfused = 1.38;
+            oneHit = 84.39;
+            twoHit = 82.92;
+            threeHit = 101.53;
+            chargedOneHit = 116.2;
+            chargedTwoHit = 140.27;
+            break;
+        case 12:
+            Multiplier = 801.6;
+            resolveBase = 7.78
+            resolveInfused = 1.45
+            oneHit = 88.97;
+            twoHit = 87.41;
+            threeHit = 107.03;
+            chargedOneHit = 122.5 ;
+            chargedTwoHit = 147.88 ;
+            break;
+        case 13:
+            Multiplier = 851.7;
+            resolveBase = 8.26
+            resolveInfused = 1.54
+            oneHit = 93.54;
+            twoHit = 91.91;
+            threeHit = 112.54;
+            chargedOneHit = 128.8;
+            chargedTwoHit = 155.48;
+            break;
+    }
+    Multiplier = (Multiplier + (60*resolveBase))/100;
+    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true };
+    
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    for (let i = 0; i < 6; i++) {
+        switch (i % 6) {
+            case 0: case 1: case 2:
+                for (let n = 0; n < 5; n++) {
+                    switch (n % 5) {
+                        case 0:
+                            attack.isReaction = true;
+                            attack.Multiplier = (oneHit + (resolveInfused * 60))/100;
+                            break;
+                        case 1:
+                            attack.isReaction = false;
+                            attack.Multiplier = (twoHit + (resolveInfused * 60))/100;
+                            break;
+                        case 2:
+                            attack.Multiplier = (threeHit + (resolveInfused * 60))/100;
+                            break;
+                        case 3:
+                            attack.isReaction = true;
+                            attack.Multiplier = (chargedOneHit + (resolveInfused * 60))/100;
+                            break;
+                        case 4:
+                            attack.Multiplier = (chargedTwoHit + (resolveInfused * 60))/100;
+                            break;
+                    }
+                    
+                    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+                }
+                break;
+            case 3:
+                attack.isReaction = true;
+                attack.Multiplier = (oneHit + (resolveInfused * 60))/100;
+                break;
+            case 4:
+                attack.isReaction = true;
+                attack.Multiplier = (chargedOneHit + (resolveInfused * 60))/100;
+                break;
+            case 5:
+                attack.isReaction = true;
+                attack.Multiplier = (chargedTwoHit + (resolveInfused * 60))/100;
+                break;
+        }
+        if (i % 6 > 2) {
+            dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+        }
+
+    }
+    return dmg;
+}
+
+function koukouSendou(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 409.6 / 100;
+            multiplier2 = 34.1 / 100;
+            break;
+        case 2:
+            Multiplier = 440.3 / 100;
+            multiplier2 = 36.7 / 100;
+            break;
+        case 3:
+            Multiplier = 471.0 / 100;
+            multiplier2 = 39.2 / 100;
+            break;
+        case 4:
+            Multiplier = 512 / 100;
+            multiplier2 = 42.7 / 100;
+            break;
+        case 5:
+            Multiplier = 542.7 / 100;
+            multiplier2 = 45.2 / 100;
+            break;
+        case 6:
+            Multiplier = 573.4 / 100;
+            multiplier2 = 47.8 / 100;
+            break;
+        case 7:
+            Multiplier = 614.4 / 100;
+            multiplier2 = 51.1 / 100;
+            break;
+        case 8:
+            Multiplier = 655.4 / 100;
+            multiplier2 = 54.6 / 100;
+            break;
+        case 9:
+            Multiplier = 696.3 / 100;
+            multiplier2 = 58 / 100;
+            break;
+        case 10:
+            Multiplier = 737.2 / 100;
+            multiplier2 = 61.4 / 100;
+            break;
+        case 11:
+            Multiplier = 778.2 / 100;
+            multiplier2 = 64.8 / 100;
+            break;
+        case 12:
+            Multiplier = 819.2 / 100;
+            multiplier2 = 68.2 / 100;
+            break;
+        case 13:
+            Multiplier = 870.4 / 100;
+            multiplier2 = 72.5 / 100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    attack.isReaction = false;
+    attack.Multiplier = multiplier2;
+    dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+
+    return {dmg:dmg};
+}
+
+function divineMaidensDeliverance(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    let res = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 100.8 / 100;
+            multiplier2 = 33.12 / 100;
+            res = 6;
+            break;
+        case 2:
+            Multiplier = 108.36 / 100;
+            multiplier2 = 35.6 / 100;
+            res = 7;
+            break;
+        case 3:
+            Multiplier = 115.92 / 100;
+            multiplier2 = 38.09 / 100;
+            res = 8;
+            break;
+        case 4:
+            Multiplier = 126 / 100;
+            multiplier2 = 41.4 / 100;
+            res = 9;
+            break;
+        case 5:
+            Multiplier = 133.56 / 100;
+            multiplier2 = 43.88 / 100;
+            res = 10;
+            break;
+        case 6:
+            Multiplier = 141.12 / 100;
+            multiplier2 = 46.37 / 100;
+            res = 11;
+            break;
+        case 7:
+            Multiplier = 151.2 / 100;
+            multiplier2 = 49.68 / 100;
+            res = 12;
+            break;
+        case 8:
+            Multiplier = 161.28 / 100;
+            multiplier2 = 52.99 / 100;
+            res = 13;
+            break;
+        case 9:
+            Multiplier = 171.36 / 100;
+            multiplier2 = 56.3 / 100;
+            res = 14;
+            break;
+        case 10:
+            Multiplier = 181.44 / 100;
+            multiplier2 = 59.62 / 100;
+            res = 15;
+            break;
+        case 11:
+            Multiplier = 191.52 / 100;
+            multiplier2 = 62.93 / 100;
+            res = 15;
+            break;
+        case 12:
+            Multiplier = 201.6 / 100;
+            multiplier2 = 66.24 / 100;
+            res = 15;
+            break;
+        case 13:
+            Multiplier = 214.2 / 100;
+            multiplier2 = 70.38 / 100;
+            res = 15;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    attack.Multiplier = multiplier2;
+    Character.currentBuffs.push({Type:"ResShred",Element:"CryoDMGBonus",Value:res});
+    Character.currentBuffs.push({Type:"ResShred",Element:"PhysicalDMGBonus",Value:res});
+    for (let index = 0; index < 12; index++) {
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
         
     }
-    
-   
-    return {dmg:dmg, atkBuff:defense};
+
+    return {dmg,dmg};
+}
+
+function crimsonOoyoroi(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    let shield = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 88 / 100;
+            multiplier2 = 58 / 100;
+            shield = (Character.HP()*(1.14/100)) + 110;
+            break;
+        case 2:
+            Multiplier = 94.6 / 100;
+            multiplier2 = 62.35 / 100;
+            shield = (Character.HP()*(1.23/100)) + 121;
+            break;
+        case 3:
+            Multiplier = 101.2 / 100;
+            multiplier2 = 66.7 / 100;
+            shield = (Character.HP()*(1.32/100)) + 132.9;
+            break;
+        case 4:
+            Multiplier = 110 / 100;
+            multiplier2 = 72.5 / 100;
+            shield = (Character.HP()*(1.43/100)) + 145.8;
+            break;
+        case 5:
+            Multiplier = 116.6 / 100;
+            multiplier2 = 76.85 / 100;
+            shield = (Character.HP()*(1.52/100)) + 159.5;
+            break;
+        case 6:
+            Multiplier = 123.2 / 100;
+            multiplier2 = 81.2 / 100;
+            shield = (Character.HP()*(1.6/100)) + 174.2;
+            break;
+        case 7:
+            Multiplier = 132 / 100;
+            multiplier2 = 87 / 100;
+            shield = (Character.HP()*(1.72/100)) + 189.8;
+            break;
+        case 8:
+            Multiplier = 140.8 / 100;
+            multiplier2 = 92.8 / 100;
+            shield = (Character.HP()*(1.83/100)) + 206.3;
+            break;
+        case 9:
+            Multiplier = 149.6 / 100;
+            multiplier2 = 98.6 / 100;
+            shield = (Character.HP()*(1.94/100)) + 223.7;
+            break;
+        case 10:
+            Multiplier = 158.4 / 100;
+            multiplier2 = 104.4 / 100;
+            shield = (Character.HP()*(2.06/100)) + 242;
+            break;
+        case 11:
+            Multiplier = 167.2 / 100;
+            multiplier2 = 110.2 / 100;
+            shield = (Character.HP()*(2.17/100)) + 261.3;
+            break;
+        case 12:
+            Multiplier = 176 / 100;
+            multiplier2 = 116 / 100;
+            shield = (Character.HP()*(2.29/100)) + 281.5;
+            break;
+        case 13:
+            Multiplier = 187 / 100;
+            multiplier2 = 123.25 / 100;
+            shield = (Character.HP()*(2.43/100)) + 302.6;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    let hasPassive1 = false;
+    let hasPassive2 = false;
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Imbricated Armor") {
+            hasPassive1 = true;
+        }else if (buff.Type == "Flaming Assault") {
+            hasPassive2 = true;
+        }
+    });
+    if(hasPassive1){
+        shield *= 1+((Character.advancedstats.shieldStrength + 5)/100);
+    }else{
+        shield *= 1+(Character.advancedstats.shieldStrength/100);
+    }
+    attack.Multiplier = multiplier2;
+    for (let index = 0; index < 15; index++) {
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3 + (hasPassive2 ? (Character.HP()* (2.2/100)) : 0);
+    }
+    console.log(dmg)
+    return {dmg:dmg,shield:shield};
+}
+
+function tenkoKenshin(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 260 / 100;
+            multiplier2 = 333.82 / 100;
+            break;
+        case 2:
+            Multiplier = 279.5 / 100;
+            multiplier2 = 358.85 / 100;
+            break;
+        case 3:
+            Multiplier = 299 / 100;
+            multiplier2 = 383.89 / 100;
+            break;
+        case 4:
+            Multiplier = 325 / 100;
+            multiplier2 = 417.27 / 100;
+            break;
+        case 5:
+            Multiplier = 344.5 / 100;
+            multiplier2 = 442.31 / 100;
+            break;
+        case 6:
+            Multiplier = 364 / 100;
+            multiplier2 = 467.34 / 100;
+            break;
+        case 7:
+            Multiplier = 390 / 100;
+            multiplier2 = 500.72 / 100;
+            break;
+        case 8:
+            Multiplier = 416 / 100;
+            multiplier2 = 534.11 / 100;
+            break;
+        case 9:
+            Multiplier = 442 / 100;
+            multiplier2 = 567.49 / 100;
+            break;
+        case 10:
+            Multiplier = 468 / 100;
+            multiplier2 = 600.87 / 100;
+            break;
+        case 11:
+            Multiplier = 494 / 100;
+            multiplier2 = 634.25 / 100;
+            break;
+        case 12:
+            Multiplier = 520 / 100;
+            multiplier2 = 667.63 / 100;
+            break;
+        case 13:
+            Multiplier = 552.5 / 100;
+            multiplier2 = 709.36 / 100;
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    attack.Multiplier = multiplier2;
+    for (let index = 0; index < 3; index++) {
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 3;
+        
+    }
+
+    return dmg;
+}
+
+function cliffbreakersBanner(Character) {
+    let Multiplier = 0;
+    let multiplier2 = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            Multiplier = 244 / 100;
+            multiplier2 = Character.DEF()*(32.16/100); 
+            break;
+        case 2:
+            Multiplier = 262.3 / 100;
+            multiplier2 = Character.DEF()*(34.57/100); 
+            break;
+        case 3:
+            Multiplier = 280.6 / 100;
+            multiplier2 = Character.DEF()*(36.98/100); 
+            break;
+        case 4:
+            Multiplier = 305 / 100;
+            multiplier2 = Character.DEF()*(40.2/100); 
+            break;
+        case 5:
+            Multiplier = 323.3 / 100;
+            multiplier2 = Character.DEF()*(42.61/100); 
+            break;
+        case 6:
+            Multiplier = 341.6 / 100;
+            multiplier2 = Character.DEF()*(45.02/100); 
+            break;
+        case 7:
+            Multiplier = 366 / 100;
+            multiplier2 = Character.DEF()*(48.24/100); 
+            break;
+        case 8:
+            Multiplier = 390.4 / 100;
+            multiplier2 = Character.DEF()*(51.46/100); 
+            break;
+        case 9:
+            Multiplier = 414.8 / 100;
+            multiplier2 = Character.DEF()*(54.67/100); 
+            break;
+        case 10:
+            Multiplier = 439.2 / 100;
+            multiplier2 = Character.DEF()*(57.89/100); 
+            break;
+        case 11:
+            Multiplier = 463.6 / 100;
+            multiplier2 = Character.DEF()*(61.1/100); 
+            break;
+        case 12:
+            Multiplier = 488 / 100;
+            multiplier2 = Character.DEF()*(64.32/100); 
+            break;
+        case 13:
+            Multiplier = 518.5 / 100;
+            multiplier2 = Character.DEF()*(68.34/100); 
+            break;
+    }
+    let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * 3;
+    Character.currentBuffs.push({Type:"YunJinBuff",Value:multiplier2});
+    return {dmg:dmg,attackBuff:multiplier2};
 }
