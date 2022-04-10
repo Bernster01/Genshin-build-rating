@@ -769,7 +769,7 @@
 		</div>
 		<div>
 			<h2>Elemental Resonance</h2>
-			
+
 
 			<div class="elementalResonanceContainer">
 				<div onclick="selectResonance('Pyro',this)">
@@ -827,14 +827,240 @@
 				</div>
 			</div>
 		</div>
-		<button onclick="userCharacter(this)">Rate my build!</button>
+		<button onclick="userCharacter(this)" id="rate-button">Rate my build!</button>
 	</div>
+	<div id="result-container">
+		<div id="result-container-container">
 
-	<div id="ResultSplashContainer">
-		<img id="CharacterSplashArt"></img>
+		</div>
+		<!-- <div id="result-splash-container">
+			<div id="result-splash-wrapper">
+				<div id="result-splash-top-info">
+					<div class="result-splash-top-info-part">
+						<h1 id="result-splash-name">Genshin Helper</h1>
+						<h2>Date: 2022-04-4</h2>
+					</div>
+					<div class="result-splash-top-info-part">
+						<h1 id="result-splash-name">Albedo</h1>
+						<span id="result-splash-score">76/100</span>
+					</div>
+					<div class="result-splash-top-info-part">
+					</div>
+				</div>
+				<div class="character-book">
+					<div class="character-card">
+						<div class="character-card-info">
+							<div class="character-card-info-group">
+								<div class="character-card-info-up-left character-card-info-part"
+									id="character-card-info-up-left">
+									<img src="Weapons/Icon_Sword.png" />
+								</div>
+								<div class="character-card-info-up-right character-card-info-part">
+									<div class="character-card-stats" id="character-card-stat-hp">
+										<h4>Health:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-attack">
+										<h4>Attack:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-def">
+										<h4>Defense:</h4>
+										<span>Info</span>
+									</div>
+								</div>
+							</div>
+							<div class="character-card-info-group">
 
+								<div class="character-card-info-down-left character-card-info-part">
+									<div class="character-card-stats" id="character-card-stat-energyrecharge">
+										<h4>Energy Recharge:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-critrate">
+										<h4>Crite Rate:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-critdmg">
+										<h4>Crit DMG:</h4>
+										<span>Info</span>
+									</div>
+
+								</div>
+								<div class="character-card-info-down-right character-card-info-part">
+									<div class="character-card-stats" id="character-card-stat-elementalbonus">
+										<h4>Elemental Bonus:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-elementalbonus">
+										<h4>Shield Strength:</h4>
+										<span>Info</span>
+									</div>
+									<div class="character-card-stats" id="character-card-stat-elementalbonus">
+										<h4>Healing Bonus:</h4>
+										<span>Info</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="character-card-info" id="character-card-artifact-info">
+							<div class="character-card-artifact-container">
+								<div class="character-card-artifact-wrapper">
+									<div class="character-card-artifact">
+										<img src="Artifacts/Circlet.png" />
+									</div>
+									<div class="character-card-artifact-info-group">
+										<div class="character-card-artifact-info">
+											<span>main-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+									</div>
+								</div>
+								<div class="character-card-artifact-wrapper">
+									<div class="character-card-artifact">
+										<img src="Artifacts/Flower.png" />
+									</div>
+									<div class="character-card-artifact-info-group">
+										<div class="character-card-artifact-info">
+											<span>main-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+									</div>
+								</div>
+								<div class="character-card-artifact-wrapper">
+									<div class="character-card-artifact">
+										<img src="Artifacts/Plume.png" />
+									</div>
+									<div class="character-card-artifact-info-group">
+										<div class="character-card-artifact-info">
+											<span>main-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="character-card-artifact-container">
+								<div class="character-card-artifact-wrapper">
+									<div class="character-card-artifact">
+										<img src="Artifacts/Sands.png" />
+									</div>
+									<div class="character-card-artifact-info-group">
+										<div class="character-card-artifact-info">
+											<span>main-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+									</div>
+								</div>
+								<div class="character-card-artifact-wrapper">
+									<div class="character-card-artifact">
+										<img src="Artifacts/Goblet.png" />
+									</div>
+									<div class="character-card-artifact-info-group">
+										<div class="character-card-artifact-info">
+											<span>main-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+										<div class="character-card-artifact-info">
+											<span>sub-stat: </span>
+											<span>Info</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+		</div> -->
+		<div id="result-buttons">
+			<div>
+				<button>Save</button>
+			</div>
+			<div>
+				<button>More Details</button>
+			</div>
+		</div>
 	</div>
-
 	<footer>
 
 	</footer>
@@ -936,7 +1162,7 @@
 
 	<script src="js/LoadCharactersHtml.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-
+	<script src="js/CharacterCard.js"></script>
 </body>
 
 </html>

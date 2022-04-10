@@ -17,6 +17,7 @@ function LoadCharacters() {
 
     loadMockArtifacts();
 }
+
 function loadWeapons(character) {
     let weapon = document.getElementById('WeaponsContainer');
     weapon.innerHTML = "";

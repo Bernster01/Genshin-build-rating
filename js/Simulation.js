@@ -47,13 +47,12 @@ function compareCharacters(usersCharacter) {
         console.log(result[2]);
         console.log(result[3]);
         console.log(["Attack: " + result2.char.attack(), "Defense: " + result2.char.DEF(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-        return `${Math.floor((result2.dmg / result[0]) * 100)}/100`;
+        userScore = Math.floor((result2.dmg / result[0]) * 100);
     }
 
     else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
         userScore = (result2.healing + (result2.dmg * 0.1)) * bonsuMultiplier;
         console.log("User: " + userScore, "Best score: " + result[0])
-        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
@@ -73,7 +72,6 @@ function compareCharacters(usersCharacter) {
             userScore = ((result2.attackBuff * 10) + (result2.dmg * 0.1)) * bonsuMultiplier;
             console.log("User: " + userScore, "Best score: " + result[0])
         }
-        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "Shield" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
@@ -91,7 +89,6 @@ function compareCharacters(usersCharacter) {
             userScore = ((result2.shield * 2) + (result2.dmg * 0.1)) * bonsuMultiplier;
             console.log("User: " + userScore, "Best score: " + result[0])
         }
-        return `${Math.floor((userScore / result[0]) * 100)}/100`;
     }
     else if (simulatedCharacter.supportType == "ElementalBuffer" && role == "Support") {
         if (simulatedCharacter.supportType2 != undefined) {
@@ -105,8 +102,14 @@ function compareCharacters(usersCharacter) {
 
         console.log(result[3]);
         console.log(["Attack: " + result2.char.attack(), "EM: " + result2.char.EM(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-        return `${Math.floor((userScore / result[0]) * 100)}/100`;
+        
+       
     }
+    
+    let card = generateCharacterCard(result2.char,userScore);
+    let doc = document.getElementById("result-container-container");
+    doc.insertAdjacentHTML('beforeend', card.card);
+    return `${Math.floor((userScore / result[0]) * 100)}/100`;
 }
 
 
@@ -357,6 +360,7 @@ class Createcharacter {
     constructor(baseCharacter, weapon, artifacts) {
         this.name = baseCharacter.name;
         this.src = baseCharacter.src;
+        this.card = baseCharacter.card;
         this.supportType = baseCharacter.supportType;
         this.element = baseCharacter.element;
         this.level = baseCharacter.level;
