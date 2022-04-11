@@ -105,8 +105,11 @@ function compareCharacters(usersCharacter) {
         
        
     }
-    
-    let card = generateCharacterCard(result2.char,userScore);
+    if (role == "Support" && simulatedCharacter.supportType != "Sub-dps") {
+        
+        userScore =Math.floor(userScore/bestSupportScore*100);
+    }
+    let card = generateCharacterCard(result2.char,userScore,supportingElement,role,elementalResonance);
     let doc = document.getElementById("result-container-container");
     doc.insertAdjacentHTML('beforeend', card.card);
     return `${Math.floor((userScore / result[0]) * 100)}/100`;

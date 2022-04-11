@@ -161,6 +161,7 @@ footer {
 	box-shadow: 0vh 0.5em 2em -1em;
 	margin: 20%;
 	margin-top: 10%;
+	margin-bottom: 5rem;
 	display: none;
 	overflow: auto;
 }
@@ -608,11 +609,11 @@ h2 {
 }
 
 .character-book {
-	width: 65%;
+	width: 66%;
 	height: 100%;
 	background-image: url("../Assets/Book_Background.png");
 	background-size: contain;
-	background-position: center;
+	background-position: left;
 	background-repeat: no-repeat;
 	margin-bottom: 2rem;
 }
@@ -643,6 +644,12 @@ h2 {
 	flex-direction: row;
 	justify-content: space-evenly;
 	margin: 1rem;
+
+}
+.character-card-info-group h4,span{
+
+	margin:1rem 0rem 0rem 0rem;
+	
 }
 
 .character-card-img {
@@ -657,7 +664,9 @@ h2 {
 	border: #5F5B6B solid 0.2rem;
 	border-radius: 2rem;
 	padding: 1rem;
-	margin: 0.25rem;
+	margin: 0.1rem;
+	padding-left: 0;
+    padding-right: 0.4rem;
 }
 
 .character-card-artifact {
@@ -667,10 +676,13 @@ h2 {
 }
 
 .character-card-artifact img {
-	width: 100%;
-	border: #817c90 solid 0.2rem;
-	border-radius: 2rem;
+	width: 75px;
+
 }
+.character-card-artifact-mainstat{
+	font-size: 14pt;
+}
+
 
 /* #character-card-artifact-info {
 	display: flex;

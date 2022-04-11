@@ -102,6 +102,7 @@ function selectRole(value) {
 }
 let elementalResonance = ["", ""];
 function selectResonance(element, object) {
+  console.log(element,object);
   if (elementalResonance[0] == element) {
     elementalResonance[0] = "";
     object.classList.remove("elementalResonance");

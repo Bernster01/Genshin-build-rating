@@ -42,7 +42,7 @@ function loadMockArtifacts() {
     document.getElementById("Circlet_substat_4").value = "HP%";
     document.getElementById("Circlet_substat_4_value").value = 4.7;
     document.getElementById("Circlet_set").value = "Blizzard Strayer";
-    document.getElementById("Circlet").src = "Artifacts/Blizzard Strayer Circlet.png";
+    document.getElementById("Circlet").src = "Artifacts/Blizzard Strayer Circlet.webp";
 
     document.getElementById("Flower_mainstat").value = "HPflat";
     document.getElementById("Flower_mainstat_value").value = 4780;
@@ -55,7 +55,7 @@ function loadMockArtifacts() {
     document.getElementById("Flower_substat_4").value = "DEF%";
     document.getElementById("Flower_substat_4_value").value = 7.3;
     document.getElementById("Flower_set").value = "Blizzard Strayer";
-    document.getElementById("Flower").src = "Artifacts/Blizzard Strayer Flower.png";
+    document.getElementById("Flower").src = "Artifacts/Blizzard Strayer Flower.webp";
 
     document.getElementById("Plume_mainstat").value = "ATKflat";
     document.getElementById("Plume_mainstat_value").value = 311;
@@ -68,7 +68,7 @@ function loadMockArtifacts() {
     document.getElementById("Plume_substat_4").value = "DEF%";
     document.getElementById("Plume_substat_4_value").value = 12.4;
     document.getElementById("Plume_set").value = "Blizzard Strayer";
-    document.getElementById("Plume").src = "Artifacts/Blizzard Strayer Plume.png";
+    document.getElementById("Plume").src = "Artifacts/Blizzard Strayer Plume.webp";
 
     document.getElementById("Sands_mainstat").value = "ATK%";
     document.getElementById("Sands_mainstat_value").value = 46.6;
@@ -81,7 +81,7 @@ function loadMockArtifacts() {
     document.getElementById("Sands_substat_4").value = "CritRate";
     document.getElementById("Sands_substat_4_value").value = 10.9;
     document.getElementById("Sands_set").value = "Blizzard Strayer";
-    document.getElementById("Sands").src = "Artifacts/Blizzard Strayer Sands.png";
+    document.getElementById("Sands").src = "Artifacts/Blizzard Strayer Sands.webp";
 
     document.getElementById("Goblet_mainstat").value = "CryoDMGBonus";
     document.getElementById("Goblet_mainstat_value").value = 46.6;
@@ -94,7 +94,7 @@ function loadMockArtifacts() {
     document.getElementById("Goblet_substat_4").value = "EnergyRecharge";
     document.getElementById("Goblet_substat_4_value").value = 5.8;
     document.getElementById("Goblet_set").value = "Viridescent Venerer";
-    document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer Goblet.png";
+    document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer Goblet.webp";
 }
 function loadMockArtifacts2() {
     let procent = 40;
