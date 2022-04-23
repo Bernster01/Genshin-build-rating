@@ -470,8 +470,11 @@ function getGrade(score){
     else if(score >= 81 && score <= 90){
         grade = "S";
     }
-    else if(score >= 91){
+    else if(score >= 91 && score <= 100){
         grade = "S+";
+    }
+    else if(score >= 101){
+        grade = "God";
     }
     return grade;
 }

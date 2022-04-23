@@ -127,6 +127,6 @@ function userCharacter(button){
     baseCharacter.elementalBurst.Level = Number.parseInt(document.getElementById("Talent_3").value);
     let character = new Createcharacter(baseCharacter,baseWeapon,artifacts);
     applyBonuses(character);
-    alert(compareCharacters(character));
+    compareCharacters(character)
 }
     

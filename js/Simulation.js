@@ -111,7 +111,14 @@ function compareCharacters(usersCharacter) {
     }
     let card = generateCharacterCard(result2.char,userScore,supportingElement,role,elementalResonance);
     let doc = document.getElementById("result-container-container");
+    let parentDoc = document.getElementById("result-container");
+    doc.innerHTML = "";
     doc.insertAdjacentHTML('beforeend', card.card);
+    parentDoc.style.transform ="translate(-50%,50%) scale(0.1)";
+    parentDoc.style.display = "flex";
+    setTimeout(function () {
+    parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
+    }, 100);
     return `${Math.floor((userScore / result[0]) * 100)}/100`;
 }
 

@@ -4,26 +4,62 @@ function Artifact(type,mainstat,substat1,substat2,substat3,substat4,set){
     this.Substats = [substat1,substat2,substat3,substat4];
     this.Set = set;
 }
+function getArtifactSetsAsHtmlOption(){
+    let htmlCode = "<option value='None'>None</option>";
+    for(let i = 0; i < setsList.length; i++){
+        htmlCode += `<option value="${setsList[i]}">${setsList[i]}</option>`;
+    }
+    return htmlCode;
+}
 const sets ={
     [0]:"Archaic Petra",
     [1]:"Blizzard Strayer",
     [2]:"Bloodstained Chivalry",
     [3]:"Crimson Witch of Flames",
-    [4]:"Emblem of Severed Fate",
-    [5]:"Gladiator's Finale",
-    [6]:"Heart of Depth",
-    [7]:"Lavawalker",
-    [8]:"Maiden Beloved",
-    [9]:"Noblesse Oblige",
-    [10]:"Pale Flame",
-    [11]:"Retracing Bolide",
-    [12]:"Shimenawa's Reminiscence",
-    [13]:"Tenacity of the Millelith",
-    [14]:"Thundering Fury",
-    [15]:"Thundersoother",
-    [16]:"Viridescent Venerer",
-    [17]:"Wanderer's Troupe"
+    [4]:"Echoes of an Offering",
+    [5]:"Emblem of Severed Fate",  
+    [6]:"Gladiator's Finale",
+    [7]:"Heart of Depth",
+    [8]:"Husk of Opulent Dreams",
+    [9]:"Lavawalker",
+    [10]:"Maiden Beloved",
+    [11]:"Noblesse Oblige",
+    [12]:"Ocean-Hued Clam",
+    [13]:"Pale Flame",
+    [14]:"Retracing Bolide",
+    [15]:"Shimenawa's Reminiscence",
+    [16]:"Tenacity of the Millelith",
+    [17]:"Thundering Fury",
+    [18]:"Thundersoother",
+    [19]:"Vermillion Hereafter",
+    [20]:"Viridescent Venerer",
+    [21]:"Wanderer's Troupe"
 }
+const setsList = [
+"Archaic Petra",
+"Blizzard Strayer",
+"Bloodstained Chivalry",
+"Crimson Witch of Flames",
+"Echoes of an Offering",
+"Emblem of Severed Fate",
+"Gladiator's Finale",
+"Heart of Depth",
+"Husk of Opulent Dreams",
+"Lavawalker",
+"Maiden Beloved",
+"Noblesse Oblige",
+"Ocean-Hued Clam",
+"Pale Flame",
+"Retracing Bolide",
+"Shimenawa's Reminiscence",
+"Tenacity of the Millelith",
+"Thundering Fury",
+"Thundersoother",
+"Vermillion Hereafter",
+"Viridescent Venerer",
+"Wanderer's Troupe"
+];
+
 const artifactSets ={
     ["Archaic Petra"]:{
         Type: "Archaic Petra",
@@ -45,6 +81,12 @@ const artifactSets ={
         twoPiece:{Type:"PyroDMGBonus",Value:15}
         
     },
+    ["Echoes of an Offering"]:{
+        Type: "Echoes of an Offering",
+        twoPiece:{Type:"ATK%",Value:18},
+        fourPiece:{Type:"Echoes"}
+        
+    },
     ["Emblem of Severed Fate"]:{
         Type: "Emblem of Severed Fate",
         twoPiece:{Type:"EnergyRecharge",Value:20},
@@ -63,6 +105,12 @@ const artifactSets ={
         fourPiece:{Type:"Heart of Depth",Value:null}
         
     },
+    ["Husk of Opulent Dreams"]:{
+        Type: "Husk of Opulent Dreams",
+        twoPiece:{Type:"DEF%",Value:30},
+        fourPiece:[{Type:"DEF%",Value:24},{Type:"GeoDMGBonus",Value:24}]
+        
+    },
     ["Lavawalker"]:{
         Type: "Lavawalker",
         twoPiece:{Type:"",Value:null},
@@ -77,6 +125,12 @@ const artifactSets ={
     ["Noblesse Oblige"]:{
         Type: "Noblesse Oblige",
         twoPiece:{Type:"BurstDMG%",Value:20},
+        
+    },
+    ["Ocean-Hued Clam"]:{
+        Type: "Ocean-Hued Clam",
+        twoPiece:{Type:"HealingBonus",Value:15},
+        fourPiece:{Type:"Ocean-Hued Clam",Value:null}
         
     },
     ["Pale Flame"]:{
@@ -115,6 +169,12 @@ const artifactSets ={
         Type: "Thundersoother",
         twoPiece:{Type:"",Value:null},
         fourPiece:{Type:"",Value:35}
+        
+    },
+    ["Vermillion Hereafter"]:{
+        Type: "Vermillion Hereafter",
+        twoPiece:{Type:"ATK%",Value:18},
+        fourPiece:{Type:"Vermillion Hereafter",Value:null}
         
     },
     ["Viridescent Venerer"]:{
