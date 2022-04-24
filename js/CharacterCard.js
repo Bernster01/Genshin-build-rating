@@ -1,22 +1,31 @@
-let cardData = null;
-function generateCharacterCard(character, score,supportingElement, role,resonances,createData) {
-    if(createData){
-    cardData={
-        Character:character,
-        Score:score,
-        SupportingElement:supportingElement,
-        Role:role,
-        Resonances:resonances,
-        Date:Date().toString()
-    };
+let currentCardData = null;
+function generateCharacterCard(character, score, supportingElement, role, resonances, createData, date) {
+    if (createData) {
+        currentCardData = {
+            Character: character,
+            Score: score,
+            SupportingElement: supportingElement,
+            Role: role,
+            Resonances: resonances,
+            Date: Date().toString()
+        };
+
     }
+
+    if (date == undefined) {
+        date = Date().toString();
+    }
+
     let elementResult = getElement(character);
     let element = elementResult.element;
     let gradient = elementResult.gradient;
     let grade = getGrade(score);
     let resonanceHTMLCode = getResonance(resonances);
     let artifacts = getArtifacts(character.artifacts);
-    let supportingElementHtmlCode = (supportingElement != null) ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
+    let supportingElementHtmlCode = (supportingElement != null && supportingElement != "null") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
+    if (!createData) {
+        console.log(supportingElementHtmlCode);
+    }
     let card = `<div id="result-splash-container" 
     style="border: #323031 solid 0.2rem;
 	border-radius: 2rem;
@@ -46,7 +55,7 @@ function generateCharacterCard(character, score,supportingElement, role,resonanc
             align-items: center;">
                 <h1 id="result-splash-name" style="margin:0;">Genshin Helper</h1>
                 <h2 style="border:none; margin: -1rem 0rem 0rem 0rem;">Rate my build</h2>
-                <h4 style="border:none;">Date: ${Date().toString()}</h4>
+                <h4 style="border:none;">Date: ${date}</h4>
             </div>
             <div class="result-splash-top-info-part">
                 <h1 id="result-splash-name" style="margin:0;">${character.name}</h1>
@@ -102,30 +111,30 @@ function generateCharacterCard(character, score,supportingElement, role,resonanc
                         <div class="character-card-info-down-left character-card-info-part">
                             <div class="character-card-stats" id="character-card-stat-energyrecharge">
                                 <h4>Energy Recharge:</h4>
-                                <span>${Math.round(character.advancedstats.energyRecharge*10)/10}</span>
+                                <span>${Math.round(character.advancedstats.energyRecharge * 10) / 10}</span>
                             </div>
                             <div class="character-card-stats" id="character-card-stat-critrate">
                                 <h4>Crite Rate:</h4>
-                                <span>${Math.round(character.critRate()*10)/10}%</span>
+                                <span>${Math.round(character.critRate() * 10) / 10}%</span>
                             </div>
                             <div class="character-card-stats" id="character-card-stat-critdmg">
                                 <h4>Crit DMG:</h4>
-                                <span>${Math.round(character.critDMG()*10)/10}%</span>
+                                <span>${Math.round(character.critDMG() * 10) / 10}%</span>
                             </div>
 
                         </div>
                         <div class="character-card-info-down-right character-card-info-part">
                             <div class="character-card-stats" id="character-card-stat-elementalbonus">
                                 <h4>${element.Type}:</h4>
-                                <span>${Math.round(element.Value*10)/10}</span>
+                                <span>${Math.round(element.Value * 10) / 10}</span>
                             </div>
                             <div class="character-card-stats" id="character-card-stat-elementalbonus">
                                 <h4>Shield Strength:</h4>
-                                <span>${Math.round(character.advancedstats.shieldStrength*10)/10}</span>
+                                <span>${Math.round(character.advancedstats.shieldStrength * 10) / 10}</span>
                             </div>
                             <div class="character-card-stats" id="character-card-stat-elementalbonus">
                                 <h4>Healing Bonus:</h4>
-                                <span>${Math.round(character.advancedstats.healingBonus*10)/10}</span>
+                                <span>${Math.round(character.advancedstats.healingBonus * 10) / 10}</span>
                             </div>
                         </div>
                     </div>
@@ -427,11 +436,11 @@ function getMostElement(elementalBonuses) {
             element = elementalBonuses[i].Type;
         }
     }
-    if(element === ""){
-        element ="No Elemental Bonus";
+    if (element === "") {
+        element = "No Elemental Bonus";
     }
     console.log(element);
-    return {Type:element, Value:max};
+    return { Type: element, Value: max };
 }
 function getArtifacts(artifacts) {
     let artifactList = {
@@ -446,46 +455,160 @@ function getArtifacts(artifacts) {
     });
     return artifactList;
 }
-function getResonance(resonances){
+function getResonance(resonances) {
     let htmlCode = "";
-    let resonancesList =[];
-    if(resonances[0] != "" || resonances[1] != ""){
-    for(let key in resonances){
-        resonancesList.push(resonances[key].toLowerCase());
-        htmlCode += `<img src="../Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
+    let resonancesList = [];
+    console.log(resonances);
+    if (resonances[0] != "" || resonances[1] != "") {
+        for (let key in resonances) {
+            resonancesList.push(resonances[key].toLowerCase());
+            if (resonances[key] != "") {
+                htmlCode += `<img src="../Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
+            }
+        }
     }
-}
     console.log(htmlCode);
     return htmlCode;
 }
-function getGrade(score){
+function getGrade(score) {
     let grade;
-    if(score >= 0 && score <= 30){
+    if (score >= 0 && score <= 30) {
         grade = "F";
     }
-    else if(score >= 31 && score <= 40){
+    else if (score >= 31 && score <= 40) {
         grade = "E";
     }
-    else if(score >= 41 && score <= 50){
+    else if (score >= 41 && score <= 50) {
         grade = "D";
     }
-    else if(score >= 51 && score <= 60){
+    else if (score >= 51 && score <= 60) {
         grade = "C";
     }
-    else if(score >= 61 && score <= 70){
+    else if (score >= 61 && score <= 70) {
         grade = "B";
     }
-    else if(score >= 71 && score <= 80){
+    else if (score >= 71 && score <= 80) {
         grade = "A";
     }
-    else if(score >= 81 && score <= 90){
+    else if (score >= 81 && score <= 90) {
         grade = "S";
     }
-    else if(score >= 91 && score <= 100){
+    else if (score >= 91 && score <= 100) {
         grade = "S+";
     }
-    else if(score >= 101){
+    else if (score >= 101) {
         grade = "God";
     }
     return grade;
+}
+function switchCharacterCardContainer() {
+    if (characterCardContainerIsOpen) {
+        characterCardContainerIsOpen = false;
+        let characterCardContainer = document.getElementById("saved-characters-cards-container");
+        let characterCardWrapper = document.getElementById("saved-characters-cards-wrapper");
+        characterCardContainer.style.transform = "translateY(88%)";
+        characterCardWrapper.style.boxShadow = " 0px 0px 0px 0px"
+    } else {
+        characterCardContainerIsOpen = true;
+        let characterCardContainer = document.getElementById("saved-characters-cards-container");
+        let characterCardWrapper = document.getElementById("saved-characters-cards-wrapper");
+
+        characterCardContainer.style.transform = "translateY(0)";
+        characterCardWrapper.style.boxShadow = " 8px 0px 64px 4px"
+    }
+
+}
+function generateCharacterCardsFromCookies() {
+    let fromCookies = getCardCookies();
+
+    let code = [];
+    for (let i = 0; i < fromCookies.length; i++) {
+        let baseCharacter = _.cloneDeep(AllCharacters[fromCookies[i].name]);
+        let baseWeapon = _.cloneDeep(AllWeapons[fromCookies[i].weapon]);
+        baseCharacter.level = fromCookies[i].level;
+        baseWeapon.level = fromCookies[i].weaponLevel;
+        baseCharacter.normalAttackLevel = fromCookies[i].talents.normalAttackLevel;
+        baseCharacter.elementalSkill.Level = fromCookies[i].talents.elementalSkill;
+        baseCharacter.elementalBurst.Level = fromCookies[i].talents.elementalBurst;
+
+        let character = new Createcharacter(baseCharacter, baseWeapon, fromCookies[i].artifacts);
+        applyBonuses(character);
+        let result = Simulation(character);
+        let resonances = ["", ""];
+        let split = fromCookies[i].resonance.split("/");
+
+        resonances[0] = split[0] === undefined ? "" : split[0];
+        resonances[1] = split[1] === undefined ? "" : split[1];
+        console.log(result.char)
+        code.push({ htmlCode: generateCharacterCard(result.char, fromCookies[i].score, fromCookies[i].supportingElement, fromCookies[i].role, resonances, false, fromCookies[i].date), cookie: fromCookies[i].cookie });
+    }
+    placeCharacterCards(code);
+    return "Success";
+}
+function placeCharacterCards(code) {
+
+    let container = document.getElementById("saved-characters-cards-wrapper");
+    code.forEach(card => {
+        let htmlCode = `<div id="${card.cookie}"class="saved-character-card-container"><div class="saved-character-card"><div class="transform-card"  onclick="showBigger(this)">${card.htmlCode.card}</div></div>
+        <div><button class="delete-character-card" onclick="deleteCharacterCard('${card.cookie}')"><i class="fa-solid fa-trash-can"></i></button></div></div>`;
+
+        container.insertAdjacentHTML("beforeend", htmlCode);
+    })
+}
+
+function deleteCharacterCard(name, bool) {
+    if (bool) {
+        deleteCookie(name);
+        let doc = document.getElementById(name);
+        let doc2 = document.getElementById("delete-character-card-prompt-container");
+        doc.style.transition = "all 0.4s";
+        doc.style.transform = "scale(0.001)";
+        doc2.innerHTML = "";
+        setTimeout(() => {
+            doc.remove();
+        }, 500);
+    }
+    else {
+
+        let doc = document.getElementById("delete-character-card-prompt-container");
+        console.log(doc.innerHTML);
+        if (doc.innerHTML == "") {
+            let html = `<div class="prompt-container">		
+                            <div class="delete-character-card-prompt-wrapper">
+                                <div class="delete-character-card-prompt">
+                                    <p>Are you sure you want to delete the character card?</p>
+                                    <div class="delete-character-card-prompt-btns">
+                                        <button class="generic-btn" onclick="deleteCharacterCard('${name}',true)">Yes</button>
+                                        <button class="generic-btn" onclick="closeDeleteCharacterCardPrompt()">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+            doc.innerHTML = html;
+        }
+    }
+}
+function closeDeleteCharacterCardPrompt() {
+    let doc = document.getElementById("delete-character-card-prompt-container");
+    doc.innerHTML = "";
+}
+function showBigger(element) {
+    let doc = document.getElementById("result-container2");
+    let doc2 = document.getElementById("result-container-container2");
+    doc2.innerHTML = "";
+    doc2.insertAdjacentHTML("beforeend", element.innerHTML);
+    doc.style.display = "Flex";
+    setTimeout(function () {
+        doc.style.transform = "translate(-50%,-50%) scale(1)";
+    }, 100);
+}
+function closeCharacterCard2() {
+    let doc = document.getElementById("result-container2");
+    let doc2 = document.getElementById("result-container-container2");
+    doc.style.transform = "translate(-50%,50%) scale(0.1)";
+    setTimeout(function () {
+        doc.style.display = "none";
+        doc2.innerHTML = "";
+
+    }, 500);
 }

@@ -10,7 +10,9 @@ document.addEventListener('mouseup', function (e) {
 
   }
 });
-
+document.addEventListener('DOMContentLoaded', function () {
+  generateCharacterCardsFromCookies();
+});
 
 
 //By ToddWebDev at https://codepen.io/toddwebdev/pen/yExKoj (slightly modifed)

@@ -773,13 +773,32 @@
 				</div>
 				<div id="result-buttons">
 					<div>
-						<button class="generic-btn p1rem br2rem" onclick="save(cardData)">Save</button>
+						<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
 					</div>
 					<div>
 						<button class="generic-btn p1rem br2rem">More Details</button>
 					</div>
 				</div>
 			</div>
+		</div>
+		<div id="saved-characters-cards-container">
+			<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
+				<span class="noselect">Your characters</span>
+			</div>
+			<div id="saved-characters-cards-wrapper">
+
+			</div>
+		</div>
+		<div id="delete-character-card-prompt-container"></div>
+		<div id="result-container2">
+			<div class="exit-btn generic-btn" onclick="closeCharacterCard2()">
+				<i class="fa-solid fa-x"></i>
+			</div>
+
+			<div id="result-container-container2">
+
+			</div>
+			
 		</div>
 		<footer>
 
@@ -876,6 +895,24 @@
 				doc.style.display = "none";
 			}, 500);
 		}
+		let characterCardOnHover = document.getElementById("saved-characters-cards-btn");
+		characterCardOnHover.addEventListener("mouseenter", function () {
+			if (!characterCardContainerIsOpen) {
+				let characterCardWrapper = document.getElementById("saved-characters-cards-wrapper");
+				characterCardWrapper.style.boxShadow = " 2px 0px 64px 1px"
+				let characterCardContainer = document.getElementById("saved-characters-cards-container");
+				characterCardContainer.style.transform = "translateY(80%)";
+			}
+		});
+		characterCardOnHover.addEventListener("mouseleave", function () {
+			if (!characterCardContainerIsOpen) {
+				let characterCardWrapper = document.getElementById("saved-characters-cards-wrapper");
+				characterCardWrapper.style.boxShadow = " 0px 0px 0px 0px"
+				let characterCardContainer = document.getElementById("saved-characters-cards-container");
+				characterCardContainer.style.transform = "translateY(88%)";
+			}
+		});
+		let characterCardContainerIsOpen = false;
 	</script>
 
 	<script src="js/EventListener.js"> </script>
