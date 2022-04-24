@@ -549,7 +549,7 @@ function placeCharacterCards(code) {
 
     let container = document.getElementById("saved-characters-cards-wrapper");
     code.forEach(card => {
-        let htmlCode = `<div id="${card.cookie}"class="saved-character-card-container"><div class="saved-character-card"><div class="transform-card">${card.htmlCode.card}</div></div>
+        let htmlCode = `<div id="${card.cookie}"class="saved-character-card-container"><div class="saved-character-card"><div class="transform-card"  onclick="showBigger(this)">${card.htmlCode.card}</div></div>
         <div><button class="delete-character-card" onclick="deleteCharacterCard('${card.cookie}')"><i class="fa-solid fa-trash-can"></i></button></div></div>`;
 
         container.insertAdjacentHTML("beforeend", htmlCode);
@@ -569,7 +569,7 @@ function deleteCharacterCard(name, bool) {
         }, 500);
     }
     else {
-        
+
         let doc = document.getElementById("delete-character-card-prompt-container");
         console.log(doc.innerHTML);
         if (doc.innerHTML == "") {
@@ -591,4 +591,24 @@ function deleteCharacterCard(name, bool) {
 function closeDeleteCharacterCardPrompt() {
     let doc = document.getElementById("delete-character-card-prompt-container");
     doc.innerHTML = "";
+}
+function showBigger(element) {
+    let doc = document.getElementById("result-container2");
+    let doc2 = document.getElementById("result-container-container2");
+    doc2.innerHTML = "";
+    doc2.insertAdjacentHTML("beforeend", element.innerHTML);
+    doc.style.display = "Flex";
+    setTimeout(function () {
+        doc.style.transform = "translate(-50%,-50%) scale(1)";
+    }, 100);
+}
+function closeCharacterCard2() {
+    let doc = document.getElementById("result-container2");
+    let doc2 = document.getElementById("result-container-container2");
+    doc.style.transform = "translate(-50%,50%) scale(0.1)";
+    setTimeout(function () {
+        doc.style.display = "none";
+        doc2.innerHTML = "";
+
+    }, 500);
 }
