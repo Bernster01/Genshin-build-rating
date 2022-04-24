@@ -1,4 +1,15 @@
-function generateCharacterCard(character, score,supportingElement, role,resonances) {
+let cardData = null;
+function generateCharacterCard(character, score,supportingElement, role,resonances,createData) {
+    if(createData){
+    cardData={
+        Character:character,
+        Score:score,
+        SupportingElement:supportingElement,
+        Role:role,
+        Resonances:resonances,
+        Date:Date().toString()
+    };
+    }
     let elementResult = getElement(character);
     let element = elementResult.element;
     let gradient = elementResult.gradient;

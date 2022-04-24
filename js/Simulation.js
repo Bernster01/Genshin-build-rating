@@ -109,7 +109,7 @@ function compareCharacters(usersCharacter) {
         
         userScore =Math.floor(userScore/bestSupportScore*100);
     }
-    let card = generateCharacterCard(result2.char,userScore,supportingElement,role,elementalResonance);
+    let card = generateCharacterCard(result2.char,userScore,supportingElement,role,elementalResonance,true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
     doc.innerHTML = "";
