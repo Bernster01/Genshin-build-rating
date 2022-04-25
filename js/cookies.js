@@ -244,3 +244,210 @@ function deleteAllCookies() {
     document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     setTimeout(function () { location.reload(); }, 1000);
 }
+function saveArtifactCookie(){
+    let artifact = [{
+        Type: "Circlet",
+        Set: document.getElementById("Circlet_set").value,
+        Mainstat: {
+            Type: document.getElementById("Circlet_mainstat").value,
+            Value: Number.parseFloat(document.getElementById("Circlet_mainstat_value").value)
+        },
+        Substats: [
+            {
+                Type: document.getElementById("Circlet_substat_1").value,
+                Value: Number.parseFloat(document.getElementById("Circlet_substat_1_value").value)
+            },
+            {
+                Type: document.getElementById("Circlet_substat_2").value,
+                Value: Number.parseFloat(document.getElementById("Circlet_substat_2_value").value)
+            },
+            {
+                Type: document.getElementById("Circlet_substat_3").value,
+                Value: Number.parseFloat(document.getElementById("Circlet_substat_3_value").value)
+            },
+            {
+                Type: document.getElementById("Circlet_substat_4").value,
+                Value: Number.parseFloat(document.getElementById("Circlet_substat_4_value").value)
+            }
+        ]
+    },
+    {
+        Type: "Flower",
+        Set: document.getElementById("Flower_set").value,
+        Mainstat: {
+            Type: document.getElementById("Flower_mainstat").value,
+            Value: Number.parseFloat(document.getElementById("Flower_mainstat_value").value)
+        },
+        Substats: [
+            {
+                Type: document.getElementById("Flower_substat_1").value,
+                Value: Number.parseFloat(document.getElementById("Flower_substat_1_value").value)
+            },
+            {
+                Type: document.getElementById("Flower_substat_2").value,
+                Value: Number.parseFloat(document.getElementById("Flower_substat_2_value").value)
+            },
+            {
+                Type: document.getElementById("Flower_substat_3").value,
+                Value: Number.parseFloat(document.getElementById("Flower_substat_3_value").value)
+            },
+            {
+                Type: document.getElementById("Flower_substat_4").value,
+                Value: Number.parseFloat(document.getElementById("Flower_substat_4_value").value)
+            }
+        ]
+    },
+    {
+        Type: "Plume",
+        Set: document.getElementById("Plume_set").value,
+        Mainstat: {
+            Type: document.getElementById("Plume_mainstat").value,
+            Value: Number.parseFloat(document.getElementById("Plume_mainstat_value").value)
+        },
+        Substats: [
+            {
+                Type: document.getElementById("Plume_substat_1").value,
+                Value: Number.parseFloat(document.getElementById("Plume_substat_1_value").value)
+            },
+            {
+                Type: document.getElementById("Plume_substat_2").value,
+                Value: Number.parseFloat(document.getElementById("Plume_substat_2_value").value)
+            },
+            {
+                Type: document.getElementById("Plume_substat_3").value,
+                Value: Number.parseFloat(document.getElementById("Plume_substat_3_value").value)
+            },
+            {
+                Type: document.getElementById("Plume_substat_4").value,
+                Value: Number.parseFloat(document.getElementById("Plume_substat_4_value").value)
+            }
+        ]
+    },
+    {
+        Type: "Sands",
+        Set: document.getElementById("Sands_set").value,
+        Mainstat: {
+            Type: document.getElementById("Sands_mainstat").value,
+            Value: Number.parseFloat(document.getElementById("Sands_mainstat_value").value)
+        },
+        Substats: [
+            {
+                Type: document.getElementById("Sands_substat_1").value,
+                Value: Number.parseFloat(document.getElementById("Sands_substat_1_value").value)
+            },
+            {
+                Type: document.getElementById("Sands_substat_2").value,
+                Value: Number.parseFloat(document.getElementById("Sands_substat_2_value").value)
+            },
+            {
+                Type: document.getElementById("Sands_substat_3").value,
+                Value: Number.parseFloat(document.getElementById("Sands_substat_3_value").value)
+            },
+            {
+                Type: document.getElementById("Sands_substat_4").value,
+                Value: Number.parseFloat(document.getElementById("Sands_substat_4_value").value)
+            }
+        ]
+    },
+    {
+        Type: "Goblet",
+        Set: document.getElementById("Goblet_set").value,
+        Mainstat: {
+            Type: document.getElementById("Goblet_mainstat").value,
+            Value: Number.parseFloat(document.getElementById("Goblet_mainstat_value").value)
+        },
+        Substats: [
+            {
+                Type: document.getElementById("Goblet_substat_1").value,
+                Value: Number.parseFloat(document.getElementById("Goblet_substat_1_value").value)
+            },
+            {
+                Type: document.getElementById("Goblet_substat_2").value,
+                Value: Number.parseFloat(document.getElementById("Goblet_substat_2_value").value)
+            },
+            {
+                Type: document.getElementById("Goblet_substat_3").value,
+                Value: Number.parseFloat(document.getElementById("Goblet_substat_3_value").value)
+            },
+            {
+                Type: document.getElementById("Goblet_substat_4").value,
+                Value: Number.parseFloat(document.getElementById("Goblet_substat_4_value").value)
+            }
+        ]
+    }
+    ]
+    console.log(artifact);
+    let artifact_string = JSON.stringify(artifact);
+    document.cookie = "artifact=" + artifact_string+";";
+}
+function loadArtifactCookie(){
+    let artifact_string = document.cookie.split("artifact=")[1].split(";")[0];
+    if(artifact_string != undefined){
+        console.log(artifact_string);
+        let artifact = JSON.parse(artifact_string);
+        giveArtifactValues(artifact);
+    }
+
+}
+function giveArtifactValues(artifact){
+        document.getElementById("Circlet_set").value = artifact[0].Set;
+        document.getElementById("Circlet").src = "Artifacts/"+artifact[0].Set+" Circlet.webp";
+        document.getElementById("Circlet_mainstat").value = artifact[0].Mainstat.Type;
+        document.getElementById("Circlet_mainstat_value").value = artifact[0].Mainstat.Value;
+        document.getElementById("Circlet_substat_1").value = artifact[0].Substats[0].Type;
+        document.getElementById("Circlet_substat_1_value").value = artifact[0].Substats[0].Value;
+        document.getElementById("Circlet_substat_2").value = artifact[0].Substats[1].Type;
+        document.getElementById("Circlet_substat_2_value").value = artifact[0].Substats[1].Value;
+        document.getElementById("Circlet_substat_3").value = artifact[0].Substats[2].Type;
+        document.getElementById("Circlet_substat_3_value").value = artifact[0].Substats[2].Value;
+        document.getElementById("Circlet_substat_4").value = artifact[0].Substats[3].Type;
+        document.getElementById("Circlet_substat_4_value").value = artifact[0].Substats[3].Value;
+        document.getElementById("Flower_set").value = artifact[1].Set;
+        document.getElementById("Flower").src = "Artifacts/"+artifact[1].Set+" Flower.webp";
+        document.getElementById("Flower_mainstat").value = artifact[1].Mainstat.Type;
+        document.getElementById("Flower_mainstat_value").value = artifact[1].Mainstat.Value;
+        document.getElementById("Flower_substat_1").value = artifact[1].Substats[0].Type;
+        document.getElementById("Flower_substat_1_value").value = artifact[1].Substats[0].Value;
+        document.getElementById("Flower_substat_2").value = artifact[1].Substats[1].Type;
+        document.getElementById("Flower_substat_2_value").value = artifact[1].Substats[1].Value;
+        document.getElementById("Flower_substat_3").value = artifact[1].Substats[2].Type;
+        document.getElementById("Flower_substat_3_value").value = artifact[1].Substats[2].Value;
+        document.getElementById("Flower_substat_4").value = artifact[1].Substats[3].Type;
+        document.getElementById("Flower_substat_4_value").value = artifact[1].Substats[3].Value;
+        document.getElementById("Plume_set").value = artifact[2].Set;
+        document.getElementById("Plume").src = "Artifacts/"+artifact[2].Set+" Plume.webp";
+        document.getElementById("Plume_mainstat").value = artifact[2].Mainstat.Type;
+        document.getElementById("Plume_mainstat_value").value = artifact[2].Mainstat.Value;
+        document.getElementById("Plume_substat_1").value = artifact[2].Substats[0].Type;
+        document.getElementById("Plume_substat_1_value").value = artifact[2].Substats[0].Value;
+        document.getElementById("Plume_substat_2").value = artifact[2].Substats[1].Type;
+        document.getElementById("Plume_substat_2_value").value = artifact[2].Substats[1].Value;
+        document.getElementById("Plume_substat_3").value = artifact[2].Substats[2].Type;
+        document.getElementById("Plume_substat_3_value").value = artifact[2].Substats[2].Value;
+        document.getElementById("Plume_substat_4").value = artifact[2].Substats[3].Type;
+        document.getElementById("Plume_substat_4_value").value = artifact[2].Substats[3].Value;
+        document.getElementById("Sands_set").value = artifact[3].Set;
+        document.getElementById("Sands").src = "Artifacts/"+artifact[3].Set+" Sands.webp";
+        document.getElementById("Sands_mainstat").value = artifact[3].Mainstat.Type;
+        document.getElementById("Sands_mainstat_value").value = artifact[3].Mainstat.Value;
+        document.getElementById("Sands_substat_1").value = artifact[3].Substats[0].Type;
+        document.getElementById("Sands_substat_1_value").value = artifact[3].Substats[0].Value;
+        document.getElementById("Sands_substat_2").value = artifact[3].Substats[1].Type;
+        document.getElementById("Sands_substat_2_value").value = artifact[3].Substats[1].Value;
+        document.getElementById("Sands_substat_3").value = artifact[3].Substats[2].Type;
+        document.getElementById("Sands_substat_3_value").value = artifact[3].Substats[2].Value;
+        document.getElementById("Sands_substat_4").value = artifact[3].Substats[3].Type;
+        document.getElementById("Sands_substat_4_value").value = artifact[3].Substats[3].Value;
+        document.getElementById("Goblet_set").value = artifact[4].Set;
+        document.getElementById("Goblet").src = "Artifacts/"+artifact[4].Set+" Goblet.webp";
+        document.getElementById("Goblet_mainstat").value = artifact[4].Mainstat.Type;
+        document.getElementById("Goblet_mainstat_value").value = artifact[4].Mainstat.Value;
+        document.getElementById("Goblet_substat_1").value = artifact[4].Substats[0].Type;
+        document.getElementById("Goblet_substat_1_value").value = artifact[4].Substats[0].Value;
+        document.getElementById("Goblet_substat_2").value = artifact[4].Substats[1].Type;
+        document.getElementById("Goblet_substat_2_value").value = artifact[4].Substats[1].Value;
+        document.getElementById("Goblet_substat_3").value = artifact[4].Substats[2].Type;
+        document.getElementById("Goblet_substat_3_value").value = artifact[4].Substats[2].Value;
+        document.getElementById("Goblet_substat_4").value = artifact[4].Substats[3].Type;
+        document.getElementById("Goblet_substat_4_value").value = artifact[4].Substats[3].Value;
+}

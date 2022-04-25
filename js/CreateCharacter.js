@@ -117,7 +117,8 @@ function userCharacter(button){
     };
 
     let artifacts = [circlet, flower, plume, sands, goblet];
-    
+    bestSupportScore = 0;
+    bestDMG = 0;
     baseCharacter = _.cloneDeep(baseCharacter);
     let baseWeapon = _.cloneDeep(weapon);
     baseWeapon.level = document.getElementById("WeaponLevels").value;

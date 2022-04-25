@@ -15,7 +15,11 @@ function LoadCharacters() {
 
 
 
-    loadMockArtifacts();
+    // loadMockArtifacts();
+    
+    loadArtifactCookie();
+    
+
 }
 
 function loadWeapons(character) {

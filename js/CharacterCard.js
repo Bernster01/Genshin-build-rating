@@ -533,14 +533,13 @@ function generateCharacterCardsFromCookies() {
 
         let character = new Createcharacter(baseCharacter, baseWeapon, fromCookies[i].artifacts);
         applyBonuses(character);
-        let result = Simulation(character);
         let resonances = ["", ""];
         let split = fromCookies[i].resonance.split("/");
 
         resonances[0] = split[0] === undefined ? "" : split[0];
         resonances[1] = split[1] === undefined ? "" : split[1];
-        console.log(result.char)
-        code.push({ htmlCode: generateCharacterCard(result.char, fromCookies[i].score, fromCookies[i].supportingElement, fromCookies[i].role, resonances, false, fromCookies[i].date), cookie: fromCookies[i].cookie });
+        
+        code.push({ htmlCode: generateCharacterCard(character, fromCookies[i].score, fromCookies[i].supportingElement, fromCookies[i].role, resonances, false, fromCookies[i].date), cookie: fromCookies[i].cookie });
     }
     placeCharacterCards(code);
     return "Success";

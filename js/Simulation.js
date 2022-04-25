@@ -972,6 +972,7 @@ function Simulation(character) {
                 if (Character.name == "Ganyu") {
                     let newAttack = attackAction;
                     let index = 0;
+                    console.log(attackAction)
                     attackAction.Multiplier.forEach(multiplier => {
                         index++;
                         attackAction.Multiplier = multiplier;

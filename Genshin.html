@@ -199,12 +199,12 @@
 					</div>
 				</div>
 				<h2>Artifacts</h2>
-				<div id="ArtifactContainer">
+				<div id="ArtifactContainer" onchange="saveArtifactCookie()">
 
 					<form class="Artifacts">
 						<fieldset id="Artifact_circlet">
 							<legend align="center">
-								<img id="Circlet" src="Artifacts/Circlet.png" alt="Circlet" title="Circlet"></img>
+								<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
 								<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
@@ -310,7 +310,7 @@
 					<form class="Artifacts">
 						<fieldset id="Artifact_flower">
 							<legend>
-								<img id="Flower" src="Artifacts/Flower.png" alt="Flower" title="Flower" height="30px"
+								<img id="Flower" src="Artifacts/None Flower.webp" alt="Flower" title="Flower" height="30px"
 									width="30px"></img>
 								<select id="Flower_set" onchange="displayArtifact(Artifact_flower)">
 									<script>
@@ -402,7 +402,7 @@
 					<form class="Artifacts">
 						<fieldset id="Artifact_plume">
 							<legend>
-								<img id="Plume" src="Artifacts/Plume.png" alt="Plume" title="Plume" height="30px"
+								<img id="Plume" src="Artifacts/None Plume.webp" alt="Plume" title="Plume" height="30px"
 									width="30px"></img>
 								<select id="Plume_set" onchange="displayArtifact(Artifact_plume)">
 									<script>
@@ -494,7 +494,7 @@
 					<form class="Artifacts" id="ArtifactSands">
 						<fieldset id="Artifact_sands">
 							<legend>
-								<img id="Sands" src="Artifacts/Sands.png" alt="Sands" title="Sands" height="30px"
+								<img id="Sands" src="Artifacts/None Sands.webp" alt="Sands" title="Sands" height="30px"
 									width="30px"></img>
 								<select id="Sands_set" onchange="displayArtifact(Artifact_sands)">
 									<script>
@@ -595,7 +595,7 @@
 					<form class="Artifacts">
 						<fieldset id="Artifact_goblet">
 							<legend>
-								<img id="Goblet" src="Artifacts/Goblet.png" alt="Goblet" title="Goblet" height="30px"
+								<img id="Goblet" src="Artifacts/None Goblet.webp" alt="Goblet" title="Goblet" height="30px"
 									width="30px"></img>
 								<select id="Goblet_set" onchange="displayArtifact(Artifact_goblet)">
 									<script>
@@ -812,7 +812,7 @@
 	<script>
 		function displayArtifact(select) {
 			if (select.childNodes[1].childNodes[3].value == "None")
-				select.childNodes[1].childNodes[1].src = "Artifacts/" + select.childNodes[1].childNodes[1].id + ".png";
+				select.childNodes[1].childNodes[1].src = "Artifacts/None " + select.childNodes[1].childNodes[1].id + ".webp";
 			else
 				select.childNodes[1].childNodes[1].src = "Artifacts/" + select.childNodes[1].childNodes[3].value + " " + select.childNodes[1].childNodes[1].id + ".webp";
 
