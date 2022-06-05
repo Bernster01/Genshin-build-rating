@@ -203,6 +203,7 @@
 				<div id="ArtifactContainer" onchange="saveArtifactCookie()">
 					<div class="Artifacts" id="Artifact_circlet">
 						<div class="Artifact-set-container">
+							<span>Circlet</span>
 							<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
 							<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
 								<script>
@@ -211,7 +212,7 @@
 							</select>
 						</div>
 						<div class="Artifact-stats">
-							<div>
+							<div class="Artifact-substat">
 								<div>
 									<label for="Artifact_circlet_mainstat">Choose Main stat</label>
 									<select id="Circlet_mainstat">
@@ -230,7 +231,7 @@
 									<input type="text" id="Circlet_mainstat_value"></input>
 								</div>
 							</div>
-							<div>
+							<div class="Artifact-substat">
 								<div>
 									<label for="Artifact_circlet_substat_1">Choose sub stat &nbsp </label>
 									<select id="Circlet_substat_1">
@@ -253,7 +254,7 @@
 									<input type="text" id="Circlet_substat_1_value"></input>
 								</div>
 							</div>
-							<div>
+							<div class="Artifact-substat">
 								<div>
 									<label for="Artifact_circlet_substat_2">Choose sub stat &nbsp </label>
 									<select id="Circlet_substat_2">
@@ -275,7 +276,7 @@
 									<input type="text" id="Circlet_substat_2_value"></input>
 								</div>
 							</div>
-							<div>
+							<div class="Artifact-substat">
 								<div>
 									<label for="Artifact_circlet_substat_3">Choose sub stat &nbsp </label>
 									<select id="Circlet_substat_3">
@@ -298,7 +299,7 @@
 									<input type="text" id="Circlet_substat_3_value"></input>
 								</div>
 							</div>
-							<div>
+							<div class="Artifact-substat">
 								<div>
 									<label for="Artifact_circlet_substat_4">Choose sub stat &nbsp </label>
 									<select id="Circlet_substat_4">
@@ -321,12 +322,499 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 
+					<div class="Artifacts" id="Artifact_flower">
+						<div class="Artifact-set-container">
+							<span>Flower</span>
+							<img id="Flower" src="Artifacts/None Circlet.webp" alt="Flower" title="Flower"></img>
+							<select id="Flower_set" onchange="displayArtifact(Artifact_circlet)">
+								<script>
+									document.write(getArtifactSetsAsHtmlOption());
+								</script>
+							</select>
+						</div>
+						<div class="Artifact-stats">
+							<div class="Artifact-substat">
+								<div>
+									<label for="Flower_mainstat">Choose Main stat</label>
+									<select id="Flower_mainstat">
+										<option value="HP%">HP%</option>
+										<option value="ATK%">ATK%</option>
+										<option value="DEF%">DEF%</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+										<option value="HealingBonus">Healing Bonus%</option>
+									</select>
+								</div>
+								<div>
 
+									<label for="Flower_mainstat_value">Enter value</label>
+									<input type="text" id="Flower_mainstat_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Flower_substat_1">Choose sub stat &nbsp </label>
+									<select id="Flower_substat_1">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
 
+									<label for="Flower_substat_1_value">Enter value</label>
+									<input type="text" id="Flower_substat_1_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Flower_substat_2">Choose sub stat &nbsp </label>
+									<select id="Flower_substat_2">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Flower_substat_2_value">Enter value</label>
+									<input type="text" id="Flower_substat_2_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Flower_substat_3">Choose sub stat &nbsp </label>
+									<select id="Flower_substat_3">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
 
+									<label for="Flower_substat_3_value">Enter value</label>
+									<input type="text" id="Flower_substat_3_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Flower_substat_4">Choose sub stat &nbsp </label>
+									<select id="Flower_substat_4">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Flower_substat_4_value">Enter value</label>
+									<input type="text" id="Flower_substat_4_value"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="Artifacts" id="Artifact_plume">
+						<div class="Artifact-set-container">
+							<span>Plume</span>
+							<img id="Plume" src="Artifacts/None Circlet.webp" alt="Plume" title="Plume"></img>
+							<select id="Plume_set" onchange="displayArtifact(Artifact_circlet)">
+								<script>
+									document.write(getArtifactSetsAsHtmlOption());
+								</script>
+							</select>
+						</div>
+						<div class="Artifact-stats">
+							<div class="Artifact-substat">
+								<div>
+									<label for="Plume_mainstat">Choose Main stat</label>
+									<select id="Plume_mainstat">
+										<option value="HP%">HP%</option>
+										<option value="ATK%">ATK%</option>
+										<option value="DEF%">DEF%</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+										<option value="HealingBonus">Healing Bonus%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Plume_mainstat_value">Enter value</label>
+									<input type="text" id="Plume_mainstat_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Plume_substat_1">Choose sub stat &nbsp </label>
+									<select id="Plume_substat_1">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Plume_substat_1_value">Enter value</label>
+									<input type="text" id="Plume_substat_1_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Plume_substat_2">Choose sub stat &nbsp </label>
+									<select id="Plume_substat_2">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Plume_substat_2_value">Enter value</label>
+									<input type="text" id="Plume_substat_2_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Plume_substat_3">Choose sub stat &nbsp </label>
+									<select id="Plume_substat_3">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Plume_substat_3_value">Enter value</label>
+									<input type="text" id="Plume_substat_3_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Plume_substat_4">Choose sub stat &nbsp </label>
+									<select id="Plume_substat_4">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Plume_substat_4_value">Enter value</label>
+									<input type="text" id="Plume_substat_4_value"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="Artifacts" id="Artifact_sands">
+						<div class="Artifact-set-container">
+							<span>Sands</span>
+							<img id="Sands" src="Artifacts/None Circlet.webp" alt="Sands" title="Sands"></img>
+							<select id="Sands_set" onchange="displayArtifact(Artifact_circlet)">
+								<script>
+									document.write(getArtifactSetsAsHtmlOption());
+								</script>
+							</select>
+						</div>
+						<div class="Artifact-stats">
+							<div class="Artifact-substat">
+								<div>
+									<label for="Sands_mainstat">Choose Main stat</label>
+									<select id="Sands_mainstat">
+										<option value="HP%">HP%</option>
+										<option value="ATK%">ATK%</option>
+										<option value="DEF%">DEF%</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+										<option value="HealingBonus">Healing Bonus%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Sands_mainstat_value">Enter value</label>
+									<input type="text" id="Sands_mainstat_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Sands_substat_1">Choose sub stat &nbsp </label>
+									<select id="Sands_substat_1">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Sands_substat_1_value">Enter value</label>
+									<input type="text" id="Sands_substat_1_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Sands_substat_2">Choose sub stat &nbsp </label>
+									<select id="Sands_substat_2">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Sands_substat_2_value">Enter value</label>
+									<input type="text" id="Sands_substat_2_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Sands_substat_3">Choose sub stat &nbsp </label>
+									<select id="Sands_substat_3">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Sands_substat_3_value">Enter value</label>
+									<input type="text" id="Sands_substat_3_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Sands_substat_4">Choose sub stat &nbsp </label>
+									<select id="Sands_substat_4">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Sands_substat_4_value">Enter value</label>
+									<input type="text" id="Sands_substat_4_value"></input>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="Artifacts" id="Artifact_goblet">
+						<div class="Artifact-set-container">
+							<span>Goblet</span>
+							<img id="Goblet" src="Artifacts/None Circlet.webp" alt="Goblet" title="Goblet"></img>
+							<select id="Goblet_set" onchange="displayArtifact(Artifact_circlet)">
+								<script>
+									document.write(getArtifactSetsAsHtmlOption());
+								</script>
+							</select>
+						</div>
+						<div class="Artifact-stats">
+							<div class="Artifact-substat">
+								<div>
+									<label for="Goblet_mainstat">Choose Main stat</label>
+									<select id="Goblet_mainstat">
+										<option value="HP%">HP%</option>
+										<option value="ATK%">ATK%</option>
+										<option value="DEF%">DEF%</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+										<option value="HealingBonus">Healing Bonus%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Goblet_mainstat_value">Enter value</label>
+									<input type="text" id="Goblet_mainstat_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Goblet_substat_1">Choose sub stat &nbsp </label>
+									<select id="Goblet_substat_1">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Goblet_substat_1_value">Enter value</label>
+									<input type="text" id="Goblet_substat_1_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Goblet_substat_2">Choose sub stat &nbsp </label>
+									<select id="Goblet_substat_2">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Goblet_substat_2_value">Enter value</label>
+									<input type="text" id="Goblet_substat_2_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Goblet_substat_3">Choose sub stat &nbsp </label>
+									<select id="Goblet_substat_3">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Goblet_substat_3_value">Enter value</label>
+									<input type="text" id="Goblet_substat_3_value"></input>
+								</div>
+							</div>
+							<div class="Artifact-substat">
+								<div>
+									<label for="Goblet_substat_4">Choose sub stat &nbsp </label>
+									<select id="Goblet_substat_4">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Goblet_substat_4_value">Enter value</label>
+									<input type="text" id="Goblet_substat_4_value"></input>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 					<!-- <form class="Artifacts">
@@ -435,7 +923,7 @@
 						</fieldset>
 					</form> -->
 
-					<form class="Artifacts">
+					<!-- <form class="Artifacts">
 						<fieldset id="Artifact_flower">
 							<legend>
 								<img id="Flower" src="Artifacts/None Flower.webp" alt="Flower" title="Flower"
@@ -824,7 +1312,7 @@
 							<br />
 
 						</fieldset>
-					</form>
+					</form> -->
 
 
 				</div>

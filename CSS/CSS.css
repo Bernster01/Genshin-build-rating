@@ -203,16 +203,17 @@ footer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 
 }
 
 .Artifacts {
 	display: flex;
 	background: #C1BDB3;
-	background-image: url('/Assets/Backgrounds/ArtifactBackground.jpg');
-	
-	
+	background-image: url('/Assets/Backgrounds/ArtifactBackground.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 1rem 2rem;
 	width: auto;
 	min-width: 152px;
 	height: auto;
@@ -227,20 +228,34 @@ footer {
 	align-items: center;
 	width: auto;
 	height: auto;
-	min-width: 152px;
-	min-height: 152px;
+	margin:1rem;
+	margin-right: 3rem;
+}
+.Artifact-set-container img{
+	width:200px;
+	height:200px;
+}
+.Artifact-set-container span{
+	margin:0;
+	font-size:24pt;
+	
 }
 .Artifact-stats{
 	display: flex;
 	flex-direction: column;
-	/* background with color #C1BDB3 with alpha 0.8*/
 	background: rgba(193, 189, 179, 0.75);
-	/* background: #C1BDB3; */
 	padding:1rem;
 	border-left:#5F5B6B solid 0.25rem;
 	border-radius: 15px 0px 0px 15px;
 	box-shadow: 0px 4px 12px 0.5px;
 	
+}
+.Artifact-substat{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom:1rem;
 }
 .Artifacts legend {
 	margin: auto;
