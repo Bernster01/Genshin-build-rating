@@ -28,8 +28,9 @@
 
 
 <body onload="LoadCharacters()">
-	<div class="container">
-		<div>
+	<div class="container" id="containerHelper">
+		<div id="backgroundOverlay"></div>
+		<div id="content">
 			<header>
 
 				<h1>Rate my build<h1>
@@ -200,8 +201,135 @@
 				</div>
 				<h2>Artifacts</h2>
 				<div id="ArtifactContainer" onchange="saveArtifactCookie()">
+					<div class="Artifacts" id="Artifact_circlet">
+						<div class="Artifact-set-container">
+							<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
+							<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
+								<script>
+									document.write(getArtifactSetsAsHtmlOption());
+								</script>
+							</select>
+						</div>
+						<div class="Artifact-stats">
+							<div>
+								<div>
+									<label for="Artifact_circlet_mainstat">Choose Main stat</label>
+									<select id="Circlet_mainstat">
+										<option value="HP%">HP%</option>
+										<option value="ATK%">ATK%</option>
+										<option value="DEF%">DEF%</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+										<option value="HealingBonus">Healing Bonus%</option>
+									</select>
+								</div>
+								<div>
 
-					<form class="Artifacts">
+									<label for="Circlet_mainstat_value">Enter value</label>
+									<input type="text" id="Circlet_mainstat_value"></input>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="Artifact_circlet_substat_1">Choose sub stat &nbsp </label>
+									<select id="Circlet_substat_1">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Circlet_substat_1_value">Enter value</label>
+									<input type="text" id="Circlet_substat_1_value"></input>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="Artifact_circlet_substat_2">Choose sub stat &nbsp </label>
+									<select id="Circlet_substat_2">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Circlet_substat_2_value">Enter value</label>
+									<input type="text" id="Circlet_substat_2_value"></input>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="Artifact_circlet_substat_3">Choose sub stat &nbsp </label>
+									<select id="Circlet_substat_3">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+
+									<label for="Circlet_substat_3_value">Enter value</label>
+									<input type="text" id="Circlet_substat_3_value"></input>
+								</div>
+							</div>
+							<div>
+								<div>
+									<label for="Artifact_circlet_substat_4">Choose sub stat &nbsp </label>
+									<select id="Circlet_substat_4">
+										<option value="none">None</option>
+										<option value="HP%">HP%</option>
+										<option value="HPflat">HP</option>
+										<option value="ATK%">ATK%</option>
+										<option value="ATKflat">ATK</option>
+										<option value="DEF%">DEF%</option>
+										<option value="DEFflat">DEF</option>
+										<option value="ElementalMastery">Elemental Mastery</option>
+										<option value="EnergyRecharge">Energy Recharge%</option>
+										<option value="CritRate">CRIT Rate%</option>
+										<option value="CritDMG">CRIT DMG%</option>
+									</select>
+								</div>
+								<div>
+									<label for="Circlet_substat_4_value">Enter value</label>
+									<input type="text" id="Circlet_substat_4_value"></input>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+
+
+
+					<!-- <form class="Artifacts">
 						<fieldset id="Artifact_circlet">
 							<legend align="center">
 								<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
@@ -305,13 +433,13 @@
 
 
 						</fieldset>
-					</form>
+					</form> -->
 
 					<form class="Artifacts">
 						<fieldset id="Artifact_flower">
 							<legend>
-								<img id="Flower" src="Artifacts/None Flower.webp" alt="Flower" title="Flower" height="30px"
-									width="30px"></img>
+								<img id="Flower" src="Artifacts/None Flower.webp" alt="Flower" title="Flower"
+									height="30px" width="30px"></img>
 								<select id="Flower_set" onchange="displayArtifact(Artifact_flower)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
@@ -595,8 +723,8 @@
 					<form class="Artifacts">
 						<fieldset id="Artifact_goblet">
 							<legend>
-								<img id="Goblet" src="Artifacts/None Goblet.webp" alt="Goblet" title="Goblet" height="30px"
-									width="30px"></img>
+								<img id="Goblet" src="Artifacts/None Goblet.webp" alt="Goblet" title="Goblet"
+									height="30px" width="30px"></img>
 								<select id="Goblet_set" onchange="displayArtifact(Artifact_goblet)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
@@ -798,7 +926,7 @@
 			<div id="result-container-container2">
 
 			</div>
-			
+
 		</div>
 		<footer>
 

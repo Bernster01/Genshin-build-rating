@@ -16,9 +16,9 @@ function LoadCharacters() {
 
 
     // loadMockArtifacts();
-    
+    loadBackground();
     loadArtifactCookie();
-    
+   
 
 }
 
@@ -167,6 +167,12 @@ function loadMockArtifacts2() {
     document.getElementById("Goblet_set").value = "Gladiator's Finale";
     document.getElementById("Goblet").src = "Artifacts/Gladiator's Finale Goblet.png";
 }
-
+function loadBackground(){
+    let number = GetRandomNumber(1, 1);
+    
+    
+    document.getElementById("containerHelper").style.backgroundImage = "url('/assets/Backgrounds/Background" + number + ".jpg')";
+    
+}
 
 
