@@ -898,7 +898,8 @@ span {
 	height: 150px;
 	width: 300px;
 	position: absolute;
-	transition: all 0.2s ease-in-out;
+	transition: transform 0.2s ease-in-out;
+	z-index:9
 }
 .saved-character-card-container{
 	width:300px;
@@ -906,10 +907,10 @@ span {
 	display:flex;
     align-items: flex-end;
     justify-content: center;
-	margin-left:2rem;
 }
 .saved-character-card:hover{
 	transform: scale(1.32);
+	z-index: 10;
 }
 .transform-card{
 	margin-top:-25rem;
