@@ -193,8 +193,6 @@ footer {
 }
 
 #ArtifactContainer {
-
-
 	font-size: 1rem;
 	left: 20%;
 	top: 25%;
@@ -257,28 +255,6 @@ footer {
 	align-items: center;
 	margin-bottom:1rem;
 }
-.Artifacts legend {
-	margin: auto;
-	display: grid;
-	justify-items: center;
-}
-
-.Artifacts fieldset {
-	display: flex;
-	justify-items: center;
-	margin-bottom: 5%;
-	width: 9vw;
-	min-width: 120px;
-	height: auto;
-}
-
-.Artifacts input,
-.Artifacts select {
-
-	
-
-}
-
 
 h2 {
 	background: #C1BDB3;
@@ -289,11 +265,7 @@ h2 {
 	width: auto;
 }
 
-.Artifacts fieldset legend img {
-	width: 2vw;
-	height: 2vw;
 
-}
 
 .Weapon {
 	background: #C1BDB3;
