@@ -3,7 +3,7 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-	<title>Genshin Helper</title>
+	<title>Rate my build | Genshin impact</title>
 
 	<link rel="icon" href="Characters/Paimon.png">
 	</link>
@@ -210,7 +210,7 @@
 							<div class="Artifact-set-container">
 								<span>Circlet</span>
 								<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
-								<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
+								<select id="Circlet_set" onchange="displayArtifact(this)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
 									</script>
@@ -333,7 +333,7 @@
 							<div class="Artifact-set-container">
 								<span>Flower</span>
 								<img id="Flower" src="Artifacts/None Circlet.webp" alt="Flower" title="Flower"></img>
-								<select id="Flower_set" onchange="displayArtifact(Artifact_circlet)">
+								<select id="Flower_set" onchange="displayArtifact(this)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
 									</script>
@@ -446,7 +446,7 @@
 							<div class="Artifact-set-container">
 								<span>Plume</span>
 								<img id="Plume" src="Artifacts/None Circlet.webp" alt="Plume" title="Plume"></img>
-								<select id="Plume_set" onchange="displayArtifact(Artifact_circlet)">
+								<select id="Plume_set" onchange="displayArtifact(this)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
 									</script>
@@ -559,7 +559,7 @@
 							<div class="Artifact-set-container">
 								<span>Sands</span>
 								<img id="Sands" src="Artifacts/None Circlet.webp" alt="Sands" title="Sands"></img>
-								<select id="Sands_set" onchange="displayArtifact(Artifact_circlet)">
+								<select id="Sands_set" onchange="displayArtifact(this)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
 									</script>
@@ -680,7 +680,7 @@
 							<div class="Artifact-set-container">
 								<span>Goblet</span>
 								<img id="Goblet" src="Artifacts/None Circlet.webp" alt="Goblet" title="Goblet"></img>
-								<select id="Goblet_set" onchange="displayArtifact(Artifact_circlet)">
+								<select id="Goblet_set" onchange="displayArtifact(this)">
 									<script>
 										document.write(getArtifactSetsAsHtmlOption());
 									</script>
@@ -690,7 +690,7 @@
 								<div class="Artifact-substat">
 									<div>
 										<label for="Goblet_mainstat">Choose Main stat</label>
-										<select id="Goblet_mainstat">
+										<select id="Goblet_mainstat" >
 											<option value="HP%">HP%</option>
 											<option value="ATK%">ATK%</option>
 											<option value="DEF%">DEF%</option>
@@ -919,12 +919,11 @@
 	<script src="js/Characters.js"></script>
 
 	<script>
-		function displayArtifact(select) {
-			if (select.childNodes[1].childNodes[3].value == "None")
-				select.childNodes[1].childNodes[1].src = "Artifacts/None " + select.childNodes[1].childNodes[1].id + ".webp";
-			else
-				select.childNodes[1].childNodes[1].src = "Artifacts/" + select.childNodes[1].childNodes[3].value + " " + select.childNodes[1].childNodes[1].id + ".webp";
-
+		function displayArtifact(element) {
+			let parent = element.parentElement;
+			let img = parent.querySelector('img');
+			img.src = 'Artifacts/' + element.value +' '+img.id + '.webp';
+			
 		}
 	</script>
 	<script>

@@ -37,6 +37,9 @@ function compareCharacters(usersCharacter) {
     let result = FindBestBuild(simulatedCharacter, 100);
 
     let result2 = Simulation(usersCharacter);
+    let dmgSources = result2.dmgSources;
+    dmgSources.aa = result2.dmg-(dmgSources.e + dmgSources.q);
+    console.log(result2.dmgSources)
     let userScore;
     let bonsuMultiplier = 1;
     if (vvActive)
@@ -889,6 +892,7 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
+    let dmgSources = {aa:0,e:0,q:0};
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
         let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action };
@@ -1159,8 +1163,10 @@ function Simulation(character) {
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
+                    
                     if (Number.isInteger(result)) {
                         totalDmg += result;
+                        dmgSources.e += result;
                     } else {
                         if (result.dmg != undefined)
                             totalDmg += result.dmg;
@@ -1170,11 +1176,13 @@ function Simulation(character) {
                             atkBuff += result.attackBuff;
                         if (result.shield != undefined)
                             shield += result.shield;
+                            dmgSources.e += result.dmg;
                     }
                 }
                 else {
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
+                    dmgSources.e += eDmg;
 
                 }
                 switch (Character.weapon.name) {
@@ -1193,8 +1201,10 @@ function Simulation(character) {
             case "Q":
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalBurst.Skill(Character);
+                    
                     if (Number.isInteger(result)) {
                         totalDmg += result;
+                        dmgSources.q += result;
                     } else {
                         if (result.dmg != undefined)
                             totalDmg += result.dmg;
@@ -1204,6 +1214,7 @@ function Simulation(character) {
                             atkBuff += result.attackBuff;
                         if (result.shield != undefined)
                             shield += result.shield;
+                        dmgSources.q += result.dmg;
                     }
                 }
                 else {
@@ -1215,6 +1226,7 @@ function Simulation(character) {
                             break;
                     }
                     let qDmg = Character.elementalBurst.Skill(Character);
+                  
                     switch (Character.weapon.name) {
                         case "Mistsplitter Reforged":
                             if (!mistSplitterBurstStack)
@@ -1237,7 +1249,7 @@ function Simulation(character) {
                         energyMultiplier = 1;
                     qDmg *= energyMultiplier;
                     totalDmg += qDmg;
-
+                    dmgSources.q += qDmg;
                 }
                 break;
 
@@ -1253,7 +1265,7 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
-    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield };
+    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
 function dmgCalc(attackAction, Character, type) {

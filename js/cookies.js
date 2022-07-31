@@ -383,7 +383,7 @@ function saveArtifactCookie(){
 function loadArtifactCookie(){
     let artifact_string = document.cookie.split("artifact=")[1].split(";")[0];
     if(artifact_string != undefined){
-        console.log(artifact_string);
+        // console.log(artifact_string);
         let artifact = JSON.parse(artifact_string);
         giveArtifactValues(artifact);
     }
