@@ -3507,7 +3507,7 @@ function crimsonOoyoroi(Character) {
     for (let index = 0; index < 15; index++) {
         dmg += dmgCalc(attack, Character, "ElementalBurst") * 3 + (hasPassive2 ? (Character.HP()* (2.2/100)) : 0);
     }
-    console.log(dmg)
+    
     return {dmg:dmg,shield:shield};
 }
 
