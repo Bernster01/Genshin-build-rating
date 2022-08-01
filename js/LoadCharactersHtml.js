@@ -1,5 +1,5 @@
 function LoadCharacters() {
-    let doc = document.getElementById('CharacterBox');
+    let doc = document.getElementById('characterIcons');
 
     AllCharacters.index.forEach(character => {
         let htmlCode = "";
@@ -13,7 +13,12 @@ function LoadCharacters() {
     });
 
 
-
+    const slider=document.getElementById("dragableArtifacts");
+    slider.childNodes.forEach(function (element) {
+        if (element.nodeName === "DIV") {
+            setYOffset(element, document.getElementById("artifactContainer"));
+        }
+    });
 
     // loadMockArtifacts();
     // loadBackground();
