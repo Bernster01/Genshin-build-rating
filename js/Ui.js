@@ -1,134 +1,238 @@
 
-const artifactSlider = document.getElementById("dragableArtifacts");
-let mouseStartArtifactSliderX = 0;
 
-artifactSlider.addEventListener("mousedown", function (e) {
-    artifactSlider.classList.add("active");
-    artifactSlider.style.cursor = "grabbing";
-    const artifactContainer = document.getElementById("artifactContainer");
-    mouseStartArtifactSliderX = e.clientX
-});
-artifactSlider.addEventListener("mouseup", function (e) {
-    artifactSlider.classList.remove("active");
-    artifactSlider.style.cursor = "grab";
-    moveArtifactsSliderToClosestArtifact();
-});
-artifactSlider.addEventListener("mouseleave", function (e) {
-    artifactSlider.classList.remove("active");
-    artifactSlider.style.cursor = "grab";
-    
-    moveArtifactsSliderToClosestArtifact();
-});
-artifactSlider.addEventListener("mousemove", function (event) {
-    
-    
-    if (artifactSlider.classList.contains("active")) {
-        event.preventDefault();
-        const artifactContainer = document.getElementById("artifactContainer");
-        const artifactSliderLeft = artifactSlider.getBoundingClientRect().left - artifactContainer.getBoundingClientRect().left;
-        const mouseX = event.clientX;
-        //move artifact slider while inside the artifact container bounds taking into account the starting position of the mouse relative to the artifact container and the artifact slider
-        artifactSlider.style.left = artifactSliderLeft+(mouseX - mouseStartArtifactSliderX) + "px";
-        
-        mouseStartArtifactSliderX = mouseX;
 
-        artifactSlider.childNodes.forEach(function (element) {
-            //if is div
-            if (element.nodeName === "DIV") {
-                setYOffset(element, artifactContainer);
-            }
-        });
 
+
+
+function stopPropagation(){
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+}
+function UpdateArtifact(element,type){
+    if(type===true){
+        if(element.innerHTML==="0"){
+            element.innerHTML="";
+        }
+    }else{
+
+    
+    let value = element.innerHTML;
+    //Remove any letters from the value
+    value = value.replace(/[^0-9]/g, '');
+    //Remove any leading zeros
+    value = value.replace(/^0+/, '');
+    //If the value is empty, set it to 0
+    if(value === ""){
+        value = 0;
     }
-});
-let yOffsetParam = 0.0075;
-function setYOffset(element, container){
-    let y = yOffset(element, container);
-    element.style.marginTop = -y + "px";
-    element.style.opacity = getOpacityFromYOffset(y);
-    element.style.boxShadow = getBoxShadowFromYOffset(y);
+    //If the value is greater then 4680, set it to 4680
+    if(value > 4680){
+        value = 4680;
+    }
+    element.innerHTML = value;
 }
-function yOffset(element, container) {
-let distance = Math.abs(getDistanceFromMiddle(element,container));
-// return Math.pow(distance,2) * yOffsetParam;
-return Math.sqrt(distance/yOffsetParam);
 }
-function getOpacityFromYOffset(y) {
-    //return a value between 0 and 1 for opacity based on y offset from the middle of the artifact container
-    return 1 - y / (artifactContainer.clientHeight *1.5);
-
-}
-function getBoxShadowFromYOffset(y) {
-    let size = 10/y;
-    return `0px  ${size}rem ${size}rem 0px rgba(0,0,0,0.5)`;
-
-}
-function getDistanceFromMiddle(element,container){
-    const elementX = (element.getBoundingClientRect().left - container.getBoundingClientRect().left) + element.clientWidth / 2;
-    const distance = elementX - container.clientWidth / 2;
-    return distance;
-}
-function getElementXrelativeToArtifactContainer(element) {
-    const artifactContainer = document.getElementById("artifactContainer");
-    const elementX = (element.getBoundingClientRect().left - artifactContainer.getBoundingClientRect().left) + element.clientWidth / 2;
-    return elementX;
-}
-function findArtifactsClosestToMiddleOfContainer() {
-    const artifactContainer = document.getElementById("artifactContainer");
-    const artifacts = document.querySelectorAll(".artifact");
-    let closestArtifact = {artifact:undefined, distance: 0};
-    artifacts.forEach(function (element) {
-        const elementX = getElementXrelativeToArtifactContainer(element);
-   
-        const distance = Math.abs(elementX - artifactContainer.clientWidth / 2);
-        if (closestArtifact.artifact === undefined) {
-            closestArtifact.artifact = element;
-            closestArtifact.distance = distance;
-        } else {
-            if (distance < closestArtifact.distance) {
-                closestArtifact.artifact = element;
-                closestArtifact.distance = distance;
-            }
-        }
+function getArtifactSetList(artifact){
+    let list = "";
+    setsList.forEach(element => {
+        //Insert a \ before any ' in element to prevent the string from being split
+        let safeElement = element.replace(/'/g, "\\'");
+        list += `<img class="artifactSet"  onclick="selectArtifactSet('${safeElement}',this,'${artifact}')" title="${element}" alt="${element}" src="Assets/Artifacts/${element} ${artifact}.webp" />`
     });
-    
-    return closestArtifact;
+    return list;
 }
-let artifactAnimation = undefined;
-let artifactAnimationWait = undefined;
-function moveArtifactsSliderToClosestArtifact() {
-    const closestArtifact = findArtifactsClosestToMiddleOfContainer();
-    const artifactSlider = document.getElementById("dragableArtifacts");
-    const artifactContainer = document.getElementById("artifactContainer");
-    let artifactX = getClientLeftRelativeToContainer(closestArtifact.artifact, artifactSlider);
-    //move artifact slider so that the artifact is centered in the artifact container
-    let targetValue = artifactSlider.clientWidth - artifactX
-    //move to the targetValue as a smooth animation for 1s vanilla js
-    let currentValue = parseFloat(artifactSlider.style.left);
-    //Remove the current setInterval if it exists¨
+function getArtifactStatsList(artifact,type){
+    let list = "";
+    artifactTypes[artifact][type].forEach(element => {
+        list += `<div onclick="selectStatType(this)" data-type="${element}"title="${artifactTypeAtrributes[element].title}"><img src="${artifactTypeAtrributes[element].icon}"/><span>${artifactTypeAtrributes[element].displayName}</span></div>`;
+    });
+    return list;
+}
+function selectArtifactSet(element,target,type){
+    //Insert a \ before any ' in element to prevent the string from being split
+    element = element.replace(/'/g, "\\'");
+    let obj=target.parentElement.parentElement;
+        obj.style.backgroundImage = `url("../Assets/Artifacts/${element} ${type}.webp")`;
+        obj.dataset.set = element;
+    target.parentElement.style.display = "none";
+}
+function selectStatType(element){
+    let type = artifactTypeAtrributes[element.dataset.type];
+   
+    element.parentElement.parentElement.querySelectorAll(".artifact_icon").forEach(target => {
+       
+        target.src=type.icon;
+        target.title=type.title;
+    });
+    element.parentElement.parentElement.querySelectorAll(".artifact_percent").forEach(target => {
+        showOrHidePercentIcon(target,element.dataset.type);
+    });
+    element.parentElement.style.display = "none";
+}
+function showOrHidePercentIcon(target,type){
+    if(artifactTypeAtrributes[type].percent === true){
+        target.style.display = "inline";
+    }else{
+        target.style.display = "none";
+    }
+}
+function showHide(targetId){
+    let target = document.getElementById(targetId);
+    if(target.style.display === "none"){
+        target.style.display = "block";
+    }else{
+        target.style.display = "none";
+    }
+}
+function addEventlistenerArtifactList(elementId){
+    let element = document.getElementById(elementId);
+    //Add event listener to the artifact list that closes the artifact list when the user clicks outside of it
     
-    clearInterval(artifactAnimation);
-    clearTimeout(artifactAnimationWait);
-    
-    artifactAnimationWait= setTimeout(function () {
-        artifactAnimation = setInterval(function () {
-        currentValue += (targetValue - currentValue) / 5;
-        artifactSlider.style.left = currentValue + "px";
-        artifactSlider.childNodes.forEach(function (element) {
-            //if is div
-            if (element.nodeName === "DIV") {
-                setYOffset(element, artifactContainer);
-            }
-        });
-        if (Math.abs(targetValue - currentValue) < 1) {
-            clearInterval(artifactAnimation);
-
+    document.addEventListener("click",function(e){
+        if(element.contains(e.target)){
+            return;
         }
-    }, 10);
-    }, 250);
+        element.style.display = "none";
+        document.removeEventListener("click",arguments.callee);
+    });
+   
 
 }
-function getClientLeftRelativeToContainer(element, container) {
-    const elementX = (element.getBoundingClientRect().left - container.getBoundingClientRect().left) + element.clientWidth / 2;
-    return elementX;
+function close(e){
+    e.style.display = "none";
+}
+
+const artifactTypeAtrributes={
+    "HP%":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Health.webp",
+        displayName:"HP%",
+        title:"HP%",
+    },
+    "HPflat":{
+        percent:false,
+        icon:"/Assets/Icons/Icon_Attribute_Health.webp",
+        displayName:"HP",
+        title:"Flat HP",
+    },
+    "ATK%":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Attack.webp",
+        displayName:"ATK%",
+        title:"ATK%",
+    },
+    "ATKflat":{
+        percent:false,
+        icon:"/Assets/Icons/Icon_Attribute_Attack.webp",
+        displayName:"ATK",
+        title:"Flat ATK",
+    },
+    "DEF%":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Defense.webp",
+        displayName:"DEF%",
+        title:"DEF%",
+    },
+    "DEFflat":{
+        percent:false,
+        icon:"/Assets/Icons/Icon_Attribute_Defense.webp",
+        displayName:"DEF",
+        title:"Flat DEF",
+    },
+    "CritRate":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Critical_Hit.webp",
+        displayName:"Crit Rate",
+        title:"Crit Rate",
+    },
+    "CritDMG":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Critical_Hit.webp",
+        displayName:"Crit DMG",
+        title:"Crit DMG",
+    },
+    "HealingBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Healing.webp",
+        displayName:"Healing Bonus",
+        title:"Healing Bonus",
+    },
+    "PyroDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Pyro.svg",
+        displayName:"PyroDMGBonus",
+        title:"PyroDMGBonus",
+
+    },
+    "HydroDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Hydro.svg",
+        displayName:"HydroDMGBonus",
+        title:"HydroDMGBonus",
+    },
+    "AnemoDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Anemo.svg",
+        displayName:"AnemoDMGBonus",
+        title:"AnemoDMGBonus",
+    },
+    "ElectroDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Electro.svg",
+        displayName:"ElectroDMGBonus",
+        title:"ElectroDMGBonus",
+    },
+    "DendroDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Dendro.svg",
+        displayName:"DendroDMGBonus",
+        title:"DendroDMGBonus",
+    },
+    "CryoDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Element_Cryo.svg",
+        displayName:"CryoDMGBonus",
+        title:"CryoDMGBonus",
+    },
+    "PhysicalDMGBonus":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Physical.svg",
+        displayName:"PhysicalDMGBonus",
+        title:"PhysicalDMGBonus",
+    },
+    "EnergyRecharge":{
+        percent:true,
+        icon:"/Assets/Icons/Icon_Attribute_Energy_Recharge.webp",
+        displayName:"Energy Recharge",
+        title:"Energy Recharge",
+    },
+    "ElementalMastery":{
+        percent:false,
+        icon:"/Assets/Icons/Icon_Attribute_Elemental_Mastery.webp",
+        displayName:"Elemental Mastery",
+        title:"Elemental Mastery",
+    }
+}
+const artifactTypes={
+    "Flower":{
+        mainstat:["HPflat"],
+        substats:["HP%","ATKflat","ATK%","DEFflat","DEF%","CritRate","CritDMG","EnergyRecharge","ElementalMastery"]
+    },
+    "Plume":{
+        mainstat:["ATKflat"],
+        substats:["HPflat","HP%","ATK%","DEFflat","DEF%","CritRate","CritDMG","EnergyRecharge","ElementalMastery"]
+    },
+    "Sands":{
+        mainstat:["HP%","ATK%","DEF%","ElementalMastery","EnergyRecharge"],
+        substats:["HPflat","ATKflat","DEFflat","CritRate","CritDMG","HP%","ATK%","DEF%","ElementalMastery","EnergyRecharge"]
+    },
+    "Goblet":{
+        mainstat:["EnergyRecharge","ElementalMastery","PyroDMGBonus","HydroDMGBonus","AnemoDMGBonus","ElectroDMGBonus","DendroDMGBonus","CryoDMGBonus","PhysicalDMGBonus"],
+        substats:["HPflat","HP%","ATKflat","ATK%","DEFflat","DEF%","CritRate","CritDMG","EnergyRecharge","ElementalMastery"]
+    },
+    "Circlet":{
+        mainstat:["CritRate","CritDMG","HP%","ATK%","DEF%","ElementalMastery","HealingBonus"],
+        substats:["HPflat","HP%","ATKflat","ATK%","DEFflat","DEF%","CritRate","CritDMG","EnergyRecharge","ElementalMastery"]
+    },
 }

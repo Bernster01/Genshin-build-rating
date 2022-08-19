@@ -13,20 +13,50 @@ function LoadCharacters() {
     });
 
 
-    const slider=document.getElementById("dragableArtifacts");
-    slider.childNodes.forEach(function (element) {
-        if (element.nodeName === "DIV") {
-            setYOffset(element, document.getElementById("artifactContainer"));
-        }
-    });
+   
 
+    loadArtifactLists();
     // loadMockArtifacts();
     // loadBackground();
     loadArtifactCookie();
-   
 
 }
+function loadArtifactLists(){
+    document.getElementById("flowerSetList").innerHTML = getArtifactSetList("Flower");
+    document.getElementById("flowerMainstatList").innerHTML = getArtifactStatsList("Flower","mainstat");
+    document.getElementById("flowerSubstat1List").innerHTML = getArtifactStatsList("Flower","substats");
+    document.getElementById("flowerSubstat2List").innerHTML = getArtifactStatsList("Flower","substats");
+    document.getElementById("flowerSubstat3List").innerHTML = getArtifactStatsList("Flower","substats");
+    document.getElementById("flowerSubstat4List").innerHTML = getArtifactStatsList("Flower","substats");
 
+    document.getElementById("plumeSetList").innerHTML = getArtifactSetList("Plume");
+    document.getElementById("plumeMainstatList").innerHTML = getArtifactStatsList("Plume","mainstat");
+    document.getElementById("plumeSubstat1List").innerHTML = getArtifactStatsList("Plume","substats");
+    document.getElementById("plumeSubstat2List").innerHTML = getArtifactStatsList("Plume","substats");
+    document.getElementById("plumeSubstat3List").innerHTML = getArtifactStatsList("Plume","substats");
+    document.getElementById("plumeSubstat4List").innerHTML = getArtifactStatsList("Plume","substats");
+
+    document.getElementById("sandsSetList").innerHTML = getArtifactSetList("Sands");
+    document.getElementById("sandsMainstatList").innerHTML = getArtifactStatsList("Sands","mainstat");
+    document.getElementById("sandsSubstat1List").innerHTML = getArtifactStatsList("Sands","substats");
+    document.getElementById("sandsSubstat2List").innerHTML = getArtifactStatsList("Sands","substats");
+    document.getElementById("sandsSubstat3List").innerHTML = getArtifactStatsList("Sands","substats");
+    document.getElementById("sandsSubstat4List").innerHTML = getArtifactStatsList("Sands","substats");
+    
+    document.getElementById("gobletSetList").innerHTML = getArtifactSetList("Goblet");
+    document.getElementById("gobletMainstatList").innerHTML = getArtifactStatsList("Goblet","mainstat");
+    document.getElementById("gobletSubstat1List").innerHTML = getArtifactStatsList("Goblet","substats");
+    document.getElementById("gobletSubstat2List").innerHTML = getArtifactStatsList("Goblet","substats");
+    document.getElementById("gobletSubstat3List").innerHTML = getArtifactStatsList("Goblet","substats");
+    document.getElementById("gobletSubstat4List").innerHTML = getArtifactStatsList("Goblet","substats");
+
+    document.getElementById("circletSetList").innerHTML = getArtifactSetList("Circlet");
+    document.getElementById("circletMainstatList").innerHTML = getArtifactStatsList("Circlet","mainstat");
+    document.getElementById("circletSubstat1List").innerHTML = getArtifactStatsList("Circlet","substats");
+    document.getElementById("circletSubstat2List").innerHTML = getArtifactStatsList("Circlet","substats");
+    document.getElementById("circletSubstat3List").innerHTML = getArtifactStatsList("Circlet","substats");
+    document.getElementById("circletSubstat4List").innerHTML = getArtifactStatsList("Circlet","substats");
+}
 function loadWeapons(character) {
     let weapon = document.getElementById('WeaponsContainer');
     weapon.innerHTML = "";
