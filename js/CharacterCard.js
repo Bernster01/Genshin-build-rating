@@ -39,7 +39,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
 	align-items: left;
 	width: 100%;
 	height: 100%;
-	background-image: url('~/${character.card}');
+	background-image: url('${character.card}');
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position-x: right;
