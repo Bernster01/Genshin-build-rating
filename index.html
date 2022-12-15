@@ -74,34 +74,28 @@
 					</div>
 					<div id="characterContainer">
 						<div id="characterContainerUpper">
-							<div id="weaponContainer">
+							<div class="flex-row">
+								<div id="weaponContainer">
 
-							</div>
-							<div id="talentContainer">
-
-							</div>
-							<div id="characterSelecting">
-								<img alt="Select" src="Assets/Characters/Paimon/Character_Paimon_Portrait.webp"
-									title="Select" id="SelectCharcterImg"
-									onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
-
-
-
-
-								<div class="CharacterBox" id="CharacterBox" style="display:none">
-									<input type="text" id="characterSearch" placeholder="Search for a character..."
-										onkeyup="searchCharacters(this.value)">
-									<div id="characterIcons">
-										<span id="noResults">Hm... seems nothing matched</span>
+								</div>
+								<div id="characterSelecting">
+									<img alt="Select" src="Assets/Characters/Paimon/Character_Paimon_Portrait.webp"
+										title="Select" id="SelectCharcterImg"
+										onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
+									<div class="CharacterBox" id="CharacterBox" style="display:none">
+										<input type="text" id="characterSearch" placeholder="Search for a character..."
+											onkeyup="searchCharacters(this.value)">
+										<div id="characterIcons">
+											<span id="noResults">Hm... seems nothing matched</span>
+										</div>
 									</div>
 								</div>
+								<div id="constellationContainer">
 
-
-
-
-
+								</div>
 							</div>
-							<div id="constellationContainer">
+
+							<div id="talentContainer">
 
 							</div>
 						</div>
@@ -111,7 +105,6 @@
 									<div class="artifactSetList" id="flowerSetList" style="display: none;"></div>
 									<div class="artifact_img_gradient"
 										onclick="stopPropagation(), showHide('flowerSetList'),addEventlistenerArtifactList('flowerSetList')">
-
 									</div>
 									<div class="mainstat">
 										<img class="artifact_icon"
@@ -125,8 +118,6 @@
 
 										</div>
 									</div>
-
-
 								</div>
 								<div class="artifact-right">
 									<div class="substat" id="flower_substat_1">

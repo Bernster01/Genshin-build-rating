@@ -1,7 +1,3 @@
-
-
-
-
 function selectSupportingElement(element, obj, type) {
   if (type) {
     let doc = document.getElementById('supportingElement');

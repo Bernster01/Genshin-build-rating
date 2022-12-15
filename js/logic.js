@@ -27,3 +27,23 @@ function switchDisplay(target,type){
     }
     
 }
+function deepClone(obj){
+    return JSON.parse(JSON.stringify(obj));
+}
+function starterFunction(){
+    //Constellations
+    const cons = generateConstellationList();
+    cons.forEach(element => {
+        console.log(element);
+        document.getElementById("constellationContainer").appendChild(element);
+    });
+    dissplaceConstellations();
+    //Talents
+    const talents = generateTalentList();
+    talents.forEach(element => {
+        document.getElementById("talentContainer").appendChild(element);
+    });
+    
+}
+
+document.addEventListener("DOMContentLoaded", starterFunction );
