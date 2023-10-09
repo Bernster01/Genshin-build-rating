@@ -101,10 +101,28 @@ function generateConstellationList() {
     const generateConstellationElement = (id) => {
         let element = document.createElement("div");
         element.id = id;
+        const text = document.createElement("p");
+        text.innerHTML = "C"+id.split("_")[1];
+        element.appendChild(text);
         element.classList.add("constellation");
+        element.addEventListener("click", function () {
+            const currentConstellation = Number.parseInt(this.id.split("_")[1]);
+            const constellationContainer = document.getElementById("constellationContainer");
+            constellationContainer.querySelectorAll(".constellation").forEach(element => {
+
+                const id = Number.parseInt(element.id.split("_")[1]);
+                if(id>currentConstellation) element.classList.remove("constellation-selected");
+                if (id <= currentConstellation) {
+                    setTimeout(() => {
+                    element.classList.add("constellation-selected");
+                    }, 1+(100*(id-1)*id/4));
+                }
+            });
+            
+        });
         return element;
     }
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 0; i <= 6; i++) {
         elements.push(generateConstellationElement(`constellation_${i}`, i));
     }
     return elements;
@@ -127,10 +145,10 @@ function dissplaceConstellations() {
     const constellationContainer = document.getElementById("constellationContainer");
     const constellationList = constellationContainer.querySelectorAll(".constellation");
     let width = constellationContainer.offsetWidth;
-    const equation = (x) => { return Math.abs((0.125 * (x * x)))}
+    const equation = (x) => { return Math.abs((0.125* (x * x)))}
     //Dissplace the constellations
     constellationList.forEach((element, index) => {
-        if(index > 2) index += 1;
+        // if(index > 2) index += 1;
         let y = equation((index-3)*4);
         let constellation = element;
         constellation.style.left = `-${y}%`;

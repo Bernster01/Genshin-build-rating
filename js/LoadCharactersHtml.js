@@ -16,9 +16,6 @@ function LoadCharacters() {
    
 
     loadArtifactLists();
-    // loadMockArtifacts();
-    // loadBackground();
-    loadArtifactCookie();
 
 }
 function loadArtifactLists(){
