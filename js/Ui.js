@@ -5,28 +5,28 @@ function stopPropagation() {
 }
 
 function UpdateArtifact(element, type) {
-    if (type === true) {
-        if (element.innerHTML === "0") {
-            element.innerHTML = "";
-        }
-    } else {
+    // if (type === true) {
+    //     if (element.innerHTML === "0") {
+    //         element.innerHTML = "";
+    //     }
+    // } else {
 
 
-        let value = element.innerHTML;
-        //Remove any letters from the value
-        value = value.replace(/[^0-9]/g, '');
-        //Remove any leading zeros
-        value = value.replace(/^0+/, '');
-        //If the value is empty, set it to 0
-        if (value === "") {
-            value = 0;
-        }
-        //If the value is greater then 4680, set it to 4680
-        if (value > 4680) {
-            value = 4680;
-        }
-        element.innerHTML = value;
-    }
+    //     let value = element.innerHTML;
+    //     //Remove any letters from the value
+    //     value = value.replace(/[^0-9]/g, '');
+    //     //Remove any leading zeros
+    //     value = value.replace(/^0+/, '');
+    //     //If the value is empty, set it to 0
+    //     if (value === "") {
+    //         value = 0;
+    //     }
+    //     //If the value is greater then 4680, set it to 4680
+    //     if (value > 4680) {
+    //         value = 4680;
+    //     }
+    //     element.innerHTML = value;
+    // }
 }
 
 function getArtifactSetList(artifact) {
