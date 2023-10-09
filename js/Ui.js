@@ -51,7 +51,7 @@ function selectArtifactSet(element, target, type) {
     //Insert a \ before any ' in element to prevent the string from being split
     element = element.replace(/'/g, "\\'");
     let obj = target.parentElement.parentElement;
-    obj.style.backgroundImage = `url("../Assets/Artifacts/${element} ${type}.webp")`;
+    obj.style.backgroundImage = `url("Assets/Artifacts/${element} ${type}.webp")`;
     obj.dataset.set = element;
     target.parentElement.style.display = "none";
 }
