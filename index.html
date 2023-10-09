@@ -3,765 +3,609 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
-	<title>Genshin Helper</title>
-
-	<link rel="icon" href="Characters/Paimon.png">
+	<title>Rate my build - Genshin impact</title>
+	<link rel="icon" href="Assets/Icons/Element_Geo.svg">
 	</link>
 	<script src="https://kit.fontawesome.com/7060ae4657.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="CSS/CSS.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
 	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-	<script src="js/CreateCharacter.js"></script>
 	<script src="js/WeaponScaling.js"></script>
 	<script src="js/cookies.js"></script>
 	<script src="js/Weapons.js"></script>
 	<script src="js/ArtifactModel.js"></script>
 	<script src="js/ArtifactGenerator.js"></script>
 	<script src="js/Simulation.js"></script>
-
-	<script src="js/LoadCharactersHtml.js"></script>
+	<script src="js/Ui.js"></script>
+	<script defer src="js/LoadCharactersHtml.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 	<script src="js/CharacterCard.js"></script>
-
+	<script src="js/logic.js"></script>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
 </head>
-
-
 <body onload="LoadCharacters()">
-	<div class="container">
-		<div>
+	<div class="container" id="containerHelper">
+		<div id="backgroundOverlay"></div>
+		<div id="content">
+
 			<header>
 
 				<h1>Rate my build<h1>
 
 			</header>
-			<div>
-				<h1>Select Character</h1>
-			</div>
-			<div id="CharacterSelection">
-				<div class="EmptyCharacter" onclick="displayCharcters()" id="SelectCharcter">
-					<img alt="Select" src="Characters/Paimon.png" title="Select" id="SelectCharcterImg"></img>
-					<div id="SelectCharcterText"><span>Select</span></div>
+			<div class="content-container">
+				<div>
+					<h1>Select Character</h1>
 				</div>
 
-				<div id="CharacterContainer" class="noselect">
-
-					<div class="CharacterBox" id="CharacterBox">
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<div id="LoadoutContainer">
-				<div id="CharacterPageContainer">
-
-					<div id="LevelContainer">
-
-						<label for="Level"> Enter character level</label>
-						<select id="Level">
-							<option value="1b">1</option>
-							<option value="20b">20/20</option>
-							<option value="20a">20/40</option>
-							<option value="40b">40/40</option>
-							<option value="40a">40/50</option>
-							<option value="60b">60/60</option>
-							<option value="60a">60/70</option>
-							<option value="70b">70/70</option>
-							<option value="70a">70/80</option>
-							<option value="80b">80/80</option>
-							<option value="80a">80/90</option>
-							<option value="90b">90</option>
-						</select>
-
-					</div>
-					<div class="Constellations">
-						<label>Constellation</label>
-						<select id="Constellation">
-							<option value="0">C0</option>
-							<option value="1">C1</option>
-							<option value="2">C2</option>
-							<option value="3">C3</option>
-							<option value="4">C4</option>
-							<option value="5">C5</option>
-							<option value="6">C6</option>
-						</select>
-					</div>
-
-					<div id="WeaponContainer">
-						<h2>Weapon</h2>
-						<div class="Weapon" onclick="displayWeapons()" id="SelectWeapon">
-							<img alt="Select" src="Weapons/Icon_Sword.png" title="Select" id="SelectWeaponImg"></img>
-							<p id="SelectWeaponText"><span>Select</span></p>
-						</div>
-						<div id="WeaponLevel">
-							<label>Enter weapon level</label>
-							<select id="WeaponLevels">
-								<option value="1b">1</option>
-								<option value="20b">20/20</option>
-								<option value="20a">20/40</option>
-								<option value="40b">40/40</option>
-								<option value="40a">40/50</option>
-								<option value="60b">60/60</option>
-								<option value="60a">60/70</option>
-								<option value="70b">70/70</option>
-								<option value="70a">70/80</option>
-								<option value="80b">80/80</option>
-								<option value="80a">80/90</option>
-								<option value="90b">90</option>
+				<div id="LoadoutContainer">
+					<div id="elementalResonanceContainer">
+						<h2>Elemental Resonance</h2>
 
 
-							</select>
-
-						</div>
-						<div id="Weapons">
-							<h3>Weapons</h3>
-							<div id="WeaponsContainer">
-
+						<div class="elementalResonanceContainer">
+							<div onclick="selectResonance('Pyro',this)">
+								<img src="Elements/pyro.png" />
+							</div>
+							<div onclick="selectResonance('Hydro',this)">
+								<img src="Elements/hydro.png" />
+							</div>
+							<div onclick="selectResonance('Anemo',this)">
+								<img src="Elements/anemo.png" />
+							</div>
+							<div onclick="selectResonance('Geo',this)">
+								<img src="Elements/geo.png" />
+							</div>
+							<div onclick="selectResonance('Electro',this)">
+								<img src="Elements/electro.png" />
+							</div>
+							<div onclick="selectResonance('Dendro',this)">
+								<img src="Elements/dendro.png" />
+							</div>
+							<div onclick="selectResonance('Cryo',this)">
+								<img src="Elements/cryo.png" />
 							</div>
 						</div>
+					</div>
+					<div id="characterContainer">
+						<div id="characterContainerUpper">
+							<div id="weaponContainer">
+								<img alt="Select" src="Assets/Weapons/Icon_Sword.png" title="Select"
+									id="SelectWeaponImg"
+									onclick="switchDisplay(document.getElementById('weaponBox'),'flex')"></img>
+								<div class="SelectBox" id="weaponBox" style="display:none">
+									<input type="text" id="weaponSearch" placeholder="Search for a character..."
+										onkeyup="searchWeapons(this.value)">
+									<div class="characterIcons" id="weaponIcons">
+										<span id="noResults">Hm... seems nothing matched</span>
+									</div>
+								</div>
+								<div>
+									<p>Weapon</p>
+									<select id="weapon_level">
+										<option value="1b">Level 1</option>
+										<option value="10b">Level 10/10</option>
+										<option value="10a">Level 10/20</option>
+										<option value="20b">Level 20/20</option>
+										<option value="20a">Level 20/30</option>
+										<option value="30b">Level 30/30</option>
+										<option value="30a">Level 30/40</option>
+										<option value="40b">Level 40/40</option>
+										<option value="40a">Level 40/50</option>
+										<option value="50b">Level 50/50</option>
+										<option value="50a">Level 50/60</option>
+										<option value="60b">Level 60/60</option>
+										<option value="60a">Level 60/70</option>
+										<option value="70b">Level 70/70</option>
+										<option value="70a">Level 70/80</option>
+										<option value="80b">Level 80/80</option>
+										<option value="80a">Level 80/90</option>
+										<option value="90b">Level 90/90</option>
+									</select>
+								</div>
+							</div>
+							<div id="characterSelecting">
+								<img alt="Select" src="Assets/Characters/Paimon/Character_Paimon_Portrait.webp"
+									title="Select" id="SelectCharcterImg"
+									onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
+								<div class="SelectBox" id="CharacterBox" style="display:none">
+									<input type="text" id="characterSearch" placeholder="Search for a character..."
+										onkeyup="searchCharacters(this.value)">
+									<div class="characterIcons" id="characterIcons">
+										<span id="noResults">Hm... seems nothing matched</span>
+									</div>
+								</div>
+								<div class="stat-container">
+									<div>
+										<div>
+											<label for="character_level">Character</label>
+											<select id="character_level">
+												<option value="1b">Level 1</option>
+												<option value="10b">Level 10/10</option>
+												<option value="10a">Level 10/20</option>
+												<option value="20b">Level 20/20</option>
+												<option value="20a">Level 20/30</option>
+												<option value="30b">Level 30/30</option>
+												<option value="30a">Level 30/40</option>
+												<option value="40b">Level 40/40</option>
+												<option value="40a">Level 40/50</option>
+												<option value="50b">Level 50/50</option>
+												<option value="50a">Level 50/60</option>
+												<option value="60b">Level 60/60</option>
+												<option value="60a">Level 60/70</option>
+												<option value="70b">Level 70/70</option>
+												<option value="70a">Level 70/80</option>
+												<option value="80b">Level 80/80</option>
+												<option value="80a">Level 80/90</option>
+												<option value="90b">Level 90/90</option>
+											</select>
+										</div>
+										<div>
+											<label for="constellation">Constellation</label>
+											<select id="constellation">
+												<option value="0">C0</option>
+												<option value="1">C1</option>
+												<option value="2">C2</option>
+												<option value="3">C3</option>
+												<option value="4">C4</option>
+												<option value="5">C5</option>
+												<option value="6">C6</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<div>
+											<label for="normal_attack">Normal Attack</label>
+											<select id="normal_attack">
+												<option value="1">Level 1</option>
+												<option value="2">Level 2</option>
+												<option value="3">Level 3</option>
+												<option value="4">Level 4</option>
+												<option value="5">Level 5</option>
+												<option value="6">Level 6</option>
+												<option value="7">Level 7</option>
+												<option value="8">Level 8</option>
+												<option value="9">Level 9</option>
+												<option value="10">Level 10</option>
+											</select>
+											<label for="talent_skill">Elemental Skill</label>
+											<select id="talent_skill">
+												<option value="1">Level 1</option>
+												<option value="2">Level 2</option>
+												<option value="3">Level 3</option>
+												<option value="4">Level 4</option>
+												<option value="5">Level 5</option>
+												<option value="6">Level 6</option>
+												<option value="7">Level 7</option>
+												<option value="8">Level 8</option>
+												<option value="9">Level 9</option>
+												<option value="10">Level 10</option>
+												<option value="11">Level 11</option>
+												<option value="12">Level 12</option>
+												<option value="13">Level 13</option>
+											</select>
+											<label for="talent_burst">Elemental Burst</label>
+											<select id="talent_burst">
+												<option value="1">Level 1</option>
+												<option value="2">Level 2</option>
+												<option value="3">Level 3</option>
+												<option value="4">Level 4</option>
+												<option value="5">Level 5</option>
+												<option value="6">Level 6</option>
+												<option value="7">Level 7</option>
+												<option value="8">Level 8</option>
+												<option value="9">Level 9</option>
+												<option value="10">Level 10</option>
+												<option value="11">Level 11</option>
+												<option value="12">Level 12</option>
+												<option value="13">Level 13</option>
+											</select>
+										</div>
+									</div>
 
+								</div>
+							</div>
+						</div>
+						<div id="artifactContainer">
+							<div class="artifact" id="flower">
+								<div class="artifact-left" id="flower_set" >
+									<div class="artifactSetList" id="flowerSetList" style="display: none;"></div>
+									<div class="artifact_img_gradient"
+										onclick="stopPropagation(), showHide('flowerSetList'),addEventlistenerArtifactList('flowerSetList')">
+									</div>
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('flowerMainstatList'),stopPropagation(),addEventlistenerArtifactList('flowerMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="flower_mainstat_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="flower_mainstat_value">0</span>
+										<span id="flower_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="flowerMainstatList" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+								<div class="artifact-right">
+									<div class="substat" id="flower_substat_1">
+										<img class="artifact_icon"
+											onclick="showHide('flowerSubstat1List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat1List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_1_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="flower_substat_1_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="flowerSubstat1List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="flower_substat_2">
+										<img class="artifact_icon"
+											onclick="showHide('flowerSubstat2List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat2List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_2_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="flower_substat_2_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="flowerSubstat2List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="flower_substat_3">
+										<img class="artifact_icon"
+											onclick="showHide('flowerSubstat3List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat3List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_3_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="flower_substat_3_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="flowerSubstat3List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="flower_substat_4">
+										<img class="artifact_icon"
+											onclick="showHide('flowerSubstat4List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat4List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_4_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="flower_substat_4_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="flowerSubstat4List" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="artifact" id="plume">
+								<div class="artifact-left" id="plume_set">
+									<div class="artifactSetList" id="plumeSetList" style="display: none;"></div>
+									<div class="artifact_img_gradient"
+										onclick="stopPropagation(), showHide('plumeSetList'),addEventlistenerArtifactList('plumeSetList')">
+
+									</div>
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('plumeMainstatList'),stopPropagation(),addEventlistenerArtifactList('plumeMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="plume_mainstat_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="plume_mainstat_value">0</span>
+										<span id="plume_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="plumeMainstatList" style="display: none;">
+
+										</div>
+									</div>
+
+
+								</div>
+								<div class="artifact-right">
+									<div class="substat" id="plume_substat_1">
+										<img class="artifact_icon"
+											onclick="showHide('plumeSubstat1List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat1List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_1_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="plume_substat_1_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="plumeSubstat1List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="plume_substat_2">
+										<img class="artifact_icon"
+											onclick="showHide('plumeSubstat2List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat2List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_2_type" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="plume_substat_2_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="plumeSubstat2List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="plume_substat_3">
+										<img class="artifact_icon"
+											onclick="showHide('plumeSubstat3List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat3List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_3_type" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="plume_substat_3_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="plumeSubstat3List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="plume_substat_4">
+										<img class="artifact_icon"
+											onclick="showHide('plumeSubstat4List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat4List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_4_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="plume_substat_4_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="plumeSubstat4List" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="artifact" id="sands">
+								<div class="artifact-left" id="sands_set">
+									<div class="artifactSetList" id="sandsSetList" style="display: none;"></div>
+									<div class="artifact_img_gradient"
+										onclick="stopPropagation(), showHide('sandsSetList'),addEventlistenerArtifactList('sandsSetList')">
+
+									</div>
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('sandsMainstatList'),stopPropagation(),addEventlistenerArtifactList('sandsMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="sands_mainstat_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="sands_mainstat_value">0</span>
+										<span id="sands_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="sandsMainstatList" style="display: none;">
+
+										</div>
+									</div>
+
+
+								</div>
+								<div class="artifact-right">
+									<div class="substat" id="sands_substat_1">
+										<img class="artifact_icon"
+											onclick="showHide('sandsSubstat1List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat1List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_1_type" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="sands_substat_1_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="sandsSubstat1List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="sands_substat_2">
+										<img class="artifact_icon"
+											onclick="showHide('sandsSubstat2List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat2List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_2_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="sands_substat_2_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="sandsSubstat2List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="sands_substat_3">
+										<img class="artifact_icon"
+											onclick="showHide('sandsSubstat3List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat3List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_3_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="sands_substat_3_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="sandsSubstat3List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="sands_substat_4">
+										<img class="artifact_icon"
+											onclick="showHide('sandsSubstat4List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat4List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_4_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="sands_substat_4_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="sandsSubstat4List" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="artifact" id="goblet">
+								<div class="artifact-left" id="goblet_set">
+									<div class="artifactSetList" id="gobletSetList" style="display: none;"></div>
+									<div class="artifact_img_gradient"
+										onclick="stopPropagation(), showHide('gobletSetList'),addEventlistenerArtifactList('gobletSetList')">
+
+									</div>
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('gobletMainstatList'),stopPropagation(),addEventlistenerArtifactList('gobletMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%"id="goblet_mainstat_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="goblet_mainstat_value">0</span>
+										<span id="goblet_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="gobletMainstatList" style="display: none;">
+
+										</div>
+									</div>
+
+
+								</div>
+								<div class="artifact-right">
+									<div class="substat" id="goblet_substat_1">
+										<img class="artifact_icon"
+											onclick="showHide('gobletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat1List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_1_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="goblet_substat_1_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="gobletSubstat1List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="goblet_substat_2">
+										<img class="artifact_icon"
+											onclick="showHide('gobletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat2List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_2_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="goblet_substat_2_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="gobletSubstat2List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="goblet_substat_3">
+										<img class="artifact_icon"
+											onclick="showHide('gobletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat3List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_3_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="goblet_substat_3_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="gobletSubstat3List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="goblet_substat_4">
+										<img class="artifact_icon"
+											onclick="showHide('gobletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat4List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_4_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="goblet_substat_4_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="gobletSubstat4List" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="artifact" id="circlet">
+								<div class="artifact-left" id="circlet_set">
+									<div class="artifactSetList" id="circletSetList" style="display: none;"></div>
+									<div class="artifact_img_gradient"
+										onclick="stopPropagation(), showHide('circletSetList'),addEventlistenerArtifactList('circletSetList')">
+									</div>
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="circlet_mainstat_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="circlet_mainstat_value">0</span>
+										<span id="circlet_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="circletMainstatList" style="display: none;">
+
+										</div>
+
+									</div>
+								</div>
+
+								<div class="artifact-right">
+									<div class="substat" id="circlet_substat_1">
+										<img class="artifact_icon"
+											onclick="showHide('circletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat1List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_1_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="circlet_substat_1_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="circletSubstat1List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="circlet_substat_2">
+										<img class="artifact_icon"
+											onclick="showHide('circletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat2List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_2_type"/>
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="circlet_substat_2_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="circletSubstat2List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="circlet_substat_3">
+										<img class="artifact_icon"
+											onclick="showHide('circletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat3List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_3_type" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="circlet_substat_3_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="circletSubstat3List" style="display: none;">
+
+										</div>
+									</div>
+									<div class="substat" id="circlet_substat_4">
+										<img class="artifact_icon"
+											onclick="showHide('circletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat4List')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_4_type" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)" id="circlet_substat_4_value">0</span>
+										<span class="artifact_percent">%</span>
+										<div class="artifactStatsList" id="circletSubstat4List" style="display: none;">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 
-					<div id="TalentContainer">
-						<h2>Talents</h2>
-						<div class="Talent">
-							<label for="Talent_1"> Enter level for Basic Attacks</label>
-							<select id="Talent_1">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-							</select>
+					<div id="supportingElementContainer">
+						<h2>Supporting Element</h2>
+						<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
+								id="SelectedSupportingElement"></span></div>
 
-
-						</div>
-						<div class="Talent">
-							<label for="Talent_2"> Enter level for Elemental Skill</label>
-							<select id="Talent_2">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-							</select>
-
-
-						</div>
-						<div class="Talent">
-							<label for="Talent_3"> Enter level for Elemental Burst</label>
-							<select id="Talent_3">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-							</select>
-
-
+						<div class="supportingElementContainer" id="supportingElement">
+							<div onclick="selectSupportingElement('Pyro',this)">
+								<img src="Elements/pyro.png" />
+								<span>Pyro</span>
+							</div>
+							<div onclick="selectSupportingElement('Hydro',this)">
+								<img src="Elements/hydro.png" />
+								<span>Hydro</span>
+							</div>
+							<div onclick="selectSupportingElement('Anemo',this)">
+								<img src="Elements/anemo.png" />
+								<span>Anemo</span>
+							</div>
+							<div onclick="selectSupportingElement('Electro',this)">
+								<img src="Elements/electro.png" />
+								<span>Electro</span>
+							</div>
+							<div onclick="selectSupportingElement('Dendro',this)">
+								<img src="Elements/dendro.png" />
+								<span>Dendro</span>
+							</div>
+							<div onclick="selectSupportingElement('Cryo',this)">
+								<img src="Elements/cryo.png" />
+								<span>Cryo</span>
+							</div>
 						</div>
 					</div>
-
-
-
-
-
+					<button class="generic-btn p1rem br2rem" onclick="prepare(this)" id="rate-button">Rate my
+						build!</button>
 				</div>
-				<div id="RoleSelectionContainer">
-					<h2>Role</h2>
-					<div>
-						<span>Support</span>
-						<input type="range" min="0" max="1" onchange="selectRole(this.value)">
-						<span>Dps</span>
-					</div>
-				</div>
-				<h2>Artifacts</h2>
-				<div id="ArtifactContainer" onchange="saveArtifactCookie()">
-
-					<form class="Artifacts">
-						<fieldset id="Artifact_circlet">
-							<legend align="center">
-								<img id="Circlet" src="Artifacts/None Circlet.webp" alt="Circlet" title="Circlet"></img>
-								<select id="Circlet_set" onchange="displayArtifact(Artifact_circlet)">
-									<script>
-										document.write(getArtifactSetsAsHtmlOption());
-									</script>
-								</select>
-							</legend>
-
-							<label for="Artifact_circlet_mainstat">Choose Main stat</label>
-							<select id="Circlet_mainstat">
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-								<option value="HealingBonus">Healing Bonus%</option>
-							</select>
-							<label for="Circlet_mainstat_value">Enter value</label>
-							<input type="text" id="Circlet_mainstat_value"></input>
-							<br />
-
-
-
-							<label for="Artifact_circlet_substat_1">Choose sub stat &nbsp </label>
-							<select id="Circlet_substat_1">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label for="Circlet_substat_1_value">Enter value</label>
-							<input type="text" id="Circlet_substat_1_value"></input>
-							<br />
-
-
-							<label for="Artifact_circlet_substat_2">Choose sub stat &nbsp </label>
-							<select id="Circlet_substat_2">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label for="Circlet_substat_2_value">Enter value</label>
-							<input type="text" id="Circlet_substat_2_value"></input>
-							<br />
-
-
-							<label for="Artifact_circlet_substat_3">Choose sub stat &nbsp </label>
-							<select id="Circlet_substat_3">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label for="Circlet_substat_3_value">Enter value</label>
-							<input type="text" id="Circlet_substat_3_value"></input>
-							<br />
-
-
-							<label for="Artifact_circlet_substat_4">Choose sub stat &nbsp </label>
-							<select id="Circlet_substat_4">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label for="Circlet_substat_4_value">Enter value</label>
-							<input type="text" id="Circlet_substat_4_value"></input>
-							<br />
-
-
-						</fieldset>
-					</form>
-
-					<form class="Artifacts">
-						<fieldset id="Artifact_flower">
-							<legend>
-								<img id="Flower" src="Artifacts/None Flower.webp" alt="Flower" title="Flower" height="30px"
-									width="30px"></img>
-								<select id="Flower_set" onchange="displayArtifact(Artifact_flower)">
-									<script>
-										document.write(getArtifactSetsAsHtmlOption());
-									</script>
-								</select>
-							</legend>
-
-							<label>Choose Main stat</label>
-							<select id="Flower_mainstat">
-								<option value="HPflat">HP</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Flower_mainstat_value"></input>
-							<br />
-
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Flower_substat_1">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Flower_substat_1_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Flower_substat_2">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Flower_substat_2_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Flower_substat_3">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Flower_substat_3_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Flower_substat_4">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Flower_substat_4_value"></input>
-							<br />
-
-						</fieldset>
-					</form>
-
-					<form class="Artifacts">
-						<fieldset id="Artifact_plume">
-							<legend>
-								<img id="Plume" src="Artifacts/None Plume.webp" alt="Plume" title="Plume" height="30px"
-									width="30px"></img>
-								<select id="Plume_set" onchange="displayArtifact(Artifact_plume)">
-									<script>
-										document.write(getArtifactSetsAsHtmlOption());
-									</script>
-								</select>
-							</legend>
-
-							<label>Choose Main stat</label>
-							<select id="Plume_mainstat">
-								<option value="ATKflat">ATK</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Plume_mainstat_value"></input>
-							<br />
-
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Plume_substat_1">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Plume_substat_1_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Plume_substat_2">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Plume_substat_2_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Plume_substat_3">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Plume_substat_3_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Plume_substat_4">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Plume_substat_4_value"></input>
-							<br />
-
-						</fieldset>
-					</form>
-
-					<form class="Artifacts" id="ArtifactSands">
-						<fieldset id="Artifact_sands">
-							<legend>
-								<img id="Sands" src="Artifacts/None Sands.webp" alt="Sands" title="Sands" height="30px"
-									width="30px"></img>
-								<select id="Sands_set" onchange="displayArtifact(Artifact_sands)">
-									<script>
-										document.write(getArtifactSetsAsHtmlOption());
-									</script>
-								</select>
-							</legend>
-
-							<label>Choose Main stat</label>
-							<select id="Sands_mainstat">
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Sands_mainstat_value"></input>
-							<br />
-
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Sands_substat_1">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Sands_substat_1_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Sands_substat_2">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Sands_substat_2_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Sands_substat_3">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Sands_substat_3_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Sands_substat_4">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Sands_substat_4_value"></input>
-							<br />
-
-						</fieldset>
-					</form>
-
-					<form class="Artifacts">
-						<fieldset id="Artifact_goblet">
-							<legend>
-								<img id="Goblet" src="Artifacts/None Goblet.webp" alt="Goblet" title="Goblet" height="30px"
-									width="30px"></img>
-								<select id="Goblet_set" onchange="displayArtifact(Artifact_goblet)">
-									<script>
-										document.write(getArtifactSetsAsHtmlOption());
-									</script>
-								</select>
-							</legend>
-
-							<label>Choose Main stat</label>
-							<select id="Goblet_mainstat">
-								<option value="HP%">HP%</option>
-								<option value="ATK%">ATK%</option>
-								<option value="DEF%">DEF%</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="PyroDMGBonus">Pyro DMG Bonus%</option>
-								<option value="HydroDMGBonus">Hydro DMG Bonus%</option>
-								<option value="AnemoDMGBonus">Anemo DMG Bonus%</option>
-								<option value="ElectroDMGBonus">Electro DMG Bonus%</option>
-								<option value="CryoDMGBonus">Cryo DMG Bonus%</option>
-								<option value="GeoDMGBonus">Geo DMG Bonus%</option>
-								<option value="PhysicalDMGBonus">Physical DMG Bonus%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Goblet_mainstat_value"></input>
-							<br />
-
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Goblet_substat_1">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="Elemental Mastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Goblet_substat_1_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Goblet_substat_2">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATK">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Goblet_substat_2_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Goblet_substat_3">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="DEF%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="em">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CritRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Goblet_substat_3_value"></input>
-							<br />
-
-							<label>Choose sub stat &nbsp </label>
-							<select id="Goblet_substat_4">
-								<option value="none">None</option>
-								<option value="HP%">HP%</option>
-								<option value="HPflat">HP</option>
-								<option value="ATK%">ATK%</option>
-								<option value="ATKflat">ATK</option>
-								<option value="Def%">DEF%</option>
-								<option value="DEFflat">DEF</option>
-								<option value="ElementalMastery">Elemental Mastery</option>
-								<option value="EnergyRecharge">Energy Recharge%</option>
-								<option value="CriteRate">CRIT Rate%</option>
-								<option value="CritDMG">CRIT DMG%</option>
-							</select>
-							<label>Enter value</label>
-							<input type="text" id="Goblet_substat_4_value"></input>
-							<br />
-
-						</fieldset>
-					</form>
-
-
-				</div>
-				<div>
-					<h2>Elemental Resonance</h2>
-
-
-					<div class="elementalResonanceContainer">
-						<div onclick="selectResonance('Pyro',this)">
-							<img src="Elements/pyro.png" />
-						</div>
-						<div onclick="selectResonance('Hydro',this)">
-							<img src="Elements/hydro.png" />
-						</div>
-						<div onclick="selectResonance('Anemo',this)">
-							<img src="Elements/anemo.png" />
-						</div>
-						<div onclick="selectResonance('Geo',this)">
-							<img src="Elements/geo.png" />
-						</div>
-						<div onclick="selectResonance('Electro',this)">
-							<img src="Elements/electro.png" />
-						</div>
-						<div onclick="selectResonance('Dendro',this)">
-							<img src="Elements/dendro.png" />
-						</div>
-						<div onclick="selectResonance('Cryo',this)">
-							<img src="Elements/cryo.png" />
-						</div>
-					</div>
-				</div>
-				<div>
-					<h2>Supporting Element</h2>
-					<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
-							id="SelectedSupportingElement"></span></div>
-
-					<div class="supportingElementContainer" id="supportingElement">
-						<div onclick="selectSupportingElement('Pyro',this)">
-							<img src="Elements/pyro.png" />
-							<span>Pyro</span>
-						</div>
-						<div onclick="selectSupportingElement('Hydro',this)">
-							<img src="Elements/hydro.png" />
-							<span>Hydro</span>
-						</div>
-						<div onclick="selectSupportingElement('Anemo',this)">
-							<img src="Elements/anemo.png" />
-							<span>Anemo</span>
-						</div>
-						<div onclick="selectSupportingElement('Electro',this)">
-							<img src="Elements/electro.png" />
-							<span>Electro</span>
-						</div>
-						<div onclick="selectSupportingElement('Dendro',this)">
-							<img src="Elements/dendro.png" />
-							<span>Dendro</span>
-						</div>
-						<div onclick="selectSupportingElement('Cryo',this)">
-							<img src="Elements/cryo.png" />
-							<span>Cryo</span>
-						</div>
-					</div>
-				</div>
-				<button class="generic-btn p1rem br2rem" onclick="userCharacter(this)" id="rate-button">Rate my
-					build!</button>
 			</div>
 			<div id="result-container">
 				<div class="exit-btn generic-btn" onclick="closeCharacterCard()">
@@ -798,7 +642,6 @@
 			<div id="result-container-container2">
 
 			</div>
-			
 		</div>
 		<footer>
 
@@ -808,63 +651,33 @@
 	<script src="js/ElementalBursts.js"></script>
 	<script src="js/NumberGenerator.js"></script>
 	<script src="js/Characters.js"></script>
-
+	<script src="js/SimulationTranslationLayer.js"></script>
 	<script>
-		function displayArtifact(select) {
-			if (select.childNodes[1].childNodes[3].value == "None")
-				select.childNodes[1].childNodes[1].src = "Artifacts/None " + select.childNodes[1].childNodes[1].id + ".webp";
-			else
-				select.childNodes[1].childNodes[1].src = "Artifacts/" + select.childNodes[1].childNodes[3].value + " " + select.childNodes[1].childNodes[1].id + ".webp";
-
+		function displayArtifact(element) {
+			let parent = element.parentElement;
+			let img = parent.querySelector('img');
+			img.src = 'Artifacts/' + element.value + ' ' + img.id + '.webp';
 		}
 	</script>
 	<script>
-		let dragging = false;
-		let selectedCharacter = null;
+		let selectedCharacter = "none";
 		function selectCharacter(character) {
-
-			if (dragging == false) {
-				let img = document.getElementById("SelectCharcterImg");
-
-				let text = document.getElementById("SelectCharcterText");
-
-				if (character.title == "Traveler (Anemo)" || character.title == "Traveler (Geo)" || character.title == "Traveler (Electro)") {
-					switch (character.title) {
-						case "Traveler (Anemo)":
-							text.className = "AnemoCharacter";
-							break;
-						case "Traveler (Electro)":
-							text.className = "ElectroCharacter";
-							break;
-						case "Traveler (Geo)":
-							text.className = "GeoCharacter";
-							break;
-					}
-					img.src = "Characters/Traveler.png";
-
-					text.innerHTML = "<span>Traveler</span>";
-				}
-				else {
-
-					img.src = "Characters/" + character.title + ".png";
-
-					text.innerHTML = "<span>" + character.title + "</span>";
-					text.className = character.childNodes[3].className;
-				}
-				text.title = character.title;
-				displayCharcters();
-				document.getElementById("LoadoutContainer").style.display = "flex";
-				loadWeapons(character.title);
-
-			}
-
+			document.getElementById('CharacterBox').style.display = 'none';
+			let target = document.getElementById('SelectCharcterImg');
+			target.src = AllCharacters[character.title].card;
+			target.title = character.title;
+			target.alt = character.title;
+			selectedCharacter = character.title;
+			console.log(character);
+			loadWeapons(character.title);
 		}
 		function selectWeapon(weapon) {
 			let img = document.getElementById("SelectWeaponImg");
-			let text = document.getElementById("SelectWeaponText");
 			img.src = weapon.childNodes[1].src
-			text.innerText = weapon.title;
-			document.getElementById("Weapons").style.visibility = "hidden";
+			img.title = weapon.childNodes[1].alt;
+			img.alt = weapon.childNodes[1].alt;
+			document.getElementById("weaponBox").style.display = "none";
+
 		}
 
 		function displayCharcters() {

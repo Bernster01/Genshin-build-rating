@@ -21,7 +21,16 @@ function generateCharacterCard(character, score, supportingElement, role, resona
     let gradient = elementResult.gradient;
     let grade = getGrade(score);
     let resonanceHTMLCode = getResonance(resonances);
-    let artifacts = getArtifacts(character.artifacts);
+    let importedArtifacts = getArtifacts(character.artifacts);
+
+    let artifacts = {
+        Circlet: importedArtifacts[0],
+        Flower: importedArtifacts[1],
+        Plume: importedArtifacts[2],
+        Sands: importedArtifacts[3],
+        Goblet: importedArtifacts[4]
+    }
+    console.log(artifacts);
     let supportingElementHtmlCode = (supportingElement != null && supportingElement != "null") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
     if (!createData) {
         console.log(supportingElementHtmlCode);
@@ -85,7 +94,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                             style="display: flex;
                             align-items: center;
                             width: 100%;">
-                            <img src="${character.weapon.src}" style="width:100%;" />
+                            <img src="Assets/${character.weapon.src}" style="width:100%;" />
                         </div>
                         <div class="character-card-info-up-right character-card-info-part">
                             <div class="character-card-stats" id="character-card-stat-hp">
@@ -178,7 +187,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                         </div>
                         <div class="character-card-artifact-wrapper">
                             <div class="character-card-artifact">
-                                <img src="Artifacts/${artifacts.Circlet.Set} ${artifacts.Circlet.Type}.webp" />
+                                <img src="Assets/Artifacts/${artifacts.Circlet.Set} ${artifacts.Circlet.Type}.webp" />
+
                             </div>
                             <div class="character-card-artifact-info-group">
                                 <div class="character-card-artifact-info">
@@ -205,7 +215,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                         </div>
                         <div class="character-card-artifact-wrapper">
                             <div class="character-card-artifact">
-                                <img src="Artifacts/${artifacts.Flower.Set} ${artifacts.Flower.Type}.webp" />
+                                <img src="Assets/Artifacts/${artifacts.Flower.Set} ${artifacts.Flower.Type}.webp" />
+
                             </div>
                             <div class="character-card-artifact-info-group">
                                 <div class="character-card-artifact-info">
@@ -235,7 +246,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                     <div class="character-card-artifact-container">
                         <div class="character-card-artifact-wrapper">
                             <div class="character-card-artifact">
-                                <img src="Artifacts/${artifacts.Plume.Set} ${artifacts.Plume.Type}.webp" />
+                                <img src="Assets/Artifacts/${artifacts.Plume.Set} ${artifacts.Plume.Type}.webp" />
+
                             </div>
                             <div class="character-card-artifact-info-group">
                                 <div class="character-card-artifact-info">
@@ -262,7 +274,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                         </div>
                         <div class="character-card-artifact-wrapper">
                             <div class="character-card-artifact">
-                                <img src="Artifacts/${artifacts.Sands.Set} ${artifacts.Sands.Type}.webp" />
+                                <img src="Assets/Artifacts/${artifacts.Sands.Set} ${artifacts.Sands.Type}.webp" />
+
                             </div>
                             <div class="character-card-artifact-info-group">
                                 <div class="character-card-artifact-info">
@@ -289,7 +302,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                         </div>
                         <div class="character-card-artifact-wrapper">
                             <div class="character-card-artifact">
-                                <img src="Artifacts/${artifacts.Goblet.Set} ${artifacts.Goblet.Type}.webp" />
+                                <img src="Assets/Artifacts/${artifacts.Goblet.Set} ${artifacts.Goblet.Type}.webp" />
+
                             </div>
                             <div class="character-card-artifact-info-group">
                                 <div class="character-card-artifact-info">
@@ -463,7 +477,7 @@ function getResonance(resonances) {
         for (let key in resonances) {
             resonancesList.push(resonances[key].toLowerCase());
             if (resonances[key] != "") {
-                htmlCode += `<img src="../Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
+                htmlCode += `<img src="Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
             }
         }
     }

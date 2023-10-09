@@ -32,11 +32,18 @@ function validateAllCharacters() {
     console.log("ALL SUCCEDED");
     alert("ALL SUCCEDED");
 }
-function compareCharacters(usersCharacter) {
-    let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 100);
-
-    let result2 = Simulation(usersCharacter);
+function runSim(baseCharacter,baseWeapon,artifacts) {
+    let userCharacter = new Createcharacter(_.cloneDeep(baseCharacter),baseWeapon,artifacts);
+    applyBonuses(userCharacter);
+    let simulatedCharacter = AllCharacters[userCharacter.name];
+    
+    let result = FindBestBuild(simulatedCharacter, 1);
+   
+    let result2 = Simulation(userCharacter);
+    console.log("results: ",result,result2);
+    let dmgSources = result2.dmgSources;
+    dmgSources.aa = result2.dmg-(dmgSources.e + dmgSources.q);
+    console.log(result2.dmgSources)
     let userScore;
     let bonsuMultiplier = 1;
     if (vvActive)
@@ -121,8 +128,6 @@ function compareCharacters(usersCharacter) {
     }, 100);
     return `${Math.floor((userScore / result[0]) * 100)}/100`;
 }
-
-
 function FindBestBuild(baseChar, times) {
     let newDamage;
     let supportType;
@@ -133,6 +138,7 @@ function FindBestBuild(baseChar, times) {
     let charac;
     let startTime = Date.now();
     for (let index = 0; index < times; index++) {
+        console.log(index);
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = _.cloneDeep(baseChar);
             supportType = character.supportType;
@@ -889,6 +895,7 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
+    let dmgSources = {aa:0,e:0,q:0};
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
         let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action };
@@ -1107,8 +1114,9 @@ function Simulation(character) {
                 }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
-                        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32 });
+                        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
                         Character.advancedstats.critRate += 12;
+                        console.log("DEBUG: " + Character.advancedstats.critRate)
                         break;
 
                     case "Calamity Queller":
@@ -1159,8 +1167,10 @@ function Simulation(character) {
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
+                    console.log("DEBUG: "+result)
                     if (Number.isInteger(result)) {
                         totalDmg += result;
+                        dmgSources.e += result;
                     } else {
                         if (result.dmg != undefined)
                             totalDmg += result.dmg;
@@ -1170,16 +1180,28 @@ function Simulation(character) {
                             atkBuff += result.attackBuff;
                         if (result.shield != undefined)
                             shield += result.shield;
+                            dmgSources.e += result.dmg;
                     }
                 }
                 else {
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
+                    dmgSources.e += eDmg;
 
                 }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
                         Character.advancedstats.critRate -= 12;
+                        //Remove the Festering Desire buff
+                        let toRemoveIndex = -1;
+                        let toRemove = 0;
+                        Character.currentBuffs.forEach(buff => {
+                            toRemoveIndex++;
+                            if (buff.Source == "Festering Desire") {
+                                toRemove = toRemoveIndex;
+                            }
+                        });
+                        Character.currentBuffs.splice(toRemove, 1);
                         break;
                     case "Thundering Pulse":
                         if (!thunderingPulseNormalStack) {
@@ -1193,8 +1215,10 @@ function Simulation(character) {
             case "Q":
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalBurst.Skill(Character);
+                    
                     if (Number.isInteger(result)) {
                         totalDmg += result;
+                        dmgSources.q += result;
                     } else {
                         if (result.dmg != undefined)
                             totalDmg += result.dmg;
@@ -1204,6 +1228,7 @@ function Simulation(character) {
                             atkBuff += result.attackBuff;
                         if (result.shield != undefined)
                             shield += result.shield;
+                        dmgSources.q += result.dmg;
                     }
                 }
                 else {
@@ -1215,6 +1240,7 @@ function Simulation(character) {
                             break;
                     }
                     let qDmg = Character.elementalBurst.Skill(Character);
+                  
                     switch (Character.weapon.name) {
                         case "Mistsplitter Reforged":
                             if (!mistSplitterBurstStack)
@@ -1237,7 +1263,7 @@ function Simulation(character) {
                         energyMultiplier = 1;
                     qDmg *= energyMultiplier;
                     totalDmg += qDmg;
-
+                    dmgSources.q += qDmg;
                 }
                 break;
 
@@ -1253,7 +1279,7 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
-    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield };
+    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
 function dmgCalc(attackAction, Character, type) {
@@ -1295,7 +1321,6 @@ function dmgCalc(attackAction, Character, type) {
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
     dmg += attackAction.isReaction ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : 0;
-
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;

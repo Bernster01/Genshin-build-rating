@@ -328,7 +328,7 @@ function passionOverload(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalSkill");
-
+    console.log("DEBUG: " + dmg);
     return dmg * 3;
 }
 
