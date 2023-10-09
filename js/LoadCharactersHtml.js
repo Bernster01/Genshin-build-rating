@@ -16,6 +16,7 @@ function LoadCharacters() {
    
 
     loadArtifactLists();
+    
 
 }
 function loadArtifactLists(){
@@ -55,11 +56,11 @@ function loadArtifactLists(){
     document.getElementById("circletSubstat4List").innerHTML = getArtifactStatsList("Circlet","substats");
 }
 function loadWeapons(character) {
-    let weapon = document.getElementById('WeaponsContainer');
+    let weapon = document.getElementById('weaponIcons');
     weapon.innerHTML = "";
     console.log(character)
     AllWeapons[AllCharacters[character].weaponType].forEach(Weapon => {
-        let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
+        let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='Assets/" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
         weapon.insertAdjacentHTML("beforeend", htmlCode);
     });
 

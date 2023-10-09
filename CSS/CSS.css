@@ -107,6 +107,7 @@ footer {
 
 .Character,
 .EmptyCharacter,
+.Weapons,
 .Weapon {
 	background: #5F5B6B;
 	width: auto;
@@ -140,7 +141,7 @@ footer {
 	font-size: 1em;
 }
 
-.Character:hover {
+.Character:hover,.Weapons:hover {
 	transform: scale(1.05);
 	box-shadow: 2px 8px 24px 2px;
 }
@@ -162,8 +163,7 @@ footer {
 	position: relative;
 	padding: 0.5rem;
 	flex-direction: column;
-	align-items: center;
-	width: 60%;
+	width: 80%;
 	min-width: 800px;
 	height: auto;
 	background: #3D383C;
@@ -184,20 +184,23 @@ width: 100%;
 height: 50%;
 margin-top: 5rem;
 display: flex;
-flex-direction: column;
+flex-direction: row;
 position: relative;
 }
 #characterContainerUpper{
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
 	position: relative;
+	width:50%;
 }
 #characterSelecting{
 	cursor: pointer;
 	position: relative;
-	z-index: 0;
+	z-index: 1;
 	border: #C1BDB3 solid 0.5rem;
-	width: 40%;
+	width: 60%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -208,13 +211,14 @@ position: relative;
 	max-width:100%;
 	filter: drop-shadow(10px 60px 50px #575757);
 }
-.CharacterBox {
+.SelectBox {
 	display: none;
 	flex-direction: column;
 	align-items: center;
-	width: 60%;
+	width: 75%;
+	min-width: 600px;
 	height: auto;
-	max-height: 500px;
+	max-height: 700px;
 	cursor: auto;
 	border-radius: 1rem;
 	overflow-x: hidden;
@@ -226,9 +230,9 @@ position: relative;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	z-index: 10;
+	z-index: 5;
 }
-#characterIcons{
+.characterIcons{
 	width:100%;
 	height:100%;
 	display: flex;
@@ -243,7 +247,7 @@ position: relative;
 #artifactContainer{
 	display: flex;
 	/* background-color: red; */
-	width:100%;
+	width:50%;
 	height: auto;
 	position: relative;
 	justify-content: center;
@@ -251,7 +255,10 @@ position: relative;
 	flex-wrap: wrap;
 }
 
-
+#talentAndConstellationContainer{
+	width:20%;
+	height: 100%;
+}
 .artifact{
 	user-select: none;
 	background-color: #C1BDB3;
@@ -261,9 +268,9 @@ position: relative;
 	display: flex;
 	flex-direction: row;
 	position: relative;
-	height: 200px;
-	width: 500px;
-	margin:2rem;
+	height: 175px;
+	width: 400px;
+	margin:1rem;
 }
 .artifact-left{
 	width: 40%;
@@ -379,14 +386,18 @@ position: relative;
 	top: 0;
 	left: 0;
 	width: fit-content;
+	min-width:400px;
 	overflow: hidden;
 	cursor: auto;
 	display: none;
+	flex-direction: row;
+	flex-wrap: wrap;
+
 	z-index: 3;
 }
 .artifactSet{
-	width: 80px !important;
-	height: 80px !important;
+	width: 100px !important;
+	height: 100px !important;
 }
 #flower{
 	z-index:5;
@@ -410,15 +421,29 @@ position: relative;
 	grid-column: 1;
 	grid-row: 2;
 }
-
-.Weapons {
+#flower_set{
+	background-image: url("../Assets/Artifacts/None Flower.webp");
+}
+#plume_set{
+	background-image: url("../Assets/Artifacts/None Plume.webp");
+}
+#sands_set{
+	background-image: url("../Assets/Artifacts/None Sands.webp");
+}
+#goblet_set{
+	background-image: url("../Assets/Artifacts/None Goblet.webp");
+}
+#circlet_set{
+	background-image: url("../Assets/Artifacts/None Circlet.webp");
+}
+/* .Weapons {
 	background: #C1BDB3;
 	width: fit-content;
 	height: fit-content;
 	border: #323031 2px solid;
 	border-radius: 15px;
 	margin: 0.75em;
-}
+} */
 
 .Weapons img {
 	height: 185px;
@@ -427,9 +452,9 @@ position: relative;
 }
 
 .WeaponsText {
-	border: #323031 2px solid;
+	border: #575757 2px solid;
 	border-radius: 0 0 10px 10px;
-	background-color: #5F5B6B;
+	background-color: #C1BDB3;
 	margin: 0;
 	margin-top: -0.4em;
 	text-align: center;
@@ -478,65 +503,24 @@ position: relative;
 	font-size: 14pt;
 }
 
-#WeaponContainer {
-	display: grid;
+#weaponContainer {
+	display: flex;
+	flex-direction: column;
 	justify-items: center;
-	background: #C1BDB3;
+	align-items: center;
 	border: 0.2vw solid #5F5B6B;
 	border-radius: 1vw;
+	aspect-ratio: 1/1;
+	width: 20%;
 	height: auto;
-	grid-row: 2;
-	grid-column: 1;
-	width: auto;
+	
 	padding: 1vw;
+	position: relative;
 
 }
-
-#WeaponContainer h2 {
-	background: #C1BDB3;
-	text-align: center;
-	border-radius: 1vw;
-	border: 2px solid #5F5B6B;
-	width: fit-content;
-	padding: 0 15% 0 15%;
-	font-size: 1.5em;
-	grid-column: 1;
-	grid-row: 1;
+#weaponContainer img{
+	filter: drop-shadow(0px 0px 10px #636363);
 }
-
-
-
-
-
-#WeaponContainer input {
-	height: 1vw;
-	margin-left: 0.25vw;
-	vertical-align: middle;
-}
-
-#SelectWeapon {
-
-	height: 225px;
-	width: 200px;
-	background: linear-gradient(180deg, #C1BDB3 0%, #C1BDB3 90%, #5F5B6B 91%);
-}
-
-#SelectWeaponText {
-	margin: 0;
-	margin-top: -5px;
-	border-top: 2px solid #3D3B3C;
-	background-color: #5F5B6B;
-	font-size: 12pt;
-	word-wrap: break-word
-}
-
-#SelectWeaponImg {
-	height: 200px;
-	width: 200px;
-}
-
-
-
 #TalentContainer {
 
 	display: flex;
@@ -545,11 +529,6 @@ position: relative;
 
 	height: auto;
 
-}
-
-#LevelContainer {
-
-	padding-bottom: 2%;
 }
 
 #CharacterPageContainer {
@@ -1112,7 +1091,8 @@ border-radius: 2rem;
 	flex-direction:column;
 	justify-content: space-around;
 	align-items:flex-end;
-	width: 50%;
+	width: 80%;
+	height: 50%;
 	position: relative;
 }
 .constellation{

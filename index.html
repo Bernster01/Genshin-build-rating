@@ -74,15 +74,14 @@
 					</div>
 					<div id="characterContainer">
 						<div id="characterContainerUpper">
-							<div class="flex-row">
 								<div id="weaponContainer">
-									<img alt="Select" src="Assets/Weapons/"
-										title="Select" id="SelectCharcterImg"
-										onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
-									<div class="CharacterBox" id="CharacterBox" style="display:none">
-										<input type="text" id="characterSearch" placeholder="Search for a character..."
-											onkeyup="searchCharacters(this.value)">
-										<div id="characterIcons">
+									<img alt="Select" src="Assets/Weapons/Icon_Sword.png"
+										title="Select" id="SelectWeaponImg"
+										onclick="switchDisplay(document.getElementById('weaponBox'),'flex')"></img>
+									<div class="SelectBox" id="weaponBox" style="display:none">
+										<input type="text" id="weaponSearch" placeholder="Search for a character..."
+											onkeyup="searchWeapons(this.value)">
+										<div class="characterIcons" id="weaponIcons">
 											<span id="noResults">Hm... seems nothing matched</span>
 										</div>
 									</div>
@@ -91,22 +90,23 @@
 									<img alt="Select" src="Assets/Characters/Paimon/Character_Paimon_Portrait.webp"
 										title="Select" id="SelectCharcterImg"
 										onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
-									<div class="CharacterBox" id="CharacterBox" style="display:none">
+									<div class="SelectBox" id="CharacterBox" style="display:none">
 										<input type="text" id="characterSearch" placeholder="Search for a character..."
 											onkeyup="searchCharacters(this.value)">
-										<div id="characterIcons">
+										<div class="characterIcons" id="characterIcons">
 											<span id="noResults">Hm... seems nothing matched</span>
 										</div>
 									</div>
 								</div>
-								<div id="constellationContainer">
+								<div id="talentAndConstellationContainer">
+									<div id="talentContainer">
 
+									</div>
+									<div id="constellationContainer">
+
+									</div>
+									
 								</div>
-							</div>
-
-							<div id="talentContainer">
-
-							</div>
 						</div>
 						<div id="artifactContainer">
 							<div class="artifact" id="flower">
@@ -400,27 +400,25 @@
 							</div>
 							<div class="artifact" id="circlet">
 								<div class="artifact-left" id="circlet_set">
-
 									<div class="artifactSetList" id="circletSetList" style="display: none;"></div>
 									<div class="artifact_img_gradient"
 										onclick="stopPropagation(), showHide('circletSetList'),addEventlistenerArtifactList('circletSetList')">
-
 									</div>
-
-								</div>
-								<div class="mainstat">
-									<img class="artifact_icon"
-										onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
-										src="/Assets/Icons/Icon_Attribute_Health.webp" />
-									<span contenteditable="" onclick="UpdateArtifact(this,true)"
-										onkeyup="UpdateArtifact(this,false)"
-										onblur="UpdateArtifact(this,false)">0</span>
-									<span id="circlet_mainstat_percentIcon">%</span>
-									<div class="artifactStatsList" id="circletMainstatList" style="display: none;">
-
+									<div class="mainstat">
+										<img class="artifact_icon"
+											onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
+											src="/Assets/Icons/Icon_Attribute_Health.webp" />
+										<span contenteditable="" onclick="UpdateArtifact(this,true)"
+											onkeyup="UpdateArtifact(this,false)"
+											onblur="UpdateArtifact(this,false)">0</span>
+										<span id="circlet_mainstat_percentIcon">%</span>
+										<div class="artifactStatsList" id="circletMainstatList" style="display: none;">
+	
+										</div>
+										
 									</div>
-
 								</div>
+								
 								<div class="artifact-right">
 									<div class="substat" id="circlet_substat_1">
 										<img class="artifact_icon"
@@ -473,7 +471,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 
 					<div id="supportingElementContainer">
@@ -576,13 +573,13 @@
 			target.title = character.title;
 			target.alt = character.title;
 			selectedCharacter = character.title;
+			console.log(character);
+			loadWeapons(character.title);
 		}
 		function selectWeapon(weapon) {
 			let img = document.getElementById("SelectWeaponImg");
-			let text = document.getElementById("SelectWeaponText");
 			img.src = weapon.childNodes[1].src
-			text.innerText = weapon.title;
-			document.getElementById("Weapons").style.visibility = "hidden";
+			document.getElementById("weaponBox").style.display = "none";
 		}
 
 		function displayCharcters() {

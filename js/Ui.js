@@ -145,7 +145,7 @@ function dissplaceConstellations() {
     const constellationContainer = document.getElementById("constellationContainer");
     const constellationList = constellationContainer.querySelectorAll(".constellation");
     let width = constellationContainer.offsetWidth;
-    const equation = (x) => { return Math.abs((0.125* (x * x)))}
+    const equation = (x) => { return Math.abs((0.125*(x * x)))}
     //Dissplace the constellations
     constellationList.forEach((element, index) => {
         // if(index > 2) index += 1;
