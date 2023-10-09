@@ -3,6 +3,7 @@ function stopPropagation() {
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
 }
+
 function UpdateArtifact(element, type) {
     if (type === true) {
         if (element.innerHTML === "0") {
@@ -27,6 +28,7 @@ function UpdateArtifact(element, type) {
         element.innerHTML = value;
     }
 }
+
 function getArtifactSetList(artifact) {
     let list = "";
     setsList.forEach(element => {
@@ -36,6 +38,7 @@ function getArtifactSetList(artifact) {
     });
     return list;
 }
+
 function getArtifactStatsList(artifact, type) {
     let list = "";
     artifactTypes[artifact][type].forEach(element => {
@@ -43,6 +46,7 @@ function getArtifactStatsList(artifact, type) {
     });
     return list;
 }
+
 function selectArtifactSet(element, target, type) {
     //Insert a \ before any ' in element to prevent the string from being split
     element = element.replace(/'/g, "\\'");
@@ -51,6 +55,7 @@ function selectArtifactSet(element, target, type) {
     obj.dataset.set = element;
     target.parentElement.style.display = "none";
 }
+
 function selectStatType(element) {
     let type = artifactTypeAtrributes[element.dataset.type];
 
@@ -58,12 +63,14 @@ function selectStatType(element) {
 
         target.src = type.icon;
         target.title = type.title;
+        target.dataset.type = element.dataset.type;
     });
     element.parentElement.parentElement.querySelectorAll(".artifact_percent").forEach(target => {
         showOrHidePercentIcon(target, element.dataset.type);
     });
     element.parentElement.style.display = "none";
 }
+
 function showOrHidePercentIcon(target, type) {
     if (artifactTypeAtrributes[type].percent === true) {
         target.style.display = "inline";
@@ -71,6 +78,7 @@ function showOrHidePercentIcon(target, type) {
         target.style.display = "none";
     }
 }
+
 function showHide(targetId) {
     let target = document.getElementById(targetId);
     if (target.style.display === "none") {
@@ -79,6 +87,7 @@ function showHide(targetId) {
         target.style.display = "none";
     }
 }
+
 function addEventlistenerArtifactList(elementId) {
     let element = document.getElementById(elementId);
     //Add event listener to the artifact list that closes the artifact list when the user clicks outside of it
@@ -93,68 +102,11 @@ function addEventlistenerArtifactList(elementId) {
 
 
 }
+
 function close(e) {
     e.style.display = "none";
 }
-function generateConstellationList() {
-    let elements = [];
-    const generateConstellationElement = (id) => {
-        let element = document.createElement("div");
-        element.id = id;
-        const text = document.createElement("p");
-        text.innerHTML = "C"+id.split("_")[1];
-        element.appendChild(text);
-        element.classList.add("constellation");
-        element.addEventListener("click", function () {
-            const currentConstellation = Number.parseInt(this.id.split("_")[1]);
-            const constellationContainer = document.getElementById("constellationContainer");
-            constellationContainer.querySelectorAll(".constellation").forEach(element => {
 
-                const id = Number.parseInt(element.id.split("_")[1]);
-                if(id>currentConstellation) element.classList.remove("constellation-selected");
-                if (id <= currentConstellation) {
-                    setTimeout(() => {
-                    element.classList.add("constellation-selected");
-                    }, 1+(100*(id-1)*id/4));
-                }
-            });
-            
-        });
-        return element;
-    }
-    for (let i = 0; i <= 6; i++) {
-        elements.push(generateConstellationElement(`constellation_${i}`, i));
-    }
-    return elements;
-}
-
-function generateTalentElements() {
-    const generateTalentElement = (id) => {
-        let element = document.createElement("div");
-        element.id = id;
-        element.classList.add("talent");
-        return element;
-    }
-    let elements = [];
-    for (let i = 1; i <= 4; i++) {
-        elements.push(generateTalentElement(`talent_${i}`, i));
-    }
-    return elements;
-}
-function dissplaceConstellations() {
-    const constellationContainer = document.getElementById("constellationContainer");
-    const constellationList = constellationContainer.querySelectorAll(".constellation");
-    let width = constellationContainer.offsetWidth;
-    const equation = (x) => { return Math.abs((0.125*(x * x)))}
-    //Dissplace the constellations
-    constellationList.forEach((element, index) => {
-        // if(index > 2) index += 1;
-        let y = equation((index-3)*4);
-        let constellation = element;
-        constellation.style.left = `-${y}%`;
-    });
-
-}
 const artifactTypeAtrributes = {
     "HP%": {
         percent: true,
@@ -200,7 +152,7 @@ const artifactTypeAtrributes = {
     },
     "CritDMG": {
         percent: true,
-        icon: "Assets/Icons/Icon_Attribute_Critical_Hit.webp",
+        icon: "Assets/Icons/Icon_Attribute_Critical_Damage.webp",
         displayName: "Crit DMG",
         title: "Crit DMG",
     },
@@ -280,7 +232,7 @@ const artifactTypes = {
         substats: ["HPflat", "ATKflat", "DEFflat", "CritRate", "CritDMG", "HP%", "ATK%", "DEF%", "ElementalMastery", "EnergyRecharge"]
     },
     "Goblet": {
-        mainstat: ["EnergyRecharge", "ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
+        mainstat: ["ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
         substats: ["HPflat", "HP%", "ATKflat", "ATK%", "DEFflat", "DEF%", "CritRate", "CritDMG", "EnergyRecharge", "ElementalMastery"]
     },
     "Circlet": {

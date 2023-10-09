@@ -32,11 +32,15 @@ function validateAllCharacters() {
     console.log("ALL SUCCEDED");
     alert("ALL SUCCEDED");
 }
-function compareCharacters(usersCharacter) {
-    let simulatedCharacter = AllCharacters[usersCharacter.name];
-    let result = FindBestBuild(simulatedCharacter, 100);
-
-    let result2 = Simulation(usersCharacter);
+function runSim(baseCharacter,baseWeapon,artifacts) {
+    let userCharacter = new Createcharacter(_.cloneDeep(baseCharacter),baseWeapon,artifacts);
+    applyBonuses(userCharacter);
+    let simulatedCharacter = AllCharacters[userCharacter.name];
+    
+    let result = FindBestBuild(simulatedCharacter, 1);
+   
+    let result2 = Simulation(userCharacter);
+    console.log("results: ",result,result2);
     let dmgSources = result2.dmgSources;
     dmgSources.aa = result2.dmg-(dmgSources.e + dmgSources.q);
     console.log(result2.dmgSources)
@@ -124,8 +128,6 @@ function compareCharacters(usersCharacter) {
     }, 100);
     return `${Math.floor((userScore / result[0]) * 100)}/100`;
 }
-
-
 function FindBestBuild(baseChar, times) {
     let newDamage;
     let supportType;
@@ -136,6 +138,7 @@ function FindBestBuild(baseChar, times) {
     let charac;
     let startTime = Date.now();
     for (let index = 0; index < times; index++) {
+        console.log(index);
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = _.cloneDeep(baseChar);
             supportType = character.supportType;
@@ -1111,8 +1114,9 @@ function Simulation(character) {
                 }
                 switch (Character.weapon.name) {
                     case "Festering Desire":
-                        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32 });
+                        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
                         Character.advancedstats.critRate += 12;
+                        console.log("DEBUG: " + Character.advancedstats.critRate)
                         break;
 
                     case "Calamity Queller":
@@ -1163,7 +1167,7 @@ function Simulation(character) {
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
-                    
+                    console.log("DEBUG: "+result)
                     if (Number.isInteger(result)) {
                         totalDmg += result;
                         dmgSources.e += result;
@@ -1188,6 +1192,16 @@ function Simulation(character) {
                 switch (Character.weapon.name) {
                     case "Festering Desire":
                         Character.advancedstats.critRate -= 12;
+                        //Remove the Festering Desire buff
+                        let toRemoveIndex = -1;
+                        let toRemove = 0;
+                        Character.currentBuffs.forEach(buff => {
+                            toRemoveIndex++;
+                            if (buff.Source == "Festering Desire") {
+                                toRemove = toRemoveIndex;
+                            }
+                        });
+                        Character.currentBuffs.splice(toRemove, 1);
                         break;
                     case "Thundering Pulse":
                         if (!thunderingPulseNormalStack) {
@@ -1307,7 +1321,6 @@ function dmgCalc(attackAction, Character, type) {
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
     dmg += attackAction.isReaction ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : 0;
-
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
