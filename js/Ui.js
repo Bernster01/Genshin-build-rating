@@ -5,30 +5,35 @@ function stopPropagation() {
 }
 
 function UpdateArtifact(element, type) {
-    // if (type === true) {
-    //     if (element.innerHTML === "0") {
-    //         element.innerHTML = "";
-    //     }
-    // } else {
+    if (type === true) {
+        if (element.innerHTML === "0") {
+            element.innerHTML = "";
+        }
+    } //Check if fit contains anythign other then numbers
+    if (Number.isNaN(Number(element.innerHTML))) {
+        element.innerHTML = element.innerHTML.replace(/[^0-9]/g, '');
+        setUserFocusForEditableSpan(element);
+    }
+    //Check for leading zeros
+    if (element.innerHTML.length > 1 && element.innerHTML.charAt(0) === "0") {
+        element.innerHTML = element.innerHTML.slice(1);
+        setUserFocusForEditableSpan(element);
+    }
+    //Check if value is greater then 4680
+    if (element.innerHTML > 4680) {
+        element.innerHTML = 4680;
+        setUserFocusForEditableSpan(element);
+    }
 
-
-    //     let value = element.innerHTML;
-    //     //Remove any letters from the value
-    //     value = value.replace(/[^0-9]/g, '');
-    //     //Remove any leading zeros
-    //     value = value.replace(/^0+/, '');
-    //     //If the value is empty, set it to 0
-    //     if (value === "") {
-    //         value = 0;
-    //     }
-    //     //If the value is greater then 4680, set it to 4680
-    //     if (value > 4680) {
-    //         value = 4680;
-    //     }
-    //     element.innerHTML = value;
-    // }
 }
-
+function setUserFocusForEditableSpan(element) {
+    let range = document.createRange();
+    let sel = window.getSelection();
+    range.setStart(element.childNodes[0], element.innerHTML.length);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+}
 function getArtifactSetList(artifact) {
     let list = "";
     setsList.forEach(element => {
@@ -175,6 +180,12 @@ const artifactTypeAtrributes = {
         displayName: "HydroDMGBonus",
         title: "HydroDMGBonus",
     },
+    "GeoDMGBonus": {
+        percent: true,
+        icon: "Assets/Icons/Element_Geo.svg",
+        displayName: "GeoDMGBonus",
+        title: "GeoDMGBonus",
+    },
     "AnemoDMGBonus": {
         percent: true,
         icon: "Assets/Icons/Element_Anemo.svg",
@@ -232,7 +243,7 @@ const artifactTypes = {
         substats: ["HPflat", "ATKflat", "DEFflat", "CritRate", "CritDMG", "HP%", "ATK%", "DEF%", "ElementalMastery", "EnergyRecharge"]
     },
     "Goblet": {
-        mainstat: ["ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
+        mainstat: ["ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "GeoDMGBonus","AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
         substats: ["HPflat", "HP%", "ATKflat", "ATK%", "DEFflat", "DEF%", "CritRate", "CritDMG", "EnergyRecharge", "ElementalMastery"]
     },
     "Circlet": {

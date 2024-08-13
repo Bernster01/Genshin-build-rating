@@ -1,16 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
 
-
+:root {
+	--main-color: #5F5B6B;
+	--secondary-color: #3D383C;
+	--tertiary-color: hsl(51, 100%, 86%);
+	--font-color: #010101;
+	--font-family: 'Carter One', cursive;
+}
 html {
-	
-	font-family: 'Carter One', cursive;
+	color: var(--font-color);
+	font-family: var(--font-family);
 }
 
 body {
 	padding: 0;
 	margin: 0;
 	height: 100vh;
-	background: #3D383C;
+	background: var(--secondary-color);
 	
 
 }
@@ -21,7 +27,7 @@ header {
 
 	background: #C1BDB3;
 	border-radius: 0 0 30px 30px;
-	border: 5px solid #3D3B3C;
+	border: 5px solid var(--secondary-color);
 	overflow: hidden;
 	z-index: 2;
 }
@@ -67,7 +73,7 @@ footer {
 	width: 100%;
 	height: 100px;
 	z-index: 2;
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 	border-radius: 2rem 2rem 0px 0px;
 	/* border:0.5vh solid #3D3B3C; */
 
@@ -85,12 +91,11 @@ footer {
 	font-weight: bold;
 	width: 10%;
 	height: 100%;
-	background: #5F5B6B;
+	background: var(--main-color);
 	text-align: center;
 	font-size: 1.5vw;
-
-	top: 50;
-	left: 50;
+	top: 50%;
+	left: 50%;
 	position: absolute;
 
 }
@@ -99,9 +104,8 @@ footer {
 .Character img,
 .EmptyCharacter img,
 .Weapon img {
-
-
-	object-fit: fill;
+	object-fit: cover;
+	width: 100%;
 }
 
 
@@ -109,15 +113,13 @@ footer {
 .EmptyCharacter,
 .Weapons,
 .Weapon {
-	background: #5F5B6B;
-	width: auto;
-	min-width: fit-content;
-	height: fit-content;
+	background: var(--main-color);
+	width: 20%;
 	cursor: pointer;
 	overflow: hidden;
 	box-shadow: 0px 4px 12px 0.5px;
 	border-radius: 15%;
-	border: 0.2rem solid #3D383C;
+	border: 0.2rem solid var(--secondary-color);
 	margin: 1%;
 
 	user-select: none;
@@ -128,7 +130,9 @@ footer {
 	text-align: center;
 
 }
-
+.Weapons{
+	width: 30%;
+}
 .EmptyCharacter {
 	margin:0;
 }
@@ -138,12 +142,12 @@ footer {
 .EmptyCharacter p,
 .Weapon p {
 
-	font-size: 1em;
+	font-size: 1.1em;
 }
 
 .Character:hover,.Weapons:hover {
 	transform: scale(1.05);
-	box-shadow: 2px 8px 24px 2px;
+	box-shadow: 2px 8px 24px 2px #000000;
 }
 
 #CharacterSelection {
@@ -166,8 +170,8 @@ footer {
 	width: 80%;
 	min-width: 800px;
 	height: auto;
-	background: #3D383C;
-	border: 0.5rem solid #5F5B6B;
+	background: var(--secondary-color);
+	border: 0.5rem solid var(--main-color);
 	border-radius: 1rem;
 	box-shadow: 0vh 0.5em 2em -1em;
 	margin: 20%;
@@ -199,7 +203,7 @@ position: relative;
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
-	border: #C1BDB3 solid 0.5rem;
+	border: var(--tertiary-color) solid 0.5rem;
 	width: 60%;
 	display: flex;
 	flex-direction: column;
@@ -223,8 +227,8 @@ position: relative;
 	border-radius: 1rem;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	background: #323031;
-	border: 0.3rem solid #5F5B6B;
+	background: var(--secondary-color);
+	border: 0.3rem solid var(--main-color);
 	box-shadow: 0em 0.4em 4em -1em;
 	position: absolute;
 	top: 50%;
@@ -261,9 +265,9 @@ position: relative;
 }
 .artifact{
 	user-select: none;
-	background-color: #C1BDB3;
+	background-color: var(--tertiary-color);
 	border-radius: 1rem;
-	border: 0.5rem solid #5F5B6B;
+	border: 0.5rem solid var(--main-color);
 	box-shadow: 0rem 1rem 2rem -1rem;
 	display: flex;
 	flex-direction: row;
@@ -307,9 +311,9 @@ position: relative;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	background-color: #C1BDB3;
+	background-color: var(--tertiary-color);
 	border-radius: 1rem;
-	border: 0.25rem solid #5F5B6B;
+	border: 0.25rem solid var(--main-color);
 	cursor: auto;
 	position: absolute;
 	top: 100%;
@@ -347,13 +351,12 @@ position: relative;
 }
 
 .artifactStatsList{
-	background-color: #C1BDB3;
+	background-color: var(--tertiary-color);
 	border-radius: 1rem;
-	border: 0.5rem solid #5F5B6B;
+	border: 0.5rem solid var(--main-color);
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: fit-content;
 	overflow: hidden;
 	z-index: 1;
 }
@@ -379,13 +382,12 @@ position: relative;
 	font-size: 1.5rem !important;
 }
 .artifactSetList{
-	background-color: #C1BDB3;
+	background-color: var(--tertiary-color);
 	border-radius: 1rem;
-	border: 0.5rem solid #5F5B6B;
+	border: 0.5rem solid var(--main-color);
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: fit-content;
 	min-width:400px;
 	overflow: hidden;
 	cursor: auto;
@@ -415,9 +417,8 @@ position: relative;
 	z-index:1;
 }
 .Weapon {
-	background: #C1BDB3;
-	width: fit-content;
-	border-color: #5F5B6B;
+	background: var(--tertiary-color);
+	border-color: var(--main-color);
 	grid-column: 1;
 	grid-row: 2;
 }
@@ -436,14 +437,7 @@ position: relative;
 #circlet_set{
 	background-image: url("../Assets/Artifacts/None Circlet.webp");
 }
-/* .Weapons {
-	background: #C1BDB3;
-	width: fit-content;
-	height: fit-content;
-	border: #323031 2px solid;
-	border-radius: 15px;
-	margin: 0.75em;
-} */
+
 
 .Weapons img {
 	height: 185px;
@@ -467,19 +461,18 @@ position: relative;
 	visibility: hidden;
 	border-radius: 1vw;
 	overflow-y: scroll;
-	background: #323031;
-	border: 0.3vw solid #5F5B6B;
+	background: var(--secondary-color);
+	border: 0.3vw solid var(--main-color);
 	box-shadow: 0em 0.4em 4em -1em;
 	display: flex;
 	flex-flow: column;
-	scrollbar-width: 10px;
 
 }
 
 #Weapons h3 {
 	text-align: center;
-	background-color: #C1BDB3;
-	border: #323031 2px solid;
+	background-color: var(--tertiary-color);
+	border: var(--secondary-color) 2px solid;
 	border-radius: 15px;
 
 }
@@ -491,7 +484,7 @@ position: relative;
 
 .Weapon p {
 	width: 100%;
-	background: #3D383C;
+	background: var(--secondary-color);
 }
 
 #WeaponLevel {
@@ -508,7 +501,7 @@ position: relative;
 	flex-direction: column;
 	justify-items: center;
 	align-items: center;
-	border: 0.2vw solid #5F5B6B;
+	border: 0.2vw solid var(--main-color);
 	border-radius: 1vw;
 	aspect-ratio: 1/1;
 	width: 20%;
@@ -534,7 +527,6 @@ position: relative;
 #CharacterPageContainer {
 
 	width: 60%;
-	height: fit-content;
 	padding: 1%;
 	display: flex;
 	flex-direction: row;
@@ -561,23 +553,24 @@ position: relative;
 .HydroCharacter,
 .ElectroCharacter,
 .AnemoCharacter,
-.CryoCharacter {
+.CryoCharacter,
+.DendroCharacter {
 	margin-top: -0.40em;
 }
 
 
 #TalentContainer {
 	padding: 1vw;
-	background: #C1BDB3;
-	border: 0.2vw solid #5F5B6B;
+	background: var(--tertiary-color);
+	border: 0.2vw solid var(--main-color);
 	border-radius: 1vw;
 
 }
 
 #CharacterPageContainer {
 
-	background: #C1BDB3;
-	border: 0.2vw solid #5F5B6B;
+	background: var(--tertiary-color);
+	border: 0.2vw solid var(--main-color);
 	border-radius: 1vw;
 
 }
@@ -615,7 +608,9 @@ position: relative;
 .CryoCharacter {
 	background: linear-gradient(66deg, rgba(0, 254, 230, 1) 0%, rgba(125, 255, 233, 1) 40%, rgba(125, 255, 233, 1) 60%, rgba(0, 254, 230, 1) 100%);
 
-
+}
+.DendroCharacter{
+	background: linear-gradient(66deg, rgba(0, 254, 0, 1) 0%, rgba(125, 255, 125, 1) 40%, rgba(125, 255, 125, 1) 60%, rgba(0, 254, 0, 1) 100%);
 }
 
 select {
@@ -635,11 +630,10 @@ select {
 .supportingElementContainer div {
 	display: flex;
 	flex-direction: column;
-	width: fit-content;
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 	text-align: center;
 	border-radius: 1vw;
-	border: 2px solid #5F5B6B;
+	border: 2px solid var(--main-color);
 	margin: 1em;
 	padding: 0.75em;
 	box-shadow: 0em 0.4em 4em -1em;
@@ -654,11 +648,10 @@ select {
 #CurrentlySelected {
 	display: flex;
 	flex-direction: column;
-	width: fit-content;
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 	text-align: center;
 	border-radius: 1vw;
-	border: 2px solid #5F5B6B;
+	border: 2px solid var(--main-color);
 	margin: 1em;
 	padding: 0.75em;
 	box-shadow: 0em 0.4em 4em -1em;
@@ -677,10 +670,10 @@ select {
 	justify-content: center;
 	align-items: center;
 	width: 60%;
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 	text-align: center;
 	border-radius: 1vw;
-	border: 2px solid #5F5B6B;
+	border: 2px solid var(--main-color);
 	margin: 1em;
 	padding: 0.75em;
 	box-shadow: 0em 0.4em 4em -1em;
@@ -710,9 +703,9 @@ select {
 
 .elementalResonance {
 
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 	border-radius: 1vw;
-	border: 2px solid #5F5B6B;
+	border: 2px solid var(--main-color);
 
 }
 
@@ -791,7 +784,7 @@ select {
 .character-card-info-part {
 	margin-left: 2rem;
 	margin-top: 1.5rem;
-	border: #5F5B6B solid 0.2rem;
+	border: var(--main-color) solid 0.2rem;
 	border-radius: 2rem;
 	width: 100%;
 	padding: 0.5rem;
@@ -821,7 +814,7 @@ span {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	border: #5F5B6B solid 0.2rem;
+	border: var(--main-color) solid 0.2rem;
 	border-radius: 2rem;
 	padding: 1rem;
 	margin: 0.1rem;
@@ -936,17 +929,17 @@ span {
 
 
 .generic-btn {
-	background-color: #C1BDB3;
-	border: #5F5B6B solid 0.2rem;
+	background-color: var(--tertiary-color);
+	border: var(--main-color) solid 0.2rem;
 	cursor: pointer;
 	color: black;
 	transition: all 0.2s ease-in-out;
 }
 
 .generic-btn:hover {
-	background-color: #5F5B6B;
-	border-color: #C1BDB3;
-	color: #C1BDB3;
+	background-color: var(--main-color);
+	border-color: var(--tertiary-color);
+	color: var(--font-color);
 }
 
 .p1rem {
@@ -971,11 +964,10 @@ span {
 }
 
 #saved-characters-cards-btn {
-	background: #5F5B6B;
-	width: fit-content;
+	background: var(--main-color);
 	align-self: center;
 	padding: 0.5rem;
-	border: #5F5B6B solid 0.2rem;
+	border: var(--main-color) solid 0.2rem;
 	border-bottom: none;
 	cursor: pointer;
 	border-radius: 1rem 1rem 0 0;
@@ -984,13 +976,13 @@ span {
 }
 
 #saved-characters-cards-btn:hover {
-	background: #C1BDB3;
+	background: var(--tertiary-color);
 
 }
 
 #saved-characters-cards-wrapper {
-	background: #C1BDB3;
-	border: #5F5B6B solid 0.2rem;
+	background: var(--tertiary-color);
+	border: var(--main-color) solid 0.2rem;
 	width: 100%;
 	height: 100%;
 	border-radius: 1rem 1rem 0 0;

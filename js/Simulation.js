@@ -1,9 +1,7 @@
-let bestDMG = 0;
-let bestSupportScore = 0;
-let bestArtifacts = null;
+let bestBuild = "";
 let supportingElement = null;
 let enemiesFrozen = false;
-let role = "Dps";
+let role = "Support";
 let mistSplitterNormalStack = false;
 let mistSplitterBurstStack = false;
 let thunderingPulseNormalStack = false;
@@ -15,10 +13,6 @@ let superconductRes = false;
 let vvActive = false;
 let saraBuff = false;
 let shenheCounter = 0;
-function reset() {
-    bestDMG = 0;
-    bestSupportScore = 0;
-}
 function validateAllCharacters() {
     //Goes through all characters and validates them
     AllCharacters.index.forEach(character => {
@@ -37,86 +31,15 @@ function runSim(baseCharacter,baseWeapon,artifacts) {
     applyBonuses(userCharacter);
     let simulatedCharacter = AllCharacters[userCharacter.name];
     
-    let result = FindBestBuild(simulatedCharacter, 1);
+    let result = FindBestBuild(simulatedCharacter, 1000);
    
     let result2 = Simulation(userCharacter);
-    console.log("results: ",result,result2);
-    let dmgSources = result2.dmgSources;
-    dmgSources.aa = result2.dmg-(dmgSources.e + dmgSources.q);
-    console.log(result2.dmgSources)
-    let userScore;
-    let bonsuMultiplier = 1;
-    if (vvActive)
-        bonsuMultiplier = 2;
-    if (role != "Support" || simulatedCharacter.supportType == "Sub-dps") {
-        console.log(result[0], result2.dmg);
-        console.log("User", result2.char);
-        console.log(result[2]);
-        console.log(result[3]);
-        console.log(["Attack: " + result2.char.attack(), "Defense: " + result2.char.DEF(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-        userScore = Math.floor((result2.dmg / result[0]) * 100);
-    }
-
-    else if (simulatedCharacter.supportType == "Healer" && role == "Support") {
-        userScore = (result2.healing + (result2.dmg * 0.1)) * bonsuMultiplier;
-        console.log("User: " + userScore, "Best score: " + result[0])
-    }
-    else if (simulatedCharacter.supportType == "ATKBooster" && role == "Support") {
-        if (simulatedCharacter.supportType2 != undefined) {
-            if (simulatedCharacter.supportType2 == "Healer") {
-                userScore = ((result2.attackBuff * 2) + (result2.healing * 0.95) + (result2.dmg * 0.05)) * bonsuMultiplier;
-
-                console.log("User: " + userScore, "Best score: " + result[0])
-            }
-            else if(simulatedCharacter.supportType2 == "Shield"){
-                userScore = ((result2.attackBuff * 2) + (result2.shield * 0.95) + (result2.dmg * 0.05)) * bonsuMultiplier;
-
-                console.log("User: " + userScore, "Best score: " + result[0])
-            }
-
-        }
-        else {
-            userScore = ((result2.attackBuff * 10) + (result2.dmg * 0.1)) * bonsuMultiplier;
-            console.log("User: " + userScore, "Best score: " + result[0])
-        }
-    }
-    else if (simulatedCharacter.supportType == "Shield" && role == "Support") {
-        if (simulatedCharacter.supportType2 != undefined) {
-            if (simulatedCharacter.supportType2 == "Healer") {
-                userScore = ((result2.shield * 2) + (result2.healing * 0.95) + (result2.dmg * 0.1)) * bonsuMultiplier;
-
-                console.log("User: " + userScore, "Best score: " + result[0])
-            }
-            if (simulatedCharacter.supportType2 == "Sub-dps") {
-                userScore = (result2.shield + result2.dmg) * bonsuMultiplier;
-                console.log("User: " + userScore, "Best score: " + result[0])
-            }
-        }
-        else {
-            userScore = ((result2.shield * 2) + (result2.dmg * 0.1)) * bonsuMultiplier;
-            console.log("User: " + userScore, "Best score: " + result[0])
-        }
-    }
-    else if (simulatedCharacter.supportType == "ElementalBuffer" && role == "Support") {
-        if (simulatedCharacter.supportType2 != undefined) {
-
-        }
-        else {
-
-            userScore = ((result2.attackBuff * 20) + (result2.dmg * 0.0025)) * bonsuMultiplier;
-            console.log("User: " + userScore, "Best score: " + result[0])
-        }
-
-        console.log(result[3]);
-        console.log(["Attack: " + result2.char.attack(), "EM: " + result2.char.EM(), "HP: " + result2.char.HP(), "Crit Rate: " + result2.char.critRate(), "Crit DMG: " + result2.char.critDMG(), result2.char.advancedstats.elementalBonuses]);
-        
-       
-    }
-    if (role == "Support" && simulatedCharacter.supportType != "Sub-dps") {
-        
-        userScore =Math.floor(userScore/bestSupportScore*100);
-    }
-    let card = generateCharacterCard(result2.char,userScore,supportingElement,role,elementalResonance,true);
+    let score = EvalBuilds(result2, bestBuild, role);
+    console.log("USER:");
+    console.log(result2);
+    console.log("BEST:");
+    console.log(bestBuild);
+    let card = generateCharacterCard(result2.character,score,supportingElement,role,elementalResonance,true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
     doc.innerHTML = "";
@@ -126,16 +49,11 @@ function runSim(baseCharacter,baseWeapon,artifacts) {
     setTimeout(function () {
     parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
     }, 100);
-    return `${Math.floor((userScore / result[0]) * 100)}/100`;
+    return `${Math.floor((score / result) * 100)}/100`;
 }
+
 function FindBestBuild(baseChar, times) {
-    let newDamage;
-    let supportType;
-    let totalHealing;
-    let currentBestArtifacts;
-    let indexForBetterDmg = [];
-    let chara;
-    let charac;
+    let bestScore = 0;
     let startTime = Date.now();
     for (let index = 0; index < times; index++) {
         console.log(index);
@@ -163,157 +81,22 @@ function FindBestBuild(baseChar, times) {
 
             applyBonuses(newCharacter);
             let result = Simulation(newCharacter);
-            newDamage = result.dmg;
-            let char = result.char;
-            let score = 0;
-            let bonsuMultiplier = 1;
-            if (vvActive)
-                bonsuMultiplier = 2;
-            if ((character.supportType == "Sub-dps" && role == "Support") || role == "Dps") {
-                if (newDamage > bestDMG) {
-                    currentBestArtifacts = newCharacter.artifacts;
-                    bestArtifacts = newCharacter.artifacts;
-                    bestDMG = newDamage;
-                    const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, DMG: newDamage };
-                    charac = char;
-                    chara = ["Attack: " + char.attack(), "Defense: " + char.DEF(), "HP: " + char.HP(), "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-
-                    indexForBetterDmg.push(newObj);
-
-                }
+            if(bestBuild == ""){
+                bestBuild = result;
             }
-            else if (character.supportType == "Healer") {
-
-                score = (result.healing + (result.dmg * 0.1)) * bonsuMultiplier;
-
-                if (score > bestSupportScore) {
-                    currentBestArtifacts = newCharacter.artifacts;
-                    bestArtifacts = newCharacter.artifacts;
-                    bestSupportScore = score;
-                    const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                    charac = char;
-                    chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-
-                    indexForBetterDmg.push(newObj);
-                }
+            let evalResult = EvalBuilds(result, bestBuild, role);
+            if (evalResult>100) {
+                bestBuild = result;
+                bestScore = evalResult;
+                console.log("New Best Build: ", bestBuild);
             }
-            else if (character.supportType == "ATKBooster" && role == "Support") {
-                if (character.supportType2 != undefined) {
-                    if (character.supportType2 == "Healer") {
-                        score = ((result.attackBuff * 2) + (result.healing * 0.95) + (result.dmg * 0.05)) * bonsuMultiplier;
-                        if (score > bestSupportScore) {
-                            currentBestArtifacts = newCharacter.artifacts;
-                            bestArtifacts = newCharacter.artifacts;
-                            bestSupportScore = score;
-                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                            charac = char;
-                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                            indexForBetterDmg.push(newObj);
-                        }
-                    }
-                    else if(character.supportType2 == "Shield"){
-                        score = ((result.attackBuff * 2) + (result.shield * 0.95) + (result.dmg * 0.05)) * bonsuMultiplier;
-                        if (score > bestSupportScore) {
-                            currentBestArtifacts = newCharacter.artifacts;
-                            bestArtifacts = newCharacter.artifacts;
-                            bestSupportScore = score;
-                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                            charac = char;
-                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                            indexForBetterDmg.push(newObj);
-                        }
-                    
-                    }
-                }
-                else {
-                    score = ((result.attackBuff * 10) + (result.dmg * 0.1)) * bonsuMultiplier;
-                    if (score > bestSupportScore) {
-                        currentBestArtifacts = newCharacter.artifacts;
-                        bestArtifacts = newCharacter.artifacts;
-                        bestSupportScore = score;
-                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                        charac = char;
-                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                        indexForBetterDmg.push(newObj);
-                    }
-                }
-
-            }
-            else if (character.supportType == "Shield" && role == "Support") {
-                if (character.supportType2 != undefined) {
-                    if (character.supportType2 == "Healer") {
-                        score = ((result.shield * 2) + (result.healing * 0.95) + (result.dmg * 0.1)) * bonsuMultiplier;
-                        if (score > bestSupportScore) {
-                            currentBestArtifacts = newCharacter.artifacts;
-                            bestArtifacts = newCharacter.artifacts;
-                            bestSupportScore = score;
-                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                            charac = char;
-                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                            indexForBetterDmg.push(newObj);
-                        }
-                    }
-                    if (character.supportType2 == "Sub-dps") {
-                        score = (result.shield + result.dmg) * bonsuMultiplier;
-                        if (score > bestSupportScore) {
-                            currentBestArtifacts = newCharacter.artifacts;
-                            bestArtifacts = newCharacter.artifacts;
-                            bestSupportScore = score;
-                            const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                            charac = char;
-                            chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                            indexForBetterDmg.push(newObj);
-                        }
-                    }
-                }
-                else {
-                    score = ((result.shield * 2) + (result.dmg * 0.1)) * bonsuMultiplier;
-                    if (score > bestSupportScore) {
-                        currentBestArtifacts = newCharacter.artifacts;
-                        bestArtifacts = newCharacter.artifacts;
-                        bestSupportScore = score;
-                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                        charac = char;
-                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), char.advancedstats.elementalBonuses];
-                        indexForBetterDmg.push(newObj);
-                    }
-                }
-
-            }
-            else if (character.supportType == "ElementalBuffer" && role == "Support") {
-                if (character.supportType2 != undefined) {
-
-                }
-                else {
-                    score = ((result.attackBuff * 20) + (result.dmg * 0.0025)) * bonsuMultiplier;
-                    if (score > bestSupportScore) {
-                        currentBestArtifacts = newCharacter.artifacts;
-                        bestArtifacts = newCharacter.artifacts;
-                        bestSupportScore = score;
-                        const newObj = { Time: index, MultiplerToFind: (indexForBetterDmg.length >= 2) ? (index / indexForBetterDmg[indexForBetterDmg.length - 1].Time) : index, Score: score };
-                        charac = char;
-                        chara = ["Attack: " + char.attack(), "Base Attack: " + char.baseAttack, "HP: " + char.HP(), "Base HP: " + char.baseHP, "Crit Rate: " + char.critRate(), "Crit DMG: " + char.critDMG(), "EM: " + char.EM(), char.advancedstats.elementalBonuses];
-                        indexForBetterDmg.push(newObj);
-                    }
-                }
-
-            }
-
-            newCharacter = undefined;
-        })
-
-
-
+            
+            
+        },);
     }
-    vvActive = false;
-    character = undefined;
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
-    console.log(indexForBetterDmg);
-    if (role == "Support" && supportType != "Sub-dps")
-        return [bestSupportScore, currentBestArtifacts, charac, chara];
-    else
-        return [bestDMG, currentBestArtifacts, charac, chara];
+    return bestScore;
 }
 function GenerateSequence() {
     let sequence = [""];
@@ -378,6 +161,7 @@ class Createcharacter {
         this.src = baseCharacter.src;
         this.card = baseCharacter.card;
         this.supportType = baseCharacter.supportType;
+        this.supportType2 = baseCharacter.supportType2 || "null";
         this.element = baseCharacter.element;
         this.level = baseCharacter.level;
         this.energyOffset = baseCharacter.energyOffset;
@@ -866,7 +650,6 @@ function getSetBonus(array, character) {
             break;
         }
         else if (count >= 2) {
-
             character.currentBuffs.push(artifactSets[array[i]].twoPiece);
         }
         setsDone.push(currentSet);
@@ -979,7 +762,7 @@ function Simulation(character) {
                 if (Character.name == "Ganyu") {
                     let newAttack = attackAction;
                     let index = 0;
-                    console.log(attackAction)
+                    
                     attackAction.Multiplier.forEach(multiplier => {
                         index++;
                         attackAction.Multiplier = multiplier;
@@ -1116,7 +899,7 @@ function Simulation(character) {
                     case "Festering Desire":
                         Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
                         Character.advancedstats.critRate += 12;
-                        console.log("DEBUG: " + Character.advancedstats.critRate)
+                        
                         break;
 
                     case "Calamity Queller":
@@ -1167,7 +950,7 @@ function Simulation(character) {
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
-                    console.log("DEBUG: "+result)
+                    
                     if (Number.isInteger(result)) {
                         totalDmg += result;
                         dmgSources.e += result;
@@ -1279,7 +1062,7 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
-    return { dmg: Math.floor(totalDmg), char: Character, healing: heal, attackBuff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
+    return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
 function dmgCalc(attackAction, Character, type) {
@@ -1358,6 +1141,8 @@ function getBaseDamage(attackAction, character) {
             return attackAction.Multiplier * character.DEF();
         case "HP":
             return attackAction.Multiplier * character.HP();
+        case "EM":
+            return attackAction.Multiplier * character.EM();
         case "Blazing Eye":
             return attackAction.Multiplier;
 

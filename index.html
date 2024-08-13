@@ -39,34 +39,7 @@
 				</div>
 
 				<div id="LoadoutContainer">
-					<div id="elementalResonanceContainer">
-						<h2>Elemental Resonance</h2>
-
-
-						<div class="elementalResonanceContainer">
-							<div onclick="selectResonance('Pyro',this)">
-								<img src="Elements/pyro.png" />
-							</div>
-							<div onclick="selectResonance('Hydro',this)">
-								<img src="Elements/hydro.png" />
-							</div>
-							<div onclick="selectResonance('Anemo',this)">
-								<img src="Elements/anemo.png" />
-							</div>
-							<div onclick="selectResonance('Geo',this)">
-								<img src="Elements/geo.png" />
-							</div>
-							<div onclick="selectResonance('Electro',this)">
-								<img src="Elements/electro.png" />
-							</div>
-							<div onclick="selectResonance('Dendro',this)">
-								<img src="Elements/dendro.png" />
-							</div>
-							<div onclick="selectResonance('Cryo',this)">
-								<img src="Elements/cryo.png" />
-							</div>
-						</div>
-					</div>
+					
 					<div id="characterContainer">
 						<div id="characterContainerUpper">
 							<div id="weaponContainer">
@@ -78,6 +51,7 @@
 										onkeyup="searchWeapons(this.value)">
 									<div class="characterIcons" id="weaponIcons">
 										<span id="noResults">Hm... seems nothing matched</span>
+										<span id="noCharacterSelected">Please select a character first</span>
 									</div>
 								</div>
 								<div>
@@ -220,7 +194,7 @@
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)"
 											onblur="UpdateArtifact(this,false)" id="flower_mainstat_value">0</span>
-										<span id="flower_mainstat_percentIcon">%</span>
+										<span id="flower_mainstat_percentIcon"></span>
 										<div class="artifactStatsList" id="flowerMainstatList" style="display: none;">
 
 										</div>
@@ -287,11 +261,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('plumeMainstatList'),stopPropagation(),addEventlistenerArtifactList('plumeMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="plume_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Attack.webp" title="Flat ATK" id="plume_mainstat_type"/>
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)"
 											onblur="UpdateArtifact(this,false)" id="plume_mainstat_value">0</span>
-										<span id="plume_mainstat_percentIcon">%</span>
+										<span id="plume_mainstat_percentIcon"></span>
 										<div class="artifactStatsList" id="plumeMainstatList" style="display: none;">
 
 										</div>
@@ -570,7 +544,34 @@
 							</div>
 						</div>
 					</div>
+					<div id="elementalResonanceContainer">
+						<h2>Elemental Resonance</h2>
 
+
+						<div class="elementalResonanceContainer">
+							<div onclick="selectResonance('Pyro',this)">
+								<img src="Elements/pyro.png" />
+							</div>
+							<div onclick="selectResonance('Hydro',this)">
+								<img src="Elements/hydro.png" />
+							</div>
+							<div onclick="selectResonance('Anemo',this)">
+								<img src="Elements/anemo.png" />
+							</div>
+							<div onclick="selectResonance('Geo',this)">
+								<img src="Elements/geo.png" />
+							</div>
+							<div onclick="selectResonance('Electro',this)">
+								<img src="Elements/electro.png" />
+							</div>
+							<div onclick="selectResonance('Dendro',this)">
+								<img src="Elements/dendro.png" />
+							</div>
+							<div onclick="selectResonance('Cryo',this)">
+								<img src="Elements/cryo.png" />
+							</div>
+						</div>
+					</div>
 					<div id="supportingElementContainer">
 						<h2>Supporting Element</h2>
 						<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
@@ -668,7 +669,6 @@
 			target.title = character.title;
 			target.alt = character.title;
 			selectedCharacter = character.title;
-			console.log(character);
 			loadWeapons(character.title);
 		}
 		function selectWeapon(weapon) {
@@ -729,6 +729,7 @@
 	</script>
 
 	<script src="js/EventListener.js"> </script>
+	<script src="js/eval.js"></script>
 </body>
 
 </html>

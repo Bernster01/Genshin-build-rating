@@ -16,8 +16,26 @@ function LoadCharacters() {
    
 
     loadArtifactLists();
-    
+    loadMockArtifacts();
+    devloadCharacter();
 
+}
+function devloadCharacter(){
+    document.getElementById("character_level").value = "90b";
+    document.getElementById("weapon_level").value = "90b";
+    document.getElementById("normal_attack").value = 10;
+    document.getElementById("talent_skill").value = 10;
+    document.getElementById("talent_burst").value = 10;
+    let character = document.createElement("div");
+    character.title = "Ganyu";
+    character.innerHTML = `<img src="Assets/Characters/Ganyu/Ganyu.png" alt="Ganyu"><div class="CryoCharacter"><span>Ganyu</span></div>`;
+    selectCharacter(character);
+    let weapon = document.createElement("div");
+    weapon.title = "Amos Bow";
+    weapon.innerHTML = `
+    <img src="Assets/Weapons/Amos_Bow.png" alt="Amos Bow"><div class="WeaponsText"><span>Amos Bow</span></div>`;
+    selectWeapon(weapon);
+    console.log(weapon);
 }
 function loadArtifactLists(){
     document.getElementById("flowerSetList").innerHTML = getArtifactSetList("Flower");
@@ -68,70 +86,144 @@ function loadWeapons(character) {
 }
 function loadMockArtifacts() {
 
-    document.getElementById("Circlet_mainstat").value = "CritDMG";
-    document.getElementById("Circlet_mainstat_value").value = 62.2;
-    document.getElementById("Circlet_substat_1").value = "CritRate";
-    document.getElementById("Circlet_substat_1_value").value = 12.4;
-    document.getElementById("Circlet_substat_2").value = "DEFflat";
-    document.getElementById("Circlet_substat_2_value").value = 39;
-    document.getElementById("Circlet_substat_3").value = "ATK%";
-    document.getElementById("Circlet_substat_3_value").value = 4.7;
-    document.getElementById("Circlet_substat_4").value = "HP%";
-    document.getElementById("Circlet_substat_4_value").value = 4.7;
-    document.getElementById("Circlet_set").value = "Blizzard Strayer";
-    document.getElementById("Circlet").src = "Artifacts/Blizzard Strayer Circlet.webp";
+    document.getElementById("circlet_mainstat_type").dataset.type = "CritDMG";
+    document.getElementById("circlet_mainstat_type").title = "CritDMG";
+    document.getElementById("circlet_mainstat_type").src = "Assets/Icons/Icon_Attribute_Critical_Damage.webp";
+    document.getElementById("circlet_mainstat_value").innerText = 62.2;
 
-    document.getElementById("Flower_mainstat").value = "HPflat";
-    document.getElementById("Flower_mainstat_value").value = 4780;
-    document.getElementById("Flower_substat_1").value = "CritRate";
-    document.getElementById("Flower_substat_1_value").value = 8.6;
-    document.getElementById("Flower_substat_2").value = "CritDMG";
-    document.getElementById("Flower_substat_2_value").value = 18.7;
-    document.getElementById("Flower_substat_3").value = "HP%";
-    document.getElementById("Flower_substat_3_value").value = 10.5;
-    document.getElementById("Flower_substat_4").value = "DEF%";
-    document.getElementById("Flower_substat_4_value").value = 7.3;
-    document.getElementById("Flower_set").value = "Blizzard Strayer";
-    document.getElementById("Flower").src = "Artifacts/Blizzard Strayer Flower.webp";
+    document.getElementById("circlet_substat_1_type").dataset.type = "CritRate";
+    document.getElementById("circlet_substat_1_type").title = "CritRate";
+    document.getElementById("circlet_substat_1_type").src = "Assets/Icons/Icon_Attribute_Critical_Hit.webp";
+    document.getElementById("circlet_substat_1_value").innerText = 12.4;
 
-    document.getElementById("Plume_mainstat").value = "ATKflat";
-    document.getElementById("Plume_mainstat_value").value = 311;
-    document.getElementById("Plume_substat_1").value = "CritDMG";
-    document.getElementById("Plume_substat_1_value").value = 6.2;
-    document.getElementById("Plume_substat_2").value = "EnergyRecharge";
-    document.getElementById("Plume_substat_2_value").value = 10.4;
-    document.getElementById("Plume_substat_3").value = "DEFflat";
-    document.getElementById("Plume_substat_3_value").value = 60;
-    document.getElementById("Plume_substat_4").value = "DEF%";
-    document.getElementById("Plume_substat_4_value").value = 12.4;
-    document.getElementById("Plume_set").value = "Blizzard Strayer";
-    document.getElementById("Plume").src = "Artifacts/Blizzard Strayer Plume.webp";
+    document.getElementById("circlet_substat_2_type").dataset.type = "DEFflat";
+    document.getElementById("circlet_substat_2_type").title = "DEFflat";
+    document.getElementById("circlet_substat_2_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
+    document.getElementById("circlet_substat_2_value").innerText = 39;
 
-    document.getElementById("Sands_mainstat").value = "ATK%";
-    document.getElementById("Sands_mainstat_value").value = 46.6;
-    document.getElementById("Sands_substat_1").value = "DEFflat";
-    document.getElementById("Sands_substat_1_value").value = 16;
-    document.getElementById("Sands_substat_2").value = "CritDMG";
-    document.getElementById("Sands_substat_2_value").value = 29.5;
-    document.getElementById("Sands_substat_3").value = "ATKflat";
-    document.getElementById("Sands_substat_3_value").value = 19;
-    document.getElementById("Sands_substat_4").value = "CritRate";
-    document.getElementById("Sands_substat_4_value").value = 10.9;
-    document.getElementById("Sands_set").value = "Blizzard Strayer";
-    document.getElementById("Sands").src = "Artifacts/Blizzard Strayer Sands.webp";
+    document.getElementById("circlet_substat_3_type").dataset.type = "ATK%";
+    document.getElementById("circlet_substat_3_type").title = "ATK%";
+    document.getElementById("circlet_substat_3_type").src = "Assets/Icons/Icon_Attribute_Attack.webp";
+    document.getElementById("circlet_substat_3_value").innerText = 4.7;
 
-    document.getElementById("Goblet_mainstat").value = "CryoDMGBonus";
-    document.getElementById("Goblet_mainstat_value").value = 46.6;
-    document.getElementById("Goblet_substat_1").value = "HPflat";
-    document.getElementById("Goblet_substat_1_value").value = 239;
-    document.getElementById("Goblet_substat_2").value = "ElementalMastery";
-    document.getElementById("Goblet_substat_2_value").value = 37;
-    document.getElementById("Goblet_substat_3").value = "CritDMG";
-    document.getElementById("Goblet_substat_3_value").value = 25.6;
-    document.getElementById("Goblet_substat_4").value = "EnergyRecharge";
-    document.getElementById("Goblet_substat_4_value").value = 5.8;
-    document.getElementById("Goblet_set").value = "Viridescent Venerer";
-    document.getElementById("Goblet").src = "Artifacts/Viridescent Venerer Goblet.webp";
+    document.getElementById("circlet_substat_4_type").dataset.type = "HP%";
+    document.getElementById("circlet_substat_4_type").title = "HP%";
+    document.getElementById("circlet_substat_4_type").src = "Assets/Icons/Icon_Attribute_Health.webp";
+    document.getElementById("circlet_substat_4_value").innerText = 4.7;
+
+    document.getElementById("circlet_set").dataset.set = "Blizzard Strayer";
+    document.getElementById("circlet_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Circlet.webp')";
+
+    document.getElementById("flower_mainstat_type").dataset.type = "HPflat";
+    document.getElementById("flower_mainstat_type").title = "HPflat";
+    document.getElementById("flower_mainstat_type").src = "Assets/Icons/Icon_Attribute_Health.webp";
+    document.getElementById("flower_mainstat_value").innerText = 4680;
+
+    document.getElementById("flower_substat_1_type").dataset.type = "CritRate";
+    document.getElementById("flower_substat_1_type").title = "CritRate";
+    document.getElementById("flower_substat_1_type").src = "Assets/Icons/Icon_Attribute_Critical_Hit.webp";
+    document.getElementById("flower_substat_1_value").innerText = 8.6;
+
+    document.getElementById("flower_substat_2_type").dataset.type = "CritDMG";
+    document.getElementById("flower_substat_2_type").title = "CritDMG";
+    document.getElementById("flower_substat_2_type").src = "Assets/Icons/Icon_Attribute_Critical_Damage.webp";
+    document.getElementById("flower_substat_2_value").innerText = 18.7;
+
+    document.getElementById("flower_substat_3_type").dataset.type = "HP%";
+    document.getElementById("flower_substat_3_type").title = "HP%";
+    document.getElementById("flower_substat_3_type").src = "Assets/Icons/Icon_Attribute_Health.webp";
+    document.getElementById("flower_substat_3_value").innerText = 10.5;
+
+    document.getElementById("flower_substat_4_type").dataset.type = "DEF%";
+    document.getElementById("flower_substat_4_type").title = "DEF%";
+    document.getElementById("flower_substat_4_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
+    document.getElementById("flower_substat_4_value").innerText = 7.3;
+
+    document.getElementById("flower_set").dataset.set = "Blizzard Strayer";
+    document.getElementById("flower_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Flower.webp')";
+
+    document.getElementById("plume_mainstat_type").dataset.type = "ATKflat";
+    document.getElementById("plume_mainstat_type").title = "ATKflat";
+    document.getElementById("plume_mainstat_type").src = "Assets/Icons/Icon_Attribute_Attack.webp";
+    document.getElementById("plume_mainstat_value").innerText = 311;
+
+    document.getElementById("plume_substat_1_type").dataset.type = "CritDMG";
+    document.getElementById("plume_substat_1_type").title = "CritDMG";
+    document.getElementById("plume_substat_1_type").src = "Assets/Icons/Icon_Attribute_Critical_Damage.webp";
+    document.getElementById("plume_substat_1_value").innerText = 6.2;
+
+    document.getElementById("plume_substat_2_type").dataset.type = "EnergyRecharge";
+    document.getElementById("plume_substat_2_type").title = "EnergyRecharge";
+    document.getElementById("plume_substat_2_type").src = "Assets/Icons/Icon_Attribute_Energy_Recharge.webp";
+    document.getElementById("plume_substat_2_value").innerText = 10.4;
+
+    document.getElementById("plume_substat_3_type").dataset.type = "DEFflat";
+    document.getElementById("plume_substat_3_type").title = "DEFflat";
+    document.getElementById("plume_substat_3_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
+    document.getElementById("plume_substat_3_value").innerText = 60;
+
+    document.getElementById("plume_substat_4_type").dataset.type = "DEF%";
+    document.getElementById("plume_substat_4_type").title = "DEF%";
+    document.getElementById("plume_substat_4_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
+    document.getElementById("plume_substat_4_value").innerText = 12.4;
+
+    document.getElementById("plume_set").dataset.set = "Blizzard Strayer";
+    document.getElementById("plume_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Plume.webp')";
+
+    document.getElementById("sands_mainstat_type").dataset.type = "ATK%";
+    document.getElementById("sands_mainstat_type").title = "ATK%";
+    document.getElementById("sands_mainstat_type").src = "Assets/Icons/Icon_Attribute_Attack.webp";
+    document.getElementById("sands_mainstat_value").innerText = 46.6;
+
+    document.getElementById("sands_substat_1_type").dataset.type = "ATKflat";
+    document.getElementById("sands_substat_1_type").title = "ATKflat";
+    document.getElementById("sands_substat_1_type").src = "Assets/Icons/Icon_Attribute_Attack.webp";
+    document.getElementById("sands_substat_1_value").innerText = 16;
+
+    document.getElementById("sands_substat_2_type").dataset.type = "CritDMG";
+    document.getElementById("sands_substat_2_type").title = "CritDMG";
+    document.getElementById("sands_substat_2_type").src = "Assets/Icons/Icon_Attribute_Critical_Damage.webp";
+    document.getElementById("sands_substat_2_value").innerText = 29.5;
+
+    document.getElementById("sands_substat_3_type").dataset.type = "DEFflat";
+    document.getElementById("sands_substat_3_type").title = "DEFflat";
+    document.getElementById("sands_substat_3_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
+    document.getElementById("sands_substat_3_value").innerText = 19;
+
+    document.getElementById("sands_substat_4_type").dataset.type = "CriteRate";
+    document.getElementById("sands_substat_4_type").title = "CritRate";
+    document.getElementById("sands_substat_4_type").src = "Assets/Icons/Icon_Attribute_Critical_Hit.webp";
+    document.getElementById("sands_substat_4_value").innerText = 10.9;
+
+    document.getElementById("sands_set").dataset.set = "Blizzard Strayer";
+    document.getElementById("sands_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Sands.webp')";
+
+    document.getElementById("goblet_mainstat_type").dataset.type = "CryoDMGBonus";
+    document.getElementById("goblet_mainstat_type").title = "CryoDMGBonus";
+    document.getElementById("goblet_mainstat_type").src = "Assets/Icons/Element_Cryo.svg";
+    document.getElementById("goblet_mainstat_value").innerText = 46.6;
+
+    document.getElementById("goblet_substat_1_type").dataset.type = "HPflat";
+    document.getElementById("goblet_substat_1_type").title = "HPflat";
+    document.getElementById("goblet_substat_1_type").src = "Assets/Icons/Icon_Attribute_Health.webp";
+    document.getElementById("goblet_substat_1_value").innerText = 239;
+
+    document.getElementById("goblet_substat_2_type").dataset.type = "ElementalMastery";
+    document.getElementById("goblet_substat_2_type").title = "ElementalMastery";
+    document.getElementById("goblet_substat_2_type").src = "Assets/Icons/Icon_Attribute_Elemental_Mastery.webp";
+    document.getElementById("goblet_substat_2_value").innerText = 37;
+
+    document.getElementById("goblet_substat_3_type").dataset.type = "CritDMG";
+    document.getElementById("goblet_substat_3_type").title = "CritDMG";
+    document.getElementById("goblet_substat_3_type").src = "Assets/Icons/Icon_Attribute_Critical_Damage.webp";
+    document.getElementById("goblet_substat_3_value").innerText = 25.6;
+
+    document.getElementById("goblet_substat_4_type").dataset.type = "EnergyRecharge";
+    document.getElementById("goblet_substat_4_type").title = "EnergyRecharge";
+    document.getElementById("goblet_substat_4_value").innerText = 5.8;
+
+    document.getElementById("goblet_set").dataset.set = "Viridescent Venerer";
+    document.getElementById("goblet_set").style.backgroundImage = "url('Assets/Artifacts/Viridescent Venerer Goblet.webp')";
 }
 function loadMockArtifacts2() {
     let procent = 40;

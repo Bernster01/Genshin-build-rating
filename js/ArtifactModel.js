@@ -18,7 +18,7 @@ const sets ={
     [3]:"Crimson Witch of Flames",
     [4]:"Echoes of an Offering",
     [5]:"Emblem of Severed Fate",  
-    [6]:"Gladiator's Finale",
+    [6]:"Gladiators Finale",
     [7]:"Heart of Depth",
     [8]:"Husk of Opulent Dreams",
     [9]:"Lavawalker",
@@ -27,13 +27,13 @@ const sets ={
     [12]:"Ocean-Hued Clam",
     [13]:"Pale Flame",
     [14]:"Retracing Bolide",
-    [15]:"Shimenawa's Reminiscence",
+    [15]:"Shimenawas Reminiscence",
     [16]:"Tenacity of the Millelith",
     [17]:"Thundering Fury",
     [18]:"Thundersoother",
     [19]:"Vermillion Hereafter",
     [20]:"Viridescent Venerer",
-    [21]:"Wanderer's Troupe"
+    [21]:"Wanderers Troupe"
 }
 const setsList = [
 "Archaic Petra",
@@ -42,7 +42,7 @@ const setsList = [
 "Crimson Witch of Flames",
 "Echoes of an Offering",
 "Emblem of Severed Fate",
-"Gladiator's Finale",
+"Gladiators Finale",
 "Heart of Depth",
 "Husk of Opulent Dreams",
 "Lavawalker",
@@ -51,13 +51,13 @@ const setsList = [
 "Ocean-Hued Clam",
 "Pale Flame",
 "Retracing Bolide",
-"Shimenawa's Reminiscence",
+"Shimenawas Reminiscence",
 "Tenacity of the Millelith",
 "Thundering Fury",
 "Thundersoother",
 "Vermillion Hereafter",
 "Viridescent Venerer",
-"Wanderer's Troupe"
+"Wanderers Troupe"
 ];
 
 const artifactSets ={
@@ -93,8 +93,8 @@ const artifactSets ={
         fourPiece:{Type:"Emblem"}
         
     },
-    ["Gladiator's Finale"]:{
-        Type: "Gladiator's Finale",
+    ["Gladiators Finale"]:{
+        Type: "Gladiators Finale",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:{Type:"NormalAttack",Value:35},
         
@@ -145,8 +145,8 @@ const artifactSets ={
             {Type:"NormalAttack",Value:40}
         ]
     },
-    ["Shimenawa's Reminiscence"]:{
-        Type: "Shimenawa's Reminiscence",
+    ["Shimenawas Reminiscence"]:{
+        Type: "Shimenawas Reminiscence",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:[
             {Type:"ChargedAttack",Value:50},
@@ -183,8 +183,8 @@ const artifactSets ={
         fourPiece:{Type:"VV",Value:null}
         
     },
-    ["Wanderer's Troupe"]:{
-        Type: "Wanderer's Troupe",
+    ["Wanderers Troupe"]:{
+        Type: "Wanderers Troupe",
         twoPiece:{Type:"ElementalMastery",Value:80},
         fourPiece:{Type:"ChargedAttack",Value:35},
     }

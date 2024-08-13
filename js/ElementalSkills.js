@@ -231,7 +231,7 @@ function letTheShowBegin(Character) {
 
     healing += regenPerHit * 16 * healingBonus * encore;
     healing += regenPerHit * 4 * 4 * healingBonus * encore;
-    return healing;
+    return {healing: healing};
 }
 
 function tidecaller(Character) {
@@ -3384,7 +3384,7 @@ function sesshouSakura(Character) {
         } else {
             attack.isReaction = false;
         }
-        dmgCalc(attack, Character, "ElementalSkill") * 3 *(hasPassive ? (1+(Character.EM()*(0.15/100))) : 1);
+        dmgCalc(attack, Character, "ElementalSkill") * 3 * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
     }
     return dmg;
 
@@ -3449,7 +3449,112 @@ function openingFlourish(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
-    shield *= 1+(Character.advancedstats.shieldStrength / 100);
-    return {dmg:dmg,shield:shield};
+    shield *= 1 + (Character.advancedstats.shieldStrength / 100);
+    return { dmg: dmg, shield: shield };
 
 }
+
+function UniversalityAnElaborationOnForm(Character) {
+    let multiplier1 = 0;
+    let multiplier2 = 0;
+    let multiplier3 = 0;
+    let multiplier4 = 0;
+
+    switch (Character.elementalSkill.Level) {
+        case 1:
+            multiplier1 = 193.6 / 100;
+            multiplier2 = 154.88 / 100;
+            multiplier3 = 67.2 / 100;
+            multiplier4 = 134.4 / 100;
+            break;
+        case 2:
+            multiplier1 = 208.12 / 100;
+            multiplier2 = 166.5 / 100;
+            multiplier3 = 72.24 / 100;
+            multiplier4 = 144.48 / 100;
+            break;
+        case 3:
+            multiplier1 = 222.64 / 100;
+            multiplier2 = 178.11 / 100;
+            multiplier3 = 77.28 / 100;
+            multiplier4 = 154.56 / 100;
+            break;
+        case 4:
+            multiplier1 = 242 / 100;
+            multiplier2 = 193.6 / 100;
+            multiplier3 = 84 / 100;
+            multiplier4 = 168 / 100;
+            break;
+        case 5:
+            multiplier1 = 256.52 / 100;
+            multiplier2 = 205.22 / 100;
+            multiplier3 = 89.04 / 100;
+            multiplier4 = 178.08 / 100;
+            break;
+        case 6:
+            multiplier1 = 271.04 / 100;
+            multiplier2 = 216.83 / 100;
+            multiplier3 = 94.08 / 100;
+            multiplier4 = 188.16 / 100;
+            break;
+        case 7:
+            multiplier1 = 290.4 / 100;
+            multiplier2 = 232.32 / 100;
+            multiplier3 = 100.8 / 100;
+            multiplier4 = 201.6 / 100;
+            break;
+        case 8:
+            multiplier1 = 309.76 / 100;
+            multiplier2 = 247.81 / 100;
+            multiplier3 = 114.24 / 100;
+            multiplier4 = 228.48 / 100;
+            break;
+        case 9:
+            multiplier1 = 329.12 / 100;
+            multiplier2 = 247.81 / 100;
+            multiplier3 = 107.52 / 100;
+            multiplier4 = 215.04 / 100;
+            break;
+        case 10:
+            multiplier1 = 348.48 / 100;
+            multiplier2 = 278.78 / 100;
+            multiplier3 = 120.96 / 100;
+            multiplier4 = 241.92 / 100;
+            break;
+        case 11:
+            multiplier1 = 367.84 / 100;
+            multiplier2 = 294.27 / 100;
+            multiplier3 = 127.68 / 100;
+            multiplier4 = 255.36 / 100;
+            break;
+        case 12:
+            multiplier1 = 387.2 / 100;
+            multiplier2 = 309.76 / 100;
+            multiplier3 = 134.4 / 100;
+            multiplier4 = 268.8 / 100;
+            break;
+        case 13:
+            multiplier1 = 411.4 / 100;
+            multiplier2 = 329.12 / 100;
+            multiplier3 = 142.8 / 100;
+            multiplier4 = 285.6 / 100;
+            break;
+    }
+    let attack = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true }
+    let attack2 = { Multiplier: multiplier2, Element: "DendroDMGBonus", Scaling: "EM", isReaction: false }
+    let attack3 = { Multiplier: multiplier3, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true }
+    let attack4 = { Multiplier: multiplier4, Element: "DendroDMGBonus", Scaling: "EM", isReaction: false }
+    Character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Mysteries Laid Bare") {
+            let buffAmount = Character.EM() * 0.1;
+            if(buffAmount > 100)
+                buffAmount = 100;
+            Character.currentBuffs.push({ Type: "ElementalSkillDMG", Value: buffAmount });
+        }
+    });
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
+    dmg += dmgCalc(attack2, Character, "ElementalSkill") * 3;
+    dmg += dmgCalc(attack3, Character, "ElementalSkill") * 3;
+    dmg += dmgCalc(attack4, Character, "ElementalSkill") * 3;
+    return dmg;
+    }

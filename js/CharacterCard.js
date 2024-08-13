@@ -30,10 +30,10 @@ function generateCharacterCard(character, score, supportingElement, role, resona
         Sands: importedArtifacts[3],
         Goblet: importedArtifacts[4]
     }
-    console.log(artifacts);
+    
     let supportingElementHtmlCode = (supportingElement != null && supportingElement != "null") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
     if (!createData) {
-        console.log(supportingElementHtmlCode);
+        
     }
     let card = `<div id="result-splash-container" 
     style="border: #323031 solid 0.2rem;
@@ -437,6 +437,9 @@ function getElement(character) {
         case "AnemoCharacter":
             gradient = "linear-gradient(90deg, #C1BDB3 40%, #51ff95)";
             break;
+        case "DendroCharacter":
+            gradient = "linear-gradient(90deg, #C1BDB3 40%, #1f7b1f)";
+            break;
     }
 
     return { element, gradient };
@@ -453,7 +456,7 @@ function getMostElement(elementalBonuses) {
     if (element === "") {
         element = "No Elemental Bonus";
     }
-    console.log(element);
+   
     return { Type: element, Value: max };
 }
 function getArtifacts(artifacts) {
@@ -472,7 +475,7 @@ function getArtifacts(artifacts) {
 function getResonance(resonances) {
     let htmlCode = "";
     let resonancesList = [];
-    console.log(resonances);
+    
     if (resonances[0] != "" || resonances[1] != "") {
         for (let key in resonances) {
             resonancesList.push(resonances[key].toLowerCase());
@@ -481,7 +484,7 @@ function getResonance(resonances) {
             }
         }
     }
-    console.log(htmlCode);
+    
     return htmlCode;
 }
 function getGrade(score) {
@@ -584,7 +587,7 @@ function deleteCharacterCard(name, bool) {
     else {
 
         let doc = document.getElementById("delete-character-card-prompt-container");
-        console.log(doc.innerHTML);
+        
         if (doc.innerHTML == "") {
             let html = `<div class="prompt-container">		
                             <div class="delete-character-card-prompt-wrapper">
