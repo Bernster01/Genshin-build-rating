@@ -19,9 +19,12 @@ function UpdateArtifact(element, type) {
         element.innerHTML = element.innerHTML.slice(1);
         setUserFocusForEditableSpan(element);
     }
-    //Check if value is greater then 4680
-    if (element.innerHTML > 4680) {
-        element.innerHTML = 4680;
+    //Check if value is greater then artifact stat max value
+    let artifactType = element.parentElement.childNodes[1].dataset.type;
+    let maxValue = mainStatValues[artifactType];
+    if (element.innerHTML > maxValue) {
+        element.innerHTML = maxValue;
+
         setUserFocusForEditableSpan(element);
     }
 

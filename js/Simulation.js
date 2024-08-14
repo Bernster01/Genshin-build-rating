@@ -1,7 +1,7 @@
 let bestBuild = "";
 let supportingElement = null;
 let enemiesFrozen = false;
-let role = "Support";
+let role = "Dps";
 let mistSplitterNormalStack = false;
 let mistSplitterBurstStack = false;
 let thunderingPulseNormalStack = false;
@@ -13,6 +13,7 @@ let superconductRes = false;
 let vvActive = false;
 let saraBuff = false;
 let shenheCounter = 0;
+let numberOfEnemies = 3;
 function validateAllCharacters() {
     //Goes through all characters and validates them
     AllCharacters.index.forEach(character => {
@@ -1145,6 +1146,8 @@ function getBaseDamage(attackAction, character) {
             return attackAction.Multiplier * character.EM();
         case "Blazing Eye":
             return attackAction.Multiplier;
+        case "Combined":
+            return attackAction.Multiplier;
 
     }
     return 1;
@@ -1308,6 +1311,12 @@ function getFlatDamage(character, attackAction) {
                 flatDamage += character.DEF() * 0.40;
             break;
     }
+    //Aggravate
+    if (attackAction.isReaction && attackAction.Element=="ElectroDMGBonus" && supportingElement=="DendroDMGBonus")
+       flatDamage += aggravate(em,lvl,character);
+    //Spread
+    if (attackAction.isReaction && attackAction.Element=="DendroDMGBonus" && supportingElement=="ElectroDMGBonus")
+       flatDamage += spread(em,lvl,character);
     return flatDamage;
 }
 function getDamageBonus(character, attackAction, type) {
@@ -1423,6 +1432,8 @@ function elementalMasteryCalc(dmg, type, character) {
     let swirlBonus = 0;
     let overloadedBonus = 0;
     let burningBonus = 0;
+    let aggravateBonus = 0;
+    let spreadBonus = 0;
     if (supportingElement == null) {
         return dmg;
     }
@@ -1453,12 +1464,12 @@ function elementalMasteryCalc(dmg, type, character) {
         swirlBonus = (swirlBonus == 0) ? 0 : swirlBonus / 100;
         overloadedBonus = (overloadedBonus == 0) ? 0 : overloadedBonus / 100;
         burningBonus = (burningBonus == 0) ? 0 : burningBonus / 100;
+        
         //Amplifying reaction
-        let vaporizeMultiplier = 2 * (1 + ((278 * (em / (em + 1400))) / 100)) * (1 + vaporizeBonus);
-        let reverseVaporizeMultiplier = 1.5 * (1 + ((278 * (em / (em + 1400))) / 100)) * (1 + vaporizeBonus);
-        let meltMultiplier = 2 * (1 + ((278 * (em / (em + 1400))) / 100)) * (1 + meltBonus);
-        let reverseMeltMultiplier = 1.5 * (1 + ((278 * (em / (em + 1400))) / 100)) * (1 + meltBonus);
-
+        let vaporizeMultiplier = 2 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + vaporizeBonus));
+        let reverseVaporizeMultiplier = 1.5 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + vaporizeBonus));
+        let meltMultiplier = 2 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + meltBonus));
+        let reverseMeltMultiplier = 1.5 *((1 + (2.78 * (em / (em + 1400)))) + (1 + meltBonus));
         switch (supportingElement) {
             case "Pyro":
                 switch (type) {
@@ -1548,6 +1559,7 @@ function elementalMasteryCalc(dmg, type, character) {
                         dmg += swirl(em, lvl, "Electro", character, swirlBonus)
                         break;
                     case "Dendro":
+                        
                         break;
                 }
                 break;
@@ -1569,17 +1581,17 @@ function elementalMasteryCalc(dmg, type, character) {
     }
 }
 function overloaded(em, lvl, element, character, overloadedBonus) {
-    return ((superconductBaseDMG[lvl] * 4) * (1 + ((1600 * (em / (em + 2000))) / 100) + overloadedBonus) * resCalc(character, element));
+    return ((superconductBaseDMG[lvl] * 4) * (1 + ((16 * (em / (em + 2000)))) + overloadedBonus) * resCalc(character, element));
 }
 function electroCharged(em, lvl, element, character, electroChargedBonus) {
-    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((1600 * (em / (em + 2000))) / 100) + electroChargedBonus) * resCalc(character, element)) * 3.5;
+    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((16 * (em / (em + 2000)))) + electroChargedBonus) * resCalc(character, element)) * 3.5;
 }
 function superconduct(em, lvl, element, character, superconductBonus) {
     if (!superconductRes) {
         character.currentBuffs.push({ Type: "ResShred", Value: 40, Element: "PhysicalDMGBonus" });
         superconductRes = true;
     }
-    return ((superconductBaseDMG[lvl]) * (1 + ((1600 * (em / (em + 2000))) / 100) + superconductBonus) * resCalc(character, element));
+    return ((superconductBaseDMG[lvl]) * (1 + ((16 * (em / (em + 2000)))) + superconductBonus) * resCalc(character, element));
 }
 function swirl(em, lvl, element, character, swirlBonus) {
     let isShreded = false;
@@ -1613,6 +1625,45 @@ function swirl(em, lvl, element, character, swirlBonus) {
         }
     }
     return dmg;
+}
+function aggravate(em,lvl,character){
+    let aggravateBonus = 0;
+    character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Aggravate") {
+            aggravateBonus = buff.Value;
+        }
+    });
+    aggravateBonus = (aggravateBonus == 0) ? 0 : aggravateBonus / 100;
+    let aggravateBaseDmg = 1.15*LvlMultiplier[lvl];
+    let aggravateEM = ((1+(5*(em/(em+1200))))+(1+aggravateBonus));
+    let aggravateDmg = aggravateBaseDmg * aggravateEM;
+    return aggravateDmg;
+}
+function spread(em,lvl,element,character){
+    let spreadBonus = 0;
+    character.currentBuffs.forEach(buff => {
+        if (buff.Type == "Spread") {
+            spreadBonus = buff.Value;
+        }
+    });
+    spreadBonus = (spreadBonus == 0) ? 0 : spreadBonus / 100;
+    let spreadBaseDmg = 1.2*LvlMultiplier[lvl];
+    let spreadEM = ((1+(5*(em/(em+1200))))+(1+spreadBonus));
+    let spreadDmg = spreadBaseDmg * spreadEM;
+    console.log("Spread: "+spreadDmg);
+    return spreadDmg;
+}
+function burning(em, lvl, element, character, burningBonus) {
+
+}
+function bloom(em, lvl, element, character, bloomBonus) {
+
+}
+function burgeoning(em, lvl, element, character, burgeoningBonus) {
+
+}
+function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
+
 }
 const superconductBaseDMG = {
     "1": 9,

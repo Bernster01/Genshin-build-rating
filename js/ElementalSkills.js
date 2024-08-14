@@ -3540,10 +3540,8 @@ function UniversalityAnElaborationOnForm(Character) {
             multiplier4 = 285.6 / 100;
             break;
     }
-    let attack = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true }
-    let attack2 = { Multiplier: multiplier2, Element: "DendroDMGBonus", Scaling: "EM", isReaction: false }
-    let attack3 = { Multiplier: multiplier3, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true }
-    let attack4 = { Multiplier: multiplier4, Element: "DendroDMGBonus", Scaling: "EM", isReaction: false }
+    let attack = { Multiplier: (multiplier1*Character.attack())+(multiplier2*Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
+    let attack2 = { Multiplier: (multiplier3*Character.attack())+(multiplier4*Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Mysteries Laid Bare") {
             let buffAmount = Character.EM() * 0.1;
@@ -3554,7 +3552,5 @@ function UniversalityAnElaborationOnForm(Character) {
     });
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * 3;
     dmg += dmgCalc(attack2, Character, "ElementalSkill") * 3;
-    dmg += dmgCalc(attack3, Character, "ElementalSkill") * 3;
-    dmg += dmgCalc(attack4, Character, "ElementalSkill") * 3;
     return dmg;
     }

@@ -457,7 +457,7 @@ const Alhaitham = {
             }
         },
         Element: "DendroDMGBonus",
-        isReaction: false,
+        isReaction: true,
         scaling: "ATK"
     },
     normalAttack2: {
@@ -516,7 +516,7 @@ const Alhaitham = {
             }
         },
         Element: "DendroDMGBonus",
-        isReaction: false,
+        isReaction: true,
         scaling: "ATK"
     },
     normalAttack4: {
@@ -574,7 +574,7 @@ const Alhaitham = {
             }
         },
         Element: "DendroDMGBonus",
-        isReaction: false,
+        isReaction: true,
         scaling: "ATK"
     },
     chargedAttack: {
@@ -603,7 +603,7 @@ const Alhaitham = {
             }
         },
         Element: "DendroDMGBonus",
-        isReaction: false,
+        isReaction: true,
         scaling: "ATK"
     },
     plungeAttack: {
@@ -15177,3 +15177,19 @@ const AllCharacters = {
         "Traveler (Electro)", "Traveler (Geo)", "Venti", "Xiangling", "Xiao", "Xingqiu",
         "Xinyan", "Yae Miko", "Yanfei", "Yoimiya", "Yun Jin", "Zhongli"]
 };
+const LvlMultiplier = {
+    ["1b"]: 17.165605,
+    ["20b"]: 80.584775,
+    ["20a"]: 80.584775,
+    ["40b"]: 207.382042,
+    ["40a"]: 207.382042,
+    ["50b"]: 323.601597,
+    ["50a"]: 323.601597,
+    ["60b"]: 492.88489,
+    ["60a"]: 492.88489,
+    ["70b"]: 765.640231,
+    ["70a"]: 765.640231,
+    ["80b"]: 1077.443668,
+    ["80a"]: 1077.443668,
+    ["90b"]: 1446.853458
+}
