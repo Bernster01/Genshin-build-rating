@@ -17,13 +17,6 @@ let numberOfEnemies = 3;
 let endEarly = false;
 async function validateAllCharacters() {
     //Goes through all characters and validates them
-    //  AllCharacters.index.forEach(character => {
-    //     console.log(character);
-    //     let result = FindBestBuild(AllCharacters[character], 100);
-    //     if (result != null || result != undefined) {
-    //         console.log(character + " Succeded");
-    //     }
-    // });
     let startTime = Date.now();
     for (const character in AllCharacters) {
         if(character == "index")
