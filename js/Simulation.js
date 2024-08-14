@@ -27,28 +27,28 @@ function validateAllCharacters() {
     console.log("ALL SUCCEDED");
     alert("ALL SUCCEDED");
 }
-function runSim(baseCharacter,baseWeapon,artifacts) {
-    let userCharacter = new Createcharacter(_.cloneDeep(baseCharacter),baseWeapon,artifacts);
+function runSim(baseCharacter, baseWeapon, artifacts) {
+    let userCharacter = new Createcharacter(_.cloneDeep(baseCharacter), baseWeapon, artifacts);
     applyBonuses(userCharacter);
     let simulatedCharacter = AllCharacters[userCharacter.name];
-    
+
     let result = FindBestBuild(simulatedCharacter, 1000);
-   
+
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild, role);
     console.log("USER:");
     console.log(result2);
     console.log("BEST:");
     console.log(bestBuild);
-    let card = generateCharacterCard(result2.character,score,supportingElement,role,elementalResonance,true);
+    let card = generateCharacterCard(result2.character, score, supportingElement, role, elementalResonance, true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
     doc.innerHTML = "";
     doc.insertAdjacentHTML('beforeend', card.card);
-    parentDoc.style.transform ="translate(-50%,50%) scale(0.1)";
+    parentDoc.style.transform = "translate(-50%,50%) scale(0.1)";
     parentDoc.style.display = "flex";
     setTimeout(function () {
-    parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
+        parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
     }, 100);
     return `${Math.floor((score / result) * 100)}/100`;
 }
@@ -82,17 +82,17 @@ function FindBestBuild(baseChar, times) {
 
             applyBonuses(newCharacter);
             let result = Simulation(newCharacter);
-            if(bestBuild == ""){
+            if (bestBuild == "") {
                 bestBuild = result;
             }
             let evalResult = EvalBuilds(result, bestBuild, role);
-            if (evalResult>100) {
+            if (evalResult > 100) {
                 bestBuild = result;
                 bestScore = evalResult;
                 console.log("New Best Build: ", bestBuild);
             }
-            
-            
+
+
         },);
     }
     let stopTime = Date.now();
@@ -679,7 +679,7 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
-    let dmgSources = {aa:0,e:0,q:0};
+    let dmgSources = { aa: 0, e: 0, q: 0 };
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
         let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action };
@@ -763,7 +763,7 @@ function Simulation(character) {
                 if (Character.name == "Ganyu") {
                     let newAttack = attackAction;
                     let index = 0;
-                    
+
                     attackAction.Multiplier.forEach(multiplier => {
                         index++;
                         attackAction.Multiplier = multiplier;
@@ -900,7 +900,7 @@ function Simulation(character) {
                     case "Festering Desire":
                         Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
                         Character.advancedstats.critRate += 12;
-                        
+
                         break;
 
                     case "Calamity Queller":
@@ -951,7 +951,7 @@ function Simulation(character) {
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
-                    
+
                     if (Number.isInteger(result)) {
                         totalDmg += result;
                         dmgSources.e += result;
@@ -964,7 +964,7 @@ function Simulation(character) {
                             atkBuff += result.attackBuff;
                         if (result.shield != undefined)
                             shield += result.shield;
-                            dmgSources.e += result.dmg;
+                        dmgSources.e += result.dmg;
                     }
                 }
                 else {
@@ -999,7 +999,7 @@ function Simulation(character) {
             case "Q":
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalBurst.Skill(Character);
-                    
+
                     if (Number.isInteger(result)) {
                         totalDmg += result;
                         dmgSources.q += result;
@@ -1024,7 +1024,7 @@ function Simulation(character) {
                             break;
                     }
                     let qDmg = Character.elementalBurst.Skill(Character);
-                  
+
                     switch (Character.weapon.name) {
                         case "Mistsplitter Reforged":
                             if (!mistSplitterBurstStack)
@@ -1312,11 +1312,11 @@ function getFlatDamage(character, attackAction) {
             break;
     }
     //Aggravate
-    if (attackAction.isReaction && attackAction.Element=="ElectroDMGBonus" && supportingElement=="DendroDMGBonus")
-       flatDamage += aggravate(em,lvl,character);
+    if (attackAction.isReaction && attackAction.Element == "ElectroDMGBonus" && supportingElement == "Dendro")
+        flatDamage += aggravate(character);
     //Spread
-    if (attackAction.isReaction && attackAction.Element=="DendroDMGBonus" && supportingElement=="ElectroDMGBonus")
-       flatDamage += spread(em,lvl,character);
+    if (attackAction.isReaction && attackAction.Element == "DendroDMGBonus" && supportingElement == "Electro")
+        flatDamage += spread(character);
     return flatDamage;
 }
 function getDamageBonus(character, attackAction, type) {
@@ -1432,8 +1432,9 @@ function elementalMasteryCalc(dmg, type, character) {
     let swirlBonus = 0;
     let overloadedBonus = 0;
     let burningBonus = 0;
-    let aggravateBonus = 0;
-    let spreadBonus = 0;
+    let bloomBonus = 0;
+    let hyperbloomBonus = 0;
+    let burgeoningBonus = 0;
     if (supportingElement == null) {
         return dmg;
     }
@@ -1464,12 +1465,15 @@ function elementalMasteryCalc(dmg, type, character) {
         swirlBonus = (swirlBonus == 0) ? 0 : swirlBonus / 100;
         overloadedBonus = (overloadedBonus == 0) ? 0 : overloadedBonus / 100;
         burningBonus = (burningBonus == 0) ? 0 : burningBonus / 100;
-        
+        bloomBonus = (bloomBonus == 0) ? 0 : bloomBonus / 100;
+        hyperbloomBonus = (hyberbloomBonus == 0) ? 0 : hyberbloomBonus / 100;
+        burgeoningBonus = (burgeoningBonus == 0) ? 0 : burgeoningBonus / 100;
+
         //Amplifying reaction
         let vaporizeMultiplier = 2 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + vaporizeBonus));
         let reverseVaporizeMultiplier = 1.5 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + vaporizeBonus));
         let meltMultiplier = 2 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + meltBonus));
-        let reverseMeltMultiplier = 1.5 *((1 + (2.78 * (em / (em + 1400)))) + (1 + meltBonus));
+        let reverseMeltMultiplier = 1.5 * ((1 + (2.78 * (em / (em + 1400)))) + (1 + meltBonus));
         switch (supportingElement) {
             case "Pyro":
                 switch (type) {
@@ -1486,7 +1490,7 @@ function elementalMasteryCalc(dmg, type, character) {
                         dmg += swirl(em, lvl, "Pyro", character, swirlBonus);
                         break;
                     case "Dendro":
-
+                        dmg += burning(em, lvl, "Pyro", character, burningBonus);
                         break;
                 }
                 break;
@@ -1514,6 +1518,7 @@ function elementalMasteryCalc(dmg, type, character) {
                         }
                         break;
                     case "Dendro":
+                        dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
                         break;
                 }
                 break;
@@ -1540,8 +1545,6 @@ function elementalMasteryCalc(dmg, type, character) {
                             enemiesFrozen = true;
                         }
                         break;
-                    case "Dendro":
-                        break;
                 }
                 break;
             case "Electro":
@@ -1558,9 +1561,6 @@ function elementalMasteryCalc(dmg, type, character) {
                     case "Anemo":
                         dmg += swirl(em, lvl, "Electro", character, swirlBonus)
                         break;
-                    case "Dendro":
-                        
-                        break;
                 }
                 break;
             case "Anemo":
@@ -1572,9 +1572,22 @@ function elementalMasteryCalc(dmg, type, character) {
                     case "Pyro":
                         dmg += burning(em, lvl, "Pyro", character, burningBonus);
                         break;
+                    case "Hydro":
+                        dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
+                        break;
+
 
                 }
                 break;
+            case "Bloom":
+                switch (type) {
+                    case "Pyro":
+                        dmg += burgeoning(em, lvl, "Pyro", character, burgeoningBonus);
+                        break;
+                    case "Electro":
+                        dmg += hyperbloom(em, lvl, "Electro", character, hyperbloomBonus);
+                        break;
+                }
 
         }
         return dmg;
@@ -1626,7 +1639,9 @@ function swirl(em, lvl, element, character, swirlBonus) {
     }
     return dmg;
 }
-function aggravate(em,lvl,character){
+function aggravate(character) {
+    let em = character.EM();
+    let lvl = character.level;
     let aggravateBonus = 0;
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "Aggravate") {
@@ -1634,12 +1649,14 @@ function aggravate(em,lvl,character){
         }
     });
     aggravateBonus = (aggravateBonus == 0) ? 0 : aggravateBonus / 100;
-    let aggravateBaseDmg = 1.15*LvlMultiplier[lvl];
-    let aggravateEM = ((1+(5*(em/(em+1200))))+(1+aggravateBonus));
+    let aggravateBaseDmg = 1.15 * LvlMultiplier[lvl];
+    let aggravateEM = ((1 + (5 * (em / (em + 1200)))) + (1 + aggravateBonus));
     let aggravateDmg = aggravateBaseDmg * aggravateEM;
     return aggravateDmg;
 }
-function spread(em,lvl,element,character){
+function spread(character) {
+    let em = character.EM();
+    let lvl = character.level;
     let spreadBonus = 0;
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "Spread") {
@@ -1647,23 +1664,22 @@ function spread(em,lvl,element,character){
         }
     });
     spreadBonus = (spreadBonus == 0) ? 0 : spreadBonus / 100;
-    let spreadBaseDmg = 1.2*LvlMultiplier[lvl];
-    let spreadEM = ((1+(5*(em/(em+1200))))+(1+spreadBonus));
+    let spreadBaseDmg = 1.2 * LvlMultiplier[lvl];
+    let spreadEM = ((1 + (5 * (em / (em + 1200)))) + (1 + spreadBonus));
     let spreadDmg = spreadBaseDmg * spreadEM;
-    console.log("Spread: "+spreadDmg);
     return spreadDmg;
 }
 function burning(em, lvl, element, character, burningBonus) {
-
+    return 0;
 }
 function bloom(em, lvl, element, character, bloomBonus) {
-
+    return 0;
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
-
+    return 0;
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
-
+    return 0;
 }
 const superconductBaseDMG = {
     "1": 9,
