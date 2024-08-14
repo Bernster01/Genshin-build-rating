@@ -1694,7 +1694,10 @@ function spread(character) {
     return spreadDmg;
 }
 function burning(em, lvl, element, character, burningBonus) {
-    return 0;
+    //10 hits over 4s
+    const burningBaseDmg = 0.25 * LvlMultiplier[lvl];
+    const burningEM = 1 + (16 * (em / (em + 1200))) + burningBonus;
+    return (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
 }
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[lvl];
