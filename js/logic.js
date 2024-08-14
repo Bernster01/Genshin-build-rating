@@ -49,7 +49,9 @@ function switchDisplay(target,type){
 }
 
 function starterFunction(){
-    
+    document.getElementById("roleInput").addEventListener("change", function(){
+        selectRole(this.value);
+    });
     
 }
 function deepClone(obj, hash = new WeakMap()) {

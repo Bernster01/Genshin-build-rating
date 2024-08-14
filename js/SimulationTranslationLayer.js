@@ -1,5 +1,9 @@
 function prepare(button) {
     button.isDisabled = true;
+    let runs = document.getElementById("simulationRuns").value;
+    if (runs === "" || runs === null || runs === undefined) {
+        runs = 1000;
+    }
     //Prepare the character for the simulation
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterImg").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponImg").title];
@@ -19,7 +23,7 @@ function prepare(button) {
     //Set artifacts
     let artifacts = getArtifacts();    console.log(artifacts);
     //run simulation
-    runSimulation(baseCharacter, weapon, artifacts);
+    runSimulation(baseCharacter, weapon, artifacts,runs);
 }
 function getArtifacts() {
     const circletMainstat = { Type: document.getElementById("circlet_mainstat_type").dataset.type, Value: Number.parseFloat(document.getElementById("circlet_mainstat_value").innerText) };
@@ -136,7 +140,7 @@ function getArtifacts() {
 
     return [circlet, flower, plume, sands, goblet];
 }
-function runSimulation(character, weapon, artifacts){
+function runSimulation(character, weapon, artifacts, runs){
     console.log("Running simulation");
     console.log(character);
     console.log(weapon);
@@ -144,7 +148,7 @@ function runSimulation(character, weapon, artifacts){
     bestSupportScore = 0;
     bestDMG = 0;
     // validateAllCharacters();
-    runSim(character, weapon, artifacts);
+    runSim(character, weapon, artifacts, runs);
 }
 function getBestBuild(){
 

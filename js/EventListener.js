@@ -41,12 +41,13 @@ function selectSupportingElement(element, obj, type) {
 function selectRole(value) {
   value = Number.parseInt(value);
   switch (value) {
-    case 0:
-      role = "Support";
-      break;
     case 1:
       role = "Dps";
       break;
+    case 2:
+      role = "Support";
+      break;
+   
   }
 
 }

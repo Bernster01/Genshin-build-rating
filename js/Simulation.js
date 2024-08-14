@@ -27,14 +27,12 @@ function validateAllCharacters() {
     console.log("ALL SUCCEDED");
     alert("ALL SUCCEDED");
 }
-function runSim(baseCharacter, baseWeapon, artifacts) {
-
+async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
-    console.log(userCharacter);
     applyBonuses(userCharacter);
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
-    let result = FindBestBuild(simulatedCharacter, 1000);
+    let result = await FindBestBuild(simulatedCharacter, runs);
 
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild, role);
@@ -56,8 +54,15 @@ function runSim(baseCharacter, baseWeapon, artifacts) {
 }
 
 function FindBestBuild(baseChar, times) {
-    let bestScore = 0;
+    
     let startTime = Date.now();
+    let bestScore = findBestBuildLoop(baseChar, times);
+    let stopTime = Date.now();
+    console.log((stopTime - startTime) / 1000 + "seconds");
+    return bestScore;
+}
+async function findBestBuildLoop(baseChar, times){
+    let bestScore = 0;
     for (let index = 0; index < times; index++) {
         console.log(index);
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
@@ -96,10 +101,13 @@ function FindBestBuild(baseChar, times) {
 
 
         },);
+        if(index % 100 == 0)
+            await delay(1);
     }
-    let stopTime = Date.now();
-    console.log((stopTime - startTime) / 1000 + "seconds");
     return bestScore;
+} 
+function delay(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 function GenerateSequence() {
     let sequence = [""];
@@ -1468,7 +1476,7 @@ function elementalMasteryCalc(dmg, type, character) {
         overloadedBonus = (overloadedBonus == 0) ? 0 : overloadedBonus / 100;
         burningBonus = (burningBonus == 0) ? 0 : burningBonus / 100;
         bloomBonus = (bloomBonus == 0) ? 0 : bloomBonus / 100;
-        hyperbloomBonus = (hyberbloomBonus == 0) ? 0 : hyberbloomBonus / 100;
+        hyperbloomBonus = (hyperbloomBonus == 0) ? 0 : hyperbloomBonus / 100;
         burgeoningBonus = (burgeoningBonus == 0) ? 0 : burgeoningBonus / 100;
 
         //Amplifying reaction
