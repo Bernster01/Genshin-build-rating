@@ -28,7 +28,9 @@ function validateAllCharacters() {
     alert("ALL SUCCEDED");
 }
 function runSim(baseCharacter, baseWeapon, artifacts) {
-    let userCharacter = new Createcharacter(_.cloneDeep(baseCharacter), baseWeapon, artifacts);
+
+    let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
+    console.log(userCharacter);
     applyBonuses(userCharacter);
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
@@ -59,9 +61,9 @@ function FindBestBuild(baseChar, times) {
     for (let index = 0; index < times; index++) {
         console.log(index);
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
-            let character = _.cloneDeep(baseChar);
+            let character = deepClone(baseChar);
             supportType = character.supportType;
-            let weapon = _.cloneDeep(AllWeapons[weaponToUse]);
+            let weapon = deepClone(AllWeapons[weaponToUse]);
             weapon.level = "90b";
             character.level = "90b";
             character.elementalSkill.Level = 10;
