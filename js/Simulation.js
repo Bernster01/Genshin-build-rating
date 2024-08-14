@@ -1128,7 +1128,7 @@ function dmgCalc(attackAction, Character, type) {
         * getCrit(Character)
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
-    dmg += attackAction.isReaction ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : 0;
+    dmg = attackAction.isReaction ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : dmg;
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -1697,13 +1697,19 @@ function burning(em, lvl, element, character, burningBonus) {
     return 0;
 }
 function bloom(em, lvl, element, character, bloomBonus) {
-    return 0;
+    const bloomBaseDmg = 2 * LvlMultiplier[lvl];
+    const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element)*3;//1 hit on 3 enemies
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
-    return 0;
+    const burgeoningBaseDmg = 3 * LvlMultiplier[lvl];
+    const burgeoningEM = 1 + (16 * (em / (em + 1200))) + burgeoningBonus;
+    return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element)*3;//1 hit on 3 enemies
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
-    return 0;
+    const hyperBloomBaseDmg = 3 * LvlMultiplier[lvl];
+    const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
+    return (hyperBloomBaseDmg * hyperBloomEM)*resCalc(character, element)*2*2;//2 hits and 2 enemies within 1m
 }
 const superconductBaseDMG = {
     "1": 9,
