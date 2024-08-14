@@ -1,4 +1,4 @@
-let bestBuild = "";
+let bestBuild = {};
 let supportingElement = null;
 let enemiesFrozen = false;
 let role = "Dps";
@@ -15,18 +15,28 @@ let saraBuff = false;
 let shenheCounter = 0;
 let numberOfEnemies = 3;
 let endEarly = false;
-function validateAllCharacters() {
+async function validateAllCharacters() {
     //Goes through all characters and validates them
-    AllCharacters.index.forEach(character => {
-        console.log(character);
-        reset();
-        let result = FindBestBuild(AllCharacters[character], 100);
+    //  AllCharacters.index.forEach(character => {
+    //     console.log(character);
+    //     let result = FindBestBuild(AllCharacters[character], 100);
+    //     if (result != null || result != undefined) {
+    //         console.log(character + " Succeded");
+    //     }
+    // });
+    let startTime = Date.now();
+    for (const character in AllCharacters) {
+        if(character == "index")
+            continue;
+        const element = AllCharacters[character];
+        let result = await FindBestBuild(element, 25);
         if (result != null || result != undefined) {
             console.log(character + " Succeded");
         }
-    });
-    console.log("ALL SUCCEDED");
-    alert("ALL SUCCEDED");
+
+    }
+    let stopTime = Date.now();
+    console.log("ALL SUCCEDED in "+(stopTime - startTime) / 1000 + "seconds");
 }
 async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
@@ -36,11 +46,11 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let result = await FindBestBuild(simulatedCharacter, runs);
 
     let result2 = Simulation(userCharacter);
-    let score = EvalBuilds(result2, bestBuild, role);
+    let score = EvalBuilds(result2, bestBuild[baseCharacter.name], role);
     console.log("USER:");
     console.log(result2);
     console.log("BEST:");
-    console.log(bestBuild);
+    console.log(bestBuild[baseCharacter.name]);
     let card = generateCharacterCard(result2.character, score, supportingElement, role, elementalResonance, true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
@@ -54,23 +64,23 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     return true;
 }
 
-function FindBestBuild(baseChar, times) {
-    
+async function FindBestBuild(baseChar, times) {
+
     let startTime = Date.now();
-    let bestScore = findBestBuildLoop(baseChar, times);
+    let bestScore = await findBestBuildLoop(baseChar, times);
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
     endEarly = false;
     return bestScore;
 }
-async function findBestBuildLoop(baseChar, times){
+async function findBestBuildLoop(baseChar, times) {
     let bestScore = 0;
     let startTime = Date.now();
+    let currentCharacter = baseChar.name;
     for (let index = 0; index < times; index++) {
-        if(endEarly)
+        if (endEarly)
             return bestScore;
-        
-        console.log(index);
+
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = deepClone(baseChar);
             supportType = character.supportType;
@@ -95,29 +105,29 @@ async function findBestBuildLoop(baseChar, times){
 
             applyBonuses(newCharacter);
             let result = Simulation(newCharacter);
-            if (bestBuild == "") {
-                bestBuild = result;
+            if (bestBuild[currentCharacter] == "" || bestBuild[currentCharacter] == undefined) {
+                bestBuild[currentCharacter] = result;
             }
-            let evalResult = EvalBuilds(result, bestBuild, role);
+            let evalResult = EvalBuilds(result, bestBuild[currentCharacter], role);
             if (evalResult > 100) {
-                bestBuild = result;
+                bestBuild[currentCharacter] = result;
                 bestScore = evalResult;
-                console.log("New Best Build: ", bestBuild);
+
             }
 
 
         },);
-        if(index % 100 == 0){
+        if (index % 100 == 0) {
             document.getElementById("currentSimRun").innerText = index;
-            document.getElementById("percentDone").innerText = Math.floor(index / times * 100) ;
+            document.getElementById("percentDone").innerText = Math.floor(index / times * 100);
             document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
             document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
             await delay(1);
         }
     }
     return bestScore;
-} 
-function delay(ms){
+}
+function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 function GenerateSequence() {

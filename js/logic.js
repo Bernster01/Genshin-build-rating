@@ -55,6 +55,7 @@ function starterFunction(){
     document.getElementById("endEarlyBtn").addEventListener("click", function(){
         endEarly=true;
     });
+    validateAllCharacters();
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions

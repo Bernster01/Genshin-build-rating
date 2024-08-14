@@ -328,7 +328,7 @@ function passionOverload(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalSkill");
-    console.log("DEBUG: " + dmg);
+
     return dmg * numberOfEnemies;
 }
 
@@ -3031,7 +3031,7 @@ function kuragesOath(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
     let heal = healing * (1 + (Character.advancedstats.healingBonus / 100));
-    console.log(1 + Character.advancedstats.healingBonus / 100);
+   
     for (let index = 0; index < 6; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
