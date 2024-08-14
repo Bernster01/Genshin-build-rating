@@ -1,9 +1,13 @@
-function prepare(button) {
+async function prepare(button) {
     button.isDisabled = true;
+    endEarly = false;
+    let simScreen = document.getElementById("simRunScreen");
     let runs = document.getElementById("simulationRuns").value;
+   
     if (runs === "" || runs === null || runs === undefined) {
         runs = 1000;
     }
+    
     //Prepare the character for the simulation
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterImg").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponImg").title];
@@ -23,7 +27,13 @@ function prepare(button) {
     //Set artifacts
     let artifacts = getArtifacts();    console.log(artifacts);
     //run simulation
-    runSimulation(baseCharacter, weapon, artifacts,runs);
+    simScreen.style.display = "flex";
+    document.getElementById("howManySimRuns").innerText = runs;
+    await delay(500);
+    let result = await runSimulation(baseCharacter, weapon, artifacts,runs);
+    if(result){
+    simScreen.style.display = "none";
+    }
 }
 function getArtifacts() {
     const circletMainstat = { Type: document.getElementById("circlet_mainstat_type").dataset.type, Value: Number.parseFloat(document.getElementById("circlet_mainstat_value").innerText) };
@@ -148,7 +158,7 @@ function runSimulation(character, weapon, artifacts, runs){
     bestSupportScore = 0;
     bestDMG = 0;
     // validateAllCharacters();
-    runSim(character, weapon, artifacts, runs);
+    return runSim(character, weapon, artifacts, runs);
 }
 function getBestBuild(){
 

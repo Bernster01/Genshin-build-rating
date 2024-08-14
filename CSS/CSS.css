@@ -1118,3 +1118,60 @@ border-radius: 2rem;
 	transform: scale(1.25) !important;
 	transition: filter 1s ease-out, background-color 1s ease-out, transform 1s ease-out;
 }
+#simRunScreen{
+	width:100%;
+	height:100vh;
+	position:fixed;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 9999;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+.sim-running-box{
+	width: 30%;
+	height: 10%;
+	background-color: var(--tertiary-color);
+	border: var(--main-color) solid 0.2rem;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.sim-progress-bar{
+	width: 90%;
+	height: 10px;
+	background-color: var(--main-color);
+	border-radius: 1rem;
+}
+#simProgressBar{
+	width: 100%;
+	height: 10px;
+	background: linear-gradient(90deg, #ff8308, #f83c00, #ff8308, #ffd700);
+	background-size: 300% 100%;
+	border-radius: 1rem;
+	animation: gradientAnimation 5s infinite;
+}
+@keyframes gradientAnimation {
+	
+	0% {
+		background-position: 100% 50%;
+	  }
+	  25% {
+		background-position: 50% 50%;
+	  }
+	  50% {
+		background-position: 0% 50%;
+	  }
+	  75% {
+		background-position: 50% 50%;
+	  }
+	  100% {
+		background-position: 100% 50%;
+	  }
+
+
+	
+	
+}

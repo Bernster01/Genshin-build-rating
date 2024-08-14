@@ -52,7 +52,9 @@ function starterFunction(){
     document.getElementById("roleInput").addEventListener("change", function(){
         selectRole(this.value);
     });
-    
+    document.getElementById("endEarlyBtn").addEventListener("click", function(){
+        endEarly=true;
+    });
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions

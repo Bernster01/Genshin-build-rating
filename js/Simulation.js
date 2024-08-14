@@ -14,6 +14,7 @@ let vvActive = false;
 let saraBuff = false;
 let shenheCounter = 0;
 let numberOfEnemies = 3;
+let endEarly = false;
 function validateAllCharacters() {
     //Goes through all characters and validates them
     AllCharacters.index.forEach(character => {
@@ -50,7 +51,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     setTimeout(function () {
         parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
     }, 100);
-    return `${Math.floor((score / result) * 100)}/100`;
+    return true;
 }
 
 function FindBestBuild(baseChar, times) {
@@ -59,11 +60,16 @@ function FindBestBuild(baseChar, times) {
     let bestScore = findBestBuildLoop(baseChar, times);
     let stopTime = Date.now();
     console.log((stopTime - startTime) / 1000 + "seconds");
+    endEarly = false;
     return bestScore;
 }
 async function findBestBuildLoop(baseChar, times){
     let bestScore = 0;
+    let startTime = Date.now();
     for (let index = 0; index < times; index++) {
+        if(endEarly)
+            return bestScore;
+        
         console.log(index);
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = deepClone(baseChar);
@@ -101,8 +107,13 @@ async function findBestBuildLoop(baseChar, times){
 
 
         },);
-        if(index % 100 == 0)
+        if(index % 100 == 0){
+            document.getElementById("currentSimRun").innerText = index;
+            document.getElementById("percentDone").innerText = Math.floor(index / times * 100) ;
+            document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
+            document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
             await delay(1);
+        }
     }
     return bestScore;
 } 
