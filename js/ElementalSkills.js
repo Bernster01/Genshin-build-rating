@@ -231,7 +231,7 @@ function letTheShowBegin(Character) {
 
     healing += regenPerHit * 16 * healingBonus * encore;
     healing += regenPerHit * 4 * 4 * healingBonus * encore;
-    return {healing: healing};
+    return { healing: healing };
 }
 
 function tidecaller(Character) {
@@ -666,16 +666,16 @@ function icetideVortex(Character) {
     switch (grimheartStack) {
         case 0: case 1:
             attack.Multiplier = skillMultiplier;
-            dmg = dmgCalc(attack, Character, "ElementalSkill")*numberOfEnemies;
+            dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
             grimheartStack += 2;
             break;
         case 2:
             attack.Multiplier = skillMultiplier2;
-            dmg = dmgCalc(attack, Character, "ElementalSkill")*numberOfEnemies;
+            dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
             attack.isReaction = false;
             attack.Multiplier = skillMultiplier3;
-            dmg += dmgCalc(attack, Character, "ElementalSkill")*numberOfEnemies;
-            dmg += dmgCalc(attack, Character, "ElementalSkill")*numberOfEnemies;
+            dmg += dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
+            dmg += dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
             let haveRime = false;
             Character.currentBuffs.forEach(buff => {
                 if (buff.Type == "Roiling Rime")
@@ -3031,7 +3031,7 @@ function kuragesOath(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true }
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
     let heal = healing * (1 + (Character.advancedstats.healingBonus / 100));
-   
+
     for (let index = 0; index < 6; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
@@ -3540,12 +3540,12 @@ function UniversalityAnElaborationOnForm(Character) {
             multiplier4 = 285.6 / 100;
             break;
     }
-    let attack = { Multiplier: (multiplier1*Character.attack())+(multiplier2*Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
-    let attack2 = { Multiplier: (multiplier3*Character.attack())+(multiplier4*Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
+    let attack = { Multiplier: (multiplier1 * Character.attack()) + (multiplier2 * Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
+    let attack2 = { Multiplier: (multiplier3 * Character.attack()) + (multiplier4 * Character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true }
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Mysteries Laid Bare") {
             let buffAmount = Character.EM() * 0.1;
-            if(buffAmount > 100)
+            if (buffAmount > 100)
                 buffAmount = 100;
             Character.currentBuffs.push({ Type: "ElementalSkillDMG", Value: buffAmount });
         }
@@ -3553,4 +3553,83 @@ function UniversalityAnElaborationOnForm(Character) {
     let dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
     dmg += dmgCalc(attack2, Character, "ElementalSkill") * numberOfEnemies;
     return dmg;
+}
+
+function allIsAsh(character) {
+    let multiplier1 = 0;
+    let multiplier2 = 0;
+    let multiplier3 = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            multiplier1 = 14.84 / 100;
+            multiplier2 = 133.56 / 100;
+            multiplier3 = 31.8 / 100;
+            break;
+        case 2:
+            multiplier1 = 15.95 / 100;
+            multiplier2 = 143.58 / 100;
+            multiplier3 = 34.19 / 100;
+            break;
+        case 3:
+            multiplier1 = 17.07 / 100;
+            multiplier2 = 153.59 / 100;
+            multiplier3 = 36.57 / 100;
+            break;
+        case 4:
+            multiplier1 = 18.55 / 100;
+            multiplier2 = 166.95 / 100;
+            multiplier3 = 36.57 / 100;
+            break;
+        case 5:
+            multiplier1 = 19.66 / 100;
+            multiplier2 = 176.97 / 100;
+            multiplier3 = 42.13 / 100;
+            break;
+        case 6:
+            multiplier1 = 20.78 / 100;
+            multiplier2 = 186.98 / 100;
+            multiplier3 = 44.52 / 100;
+            break;
+        case 7:
+            multiplier1 = 22.26 / 100;
+            multiplier2 = 200.34 / 100;
+            multiplier3 = 47.7 / 100;
+            break;
+        case 8:
+            multiplier1 = 23.74 / 100;
+            multiplier2 = 213.7 / 100;
+            multiplier3 = 50.88 / 100;
+            break;
+        case 9:
+            multiplier1 = 25.23 / 100;
+            multiplier2 = 227.05 / 100;
+            multiplier3 = 54.06 / 100;
+            break;
+        case 10:
+            multiplier1 = 26.71 / 100;
+            multiplier2 = 240.41 / 100;
+            multiplier3 = 57.24 / 100;
+            break;
+        default:
+            multiplier1 = 26.71 / 100;
+            multiplier2 = 240.41 / 100;
+            multiplier3 = 57.24 / 100;
+            break;
     }
+    let attack = { Multiplier: multiplier1, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let attack2 = { Multiplier: multiplier2, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let attack3 = { Multiplier: multiplier3, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true }
+    let dmg = dmgCalc(attack, character, "ElementalSkill") * numberOfEnemies;
+    dmg += dmgCalc(attack2, character, "ElementalSkill") * numberOfEnemies;
+    dmg += dmgCalc(attack3, character, "ElementalSkill") * 2;//Max 2 instance of blood directive dmg at the same time
+    let hasBuff = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "BloodDirective") {
+            hasBuff = true;
+            
+        }
+    }
+    if (!hasBuff)
+        character.currentBuffs.push({ Type: "BloodDirective", Value: numberOfEnemies });//Enemies with blood directive
+    return dmg;
+}

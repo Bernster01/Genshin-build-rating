@@ -19,7 +19,7 @@ async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
     for (const character in AllCharacters) {
-        if(character == "index")
+        if (character == "index")
             continue;
         const element = AllCharacters[character];
         let result = await FindBestBuild(element, 25);
@@ -29,7 +29,7 @@ async function validateAllCharacters() {
 
     }
     let stopTime = Date.now();
-    console.log("ALL SUCCEDED in "+(stopTime - startTime) / 1000 + "seconds");
+    console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
 }
 async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
@@ -197,6 +197,7 @@ class Createcharacter {
         this.baseHP = baseCharacter.baseHP;
         this.baseHP = this.baseHP();
         this.baseAttack = this.baseAttack() + weapon.baseAttack();
+        this.bondOfLife = 0;
         this.stamina = baseCharacter.stamina;
         this.normalAttack1 = baseCharacter.normalAttack1;
         this.normalAttack2 = baseCharacter.normalAttack2;
@@ -214,6 +215,18 @@ class Createcharacter {
         this.ExtraMultiplier = baseCharacter.ExtraMultiplier || [];
         this.advancedstats = baseCharacter.advancedstats;
         this.ascensionstats = baseCharacter.ascensionStat;
+        this.bondOfLifeToRemove = function (amount) {
+            this.bondOfLife -= amount;
+            if (this.bondOfLife < 0)
+                this.bondOfLife = 0;
+            ;
+        }
+        this.applyBondOfLife = function (amount) {
+            this.bondOfLife += amount;
+            if (this.bondOfLife > 200)
+                this.bondOfLife = 200;
+            
+        }
         this.getBuffOfType = function (type) {
             let buffs = this.currentBuffs;
             buffs.forEach(buff => {
@@ -706,7 +719,8 @@ function Simulation(character) {
     let dmgSources = { aa: 0, e: 0, q: 0 };
     Character.sequence[role].forEach(action => {
         let type = "NormalAttack";
-        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action };
+
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action,action:type };
         switch (action) {
             case "N1":
             case "N2":
@@ -759,6 +773,7 @@ function Simulation(character) {
                         attackAction.Scaling = Character.chargedAttack.scaling;
 
                         type = "ChargedAttack";
+                        attackAction.action = type;
                         if (Character.name == "Sara") {
                             if (!saraBuff) {
                                 let value = 0;
@@ -771,6 +786,21 @@ function Simulation(character) {
                                 saraBuff = true;
                             }
                         }
+                        if (Character.name == "Arlecchino") {
+                            let buffToRemove = "";
+                            for (buff of Character.currentBuffs) {
+                                if (buff.Type == "BloodDirective") {
+                                    let instances = buff.Value;
+                                    //65% of HP * instances
+                                    let totalBondOfLife = 65 * instances;
+                                    Character.applyBondOfLife(totalBondOfLife);
+                                    //remove buff
+                                    buffToRemove = buff;
+                                }
+                            }
+                            if (buffToRemove != "")
+                                Character.currentBuffs.splice(Character.currentBuffs.indexOf(buffToRemove), 1);
+                        }
                         break;
 
                     case "P":
@@ -779,13 +809,16 @@ function Simulation(character) {
                         attackAction.isReaction = Character.plungeAttack.isReaction;
                         attackAction.Scaling = Character.plungeAttack.scaling;
                         type = "PlungeAttack";
+                        attackAction.action = type;
                         if (Character.name == "Itto") {
                             type = "ChargedAttack";
                         }
                         break;
                 }
+
                 if (Character.name == "Ganyu") {
                     let newAttack = attackAction;
+                    newAttack.action = "ChargedAttack";
                     let index = 0;
 
                     attackAction.Multiplier.forEach(multiplier => {
@@ -870,7 +903,7 @@ function Simulation(character) {
                         totalDmg += dmgCalc(attackAction, Character, type);
                     }
                     totalDmg += dmgCalc(attackAction, Character, type);
-
+                    
                 }
                 else {
 
@@ -878,7 +911,7 @@ function Simulation(character) {
                     if (Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst") {
                         enemies = 3;
                     }
-                    totalDmg += dmgCalc(attackAction, Character, type) * enemies;
+                   
                     if (Character.name == "Yoimiya") {
                         switch (action) {
                             case "N1":
@@ -906,6 +939,11 @@ function Simulation(character) {
                         Character.currentBuffs.push({ Type: "NormalAttack", Value: 13 });
                         thunderingPulseNormalStack = true;
                     }
+                    if(Character.name == "Arlecchino"){
+                        character.bondOfLifeToRemove(character.bondOfLife * 0.075);
+                    }
+                    
+                    totalDmg += dmgCalc(attackAction, Character, type) * enemies;
                 }
                 break;
 
@@ -1319,6 +1357,45 @@ function getFlatDamage(character, attackAction) {
 
             }
             break;
+        case "Arlecchino":
+            if (attackAction.action == "NormalAttack" || attackAction.action == "ChargedAttack") {
+                let masqueOfTheRedDeathIncreaseMultiplier = 0;
+                switch (character.normalAttackLevel) {
+                    case 1:
+                        masqueOfTheRedDeathIncreaseMultiplier = 120.4 / 100;
+                        break;
+                    case 2:
+                        masqueOfTheRedDeathIncreaseMultiplier = 130.2 / 100;
+                        break;
+                    case 3:
+                        masqueOfTheRedDeathIncreaseMultiplier = 140 / 100;
+                        break;
+                    case 4:
+                        masqueOfTheRedDeathIncreaseMultiplier = 154 / 100;
+                        break;
+                    case 5:
+                        masqueOfTheRedDeathIncreaseMultiplier = 163.8 / 100;
+                        break;
+                    case 6:
+                        masqueOfTheRedDeathIncreaseMultiplier = 175 / 100;
+                        break;
+                    case 7:
+                        masqueOfTheRedDeathIncreaseMultiplier = 190.4 / 100;
+                        break;
+                    case 8:
+                        masqueOfTheRedDeathIncreaseMultiplier = 205.8 / 100;
+                        break;
+                    case 9:
+                        masqueOfTheRedDeathIncreaseMultiplier = 221.2 / 100;
+                        break;
+                    case 10:
+                        masqueOfTheRedDeathIncreaseMultiplier = 238 / 100;
+                        break;
+                }
+                flatDamage += character.attack() * (masqueOfTheRedDeathIncreaseMultiplier * (1 + (character.bondOfLife / 100)));
+                
+            }
+            break;
     }
     //Weapon buffs
     switch (character.weapon.name) {
@@ -1702,17 +1779,17 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[lvl];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
-    return (bloomBaseDmg * bloomEM) * resCalc(character, element)*3;//1 hit on 3 enemies
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
     const burgeoningBaseDmg = 3 * LvlMultiplier[lvl];
     const burgeoningEM = 1 + (16 * (em / (em + 1200))) + burgeoningBonus;
-    return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element)*3;//1 hit on 3 enemies
+    return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
     const hyperBloomBaseDmg = 3 * LvlMultiplier[lvl];
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
-    return (hyperBloomBaseDmg * hyperBloomEM)*resCalc(character, element)*2*2;//2 hits and 2 enemies within 1m
+    return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
 }
 const superconductBaseDMG = {
     "1": 9,

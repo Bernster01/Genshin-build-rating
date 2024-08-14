@@ -3705,12 +3705,78 @@ function ParticularFieldFettersOfPhenomena(Character) {
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Mysteries Laid Bare") {
             let buffAmount = Character.EM() * 0.1;
-            if(buffAmount > 100)
+            if (buffAmount > 100)
                 buffAmount = 100;
             Character.currentBuffs.push({ Type: "ElementalBurstDMG", Value: buffAmount });
         }
     });
     let dmg = dmgCalc(attack1, Character, "ElementalBurst") * 10 * numberOfEnemies;
     dmg += dmgCalc(attack2, Character, "ElementalBurst") * 10 * numberOfEnemies;
+    return dmg;
+}
+
+function BalemoonRising(Character) {
+    let multiplier = 0;
+    switch (Character.elementalBurst.Level) {
+        case 1:
+            multiplier = 370.4 / 100;
+            break;
+        case 2:
+            multiplier = 398.18 / 100;
+            break;
+        case 3:
+            multiplier = 425.96 / 100;
+            break;
+        case 4:
+            multiplier = 463 / 100;
+            break;
+        case 5:
+            multiplier = 490.78 / 100;
+            break;
+        case 6:
+            multiplier = 518.56 / 100;
+            break;
+        case 7:
+            multiplier = 555.6 / 100;
+            break;
+        case 8:
+            multiplier = 592.64 / 100;
+            break;
+        case 9:
+            multiplier = 629.68 / 100;
+            break;
+        case 10:
+            multiplier = 666.72 / 100;
+            break;
+        case 11:
+            multiplier = 703.76 / 100;
+            break;
+        case 12:
+            multiplier = 740.8 / 100;
+            break;
+        case 13:
+            multiplier = 787.1 / 100;
+            break;
+    }
+    let attack = { Multiplier: multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true };
+    let dmg = dmgCalc(attack, Character, "ElementalBurst") * numberOfEnemies;
+    //Absorb blood directive
+    let buffToRemove = "";
+    for (buff of Character.currentBuffs) {
+        if (buff.Type == "BloodDirective") {
+            let instances = buff.Value;
+            //65% of HP * instances
+            let totalBondOfLife = 65 * instances;
+            Character.applyBondOfLife(totalBondOfLife);
+            //remove buff
+            buffToRemove = buff;
+        }
+    }
+    if(buffToRemove!="")
+        Character.currentBuffs.splice(Character.currentBuffs.indexOf(buffToRemove), 1);
+    let totalHeal = (Character.attack() * 1.5) + (((Character.bondOfLife/100)*Character.HP())*1.5);
+    //perect of hp healed
+    let bondOfLifeToRemove = (totalHeal / Character.HP())*100;
+    Character.bondOfLifeToRemove(bondOfLifeToRemove);
     return dmg;
 }
