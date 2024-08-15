@@ -5109,7 +5109,8 @@ const Gorou = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 140,
-    supportType: "Sub-dps",
+    supportType: "ATKBooster",
+    supportType2: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
         ["Support"]: ["E", "Q"],
