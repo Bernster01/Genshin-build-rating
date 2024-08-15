@@ -3,11 +3,11 @@ async function prepare(button) {
     endEarly = false;
     let simScreen = document.getElementById("simRunScreen");
     let runs = document.getElementById("simulationRuns").value;
-   
+
     if (runs === "" || runs === null || runs === undefined) {
         runs = 1000;
     }
-    
+
     //Prepare the character for the simulation
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterImg").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponImg").title];
@@ -25,15 +25,20 @@ async function prepare(button) {
     baseCharacter.elementalSkill.Level = Number.parseInt(document.getElementById("talent_skill").value);
     baseCharacter.elementalBurst.Level = Number.parseInt(document.getElementById("talent_burst").value);
     //Set artifacts
-    let artifacts = getArtifacts();    console.log(artifacts);
+    let artifacts = getArtifacts();
     //run simulation
     simScreen.style.display = "flex";
     document.getElementById("howManySimRuns").innerText = runs;
-    await delay(500);
-    let result = await runSimulation(baseCharacter, weapon, artifacts,runs);
-    if(result){
-    simScreen.style.display = "none";
+    await delay(200);
+    if (getJSON) {
+        await getBestBuildForCharacter(baseCharacter, runs);
+        simScreen.style.display = "none";
     }
+    else {
+        await runSimulation(baseCharacter, weapon, artifacts, runs);
+        simScreen.style.display = "none";
+    }
+       
 }
 function getArtifacts() {
     const circletMainstat = { Type: document.getElementById("circlet_mainstat_type").dataset.type, Value: Number.parseFloat(document.getElementById("circlet_mainstat_value").innerText) };
@@ -150,7 +155,7 @@ function getArtifacts() {
 
     return [circlet, flower, plume, sands, goblet];
 }
-function runSimulation(character, weapon, artifacts, runs){
+function runSimulation(character, weapon, artifacts, runs) {
     console.log("Running simulation");
     console.log(character);
     console.log(weapon);
@@ -160,6 +165,6 @@ function runSimulation(character, weapon, artifacts, runs){
     // validateAllCharacters();
     return runSim(character, weapon, artifacts, runs);
 }
-function getBestBuild(){
+function getBestBuild() {
 
 }

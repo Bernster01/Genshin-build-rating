@@ -15,6 +15,50 @@ let saraBuff = false;
 let shenheCounter = 0;
 let numberOfEnemies = 3;
 let endEarly = false;
+let getJSON = true;
+async function getBestBuildForCharacter(character, amount) {
+    let result = await FindBestBuild(character, amount);
+    downloadJSON(getBuildAsJSON(bestBuild[character.name]));
+}
+function getBuildAsJSON(build) {
+    let character = build.character;
+    let b = {
+        character: {
+            name: character.name,
+            level: character.level,
+            normalAttackLevel: character.normalAttackLevel,
+            elementalSkillLevel: character.elementalSkill,
+            elementalBurstLevel: character.elementalBurst,
+        },
+        artifacts: character.artifacts,
+        weapon: {
+            name: character.weapon.name,
+            level: character.weapon.level,
+        },
+        role: role,
+        supportingElement: supportingElement,
+        elementalResonance: elementalResonance,
+        dmg: {
+            totalDmg: build.dmg,
+            sources: build.dmgSources,
+        }
+    }
+    return JSON.stringify(b);
+}
+async function downloadJSON(build) {
+    let result = window.confirm("Download build?");
+    if (!result) {
+        console.log("Download canceled");
+        console.log(JSON.parse(build));
+        return;
+    }
+    let blob = new Blob([build], { type: "application/json" });
+    let url = URL.createObjectURL(blob);
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = "build.json";
+    a.click();
+}
 async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
@@ -716,9 +760,9 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
-    let dmgSources = { aa: 0, e: 0, q: 0 };
+    let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0 };
     Character.sequence[role].forEach(action => {
-        
+
 
         let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, type: "" };
         switch (action) {
@@ -809,7 +853,7 @@ function Simulation(character) {
                         attackAction.type = "PlungeAttack";
                         if (Character.name == "Itto") {
                             type = "ChargedAttack";
-                            attackAction.Type = "ChargedAttack";
+                            attackAction.type = "ChargedAttack";
                         }
                         break;
                 }
@@ -829,10 +873,11 @@ function Simulation(character) {
                             });
                         }
                         let dmg = dmgCalc(newAttack, Character);
+
                         if (index >= 2)
-                            totalDmg += dmg * 3;
-                        else
-                            totalDmg += dmg;
+                            dmg * 3;
+                        totalDmg += dmg;
+                        dmgSources.c += dmg;
                         let toRemoveIndex = -1;
                         let toRemove = 0;
                         if (index >= 2) {
@@ -870,7 +915,7 @@ function Simulation(character) {
                                         type: "NormalAttack"
                                     },
                                     Character
-                                    );
+                                );
                             }
                         })
 
@@ -900,9 +945,8 @@ function Simulation(character) {
                         totalDmg += dmgCalc(attackAction, Character);
                     }
                     totalDmg += dmgCalc(attackAction, Character);
-
-                }
-                else {
+                    dmgSources.c += totalDmg;
+                } else {
 
                     let enemies = 1;
                     if (Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst") {
@@ -941,6 +985,13 @@ function Simulation(character) {
                     }
 
                     totalDmg += dmgCalc(attackAction, Character) * enemies;
+                    if (attackAction.type == "ChargedAttack")
+                        dmgSources.c += totalDmg;
+                    else if (attackAction.type == "NormalAttack")
+                        dmgSources.n += totalDmg;
+                    else if (attackAction.type == "PlungeAttack")
+                        dmgSources.p += totalDmg;
+
                 }
                 break;
 
@@ -1122,11 +1173,14 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
+    for(dmgSource in dmgSources){
+        dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
+    }
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
 function dmgCalc(attackAction, Character) {
-    
+
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -1426,7 +1480,7 @@ function getDamageBonus(character, attackAction) {
                 let multiplier = character.advancedstats.energyRecharge * 0.25;
                 if (multiplier > 75)
                     multiplier = 75;
-                bonus += multiplier;
+                bonus += multiplier / 100;
             }
         })
     }
