@@ -6607,8 +6607,8 @@ const Kazuha = {
     energyOffset: 140,
     supportType: "ElementalBuffer",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
-        ["Support"]: ["E", "Q"],
+        ["Dps"]: ["E","P", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E","P"],
+        ["Support"]: ["E","P", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -11458,7 +11458,7 @@ const Tartaglia = {
             }
 
         },
-        Element: "AnemoDMGBonus",
+        Element: "PhysicalDMGBonus",
         isReaction: false,
         scaling: "ATK"
 
@@ -11489,7 +11489,7 @@ const Tartaglia = {
             }
 
         },
-        Element: "AnemoDMGBonus",
+        Element: "PhysicalDMGBonus",
         isReaction: false,
         scaling: "ATK"
     },
@@ -11519,7 +11519,7 @@ const Tartaglia = {
             }
 
         },
-        Element: "AnemoDMGBonus",
+        Element: "PhysicalDMGBonus",
         isReaction: true,
         scaling: "ATK"
     },

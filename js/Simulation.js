@@ -225,7 +225,7 @@ class Createcharacter {
             this.bondOfLife += amount;
             if (this.bondOfLife > 200)
                 this.bondOfLife = 200;
-            
+
         }
         this.getBuffOfType = function (type) {
             let buffs = this.currentBuffs;
@@ -718,9 +718,9 @@ function Simulation(character) {
     let shield = 0;
     let dmgSources = { aa: 0, e: 0, q: 0 };
     Character.sequence[role].forEach(action => {
-        let type = "NormalAttack";
+        
 
-        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, Type: action,action:type };
+        let attackAction = { Multiplier: 0, Element: "", isReaction: false, Scaling: null, type: "" };
         switch (action) {
             case "N1":
             case "N2":
@@ -729,7 +729,7 @@ function Simulation(character) {
             case "N5":
             case "C":
             case "P":
-
+                attackAction.type = "NormalAttack";
                 switch (action) {
                     case "N1":
                         attackAction.Multiplier = Character.normalAttack1.Multiplier(Character.normalAttackLevel);
@@ -771,9 +771,7 @@ function Simulation(character) {
                         attackAction.Element = Character.chargedAttack.Element;
                         attackAction.isReaction = Character.chargedAttack.isReaction;
                         attackAction.Scaling = Character.chargedAttack.scaling;
-
-                        type = "ChargedAttack";
-                        attackAction.action = type;
+                        attackAction.type = "ChargedAttack";
                         if (Character.name == "Sara") {
                             if (!saraBuff) {
                                 let value = 0;
@@ -808,10 +806,10 @@ function Simulation(character) {
                         attackAction.Element = Character.plungeAttack.Element;
                         attackAction.isReaction = Character.plungeAttack.isReaction;
                         attackAction.Scaling = Character.plungeAttack.scaling;
-                        type = "PlungeAttack";
-                        attackAction.action = type;
+                        attackAction.type = "PlungeAttack";
                         if (Character.name == "Itto") {
                             type = "ChargedAttack";
+                            attackAction.Type = "ChargedAttack";
                         }
                         break;
                 }
@@ -830,7 +828,7 @@ function Simulation(character) {
                                     character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Undivided Heart" });
                             });
                         }
-                        let dmg = dmgCalc(newAttack, Character, type);
+                        let dmg = dmgCalc(newAttack, Character);
                         if (index >= 2)
                             totalDmg += dmg * 3;
                         else
@@ -849,7 +847,7 @@ function Simulation(character) {
                     });
 
                 } else if (Character.name == "Traveler (Anemo)" || Character.name == "Traveler (Geo)") {
-                    totalDmg += dmgCalc(attackAction, Character, type);
+                    totalDmg += dmgCalc(attackAction, Character);
                     if (action == "N5") {
                         Character.currentBuffs.forEach(buff => {
                             if (buff.Type == "Slitting Wind") {
@@ -859,10 +857,9 @@ function Simulation(character) {
                                         Element: "AnemoDMGBonus",
                                         isReaction: true,
                                         Scaling: "ATK",
-                                        Type: "NormalAttack"
+                                        type: "NormalAttack"
                                     },
-                                    Character,
-                                    "NormalAttack");
+                                    Character);
                             } else if (buff.Type == "Frenzied Rockslide") {
                                 totalDmg += dmgCalc(
                                     {
@@ -870,10 +867,10 @@ function Simulation(character) {
                                         Element: "GeoDMGBonus",
                                         isReaction: true,
                                         Scaling: "ATK",
-                                        Type: "NormalAttack"
+                                        type: "NormalAttack"
                                     },
-                                    Character,
-                                    "NormalAttack");
+                                    Character
+                                    );
                             }
                         })
 
@@ -897,13 +894,13 @@ function Simulation(character) {
                     else {
                         let newAttack = attackAction;
                         newAttack.Multiplier = Character.attack() * 0.8;
-                        newAttack.Type = "ChargedAttack";
+                        newAttack.type = "ChargedAttack";
                         newAttack.isReaction = false;
                         newAttack.Scaling = "Blazing Eye";
-                        totalDmg += dmgCalc(attackAction, Character, type);
+                        totalDmg += dmgCalc(attackAction, Character);
                     }
-                    totalDmg += dmgCalc(attackAction, Character, type);
-                    
+                    totalDmg += dmgCalc(attackAction, Character);
+
                 }
                 else {
 
@@ -911,7 +908,7 @@ function Simulation(character) {
                     if (Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst") {
                         enemies = 3;
                     }
-                   
+
                     if (Character.name == "Yoimiya") {
                         switch (action) {
                             case "N1":
@@ -939,11 +936,11 @@ function Simulation(character) {
                         Character.currentBuffs.push({ Type: "NormalAttack", Value: 13 });
                         thunderingPulseNormalStack = true;
                     }
-                    if(Character.name == "Arlecchino"){
+                    if (Character.name == "Arlecchino") {
                         character.bondOfLifeToRemove(character.bondOfLife * 0.075);
                     }
-                    
-                    totalDmg += dmgCalc(attackAction, Character, type) * enemies;
+
+                    totalDmg += dmgCalc(attackAction, Character) * enemies;
                 }
                 break;
 
@@ -1128,7 +1125,8 @@ function Simulation(character) {
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
-function dmgCalc(attackAction, Character, type) {
+function dmgCalc(attackAction, Character) {
+    
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -1162,7 +1160,7 @@ function dmgCalc(attackAction, Character, type) {
     //Damage Calculation 
     let dmg =
         ((getBaseDamage(attackAction, Character) * getSpecialMultiplier(Character, attackAction)) + getFlatDamage(Character, attackAction))
-        * (1 + getDamageBonus(Character, attackAction, type))
+        * (1 + getDamageBonus(Character, attackAction))
         * getCrit(Character)
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
@@ -1240,7 +1238,7 @@ function getFlatDamage(character, attackAction) {
                 }
             })
             if (hasPassive) {
-                switch (attackAction.action) {
+                switch (attackAction.type) {
                     case "NormalAttack":
                         flatDamage += character.HP() * 0.0139;
                         break;
@@ -1255,7 +1253,7 @@ function getFlatDamage(character, attackAction) {
             break;
         case "Gorou":
 
-            if (attackAction.action == "ElementalSkill" || attackAction.action == "ElementalBurst") {
+            if (attackAction.type == "ElementalSkill" || attackAction.type == "ElementalBurst") {
 
                 let HotWaW = false;
                 let AFR = false;
@@ -1268,7 +1266,7 @@ function getFlatDamage(character, attackAction) {
                     }
 
                 })
-                switch (attackAction.action) {
+                switch (attackAction.type) {
                     case "ElementalSkill":
                         if (HotWaW) {
                             flatDamage += character.DEF() * 1.56;
@@ -1290,7 +1288,7 @@ function getFlatDamage(character, attackAction) {
                 }
             });
             if (hasBloodPassive) {
-                switch (attackAction.action) {
+                switch (attackAction.type) {
                     case "ChargedAttack":
                         flatDamage += character.DEF() * 0.35;
                         break;
@@ -1308,7 +1306,7 @@ function getFlatDamage(character, attackAction) {
             if (hasSongofPearl) {
                 kokomiBonusMultipler = 1 + (character.advancedstats.healingBonus * 0.15);
             }
-            switch (attackAction.action) {
+            switch (attackAction.type) {
                 case "NormalAttack":
                     character.currentBuffs.forEach(buff => {
                         if (buff.Type == "KokomiNormal") {
@@ -1347,7 +1345,7 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Yun Jin":
-            if (attackAction.action == "NormalAttack") {
+            if (attackAction.type == "NormalAttack") {
                 character.currentBuffs.forEach(buff => {
                     if (buff.Type == "YunJinBuff") {
 
@@ -1358,7 +1356,7 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Arlecchino":
-            if (attackAction.action == "NormalAttack" || attackAction.action == "ChargedAttack") {
+            if (attackAction.type == "NormalAttack" || attackAction.type == "ChargedAttack") {
                 let masqueOfTheRedDeathIncreaseMultiplier = 0;
                 switch (character.normalAttackLevel) {
                     case 1:
@@ -1393,7 +1391,7 @@ function getFlatDamage(character, attackAction) {
                         break;
                 }
                 flatDamage += character.attack() * (masqueOfTheRedDeathIncreaseMultiplier * (1 + (character.bondOfLife / 100)));
-                
+
             }
             break;
     }
@@ -1405,10 +1403,10 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Everlasting Moonglow":
-            if (attackAction.type != "ElementaSkill" && attackAction.Type != "ElementaBurst" && attackAction.Type != "C" && attackAction.Type != "P" && attackAction.Type != undefined)
+            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "C" && attackAction.type != "P" && attackAction.type != undefined)
                 flatDamage += character.HP() * 0.10;
         case "Redhorn Stonethresher":
-            if (attackAction.type != "ElementaSkill" && attackAction.Type != "ElementaBurst" && attackAction.Type != "P" && attackAction.Type != undefined)
+            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "P" && attackAction.type != undefined)
                 flatDamage += character.DEF() * 0.40;
             break;
     }
@@ -1420,9 +1418,9 @@ function getFlatDamage(character, attackAction) {
         flatDamage += spread(character);
     return flatDamage;
 }
-function getDamageBonus(character, attackAction, type) {
+function getDamageBonus(character, attackAction) {
     let bonus = 1;
-    if (attackAction.action == "ElementalBurst") {
+    if (attackAction.type == "ElementalBurst") {
         character.currentBuffs.forEach(buff => {
             if (buff.Type == "Emblem") {
                 let multiplier = character.advancedstats.energyRecharge * 0.25;
@@ -1443,7 +1441,7 @@ function getDamageBonus(character, attackAction, type) {
 
         character.ExtraMultiplier.forEach(multiplier => {
 
-            if (type == multiplier.Type || multiplier.Type == "BonusDMG%") {
+            if (attackAction.type == multiplier.Type || multiplier.Type == "BonusDMG%") {
 
                 bonus += (multiplier.Value / 100);
 
@@ -1451,7 +1449,7 @@ function getDamageBonus(character, attackAction, type) {
         });
     }
     character.currentBuffs.forEach(buff => {
-        if (type == buff.Type) {
+        if (attackAction.type == buff.Type) {
             bonus += (buff.Value / 100);
 
         }
