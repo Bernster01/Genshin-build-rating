@@ -3846,7 +3846,7 @@ function oTidesIHaveReturned(character) {
     let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
-    for (buff in character.currentBuffs) {
+    for (buff of character.currentBuffs) {
         if (buff.Type == "Discipline of the Supreme Arbitration") {
             let currentBonus = buff.Value;
             let sourewaterDroplets = 6;

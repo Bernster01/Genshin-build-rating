@@ -668,14 +668,14 @@ function applyBonuses(character) {
                 break;
         }
     });
-    if(character.name == "Neuvillette") {
-        for (buff in character.currentBuffs) {
+    if (character.name == "Neuvillette") {
+        for (buff of character.currentBuffs) {
             if (buff.Type == "Discipline of the Supreme Arbitration") {
                 let currentHP = character.HP();
                 //Add 0.6% bonus for every 1% of current HP over 30% max hp
                 let newBonus = 0;
-                if(currentHP>0.3*character.HP())
-                    newBonus = (currentHP-0.3*character.HP())*0.6;
+                if (currentHP > 0.3 * character.HP())
+                    newBonus = (currentHP - 0.3 * character.HP()) * 0.6;
                 //max 30% bonus
                 if (newBonus > 30)
                     newBonus = 30;
@@ -683,7 +683,7 @@ function applyBonuses(character) {
                 buff.Value = Math.floor(newBonus);
                 buff.currentHP = currentHP;
             }
-            
+
         }
     }
 }
@@ -845,7 +845,7 @@ function Simulation(character) {
                                 saraBuff = true;
                             }
                         }
-                        if (Character.name == "Arlecchino") {
+                        else if (Character.name == "Arlecchino") {
                             let buffToRemove = "";
                             for (buff of Character.currentBuffs) {
                                 if (buff.Type == "BloodDirective") {
@@ -860,19 +860,27 @@ function Simulation(character) {
                             if (buffToRemove != "")
                                 Character.currentBuffs.splice(Character.currentBuffs.indexOf(buffToRemove), 1);
                         }
-                        if(Character.name == "Neuvillette") {
-                            for (buff in character.currentBuffs) {
+                        else if (Character.name == "Neuvillette") {
+                            for (buff of character.currentBuffs) {
                                 if (buff.Type == "Discipline of the Supreme Arbitration") {
                                     let currentBonus = buff.Value;
                                     let currentHP = buff.currentHP;
+
                                     character.advancedstats.elementalBonuses[1].Value -= currentBonus;
                                     //remove 8% of max hp
-                                    let drain = 0.08*character.HP();
-                                    let newHP = currentHP-drain;
+                                    //if currentHp is above 50% max hp, remove 8% bonus
+                                    if (currentHP > 0.5 * character.HP()) {
+                                        let drain = 0.08 * character.HP();
+                                        currentHP = currentHP - drain;
+                                    }
                                     //Add 0.6% bonus for every 1% of current HP over 30% max hp
                                     let newBonus = 0;
-                                    if(currentHP>0.3*character.HP())
-                                        newBonus = (currentHP-0.3*character.HP())*0.6;
+                                    if (currentHP > 0.3 * character.HP()) {
+                                        let currentHPPercent = currentHP / character.HP();
+                                        newBonus = (currentHPPercent - 0.3) * 0.6 * 100;
+
+
+                                    }
                                     //max 30% bonus
                                     if (newBonus > 30)
                                         newBonus = 30;
@@ -880,7 +888,7 @@ function Simulation(character) {
                                     buff.Value = Math.floor(newBonus);
                                     buff.currentHP = currentHP;
                                 }
-                                
+
                             }
                         }
                         break;
@@ -1213,7 +1221,7 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
-    for(dmgSource in dmgSources){
+    for (dmgSource in dmgSources) {
         dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
     }
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };

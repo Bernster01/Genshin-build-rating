@@ -8443,7 +8443,7 @@ const Neuvillette ={
         Multiplier: function (level) {
             return 0;
         },
-        Element: "ElectroDMGBonus",
+        Element: "HydroDMGBonus",
         isReaction: false,
         scaling: "ATK"
     },
