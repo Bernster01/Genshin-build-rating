@@ -3388,7 +3388,7 @@ function sesshouSakura(Character) {
         } else {
             attack.isReaction = false;
         }
-        dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
+        dmg+= dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
     }
     return dmg;
 
