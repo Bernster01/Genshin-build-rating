@@ -1497,10 +1497,10 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Everlasting Moonglow":
-            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "C" && attackAction.type != "P" && attackAction.type != undefined)
+            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "ChargedAttack" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
                 flatDamage += character.HP() * 0.10;
         case "Redhorn Stonethresher":
-            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "P" && attackAction.type != undefined)
+            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
                 flatDamage += character.DEF() * 0.40;
             break;
     }
