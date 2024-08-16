@@ -329,7 +329,7 @@ function passionOverload(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
-    return dmg;
+    return {dmg:dmg};
 }
 
 function chounghuasLayerdFrost(Character) {
@@ -943,7 +943,7 @@ function galeBlade(Character) {
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
 
-    return dmg;
+    return {dmg:dmg};
 }
 
 function frostgnaw(Character) {
@@ -1824,7 +1824,7 @@ function astableAnemohypostasisCreation(Character) {
     let dmg = dmgCalc(attack, Character);
 
 
-    return dmg;
+    return {dmg:dmg};
 }
 
 function ragingTide(Character) {

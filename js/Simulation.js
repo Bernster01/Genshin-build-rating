@@ -1229,7 +1229,6 @@ function Simulation(character) {
         dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
         tmp += dmgSources[dmgSource];
     }
-    console.log(character.name +" dealt "+totalDmg+" damage"+", according to sources: "+tmp);
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }

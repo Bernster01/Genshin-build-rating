@@ -1562,7 +1562,7 @@ function sweepingTime(Character) {
     Character.normalAttack2.element = "GeoDMGBonus";
     Character.normalAttack3.element = "GeoDMGBonus";
     Character.normalAttack4.element = "GeoDMGBonus";
-    return dmg;
+    return {dmg:dmg};
 }
 
 function preserverofFortune(Character) {
@@ -2708,7 +2708,7 @@ function planetBefall(Character) {
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
-    return dmg;
+    return {dmg:dmg};
 }
 
 function propheciesofDawn(Character) {
