@@ -998,7 +998,7 @@ function Simulation(character) {
 
                     let enemies = 1;
                     if (Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst") {
-                        enemies = 3;
+                        enemies = numberOfEnemies;
                     }
 
                     if (Character.name == "Yoimiya") {
@@ -1031,14 +1031,17 @@ function Simulation(character) {
                     if (Character.name == "Arlecchino") {
                         character.bondOfLifeToRemove(character.bondOfLife * 0.075);
                     }
-
-                    totalDmg += dmgCalc(attackAction, Character) * enemies;
-                    if (attackAction.type == "ChargedAttack")
-                        dmgSources.c += totalDmg;
-                    else if (attackAction.type == "NormalAttack")
-                        dmgSources.n += totalDmg;
-                    else if (attackAction.type == "PlungeAttack")
-                        dmgSources.p += totalDmg;
+                    let dmg = dmgCalc(attackAction, Character) * enemies;
+                    totalDmg += dmg;
+                    if (attackAction.type == "NormalAttack") {
+                        dmgSources.n += dmg;
+                    }
+                    else if (attackAction.type == "ChargedAttack") {
+                        dmgSources.c += dmg;
+                    }
+                    else if (attackAction.type == "PlungeAttack") {
+                        dmgSources.p += dmg;
+                    }
 
                 }
                 break;
@@ -1221,9 +1224,12 @@ function Simulation(character) {
     let bonusMultiplier = 1;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = 2;
+    let tmp = 0;
     for (dmgSource in dmgSources) {
         dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
+        tmp += dmgSources[dmgSource];
     }
+    console.log(character.name +" dealt "+totalDmg+" damage"+", according to sources: "+tmp);
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
