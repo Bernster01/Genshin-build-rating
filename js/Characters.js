@@ -2287,8 +2287,322 @@ const Ayato = {
         }
     }
 };
+const Baizhu ={
+    name: "Baizhu",
+    src: "Assets/Characters/Baizhu/Baizhu.webp",
+    card: "Assets/Characters/Baizhu/Character_Baizhu_Portrait.webp",
+    element: "DendroCharacter",
+    level: "1b",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 14.99,
+            ["20b"]: 38.88,
+            ["20a"]: 51.73,
+            ["40b"]: 77.41,
+            ["40a"]: 86.54,
+            ["50b"]: 99.57,
+            ["50a"]: 111.74,
+            ["60b"]: 124.90,
+            ["60a"]: 134.03,
+            ["70b"]: 147.31,
+            ["70a"]: 156.44,
+            ["80b"]: 169.87,
+            ["80a"]: 179.00,
+            ["90b"]: 192.54
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 1039.12,
+            ["20b"]: 2695.47,
+            ["20a"]: 3586.42,
+            ["40b"]: 5366.44,
+            ["40a"]: 5999.48,
+            ["50b"]: 6902.47,
+            ["50a"]: 7746.53,
+            ["60b"]: 8658.88,
+            ["60a"]: 9291.92,
+            ["70b"]: 10212.58,
+            ["70a"]: 10845.62,
+            ["80b"]: 11776.67,
+            ["80a"]: 12409.72,
+            ["90b"]: 13348.04
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 38.89,
+            ["20b"]: 100.88,
+            ["20a"]: 134.22,
+            ["40b"]: 200.84,
+            ["40a"]: 224.53,
+            ["50b"]: 258.33,
+            ["50a"]: 289.92,
+            ["60b"]: 324.06,
+            ["60a"]: 347.76,
+            ["70b"]: 382.21,
+            ["70a"]: 405.91,
+            ["80b"]: 440.75,
+            ["80a"]: 464.44,
+            ["90b"]: 499.56
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
 
+        ]
 
+    },
+
+    scalingType: "Hybrid",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 140,
+    supportType: "Healer",
+    supportType2: "Shielder",
+    sequence: {
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4","C", "N1", "N2", "N3","N4","C"],
+        ["Support"]: ["E","Q","E"]
+    },
+    weaponType: "Catalyst",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 37.37 / 100
+                case 2:
+                    return 40.17 / 100
+                case 3:
+                    return 42.98 / 100
+                case 4:
+                    return 46.71 / 100
+                case 5:
+                    return 49.52 / 100
+                case 6:
+                    return 52.06 / 100
+                case 7:
+                    return 56.06 / 100
+                case 8:
+                    return 59.79 / 100
+                case 9:
+                    return 63.53 / 100
+                case 10:
+                    return 67.27 / 100
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 36.42 / 100
+                case 2:
+                    return 39.16 / 100
+                case 3:
+                    return 41.89 / 100
+                case 4:
+                    return 45.53 / 100
+                case 5:
+                    return 48.26 / 100
+                case 6:
+                    return 50.99 / 100
+                case 7:
+                    return 54.64 / 100
+                case 8:
+                    return 58.28 / 100
+                case 9:
+                    return 61.92 / 100
+                case 10:
+                    return 65.56 / 100
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return (22.54*2) / 100
+                case 2:
+                    return (24.23*2) / 100
+                case 3:
+                    return (25.92*2) / 100
+                case 4:
+                    return (28.18*2) / 100
+                case 5:
+                    return (29.87*2) / 100
+                case 6:
+                    return (31.56*2) / 100
+                case 7:
+                    return (33.81*2) / 100
+                case 8:
+                    return (36.07*2) / 100
+                case 9:
+                    return (38.32*2) / 100
+                case 10:
+                    return (40.57*2) / 100
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 54.14 / 100
+                case 2:
+                    return 58.2 / 100
+                case 3:
+                    return 62.26 / 100
+                case 4:
+                    return 67.67 / 100
+                case 5:
+                    return 71.73 / 100
+                case 6:
+                    return 75.79 / 100
+                case 7:
+                    return 81.21 / 100
+                case 8:
+                    return 86.62 / 100
+                case 9:
+                    return 91.03 / 100
+                case 10:
+                    return 97.45 / 100
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            return 0
+        },
+        Element: "HydroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 121.04 / 100
+                case 2:
+                    return 130.12 / 100
+                case 3:
+                    return 139.2 / 100
+                case 4:
+                    return 151.3 / 100
+                case 5:
+                    return 160.38 / 100
+                case 6:
+                    return 169.46 / 100
+                case 7:
+                    return 181.56 / 100
+                case 8:
+                    return 193.66 / 100
+                case 9:
+                    return 205.77 / 100
+                case 10:
+                    return 217.87 / 100
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) { return 0 },
+        Element: "DendroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 7.2,
+            ["50b"]: 7.2,
+            ["50a"]: 14.4,
+            ["60b"]: 14.4,
+            ["60a"]: 14.4,
+            ["70b"]: 14.4,
+            ["70a"]: 21.6,
+            ["80b"]: 21.6,
+            ["80a"]: 28.8,
+            ["90b"]: 28.8
+        }
+
+        return { Type: "HP%", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: universalDiagnosis,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: holisticRevivification,
+        Level: 1
+    },
+    passive1: {
+        Type: "Five Fortunes Forever",
+        Value: (role=="Dps")?{Type:"DendroDMGBonus",Value:25}:{Type:"HealingBonus",Value:20}
+    },
+    passive2: {
+        Type: "All things Are of the Earth",
+        Value: null
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
 const Barbara = {
     name: "Barbara",
     src: "Assets/Characters/Barbara/Barbara.png",
@@ -14406,13 +14720,34 @@ const Yae_Miko = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "E", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C"],
+        ["Dps"]: ["Q", "E", "N1","N2","N3","C","N1","N2","N3","C","N1","N2","N3","C","E"],
         ["Support"]: ["Q", "E"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
         Multiplier: function (level) {
-            return 0;
+            switch (level) {
+                case 1:
+                    return 39.66 / 100;
+                case 2:
+                    return 42.63 / 100;
+                case 3:
+                    return 45.61 / 100;
+                case 4:
+                    return 49.57 / 100;
+                case 5:
+                    return 52.55 / 100;
+                case 6:
+                    return 55.52 / 100;
+                case 7:
+                    return 59.49 / 100;
+                case 8:
+                    return 63.45 / 100;
+                case 9:
+                    return 67.42 / 100;
+                case 10:
+                    return 71.39 / 100;
+            }
         },
         Element: "ElectroDMGBonus",
         isReaction: true,
@@ -14420,7 +14755,28 @@ const Yae_Miko = {
     },
     normalAttack2: {
         Multiplier: function (level) {
-            return 0;
+            switch (level) {
+                case 1:
+                    return 38.52 / 100;
+                case 2:
+                    return 41.41 / 100;
+                case 3:
+                    return 44.3 / 100;
+                case 4:
+                    return 48.15 / 100;
+                case 5:
+                    return 51.04 / 100;
+                case 6:
+                    return 53.93 / 100;
+                case 7:
+                    return 57.78 / 100;
+                case 8:
+                    return 61.63 / 100;
+                case 9:
+                    return 65.48 / 100;
+                case 10:
+                    return 69.33 / 100;
+            }
         },
         Element: "ElectroDMGBonus",
         isReaction: false,
@@ -14429,7 +14785,28 @@ const Yae_Miko = {
     },
     normalAttack3: {
         Multiplier: function (level) {
-            return 0;
+            switch (level) {
+                case 1:
+                    return 56.89 / 100;
+                case 2:
+                    return 61.16 / 100;
+                case 3:
+                    return 65.42 / 100;
+                case 4:
+                    return 71.11 / 100;
+                case 5:
+                    return 75.38 / 100;
+                case 6:
+                    return 79.64 / 100;
+                case 7:
+                    return 85.33 / 100;
+                case 8:
+                    return 91.02 / 100;
+                case 9:
+                    return 96.71 / 100;
+                case 10:
+                    return 102.4 / 100;
+            }
 
 
         },
@@ -14452,7 +14829,7 @@ const Yae_Miko = {
 
 
         },
-        Element: "PyroDMGBonus",
+        Element: "ElectroDMGBonus",
         isReaction: false,
         scaling: "ATK"
     },
@@ -14489,7 +14866,7 @@ const Yae_Miko = {
         Multiplier: function (level) {
             return 0;
         },
-        Element: "PhysicalDMGBonus",
+        Element: "ElectroDMGBonus",
         isReaction: false,
         scaling: "ATK"
     },
@@ -15761,6 +16138,7 @@ const AllCharacters = {
     ["Arlecchino"]: Arlecchino,
     ["Ayaka"]: Ayaka,
     ["Ayato"]: Ayato,
+    ["Baizhu"]: Baizhu,
     ["Barbara"]: Barbara,
     ["Beidou"]: Beidou,
     ["Bennett"]: Bennett,
@@ -15807,7 +16185,7 @@ const AllCharacters = {
     ["Yoimiya"]: Yoimiya,
     ["Yun Jin"]: Yun_Jin,
     ["Zhongli"]: Zhongli,
-    index: ["Albedo","Alhaitham","Aloy", "Amber", "Arlecchino","Ayaka", "Ayato", "Barbara", "Beidou", "Bennett",
+    index: ["Albedo","Alhaitham","Aloy", "Amber", "Arlecchino","Ayaka", "Ayato", "Baizhu","Barbara", "Beidou", "Bennett",
         "Chongyun", "Diluc", "Diona", "Eula", "Fischl", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
         "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona","Neuvillette", "Ningguang", "Noelle",
         "Qiqi", "Raiden", "Razor", "Rosaria", "Sara", "Sayu", "Shenhe", "Sucrose", "Thoma", "Tartaglia", "Traveler (Anemo)",

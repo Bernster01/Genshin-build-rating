@@ -329,7 +329,7 @@ function passionOverload(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
-    return {dmg:dmg};
+    return { dmg: dmg };
 }
 
 function chounghuasLayerdFrost(Character) {
@@ -943,7 +943,7 @@ function galeBlade(Character) {
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
 
-    return {dmg:dmg};
+    return { dmg: dmg };
 }
 
 function frostgnaw(Character) {
@@ -1824,7 +1824,7 @@ function astableAnemohypostasisCreation(Character) {
     let dmg = dmgCalc(attack, Character);
 
 
-    return {dmg:dmg};
+    return { dmg: dmg };
 }
 
 function ragingTide(Character) {
@@ -3388,7 +3388,7 @@ function sesshouSakura(Character) {
         } else {
             attack.isReaction = false;
         }
-        dmg+= dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
+        dmg += dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
     }
     return dmg;
 
@@ -3698,14 +3698,14 @@ function oTearsIShallRepay(character) {
             let currentHP = buff.currentHP;
             character.advancedstats.elementalBonuses[1].Value -= currentBonus;
             //Calc new bonus
-            let healing = character.HP() * 0.16*sourewaterDroplets;
+            let healing = character.HP() * 0.16 * sourewaterDroplets;
             currentHP = currentHP + healing;
-            if(currentHP>character.HP())
+            if (currentHP > character.HP())
                 currentHP = character.HP();
             //Add 0.6% bonus for every 1% of current HP over 30% max hp
             let newBonus = 0;
-            if(currentHP>0.3*character.HP())
-                newBonus = (currentHP-0.3*character.HP())*0.6;
+            if (currentHP > 0.3 * character.HP())
+                newBonus = (currentHP - 0.3 * character.HP()) * 0.6;
             //max 30% bonus
             if (newBonus > 30)
                 newBonus = 30;
@@ -3713,7 +3713,72 @@ function oTearsIShallRepay(character) {
             buff.Value = Math.floor(newBonus);
             buff.currentHP = currentHP;
         }
-        
+
     }
     return dmg;
+}
+
+function universalDiagnosis(character) {
+    let multiplier1 = 0;
+    let multiplier2 = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            multiplier1 = 79.2 / 100;
+            multiplier2 = (((character.HP()*8)/100)+770.3755) 
+            break;
+        case 2:
+            multiplier1 = 85.14 / 100;
+            multiplier2 = (((character.HP()*8.6)/100)+847.42377	) 
+            break;
+        case 3:
+            multiplier1 = 91.08 / 100;
+            multiplier2 = (((character.HP()*9.2)/100)+930.8927) 
+            break;
+        case 4:
+            multiplier1 = 99 / 100;
+            multiplier2 = (((character.HP()*10)/100)+1020.78235) 
+            break;
+        case 5:
+            multiplier1 = 104.94 / 100;
+            multiplier2 = (((character.HP()*10.6)/100)+1117.0927) 
+            break;
+        case 6:
+            multiplier1 = 110.88 / 100;
+            multiplier2 = (((character.HP()*11.2)/100)+1219.8236) 
+            break;
+        case 7:
+            multiplier1 = 118.8 / 100;
+            multiplier2 = (((character.HP()*12)/100)+1328.9753	) 
+            break;
+        case 8:
+            multiplier1 = 126.72 / 100;
+            multiplier2 = (((character.HP()*12.8)/100)+1444.5477) 
+            break;
+        case 9:
+            multiplier1 = 134.64 / 100;
+            multiplier2 = (((character.HP()*13.6)/100)+1566.5408) 
+            break;
+        case 10:
+            multiplier1 = 142.56 / 100;
+            multiplier2 = (((character.HP()*14.4)/100)+1694.9546) 
+            break;
+        case 11:
+            multiplier1 = 150.48 / 100;
+            multiplier2 = (((character.HP()*15.2)/100)+1829.7891) 
+            break;
+        case 12:
+            multiplier1 = 158.4 / 100;
+            multiplier2 = (((character.HP()*16)/100)+1971.0442) 
+            break;
+        case 13:
+            multiplier1 = 168.3 / 100;
+            multiplier2 = (((character.HP()*17)/100)+2118.72) 
+            break;
+    }
+    let attack = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack, character) * numberOfEnemies;
+    let healing = multiplier2 * (1 + (character.advancedstats.healingBonus / 100));
+    return { dmg: dmg, healing: healing };
 }

@@ -1663,6 +1663,13 @@ function elementalMasteryCalc(dmg, type, character) {
             else if (buff.Type == "VV") {
                 swirlBonus += 60;
             }
+            else if (buff.Type == "All things Are of the Earth") {
+                burningBonus += buff.Value.transformitiveBonus
+                bloomBonus += buff.Value.transformitiveBonus
+                hyperbloomBonus += buff.Value.transformitiveBonus
+                burgeoningBonus += buff.Value.transformitiveBonus
+
+            }
         });
         vaporizeBonus = (vaporizeBonus == 0) ? 0 : vaporizeBonus / 100;
         meltBonus = (meltBonus == 0) ? 0 : meltBonus / 100;

@@ -1562,7 +1562,7 @@ function sweepingTime(Character) {
     Character.normalAttack2.element = "GeoDMGBonus";
     Character.normalAttack3.element = "GeoDMGBonus";
     Character.normalAttack4.element = "GeoDMGBonus";
-    return {dmg:dmg};
+    return { dmg: dmg };
 }
 
 function preserverofFortune(Character) {
@@ -2708,7 +2708,7 @@ function planetBefall(Character) {
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
 
-    return {dmg:dmg};
+    return { dmg: dmg };
 }
 
 function propheciesofDawn(Character) {
@@ -3853,14 +3853,14 @@ function oTidesIHaveReturned(character) {
             let currentHP = buff.currentHP;
             character.advancedstats.elementalBonuses[1].Value -= currentBonus;
             //Calc new bonus
-            let healing = character.HP() * 0.16*sourewaterDroplets;
+            let healing = character.HP() * 0.16 * sourewaterDroplets;
             currentHP = currentHP + healing;
-            if(currentHP>character.HP())
+            if (currentHP > character.HP())
                 currentHP = character.HP();
             //Add 0.6% bonus for every 1% of current HP over 30% max hp
             let newBonus = 0;
-            if(currentHP>0.3*character.HP())
-                newBonus = (currentHP-0.3*character.HP())*0.6;
+            if (currentHP > 0.3 * character.HP())
+                newBonus = (currentHP - 0.3 * character.HP()) * 0.6;
             //max 30% bonus
             if (newBonus > 30)
                 newBonus = 30;
@@ -3868,7 +3868,99 @@ function oTidesIHaveReturned(character) {
             buff.Value = Math.floor(newBonus);
             buff.currentHP = currentHP;
         }
-        
+
     }
     return dmg;
+}
+
+function holisticRevivification(character) {
+    let multiplier1 = 0;
+    let healing = 0;
+    let shield = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            multiplier1 = 97.06 / 100;
+            healing = (((character.HP() * 5.2) / 100) + 500.74408);
+            shield = (((character.HP() * 0.8) / 100) + 77.03752);
+            break;
+        case 2:
+            multiplier1 = 104.34 / 100;
+            healing = (((character.HP() * 5.59) / 100) + 550.82544);
+            shield = (((character.HP() * 0.86) / 100) + 84.74235);
+            break;
+        case 3:
+            multiplier1 = 111.62 / 100;
+            healing = (((character.HP() * 5.98) / 100) + 605.08026);
+            shield = (((character.HP() * 0.92) / 100) + 93.08924);
+            break;
+        case 4:
+            multiplier1 = 121.33 / 100;
+            healing = (((character.HP() * 6.5) / 100) + 663.50854);
+            shield = (((character.HP() * 1) / 100) + 102.0782);
+            break;
+        case 5:
+            multiplier1 = 128.61 / 100;
+            healing = (((character.HP() * 6.89) / 100) + 726.1102);
+            shield = (((character.HP() * 1.06) / 100) + 111.70923);
+            break;
+        case 6:
+            multiplier1 = 135.89 / 100;
+            healing = (((character.HP() * 7.28) / 100) + 792.8854);
+            shield = (((character.HP() * 1.12) / 100) + 121.98233);
+            break;
+        case 7:
+            multiplier1 = 145.6 / 100;
+            healing = (((character.HP() * 7.8) / 100) + 863.834);
+            shield = (((character.HP() * 1.2) / 100) + 132.89749);
+            break;
+        case 8:
+            multiplier1 = 155.3 / 100;
+            healing = (((character.HP() * 8.32) / 100) + 938.95605);
+            shield = (((character.HP() * 1.28) / 100) + 144.45473);
+            break;
+        case 9:
+            multiplier1 = 165.01 / 100;
+            healing = (((character.HP() * 8.84) / 100) + 1018.2515);
+            shield = (((character.HP() * 1.36) / 100) + 156.65404);
+            break;
+        case 10:
+            multiplier1 = 174.72 / 100;
+            healing = (((character.HP() * 9.36) / 100) + 1101.7205);
+            shield = (((character.HP() * 1.44) / 100) + 169.4954);
+            break;
+        case 11:
+            multiplier1 = 184.42 / 100;
+            healing = (((character.HP() * 9.88) / 100) + 1189.3629);
+            shield = (((character.HP() * 1.52) / 100) + 182.97885);
+            break;
+        case 12:
+            multiplier1 = 194.13 / 100;
+            healing = (((character.HP() * 10.4) / 100) + 1281.1787);
+            shield = (((character.HP() * 1.6) / 100) + 197.10435);
+            break;
+        case 13:
+            multiplier1 = 206.26 / 100;
+            healing = (((character.HP() * 11.05) / 100) + 1377.168);
+            shield = (((character.HP() * 1.7) / 100) + 211.87193);
+            break;
+    }
+    let attack1 = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;
+    for(buff of character.currentBuffs){
+        if(buff.Type == "All things Are of the Earth"){
+            //2% bonus per 1000 HP not exceeding 50000
+            let hpTicks = character.HP()/1000;
+            if (hpTicks > 50)
+                hpTicks = 50;
+            let transformitiveBonus = hpTicks*2;
+            let aggravateSpredBonus = hpTicks*0.8;
+            buff.Value = {transformitiveBonus:transformitiveBonus};
+            character.currentBuffs.push({Type:"Aggravate", Value:aggravateSpredBonus});
+            character.currentBuffs.push({Type:"Spread", Value:aggravateSpredBonus});
+        }
+    }
+    dmg = dmgCalc(attack1, character) * numberOfEnemies*4;
+    shield = shield*character.advancedstats.shieldStrength*5;
+    let heal = healing*character.advancedstats.healingBonus*5;
+    return {dmg:dmg, shield:shield, heal:heal};
 }
