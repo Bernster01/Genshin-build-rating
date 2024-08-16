@@ -668,7 +668,24 @@ function applyBonuses(character) {
                 break;
         }
     });
-
+    if(character.name == "Neuvillette") {
+        for (buff in character.currentBuffs) {
+            if (buff.Type == "Discipline of the Supreme Arbitration") {
+                let currentHP = character.HP();
+                //Add 0.6% bonus for every 1% of current HP over 30% max hp
+                let newBonus = 0;
+                if(currentHP>0.3*character.HP())
+                    newBonus = (currentHP-0.3*character.HP())*0.6;
+                //max 30% bonus
+                if (newBonus > 30)
+                    newBonus = 30;
+                character.advancedstats.elementalBonuses[1].Value += newBonus;
+                buff.Value = Math.floor(newBonus);
+                buff.currentHP = currentHP;
+            }
+            
+        }
+    }
 }
 function getSetBonus(array, character) {
     let setsDone = [];
@@ -842,6 +859,29 @@ function Simulation(character) {
                             }
                             if (buffToRemove != "")
                                 Character.currentBuffs.splice(Character.currentBuffs.indexOf(buffToRemove), 1);
+                        }
+                        if(Character.name == "Neuvillette") {
+                            for (buff in character.currentBuffs) {
+                                if (buff.Type == "Discipline of the Supreme Arbitration") {
+                                    let currentBonus = buff.Value;
+                                    let currentHP = buff.currentHP;
+                                    character.advancedstats.elementalBonuses[1].Value -= currentBonus;
+                                    //remove 8% of max hp
+                                    let drain = 0.08*character.HP();
+                                    let newHP = currentHP-drain;
+                                    //Add 0.6% bonus for every 1% of current HP over 30% max hp
+                                    let newBonus = 0;
+                                    if(currentHP>0.3*character.HP())
+                                        newBonus = (currentHP-0.3*character.HP())*0.6;
+                                    //max 30% bonus
+                                    if (newBonus > 30)
+                                        newBonus = 30;
+                                    character.advancedstats.elementalBonuses[1].Value += newBonus;
+                                    buff.Value = Math.floor(newBonus);
+                                    buff.currentHP = currentHP;
+                                }
+                                
+                            }
                         }
                         break;
 

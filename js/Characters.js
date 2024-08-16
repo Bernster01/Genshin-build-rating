@@ -8209,6 +8209,302 @@ const Mona = {
         }
     }
 };
+const Neuvillette ={
+    name: "Neuvillette",
+    src: "Assets/Characters/Neuvillette/Neuvillette.webp",
+    card: "Assets/Characters/Neuvillette/Character_Neuvillette_Portrait.webp",
+    element: "HydroCharacter",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 16.22,
+            ["20b"]: 42.07,
+            ["20a"]: 55.97,
+            ["40b"]: 83.76,
+            ["40a"]: 93.63,
+            ["50b"]: 107.73,
+            ["50a"]: 120.90,
+            ["60b"]: 135.14,
+            ["60a"]: 145.02,
+            ["70b"]: 159.39,
+            ["70a"]: 169.27,
+            ["80b"]: 183.80,
+            ["80a"]: 193.68,
+            ["90b"]: 208.32
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 1143.98,
+            ["20b"]: 2967.49,
+            ["20a"]: 3948.36,
+            ["40b"]: 5908.00,
+            ["40a"]: 6604.93,
+            ["50b"]: 7599.05,
+            ["50a"]: 8528.29,
+            ["60b"]: 9532.71,
+            ["60a"]: 10229.64,
+            ["70b"]: 11243.21,
+            ["70a"]: 11940.14,
+            ["80b"]: 12965.15,
+            ["80a"]: 13662.08,
+            ["90b"]: 14695.09
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 44.87,
+            ["20b"]: 116.40,
+            ["20a"]: 154.87,
+            ["40b"]: 231.74,
+            ["40a"]: 259.08,
+            ["50b"]: 298.07,
+            ["50a"]: 334.52,
+            ["60b"]: 373.92,
+            ["60a"]: 401.26,
+            ["70b"]: 441.02,
+            ["70a"]: 468.35,
+            ["80b"]: 508.56,
+            ["80a"]: 535.90,
+            ["90b"]: 576.42
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "HP",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 150,
+    supportType: "Sub-dps",
+    sequence: { //each C is 0.5 of charged attack
+        ["Dps"]: ["Q", "C","C","C","C","C","C","E","C","C","C","C","C","C","N1","N2","N3","E","C","C","C","C","C","C",],
+        ["Support"]: ["Q", "C","C","C","C","C","C","E","C","C","C","C","C","C"],
+    },
+    weaponType: "Catalyst",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 54.58 / 100;
+                case 2:
+                    return 58.67 / 100;
+                case 3:
+                    return 62.76 / 100;
+                case 4:
+                    return 68.22 / 100;
+                case 5:
+                    return 72.31 / 100;
+                case 6:
+                    return 76.41 / 100;
+                case 7:
+                    return 81.87 / 100;
+                case 8:
+                    return 87.32 / 100;
+                case 9:
+                    return 92.78 / 100;
+                case 10:
+                    return 98.24 / 100;
+            }
+
+        },
+        Element: "HydroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 46.25 / 100;
+                case 2:
+                    return 49.71 / 100;
+                case 3:
+                    return 53.18 / 100;
+                case 4:
+                    return 57.81 / 100;
+                case 5:
+                    return 61.28 / 100;
+                case 6:
+                    return 64.74 / 100;
+                case 7:
+                    return 69.37 / 100;
+                case 8:
+                    return 73.99 / 100;
+                case 9:
+                    return 78.62 / 100;
+                case 10:
+                    return 83.24 / 100;
+            }
+        },
+        Element: "HydroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 72.34 / 100;
+                case 2:
+                    return 77.76 / 100;
+                case 3:
+                    return 83.19 / 100;
+                case 4:
+                    return 90.42 / 100;
+                case 5:
+                    return 95.85 / 100;
+                case 6:
+                    return 101.27 / 100;
+                case 7:
+                    return 108.51 / 100;
+                case 8:
+                    return 115.74 / 100;
+                case 9:
+                    return 122.97 / 100;
+                case 10:
+                    return 130.21 / 100;
+            }
+        },
+        Element: "HydroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "HydroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "HydroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {//Big charged attack
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 7.32 / 100;
+                case 2:
+                    return 7.91 / 100;
+                case 3:
+                    return 8.51 / 100;
+                case 4:
+                    return 9.36 / 100;
+                case 5:
+                    return 9.96 / 100;
+                case 6:
+                    return 10.64 / 100;
+                case 7:
+                    return 11.57 / 100;
+                case 8:
+                    return 12.51 / 100;
+                case 9:
+                    return 13.45 / 100;
+                case 10:
+                    return 14.47 / 100;
+            }
+        },
+        Element: "HydroDMGBonus",
+        isReaction: false,
+        scaling: "HP"
+    },
+    plungeAttack: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "ElectroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 9.6,
+            ["50b"]: 9.6,
+            ["50a"]: 19.2,
+            ["60b"]: 19.2,
+            ["60a"]: 19.2,
+            ["70b"]: 19.2,
+            ["70a"]: 28.8,
+            ["80b"]: 28.8,
+            ["80a"]: 38.4,
+            ["90b"]: 38.4
+        }
+
+        return { Type: "CritDMG", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: oTearsIShallRepay,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: oTidesIHaveReturned,
+        Level: 1
+    },
+    passive1: {
+        Type: "Heir to the Ancient Sea's Authority",
+        Value: {Type:"ChargedAttack",value:160}
+    },
+    passive2: {
+        Type: "Discipline of the Supreme Arbitration",
+        Value: {Type:"HydroDMGBonus",value:0,sourewaterDroplets:0,currentHP:0}
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
 const Ningguang = {
     name: "Ningguang",
     src: "Assets/Characters/Ningguang/Ningguang.png",
@@ -15485,6 +15781,7 @@ const AllCharacters = {
     ["Kokomi"]: Kokomi,
     ["Lisa"]: Lisa,
     ["Mona"]: Mona,
+    ["Neuvillette"]: Neuvillette,
     ["Ningguang"]: Ningguang,
     ["Noelle"]: Noelle,
     ["Qiqi"]: Qiqi,
@@ -15512,7 +15809,7 @@ const AllCharacters = {
     ["Zhongli"]: Zhongli,
     index: ["Albedo","Alhaitham","Aloy", "Amber", "Arlecchino","Ayaka", "Ayato", "Barbara", "Beidou", "Bennett",
         "Chongyun", "Diluc", "Diona", "Eula", "Fischl", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
-        "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona", "Ningguang", "Noelle",
+        "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona","Neuvillette", "Ningguang", "Noelle",
         "Qiqi", "Raiden", "Razor", "Rosaria", "Sara", "Sayu", "Shenhe", "Sucrose", "Thoma", "Tartaglia", "Traveler (Anemo)",
         "Traveler (Electro)", "Traveler (Geo)", "Venti", "Xiangling", "Xiao", "Xingqiu",
         "Xinyan", "Yae Miko", "Yanfei", "Yoimiya", "Yun Jin", "Zhongli"]

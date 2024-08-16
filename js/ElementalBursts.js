@@ -2299,7 +2299,7 @@ function windsGrandOde(Character) {
     if (supportingElement != "Anemo" && supportingElement != "Geo" && supportingElement != undefined) {
         attack.Multiplier = Multiplier2;
         attack.Element = supportingElement + "DMGBonus";
-            dmg += dmgCalc(attack, Character, "ElementalBurst") * 20 * numberOfEnemies;
+        dmg += dmgCalc(attack, Character, "ElementalBurst") * 20 * numberOfEnemies;
     }
     return dmg;
 }
@@ -3782,5 +3782,93 @@ function BalemoonRising(Character) {
     //percent of hp healed
     let bondOfLifeToRemove = (totalHeal / Character.HP()) * 100;
     Character.bondOfLifeToRemove(bondOfLifeToRemove);
+    return dmg;
+}
+
+function oTidesIHaveReturned(character) {
+    let multiplier1 = 0;
+    let multiplier2 = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            multiplier1 = 22.26 / 100;
+            multiplier2 = 9.11 / 100;
+            break;
+        case 2:
+            multiplier1 = 23.93 / 100;
+            multiplier2 = 9.79 / 100;
+            break;
+        case 3:
+            multiplier1 = 25.6 / 100;
+            multiplier2 = 10.47 / 100;
+            break;
+        case 4:
+            multiplier1 = 27.82 / 100;
+            multiplier2 = 11.38 / 100;
+            break;
+        case 5:
+            multiplier1 = 29.49 / 100;
+            multiplier2 = 12.06 / 100;
+            break;
+        case 6:
+            multiplier1 = 31.16 / 100;
+            multiplier2 = 12.75 / 100;
+            break;
+        case 7:
+            multiplier1 = 33.39 / 100;
+            multiplier2 = 13.66 / 100;
+            break;
+        case 8:
+            multiplier1 = 35.61 / 100;
+            multiplier2 = 14.57 / 100;
+            break;
+        case 9:
+            multiplier1 = 37.84 / 100;
+            multiplier2 = 15.48 / 100;
+            break;
+        case 10:
+            multiplier1 = 40.06 / 100;
+            multiplier2 = 16.39 / 100;
+            break;
+        case 11:
+            multiplier1 = 42.29 / 100;
+            multiplier2 = 17.3 / 100;
+            break;
+        case 12:
+            multiplier1 = 44.52 / 100;
+            multiplier2 = 18.21 / 100;
+            break;
+        case 13:
+            multiplier1 = 47.3 / 100;
+            multiplier2 = 19.35 / 100;
+            break;
+    }
+    let attack1 = { Multiplier: multiplier1, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    for (buff in character.currentBuffs) {
+        if (buff.Type == "Discipline of the Supreme Arbitration") {
+            let currentBonus = buff.Value;
+            let sourewaterDroplets = 6;
+            let currentHP = buff.currentHP;
+            character.advancedstats.elementalBonuses[1].Value -= currentBonus;
+            //Calc new bonus
+            let healing = character.HP() * 0.16*sourewaterDroplets;
+            currentHP = currentHP + healing;
+            if(currentHP>character.HP())
+                currentHP = character.HP();
+            //Add 0.6% bonus for every 1% of current HP over 30% max hp
+            let newBonus = 0;
+            if(currentHP>0.3*character.HP())
+                newBonus = (currentHP-0.3*character.HP())*0.6;
+            //max 30% bonus
+            if (newBonus > 30)
+                newBonus = 30;
+            character.advancedstats.elementalBonuses[1].Value += newBonus;
+            buff.Value = Math.floor(newBonus);
+            buff.currentHP = currentHP;
+        }
+        
+    }
     return dmg;
 }
