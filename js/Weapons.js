@@ -1655,7 +1655,32 @@ const ThrillingTalesOfDragonSlayers = {
         return this;
     }
 }.Init();
-
+const TomeoftheEternalFlow= {
+    name: "Tome of the Eternal Flow",
+    src: "Weapons/Weapon_Tome_of_the_Eternal_Flow.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"HP%",Value:16},{Type:"ChargedAttack",Value:42},{Type:"EnergyRecharge",Value:6}]},//
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const WineAndSong = {
     name: "Wine and Song",
     src: "Weapons/Wine_and_Song.png",
@@ -2856,6 +2881,7 @@ const AllWeapons = {
     ["The Widsith"]:TheWidsith,
     ["Thrilling Tales of Dragon Slayers"]:ThrillingTalesOfDragonSlayers,
     ["Thundering Pulse"]:ThunderingPulse,
+    ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
     ["Vortex Vanquisher"]:VortexVanquisher,
     ["Wavebreakers Fin"]:WavebreakersFin,
     ["White Tassel"]:WhiteTassel,
@@ -2957,6 +2983,7 @@ const AllWeapons = {
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
         "Thundering Pulse",
+        "Tome of the Eternal Flow",
         "Vortex Vanquisher",
         "Wavebreakers Fin",
         "White Tassel",
@@ -3032,6 +3059,7 @@ const AllWeapons = {
         "Solar Pearl",
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
+        "Tome of the Eternal Flow",
         "Wine and Song"
     ],
     ["Claymore"]:[
