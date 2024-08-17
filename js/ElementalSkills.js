@@ -3829,3 +3829,51 @@ function sacredRiteHeronsSanctum(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
 }
+
+function lingeringLifeline(character){
+    let multiplier = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            multiplier = 22.61 / 100;
+            break;
+        case 2:
+            multiplier = 24.31 / 100;
+            break;
+        case 3:
+            multiplier = 26.01 / 100;
+            break;
+        case 4:
+            multiplier = 28.27 / 100;
+            break;
+        case 5:
+            multiplier = 29.96 / 100;
+            break;
+        case 6:
+            multiplier = 31.66 / 100;
+            break;
+        case 7:
+            multiplier = 33.92 / 100;
+            break;
+        case 8:
+            multiplier = 36.18 / 100;
+            break;
+        case 9:
+            multiplier = 38.44 / 100;
+            break;
+        case 10:
+            multiplier = 40.70 / 100;
+            break;
+        case 11:
+            multiplier = 42.97 / 100;
+            break;
+        case 12:
+            multiplier = 45.23 / 100;
+            break;
+        case 13:
+            multiplier = 48.05 / 100;
+            break;
+    }
+    let attack = { Multiplier: multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
+}

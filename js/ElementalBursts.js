@@ -4027,3 +4027,86 @@ function sacredRiteWagtailsTide(character) {
     dmg += dmgCalc(attack, character) * numberOfEnemies * 3;
     return dmg;
 }
+
+function depthClarionDice(character) {
+    let multiplier1 = 0;
+    let multiplier2 = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            multiplier1 = 7.31 / 100;
+            multiplier2 = 4.87 / 100;
+            break;
+        case 2:
+            multiplier1 = 7.86 / 100;
+            multiplier2 = 5.24 / 100;
+            break;
+        case 3:
+            multiplier1 = 8.4 / 100;
+            multiplier2 = 5.6 / 100;
+            break;
+        case 4:
+            multiplier1 = 9.13 / 100;
+            multiplier2 = 6.09 / 100;
+            break;
+        case 5:
+            multiplier1 = 9.68 / 100;
+            multiplier2 = 6.46 / 100;
+            break;
+        case 6:
+            multiplier1 = 10.23 / 100;
+            multiplier2 = 6.82 / 100;
+            break;
+        case 7:
+            multiplier1 = 10.96 / 100;
+            multiplier2 = 7.31 / 100;
+            break;
+        case 8:
+            multiplier1 = 11.69 / 100;
+            multiplier2 = 7.8 / 100;
+            break;
+        case 9:
+            multiplier1 = 12.42 / 100;
+            multiplier2 = 8.28 / 100;
+            break;
+        case 10:
+            multiplier1 = 13.15 / 100;
+            multiplier2 = 8.77 / 100;
+            break;
+        case 11:
+            multiplier1 = 13.89 / 100;
+            multiplier2 = 9.26 / 100;
+            break;
+        case 12:
+            multiplier1 = 14.62 / 100;
+            multiplier2 = 9.74 / 100;
+            break;
+        case 13:
+            multiplier1 = 15.53 / 100;
+            multiplier2 = 10.35 / 100;
+            break;
+    }
+    let attack1 = { Multiplier: multiplier1, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;//Initial
+    let hasBuff = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Adapt With Ease") {
+            hasBuff = true;
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 1 });
+            break;
+        }
+    }
+    for (let index = 0; index < 15*3; index++) {
+        if(index==0||index % 3 == 0)
+            attack2.isReaction = true;
+        else
+            attack2.isReaction = false;
+        dmg += dmgCalc(attack2, character);
+        //push buff
+        if (hasBuff && index % 3 == 0&&index<=(14*3)) {
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 3.5 });
+        }
+        
+    }
+    return dmg;
+}
