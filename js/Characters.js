@@ -427,8 +427,8 @@ const Alhaitham = {
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2","N3","C"],
-        ["Support"]: ["E", "N1", "N2","N3","C", "Q"],
+        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2", "N3", "C"],
+        ["Support"]: ["E", "N1", "N2", "N3", "C", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -494,25 +494,25 @@ const Alhaitham = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (2*34.18) / 100
+                    return (2 * 34.18) / 100
                 case 2:
-                    return (2*36.96) / 100
+                    return (2 * 36.96) / 100
                 case 3:
-                    return (2*39.74) / 100
+                    return (2 * 39.74) / 100
                 case 4:
-                    return (2*43.72) / 100
+                    return (2 * 43.72) / 100
                 case 5:
-                    return (2*46.5) / 100
+                    return (2 * 46.5) / 100
                 case 6:
-                    return (2*49.68) / 100
+                    return (2 * 49.68) / 100
                 case 7:
-                    return (2*54.05) / 100
+                    return (2 * 54.05) / 100
                 case 8:
-                    return (2*58.42) / 100
+                    return (2 * 58.42) / 100
                 case 9:
-                    return (2*62.79) / 100
+                    return (2 * 62.79) / 100
                 case 10:
-                    return (2*67.56) / 100
+                    return (2 * 67.56) / 100
             }
         },
         Element: "DendroDMGBonus",
@@ -581,25 +581,25 @@ const Alhaitham = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (2*55.25) / 100
+                    return (2 * 55.25) / 100
                 case 2:
-                    return (2*59.75) / 100
+                    return (2 * 59.75) / 100
                 case 3:
-                    return (2*64.25) / 100
+                    return (2 * 64.25) / 100
                 case 4:
-                    return (2*70.67) / 100
+                    return (2 * 70.67) / 100
                 case 5:
-                    return (2*75.17) / 100
+                    return (2 * 75.17) / 100
                 case 6:
-                    return (2*80.31) / 100
+                    return (2 * 80.31) / 100
                 case 7:
-                    return (2*87.38) / 100
+                    return (2 * 87.38) / 100
                 case 8:
-                    return (2*94.45) / 100
+                    return (2 * 94.45) / 100
                 case 9:
-                    return (2*101.52) / 100
+                    return (2 * 101.52) / 100
                 case 10:
-                    return (2*116.93) / 100
+                    return (2 * 116.93) / 100
             }
         },
         Element: "DendroDMGBonus",
@@ -1395,15 +1395,15 @@ const Arlecchino = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "E","C", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3","N4","N5"],
-        ["Support"]: ["Q", "E","C","N1", "N2", "N3", "N4", "N5", "C",],
+        ["Dps"]: ["E", "Q", "E", "C", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5"],
+        ["Support"]: ["Q", "E", "C", "N1", "N2", "N3", "N4", "N5", "C",],
     },
     weaponType: "Polearm",
     normalAttack1: {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return 47.5/ 100
+                    return 47.5 / 100
                 case 2:
                     return 51.37 / 100
                 case 3:
@@ -2287,7 +2287,7 @@ const Ayato = {
         }
     }
 };
-const Baizhu ={
+const Baizhu = {
     name: "Baizhu",
     src: "Assets/Characters/Baizhu/Baizhu.webp",
     card: "Assets/Characters/Baizhu/Character_Baizhu_Portrait.webp",
@@ -2381,8 +2381,8 @@ const Baizhu ={
     supportType: "Healer",
     supportType2: "Shielder",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4","C", "N1", "N2", "N3","N4","C"],
-        ["Support"]: ["E","Q","E"]
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "C", "N1", "N2", "N3", "N4", "C"],
+        ["Support"]: ["E", "Q", "E"]
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -2448,25 +2448,25 @@ const Baizhu ={
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (22.54*2) / 100
+                    return (22.54 * 2) / 100
                 case 2:
-                    return (24.23*2) / 100
+                    return (24.23 * 2) / 100
                 case 3:
-                    return (25.92*2) / 100
+                    return (25.92 * 2) / 100
                 case 4:
-                    return (28.18*2) / 100
+                    return (28.18 * 2) / 100
                 case 5:
-                    return (29.87*2) / 100
+                    return (29.87 * 2) / 100
                 case 6:
-                    return (31.56*2) / 100
+                    return (31.56 * 2) / 100
                 case 7:
-                    return (33.81*2) / 100
+                    return (33.81 * 2) / 100
                 case 8:
-                    return (36.07*2) / 100
+                    return (36.07 * 2) / 100
                 case 9:
-                    return (38.32*2) / 100
+                    return (38.32 * 2) / 100
                 case 10:
-                    return (40.57*2) / 100
+                    return (40.57 * 2) / 100
             }
         },
         Element: "DendroDMGBonus",
@@ -2577,7 +2577,7 @@ const Baizhu ={
     },
     passive1: {
         Type: "Five Fortunes Forever",
-        Value: (role=="Dps")?{Type:"DendroDMGBonus",Value:25}:{Type:"HealingBonus",Value:20}
+        Value: (role == "Dps") ? { Type: "DendroDMGBonus", Value: 25 } : { Type: "HealingBonus", Value: 20 }
     },
     passive2: {
         Type: "All things Are of the Earth",
@@ -2697,7 +2697,7 @@ const Barbara = {
     supportType: "Healer",
     sequence: {
         ["Dps"]: ["N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
-        ["Support"]: ["Q", "E","N1","N2","C"]
+        ["Support"]: ["Q", "E", "N1", "N2", "C"]
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -3527,6 +3527,320 @@ const Bennett = {
     passive2: {
         Type: "ElementalSkill",
         Value: 30
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
+const Candace = {
+    name: "Candace",
+    src: "Assets/Characters/Candace/Candace.webp",
+    card: "Assets/Characters/Candace/Character_Candace_Portrait.png",
+    element: "HydroCharacter",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 17.81,
+            ["20b"]: 45.75,
+            ["20a"]: 59.05,
+            ["40b"]: 88.45,
+            ["40a"]: 97.91,
+            ["50b"]: 112.62,
+            ["50a"]: 125.22,
+            ["60b"]: 139.93,
+            ["60a"]: 149.38,
+            ["70b"]: 164.07,
+            ["70a"]: 173.53,
+            ["80b"]: 188.24,
+            ["80a"]: 197.69,
+            ["90b"]: 212.40
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 911.79,
+            ["20b"]: 2342.39,
+            ["20a"]: 3023.55,
+            ["40b"]: 4528.91,
+            ["40a"]: 5012.89,
+            ["50b"]: 5766.03,
+            ["50a"]: 6411.33,
+            ["60b"]: 7164.47,
+            ["60a"]: 7648.45,
+            ["70b"]: 8400.68,
+            ["70a"]: 8884.46,
+            ["80b"]: 9637.80,
+            ["80a"]: 10121.78,
+            ["90b"]: 10874.91
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 57.23,
+            ["20b"]: 147.01,
+            ["20a"]: 189.76,
+            ["40b"]: 284.24,
+            ["40a"]: 314.61,
+            ["50b"]: 361.88,
+            ["50a"]: 402.38,
+            ["60b"]: 449.65,
+            ["60a"]: 480.03,
+            ["70b"]: 527.24,
+            ["70a"]: 557.61,
+            ["80b"]: 604.88,
+            ["80a"]: 635.25,
+            ["90b"]: 682.52
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "Hybrid",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 220,
+    supportType: "Sub-dps",
+    sequence: {
+        ["Dps"]: ["E", "Q", "N1", "N1", "N2", "3", "E", "N1", "N2", "N3"],
+        ["Support"]: ["E", "Q",]
+    },
+    weaponType: "Polearm",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 60.8 / 100
+                case 2:
+                    return 65.75 / 100
+                case 3:
+                    return 70.7 / 100
+                case 4:
+                    return 77.77 / 100
+                case 5:
+                    return 82.72 / 100
+                case 6:
+                    return 88.38 / 100
+                case 7:
+                    return 96.15 / 100
+                case 8:
+                    return 103.93 / 100
+                case 9:
+                    return 111.71 / 100
+                case 10:
+                    return 120.19 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 61.15 / 100
+                case 2:
+                    return 66.12 / 100
+                case 3:
+                    return 71.1 / 100
+                case 4:
+                    return 78.21 / 100
+                case 5:
+                    return 83.19 / 100
+                case 6:
+                    return 88.88 / 100
+                case 7:
+                    return 96.7 / 100
+                case 8:
+                    return 104.52 / 100
+                case 9:
+                    return 112.34 / 100
+                case 10:
+                    return 120.87 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return (35.49 + 43.37) / 100
+                case 2:
+                    return (38.38 + 46.9) / 100
+                case 3:
+                    return (41.27 + 50.43) / 100
+                case 4:
+                    return (45.39 + 55.48) / 100
+                case 5:
+                    return (48.28 + 59.01) / 100
+                case 6:
+                    return (51.58 + 63.04) / 100
+                case 7:
+                    return (56.12 + 68.59) / 100
+                case 8:
+                    return (60.66 + 74.14) / 100
+                case 9:
+                    return (65.2 + 79.69) / 100
+                case 10:
+                    return (70.15 + 85.74) / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 94.94 / 100
+                case 2:
+                    return 102.67 / 100
+                case 3:
+                    return 110.4 / 100
+                case 4:
+                    return 121.44 / 100
+                case 5:
+                    return 129.17 / 100
+                case 6:
+                    return 138 / 100
+                case 7:
+                    return 150.14 / 100
+                case 8:
+                    return 162.29 / 100
+                case 9:
+                    return 174.43 / 100
+                case 10:
+                    return 187.68 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            return 0;
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 124.18 / 100
+                case 2:
+                    return 134.29 / 100
+                case 3:
+                    return 144.4 / 100
+                case 4:
+                    return 158.84 / 100
+                case 5:
+                    return 168.95 / 100
+                case 6:
+                    return 180.5 / 100
+                case 7:
+                    return 150.14 / 100
+                case 8:
+                    return 196.38 / 100
+                case 9:
+                    return 212.27 / 100
+                case 10:
+                    return 228.15 / 100
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) { return 0 },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 6,
+            ["50b"]: 6,
+            ["50a"]: 12,
+            ["60b"]: 12,
+            ["60a"]: 12,
+            ["70b"]: 12,
+            ["70a"]: 18,
+            ["80b"]: 18,
+            ["80a"]: 24,
+            ["90b"]: 24
+        }
+
+        return { Type: "HP%", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: sacredRiteHeronsSanctum,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: sacredRiteWagtailsTide,
+        Level: 1
+    },
+    passive1: {
+        Type: "",
+        Value: null
+    },
+    passive2: {
+        Type: "Celestial Dome of Sand",
+        Value: null
     },
     constellations: {
         Amount: 0,
@@ -6922,8 +7236,8 @@ const Kazuha = {
     energyOffset: 140,
     supportType: "ElementalBuffer",
     sequence: {
-        ["Dps"]: ["E","P", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E","P"],
-        ["Support"]: ["E","P", "Q"],
+        ["Dps"]: ["E", "P", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E", "P"],
+        ["Support"]: ["E", "P", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
@@ -8523,7 +8837,7 @@ const Mona = {
         }
     }
 };
-const Neuvillette ={
+const Neuvillette = {
     name: "Neuvillette",
     src: "Assets/Characters/Neuvillette/Neuvillette.webp",
     card: "Assets/Characters/Neuvillette/Character_Neuvillette_Portrait.webp",
@@ -8615,8 +8929,8 @@ const Neuvillette ={
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: { //each C is 0.5 of charged attack
-        ["Dps"]: ["Q", "C","C","C","C","C","C","E","C","C","C","C","C","C","N1","N2","N3","E","C","C","C","C","C","C",],
-        ["Support"]: ["Q", "C","C","C","C","C","C","E","C","C","C","C","C","C"],
+        ["Dps"]: ["Q", "C", "C", "C", "C", "C", "C", "E", "C", "C", "C", "C", "C", "C", "N1", "N2", "N3", "E", "C", "C", "C", "C", "C", "C",],
+        ["Support"]: ["Q", "C", "C", "C", "C", "C", "C", "E", "C", "C", "C", "C", "C", "C"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -8793,11 +9107,11 @@ const Neuvillette ={
     },
     passive1: {
         Type: "Heir to the Ancient Sea's Authority",
-        Value: {Type:"ChargedAttack",value:160}
+        Value: { Type: "ChargedAttack", value: 160 }
     },
     passive2: {
         Type: "Discipline of the Supreme Arbitration",
-        Value: {Type:"HydroDMGBonus",value:0,sourewaterDroplets:0,currentHP:0}
+        Value: { Type: "HydroDMGBonus", value: 0, sourewaterDroplets: 0, currentHP: 0 }
     },
     constellations: {
         Amount: 0,
@@ -14720,7 +15034,7 @@ const Yae_Miko = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "E", "N1","N2","N3","C","N1","N2","N3","C","N1","N2","N3","C","E"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],
         ["Support"]: ["Q", "E"],
     },
     weaponType: "Catalyst",
@@ -16142,6 +16456,7 @@ const AllCharacters = {
     ["Barbara"]: Barbara,
     ["Beidou"]: Beidou,
     ["Bennett"]: Bennett,
+    ["Candace"]: Candace,
     ["Chongyun"]: Chongyun,
     ["Diluc"]: Diluc,
     ["Diona"]: Diona,
@@ -16185,9 +16500,9 @@ const AllCharacters = {
     ["Yoimiya"]: Yoimiya,
     ["Yun Jin"]: Yun_Jin,
     ["Zhongli"]: Zhongli,
-    index: ["Albedo","Alhaitham","Aloy", "Amber", "Arlecchino","Ayaka", "Ayato", "Baizhu","Barbara", "Beidou", "Bennett",
-        "Chongyun", "Diluc", "Diona", "Eula", "Fischl", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
-        "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona","Neuvillette", "Ningguang", "Noelle",
+    index: ["Albedo", "Alhaitham", "Aloy", "Amber", "Arlecchino", "Ayaka", "Ayato", "Baizhu", "Barbara", "Beidou", "Bennett",
+        "Candace", "Chongyun", "Diluc", "Diona", "Eula", "Fischl", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
+        "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona", "Neuvillette", "Ningguang", "Noelle",
         "Qiqi", "Raiden", "Razor", "Rosaria", "Sara", "Sayu", "Shenhe", "Sucrose", "Thoma", "Tartaglia", "Traveler (Anemo)",
         "Traveler (Electro)", "Traveler (Geo)", "Venti", "Xiangling", "Xiao", "Xingqiu",
         "Xinyan", "Yae Miko", "Yanfei", "Yoimiya", "Yun Jin", "Zhongli"]

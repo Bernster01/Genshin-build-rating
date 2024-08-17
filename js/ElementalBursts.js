@@ -3946,21 +3946,84 @@ function holisticRevivification(character) {
     }
     let attack1 = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
-    for(buff of character.currentBuffs){
-        if(buff.Type == "All things Are of the Earth"){
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "All things Are of the Earth") {
             //2% bonus per 1000 HP not exceeding 50000
-            let hpTicks = character.HP()/1000;
+            let hpTicks = character.HP() / 1000;
             if (hpTicks > 50)
                 hpTicks = 50;
-            let transformitiveBonus = hpTicks*2;
-            let aggravateSpredBonus = hpTicks*0.8;
-            buff.Value = {transformitiveBonus:transformitiveBonus};
-            character.currentBuffs.push({Type:"Aggravate", Value:aggravateSpredBonus});
-            character.currentBuffs.push({Type:"Spread", Value:aggravateSpredBonus});
+            let transformitiveBonus = hpTicks * 2;
+            let aggravateSpredBonus = hpTicks * 0.8;
+            buff.Value = { transformitiveBonus: transformitiveBonus };
+            character.currentBuffs.push({ Type: "Aggravate", Value: aggravateSpredBonus });
+            character.currentBuffs.push({ Type: "Spread", Value: aggravateSpredBonus });
         }
     }
-    dmg = dmgCalc(attack1, character) * numberOfEnemies*4;
-    shield = shield*character.advancedstats.shieldStrength*5;
-    let heal = healing*character.advancedstats.healingBonus*5;
-    return {dmg:dmg, shield:shield, heal:heal};
+    dmg = dmgCalc(attack1, character) * numberOfEnemies * 4;
+    shield = shield * character.advancedstats.shieldStrength * 5;
+    let heal = healing * character.advancedstats.healingBonus * 5;
+    return { dmg: dmg, shield: shield, heal: heal };
+}
+
+function sacredRiteWagtailsTide(character) {
+    let multiplier = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            multiplier = 6.61 / 100;
+            break;
+        case 2:
+            multiplier = 7.11 / 100;
+            break;
+        case 3:
+            multiplier = 7.6 / 100;
+            break;
+        case 4:
+            multiplier = 8.26 / 100;
+            break;
+        case 5:
+            multiplier = 8.76 / 100;
+            break;
+        case 6:
+            multiplier = 9.25 / 100;
+            break;
+        case 7:
+            multiplier = 9.92 / 100;
+            break;
+        case 8:
+            multiplier = 10.58 / 100;
+            break;
+        case 9:
+            multiplier = 11.24 / 100;
+            break;
+        case 10:
+            multiplier = 11.9 / 100;
+            break;
+        case 11:
+            multiplier = 12.56 / 100;
+            break;
+        case 12:
+            multiplier = 13.22 / 100;
+            break;
+        case 13:
+            multiplier = 14.05 / 100;
+            break;
+    }
+    let attack = { Multiplier: multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    character.currentBuffs.push({ Type: "DMGBonus%", Value: 20 });
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Celestial Dome of Sand") {
+            //1% per 1000 HP
+            let normalAttackBuff = Math.floor(character.HP() / 1000);
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: normalAttackBuff });
+
+        }
+    }
+    character.normalAttack1.element = "HydroDMGBonus";
+    character.normalAttack2.element = "HydroDMGBonus";
+    character.normalAttack3.element = "HydroDMGBonus";
+    character.normalAttack4.element = "HydroDMGBonus";
+    character.normalAttack5.element = "HydroDMGBonus";
+    dmg += dmgCalc(attack, character) * numberOfEnemies * 3;
+    return dmg;
 }

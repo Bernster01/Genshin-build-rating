@@ -3724,55 +3724,55 @@ function universalDiagnosis(character) {
     switch (character.elementalSkill.Level) {
         case 1:
             multiplier1 = 79.2 / 100;
-            multiplier2 = (((character.HP()*8)/100)+770.3755) 
+            multiplier2 = (((character.HP() * 8) / 100) + 770.3755)
             break;
         case 2:
             multiplier1 = 85.14 / 100;
-            multiplier2 = (((character.HP()*8.6)/100)+847.42377	) 
+            multiplier2 = (((character.HP() * 8.6) / 100) + 847.42377)
             break;
         case 3:
             multiplier1 = 91.08 / 100;
-            multiplier2 = (((character.HP()*9.2)/100)+930.8927) 
+            multiplier2 = (((character.HP() * 9.2) / 100) + 930.8927)
             break;
         case 4:
             multiplier1 = 99 / 100;
-            multiplier2 = (((character.HP()*10)/100)+1020.78235) 
+            multiplier2 = (((character.HP() * 10) / 100) + 1020.78235)
             break;
         case 5:
             multiplier1 = 104.94 / 100;
-            multiplier2 = (((character.HP()*10.6)/100)+1117.0927) 
+            multiplier2 = (((character.HP() * 10.6) / 100) + 1117.0927)
             break;
         case 6:
             multiplier1 = 110.88 / 100;
-            multiplier2 = (((character.HP()*11.2)/100)+1219.8236) 
+            multiplier2 = (((character.HP() * 11.2) / 100) + 1219.8236)
             break;
         case 7:
             multiplier1 = 118.8 / 100;
-            multiplier2 = (((character.HP()*12)/100)+1328.9753	) 
+            multiplier2 = (((character.HP() * 12) / 100) + 1328.9753)
             break;
         case 8:
             multiplier1 = 126.72 / 100;
-            multiplier2 = (((character.HP()*12.8)/100)+1444.5477) 
+            multiplier2 = (((character.HP() * 12.8) / 100) + 1444.5477)
             break;
         case 9:
             multiplier1 = 134.64 / 100;
-            multiplier2 = (((character.HP()*13.6)/100)+1566.5408) 
+            multiplier2 = (((character.HP() * 13.6) / 100) + 1566.5408)
             break;
         case 10:
             multiplier1 = 142.56 / 100;
-            multiplier2 = (((character.HP()*14.4)/100)+1694.9546) 
+            multiplier2 = (((character.HP() * 14.4) / 100) + 1694.9546)
             break;
         case 11:
             multiplier1 = 150.48 / 100;
-            multiplier2 = (((character.HP()*15.2)/100)+1829.7891) 
+            multiplier2 = (((character.HP() * 15.2) / 100) + 1829.7891)
             break;
         case 12:
             multiplier1 = 158.4 / 100;
-            multiplier2 = (((character.HP()*16)/100)+1971.0442) 
+            multiplier2 = (((character.HP() * 16) / 100) + 1971.0442)
             break;
         case 13:
             multiplier1 = 168.3 / 100;
-            multiplier2 = (((character.HP()*17)/100)+2118.72) 
+            multiplier2 = (((character.HP() * 17) / 100) + 2118.72)
             break;
     }
     let attack = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
@@ -3781,4 +3781,51 @@ function universalDiagnosis(character) {
     dmg += dmgCalc(attack, character) * numberOfEnemies;
     let healing = multiplier2 * (1 + (character.advancedstats.healingBonus / 100));
     return { dmg: dmg, healing: healing };
+}
+function sacredRiteHeronsSanctum(character) {
+    let multiplier = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            multiplier = 19.04 / 100;
+            break;
+        case 2:
+            multiplier = 20.47 / 100;
+            break;
+        case 3:
+            multiplier = 21.9 / 100;
+            break;
+        case 4:
+            multiplier = 23.8 / 100;
+            break;
+        case 5:
+            multiplier = 25.23 / 100;
+            break;
+        case 6:
+            multiplier = 26.66 / 100;
+            break;
+        case 7:
+            multiplier = 28.56 / 100;
+            break;
+        case 8:
+            multiplier = 30.46 / 100;
+            break;
+        case 9:
+            multiplier = 32.37 / 100;
+            break;
+        case 10:
+            multiplier = 34.27 / 100;
+            break;
+        case 11:
+            multiplier = 36.18 / 100;
+            break;
+        case 12:
+            multiplier = 38.08 / 100;
+            break;
+        case 13:
+            multiplier = 40.46 / 100;
+            break;
+    }
+    let attack = { Multiplier: multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
 }
