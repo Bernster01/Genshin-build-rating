@@ -4137,3 +4137,69 @@ function floralBrush(character) {
     return dmg;
 
 }
+
+function framingFreezingPointComposition(character) {
+    let photoDMG = 0;
+    let markDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            photoDMG = 67.2 / 100;
+            markDMG = 39.2 / 100;
+            break;
+        case 2:
+            photoDMG = 72.24 / 100;
+            markDMG = 42.14 / 100;
+            break;
+        case 3:
+            photoDMG = 77.28 / 100;
+            markDMG = 45.08 / 100;
+            break;
+        case 4:
+            photoDMG = 84 / 100;
+            markDMG = 49 / 100;
+            break;
+        case 5:
+            photoDMG = 89.04 / 100;
+            markDMG = 51.94 / 100;
+            break;
+        case 6:
+            photoDMG = 94.08 / 100;
+            markDMG = 54.88 / 100;
+            break;
+        case 7:
+            photoDMG = 100.8 / 100;
+            markDMG = 58.8 / 100;
+            break;
+        case 8:
+            photoDMG = 107.52 / 100;
+            markDMG = 62.72 / 100;
+            break;
+        case 9:
+            photoDMG = 114.24 / 100;
+            markDMG = 66.64 / 100;
+            break;
+        case 10:
+            photoDMG = 120.96 / 100;
+            markDMG = 70.56 / 100;
+            break;
+        case 11:
+            photoDMG = 127.68 / 100;
+            markDMG = 74.48 / 100;
+            break;
+        case 12:
+            photoDMG = 134.4 / 100;
+            markDMG = 78.4 / 100;
+            break;
+        case 13:
+            photoDMG = 142.8 / 100;
+            markDMG = 83.3 / 100;
+            break;
+    }
+    let attack = { Multiplier: photoDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let mark = { Multiplier: markDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    for (let i = 0; i < 4; i++) {
+        dmg += dmgCalc(mark, character) * numberOfEnemies;
+    }
+    return {dmg:dmg};
+}

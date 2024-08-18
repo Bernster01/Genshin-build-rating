@@ -3862,6 +3862,369 @@ const Candace = {
         }
     }
 };
+const Charlotte = {
+    name: "Charlotte",
+    src: "Assets/Characters/Charlotte/Charlotte.webp",
+    card: "Assets/Characters/Charlotte/Character_Charlotte_Portrait.webp",
+    element: "CryoCharacter",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 14.51,
+            ["20b"]: 37.29,
+            ["20a"]: 48.13,
+            ["40b"]: 72.09,
+            ["40a"]: 79.79,
+            ["50b"]: 91.78,
+            ["50a"]: 102.05,
+            ["60b"]: 114.04,
+            ["60a"]: 121.75,
+            ["70b"]: 133.72,
+            ["70a"]: 141.42,
+            ["80b"]: 153.41,
+            ["80a"]: 161.12,
+            ["90b"]: 173.10
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 902.67,
+            ["20b"]: 2318.97,
+            ["20a"]: 2993.31,
+            ["40b"]: 4483.62,
+            ["40a"]: 4962.76,
+            ["50b"]: 5708.37,
+            ["50a"]: 6347.22,
+            ["60b"]: 7092.83,
+            ["60a"]: 7571.97,
+            ["70b"]: 8316.67,
+            ["70a"]: 8795.81,
+            ["80b"]: 9541.42,
+            ["80a"]: 10020.56,
+            ["90b"]: 10766.17,
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 45.78,
+            ["20b"]: 117.61,
+            ["20a"]: 151.81,
+            ["40b"]: 227.39,
+            ["40a"]: 251.69,
+            ["50b"]: 289.51,
+            ["50a"]: 321.91,
+            ["60b"]: 359.72,
+            ["60a"]: 384.02,
+            ["70b"]: 421.79,
+            ["70a"]: 446.09,
+            ["80b"]: 483.90,
+            ["80a"]: 508.20,
+            ["90b"]: 546.02,
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "ATK",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 150,
+    supportType: "Healer",
+    supportType2: "Sub-dps",
+    sequence: {
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C"],
+        ["Support"]: ["E", "Q"],
+    },
+    weaponType: "Catalyst",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 49.85 / 100;
+                case 2:
+                    return 53.58 / 100;
+                case 3:
+                    return 57.32 / 100;
+                case 4:
+                    return 62.31 / 100;
+                case 5:
+                    return 66.05 / 100;
+                case 6:
+                    return 69.78 / 100;
+                case 7:
+                    return 74.77 / 100;
+                case 8:
+                    return 79.75 / 100;
+                case 9:
+                    return 84.74 / 100;
+                case 10:
+                    return 89.72 / 100;
+            }
+        },
+        Element: "CryoDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 43.38 / 100;
+                case 2:
+                    return 46.63 / 100;
+                case 3:
+                    return 49.88 / 100;
+                case 4:
+                    return 54.22 / 100;
+                case 5:
+                    return 57.47 / 100;
+                case 6:
+                    return 60.73 / 100;
+                case 7:
+                    return 65.06 / 100;
+                case 8:
+                    return 69.4 / 100;
+                case 9:
+                    return 73.74 / 100;
+                case 10:
+                    return 78.08 / 100;
+            }
+
+        },
+        Element: "CryoDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 64.6 / 100;
+                case 2:
+                    return 69.45 / 100;
+                case 3:
+                    return 74.29 / 100;
+                case 4:
+                    return 80.75 / 100;
+                case 5:
+                    return 85.6 / 100;
+                case 6:
+                    return 90.44 / 100;
+                case 7:
+                    return 96.9 / 100;
+                case 8:
+                    return 103.36 / 100;
+                case 9:
+                    return 109.82 / 100;
+                case 10:
+                    return 116.28 / 100;
+            }
+
+
+        },
+        Element: "CryoDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 0 / 100;
+                case 2:
+                    return 0 / 100;
+                case 3:
+                    return 0 / 100;
+                case 4:
+                    return 0 / 100;
+                case 5:
+                    return 0 / 100;
+                case 6:
+                    return 0 / 100;
+                case 7:
+                    return 0 / 100;
+                case 8:
+                    return 0 / 100;
+                case 9:
+                    return 0 / 100;
+                case 10:
+                    return 0 / 100;
+            }
+
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 0 / 100;
+                case 2:
+                    return 0 / 100;
+                case 3:
+                    return 0 / 100;
+                case 4:
+                    return 0 / 100;
+                case 5:
+                    return 0 / 100;
+                case 6:
+                    return 0 / 100;
+                case 7:
+                    return 0 / 100;
+                case 8:
+                    return 0 / 100;
+                case 9:
+                    return 0 / 100;
+                case 10:
+                    return 0 / 100;
+            }
+        },
+        Element: "PhysicalDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 100.51 / 100;
+                case 2:
+                    return 108.05 / 100;
+                case 3:
+                    return 115.59 / 100;
+                case 4:
+                    return 125.64 / 100;
+                case 5:
+                    return 133.18 / 100;
+                case 6:
+                    return 140.72 / 100;
+                case 7:
+                    return 150.77 / 100;
+                case 8:
+                    return 160.82 / 100;
+                case 9:
+                    return 170.87 / 100;
+                case 10:
+                    return 180.92 / 100;
+            }
+        },
+        Element: "CryoDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 141.93 / 100;
+                case 2:
+                    return 153.49 / 100;
+                case 3:
+                    return 165.04 / 100;
+                case 4:
+                    return 181.54 / 100;
+                case 5:
+                    return 193.1 / 100;
+                case 6:
+                    return 206.3 / 100;
+                case 7:
+                    return 224.45 / 100;
+                case 8:
+                    return 242.61 / 100;
+                case 9:
+                    return 260.76 / 100;
+                case 10:
+                    return 280.57 / 100;
+            }
+        },
+        Element: "CryoDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 6,
+            ["50b"]: 6,
+            ["50a"]: 12,
+            ["60b"]: 12,
+            ["60a"]: 12,
+            ["70b"]: 12,
+            ["70a"]: 18,
+            ["80b"]: 18,
+            ["80a"]: 24,
+            ["90b"]: 24
+        }
+
+        return { Type: "ATK%", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: framingFreezingPointComposition,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: stillPhotoComprehensiveConfirmation,
+        Level: 1
+    },
+    passive1: {
+        Type: "",
+        Value: null
+    },
+    passive2: {
+        Type: "",
+        Value: null
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
 const Chongyun = {
     name: "Chongyun",
     src: "Assets/Characters/Chongyun/Chongyun.png",
@@ -4160,7 +4523,7 @@ const Collei = {
     name: "Collei",
     src: "Assets/Characters/Collei/Collei.webp",
     card: "Assets/Characters/Collei/Character_Collei_Portrait.webp",
-    element: "ElementCharacter",
+    element: "DendroCharacter",
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16.74,
@@ -4248,8 +4611,8 @@ const Collei = {
     energyOffset: 185,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","Q","N1","N2","N3","N4","N1","N2","N3","N4"],
-        ["Support"]: ["E","Q"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Bow",
     normalAttack1: {
@@ -18227,6 +18590,7 @@ const AllCharacters = {
     ["Beidou"]: Beidou,
     ["Bennett"]: Bennett,
     ["Candace"]: Candace,
+    ["Charlotte"]: Charlotte,
     ["Chongyun"]: Chongyun,
     ["Collei"]: Collei,
     ["Dehya"]: Dehya,
@@ -18275,7 +18639,7 @@ const AllCharacters = {
     ["Yun Jin"]: Yun_Jin,
     ["Zhongli"]: Zhongli,
     index: ["Albedo", "Alhaitham", "Aloy", "Amber", "Arlecchino", "Ayaka", "Ayato", "Baizhu", "Barbara", "Beidou", "Bennett",
-        "Candace", "Chongyun", "Collei", "Dehya", "Diluc", "Diona", "Eula", "Fischl", "Furina", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
+        "Candace", "Charlotte", "Chongyun", "Collei", "Dehya", "Diluc", "Diona", "Eula", "Fischl", "Furina", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
         "Kaeya", "Kazuha", "Keqing", "Klee", "Kokomi", "Lisa", "Mona", "Neuvillette", "Ningguang", "Noelle",
         "Qiqi", "Raiden", "Razor", "Rosaria", "Sara", "Sayu", "Shenhe", "Sucrose", "Thoma", "Tartaglia", "Traveler (Anemo)",
         "Traveler (Electro)", "Traveler (Geo)", "Venti", "Xiangling", "Xiao", "Xingqiu",

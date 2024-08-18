@@ -4286,6 +4286,99 @@ function trumpCardKitty(character) {
     let attack1 = { Multiplier: explosionDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: leapDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
-    dmg += dmgCalc(attack2, character) * numberOfEnemies*12;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies * 12;
     return dmg;
-}   
+}
+
+function stillPhotoComprehensiveConfirmation(character) {
+    let castHealing = 0;
+    let skillDMG = 0;
+    let continHealing = 0;
+    let kameraDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            castHealing = character.attack() * (256.57 / 100) + 1608;
+            skillDMG = 77.62 / 100;
+            continHealing = character.attack() * (9.22 / 100) + 57;
+            kameraDMG = 6.47 / 100;
+            break;
+        case 2:
+            castHealing = character.attack() * (275.82 / 100) + 1769;
+            skillDMG = 83.44 / 100;
+            continHealing = character.attack() * (9.91 / 100) + 63;
+            kameraDMG = 6.95 / 100;
+            break;
+        case 3:
+            castHealing = character.attack() * (295.06 / 100) + 1944;
+            skillDMG = 89.26 / 100;
+            continHealing = character.attack() * (0 / 100) + 69;
+            kameraDMG = 7.44 / 100;
+            break;
+        case 4:
+            castHealing = character.attack() * (320.72 / 100) + 2131;
+            skillDMG = 97.02 / 100;
+            continHealing = character.attack() * (11.52 / 100) + 76	;
+            kameraDMG = 8.08 / 100;
+            break;
+        case 5:
+            castHealing = character.attack() * (339.96 / 100) + 2332;
+            skillDMG = 102.84 / 100;
+            continHealing = character.attack() * (12.21 / 100) + 83;
+            kameraDMG = 8.57 / 100;
+            break;
+        case 6:
+            castHealing = character.attack() * (359.2 / 100) + 2547;
+            skillDMG = 108.66 / 100;
+            continHealing = character.attack() * (12.9 / 100) + 91;
+            kameraDMG = 9.06 / 100;
+            break;
+        case 7:
+            castHealing = character.attack() * (384.86 / 100) + 2775;
+            skillDMG = 116.42 / 100;
+            continHealing = character.attack() * (13.82 / 100) + 99;
+            kameraDMG = 9.7 / 100;
+            break;
+        case 8:
+            castHealing = character.attack() * (410.52 / 100) + 3016;
+            skillDMG = 124.19 / 100;
+            continHealing = character.attack() * (14.75 / 100) + 108;
+            kameraDMG = 10.35 / 100;
+            break;
+        case 9:
+            castHealing = character.attack() * (436.17 / 100) + 3271;
+            skillDMG = 131.95 / 100;
+            continHealing = character.attack() * (15.67 / 100) + 117;
+            kameraDMG = 11 / 100;
+            break;
+        case 10:
+            castHealing = character.attack() * (461.83 / 100) + 3539;
+            skillDMG = 139.71 / 100;
+            continHealing = character.attack() * (16.59 / 100) + 126;
+            kameraDMG = 11.64 / 100;
+            break;
+        case 11:
+            castHealing = character.attack() * (487.49 / 100) + 3820;
+            skillDMG = 147.47 / 100;
+            continHealing = character.attack() * (17.51 / 100) + 136;
+            kameraDMG = 12.29 / 100;
+            break;
+        case 12:
+            castHealing = character.attack() * (513.15 / 100) + 4115;
+            skillDMG = 155.23 / 100;
+            continHealing = character.attack() * (18.43 / 100) + 147;
+            kameraDMG = 12.94 / 100;
+            break;
+        case 13:
+            castHealing = character.attack() * (545.22 / 100) + 4424;
+            skillDMG = 164.93 / 100;
+            continHealing = character.attack() * (19.58 / 100) + 158;
+            kameraDMG = 13.74 / 100;
+            break;
+    }
+    let attack1 = { Multiplier: skillDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: kameraDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let totalHeal = castHealing + (continHealing * 9) *(1+(character.advancedstats.healingBonus/100));
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies * 9;
+    return { dmg: dmg, healing: totalHeal };
+}
