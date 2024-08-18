@@ -4171,7 +4171,57 @@ function leonineBite(character) {
     let attack1 = { Multiplier: flameManesFistDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: false, type: "ElementalBurst" };
     let attack2 = { Multiplier: incinerationDriveDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
 
-    let dmg = dmgCalc(attack1, character) * numberOfEnemies*10;
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies * 10;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function letThePeopleRejoice(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 11.41 / 100;
+            break;
+        case 2:
+            skillDMG = 12.26 / 100;
+            break;
+        case 3:
+            skillDMG = 13.12 / 100;
+            break;
+        case 4:
+            skillDMG = 14.26 / 100;
+            break;
+        case 5:
+            skillDMG = 15.11 / 100;
+            break;
+        case 6:
+            skillDMG = 15.97 / 100;
+            break;
+        case 7:
+            skillDMG = 17.11 / 100;
+            break;
+        case 8:
+            skillDMG = 18.25 / 100;
+            break;
+        case 9:
+            skillDMG = 19.39 / 100;
+            break;
+        case 10:
+            skillDMG = 20.53 / 100;
+            break;
+        case 11:
+            skillDMG = 21.67 / 100;
+            break;
+        case 12:
+            skillDMG = 22.81 / 100;
+            break;
+        case 13:
+            skillDMG = 24.24 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return {dmg: dmg};
+
+
 }

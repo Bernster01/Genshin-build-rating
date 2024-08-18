@@ -3954,7 +3954,135 @@ function moltenInferno(character) {
     let coordAttack = { Multiplier: fieldDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
-    dmg += dmgCalc(coordAttack, character) * numberOfEnemies*4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
-    let shield = character.HP() * (200/100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
+    dmg += dmgCalc(coordAttack, character) * numberOfEnemies * 4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
+    let shield = character.HP() * (200 / 100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
     return { dmg: dmg, shield: shield };
+}
+
+function salonSolitaire(character) {
+    let ousiaBubbleDMG = 0;
+    let gentilhommeUsherDMG = 0;
+    let surintendanteChevalmarinDMG = 0;
+    let mademaoselleCrabalettaDMG = 0;
+    let singerofManyWatersHealing = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            ousiaBubbleDMG = 7.86 / 100;
+            gentilhommeUsherDMG = 5.96 / 100;
+            surintendanteChevalmarinDMG = 3.23 / 100;
+            mademaoselleCrabalettaDMG = 8.29 / 100;
+            singerofManyWatersHealing = (character.HP() * (4.8 / 100)) + 462;
+            break;
+        case 2:
+            ousiaBubbleDMG = 8.45 / 100;
+            gentilhommeUsherDMG = 6.41 / 100;
+            surintendanteChevalmarinDMG = 3.47 / 100;
+            mademaoselleCrabalettaDMG = 8.91 / 100;
+            singerofManyWatersHealing = (character.HP() * (5.16 / 100)) + 508;
+            break;
+        case 3:
+            ousiaBubbleDMG = 9.04 / 100;
+            gentilhommeUsherDMG = 6.85 / 100;
+            surintendanteChevalmarinDMG = 3.72 / 100;
+            mademaoselleCrabalettaDMG = 9.53 / 100;
+            singerofManyWatersHealing = (character.HP() * (5.5 / 100)) + 559;
+            break;
+        case 4:
+            ousiaBubbleDMG = 9.83 / 100;
+            gentilhommeUsherDMG = 7.45 / 100;
+            surintendanteChevalmarinDMG = 4.04 / 100;
+            mademaoselleCrabalettaDMG = 10.36 / 100;
+            singerofManyWatersHealing = (character.HP() * (6 / 100)) + 612;
+            break;
+        case 5:
+            ousiaBubbleDMG = 10.42 / 100;
+            gentilhommeUsherDMG = 7.9 / 100;
+            surintendanteChevalmarinDMG = 4.28 / 100;
+            mademaoselleCrabalettaDMG = 10.98 / 100;
+            singerofManyWatersHealing = (character.HP() * (6.36 / 100)) + 670;
+            break;
+        case 6:
+            ousiaBubbleDMG = 11.01 / 100;
+            gentilhommeUsherDMG = 8.34 / 100;
+            surintendanteChevalmarinDMG = 4.52 / 100;
+            mademaoselleCrabalettaDMG = 11.6 / 100;
+            singerofManyWatersHealing = (character.HP() * (6.72 / 100)) + 732;
+            break;
+        case 7:
+            ousiaBubbleDMG = 11.8 / 100;
+            gentilhommeUsherDMG = 8.94 / 100;
+            surintendanteChevalmarinDMG = 4.85 / 100;
+            mademaoselleCrabalettaDMG = 12.43 / 100;
+            singerofManyWatersHealing = (character.HP() * (7.2 / 100)) + 797;
+            break;
+        case 8:
+            ousiaBubbleDMG = 12.58 / 100;
+            gentilhommeUsherDMG = 9.54 / 100;
+            surintendanteChevalmarinDMG = 5.17 / 100;
+            mademaoselleCrabalettaDMG = 13.26 / 100;
+            singerofManyWatersHealing = (character.HP() * (7.68 / 100)) + 867;
+            break;
+        case 9:
+            ousiaBubbleDMG = 13.37 / 100;
+            gentilhommeUsherDMG = 10.13 / 100;
+            surintendanteChevalmarinDMG = 5.49 / 100;
+            mademaoselleCrabalettaDMG = 14.09 / 100;
+            singerofManyWatersHealing = (character.HP() * (8.16 / 100)) + 940;
+            break;
+        case 10:
+            ousiaBubbleDMG = 14.16 / 100;
+            gentilhommeUsherDMG = 10.73 / 100;
+            surintendanteChevalmarinDMG = 5.82 / 100;
+            mademaoselleCrabalettaDMG = 14.92 / 100;
+            singerofManyWatersHealing = (character.HP() * (8.64 / 100)) + 1017;
+            break;
+        case 11:
+            ousiaBubbleDMG = 14.94 / 100;
+            gentilhommeUsherDMG = 11.32 / 100;
+            surintendanteChevalmarinDMG = 6.14 / 100;
+            mademaoselleCrabalettaDMG = 15.75 / 100;
+            singerofManyWatersHealing = (character.HP() * (9.12 / 100)) + 1098;
+            break;
+        case 12:
+            ousiaBubbleDMG = 15.73 / 100;
+            gentilhommeUsherDMG = 11.92 / 100;
+            surintendanteChevalmarinDMG = 6.46 / 100;
+            mademaoselleCrabalettaDMG = 16.58 / 100;
+            singerofManyWatersHealing = (character.HP() * (9.6 / 100)) + 1183;
+            break;
+        case 13:
+            ousiaBubbleDMG = 16.71 / 100;
+            gentilhommeUsherDMG = 12.67 / 100;
+            surintendanteChevalmarinDMG = 6.87 / 100;
+            mademaoselleCrabalettaDMG = 17.61 / 100;
+            singerofManyWatersHealing = (character.HP() * (10.2 / 100)) + 1271;
+            break;
+    }
+    //Surintendante Chevalmarin ~1.5s cd per attack
+    //Mademoiselle Crabaletta ~5.1s cd per attack
+    //Gentilhomme Usher ~3.1s cd per attack
+    let surintendanteChevalmarinAttack = { Multiplier: surintendanteChevalmarinDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let mademaoselleCrabalettaAttack = { Multiplier: mademaoselleCrabalettaDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let gentilhommeUsherAttack = { Multiplier: gentilhommeUsherDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let ousiaBubbleAttack = { Multiplier: ousiaBubbleDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
+    let dmg = 0;
+    for (let i = 0; i < 20; i++) {
+        if (i % 2 == 0) {
+            surintendanteChevalmarinAttack.isReaction = false;
+            gentilhommeUsherAttack.isReaction = false;
+        }
+        else {
+            surintendanteChevalmarinAttack.isReaction = true;
+            gentilhommeUsherAttack.isReaction = true;
+        }
+        if(i<10){
+            dmg += dmgCalc(gentilhommeUsherAttack, character) * numberOfEnemies;
+        }
+        if(i<6){
+            dmg += dmgCalc(mademaoselleCrabalettaAttack, character) * numberOfEnemies;
+        }
+        dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
+    }
+    dmg += dmgCalc(ousiaBubbleAttack, character) * numberOfEnemies;
+    return {dmg:dmg};
 }
