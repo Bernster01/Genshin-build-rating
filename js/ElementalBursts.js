@@ -4397,7 +4397,7 @@ function ringOfBurstingGrenades(character) {
             break;
         case 3:
             explosiveGrandeDMG = 423.38 / 100;
-            secondaryExplosiveDMG = 56.45	 / 100;
+            secondaryExplosiveDMG = 56.45 / 100;
             break;
         case 4:
             explosiveGrandeDMG = 460.2 / 100;
@@ -4444,12 +4444,12 @@ function ringOfBurstingGrenades(character) {
     let attack2 = { Multiplier: secondaryExplosiveDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies * 8;
-    return {dmg: dmg};
+    return { dmg: dmg };
 }
 function hiyokuTwinBlades(character) {
     let skillDMGAtk = 0;
     let skillDMGDef = 0;
-    switch (character.elementalSkill.Level) {
+    switch (character.elementalBurst.Level) {
         case 1:
             skillDMGAtk = 256.32 / 100;
             skillDMGDef = 320.4 / 100;
@@ -4503,10 +4503,82 @@ function hiyokuTwinBlades(character) {
             skillDMGDef = 640.8 / 100;
             break;
     }
-    let attack = { Multiplier: skillDMGAtk*character.attack(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
-    let attack2 = { Multiplier: skillDMGDef*character.DEF(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
+    let attack = { Multiplier: skillDMGAtk * character.attack(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
+    let attack2 = { Multiplier: skillDMGDef * character.DEF(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     return dmg;
 
+}
+
+function lastLightFall(character) {
+    let skillDMG = 0;
+    let bondOfLifeGain = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 126.88 / 100;
+            bondOfLifeGain = 66;
+            break;
+        case 2:
+            skillDMG = 136.4 / 100;
+            bondOfLifeGain = 72;
+            break;
+        case 3:
+            skillDMG = 145.91 / 100;
+            bondOfLifeGain = 78;
+            break;
+        case 4:
+            skillDMG = 158.6 / 100;
+            bondOfLifeGain = 84;
+            break;
+        case 5:
+            skillDMG = 168.12 / 100;
+            bondOfLifeGain = 90;
+            break;
+        case 6:
+            skillDMG = 177.63 / 100;
+            bondOfLifeGain = 96;
+            break;
+        case 7:
+            skillDMG = 190.32 / 100;
+            bondOfLifeGain = 102;
+            break;
+        case 8:
+            skillDMG = 203.01 / 100;
+            bondOfLifeGain = 108;
+            break;
+        case 9:
+            skillDMG = 215.7 / 100;
+            bondOfLifeGain = 114;
+            break;
+        case 10:
+            skillDMG = 228.38 / 100;
+            bondOfLifeGain = 120;
+            break;
+        case 11:
+            skillDMG = 241.07 / 100;
+            bondOfLifeGain = 126;
+            break;
+        case 12:
+            skillDMG = 253.76 / 100;
+            bondOfLifeGain = 132;
+            break;
+        case 13:
+            skillDMG = 269.62 / 100;
+            bondOfLifeGain = 138;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let dmg = 0;
+    character.applyBondOfLife(bondOfLifeGain);
+    for(let i = 0; i < 5; i++){
+        if(i==0||i%3){
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character)*numberOfEnemies;
+    }
+    return dmg;
 }

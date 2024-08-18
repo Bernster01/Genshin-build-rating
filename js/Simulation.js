@@ -1517,6 +1517,12 @@ function getFlatDamage(character, attackAction) {
                 flatDamage += character.DEF() * 0.40;
             break;
     }
+    for (const buff of character.currentBuffs) {
+        if (buff.Type == "FlatDMG") {
+            if(buff.for == attackAction.type)
+                flatDamage += buff.Value;
+        }
+    }
     //Aggravate
     if (attackAction.isReaction && attackAction.Element == "ElectroDMGBonus" && supportingElement == "Dendro")
         flatDamage += aggravate(character);

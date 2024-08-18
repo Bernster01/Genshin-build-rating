@@ -4375,20 +4375,20 @@ function flutteringHasode(character) {
             upwardSweepAttackDMGdef = 396.53 / 100;
             break;
     }
-    tamotoDMGatk= tamotoDMGatk * character.attack();
-    tamotoDMGdef= tamotoDMGdef * character.DEF();
-    upwardSweepAttackDMGatk= upwardSweepAttackDMGatk * character.attack();
-    upwardSweepAttackDMGdef= upwardSweepAttackDMGdef * character.DEF();
+    tamotoDMGatk = tamotoDMGatk * character.attack();
+    tamotoDMGdef = tamotoDMGdef * character.DEF();
+    upwardSweepAttackDMGatk = upwardSweepAttackDMGatk * character.attack();
+    upwardSweepAttackDMGdef = upwardSweepAttackDMGdef * character.DEF();
     let tamotoDMG = tamotoDMGatk + tamotoDMGdef;
     let upwardSweepAttackDMG = upwardSweepAttackDMGatk + upwardSweepAttackDMGdef;
     let attack = { Multiplier: upwardSweepAttackDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let attack2 = { Multiplier: tamotoDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    dmg += dmgCalc(attack2, character) * numberOfEnemies*2*4;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies * 2 * 4;
 
-    for(buffs of character.currentBuffs){
-        if(buffs.Type == "Tailor-Made"){
-            if(role =="Dps"){
+    for (buffs of character.currentBuffs) {
+        if (buffs.Type == "Tailor-Made") {
+            if (role == "Dps") {
                 character.normalAttack1.Element = "GeoDMGBonus";
                 character.normalAttack2.Element = "GeoDMGBonus";
                 character.normalAttack3.Element = "GeoDMGBonus";
@@ -4397,9 +4397,9 @@ function flutteringHasode(character) {
                 character.chargedAttack.Element = "GeoDMGBonus";
                 character.plungeAttack.Element = "GeoDMGBonus";
             }
-            else{
+            else {
                 dmg += dmgCalc(attack, character) * numberOfEnemies;
-                dmg += dmgCalc(attack2, character) * numberOfEnemies*2;
+                dmg += dmgCalc(attack2, character) * numberOfEnemies * 2;
             }
             break;
         }
@@ -4407,4 +4407,203 @@ function flutteringHasode(character) {
 
     return dmg;
 
+}
+
+function huntersVigil(character) {
+    let swiftHunt1lvlDMG = 0;
+    let swiftHunt2lvlDMG = 0;
+    let impaletheNightlvl1DMG = 0;
+    let impaletheNightlvl2DMG = 0;
+    let impaletheNightlvl3DMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            swiftHunt1lvlDMG = 26.76 / 100;
+            swiftHunt2lvlDMG = 38.79 / 100;
+            impaletheNightlvl1DMG = 32.97 / 100;
+            impaletheNightlvl2DMG = 43.96 / 100;
+            impaletheNightlvl3DMG = 25.11 / 100;
+            break;
+        case 2:
+            swiftHunt1lvlDMG = 28.94 / 100;
+            swiftHunt2lvlDMG = 41.94 / 100;
+            impaletheNightlvl1DMG = 35.66 / 100;
+            impaletheNightlvl2DMG = 47.54 / 100;
+            impaletheNightlvl3DMG = 27.16 / 100;
+            break;
+        case 3:
+            swiftHunt1lvlDMG = 31.12 / 100;
+            swiftHunt2lvlDMG = 45.1 / 100;
+            impaletheNightlvl1DMG = 38.34 / 100;
+            impaletheNightlvl2DMG = 51.12 / 100;
+            impaletheNightlvl3DMG = 29.2 / 100;
+            break;
+        case 4:
+            swiftHunt1lvlDMG = 34.23 / 100;
+            swiftHunt2lvlDMG = 49.61 / 100;
+            impaletheNightlvl1DMG = 42.17 / 100;
+            impaletheNightlvl2DMG = 56.23 / 100;
+            impaletheNightlvl3DMG = 32.12 / 100;
+            break;
+        case 5:
+            swiftHunt1lvlDMG = 36.41 / 100;
+            swiftHunt2lvlDMG = 52.77 / 100;
+            impaletheNightlvl1DMG = 44.86 / 100;
+            impaletheNightlvl2DMG = 59.81 / 100;
+            impaletheNightlvl3DMG = 34.16 / 100;
+            break;
+        case 6:
+            swiftHunt1lvlDMG = 38.9 / 100;
+            swiftHunt2lvlDMG = 56.38 / 100;
+            impaletheNightlvl1DMG = 47.93 / 100;
+            impaletheNightlvl2DMG = 63.9 / 100;
+            impaletheNightlvl3DMG = 36.5 / 100;
+            break;
+        case 7:
+            swiftHunt1lvlDMG = 42.32 / 100;
+            swiftHunt2lvlDMG = 61.34 / 100;
+            impaletheNightlvl1DMG = 52.14 / 100;
+            impaletheNightlvl2DMG = 69.52 / 100;
+            impaletheNightlvl3DMG = 39.71 / 100;
+            break;
+        case 8:
+            swiftHunt1lvlDMG = 45.75 / 100;
+            swiftHunt2lvlDMG = 66.3 / 100;
+            impaletheNightlvl1DMG = 56.36 / 100;
+            impaletheNightlvl2DMG = 75.15 / 100;
+            impaletheNightlvl3DMG = 42.92 / 100;
+            break;
+        case 9:
+            swiftHunt1lvlDMG = 49.17 / 100;
+            swiftHunt2lvlDMG = 71.26 / 100;
+            impaletheNightlvl1DMG = 60.58 / 100;
+            impaletheNightlvl2DMG = 80.77 / 100;
+            impaletheNightlvl3DMG = 46.14 / 100;
+            break;
+        case 10:
+            swiftHunt1lvlDMG = 52.9 / 100;
+            swiftHunt2lvlDMG = 76.67 / 100;
+            impaletheNightlvl1DMG = 65.18 / 100;
+            impaletheNightlvl2DMG = 86.9 / 100;
+            impaletheNightlvl3DMG = 49.64 / 100;
+            break;
+        case 11:
+            swiftHunt1lvlDMG = 56.64 / 100;
+            swiftHunt2lvlDMG = 82.08 / 100;
+            impaletheNightlvl1DMG = 69.78 / 100;
+            impaletheNightlvl2DMG = 93.04 / 100;
+            impaletheNightlvl3DMG = 53.14 / 100;
+            break;
+        case 12:
+            swiftHunt1lvlDMG = 60.37 / 100;
+            swiftHunt2lvlDMG = 87.49 / 100;
+            impaletheNightlvl1DMG = 74.38 / 100;
+            impaletheNightlvl2DMG = 99.17 / 100;
+            impaletheNightlvl3DMG = 56.65 / 100;
+            break;
+        case 13:
+            swiftHunt1lvlDMG = 64.11 / 100;
+            swiftHunt2lvlDMG = 92.91 / 100;
+            impaletheNightlvl1DMG = 78.98 / 100;
+            impaletheNightlvl2DMG = 105.31 / 100;
+            impaletheNightlvl3DMG = 60.15 / 100;
+            break;
+    }
+    let swiftHunt1lvl = { Multiplier: swiftHunt1lvlDMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+    let swiftHunt2lvl = { Multiplier: swiftHunt2lvlDMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+    let impaletheNightlvl1 = { Multiplier: impaletheNightlvl1DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let impaletheNightlvl2 = { Multiplier: impaletheNightlvl2DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let impaletheNightlvl3 = { Multiplier: impaletheNightlvl3DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = 0;
+    let hasLawfulRemuneration = false;
+    let hasDarkShatteringFlame = false;
+    for (buffs of character.currentBuffs) {
+        if (buffs.Type == "Lawful Remuneration") {
+            character.currentBuffs.push({ Type: "CritRate", Value: 0, Source: "Lawful Remuneration" });
+            hasLawfulRemuneration = true;
+        }
+        if (buffs.Type == "Dark-Shattering Flame") {
+            character.currentBuffs.push({ Type: "FlatDMG",for:"NormalAttack", Value: 0, Source: "Dark-Shattering Flame" });
+            hasDarkShatteringFlame = true;
+        }
+
+    }
+    for (let i = 0; i < 24; i++) {
+        //Combo 6[N1,N2,N3,E] where swifthunt is N and impale is E where lvl depends on bondoflife
+        //Assuming 1000 heal every 3rd attack from support
+        let currenBondOfLife = character.bondOfLife;
+        //Update her buffs
+        if (hasLawfulRemuneration) {
+            for (buffs of character.currentBuffs) {
+                if (buffs.Source == "Lawful Remuneration") {
+                    if (currenBondOfLife >= 100) {
+                        if (buffs.Value == 0)
+                            buffs.Value = 10;
+                        else if (buffs.Value ==10)
+                            buffs.Value = 20;
+                    }
+
+                }
+            }
+        }
+        if (i % 3 == 0 || i == 0) {
+            swiftHunt1lvl.isReaction = true;
+            swiftHunt2lvl.isReaction = true;
+            impaletheNightlvl1.isReaction = true;
+            impaletheNightlvl2.isReaction = true;
+            impaletheNightlvl3.isReaction = true;
+            //Gain Bond of life
+            let heal = 2000;
+            let percentHeal = heal / character.HP() * 100;
+            character.applyBondOfLife(percentHeal);
+            if(hasDarkShatteringFlame&&(supportingElement!=null||supportingElement!=undefined)){
+                for(buffs of character.currentBuffs){
+                    if(buffs.Source == "Dark-Shattering Flame"){
+                        let increase = (20/100)*character.attack();
+                        if(increase>600)
+                            increase = 600;
+                        buffs.Value += increase;
+                        if(buffs.Value>1800)
+                            buffs.Value = 1800;
+                    }
+                }
+            }
+        }
+        else {
+            swiftHunt1lvl.isReaction = false;
+            swiftHunt2lvl.isReaction = false;
+            impaletheNightlvl1.isReaction = false;
+            impaletheNightlvl2.isReaction = false;
+            impaletheNightlvl3.isReaction = false;
+        }
+        if (i % 4 == 0) {
+            //Impale the night
+
+            switch (currenBondOfLife) {
+                case currenBondOfLife == 0:
+                    dmg += dmgCalc(impaletheNightlvl1, character) * numberOfEnemies;
+                    break;
+                case currenBondOfLife < 100:
+                    dmg += dmgCalc(impaletheNightlvl2, character) * numberOfEnemies;
+                    character.bondOfLifeRemove(1.04 * currenBondOfLife)
+                    break;
+                case currenBondOfLife > 100:
+                    for (let j = 0; j < 3; j++) {
+                        dmg += dmgCalc(impaletheNightlvl3, character) * numberOfEnemies;
+
+                    }
+                    character.bondOfLifeRemove(1.1 * currenBondOfLife)
+            }
+            continue;
+        }
+        //Swift Hunt
+        if (currenBondOfLife >= 100) {
+            dmg += dmgCalc(swiftHunt1lvl, character) * numberOfEnemies;
+            dmg += dmgCalc(swiftHunt2lvl, character) * (numberOfEnemies - 1);//Pierces enemies
+        }
+        else {
+            dmg += dmgCalc(swiftHunt1lvl, character) * numberOfEnemies;
+            character.applyBondOfLife(35);
+        }
+    }
+    return dmg;
 }
