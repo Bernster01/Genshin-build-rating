@@ -4221,7 +4221,71 @@ function letThePeopleRejoice(character) {
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    return {dmg: dmg};
+    return { dmg: dmg };
 
 
 }
+
+function trumpCardKitty(character) {
+    let explosionDMG = 0;
+    let leapDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            explosionDMG = 201.82 / 100;
+            leapDMG = 43.25 / 100;
+            break;
+        case 2:
+            explosionDMG = 216.96 / 100;
+            leapDMG = 46.49 / 100;
+            break;
+        case 3:
+            explosionDMG = 232.1 / 100;
+            leapDMG = 49.74 / 100;
+            break;
+        case 4:
+            explosionDMG = 252.28 / 100;
+            leapDMG = 54.06 / 100;
+            break;
+        case 5:
+            explosionDMG = 267.42 / 100;
+            leapDMG = 57.3 / 100;
+            break;
+        case 6:
+            explosionDMG = 282.55 / 100;
+            leapDMG = 60.55 / 100;
+            break;
+        case 7:
+            explosionDMG = 302.74 / 100;
+            leapDMG = 64.87 / 100;
+            break;
+        case 8:
+            explosionDMG = 322.92 / 100;
+            leapDMG = 69.2 / 100;
+            break;
+        case 9:
+            explosionDMG = 343.1 / 100;
+            leapDMG = 73.52 / 100;
+            break;
+        case 10:
+            explosionDMG = 363.28 / 100;
+            leapDMG = 77.85 / 100;
+            break;
+        case 11:
+            explosionDMG = 383.47 / 100;
+            leapDMG = 82.17 / 100;
+            break;
+        case 12:
+            explosionDMG = 403.65 / 100;
+            leapDMG = 86.5 / 100;
+            break;
+        case 13:
+            explosionDMG = 428.88 / 100;
+            leapDMG = 91.9 / 100;
+            break;
+    }
+    let attack1 = { Multiplier: explosionDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: leapDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies*12;
+    return dmg;
+}   

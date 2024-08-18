@@ -4075,14 +4075,65 @@ function salonSolitaire(character) {
             surintendanteChevalmarinAttack.isReaction = true;
             gentilhommeUsherAttack.isReaction = true;
         }
-        if(i<10){
+        if (i < 10) {
             dmg += dmgCalc(gentilhommeUsherAttack, character) * numberOfEnemies;
         }
-        if(i<6){
+        if (i < 6) {
             dmg += dmgCalc(mademaoselleCrabalettaAttack, character) * numberOfEnemies;
         }
         dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
     }
     dmg += dmgCalc(ousiaBubbleAttack, character) * numberOfEnemies;
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function floralBrush(character) {
+    let skillDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 151.2 / 100;
+            break;
+        case 2:
+            skillDMG = 162.54 / 100;
+            break;
+        case 3:
+            skillDMG = 173.88 / 100;
+            break;
+        case 4:
+            skillDMG = 189 / 100;
+            break;
+        case 5:
+            skillDMG = 200.34 / 100;
+            break;
+        case 6:
+            skillDMG = 211.68 / 100;
+            break;
+        case 7:
+            skillDMG = 226.8 / 100;
+            break;
+        case 8:
+            skillDMG = 241.92 / 100;
+            break;
+        case 9:
+            skillDMG = 257.04 / 100;
+            break;
+        case 10:
+            skillDMG = 272.16 / 100;
+            break;
+        case 11:
+            skillDMG = 287.28 / 100;
+            break;
+        case 12:
+            skillDMG = 302.4 / 100;
+            break;
+        case 13:
+            skillDMG = 321.3 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    attack.isReaction = false;
+    dmg += dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
+
 }
