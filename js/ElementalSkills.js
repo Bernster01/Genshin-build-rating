@@ -4289,3 +4289,122 @@ function shortRangeRapidInterdictionFire(character) {
     }
     return { dmg: dmg, healing: totalHealing, attackBuff: atkBuff };
 }
+
+function flutteringHasode(character) {
+    let tamotoDMGdef = 0;
+    let tamotoDMGatk = 0;
+    let upwardSweepAttackDMGatk = 0;
+    let upwardSweepAttackDMGdef = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            tamotoDMGdef = 82.08 / 100;
+            tamotoDMGatk = 102.6 / 100;
+            upwardSweepAttackDMGatk = 149.28 / 100;
+            upwardSweepAttackDMGdef = 186.6 / 100;
+            break;
+        case 2:
+            tamotoDMGdef = 88.24 / 100;
+            tamotoDMGatk = 110.29 / 100;
+            upwardSweepAttackDMGatk = 160.48 / 100;
+            upwardSweepAttackDMGdef = 200.59 / 100;
+            break;
+        case 3:
+            tamotoDMGdef = 94.39 / 100;
+            tamotoDMGatk = 117.99 / 100;
+            upwardSweepAttackDMGatk = 171.67 / 100;
+            upwardSweepAttackDMGdef = 214.59 / 100;
+            break;
+        case 4:
+            tamotoDMGdef = 102.6 / 100;
+            tamotoDMGatk = 128.25 / 100;
+            upwardSweepAttackDMGatk = 186.6 / 100;
+            upwardSweepAttackDMGdef = 233.25 / 100;
+            break;
+        case 5:
+            tamotoDMGdef = 108.76 / 100;
+            tamotoDMGatk = 135.94 / 100;
+            upwardSweepAttackDMGatk = 197.8 / 100;
+            upwardSweepAttackDMGdef = 247.25 / 100;
+            break;
+        case 6:
+            tamotoDMGdef = 114.91 / 100;
+            tamotoDMGatk = 143.64 / 100;
+            upwardSweepAttackDMGatk = 208.99 / 100;
+            upwardSweepAttackDMGdef = 261.24 / 100;
+            break;
+        case 7:
+            tamotoDMGdef = 123.12 / 100;
+            tamotoDMGatk = 153.9 / 100;
+            upwardSweepAttackDMGatk = 223.92 / 100;
+            upwardSweepAttackDMGdef = 279.9 / 100;
+            break;
+        case 8:
+            tamotoDMGdef = 131.33 / 100;
+            tamotoDMGatk = 164.16 / 100;
+            upwardSweepAttackDMGatk = 238.85 / 100;
+            upwardSweepAttackDMGdef = 298.56 / 100;
+            break;
+        case 9:
+            tamotoDMGdef = 139.54 / 100;
+            tamotoDMGatk = 174.42 / 100;
+            upwardSweepAttackDMGatk = 253.78 / 100;
+            upwardSweepAttackDMGdef = 317.22 / 100;
+            break;
+        case 10:
+            tamotoDMGdef = 147.74 / 100;
+            tamotoDMGatk = 184.68 / 100;
+            upwardSweepAttackDMGatk = 268.7 / 100;
+            upwardSweepAttackDMGdef = 335.88 / 100;
+            break;
+        case 11:
+            tamotoDMGdef = 155.95 / 100;
+            tamotoDMGatk = 194.94 / 100;
+            upwardSweepAttackDMGatk = 283.63 / 100;
+            upwardSweepAttackDMGdef = 354.54 / 100;
+            break;
+        case 12:
+            tamotoDMGdef = 164.16 / 100;
+            tamotoDMGatk = 205.2 / 100;
+            upwardSweepAttackDMGatk = 298.56 / 100;
+            upwardSweepAttackDMGdef = 373.2 / 100;
+            break;
+        case 13:
+            tamotoDMGdef = 174.42 / 100;
+            tamotoDMGatk = 218.02 / 100;
+            upwardSweepAttackDMGatk = 317.22 / 100;
+            upwardSweepAttackDMGdef = 396.53 / 100;
+            break;
+    }
+    tamotoDMGatk= tamotoDMGatk * character.attack();
+    tamotoDMGdef= tamotoDMGdef * character.DEF();
+    upwardSweepAttackDMGatk= upwardSweepAttackDMGatk * character.attack();
+    upwardSweepAttackDMGdef= upwardSweepAttackDMGdef * character.DEF();
+    let tamotoDMG = tamotoDMGatk + tamotoDMGdef;
+    let upwardSweepAttackDMG = upwardSweepAttackDMGatk + upwardSweepAttackDMGdef;
+    let attack = { Multiplier: upwardSweepAttackDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
+    let attack2 = { Multiplier: tamotoDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies*2*4;
+
+    for(buffs of character.currentBuffs){
+        if(buffs.Type == "Tailor-Made"){
+            if(role =="Dps"){
+                character.normalAttack1.Element = "GeoDMGBonus";
+                character.normalAttack2.Element = "GeoDMGBonus";
+                character.normalAttack3.Element = "GeoDMGBonus";
+                character.normalAttack4.Element = "GeoDMGBonus";
+                character.normalAttack5.Element = "GeoDMGBonus";
+                character.chargedAttack.Element = "GeoDMGBonus";
+                character.plungeAttack.Element = "GeoDMGBonus";
+            }
+            else{
+                dmg += dmgCalc(attack, character) * numberOfEnemies;
+                dmg += dmgCalc(attack2, character) * numberOfEnemies*2;
+            }
+            break;
+        }
+    }
+
+    return dmg;
+
+}

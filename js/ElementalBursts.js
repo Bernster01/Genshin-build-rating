@@ -4446,3 +4446,67 @@ function ringOfBurstingGrenades(character) {
     dmg += dmgCalc(attack2, character) * numberOfEnemies * 8;
     return {dmg: dmg};
 }
+function hiyokuTwinBlades(character) {
+    let skillDMGAtk = 0;
+    let skillDMGDef = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMGAtk = 256.32 / 100;
+            skillDMGDef = 320.4 / 100;
+            break;
+        case 2:
+            skillDMGAtk = 275.54 / 100;
+            skillDMGDef = 344.43 / 100;
+            break;
+        case 3:
+            skillDMGAtk = 294.77 / 100;
+            skillDMGDef = 368.46 / 100;
+            break;
+        case 4:
+            skillDMGAtk = 320.4 / 100;
+            skillDMGDef = 400.5 / 100;
+            break;
+        case 5:
+            skillDMGAtk = 339.62 / 100;
+            skillDMGDef = 424.53 / 100;
+            break;
+        case 6:
+            skillDMGAtk = 358.85 / 100;
+            skillDMGDef = 448.56 / 100;
+            break;
+        case 7:
+            skillDMGAtk = 384.48 / 100;
+            skillDMGDef = 480.6 / 100;
+            break;
+        case 8:
+            skillDMGAtk = 410.11 / 100;
+            skillDMGDef = 512.64 / 100;
+            break;
+        case 9:
+            skillDMGAtk = 435.74 / 100;
+            skillDMGDef = 544.68 / 100;
+            break;
+        case 10:
+            skillDMGAtk = 435.74 / 100;
+            skillDMGDef = 544.68 / 100;
+            break;
+        case 11:
+            skillDMGAtk = 461.38 / 100;
+            skillDMGDef = 576.72 / 100;
+            break;
+        case 12:
+            skillDMGAtk = 487.01 / 100;
+            skillDMGDef = 608.76 / 100;
+            break;
+        case 13:
+            skillDMGAtk = 512.64 / 100;
+            skillDMGDef = 640.8 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMGAtk*character.attack(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
+    let attack2 = { Multiplier: skillDMGDef*character.DEF(), Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    return dmg;
+
+}
