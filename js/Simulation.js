@@ -1221,15 +1221,15 @@ function Simulation(character) {
             }
         });
     }
-    let bonusMultiplier = 1;
+    let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
-        bonusMultiplier = 2;
+        bonusMultiplier = (atkBuff*2)+100;
     let tmp = 0;
     for (dmgSource in dmgSources) {
         dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
         tmp += dmgSources[dmgSource];
     }
-    return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff * bonusMultiplier, shield: shield, dmgSources: dmgSources };
+    return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff + bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
 function dmgCalc(attackAction, Character) {

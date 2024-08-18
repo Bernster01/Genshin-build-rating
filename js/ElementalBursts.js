@@ -4317,7 +4317,7 @@ function stillPhotoComprehensiveConfirmation(character) {
         case 4:
             castHealing = character.attack() * (320.72 / 100) + 2131;
             skillDMG = 97.02 / 100;
-            continHealing = character.attack() * (11.52 / 100) + 76	;
+            continHealing = character.attack() * (11.52 / 100) + 76;
             kameraDMG = 8.08 / 100;
             break;
         case 5:
@@ -4377,8 +4377,72 @@ function stillPhotoComprehensiveConfirmation(character) {
     }
     let attack1 = { Multiplier: skillDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: kameraDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
-    let totalHeal = castHealing + (continHealing * 9) *(1+(character.advancedstats.healingBonus/100));
+    let totalHeal = castHealing + (continHealing * 9) * (1 + (character.advancedstats.healingBonus / 100));
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies * 9;
     return { dmg: dmg, healing: totalHeal };
+}
+
+function ringOfBurstingGrenades(character) {
+    let explosiveGrandeDMG = 0;
+    let secondaryExplosiveDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            explosiveGrandeDMG = 368.16 / 100;
+            secondaryExplosiveDMG = 49.09 / 100;
+            break;
+        case 2:
+            explosiveGrandeDMG = 395.77 / 100;
+            secondaryExplosiveDMG = 52.77 / 100;
+            break;
+        case 3:
+            explosiveGrandeDMG = 423.38 / 100;
+            secondaryExplosiveDMG = 56.45	 / 100;
+            break;
+        case 4:
+            explosiveGrandeDMG = 460.2 / 100;
+            secondaryExplosiveDMG = 61.36 / 100;
+            break;
+        case 5:
+            explosiveGrandeDMG = 487.81 / 100;
+            secondaryExplosiveDMG = 65.04 / 100;
+            break;
+        case 6:
+            explosiveGrandeDMG = 515.42 / 100;
+            secondaryExplosiveDMG = 68.72 / 100;
+            break;
+        case 7:
+            explosiveGrandeDMG = 552.24 / 100;
+            secondaryExplosiveDMG = 73.63 / 100;
+            break;
+        case 8:
+            explosiveGrandeDMG = 589.06 / 100;
+            secondaryExplosiveDMG = 78.54 / 100;
+            break;
+        case 9:
+            explosiveGrandeDMG = 625.87 / 100;
+            secondaryExplosiveDMG = 83.45 / 100;
+            break;
+        case 10:
+            explosiveGrandeDMG = 662.69 / 100;
+            secondaryExplosiveDMG = 88.36 / 100;
+            break;
+        case 11:
+            explosiveGrandeDMG = 699.5 / 100;
+            secondaryExplosiveDMG = 93.27 / 100;
+            break;
+        case 12:
+            explosiveGrandeDMG = 736.32 / 100;
+            secondaryExplosiveDMG = 98.18 / 100;
+            break;
+        case 13:
+            explosiveGrandeDMG = 782.34 / 100;
+            secondaryExplosiveDMG = 104.31 / 100;
+            break;
+    }
+    let attack1 = { Multiplier: explosiveGrandeDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: secondaryExplosiveDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies * 8;
+    return {dmg: dmg};
 }

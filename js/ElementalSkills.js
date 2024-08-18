@@ -4201,5 +4201,91 @@ function framingFreezingPointComposition(character) {
     for (let i = 0; i < 4; i++) {
         dmg += dmgCalc(mark, character) * numberOfEnemies;
     }
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function shortRangeRapidInterdictionFire(character) {
+    let holdDMG = 0;
+    let overloadedBallDMG = 0;
+    let healing = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            holdDMG = 172.8 / 100;
+            overloadedBallDMG = 282.4 / 100;
+            healing = character.HP() * (2.67 / 100) + 257;
+            break;
+        case 2:
+            holdDMG = 185.76 / 100;
+            overloadedBallDMG = 303.58 / 100;
+            healing = character.HP() * (2.87 / 100) + 282;
+            break;
+        case 3:
+            holdDMG = 198.72 / 100;
+            overloadedBallDMG = 324.76 / 100;
+            healing = character.HP() * (3.07 / 100) + 310;
+            break;
+        case 4:
+            holdDMG = 216 / 100;
+            overloadedBallDMG = 353 / 100;
+            healing = character.HP() * (3.33 / 100) + 340;
+            break;
+        case 5:
+            holdDMG = 228.96 / 100;
+            overloadedBallDMG = 374.18 / 100;
+            healing = character.HP() * (3.53 / 100) + 372;
+            break;
+        case 6:
+            holdDMG = 241.92 / 100;
+            overloadedBallDMG = 395.36 / 100;
+            healing = character.HP() * (3.73 / 100) + 407;
+            break;
+        case 7:
+            holdDMG = 259.2 / 100;
+            overloadedBallDMG = 423.6 / 100;
+            healing = character.HP() * (4 / 100) + 443;
+            break;
+        case 8:
+            holdDMG = 276.48 / 100;
+            overloadedBallDMG = 451.84 / 100;
+            healing = character.HP() * (4.27 / 100) + 482;
+            break;
+        case 9:
+            holdDMG = 293.76 / 100;
+            overloadedBallDMG = 480.08 / 100;
+            healing = character.HP() * (4.53 / 100) + 522;
+            break;
+        case 10:
+            holdDMG = 311.04 / 100;
+            overloadedBallDMG = 508.32 / 100;
+            healing = character.HP() * (4.8 / 100) + 565;
+            break;
+        case 11:
+            holdDMG = 328.32 / 100;
+            overloadedBallDMG = 536.56 / 100;
+            healing = character.HP() * (5.07 / 100) + 610;
+            break;
+        case 12:
+            holdDMG = 345.6 / 100;
+            overloadedBallDMG = 564.8 / 100;
+            healing = character.HP() * (5.33 / 100) + 657;
+            break;
+        case 13:
+            holdDMG = 367.2 / 100;
+            overloadedBallDMG = 600.1 / 100;
+            healing = character.HP() * (5.67 / 100) + 706;
+            break;
+    }
+    let attack = { Multiplier: holdDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let attack2 = { Multiplier: overloadedBallDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    let atkBuff = 0;
+    let totalHealing = healing * 6 * (1 + (character.advancedstats.healingBonus / 100));
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Vertical Force Coordination") {
+            atkBuff += Math.floor(character.HP() / 1000);
+            character.currentBuffs.push({ Type: "ATK%", Value: atkBuff, Source: "Vertical Force Coordination" });
+        }
+    }
+    return { dmg: dmg, healing: totalHealing, attackBuff: atkBuff };
 }
