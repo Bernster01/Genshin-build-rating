@@ -4096,17 +4096,82 @@ function depthClarionDice(character) {
             break;
         }
     }
-    for (let index = 0; index < 15*3; index++) {
-        if(index==0||index % 3 == 0)
+    for (let index = 0; index < 15 * 3; index++) {
+        if (index == 0 || index % 3 == 0)
             attack2.isReaction = true;
         else
             attack2.isReaction = false;
         dmg += dmgCalc(attack2, character);
         //push buff
-        if (hasBuff && index % 3 == 0&&index<=(14*3)) {
+        if (hasBuff && index % 3 == 0 && index <= (14 * 3)) {
             character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 3.5 });
         }
-        
+
     }
     return dmg;
+}
+
+function leonineBite(character) {
+    let flameManesFistDMG = 0;
+    let incinerationDriveDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            flameManesFistDMG = (character.attack() * (98.7 / 100)) + (character.HP() * (1.69 / 100));
+            incinerationDriveDMG = (character.attack() * (139.3 / 100)) + (character.HP() * (2.39 / 100));
+            break;
+        case 2:
+            flameManesFistDMG = (character.attack() * (106.1 / 100)) + (character.HP() * (1.82 / 100));
+            incinerationDriveDMG = (character.attack() * (149.75 / 100)) + (character.HP() * (2.57 / 100));
+            break;
+        case 3:
+            flameManesFistDMG = (character.attack() * (113.5 / 100)) + (character.HP() * (1.95 / 100));
+            incinerationDriveDMG = (character.attack() * (160.19 / 100)) + (character.HP() * (2.75 / 100));
+            break;
+        case 4:
+            flameManesFistDMG = (character.attack() * (123.37 / 100)) + (character.HP() * (2.11 / 100));
+            incinerationDriveDMG = (character.attack() * (174.13 / 100)) + (character.HP() * (2.99 / 100));
+            break;
+        case 5:
+            flameManesFistDMG = (character.attack() * (130.78 / 100)) + (character.HP() * (2.24 / 100));
+            incinerationDriveDMG = (character.attack() * (184.57 / 100)) + (character.HP() * (3.16 / 100));
+            break;
+        case 6:
+            flameManesFistDMG = (character.attack() * (138.18 / 100)) + (character.HP() * (2.37 / 100));
+            incinerationDriveDMG = (character.attack() * (195.02 / 100)) + (character.HP() * (3.34 / 100));
+            break;
+        case 7:
+            flameManesFistDMG = (character.attack() * (148.05 / 100)) + (character.HP() * (2.54 / 100));
+            incinerationDriveDMG = (character.attack() * (208.95 / 100)) + (character.HP() * (3.58 / 100));
+            break;
+        case 8:
+            flameManesFistDMG = (character.attack() * (157.92 / 100)) + (character.HP() * (2.71 / 100));
+            incinerationDriveDMG = (character.attack() * (222.88 / 100)) + (character.HP() * (3.82 / 100));
+            break;
+        case 9:
+            flameManesFistDMG = (character.attack() * (167.79 / 100)) + (character.HP() * (2.88 / 100));
+            incinerationDriveDMG = (character.attack() * (236.81 / 100)) + (character.HP() * (4.06 / 100));
+            break;
+        case 10:
+            flameManesFistDMG = (character.attack() * (177.66 / 100)) + (character.HP() * (3.05 / 100));
+            incinerationDriveDMG = (character.attack() * (250.74 / 100)) + (character.HP() * (4.3 / 100));
+            break;
+        case 11:
+            flameManesFistDMG = (character.attack() * (187.53 / 100)) + (character.HP() * (3.21 / 100));
+            incinerationDriveDMG = (character.attack() * (264.67 / 100)) + (character.HP() * (4.54 / 100));
+            break;
+        case 12:
+            flameManesFistDMG = (character.attack() * (197.4 / 100)) + (character.HP() * (3.38 / 100));
+            incinerationDriveDMG = (character.attack() * (278.6 / 100)) + (character.HP() * (4.78 / 100));
+            break;
+        case 13:
+            flameManesFistDMG = (character.attack() * (209.74 / 100)) + (character.HP() * (3.6 / 100));
+            incinerationDriveDMG = (character.attack() * (296.01 / 100)) + (character.HP() * (5.07 / 100));
+            break;
+    }
+    let attack1 = { Multiplier: flameManesFistDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: false, type: "ElementalBurst" };
+    let attack2 = { Multiplier: incinerationDriveDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
+
+    let dmg = dmgCalc(attack1, character) * numberOfEnemies*10;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    return {dmg:dmg};
 }

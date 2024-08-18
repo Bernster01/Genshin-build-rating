@@ -3830,7 +3830,7 @@ function sacredRiteHeronsSanctum(character) {
     return dmg;
 }
 
-function lingeringLifeline(character){
+function lingeringLifeline(character) {
     let multiplier = 0;
     switch (character.elementalSkill.Level) {
         case 1:
@@ -3876,4 +3876,85 @@ function lingeringLifeline(character){
     let attack = { Multiplier: multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
+}
+
+function moltenInferno(character) {
+    let indomitableFlameDMG = 0;
+    let rangingFlameDMG = 0;
+    let fieldDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            indomitableFlameDMG = 112.88 / 100;
+            rangingFlameDMG = 132.8 / 100;
+            fieldDMG = (character.attack() * (60.2 / 100)) + (character.HP() * (1.03 / 100));
+            break;
+        case 2:
+            indomitableFlameDMG = 121.35 / 100;
+            rangingFlameDMG = 142.76 / 100;
+            fieldDMG = (character.attack() * (64.72 / 100)) + (character.HP() * (1.11 / 100));
+            break;
+        case 3:
+            indomitableFlameDMG = 129.81 / 100;
+            rangingFlameDMG = 152.72 / 100;
+            fieldDMG = (character.attack() * (69.23 / 100)) + (character.HP() * (1.19 / 100));
+            break;
+        case 4:
+            indomitableFlameDMG = 141.1 / 100;
+            rangingFlameDMG = 166 / 100;
+            fieldDMG = (character.attack() * (75.25 / 100)) + (character.HP() * (1.29 / 100));
+            break;
+        case 5:
+            indomitableFlameDMG = 149.57 / 100;
+            rangingFlameDMG = 175.96 / 100;
+            fieldDMG = (character.attack() * (79.77 / 100)) + (character.HP() * (1.37 / 100));
+            break;
+        case 6:
+            indomitableFlameDMG = 158.03 / 100;
+            rangingFlameDMG = 185.92 / 100;
+            fieldDMG = (character.attack() * (84.28 / 100)) + (character.HP() * (1.44 / 100));
+            break;
+        case 7:
+            indomitableFlameDMG = 169.32 / 100;
+            rangingFlameDMG = 199.2 / 100;
+            fieldDMG = (character.attack() * (90.3 / 100)) + (character.HP() * (1.55 / 100));
+            break;
+        case 8:
+            indomitableFlameDMG = 180.61 / 100;
+            rangingFlameDMG = 212.48 / 100;
+            fieldDMG = (character.attack() * (96.32 / 100)) + (character.HP() * (1.65 / 100));
+            break;
+        case 9:
+            indomitableFlameDMG = 191.9 / 100;
+            rangingFlameDMG = 225.76 / 100;
+            fieldDMG = (character.attack() * (102.34 / 100)) + (character.HP() * (1.75 / 100));
+            break;
+        case 10:
+            indomitableFlameDMG = 203.18 / 100;
+            rangingFlameDMG = 239.04 / 100;
+            fieldDMG = (character.attack() * (108.36 / 100)) + (character.HP() * (1.86 / 100));
+            break;
+        case 11:
+            indomitableFlameDMG = 214.47 / 100;
+            rangingFlameDMG = 252.32 / 100;
+            fieldDMG = (character.attack() * (114.38 / 100)) + (character.HP() * (1.96 / 100));
+            break;
+        case 12:
+            indomitableFlameDMG = 225.76 / 100;
+            rangingFlameDMG = 265.6 / 100;
+            fieldDMG = (character.attack() * (120.4 / 100)) + (character.HP() * (2.06 / 100));
+            break;
+        case 13:
+            indomitableFlameDMG = 239.87 / 100;
+            rangingFlameDMG = 282.2 / 100;
+            fieldDMG = (character.attack() * (127.92 / 100)) + (character.HP() * (2.19 / 100));
+            break;
+    }
+    let attack = { Multiplier: indomitableFlameDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let attack2 = { Multiplier: rangingFlameDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let coordAttack = { Multiplier: fieldDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    dmg += dmgCalc(coordAttack, character) * numberOfEnemies*4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
+    let shield = character.HP() * (200/100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
+    return { dmg: dmg, shield: shield };
 }
