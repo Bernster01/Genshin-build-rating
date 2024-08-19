@@ -17,6 +17,7 @@ let numberOfEnemies = 3;
 let endEarly = false;
 let getJSON = false;
 let targetsBurning = false;
+let persTimer = -1;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -770,6 +771,7 @@ function resetVariables() {
     saraBuff = false;
     shenheCounter = 0;
     targetsBurning = false;
+    persTimer = -1;
 }
 function Simulation(character) {
 
@@ -793,6 +795,9 @@ function Simulation(character) {
             case "N5":
             case "C":
             case "P":
+                if (Character.name == "Freminet") {
+                    persTimer += 2;//Ult will be active 
+                }
                 attackAction.type = "NormalAttack";
                 switch (action) {
                     case "N1":
@@ -1220,8 +1225,8 @@ function Simulation(character) {
                                 thunderingPulseSkillStack = true
                             }
                     }
-                    
-                   
+
+
                     totalDmg += qDmg;
                     dmgSources.q += qDmg;
                 }

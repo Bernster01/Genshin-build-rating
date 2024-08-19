@@ -4967,5 +4967,119 @@ function windRealmofNasamjnin(character) {
     let pressurizedCollapseVortex = { Multiplier: pressurizedCollapseVortexDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function pressurizedFloe(character) {
+    let upwardThrustDMG = 0;
+    let frostDMG = 0;
+    let shatteringPressure = 0;
+    let shatteringPressure4 = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            upwardThrustDMG = 83.04 / 100;
+            frostDMG = 7.16 / 100;
+            shatteringPressure = 200.48 / 100;
+            shatteringPressure4 = 243.44 / 100;
+            break;
+        case 2:
+            upwardThrustDMG = 89.27 / 100;
+            frostDMG = 7.7 / 100;
+            shatteringPressure = 215.52 / 100;
+            shatteringPressure4 = 261.7 / 100;
+            break;
+        case 3:
+            upwardThrustDMG = 95.5 / 100;
+            frostDMG = 8.23 / 100;
+            shatteringPressure = 230.55 / 100;
+            shatteringPressure4 = 279.96 / 100;
+            break;
+        case 4:
+            upwardThrustDMG = 103.8 / 100;
+            frostDMG = 8.95 / 100;
+            shatteringPressure = 250.6 / 100;
+            shatteringPressure4 = 304.3 / 100;
+            break;
+        case 5:
+            upwardThrustDMG = 110.03 / 100;
+            frostDMG = 9.49 / 100;
+            shatteringPressure = 265.64 / 100;
+            shatteringPressure4 = 322.56 / 100;
+            break;
+        case 6:
+            upwardThrustDMG = 116.26 / 100;
+            frostDMG = 10.02 / 100;
+            shatteringPressure = 280.67 / 100;
+            shatteringPressure4 = 340.82 / 100;
+            break;
+        case 7:
+            upwardThrustDMG = 124.56 / 100;
+            frostDMG = 10.74 / 100;
+            shatteringPressure = 300.72 / 100;
+            shatteringPressure4 = 365.16 / 100;
+            break;
+        case 8:
+            upwardThrustDMG = 132.86 / 100;
+            frostDMG = 11.46 / 100;
+            shatteringPressure = 320.77 / 100;
+            shatteringPressure4 = 389.5 / 100;
+            break;
+        case 9:
+            upwardThrustDMG = 141.17 / 100;
+            frostDMG = 12.17 / 100;
+            shatteringPressure = 340.82 / 100;
+            shatteringPressure4 = 413.85 / 100;
+            break;
+        case 10:
+            upwardThrustDMG = 149.47 / 100;
+            frostDMG = 12.89 / 100;
+            shatteringPressure = 360.86 / 100;
+            shatteringPressure4 = 438.19 / 100;
+            break;
+        case 11:
+            upwardThrustDMG = 157.78 / 100;
+            frostDMG = 13.6 / 100;
+            shatteringPressure = 380.91 / 100;
+            shatteringPressure4 = 462.54 / 100;
+            break;
+        case 12:
+            upwardThrustDMG = 166.08 / 100;
+            frostDMG = 14.32 / 100;
+            shatteringPressure = 400.96 / 100;
+            shatteringPressure4 = 486.88 / 100;
+            break;
+        case 13:
+            upwardThrustDMG = 176.46 / 100;
+            frostDMG = 15.22 / 100;
+            shatteringPressure = 426.02 / 100;
+            shatteringPressure4 = 517.31 / 100;
+            break;
+    }
+    let upwardThrust = { Multiplier: upwardThrustDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let frost = { Multiplier: frostDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let shatteringPressureAttack = { Multiplier: shatteringPressure, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+    let shatteringPressureAttack4 = { Multiplier: shatteringPressure4, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+    let dmg = dmgCalc(frost*2, character) * numberOfEnemies*1.6;//1.6 avg normal attacks per e use
+    switch (persTimer) {
+        case -1:
+            dmg += dmgCalc(upwardThrust, character) * numberOfEnemies;
+            persTimer = 0;
+            break;
+        case 0:
+            dmg += dmgCalc(shatteringPressureAttack, character) * numberOfEnemies;
+            persTimer = -1;
+            break;
+        case 1:
+            dmg += dmgCalc(upwardThrust, character) * numberOfEnemies;
+            persTimer = 0;
+            break;
+        case 4:
+            dmg += dmgCalc(shatteringPressureAttack4, character) * numberOfEnemies;
+            persTimer = -1;
+            break;
+        default:
+            console.log("opsie " + persTimer);
+            break;
+    }
+    return dmg;
 }

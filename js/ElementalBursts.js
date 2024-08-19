@@ -4879,10 +4879,51 @@ function theWindsSecretWay(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     character.currentBuffs.push({ Type: "AnemoBonus", Value: anemoBonus });
     let atkBuff = 0;
-    for(buff of character.currentBuffs){
-        if(buff.Type == "Lost Wisdom of the Seven Caverns"){
-            atkBuff = character.baseAttack * (32/100);
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Lost Wisdom of the Seven Caverns") {
+            atkBuff = character.baseAttack * (32 / 100);
         }
     }
-    return { dmg: dmg, attackBuff: (anemoBonus*100)+atkBuff };
+    return { dmg: dmg, attackBuff: (anemoBonus * 100) + atkBuff };
+}
+function shadowhuntersAmbush(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 318.4 / 100;
+            break;
+        case 2:
+            skillDMG = 342.28 / 100;
+            break;
+        case 3:
+            skillDMG = 366.16 / 100;
+            break;
+        case 4:
+            skillDMG = 398 / 100;
+            break;
+        case 5:
+            skillDMG = 421.88 / 100;
+            break;
+        case 6:
+            skillDMG = 445.76 / 100;
+            break;
+        case 7:
+            skillDMG = 477.6 / 100;
+            break;
+        case 8:
+            skillDMG = 509.44 / 100;
+            break;
+        case 9:
+            skillDMG = 541.28 / 100;
+            break;
+        case 10:
+            skillDMG = 573.12 / 100;
+            break;
+        default:
+            skillDMG = 573.12 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
 }
