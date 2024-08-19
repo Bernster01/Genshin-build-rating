@@ -4571,14 +4571,127 @@ function lastLightFall(character) {
     let attack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
     character.applyBondOfLife(bondOfLifeGain);
-    for(let i = 0; i < 5; i++){
-        if(i==0||i%3){
+    for (let i = 0; i < 5; i++) {
+        if (i == 0 || i % 3) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
         }
-        dmg += dmgCalc(attack, character)*numberOfEnemies;
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
     }
     return dmg;
+}
+
+function sacredRiteWolfsSwiftness(character) {
+    let oneHitDMG = 0;
+    let twoHitDMG = 0;
+    let threeHitDMG = 0;
+    let fourHitDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            oneHitDMG = 78.28 / 100;
+            twoHitDMG = 82.47 / 100;
+            threeHitDMG = 104.63 / 100;
+            fourHitDMG = 51.69 / 100;
+            break;
+        case 2:
+            oneHitDMG = 84.66 / 100;
+            twoHitDMG = 89.18 / 100;
+            threeHitDMG = 113.15 / 100;
+            fourHitDMG = 55.9 / 100;
+            break;
+        case 3:
+            oneHitDMG = 91.03 / 100;
+            twoHitDMG = 95.89 / 100;
+            threeHitDMG = 121.67 / 100;
+            fourHitDMG = 60.11 / 100;
+            break;
+        case 4:
+            oneHitDMG = 100.13 / 100;
+            twoHitDMG = 105.48 / 100;
+            threeHitDMG = 133.83 / 100;
+            fourHitDMG = 66.12 / 100;
+            break;
+        case 5:
+            oneHitDMG = 106.5 / 100;
+            twoHitDMG = 112.2 / 100;
+            threeHitDMG = 142.35 / 100;
+            fourHitDMG = 70.33 / 100;
+            break;
+        case 6:
+            oneHitDMG = 113.78 / 100;
+            twoHitDMG = 119.87 / 100;
+            threeHitDMG = 152.08 / 100;
+            fourHitDMG = 75.14 / 100;
+            break;
+        case 7:
+            oneHitDMG = 123.8 / 100;
+            twoHitDMG = 130.42 / 100;
+            threeHitDMG = 165.47 / 100;
+            fourHitDMG = 81.75 / 100;
+            break;
+        case 8:
+            oneHitDMG = 133.81 / 100;
+            twoHitDMG = 140.96 / 100;
+            threeHitDMG = 178.85 / 100;
+            fourHitDMG = 88.36 / 100;
+            break;
+        case 9:
+            oneHitDMG = 143.82 / 100;
+            twoHitDMG = 151.51 / 100;
+            threeHitDMG = 192.23 / 100;
+            fourHitDMG = 94.97 / 100;
+            break;
+        case 10:
+            oneHitDMG = 154.75 / 100;
+            twoHitDMG = 163.02 / 100;
+            threeHitDMG = 206.83 / 100;
+            fourHitDMG = 102.19 / 100;
+            break;
+        case 11:
+            oneHitDMG = 165.67 / 100;
+            twoHitDMG = 174.53 / 100;
+            threeHitDMG = 221.43 / 100;
+            fourHitDMG = 109.4 / 100;
+            break;
+        case 12:
+            oneHitDMG = 176.59 / 100;
+            twoHitDMG = 186.03 / 100;
+            threeHitDMG = 236.03 / 100;
+            fourHitDMG = 116.61 / 100;
+            break;
+        case 13:
+            oneHitDMG = 187.52 / 100;
+            twoHitDMG = 197.54 / 100;
+            threeHitDMG = 250.63 / 100;
+            fourHitDMG = 123.83 / 100;
+            break;
+    }
+    character.normalAttack1.Multiplier = function(){return oneHitDMG};
+    character.normalAttack1.Element = "ElectroDMGBonus";
+    character.normalAttack2.isReaction = true;
+    character.normalAttack2.Multiplier = function(){return twoHitDMG};
+    character.normalAttack2.Element = "ElectroDMGBonus";
+    character.normalAttack3.Multiplier = function(){return threeHitDMG};
+    character.normalAttack3.Element = "ElectroDMGBonus";
+    character.normalAttack4.Multiplier = function(){return fourHitDMG};
+    character.normalAttack4.Element = "ElectroDMGBonus";
+
+    //Buffs
+    character.currentBuffs.push({ Type: "Pactsworn Pathclearer", Value: 0 });//ult state for skill
+    let hasA4 = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Authority Over the Nine Bows") {
+            hasA4 = true;
+            break;
+        }
+    }
+    if (hasA4) {
+        let flatDamage = (250 / 100) * character.EM();
+        character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage, for: "Duststalker Bolt" });
+        let flatDamage2 = (150/100) * character.EM();
+        character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage2, for: "NormalAttack" });
+    }
+    return 0;
 }

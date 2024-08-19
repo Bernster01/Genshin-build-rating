@@ -66,14 +66,15 @@ async function validateAllCharacters() {
         if (character == "index")
             continue;
         const element = AllCharacters[character];
-        let result = await FindBestBuild(element, 25);
-        if (result != null || result != undefined) {
-            console.log(character + " Succeded");
+        let result = await FindBestBuild(element, 10);
+        if (result == null || result == undefined) {
+            console.log(character + " FAILED");
         }
 
     }
     let stopTime = Date.now();
     console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
+    console.log(bestBuild);
 }
 async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
@@ -106,7 +107,7 @@ async function FindBestBuild(baseChar, times) {
     let startTime = Date.now();
     let bestScore = await findBestBuildLoop(baseChar, times);
     let stopTime = Date.now();
-    console.log((stopTime - startTime) / 1000 + "seconds");
+
     endEarly = false;
     return bestScore;
 }
@@ -1033,7 +1034,21 @@ function Simulation(character) {
                     }
                     let dmg = dmgCalc(attackAction, Character) * enemies;
                     totalDmg += dmg;
-                    if (attackAction.type == "NormalAttack") {
+                    if (Character.name == "Cyno") {
+                        let isInUlt = false;
+                        for (buff of Character.currentBuffs) {
+                            if (buff.Type == "Pactsworn Pathclearer") {
+                                isInUlt = true;
+                                break;
+                            }
+                        }
+                        if (isInUlt) {
+                            dmgSources.q += dmg;
+                        } else {
+                            dmgSources.n += dmg;
+                        }
+                    }
+                    else if (attackAction.type == "NormalAttack") {
                         dmgSources.n += dmg;
                     }
                     else if (attackAction.type == "ChargedAttack") {
@@ -1223,7 +1238,7 @@ function Simulation(character) {
     }
     let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
-        bonusMultiplier = (atkBuff*2)+100;
+        bonusMultiplier = (atkBuff * 2) + 100;
     let tmp = 0;
     for (dmgSource in dmgSources) {
         dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
@@ -1505,22 +1520,25 @@ function getFlatDamage(character, attackAction) {
     //Weapon buffs
     switch (character.weapon.name) {
         case "Cinnabar Spindle":
-            if (attackAction.type == "ElementaSkill") {
+            if (attackAction.type == "ElementalSkill") {
                 flatDamage += character.DEF() * 0.8;
             }
             break;
         case "Everlasting Moonglow":
-            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "ChargedAttack" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
+            if (attackAction.type != "ElementalSkill" && attackAction.type != "ElementalBurst" && attackAction.type != "ChargedAttack" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
                 flatDamage += character.HP() * 0.10;
         case "Redhorn Stonethresher":
-            if (attackAction.type != "ElementaSkill" && attackAction.type != "ElementaBurst" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
+            if (attackAction.type != "ElementalSkill" && attackAction.type != "ElementalBurst" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
                 flatDamage += character.DEF() * 0.40;
             break;
     }
     for (const buff of character.currentBuffs) {
         if (buff.Type == "FlatDMG") {
-            if(buff.for == attackAction.type)
+            if (buff.for == attackAction.type)
                 flatDamage += buff.Value;
+            else if (buff.for == attackAction.type2) {
+                flatDamage += buff.Value;
+            }
         }
     }
     //Aggravate

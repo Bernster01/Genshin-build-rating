@@ -4522,7 +4522,7 @@ function huntersVigil(character) {
             hasLawfulRemuneration = true;
         }
         if (buffs.Type == "Dark-Shattering Flame") {
-            character.currentBuffs.push({ Type: "FlatDMG",for:"NormalAttack", Value: 0, Source: "Dark-Shattering Flame" });
+            character.currentBuffs.push({ Type: "FlatDMG", for: "NormalAttack", Value: 0, Source: "Dark-Shattering Flame" });
             hasDarkShatteringFlame = true;
         }
 
@@ -4538,7 +4538,7 @@ function huntersVigil(character) {
                     if (currenBondOfLife >= 100) {
                         if (buffs.Value == 0)
                             buffs.Value = 10;
-                        else if (buffs.Value ==10)
+                        else if (buffs.Value == 10)
                             buffs.Value = 20;
                     }
 
@@ -4555,14 +4555,14 @@ function huntersVigil(character) {
             let heal = 2000;
             let percentHeal = heal / character.HP() * 100;
             character.applyBondOfLife(percentHeal);
-            if(hasDarkShatteringFlame&&(supportingElement!=null||supportingElement!=undefined)){
-                for(buffs of character.currentBuffs){
-                    if(buffs.Source == "Dark-Shattering Flame"){
-                        let increase = (20/100)*character.attack();
-                        if(increase>600)
+            if (hasDarkShatteringFlame && (supportingElement != null || supportingElement != undefined)) {
+                for (buffs of character.currentBuffs) {
+                    if (buffs.Source == "Dark-Shattering Flame") {
+                        let increase = (20 / 100) * character.attack();
+                        if (increase > 600)
                             increase = 600;
                         buffs.Value += increase;
-                        if(buffs.Value>1800)
+                        if (buffs.Value > 1800)
                             buffs.Value = 1800;
                     }
                 }
@@ -4605,5 +4605,104 @@ function huntersVigil(character) {
             character.applyBondOfLife(35);
         }
     }
+    return dmg;
+}
+
+function secretRiteChasmicSoulfarer(character) {
+    let skillDMG = 0;
+    let mortuaryRiteDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 130.4 / 100;
+            mortuaryRiteDMG = 156.8 / 100;
+            break;
+        case 2:
+            skillDMG = 140.18 / 100;
+            mortuaryRiteDMG = 168.56 / 100;
+            break;
+        case 3:
+            skillDMG = 149.96 / 100;
+            mortuaryRiteDMG = 180.32 / 100;
+            break;
+        case 4:
+            skillDMG = 163 / 100;
+            mortuaryRiteDMG = 196 / 100;
+            break;
+        case 5:
+            skillDMG = 172.78 / 100;
+            mortuaryRiteDMG = 207.76 / 100;
+            break;
+        case 6:
+            skillDMG = 182.56 / 100;
+            mortuaryRiteDMG = 219.52 / 100;
+            break;
+        case 7:
+            skillDMG = 195.6 / 100;
+            mortuaryRiteDMG = 235.2 / 100;
+            break;
+        case 8:
+            skillDMG = 208.64 / 100;
+            mortuaryRiteDMG = 250.88 / 100;
+            break;
+        case 9:
+            skillDMG = 221.68 / 100;
+            mortuaryRiteDMG = 266.56 / 100;
+            break;
+        case 10:
+            skillDMG = 234.72 / 100;
+            mortuaryRiteDMG = 282.24 / 100;
+            break;
+        case 11:
+            skillDMG = 247.76 / 100;
+            mortuaryRiteDMG = 297.92 / 100;
+            break;
+        case 12:
+            skillDMG = 260.8 / 100;
+            mortuaryRiteDMG = 260.8 / 100;
+            break;
+        case 13:
+            skillDMG = 277.1 / 100;
+            mortuaryRiteDMG = 333.2 / 100;
+            break;
+    }
+
+    //Check if in ult state
+    let isInUlt = false;
+    let hasA1 = false;
+    let hasBuff = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Pactsworn Pathclearer") {
+            isInUlt = true;
+            continue;
+        } else if (buff.Type == "Featherfall Judgment") {
+            hasA1 = true;
+            continue;
+        } else if (buff.Type == "ElementalSkill") {
+            if (buff.Source == "Featherfall Judgment") {
+                hasBuff = true;
+            }
+            continue
+        }
+
+    }
+    if (!isInUlt) {
+        let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+        let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+        console.log("Cyno normal Skill")
+        return dmg;
+    }
+    let enhancedAttack = { Multiplier: mortuaryRiteDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = 0;
+    if (hasA1) {
+        if (!hasBuff)
+            character.currentBuffs.push({ Type: "ElementalSkill", Value: 35, Source: "Featherfall Judgment" });
+        let duststalkerBoltAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill", type2: "Duststalker Bolt" }
+        for (let i = 0; i < 3; i++) {
+            dmg += dmgCalc(duststalkerBoltAttack, character) * numberOfEnemies;
+        }
+    }
+    dmg += dmgCalc(enhancedAttack, character) * numberOfEnemies;
+    console.log("Cyno Enhanced Skill")
+
     return dmg;
 }
