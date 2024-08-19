@@ -4702,67 +4702,119 @@ function alcazarzaraysExactitude(character) {
     switch (character.elementalBurst.Level) {
         case 1:
             connectorDMG = 15.88 / 100;
-            conHealing = ((6.67/100)*character.HP()) + 641.9;
+            conHealing = ((6.67 / 100) * character.HP()) + 641.9;
             break;
         case 2:
             connectorDMG = 17.07 / 100;
-            conHealing = ((7.17/100)*character.HP()) + 706.1;
+            conHealing = ((7.17 / 100) * character.HP()) + 706.1;
             break;
         case 3:
             connectorDMG = 18.26 / 100;
-            conHealing = ((7.67/100)*character.HP()) + 775.7;
+            conHealing = ((7.67 / 100) * character.HP()) + 775.7;
             break;
         case 4:
             connectorDMG = 19.85 / 100;
-            conHealing = ((8.34/100)*character.HP()) + 850.6;
+            conHealing = ((8.34 / 100) * character.HP()) + 850.6;
             break;
         case 5:
             connectorDMG = 21.04 / 100;
-            conHealing = ((8.84/100)*character.HP()) + 930.9;
+            conHealing = ((8.84 / 100) * character.HP()) + 930.9;
             break;
         case 6:
             connectorDMG = 22.24 / 100;
-            conHealing = ((9.34/100)*character.HP()) + 1016;
+            conHealing = ((9.34 / 100) * character.HP()) + 1016;
             break;
         case 7:
             connectorDMG = 23.82 / 100;
-            conHealing = ((10.01/100)*character.HP()) + 1107;
+            conHealing = ((10.01 / 100) * character.HP()) + 1107;
             break;
         case 8:
             connectorDMG = 25.41 / 100;
-            conHealing = ((10.67/100)*character.HP()) + 1203;
+            conHealing = ((10.67 / 100) * character.HP()) + 1203;
             break;
         case 9:
             connectorDMG = 27 / 100;
-            conHealing = ((11.34/100)*character.HP()) + 1305;
+            conHealing = ((11.34 / 100) * character.HP()) + 1305;
             break;
         case 10:
             connectorDMG = 28.59 / 100;
-            conHealing = ((12.01/100)*character.HP()) + 1412;
+            conHealing = ((12.01 / 100) * character.HP()) + 1412;
             break;
         case 11:
             connectorDMG = 30.18 / 100;
-            conHealing = ((12.67/100)*character.HP()) + 1524;
+            conHealing = ((12.67 / 100) * character.HP()) + 1524;
             break;
         case 12:
             connectorDMG = 31.76 / 100;
-            conHealing = ((13.34/100)*character.HP()) + 1642;
+            conHealing = ((13.34 / 100) * character.HP()) + 1642;
             break;
         case 13:
             connectorDMG = 33.75 / 100;
-            conHealing = ((14.17/100)*character.HP()) + 1765;
+            conHealing = ((14.17 / 100) * character.HP()) + 1765;
             break;
     }
     let attack = { Multiplier: connectorDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for(let i = 0; i<30;i++){
-        if(i == 0 || i%3 == 0){
+    for (let i = 0; i < 30; i++) {
+        if (i == 0 || i % 3 == 0) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, character) * numberOfEnemies;
     }
-    return {dmg:dmg, healing:conHealing*6};
+    return { dmg: dmg, healing: conHealing * 6 };
+}
+
+function aromaticExplication(character) {
+    let lumiDouceCaselvl3DMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            lumiDouceCaselvl3DMG = 217.2 / 100;
+            break;
+        case 2:
+            lumiDouceCaselvl3DMG = 233.49 / 100;
+            break;
+        case 3:
+            lumiDouceCaselvl3DMG = 249.78 / 100;
+            break;
+        case 4:
+            lumiDouceCaselvl3DMG = 271.5 / 100;
+            break;
+        case 5:
+            lumiDouceCaselvl3DMG = 287.79 / 100;
+            break;
+        case 6:
+            lumiDouceCaselvl3DMG = 304.08 / 100;
+            break;
+        case 7:
+            lumiDouceCaselvl3DMG = 325.8 / 100;
+            break;
+        case 8:
+            lumiDouceCaselvl3DMG = 347.52 / 100;
+            break;
+        case 9:
+            lumiDouceCaselvl3DMG = 369.24 / 100;
+            break;
+        case 10:
+            lumiDouceCaselvl3DMG = 390.96 / 100;
+            break;
+        case 11:
+            lumiDouceCaselvl3DMG = 412.68 / 100;
+            break;
+        case 12:
+            lumiDouceCaselvl3DMG = 434.4 / 100;
+            break;
+        case 13:
+            lumiDouceCaselvl3DMG = 461.55 / 100;
+            break;
+    }
+    let attack = { Multiplier: lumiDouceCaselvl3DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for (let i = 0; i < 9; i++) {
+        dmg += dmgCalc(attack, character) * (numberOfEnemies-1);//-1 because cooldown on targetable
+        attack.isReaction = false;
+    }
+    return dmg;
 }

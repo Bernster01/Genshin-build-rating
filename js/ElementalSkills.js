@@ -4765,6 +4765,143 @@ function spiritWardingLampTroubleshooterCannon(character) {
     let troubleshooterShot = { Multiplier: troubleshooterShotDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let afterSalesServiceRound = { Multiplier: afterSalesServiceRoundDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let dmg = dmgCalc(troubleshooterShot, character) * numberOfEnemies;
-    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies*2;
-    return {dmg:dmg};
+    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies * 2;
+    return { dmg: dmg };
+}
+const LumidouceCase = {
+    scents: 0,
+    currentLevel: 1,
+    checkforScents: function () {
+        if (targetsBurning) {
+            this.scents++;
+            if (this.scents >= 2) {
+                if (this.currentLevel == 1) {
+                    this.currentLevel = 2;
+                    this.scents = 0;
+                }
+                else if (this.currentLevel >= 2)
+                    this.currentLevel = 2;
+            }
+        }
+        return this.scents;
+    }
+
+}
+function fragranceExtraction(character) {
+    let skillDMG = 0;
+    let lumiDouceCaselvl1DMG = 0;
+    let lumiDouceCaselvl2DMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 47.08 / 100;
+            lumiDouceCaselvl1DMG = 39.6 / 100;
+            lumiDouceCaselvl2DMG = 84 / 100;
+            break;
+        case 2:
+            skillDMG = 50.61 / 100;
+            lumiDouceCaselvl1DMG = 42.57 / 100;
+            lumiDouceCaselvl2DMG = 90.3 / 100;
+            break;
+        case 3:
+            skillDMG = 54.14 / 100;
+            lumiDouceCaselvl1DMG = 45.54 / 100;
+            lumiDouceCaselvl2DMG = 96.6 / 100;
+            break;
+        case 4:
+            skillDMG = 58.85 / 100;
+            lumiDouceCaselvl1DMG = 49.5 / 100;
+            lumiDouceCaselvl2DMG = 105 / 100;
+            break;
+        case 5:
+            skillDMG = 62.38 / 100;
+            lumiDouceCaselvl1DMG = 52.47 / 100;
+            lumiDouceCaselvl2DMG = 111.3 / 100;
+            break;
+        case 6:
+            skillDMG = 65.91 / 100;
+            lumiDouceCaselvl1DMG = 55.44 / 100;
+            lumiDouceCaselvl2DMG = 117.6 / 100;
+            break;
+        case 7:
+            skillDMG = 70.62 / 100;
+            lumiDouceCaselvl1DMG = 59.4 / 100;
+            lumiDouceCaselvl2DMG = 126 / 100;
+            break;
+        case 8:
+            skillDMG = 75.33 / 100;
+            lumiDouceCaselvl1DMG = 63.36 / 100;
+            lumiDouceCaselvl2DMG = 134.4 / 100;
+            break;
+        case 9:
+            skillDMG = 80.04 / 100;
+            lumiDouceCaselvl1DMG = 67.32 / 100;
+            lumiDouceCaselvl2DMG = 142.8 / 100;
+            break;
+        case 10:
+            skillDMG = 84.74 / 100;
+            lumiDouceCaselvl1DMG = 71.28 / 100;
+            lumiDouceCaselvl2DMG = 151.2 / 100;
+            break;
+        case 11:
+            skillDMG = 89.45 / 100;
+            lumiDouceCaselvl1DMG = 75.24 / 100;
+            lumiDouceCaselvl2DMG = 159.6 / 100;
+            break;
+        case 12:
+            skillDMG = 94.16 / 100;
+            lumiDouceCaselvl1DMG = 79.2 / 100;
+            lumiDouceCaselvl2DMG = 168 / 100;
+            break;
+        case 13:
+            skillDMG = 100.05 / 100;
+            lumiDouceCaselvl1DMG = 84.15 / 100;
+            lumiDouceCaselvl2DMG = 178.5 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let lumiDouceCaselvl1 = { Multiplier: lumiDouceCaselvl1DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let lumiDouceCaselvl2 = { Multiplier: lumiDouceCaselvl2DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    let hasA1 = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Lingering Fragrance") {
+            hasA1 = true;
+        }
+    }
+    for (let i = 1; i <= 14; i++) {
+        //Each i is 1.5s
+        if (i % 2 == 0) {
+            lumiDouceCaselvl1.isReaction = true;
+            lumiDouceCaselvl2.isReaction = true;
+        }
+        else {
+            lumiDouceCaselvl1.isReaction = false;
+            lumiDouceCaselvl2.isReaction = false;
+        }
+        //Check every 2s for scents 
+        if (i == 2 || i == 3 || i == 4 || i == 6 || i == 7 || i == 8 || i == 10 || i == 11 || i == 12 || i == 14) {
+
+            LumidouceCase.checkforScents();
+
+        }
+        if (LumidouceCase.currentLevel == 1) {
+            dmg += dmgCalc(lumiDouceCaselvl1, character) * numberOfEnemies;
+           
+        }
+        else if (LumidouceCase.currentLevel == 2) {
+
+            dmg += dmgCalc(lumiDouceCaselvl2, character) * numberOfEnemies;
+            lumiDouceCaselvl2.isReaction = false;
+            dmg += dmgCalc(lumiDouceCaselvl2, character) * numberOfEnemies;
+            //if has a1 do big dmg
+            if (hasA1 && LumidouceCase.scents == 2) {
+                LumidouceCase.scents = 0;
+                //Big dmg
+                let bigDMG = { Multiplier: 600 / 100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "Special" }
+                dmg += dmgCalc(bigDMG, character) * numberOfEnemies;
+            }
+        }
+
+    }
+    return dmg;
 }

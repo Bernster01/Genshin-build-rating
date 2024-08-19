@@ -15,7 +15,8 @@ let saraBuff = false;
 let shenheCounter = 0;
 let numberOfEnemies = 3;
 let endEarly = false;
-let getJSON = true;
+let getJSON = false;
+let targetsBurning = false;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -82,7 +83,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
     let result = await FindBestBuild(simulatedCharacter, runs);
-
+    console.log("USER:");
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild[baseCharacter.name], role);
     console.log("USER:");
@@ -768,6 +769,7 @@ function resetVariables() {
     vvActive = false;
     saraBuff = false;
     shenheCounter = 0;
+    targetsBurning = false;
 }
 function Simulation(character) {
 
@@ -1218,10 +1220,8 @@ function Simulation(character) {
                                 thunderingPulseSkillStack = true
                             }
                     }
-                    let energyMultiplier = Character.advancedstats.energyRecharge / Character.energyOffset;
-                    if (energyMultiplier > 1)
-                        energyMultiplier = 1;
-                    qDmg *= energyMultiplier;
+                    
+                   
                     totalDmg += qDmg;
                     dmgSources.q += qDmg;
                 }
@@ -1591,6 +1591,19 @@ function getDamageBonus(character, attackAction) {
 
         }
     });
+    if (character.name == "Emilie") {
+        if (targetsBurning) {
+            for (buff of character.currentBuffs) {
+                if (buff.Type == "Rectification") {
+                    //every 1000 atk increase 15% bonus to max 36
+                    let burningIncrease = (character.attack() / 1000) * 15;
+                    if (burningIncrease > 36)
+                        burningIncrease = 36;
+                    bonus += burningIncrease / 100;
+                }
+            }
+        }
+    }
     return bonus;
 
 }
@@ -1907,23 +1920,26 @@ function spread(character) {
     return spreadDmg;
 }
 function burning(em, lvl, element, character, burningBonus) {
+
+
     //10 hits over 4s
-    const burningBaseDmg = 0.25 * LvlMultiplier[lvl];
+    const burningBaseDmg = 0.25 * LvlMultiplier[character.level];
     const burningEM = 1 + (16 * (em / (em + 1200))) + burningBonus;
+    targetsBurning = true;
     return (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
 }
 function bloom(em, lvl, element, character, bloomBonus) {
-    const bloomBaseDmg = 2 * LvlMultiplier[lvl];
+    const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
     return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
-    const burgeoningBaseDmg = 3 * LvlMultiplier[lvl];
+    const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];
     const burgeoningEM = 1 + (16 * (em / (em + 1200))) + burgeoningBonus;
     return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
-    const hyperBloomBaseDmg = 3 * LvlMultiplier[lvl];
+    const hyperBloomBaseDmg = 3 * LvlMultiplier[character.level];
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
     return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
 }
@@ -1938,4 +1954,20 @@ const superconductBaseDMG = {
     "70": 383,
     "80": 540,
     "90": 725
+}
+const LvlMultiplier = {
+    ["1b"]: 17.165605,
+    ["20b"]: 80.584775,
+    ["20a"]: 80.584775,
+    ["40b"]: 207.382042,
+    ["40a"]: 207.382042,
+    ["50b"]: 323.601597,
+    ["50a"]: 323.601597,
+    ["60b"]: 492.88489,
+    ["60a"]: 492.88489,
+    ["70b"]: 765.640231,
+    ["70a"]: 765.640231,
+    ["80b"]: 1077.443668,
+    ["80a"]: 1077.443668,
+    ["90b"]: 1446.853458
 }
