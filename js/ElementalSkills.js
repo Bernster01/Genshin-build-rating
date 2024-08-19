@@ -4886,7 +4886,7 @@ function fragranceExtraction(character) {
         }
         if (LumidouceCase.currentLevel == 1) {
             dmg += dmgCalc(lumiDouceCaselvl1, character) * numberOfEnemies;
-           
+
         }
         else if (LumidouceCase.currentLevel == 2) {
 
@@ -4904,4 +4904,68 @@ function fragranceExtraction(character) {
 
     }
     return dmg;
+}
+
+function windRealmofNasamjnin(character) {
+    let skillDMG = 0;
+    let pressurizedCollapseVortexDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 148.8 / 100;
+            pressurizedCollapseVortexDMG = 108 / 100;
+            break;
+        case 2:
+            skillDMG = 159.96 / 100;
+            pressurizedCollapseVortexDMG = 116.1 / 100;
+            break;
+        case 3:
+            skillDMG = 171.12 / 100;
+            pressurizedCollapseVortexDMG = 124.2 / 100;
+            break;
+        case 4:
+            skillDMG = 186 / 100;
+            pressurizedCollapseVortexDMG = 135 / 100;
+            break;
+        case 5:
+            skillDMG = 197.16 / 100;
+            pressurizedCollapseVortexDMG = 143.1 / 100;
+            break;
+        case 6:
+            skillDMG = 208.32 / 100;
+            pressurizedCollapseVortexDMG = 151.2 / 100;
+            break;
+        case 7:
+            skillDMG = 223.2 / 100;
+            pressurizedCollapseVortexDMG = 162 / 100;
+            break;
+        case 8:
+            skillDMG = 238.08 / 100;
+            pressurizedCollapseVortexDMG = 172.8 / 100;
+            break;
+        case 9:
+            skillDMG = 252.96 / 100;
+            pressurizedCollapseVortexDMG = 183.6 / 100;
+            break;
+        case 10:
+            skillDMG = 267.84 / 100;
+            pressurizedCollapseVortexDMG = 194.4 / 100;
+            break;
+        case 11:
+            skillDMG = 282.72 / 100;
+            pressurizedCollapseVortexDMG = 205.2 / 100;
+            break;
+        case 12:
+            skillDMG = 297.6 / 100;
+            pressurizedCollapseVortexDMG = 216 / 100;
+            break;
+        case 13:
+            skillDMG = 316.2 / 100;
+            pressurizedCollapseVortexDMG = 316.2 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let pressurizedCollapseVortex = { Multiplier: pressurizedCollapseVortexDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
+    return {dmg:dmg};
 }

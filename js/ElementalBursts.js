@@ -4813,8 +4813,76 @@ function aromaticExplication(character) {
     let attack = { Multiplier: lumiDouceCaselvl3DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
     for (let i = 0; i < 9; i++) {
-        dmg += dmgCalc(attack, character) * (numberOfEnemies-1);//-1 because cooldown on targetable
+        dmg += dmgCalc(attack, character) * (numberOfEnemies - 1);//-1 because cooldown on targetable
         attack.isReaction = false;
     }
     return dmg;
+}
+function theWindsSecretWay(character) {
+    let skillDMG = 0;
+    let anemoBonus = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 377.6 / 100;
+            anemoBonus = 18;
+            break;
+        case 2:
+            skillDMG = 405.92 / 100;
+            anemoBonus = 19.35;
+            break;
+        case 3:
+            skillDMG = 434.24 / 100;
+            anemoBonus = 20.7;
+            break;
+        case 4:
+            skillDMG = 472 / 100;
+            anemoBonus = 22.5;
+            break;
+        case 5:
+            skillDMG = 500.32 / 100;
+            anemoBonus = 23.85;
+            break;
+        case 6:
+            skillDMG = 528.64 / 100;
+            anemoBonus = 25.2;
+            break;
+        case 7:
+            skillDMG = 566.4 / 100;
+            anemoBonus = 27;
+            break;
+        case 8:
+            skillDMG = 604.16 / 100;
+            anemoBonus = 28.8;
+            break;
+        case 9:
+            skillDMG = 641.92 / 100;
+            anemoBonus = 30.6;
+            break;
+        case 10:
+            skillDMG = 679.68 / 100;
+            anemoBonus = 32.4;
+            break;
+        case 11:
+            skillDMG = 717.44 / 100;
+            anemoBonus = 34.2;
+            break;
+        case 12:
+            skillDMG = 755.2 / 100;
+            anemoBonus = 36;
+            break;
+        case 13:
+            skillDMG = 802.4 / 100;
+            anemoBonus = 38.25;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    character.currentBuffs.push({ Type: "AnemoBonus", Value: anemoBonus });
+    let atkBuff = 0;
+    for(buff of character.currentBuffs){
+        if(buff.Type == "Lost Wisdom of the Seven Caverns"){
+            atkBuff = character.baseAttack * (32/100);
+        }
+    }
+    return { dmg: dmg, attackBuff: (anemoBonus*100)+atkBuff };
 }
