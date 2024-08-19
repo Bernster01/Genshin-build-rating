@@ -4688,7 +4688,6 @@ function secretRiteChasmicSoulfarer(character) {
     if (!isInUlt) {
         let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
         let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-        console.log("Cyno normal Skill")
         return dmg;
     }
     let enhancedAttack = { Multiplier: mortuaryRiteDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
@@ -4702,7 +4701,70 @@ function secretRiteChasmicSoulfarer(character) {
         }
     }
     dmg += dmgCalc(enhancedAttack, character) * numberOfEnemies;
-    console.log("Cyno Enhanced Skill")
 
     return dmg;
+}
+
+function spiritWardingLampTroubleshooterCannon(character) {
+    let troubleshooterShotDMG = 0;
+    let afterSalesServiceRoundDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            troubleshooterShotDMG = 147.28 / 100;
+            afterSalesServiceRoundDMG = 31.56 / 100;
+            break;
+        case 2:
+            troubleshooterShotDMG = 158.33 / 100;
+            afterSalesServiceRoundDMG = 33.93 / 100;
+            break;
+        case 3:
+            troubleshooterShotDMG = 169.37 / 100;
+            afterSalesServiceRoundDMG = 36.29 / 100;
+            break;
+        case 4:
+            troubleshooterShotDMG = 184.1 / 100;
+            afterSalesServiceRoundDMG = 39.45 / 100;
+            break;
+        case 5:
+            troubleshooterShotDMG = 195.15 / 100;
+            afterSalesServiceRoundDMG = 41.82 / 100;
+            break;
+        case 6:
+            troubleshooterShotDMG = 206.19 / 100;
+            afterSalesServiceRoundDMG = 44.18 / 100;
+            break;
+        case 7:
+            troubleshooterShotDMG = 220.92 / 100;
+            afterSalesServiceRoundDMG = 47.34 / 100;
+            break;
+        case 8:
+            troubleshooterShotDMG = 235.65 / 100;
+            afterSalesServiceRoundDMG = 50.5 / 100;
+            break;
+        case 9:
+            troubleshooterShotDMG = 250.38 / 100;
+            afterSalesServiceRoundDMG = 53.65 / 100;
+            break;
+        case 10:
+            troubleshooterShotDMG = 265.1 / 100;
+            afterSalesServiceRoundDMG = 56.81 / 100;
+            break;
+        case 11:
+            troubleshooterShotDMG = 279.83 / 100;
+            afterSalesServiceRoundDMG = 59.96 / 100;
+            break;
+        case 12:
+            troubleshooterShotDMG = 294.56 / 100;
+            afterSalesServiceRoundDMG = 63.12 / 100;
+            break;
+        case 13:
+            troubleshooterShotDMG = 312.97 / 100;
+            afterSalesServiceRoundDMG = 67.06 / 100;
+            break;
+    }
+    let troubleshooterShot = { Multiplier: troubleshooterShotDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let afterSalesServiceRound = { Multiplier: afterSalesServiceRoundDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+    let dmg = dmgCalc(troubleshooterShot, character) * numberOfEnemies;
+    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies*2;
+    return {dmg:dmg};
 }

@@ -4668,14 +4668,14 @@ function sacredRiteWolfsSwiftness(character) {
             fourHitDMG = 123.83 / 100;
             break;
     }
-    character.normalAttack1.Multiplier = function(){return oneHitDMG};
+    character.normalAttack1.Multiplier = function () { return oneHitDMG };
     character.normalAttack1.Element = "ElectroDMGBonus";
     character.normalAttack2.isReaction = true;
-    character.normalAttack2.Multiplier = function(){return twoHitDMG};
+    character.normalAttack2.Multiplier = function () { return twoHitDMG };
     character.normalAttack2.Element = "ElectroDMGBonus";
-    character.normalAttack3.Multiplier = function(){return threeHitDMG};
+    character.normalAttack3.Multiplier = function () { return threeHitDMG };
     character.normalAttack3.Element = "ElectroDMGBonus";
-    character.normalAttack4.Multiplier = function(){return fourHitDMG};
+    character.normalAttack4.Multiplier = function () { return fourHitDMG };
     character.normalAttack4.Element = "ElectroDMGBonus";
 
     //Buffs
@@ -4690,8 +4690,79 @@ function sacredRiteWolfsSwiftness(character) {
     if (hasA4) {
         let flatDamage = (250 / 100) * character.EM();
         character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage, for: "Duststalker Bolt" });
-        let flatDamage2 = (150/100) * character.EM();
+        let flatDamage2 = (150 / 100) * character.EM();
         character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage2, for: "NormalAttack" });
     }
     return 0;
+}
+
+function alcazarzaraysExactitude(character) {
+    let connectorDMG = 0;
+    let conHealing = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            connectorDMG = 15.88 / 100;
+            conHealing = ((6.67/100)*character.HP()) + 641.9;
+            break;
+        case 2:
+            connectorDMG = 17.07 / 100;
+            conHealing = ((7.17/100)*character.HP()) + 706.1;
+            break;
+        case 3:
+            connectorDMG = 18.26 / 100;
+            conHealing = ((7.67/100)*character.HP()) + 775.7;
+            break;
+        case 4:
+            connectorDMG = 19.85 / 100;
+            conHealing = ((8.34/100)*character.HP()) + 850.6;
+            break;
+        case 5:
+            connectorDMG = 21.04 / 100;
+            conHealing = ((8.84/100)*character.HP()) + 930.9;
+            break;
+        case 6:
+            connectorDMG = 22.24 / 100;
+            conHealing = ((9.34/100)*character.HP()) + 1016;
+            break;
+        case 7:
+            connectorDMG = 23.82 / 100;
+            conHealing = ((10.01/100)*character.HP()) + 1107;
+            break;
+        case 8:
+            connectorDMG = 25.41 / 100;
+            conHealing = ((10.67/100)*character.HP()) + 1203;
+            break;
+        case 9:
+            connectorDMG = 27 / 100;
+            conHealing = ((11.34/100)*character.HP()) + 1305;
+            break;
+        case 10:
+            connectorDMG = 28.59 / 100;
+            conHealing = ((12.01/100)*character.HP()) + 1412;
+            break;
+        case 11:
+            connectorDMG = 30.18 / 100;
+            conHealing = ((12.67/100)*character.HP()) + 1524;
+            break;
+        case 12:
+            connectorDMG = 31.76 / 100;
+            conHealing = ((13.34/100)*character.HP()) + 1642;
+            break;
+        case 13:
+            connectorDMG = 33.75 / 100;
+            conHealing = ((14.17/100)*character.HP()) + 1765;
+            break;
+    }
+    let attack = { Multiplier: connectorDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for(let i = 0; i<30;i++){
+        if(i == 0 || i%3 == 0){
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+    }
+    return {dmg:dmg, healing:conHealing*6};
 }
