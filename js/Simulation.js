@@ -1931,7 +1931,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
 
     });
 
-    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((1600 * (em / (em + 2000))) / 100) + swirlBonus) * resCalc(character, element));
+    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((16 * (em / (em + 2000))))+swirlBonus  ) * resCalc(character, element));
     if (!isShreded) {
         character.currentBuffs.forEach(buff => {
             if (buff.Type == "VV") {

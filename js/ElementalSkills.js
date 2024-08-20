@@ -5554,7 +5554,7 @@ function allSchemestoKnow(character) {
     let critBonus = 0;
     if (hasA4) {
         let emForBonus = character.EM() - 200;
-        if(emForBonus < 0){
+        if (emForBonus < 0) {
             emForBonus = 0;
         }
         character.currentBuffs.push({
@@ -5562,23 +5562,112 @@ function allSchemestoKnow(character) {
             Value: emForBonus * 0.1,
             Source: "Pupillary Variance",
         });
-        critBonus = emForBonus*0.03;
+        critBonus = emForBonus * 0.03;
         character.advancedstats.critRate += critBonus;
     }
     let interval = Math.floor(25 / (1.5 - intervalBonus));
     let containing = ["Pyro", "Electro", "Hydro"];
     if (containing.includes(supportingElement)) {
         for (let i = 0; i < interval; i++) {
-            dmg += dmgCalc(triKarma, character) * numberOfEnemies-1;
+            dmg += dmgCalc(triKarma, character) * numberOfEnemies - 1;
         }
     }
     character.advancedstats.critRate -= critBonus;
-    if(hasA4){
+    if (hasA4) {
         for (buff of character.currentBuffs) {
             if (buff.Source == "Pupillary Variance") {
                 character.currentBuffs.pop(buff);
             }
         }
+    }
+    return dmg;
+}
+function heartstopperStrike(character) {
+    let skillDMG = 0;
+    let declensionDMGBonus = 0;
+    let convictionDMGBonus = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 227.52 / 100;
+            declensionDMGBonus = 56.88;
+            convictionDMGBonus = 113.76;
+            break;
+        case 2:
+            skillDMG = 244.58 / 100;
+            declensionDMGBonus = 61.15;
+            convictionDMGBonus = 122.29;
+            break;
+        case 3:
+            skillDMG = 261.65 / 100;
+            declensionDMGBonus = 65.41;
+            convictionDMGBonus = 130.82;
+            break;
+        case 4:
+            skillDMG = 284.4 / 100;
+            declensionDMGBonus = 71.1;
+            convictionDMGBonus = 142.2;
+            break;
+        case 5:
+            skillDMG = 301.46 / 100;
+            declensionDMGBonus = 75.37;
+            convictionDMGBonus = 150.73;
+            break;
+        case 6:
+            skillDMG = 318.53 / 100;
+            declensionDMGBonus = 79.63;
+            convictionDMGBonus = 159.26;
+            break;
+        case 7:
+            skillDMG = 341.28 / 100;
+            declensionDMGBonus = 85.32;
+            convictionDMGBonus = 170.64;
+            break;
+        case 8:
+            skillDMG = 364.03 / 100;
+            declensionDMGBonus = 91.01;
+            convictionDMGBonus = 182.02;
+            break;
+        case 9:
+            skillDMG = 386.78 / 100;
+            declensionDMGBonus = 96.7;
+            convictionDMGBonus = 193.39;
+            break;
+        case 10:
+            skillDMG = 409.54 / 100;
+            declensionDMGBonus = 102.38;
+            convictionDMGBonus = 204.77;
+            break;
+        case 11:
+            skillDMG = 432.29 / 100;
+            declensionDMGBonus = 108.07;
+            convictionDMGBonus = 216.14;
+            break;
+        case 12:
+            skillDMG = 455.04 / 100;
+            declensionDMGBonus = 113.76;
+            convictionDMGBonus = 227.52;
+            break;
+        case 13:
+            skillDMG = 483.48 / 100;
+            declensionDMGBonus = 120.87;
+            convictionDMGBonus = 241.74;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let hasBuff = false;
+    let declensionBuff="";
+    for(buff of character.currentBuffs){
+        if(buff.Type == "AddativeBonusDMG" && buff.Source == "Declension"){
+            hasBuff = true;
+            declensionBuff = buff;
+        }
+    }
+    if(!hasBuff){
+        character.currentBuffs.push({Type: "AddativeBonusDMG", Value: ((declensionDMGBonus*4)+convictionDMGBonus), Source: "Declension"});
+    }
+    dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    if(!hasBuff){
+        character.currentBuffs.pop(declensionBuff);
     }
     return dmg;
 }

@@ -5297,7 +5297,7 @@ function illusoryHeart(character) {
             electroBonus = 0.791;
             break;
     }
-    switch (supportingElement){
+    switch (supportingElement) {
         case "Pyro":
             character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
             break;
@@ -5309,4 +5309,76 @@ function illusoryHeart(character) {
             break;
     }
     return 0;
+}
+
+function windmusterKick(character) {
+    let fudoiStyleVacuumSluggerDMG = 0;
+    let windmusterIrisDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            fudoiStyleVacuumSluggerDMG = 314.69 / 100;
+            windmusterIrisDMG = 21.46 / 100;
+            break;
+        case 2:
+            fudoiStyleVacuumSluggerDMG = 338.29 / 100;
+            windmusterIrisDMG = 23.07 / 100;
+            break;
+        case 3:
+            fudoiStyleVacuumSluggerDMG = 361.89 / 100;
+            windmusterIrisDMG = 24.67 / 100;
+            break;
+        case 4:
+            fudoiStyleVacuumSluggerDMG = 393.36 / 100;
+            windmusterIrisDMG = 26.82 / 100;
+            break;
+        case 5:
+            fudoiStyleVacuumSluggerDMG = 416.96 / 100;
+            windmusterIrisDMG = 28.43 / 100;
+            break;
+        case 6:
+            fudoiStyleVacuumSluggerDMG = 440.56 / 100;
+            windmusterIrisDMG = 30.04 / 100;
+            break;
+        case 7:
+            fudoiStyleVacuumSluggerDMG = 472.03 / 100;
+            windmusterIrisDMG = 32.18 / 100;
+            break;
+        case 8:
+            fudoiStyleVacuumSluggerDMG = 503.5 / 100;
+            windmusterIrisDMG = 34.33 / 100;
+            break;
+        case 9:
+            fudoiStyleVacuumSluggerDMG = 534.97 / 100;
+            windmusterIrisDMG = 36.48 / 100;
+            break;
+        case 10:
+            fudoiStyleVacuumSluggerDMG = 566.44 / 100;
+            windmusterIrisDMG = 38.62 / 100;
+            break;
+        case 11:
+            fudoiStyleVacuumSluggerDMG = 597.91 / 100;
+            windmusterIrisDMG = 40.77 / 100;
+            break;
+        case 12:
+            fudoiStyleVacuumSluggerDMG = 629.38 / 100;
+            windmusterIrisDMG = 42.91 / 100;
+            break;
+        case 13:
+            fudoiStyleVacuumSluggerDMG = 668.71 / 100;
+            windmusterIrisDMG = 45.59 / 100;
+            break;
+    }
+    
+    let attack = { Multiplier: fudoiStyleVacuumSluggerDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: windmusterIrisDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let validElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    if(validElements.includes(supportingElement)){
+        let element = supportingElement + "DMGBonus";
+        for(let i = 0;i<3;i++){
+            attack.Element = element;
+            dmg += dmgCalc(attack2, character) * numberOfEnemies;
+        }
+    }
+    return dmg;
 }
