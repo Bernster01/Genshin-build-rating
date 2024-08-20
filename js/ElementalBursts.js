@@ -5104,3 +5104,82 @@ function paintedDome(character) {
     character.normalAttack3.Element = "DendroDMGBonus";
     return dmg;
 }
+
+function secretArtSurpriseDispatch(character) {
+    let skillDMG = 0;
+    let catGrassCardamomExplosioinDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 570.24 / 100;
+            catGrassCardamomExplosioinDMG = 35.64 / 100;
+            break;
+        case 2:
+            skillDMG = 613.01 / 100;
+            catGrassCardamomExplosioinDMG = 38.31 / 100;
+            break;
+        case 3:
+            skillDMG = 655.78 / 100;
+            catGrassCardamomExplosioinDMG = 40.99 / 100;
+            break;
+        case 4:
+            skillDMG = 712.8 / 100;
+            catGrassCardamomExplosioinDMG = 44.55 / 100;
+            break;
+        case 5:
+            skillDMG = 755.57 / 100;
+            catGrassCardamomExplosioinDMG = 47.22 / 100;
+            break;
+        case 6:
+            skillDMG = 798.34 / 100;
+            catGrassCardamomExplosioinDMG = 49.9 / 100;
+            break;
+        case 7:
+            skillDMG = 855.36 / 100;
+            catGrassCardamomExplosioinDMG = 53.46 / 100;
+            break;
+        case 8:
+            skillDMG = 912.38 / 100;
+            catGrassCardamomExplosioinDMG = 57.02 / 100;
+            break;
+        case 9:
+            skillDMG = 969.41 / 100;
+            catGrassCardamomExplosioinDMG = 60.59 / 100;
+            break;
+        case 10:
+            skillDMG = 1026.43 / 100;
+            catGrassCardamomExplosioinDMG = 64.15 / 100;
+            break;
+        case 11:
+            skillDMG = 1083.46 / 100;
+            catGrassCardamomExplosioinDMG = 67.72 / 100;
+            break;
+        case 12:
+            skillDMG = 1140.48 / 100;
+            catGrassCardamomExplosioinDMG = 71.28 / 100;
+            break;
+        case 13:
+            skillDMG = 1211.76 / 100;
+            catGrassCardamomExplosioinDMG = 75.73 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: catGrassCardamomExplosioinDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Pupillary Variance") {
+            character.currentBuffs.push({ Type: "ElementalBurst", Value: Math.floor(character.HP()/100)*0.3 });
+            break;
+        }
+    }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    for(let i = 0; i < 6; i++){
+        if(i == 0 || i % 3 == 0){
+            attack2.isReaction = true;
+        }
+        else{
+            attack2.isReaction = false;
+        }
+        dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
+    
+    return {dmg:dmg};
+}

@@ -5233,46 +5233,141 @@ function artisticIngenuity(character) {
     let skillDMG = 0;
     switch (character.elementalBurst.Level) {
         case 1:
-            skillDMG = 204/ 100;
+            skillDMG = 204 / 100;
             break;
         case 2:
-            skillDMG = 219.3/ 100;
+            skillDMG = 219.3 / 100;
             break;
         case 3:
-            skillDMG = 234.6/ 100;
+            skillDMG = 234.6 / 100;
             break;
         case 4:
-            skillDMG = 255/ 100;
+            skillDMG = 255 / 100;
             break;
         case 5:
-            skillDMG = 270.3/ 100;
+            skillDMG = 270.3 / 100;
             break;
         case 6:
-            skillDMG = 285.6/ 100;
+            skillDMG = 285.6 / 100;
             break;
         case 7:
-            skillDMG = 306/ 100;
+            skillDMG = 306 / 100;
             break;
         case 8:
-            skillDMG = 326.4/ 100;
+            skillDMG = 326.4 / 100;
             break;
         case 9:
-            skillDMG = 346.8/ 100;
+            skillDMG = 346.8 / 100;
             break;
         case 10:
-            skillDMG = 367.2/ 100;
+            skillDMG = 367.2 / 100;
             break;
         case 11:
-            skillDMG = 387.6/ 100;
+            skillDMG = 387.6 / 100;
             break;
         case 12:
-            skillDMG = 408/ 100;
+            skillDMG = 408 / 100;
             break;
         case 13:
-            skillDMG = 433.5/ 100;
+            skillDMG = 433.5 / 100;
             break;
     }
     let skillAttack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
+}
+
+function meowteorKick(character) {
+    let parcelHitDMG = 0;
+    let shield = 0;
+    let flipclawStrikeDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            parcelHitDMG = 33.6 / 100;
+            shield = (character.HP() * (16 / 100)) + 1541.0796
+            flipclawStrikeDMG = 144 / 100;
+            break;
+        case 2:
+            parcelHitDMG = 36.12 / 100;
+            shield = (character.HP() * (17.2 / 100)) + 1695.2089
+            flipclawStrikeDMG = 154.8 / 100;
+            break;
+        case 3:
+            parcelHitDMG = 38.64 / 100;
+            shield = (character.HP() * (18.4 / 100)) + 1862.1824
+            flipclawStrikeDMG = 165.6 / 100;
+            break;
+        case 4:
+            parcelHitDMG = 42 / 100;
+            shield = (character.HP() * (20 / 100)) + 2042
+            flipclawStrikeDMG = 180 / 100;
+            break;
+        case 5:
+            parcelHitDMG = 44.52 / 100;
+            shield = (character.HP() * (21.2 / 100)) + 2234.6616
+            flipclawStrikeDMG = 190.8 / 100;
+            break;
+        case 6:
+            parcelHitDMG = 47.04 / 100;
+            shield = (character.HP() * (22.4 / 100)) + 2440.1675
+            flipclawStrikeDMG = 201.6 / 100;
+            break;
+        case 7:
+            parcelHitDMG = 50.4 / 100;
+            shield = (character.HP() * (24 / 100)) + 2658.5176
+            flipclawStrikeDMG = 216 / 100;
+            break;
+        case 8:
+            parcelHitDMG = 53.76 / 100;
+            shield = (character.HP() * (25.6 / 100)) + 2889.7117
+            flipclawStrikeDMG = 230.4 / 100;
+            break;
+        case 9:
+            parcelHitDMG = 57.12 / 100;
+            shield = (character.HP() * (27.2 / 100)) + 3133.7498
+            flipclawStrikeDMG = 244.8 / 100;
+            break;
+        case 10:
+            parcelHitDMG = 60.48 / 100;
+            shield = (character.HP() * (28.8 / 100)) + 3390.632
+            flipclawStrikeDMG = 259.2 / 100;
+            break;
+        case 11:
+            parcelHitDMG = 63.84 / 100;
+            shield = (character.HP() * (30.4 / 100)) + 3660.3584
+            flipclawStrikeDMG = 273.6 / 100;
+            break;
+        case 12:
+            parcelHitDMG = 67.2 / 100;
+            shield = (character.HP() * (32 / 100)) + 3942.929
+            flipclawStrikeDMG = 288 / 100;
+            break;
+        case 13:
+            parcelHitDMG = 71.4 / 100;
+            shield = (character.HP() * (34 / 100)) + 4238.3438
+            flipclawStrikeDMG = 306 / 100;
+            break;
+    }
+    let parcelHit = { Multiplier: parcelHitDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let flipclawStrike = { Multiplier: flipclawStrikeDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let dmg = 0;
+    for(buff of character.currentBuffs){
+        if(buff.Type == "Pupillary Variance"){
+            character.currentBuffs.push({ Type: "ElementalSkill", Value: Math.floor(character.HP()/100)*0.4 });
+        }
+    }
+    for(let i = 0; i<20*numberOfEnemies; i++){
+        if(i%3 == 0){
+            flipclawStrike.isReaction = true;
+        }
+        else{
+            flipclawStrike.isReaction = false;
+        }
+        dmg += dmgCalc(parcelHit, character);
+    }
+    dmg += dmgCalc(flipclawStrike, character) * numberOfEnemies;
+    for(let i = 0; i<numberOfEnemies; i++){
+        dmg += dmgCalc(flipclawStrike, character);
+    }
+    return { dmg: dmg, shield: shield };
 }
