@@ -5091,92 +5091,140 @@ function sanctifyingRing(character) {
     switch (character.elementalSkill.Level) {
         case 1:
             skillDMG = 75.71 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(3 / 100) + 288.89;
+            grassRingofSancitifactionHealing = character.HP() * (3 / 100) + 288.89;
             grassRingofSancitifactionDMG = 25.24 / 100;
             break;
         case 2:
             skillDMG = 81.39 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(3.23 / 100) + 317.78;
+            grassRingofSancitifactionHealing = character.HP() * (3.23 / 100) + 317.78;
             grassRingofSancitifactionDMG = 27.13 / 100;
             break;
         case 3:
             skillDMG = 87.07 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(3.45 / 100) + 349.08;
+            grassRingofSancitifactionHealing = character.HP() * (3.45 / 100) + 349.08;
             grassRingofSancitifactionDMG = 29.03 / 100;
             break;
         case 4:
             skillDMG = 94.64 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(3.75 / 100) + 382.79;
+            grassRingofSancitifactionHealing = character.HP() * (3.75 / 100) + 382.79;
             grassRingofSancitifactionDMG = 31.55 / 100;
             break;
         case 5:
             skillDMG = 100.32 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(3.98 / 100) + 418.91;
+            grassRingofSancitifactionHealing = character.HP() * (3.98 / 100) + 418.91;
             grassRingofSancitifactionDMG = 33.44 / 100;
             break;
         case 6:
             skillDMG = 106 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(4.2 / 100) + 457.43;
+            grassRingofSancitifactionHealing = character.HP() * (4.2 / 100) + 457.43;
             grassRingofSancitifactionDMG = 35.34 / 100;
             break;
         case 7:
             skillDMG = 113.57 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(4.5 / 100) + 498.37;
+            grassRingofSancitifactionHealing = character.HP() * (4.5 / 100) + 498.37;
             grassRingofSancitifactionDMG = 37.86 / 100;
             break;
         case 8:
             skillDMG = 121.14 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(4.8 / 100) + 541.71;
+            grassRingofSancitifactionHealing = character.HP() * (4.8 / 100) + 541.71;
             grassRingofSancitifactionDMG = 40.38 / 100;
             break;
         case 9:
             skillDMG = 128.71 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(5.1 / 100) + 587.45;
+            grassRingofSancitifactionHealing = character.HP() * (5.1 / 100) + 587.45;
             grassRingofSancitifactionDMG = 42.91 / 100;
             break;
         case 10:
             skillDMG = 136.28 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(5.4 / 100) + 635.61;
+            grassRingofSancitifactionHealing = character.HP() * (5.4 / 100) + 635.61;
             grassRingofSancitifactionDMG = 45.43 / 100;
             break;
         case 11:
             skillDMG = 143.85 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(5.7 / 100) + 686.17;
+            grassRingofSancitifactionHealing = character.HP() * (5.7 / 100) + 686.17;
             grassRingofSancitifactionDMG = 47.96 / 100;
             break;
         case 12:
             skillDMG = 151.42 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(6 / 100) + 739.14;
+            grassRingofSancitifactionHealing = character.HP() * (6 / 100) + 739.14;
             grassRingofSancitifactionDMG = 50.48 / 100;
             break;
         case 13:
             skillDMG = 160.89 / 100;
-            grassRingofSancitifactionHealing = character.HP()*(6.38 / 100) + 794.52;
+            grassRingofSancitifactionHealing = character.HP() * (6.38 / 100) + 794.52;
             grassRingofSancitifactionDMG = 53.63 / 100;
             break;
-        
+
     }
     let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let grassRingofSancitifaction = { Multiplier: grassRingofSancitifactionDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let hasA4 = false;
-    for(buff of character.currentBuffs){
-        if(buff.Type == "Heart's Repose"){
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Heart's Repose") {
             hasA4 = true;
         }
     }
-    if(hasA4){
-        character.currentBuffs.push({Type:"FlatDMG", Value: (25/100)*character.EM(), Source:"Heart's Repose", for:"ElementalSkill"});
-        grassRingofSancitifactionHealing += ((75/100)*character.EM());
+    if (hasA4) {
+        character.currentBuffs.push({ Type: "FlatDMG", Value: (25 / 100) * character.EM(), Source: "Heart's Repose", for: "ElementalSkill" });
+        grassRingofSancitifactionHealing += ((75 / 100) * character.EM());
     }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-    for(let i = 0; i < 8; i++){
-        if(i%2==0){
+    for (let i = 0; i < 8; i++) {
+        if (i % 2 == 0) {
             grassRingofSancitifaction.isReaction = true;
         }
-        else{
+        else {
             grassRingofSancitifaction.isReaction = false;
         }
         dmg += dmgCalc(grassRingofSancitifaction, character) * numberOfEnemies;
     }
-    return {dmg:dmg, healing:grassRingofSancitifactionHealing};
+    return { dmg: dmg, healing: grassRingofSancitifactionHealing };
+}
+
+function bestialAscent(character) {
+    let plungMultiplier = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            plungMultiplier = 230.4;
+            break;
+        case 2:
+            plungMultiplier = 247.68;
+            break;
+        case 3:
+            plungMultiplier = 264.96;
+            break;
+        case 4:
+            plungMultiplier = 288;
+            break;
+        case 5:
+            plungMultiplier = 305.28;
+            break;
+        case 6:
+            plungMultiplier = 322.56;
+            break;
+        case 7:
+            plungMultiplier = 345.6;
+            break;
+        case 8:
+            plungMultiplier = 368.64;
+            break;
+        case 9:
+            plungMultiplier = 391.68;
+            break;
+        case 10:
+            plungMultiplier = 414.72;
+            break;
+        case 11:
+            plungMultiplier = 437.76;
+            break;
+        case 12:
+            plungMultiplier = 460.8;
+            break;
+        case 13:
+            plungMultiplier = 489.6;
+            break;
+
+    }
+    character.plungeAttack.Multiplier = function(level){return plungMultiplier/100};
+    return 0;
 }

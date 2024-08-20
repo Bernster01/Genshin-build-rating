@@ -4974,14 +4974,61 @@ function gyoeiNarukamiKariyamaRite(character) {
     let attack = { Multiplier: singleInstanceDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
     for (let i = 0; i < 12; i++) {
-        if(i%3==0 || i==0)
-        {
+        if (i % 3 == 0 || i == 0) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
-        }   
+        }
         dmg += dmgCalc(attack, character) * 2;//Max 2 enemies hit
     }
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function suannisGildedDance(character) {
+    let suanniManChaiSmashDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            suanniManChaiSmashDMG = 370.4 / 100;
+            break;
+        case 2:
+            suanniManChaiSmashDMG = 398.18 / 100;
+            break;
+        case 3:
+            suanniManChaiSmashDMG =  425.96/ 100;
+            break;
+        case 4:
+            suanniManChaiSmashDMG =  463/ 100;
+            break;
+        case 5:
+            suanniManChaiSmashDMG =  490.78/ 100;
+            break;
+        case 6:
+            suanniManChaiSmashDMG =  518.56/ 100;
+            break;
+        case 7:
+            suanniManChaiSmashDMG =  555.6/ 100;
+            break;
+        case 8:
+            suanniManChaiSmashDMG = 592.64 / 100;
+            break;
+        case 9:
+            suanniManChaiSmashDMG = 629.68 / 100;
+            break;
+        case 10:
+            suanniManChaiSmashDMG =  666.72/ 100;
+            break;
+        case 11:
+            suanniManChaiSmashDMG =  703.76/ 100;
+            break;
+        case 12:
+            suanniManChaiSmashDMG =  740.8/ 100;
+            break;
+        case 13:
+            suanniManChaiSmashDMG =  787.1/ 100;
+            break;
+    }
+    let attack = { Multiplier: suanniManChaiSmashDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
 }
