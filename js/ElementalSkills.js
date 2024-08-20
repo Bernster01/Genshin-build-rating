@@ -5225,6 +5225,54 @@ function bestialAscent(character) {
             break;
 
     }
-    character.plungeAttack.Multiplier = function(level){return plungMultiplier/100};
+    character.plungeAttack.Multiplier = function (level) { return plungMultiplier / 100 };
     return 0;
+}
+
+function artisticIngenuity(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 204/ 100;
+            break;
+        case 2:
+            skillDMG = 219.3/ 100;
+            break;
+        case 3:
+            skillDMG = 234.6/ 100;
+            break;
+        case 4:
+            skillDMG = 255/ 100;
+            break;
+        case 5:
+            skillDMG = 270.3/ 100;
+            break;
+        case 6:
+            skillDMG = 285.6/ 100;
+            break;
+        case 7:
+            skillDMG = 306/ 100;
+            break;
+        case 8:
+            skillDMG = 326.4/ 100;
+            break;
+        case 9:
+            skillDMG = 346.8/ 100;
+            break;
+        case 10:
+            skillDMG = 367.2/ 100;
+            break;
+        case 11:
+            skillDMG = 387.6/ 100;
+            break;
+        case 12:
+            skillDMG = 408/ 100;
+            break;
+        case 13:
+            skillDMG = 433.5/ 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
 }

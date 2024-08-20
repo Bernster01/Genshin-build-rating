@@ -1740,6 +1740,9 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 burgeoningBonus += buff.Value.transformitiveBonus
 
             }
+            else if (buff.Type == "bloomBonus") {
+                bloomBonus += buff.Value;
+            }
         });
         vaporizeBonus = (vaporizeBonus == 0) ? 0 : vaporizeBonus / 100;
         meltBonus = (meltBonus == 0) ? 0 : meltBonus / 100;
@@ -1809,7 +1812,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         }
                         break;
                     case "Dendro":
-                        dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
+                        dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
                         elementalDMGSources.bloomDMG += dmg;
                         break;
                 }
@@ -1874,7 +1877,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.burningDMG += dmg;
                         break;
                     case "Hydro":
-                        dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
+                        dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
                         elementalDMGSources.bloomDMG += dmg;
                         break;
 
@@ -1884,13 +1887,19 @@ function elementalMasteryCalc(incomingDmg, type, character) {
             case "Bloom":
                 switch (type) {
                     case "Pyro":
-                        dmg += burgeoning(em, lvl, "Pyro", character, burgeoningBonus);
+                        dmg += burgeoning(em, lvl, "Dendro", character, burgeoningBonus);
                         elementalDMGSources.burgeoningDMG += dmg;
                         break;
                     case "Electro":
-                        dmg += hyperbloom(em, lvl, "Electro", character, hyperbloomBonus);
+                        dmg += hyperbloom(em, lvl, "Dendro", character, hyperbloomBonus);
                         elementalDMGSources.hyperbloomDMG += dmg;
                         break;
+                }
+                if(character.name=="Kaveh"){
+                    for(let i = 0; i<5;i++){
+                        dmg+=bloom(em, lvl, "Dendro", character, bloomBonus);
+                    }
+                    elementalDMGSources.bloomDMG+=dmg;
                 }
 
         }

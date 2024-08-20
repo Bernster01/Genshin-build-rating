@@ -4995,19 +4995,19 @@ function suannisGildedDance(character) {
             suanniManChaiSmashDMG = 398.18 / 100;
             break;
         case 3:
-            suanniManChaiSmashDMG =  425.96/ 100;
+            suanniManChaiSmashDMG = 425.96 / 100;
             break;
         case 4:
-            suanniManChaiSmashDMG =  463/ 100;
+            suanniManChaiSmashDMG = 463 / 100;
             break;
         case 5:
-            suanniManChaiSmashDMG =  490.78/ 100;
+            suanniManChaiSmashDMG = 490.78 / 100;
             break;
         case 6:
-            suanniManChaiSmashDMG =  518.56/ 100;
+            suanniManChaiSmashDMG = 518.56 / 100;
             break;
         case 7:
-            suanniManChaiSmashDMG =  555.6/ 100;
+            suanniManChaiSmashDMG = 555.6 / 100;
             break;
         case 8:
             suanniManChaiSmashDMG = 592.64 / 100;
@@ -5016,19 +5016,91 @@ function suannisGildedDance(character) {
             suanniManChaiSmashDMG = 629.68 / 100;
             break;
         case 10:
-            suanniManChaiSmashDMG =  666.72/ 100;
+            suanniManChaiSmashDMG = 666.72 / 100;
             break;
         case 11:
-            suanniManChaiSmashDMG =  703.76/ 100;
+            suanniManChaiSmashDMG = 703.76 / 100;
             break;
         case 12:
-            suanniManChaiSmashDMG =  740.8/ 100;
+            suanniManChaiSmashDMG = 740.8 / 100;
             break;
         case 13:
-            suanniManChaiSmashDMG =  787.1/ 100;
+            suanniManChaiSmashDMG = 787.1 / 100;
             break;
     }
     let attack = { Multiplier: suanniManChaiSmashDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
+}
+
+function paintedDome(character) {
+    let skillDMG = 0;
+    let dendroCoreBonus = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 160 / 100;
+            dendroCoreBonus = 27.49;
+            break;
+        case 2:
+            skillDMG = 172 / 100;
+            dendroCoreBonus = 29.55;
+            break;
+        case 3:
+            skillDMG = 184 / 100;
+            dendroCoreBonus = 31.61;
+            break;
+        case 4:
+            skillDMG = 200 / 100;
+            dendroCoreBonus = 34.36;
+            break;
+        case 5:
+            skillDMG = 212 / 100;
+            dendroCoreBonus = 36.42;
+            break;
+        case 6:
+            skillDMG = 224 / 100;
+            dendroCoreBonus = 38.48;
+            break;
+        case 7:
+            skillDMG = 240 / 100;
+            dendroCoreBonus = 41.23;
+            break;
+        case 8:
+            skillDMG = 256 / 100;
+            dendroCoreBonus = 43.98;
+            break;
+        case 9:
+            skillDMG = 272 / 100;
+            dendroCoreBonus = 46.73;
+            break;
+        case 10:
+            skillDMG = 288 / 100;
+            dendroCoreBonus = 49.48;
+            break;
+        case 11:
+            skillDMG = 304 / 100;
+            dendroCoreBonus = 52.23;
+            break;
+        case 12:
+            skillDMG = 320 / 100;
+            dendroCoreBonus = 54.98;
+            break;
+        case 13:
+            skillDMG = 340 / 100;
+            dendroCoreBonus = 58.41;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    character.currentBuffs.push({ Type: "bloomBonus", Value: dendroCoreBonus });
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "A Craftsman's Curious Conceptions") {
+            character.currentBuffs.push({ Type: "ElementalMastery", Value: 100 });
+            break;
+        }
+    }
+    character.normalAttack1.Element = "DendroDMGBonus";
+    character.normalAttack2.Element = "DendroDMGBonus";
+    character.normalAttack3.Element = "DendroDMGBonus";
     return dmg;
 }
