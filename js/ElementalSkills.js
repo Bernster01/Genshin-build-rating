@@ -5351,23 +5351,124 @@ function meowteorKick(character) {
     let parcelHit = { Multiplier: parcelHitDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let flipclawStrike = { Multiplier: flipclawStrikeDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
-    for(buff of character.currentBuffs){
-        if(buff.Type == "Pupillary Variance"){
-            character.currentBuffs.push({ Type: "ElementalSkill", Value: Math.floor(character.HP()/100)*0.4 });
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Pupillary Variance") {
+            character.currentBuffs.push({ Type: "ElementalSkill", Value: Math.floor(character.HP() / 100) * 0.4 });
         }
     }
-    for(let i = 0; i<20*numberOfEnemies; i++){
-        if(i%3 == 0){
+    for (let i = 0; i < 20 * numberOfEnemies; i++) {
+        if (i % 3 == 0) {
             flipclawStrike.isReaction = true;
         }
-        else{
+        else {
             flipclawStrike.isReaction = false;
         }
         dmg += dmgCalc(parcelHit, character);
     }
     dmg += dmgCalc(flipclawStrike, character) * numberOfEnemies;
-    for(let i = 0; i<numberOfEnemies; i++){
+    for (let i = 0; i < numberOfEnemies; i++) {
         dmg += dmgCalc(flipclawStrike, character);
+    }
+    return { dmg: dmg, shield: shield };
+}
+
+function nightsofFormalFocus(character) {
+    let skillDMG = 0;
+    let shootingStarDMG = 0;
+    let shield = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 12.8 / 100;
+            shootingStarDMG = 14.72 / 100;
+            shield = (character.HP() * (10.8 / 100)) + 1040;
+            break;
+        case 2:
+            skillDMG = 13.76 / 100;
+            shootingStarDMG = 15.82 / 100;
+            shield = (character.HP() * (11.61 / 100)) + 1144;
+            break;
+        case 3:
+            skillDMG = 14.72 / 100;
+            shootingStarDMG = 16.93 / 100;
+            shield = (character.HP() * (12.42 / 100)) + 1256;
+            break;
+        case 4:
+            skillDMG = 16 / 100;
+            shootingStarDMG = 18.4 / 100;
+            shield = (character.HP() * (13.5 / 100)) + 1378;
+            break;
+        case 5:
+            skillDMG = 16.96 / 100;
+            shootingStarDMG = 19.5 / 100;
+            shield = (character.HP() * (14.31 / 100)) + 1508;
+            break;
+        case 6:
+            skillDMG = 17.92 / 100;
+            shootingStarDMG = 20.61 / 100;
+            shield = (character.HP() * (15.12 / 100)) + 1646;
+            break;
+        case 7:
+            skillDMG = 19.2 / 100;
+            shootingStarDMG = 22.08 / 100;
+            shield = (character.HP() * (16.2 / 100)) + 1794;
+            break;
+        case 8:
+            skillDMG = 20.48 / 100;
+            shootingStarDMG = 23.55 / 100;
+            shield = (character.HP() * (17.28 / 100)) + 1950;
+            break;
+        case 9:
+            skillDMG = 21.76 / 100;
+            shootingStarDMG = 25.02 / 100;
+            shield = (character.HP() * (18.36 / 100)) + 2114;
+            break;
+        case 10:
+            skillDMG = 23.04 / 100;
+            shootingStarDMG = 26.5 / 100;
+            shield = (character.HP() * (19.44 / 100)) + 2288;
+            break;
+        case 11:
+            skillDMG = 24.32 / 100;
+            shootingStarDMG = 27.97 / 100;
+            shield = (character.HP() * (20.52 / 100)) + 2470;
+            break;
+        case 12:
+            skillDMG = 25.6 / 100;
+            shootingStarDMG = 29.44 / 100;
+            shield = (character.HP() * (21.6 / 100)) + 2660;
+            break;
+        case 13:
+            skillDMG = 27.2 / 100;
+            shootingStarDMG = 31.28 / 100;
+            shield = (character.HP() * (22.95 / 100)) + 2860;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let shootingStar = { Multiplier: shootingStarDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst", type2: "Shooting Star" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    let hasA4 = false;
+    let hasBuff = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Sweet Slumber Undisturbed") {
+            hasA4 = true;
+            continue;
+        }
+        else if (buff.Type == "FlatDMG") {
+            if (buff.for == "Shooting Star") {
+                hasBuff = true;
+            }
+        }
+    }
+
+    if (hasA4 && !hasBuff)
+        character.currentBuffs.push({ Type: "FlatDMG", Value: (character.HP()/100) * 1.5, for: "Shooting Star" });
+    for (let i = 0; i < 5; i++) {
+        shootingStar.isReaction = true;
+        dmg += dmgCalc(shootingStar, character) ;
+        shootingStar.isReaction = false;
+        for (let j = 0; j < 3; j++) {
+            dmg += dmgCalc(shootingStar, character) ;
+        }
     }
     return { dmg: dmg, shield: shield };
 }

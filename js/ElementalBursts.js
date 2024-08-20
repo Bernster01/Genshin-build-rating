@@ -5166,20 +5166,77 @@ function secretArtSurpriseDispatch(character) {
     let attack2 = { Multiplier: catGrassCardamomExplosioinDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     for (buff of character.currentBuffs) {
         if (buff.Type == "Pupillary Variance") {
-            character.currentBuffs.push({ Type: "ElementalBurst", Value: Math.floor(character.HP()/100)*0.3 });
+            character.currentBuffs.push({ Type: "ElementalBurst", Value: Math.floor(character.HP() / 100) * 0.3 });
             break;
         }
     }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    for(let i = 0; i < 6; i++){
-        if(i == 0 || i % 3 == 0){
+    for (let i = 0; i < 6; i++) {
+        if (i == 0 || i % 3 == 0) {
             attack2.isReaction = true;
         }
-        else{
+        else {
             attack2.isReaction = false;
         }
         dmg += dmgCalc(attack2, character) * numberOfEnemies;
     }
-    
-    return {dmg:dmg};
+
+    return { dmg: dmg };
+}
+
+function dreamoftheStarStreamShaker(character) {
+    let slugDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            slugDMG =  4.65/ 100;
+            break;
+        case 2:
+            slugDMG =  5 / 100;
+            break;
+        case 3:
+            slugDMG =  5.35 / 100;
+            break;
+        case 4:
+            slugDMG = 5.81 / 100;
+            break;
+        case 5:
+            slugDMG = 6.16 / 100;
+            break;
+        case 6:
+            slugDMG = 6.51 / 100;
+            break;
+        case 7:
+            slugDMG = 6.97 / 100;
+            break;
+        case 8:
+            slugDMG = 7.44 / 100;
+            break;
+        case 9:
+            slugDMG = 7.9 / 100;
+            break;
+        case 10:
+            slugDMG = 8.37 / 100;
+            break;
+        case 11:
+            slugDMG = 8.83 / 100;
+            break;
+        case 12:
+            slugDMG = 9.3 / 100;
+            break;
+        case 13:
+            slugDMG = 9.88 / 100;
+            break;
+    }
+    let attack = { Multiplier: slugDMG, Element: "CryoDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for(let i = 0; i<8;i++){
+        if(i %2 == 0){
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character);
+    }
+    return { dmg: dmg };
 }
