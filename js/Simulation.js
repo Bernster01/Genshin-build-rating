@@ -1866,9 +1866,10 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 }
                 break;
             case "Anemo":
-                if (type != "Anemo")
+                if (type != "Anemo" && type != "Geo" && type != "Dendro") {
                     dmg += swirl(em, lvl, type, character, swirlBonus);
                     elementalDMGSources.swirlDMG += dmg;
+                }
                 break;
             case "Dendro":
                 switch (type) {
@@ -1997,7 +1998,7 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
-    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element);
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
     const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];

@@ -5188,13 +5188,13 @@ function dreamoftheStarStreamShaker(character) {
     let slugDMG = 0;
     switch (character.elementalBurst.Level) {
         case 1:
-            slugDMG =  4.65/ 100;
+            slugDMG = 4.65 / 100;
             break;
         case 2:
-            slugDMG =  5 / 100;
+            slugDMG = 5 / 100;
             break;
         case 3:
-            slugDMG =  5.35 / 100;
+            slugDMG = 5.35 / 100;
             break;
         case 4:
             slugDMG = 5.81 / 100;
@@ -5229,14 +5229,84 @@ function dreamoftheStarStreamShaker(character) {
     }
     let attack = { Multiplier: slugDMG, Element: "CryoDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for(let i = 0; i<8;i++){
-        if(i %2 == 0){
+    for (let i = 0; i < 8; i++) {
+        if (i % 2 == 0) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, character);
     }
     return { dmg: dmg };
+}
+function illusoryHeart(character) {
+    let pyroBonus = 0;
+    let electroBonus = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            pyroBonus = 22.32;
+            electroBonus = 0.372;
+            break;
+        case 2:
+            pyroBonus = 23.99;
+            electroBonus = 0.399;
+            break;
+        case 3:
+            pyroBonus = 25.67;
+            electroBonus = 0.428;
+            break;
+        case 4:
+            pyroBonus = 27.9;
+            electroBonus = 0.465;
+            break;
+        case 5:
+            pyroBonus = 29.57;
+            electroBonus = 0.493;
+            break;
+        case 6:
+            pyroBonus = 31.25;
+            electroBonus = 0.521;
+            break;
+        case 7:
+            pyroBonus = 33.48;
+            electroBonus = 0.558;
+            break;
+        case 8:
+            pyroBonus = 35.71;
+            electroBonus = 0.595;
+            break;
+        case 9:
+            pyroBonus = 37.94;
+            electroBonus = 0.632;
+            break;
+        case 10:
+            pyroBonus = 40.18;
+            electroBonus = 0.669;
+            break;
+        case 11:
+            pyroBonus = 42.41;
+            electroBonus = 0.707;
+            break;
+        case 12:
+            pyroBonus = 44.64;
+            electroBonus = 0.744;
+            break;
+        case 13:
+            pyroBonus = 47.43;
+            electroBonus = 0.791;
+            break;
+    }
+    switch (supportingElement){
+        case "Pyro":
+            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
+            break;
+        case "Electro":
+            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroBonus });
+            break;
+        default:
+            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: 0 });
+            break;
+    }
+    return 0;
 }

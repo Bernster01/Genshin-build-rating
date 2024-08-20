@@ -15000,6 +15000,368 @@ const Mona = {
         }
     }
 };
+const Nahida = {
+    name: "Nahida",
+    src: "Assets/Characters/Nahida/Nahida.webp",
+    card: "Assets/Characters/Nahida/Character_Nahida_Portrait.webp",
+    element: "DendroCharacter",
+    baseAttack: function () {
+        let baseattack = {
+            ["1b"]: 23.28,
+            ["20b"]: 60.38,
+            ["20a"]: 80.33,
+            ["40b"]: 120.20,
+            ["40a"]: 134.38,
+            ["50b"]: 154.60,
+            ["50a"]: 173.51,
+            ["60b"]: 193.94,
+            ["60a"]: 208.12,
+            ["70b"]: 228.74,
+            ["70a"]: 242.92,
+            ["80b"]: 263.78,
+            ["80a"]: 277.96,
+            ["90b"]: 298.97
+        }
+        return baseattack[this.level];
+    },
+    baseHP: function () {
+        let baseHP = {
+            ["1b"]: 806.51,
+            ["20b"]: 2092.08,
+            ["20a"]: 2783.59,
+            ["40b"]: 4165.14,
+            ["40a"]: 4656.48,
+            ["50b"]: 5357.33,
+            ["50a"]: 6012.45,
+            ["60b"]: 6720.56,
+            ["60a"]: 7211.89,
+            ["70b"]: 7926.46,
+            ["70a"]: 8417.80,
+            ["80b"]: 9140.43,
+            ["80a"]: 9631.76,
+            ["90b"]: 10360.04,
+        }
+        return baseHP[this.level];
+    },
+    baseDEF: function () {
+        let baseDEF = {
+            ["1b"]: 49.06,
+            ["20b"]: 127.26,
+            ["20a"]: 169.33,
+            ["40b"]: 253.37,
+            ["40a"]: 283.26,
+            ["50b"]: 325.89,
+            ["50a"]: 365.74,
+            ["60b"]: 408.82,
+            ["60a"]: 438.71,
+            ["70b"]: 482.18,
+            ["70a"]: 512.07,
+            ["80b"]: 556.02,
+            ["80a"]: 585.91,
+            ["90b"]: 630.21,
+        }
+        return baseDEF[this.level];
+    },
+    elementalMastery: 0,
+    advancedstats: {
+        critRate: 5,
+        critDMG: 50,
+        healingBonus: 0,
+        incomingHealingBonus: 0,
+        energyRecharge: 100,
+        cdReduction: 0,
+        shieldStrength: 0,
+        elementalBonuses: [
+            { Type: "PyroDMGBonus", Value: 0 },
+            { Type: "HydroDMGBonus", Value: 0 },
+            { Type: "DendroDMGBonus", Value: 0 },
+            { Type: "ElectroDMGBonus", Value: 0 },
+            { Type: "AnemoDMGBonus", Value: 0 },
+            { Type: "CryoDMGBonus", Value: 0 },
+            { Type: "GeoDMGBonus", Value: 0 },
+            { Type: "PhysicalDMGBonus", Value: 0 }
+
+        ]
+
+    },
+
+    scalingType: "ATK",
+    normalAttackTalent: 1,
+    elementalSkillTalent: 1,
+    elementalBurstTalent: 1,
+    energyOffset: 150,
+    supportType: "Sub-dps",
+    sequence: {
+        ["Dps"]: ["Q", "E", "N1", "N2", "N4", "C", "N1", "N2", "N3", "N4", "E", "N1", "N2", "N3", "N4", "C"],
+        ["Support"]: ["Q", "E", "N1", "N2", "N1", "N2"],
+    },
+    weaponType: "Catalyst",
+    normalAttack1: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 40.3 / 100;
+                case 2:
+                    return 43.33 / 100;
+                case 3:
+                    return 46.35 / 100;
+                case 4:
+                    return 50.38 / 100;
+                case 5:
+                    return 53.4 / 100;
+                case 6:
+                    return 56.43 / 100;
+                case 7:
+                    return 60.46 / 100;
+                case 8:
+                    return 64.49 / 100;
+                case 9:
+                    return 68.52 / 100;
+                case 10:
+                    return 72.55 / 100;
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    normalAttack2: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 36.97 / 100;
+                case 2:
+                    return 39.75 / 100;
+                case 3:
+                    return 42.52 / 100;
+                case 4:
+                    return 46.22 / 100;
+                case 5:
+                    return 48.99 / 100;
+                case 6:
+                    return 51.76 / 100;
+                case 7:
+                    return 55.46 / 100;
+                case 8:
+                    return 59.16 / 100;
+                case 9:
+                    return 62.86 / 100;
+                case 10:
+                    return 66.55 / 100;
+            }
+
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+
+    },
+    normalAttack3: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 45.87 / 100;
+                case 2:
+                    return 49.31 / 100;
+                case 3:
+                    return 52.76 / 100;
+                case 4:
+                    return 57.34 / 100;
+                case 5:
+                    return 60.78 / 100;
+                case 6:
+                    return 64.22 / 100;
+                case 7:
+                    return 68.81 / 100;
+                case 8:
+                    return 73.4 / 100;
+                case 9:
+                    return 77.99 / 100;
+                case 10:
+                    return 82.57 / 100;
+            }
+
+
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack4: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 58.41 / 100;
+                case 2:
+                    return 62.79 / 100;
+                case 3:
+                    return 67.17 / 100;
+                case 4:
+                    return 73.01 / 100;
+                case 5:
+                    return 77.39 / 100;
+                case 6:
+                    return 81.77 / 100;
+                case 7:
+                    return 87.61 / 100;
+                case 8:
+                    return 93.45 / 100;
+                case 9:
+                    return 99.29 / 100;
+                case 10:
+                    return 105.13 / 100;
+            }
+
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttack5: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 0 / 100;
+                case 2:
+                    return 0 / 100;
+                case 3:
+                    return 0 / 100;
+                case 4:
+                    return 0 / 100;
+                case 5:
+                    return 0 / 100;
+                case 6:
+                    return 0 / 100;
+                case 7:
+                    return 0 / 100;
+                case 8:
+                    return 0 / 100;
+                case 9:
+                    return 0 / 100;
+                case 10:
+                    return 0 / 100;
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    chargedAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 132 / 100;
+                case 2:
+                    return 141.9 / 100;
+                case 3:
+                    return 151.8 / 100;
+                case 4:
+                    return 165 / 100;
+                case 5:
+                    return 174.9 / 100;
+                case 6:
+                    return 184.8 / 100;
+                case 7:
+                    return 198 / 100;
+                case 8:
+                    return 211.2 / 100;
+                case 9:
+                    return 224.4 / 100;
+                case 10:
+                    return 237.6 / 100;
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: true,
+        scaling: "ATK"
+    },
+    plungeAttack: {
+        Multiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 0 / 100;
+                case 2:
+                    return 0 / 100;
+                case 3:
+                    return 0 / 100;
+                case 4:
+                    return 0 / 100;
+                case 5:
+                    return 0 / 100;
+                case 6:
+                    return 0 / 100;
+                case 7:
+                    return 0 / 100;
+                case 8:
+                    return 0 / 100;
+                case 9:
+                    return 0 / 100;
+                case 10:
+                    return 0 / 100;
+            }
+        },
+        Element: "DendroDMGBonus",
+        isReaction: false,
+        scaling: "ATK"
+    },
+    normalAttackLevel: 1,
+    ascensionStat: function () {
+        let values = {
+            ["1b"]: 0,
+            ["20b"]: 0,
+            ["20a"]: 0,
+            ["40b"]: 0,
+            ["40a"]: 28.8,
+            ["50b"]: 28.8,
+            ["50a"]: 57.6,
+            ["60b"]: 57.6,
+            ["60a"]: 57.6,
+            ["70b"]: 57.6,
+            ["70a"]: 86.4,
+            ["80b"]: 86.4,
+            ["80a"]: 115.2,
+            ["90b"]: 115.2
+        }
+
+        return { Type: "ElementalMastery", Value: values[this.level] };
+
+    },
+    elementalSkill: {
+        Skill: allSchemestoKnow,
+        Level: 1
+    },
+    elementalBurst: {
+        Skill: illusoryHeart,
+        Level: 1
+    },
+    passive1: {
+        Type: "ElementalMastery",
+        Value: 200
+    },
+    passive2: {
+        Type: "Awakening Elucidated",
+        Value: null
+    },
+    constellations: {
+        Amount: 0,
+        constellation: function () {
+            let allConstellations = {
+                [1]: null,
+                [2]: null,
+                [3]: null,
+                [4]: null,
+                [5]: null,
+                [6]: null,
+            }
+            let activeConstellations = [];
+            for (let index = 1; index < this.Amount; index++) {
+                activeConstellations.push(allConstellations[index])
+
+            }
+            return activeConstellations;
+        }
+    }
+};
 const Neuvillette = {
     name: "Neuvillette",
     src: "Assets/Characters/Neuvillette/Neuvillette.webp",
@@ -23336,6 +23698,7 @@ const AllCharacters = {
     ["Layla"]: Layla,
     ["Lisa"]: Lisa,
     ["Mona"]: Mona,
+    ["Nahida"]: Nahida,
     ["Neuvillette"]: Neuvillette,
     ["Ningguang"]: Ningguang,
     ["Noelle"]: Noelle,
@@ -23366,7 +23729,7 @@ const AllCharacters = {
     index: ["Albedo", "Alhaitham", "Aloy", "Amber", "Arlecchino", "Ayaka", "Ayato", "Baizhu", "Barbara", "Beidou", "Bennett",
         "Candace", "Charlotte", "Chevreuse", "Chiori", "Chongyun", "Clorinde", "Collei", "Cyno", "Dehya", "Diluc", "Diona", "Dori",
         "Emilie", "Eula", "Faruzan", "Fischl", "Freminet", "Furina", "Gaming", "Ganyu", "Gorou", "Hu Tao", "Itto", "Jean",
-        "Kaeya", "Kaveh", "Kazuha", "Keqing", "Kirara", "Klee", "Kokomi", "Kuki", "Layla", "Lisa", "Mona", "Neuvillette", "Ningguang", "Noelle",
+        "Kaeya", "Kaveh", "Kazuha", "Keqing", "Kirara", "Klee", "Kokomi", "Kuki", "Layla", "Lisa", "Mona","Nahida", "Neuvillette", "Ningguang", "Noelle",
         "Qiqi", "Raiden", "Razor", "Rosaria", "Sara", "Sayu", "Shenhe", "Sucrose", "Thoma", "Tartaglia", "Traveler (Anemo)",
         "Traveler (Electro)", "Traveler (Geo)", "Venti", "Xiangling", "Xiao", "Xingqiu",
         "Xinyan", "Yae Miko", "Yanfei", "Yelan", "Yoimiya", "Yun Jin", "Zhongli"]

@@ -5461,14 +5461,124 @@ function nightsofFormalFocus(character) {
     }
 
     if (hasA4 && !hasBuff)
-        character.currentBuffs.push({ Type: "FlatDMG", Value: (character.HP()/100) * 1.5, for: "Shooting Star" });
+        character.currentBuffs.push({ Type: "FlatDMG", Value: (character.HP() / 100) * 1.5, for: "Shooting Star" });
     for (let i = 0; i < 5; i++) {
         shootingStar.isReaction = true;
-        dmg += dmgCalc(shootingStar, character) ;
+        dmg += dmgCalc(shootingStar, character);
         shootingStar.isReaction = false;
         for (let j = 0; j < 3; j++) {
-            dmg += dmgCalc(shootingStar, character) ;
+            dmg += dmgCalc(shootingStar, character);
         }
     }
     return { dmg: dmg, shield: shield };
+}
+function allSchemestoKnow(character) {
+    let holdDMG = 0;
+    let triKarmaDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            holdDMG = 130.4 / 100;
+            triKarmaDMG = (character.attack() * (103.2 / 100)) + (character.EM() * (206.4 / 100));
+            break;
+        case 2:
+            holdDMG = 140.18 / 100;
+            triKarmaDMG = (character.attack() * (110.94 / 100)) + (character.EM() * (221.88 / 100));
+            break;
+        case 3:
+            holdDMG = 149.96 / 100;
+            triKarmaDMG = (character.attack() * (118.68 / 100)) + (character.EM() * (237.36 / 100));
+            break;
+        case 4:
+            holdDMG = 163 / 100;
+            triKarmaDMG = (character.attack() * (129 / 100)) + (character.EM() * (258 / 100));
+            break;
+        case 5:
+            holdDMG = 172.78100;
+            triKarmaDMG = (character.attack() * (136.74 / 100)) + (character.EM() * (273.48 / 100));
+            break;
+        case 6:
+            holdDMG = 182.56 / 100;
+            triKarmaDMG = (character.attack() * (144.48 / 100)) + (character.EM() * (288.96 / 100));
+            break;
+        case 7:
+            holdDMG = 195.6 / 100;
+            triKarmaDMG = (character.attack() * (154.8 / 100)) + (character.EM() * (309.6 / 100));
+            break;
+        case 8:
+            holdDMG = 208.64 / 100;
+            triKarmaDMG = (character.attack() * (165.12 / 100)) + (character.EM() * (330.24 / 100));
+            break;
+        case 9:
+            holdDMG = 221.68 / 100;
+            triKarmaDMG = (character.attack() * (175.44 / 100)) + (character.EM() * (350.88 / 100));
+            break;
+        case 10:
+            holdDMG = 234.72 / 100;
+            triKarmaDMG = (character.attack() * (185.76 / 100)) + (character.EM() * (371.52 / 100));
+            break;
+        case 11:
+            holdDMG = 247.76 / 100;
+            triKarmaDMG = (character.attack() * (196.08 / 100)) + (character.EM() * (392.16 / 100));
+            break;
+        case 12:
+            holdDMG = 260.8 / 100;
+            triKarmaDMG = (character.attack() * (206.4 / 100)) + (character.EM() * (412.8 / 100));
+            break;
+        case 13:
+            holdDMG = 277.1 / 100;
+            triKarmaDMG = (character.attack() * (219.3 / 100)) + (character.EM() * (438.6 / 100));
+            break;
+    }
+    let holdAttack = { Multiplier: holdDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let triKarma = { Multiplier: triKarmaDMG, Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" }
+    let dmg = dmgCalc(holdAttack, character) * numberOfEnemies;
+    let dmgBonus = 0;
+    let intervalBonus = 0;
+    let hasBuff = false;
+    let hasA4 = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Illusory Heart") {
+            dmgBonus = buff.pyroBonus
+            intervalBonus = buff.electroBonus;
+            continue;
+        } else if (buff.Type == "ElementalSkill" && buff.for == "tri-karma") {
+            hasBuff = true;
+        } else if (buff.Type == "Pupillary Variance") {
+            hasA4 = true;
+
+        }
+    }
+    if (!hasBuff) {
+        character.currentBuffs.push({ Type: "ElementalSkill", Value: dmgBonus, for: "tri-karma" });
+    }
+    let critBonus = 0;
+    if (hasA4) {
+        let emForBonus = character.EM() - 200;
+        if(emForBonus < 0){
+            emForBonus = 0;
+        }
+        character.currentBuffs.push({
+            Type: "AddativeBonusDMG",
+            Value: emForBonus * 0.1,
+            Source: "Pupillary Variance",
+        });
+        critBonus = emForBonus*0.03;
+        character.advancedstats.critRate += critBonus;
+    }
+    let interval = Math.floor(25 / (1.5 - intervalBonus));
+    let containing = ["Pyro", "Electro", "Hydro"];
+    if (containing.includes(supportingElement)) {
+        for (let i = 0; i < interval; i++) {
+            dmg += dmgCalc(triKarma, character) * numberOfEnemies-1;
+        }
+    }
+    character.advancedstats.critRate -= critBonus;
+    if(hasA4){
+        for (buff of character.currentBuffs) {
+            if (buff.Source == "Pupillary Variance") {
+                character.currentBuffs.pop(buff);
+            }
+        }
+    }
+    return dmg;
 }
