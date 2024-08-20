@@ -4927,3 +4927,61 @@ function shadowhuntersAmbush(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
 }
+
+function gyoeiNarukamiKariyamaRite(character) {
+    let singleInstanceDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            singleInstanceDMG = 3.6 / 100;
+            break;
+        case 2:
+            singleInstanceDMG = 3.88 / 100;
+            break;
+        case 3:
+            singleInstanceDMG = 4.15 / 100;
+            break;
+        case 4:
+            singleInstanceDMG = 4.51 / 100;
+            break;
+        case 5:
+            singleInstanceDMG = 4.78 / 100;
+            break;
+        case 6:
+            singleInstanceDMG = 5.05 / 100;
+            break;
+        case 7:
+            singleInstanceDMG = 5.41 / 100;
+            break;
+        case 8:
+            singleInstanceDMG = 5.77 / 100;
+            break;
+        case 9:
+            singleInstanceDMG = 6.13 / 100;
+            break;
+        case 10:
+            singleInstanceDMG = 6.49 / 100;
+            break;
+        case 11:
+            singleInstanceDMG = 6.85 / 100;
+            break;
+        case 12:
+            singleInstanceDMG = 7.21 / 100;
+            break;
+        case 13:
+            singleInstanceDMG = 7.66 / 100;
+            break;
+    }
+    let attack = { Multiplier: singleInstanceDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for (let i = 0; i < 12; i++) {
+        if(i%3==0 || i==0)
+        {
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }   
+        dmg += dmgCalc(attack, character) * 2;//Max 2 enemies hit
+    }
+    return {dmg:dmg};
+}

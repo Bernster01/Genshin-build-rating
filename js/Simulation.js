@@ -18,6 +18,16 @@ let endEarly = false;
 let getJSON = false;
 let targetsBurning = false;
 let persTimer = -1;
+let elementalDMGSources ={
+    superconductDMG: 0,
+    overloadDMG: 0,
+    electrochargedDMG: 0,
+    bloomDMG: 0,
+    burningDMG: 0,
+    hyperbloomDMG: 0,
+    burgeoningDMG: 0,
+    swirlDMG: 0,
+}
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -772,6 +782,13 @@ function resetVariables() {
     shenheCounter = 0;
     targetsBurning = false;
     persTimer = -1;
+    elementalDMGSources.superconductDMG = 0;
+    elementalDMGSources.overloadDMG = 0;
+    elementalDMGSources.electrochargedDMG = 0;
+    elementalDMGSources.bloomDMG = 0;
+    elementalDMGSources.burningDMG = 0;
+    elementalDMGSources.hyperbloomDMG = 0;
+    elementalDMGSources.burgeoningDMG = 0;
 }
 function Simulation(character) {
 
@@ -1245,10 +1262,19 @@ function Simulation(character) {
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         bonusMultiplier = (atkBuff * 2) + 100;
     let tmp = 0;
-    for (dmgSource in dmgSources) {
-        dmgSources[dmgSource] = Math.round(dmgSources[dmgSource]);
-        tmp += dmgSources[dmgSource];
+    for (source in dmgSources) {
+        dmgSources[source] = Math.round(dmgSources[source]);
+        tmp += dmgSources[source];
     }
+    //Add elementalDMG sources to dmgsources if they are not 0
+    let transformitiveDMG = 0;
+    for (source in elementalDMGSources) {
+        if (elementalDMGSources[source] != 0) {
+            dmgSources[source] = elementalDMGSources[source];
+            transformitiveDMG += elementalDMGSources[source];
+        }
+    }
+    totalDmg += transformitiveDMG;
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff + bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
@@ -1291,7 +1317,7 @@ function dmgCalc(attackAction, Character) {
         * getCrit(Character)
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
-    dmg = attackAction.isReaction ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : dmg;
+    dmg = (attackAction.isReaction || (supportingElement == "Bloom" && (attackAction.Element == "PyroDMGBonus" || attackAction.Element == "ElectroDMGBonus"))) ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : dmg;
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -1669,7 +1695,7 @@ function resCalc(character, element) {
         return (1 / (4 * res + 1));
     }
 }
-function elementalMasteryCalc(dmg, type, character) {
+function elementalMasteryCalc(incomingDmg, type, character) {
     type = type.slice(0, type.length - 8);
     let em = character.EM();
     let lvl = Number.parseInt(character.level.slice(0, character.level.length - 1));
@@ -1683,11 +1709,13 @@ function elementalMasteryCalc(dmg, type, character) {
     let bloomBonus = 0;
     let hyperbloomBonus = 0;
     let burgeoningBonus = 0;
+    let dmg = 0;
+    let amplyfyingReaction = false;
     if (supportingElement == null) {
-        return dmg;
+        return incomingDmg;
     }
     else if (supportingElement == type) {
-        return dmg;
+        return incomingDmg;
     }
     else {
         character.currentBuffs.forEach(buff => {
@@ -1733,32 +1761,40 @@ function elementalMasteryCalc(dmg, type, character) {
             case "Pyro":
                 switch (type) {
                     case "Hydro":
-                        dmg *= vaporizeMultiplier;
+                        dmg = vaporizeMultiplier * incomingDmg;
+                        amplyfyingReaction = true;
                         break;
                     case "Electro":
                         dmg += overloaded(em, lvl, "Pyro", character, overloadedBonus);
+                        elementalDMGSources.overloadDMG += dmg;
                         break;
                     case "Cryo":
-                        dmg *= reverseMeltMultiplier;
+                        dmg = reverseMeltMultiplier * incomingDmg;
+                        amplyfyingReaction = true;
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Pyro", character, swirlBonus);
+                        elementalDMGSources.swirlDMG += dmg;
                         break;
                     case "Dendro":
                         dmg += burning(em, lvl, "Pyro", character, burningBonus);
+                        elementalDMGSources.burningDMG += dmg;
                         break;
                 }
                 break;
             case "Hydro":
                 switch (type) {
                     case "Pyro":
-                        dmg *= reverseVaporizeMultiplier;
+                        dmg = reverseVaporizeMultiplier * incomingDmg;
+                        amplyfyingReaction = true;
                         break;
                     case "Electro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
+                        elementalDMGSources.electroChargedDMG += dmg;
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Hydro", character, swirlBonus);
+                        elementalDMGSources.swirlDMG += dmg;
                         break;
                     case "Cryo":
                         if (!enemiesFrozen) {
@@ -1774,6 +1810,7 @@ function elementalMasteryCalc(dmg, type, character) {
                         break;
                     case "Dendro":
                         dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
+                        elementalDMGSources.bloomDMG += dmg;
                         break;
                 }
                 break;
@@ -1781,12 +1818,15 @@ function elementalMasteryCalc(dmg, type, character) {
                 switch (type) {
                     case "Electro":
                         dmg += superconduct(em, lvl, "Cryo", character, superconductBonus);
+                        elementalDMGSources.superconductDMG += dmg;
                         break;
                     case "Pyro":
-                        dmg *= meltMultiplier;
+                        dmg = meltMultiplier * incomingDmg;
+                        amplyfyingReaction = true;
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Cryo", character, swirlBonus);
+                        elementalDMGSources.swirlDMG += dmg;
                         break;
                     case "Hydro":
                         if (!enemiesFrozen) {
@@ -1806,29 +1846,36 @@ function elementalMasteryCalc(dmg, type, character) {
                 switch (type) {
                     case "Hydro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
+                        elementalDMGSources.electroChargedDMG += dmg;
                         break;
                     case "Pyro":
                         dmg += overloaded(em, lvl, "Pyro", character, overloadedBonus);
+                        elementalDMGSources.overloadDMG += dmg;
                         break;
                     case "Cryo":
                         dmg += superconduct(em, lvl, "Cryo", character, superconductBonus);
+                        elementalDMGSources.superconductDMG += dmg;
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Electro", character, swirlBonus)
+                        elementalDMGSources.swirlDMG += dmg;
                         break;
                 }
                 break;
             case "Anemo":
                 if (type != "Anemo")
                     dmg += swirl(em, lvl, type, character, swirlBonus);
+                    elementalDMGSources.swirlDMG += dmg;
                 break;
             case "Dendro":
                 switch (type) {
                     case "Pyro":
                         dmg += burning(em, lvl, "Pyro", character, burningBonus);
+                        elementalDMGSources.burningDMG += dmg;
                         break;
                     case "Hydro":
                         dmg += bloom(em, lvl, "Hydro", character, bloomBonus);
+                        elementalDMGSources.bloomDMG += dmg;
                         break;
 
 
@@ -1838,14 +1885,19 @@ function elementalMasteryCalc(dmg, type, character) {
                 switch (type) {
                     case "Pyro":
                         dmg += burgeoning(em, lvl, "Pyro", character, burgeoningBonus);
+                        elementalDMGSources.burgeoningDMG += dmg;
                         break;
                     case "Electro":
                         dmg += hyperbloom(em, lvl, "Electro", character, hyperbloomBonus);
+                        elementalDMGSources.hyperbloomDMG += dmg;
                         break;
                 }
 
         }
-        return dmg;
+        if (amplyfyingReaction)
+            return dmg;
+        else
+            return incomingDmg;
     }
 }
 function overloaded(em, lvl, element, character, overloadedBonus) {

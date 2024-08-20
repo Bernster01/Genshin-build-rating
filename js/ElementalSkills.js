@@ -5059,7 +5059,7 @@ function pressurizedFloe(character) {
     let frost = { Multiplier: frostDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let shatteringPressureAttack = { Multiplier: shatteringPressure, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let shatteringPressureAttack4 = { Multiplier: shatteringPressure4, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
-    let dmg = dmgCalc(frost*2, character) * numberOfEnemies*1.6;//1.6 avg normal attacks per e use
+    let dmg = dmgCalc(frost * 2, character) * numberOfEnemies * 1.6;//1.6 avg normal attacks per e use
     switch (persTimer) {
         case -1:
             dmg += dmgCalc(upwardThrust, character) * numberOfEnemies;
@@ -5082,4 +5082,101 @@ function pressurizedFloe(character) {
             break;
     }
     return dmg;
+}
+
+function sanctifyingRing(character) {
+    let skillDMG = 0;
+    let grassRingofSancitifactionDMG = 0;
+    let grassRingofSancitifactionHealing = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 75.71 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(3 / 100) + 288.89;
+            grassRingofSancitifactionDMG = 25.24 / 100;
+            break;
+        case 2:
+            skillDMG = 81.39 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(3.23 / 100) + 317.78;
+            grassRingofSancitifactionDMG = 27.13 / 100;
+            break;
+        case 3:
+            skillDMG = 87.07 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(3.45 / 100) + 349.08;
+            grassRingofSancitifactionDMG = 29.03 / 100;
+            break;
+        case 4:
+            skillDMG = 94.64 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(3.75 / 100) + 382.79;
+            grassRingofSancitifactionDMG = 31.55 / 100;
+            break;
+        case 5:
+            skillDMG = 100.32 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(3.98 / 100) + 418.91;
+            grassRingofSancitifactionDMG = 33.44 / 100;
+            break;
+        case 6:
+            skillDMG = 106 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(4.2 / 100) + 457.43;
+            grassRingofSancitifactionDMG = 35.34 / 100;
+            break;
+        case 7:
+            skillDMG = 113.57 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(4.5 / 100) + 498.37;
+            grassRingofSancitifactionDMG = 37.86 / 100;
+            break;
+        case 8:
+            skillDMG = 121.14 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(4.8 / 100) + 541.71;
+            grassRingofSancitifactionDMG = 40.38 / 100;
+            break;
+        case 9:
+            skillDMG = 128.71 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(5.1 / 100) + 587.45;
+            grassRingofSancitifactionDMG = 42.91 / 100;
+            break;
+        case 10:
+            skillDMG = 136.28 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(5.4 / 100) + 635.61;
+            grassRingofSancitifactionDMG = 45.43 / 100;
+            break;
+        case 11:
+            skillDMG = 143.85 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(5.7 / 100) + 686.17;
+            grassRingofSancitifactionDMG = 47.96 / 100;
+            break;
+        case 12:
+            skillDMG = 151.42 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(6 / 100) + 739.14;
+            grassRingofSancitifactionDMG = 50.48 / 100;
+            break;
+        case 13:
+            skillDMG = 160.89 / 100;
+            grassRingofSancitifactionHealing = character.HP()*(6.38 / 100) + 794.52;
+            grassRingofSancitifactionDMG = 53.63 / 100;
+            break;
+        
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let grassRingofSancitifaction = { Multiplier: grassRingofSancitifactionDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let hasA4 = false;
+    for(buff of character.currentBuffs){
+        if(buff.Type == "Heart's Repose"){
+            hasA4 = true;
+        }
+    }
+    if(hasA4){
+        character.currentBuffs.push({Type:"FlatDMG", Value: (25/100)*character.EM(), Source:"Heart's Repose", for:"ElementalSkill"});
+        grassRingofSancitifactionHealing += ((75/100)*character.EM());
+    }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    for(let i = 0; i < 8; i++){
+        if(i%2==0){
+            grassRingofSancitifaction.isReaction = true;
+        }
+        else{
+            grassRingofSancitifaction.isReaction = false;
+        }
+        dmg += dmgCalc(grassRingofSancitifaction, character) * numberOfEnemies;
+    }
+    return {dmg:dmg, healing:grassRingofSancitifactionHealing};
 }
