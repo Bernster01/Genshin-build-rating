@@ -5805,22 +5805,70 @@ function danceofHaftkarsvar(character) {
             break;
     }
     let skillAttack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" }
-    character.normalAttack1.Multiplier = function (level) { return swordHit1DMG};
+    character.normalAttack1.Multiplier = function (level) { return swordHit1DMG };
     character.normalAttack1.Element = "HydroDMGBonus";
     character.normalAttack1.isReaction = true;
     character.normalAttack1.scaling = "HP";
-    character.normalAttack2.Multiplier = function (level) { return swordHit2DMG};
+    character.normalAttack2.Multiplier = function (level) { return swordHit2DMG };
     character.normalAttack2.Element = "HydroDMGBonus";
     character.normalAttack2.isReaction = false;
     character.normalAttack2.scaling = "HP";
-    character.normalAttack3.Multiplier = function (level) { return luminousIllusionDMG};
+    character.normalAttack3.Multiplier = function (level) { return luminousIllusionDMG };
     character.normalAttack3.Element = "HydroDMGBonus";
     character.normalAttack3.isReaction = false;
     character.normalAttack3.scaling = "HP";
 
-    if(supportingElement=="Dendro"){
+    if (supportingElement == "Dendro") {
         shouldGenerateBountifulCores = true;
     }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
+}
+
+function razorgrassBlade(character) {
+    let skillDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 230.4 / 100;
+            break;
+        case 2:
+            skillDMG = 247.68 / 100;
+            break;
+        case 3:
+            skillDMG = 264.96 / 100;
+            break;
+        case 4:
+            skillDMG = 288 / 100;
+            break;
+        case 5:
+            skillDMG = 305.28 / 100;
+            break;
+        case 6:
+            skillDMG = 322.56 / 100;
+            break;
+        case 7:
+            skillDMG = 345.6 / 100;
+            break;
+        case 8:
+            skillDMG = 368.64 / 100;
+            break;
+        case 9:
+            skillDMG = 391.68 / 100;
+            break;
+        case 10:
+            skillDMG = 414.72 / 100;
+            break;
+        case 11:
+            skillDMG = 437.76 / 100;
+            break;
+        case 12:
+            skillDMG = 460.8 / 100;
+            break;
+        case 13:
+            skillDMG = 489.6 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
 }

@@ -5541,3 +5541,83 @@ function danceofAbzendegiDistantDreamListeningSpring(character) {
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     return dmg;
 }
+
+function surgentManifestation(character) {
+    let leaLotusLampAttackDMG = 0;
+    let explosionDMG = 0
+    switch (character.elementalBurst.Level) {
+        case 1:
+            leaLotusLampAttackDMG = 80.16 / 100;
+            explosionDMG = 400.8 / 100;
+            break;
+        case 2:
+            leaLotusLampAttackDMG = 86.17 / 100;
+            explosionDMG = 430.86 / 100;
+            break;
+        case 3:
+            leaLotusLampAttackDMG = 92.18 / 100;
+            explosionDMG = 460.92 / 100;
+            break;
+        case 4:
+            leaLotusLampAttackDMG = 100.2 / 100;
+            explosionDMG = 501 / 100;
+            break;
+        case 5:
+            leaLotusLampAttackDMG = 106.21 / 100;
+            explosionDMG = 531.06 / 100;
+            break;
+        case 6:
+            leaLotusLampAttackDMG = 112.22 / 100;
+            explosionDMG = 561.12 / 100;
+            break;
+        case 7:
+            leaLotusLampAttackDMG = 120.24 / 100;
+            explosionDMG = 601.2 / 100;
+            break;
+        case 8:
+            leaLotusLampAttackDMG = 128.26 / 100;
+            explosionDMG = 641.28 / 100;
+            break;
+        case 9:
+            leaLotusLampAttackDMG = 136.27 / 100;
+            explosionDMG = 681.36 / 100;
+            break;
+        case 10:
+            leaLotusLampAttackDMG = 144.29 / 100;
+            explosionDMG = 721.44 / 100;
+            break;
+        case 11:
+            leaLotusLampAttackDMG = 152.3 / 100;
+            explosionDMG = 761.52 / 100;
+            break;
+        case 12:
+            leaLotusLampAttackDMG = 160.32 / 100;
+            explosionDMG = 801.6 / 100;
+            break;
+        case 13:
+            leaLotusLampAttackDMG = 170.34 / 100;
+            explosionDMG = 851.7 / 100;
+            break;
+    }
+    let attack = { Multiplier: leaLotusLampAttackDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: explosionDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    let hits = 8;
+    if (supportingElement == "Electro")
+        hits = 13;
+    for (let i = 0; i < hits; i++) {
+        if (i % 2 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+        if (supportingElement == "Pyro") {
+            dmg += dmgCalc(attack2, character) * numberOfEnemies;
+            break;
+        }
+    }
+    return dmg;
+
+}
