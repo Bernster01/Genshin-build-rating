@@ -1,4 +1,30 @@
 //#region Swords 
+const Absolution = {
+    name: "Absolution",
+    src: "Weapons/Weapon_Absolution.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "9.6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"CritDMG",Value:20}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 
 const AmenomaKageuchi = {
     name: "Amenoma Kageuchi",
@@ -2813,6 +2839,7 @@ function getSubStat(weapon) {
 
 }
 const AllWeapons = {
+    ["Absolution"]: Absolution,
     ["Alley Hunter"]:AlleyHunter,
     ["Akuoumaru"]:Akuoumaru,
     ["Amenoma Kageuchi"]: AmenomaKageuchi,
@@ -2916,6 +2943,7 @@ const AllWeapons = {
     ["Wine and Song"]:WineAndSong,
     ["Wolf's Gravestone"]:WolfsGravestone,
     index:[
+        "Absolution",
         "Akuoumaru",
         "Alley Hunter",
         "Amenoma Kageuchi",
@@ -3021,6 +3049,7 @@ const AllWeapons = {
         
     ],
     ["Sword"]:[
+        "Absolution",
         "Amenoma Kageuchi",
         "Aquila Favonia",
         "Blackcliff Longsword",

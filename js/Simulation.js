@@ -283,6 +283,16 @@ class Createcharacter {
             this.bondOfLife += amount;
             if (this.bondOfLife > 200)
                 this.bondOfLife = 200;
+            //Absolution passive
+            if (this.weapon.name == "Absolution") {
+                let stacks = 0;
+                this.currentBuffs.forEach(buff => {
+                    if (buff.Source == "Absolution")
+                        stacks++;
+                });
+                if (stacks < 3)
+                    this.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 16, Source: "Absolution" });
+            }
 
         }
         this.getBuffOfType = function (type) {
