@@ -5655,19 +5655,66 @@ function heartstopperStrike(character) {
     }
     let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let hasBuff = false;
-    let declensionBuff="";
-    for(buff of character.currentBuffs){
-        if(buff.Type == "AddativeBonusDMG" && buff.Source == "Declension"){
+    let declensionBuff = "";
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "AddativeBonusDMG" && buff.Source == "Declension") {
             hasBuff = true;
             declensionBuff = buff;
         }
     }
-    if(!hasBuff){
-        character.currentBuffs.push({Type: "AddativeBonusDMG", Value: ((declensionDMGBonus*4)+convictionDMGBonus), Source: "Declension"});
+    if (!hasBuff) {
+        character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: ((declensionDMGBonus * 4) + convictionDMGBonus), Source: "Declension" });
     }
     dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-    if(!hasBuff){
+    if (!hasBuff) {
         character.currentBuffs.pop(declensionBuff);
     }
+    return dmg;
+}
+function enigmaticFeint(character) {
+    let skillDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 268 / 100;
+            break;
+        case 2:
+            skillDMG = 288.1 / 100;
+            break;
+        case 3:
+            skillDMG = 308.2 / 100;
+            break;
+        case 4:
+            skillDMG = 335 / 100;
+            break;
+        case 5:
+            skillDMG = 355.1 / 100;
+            break;
+        case 6:
+            skillDMG = 375.2 / 100;
+            break;
+        case 7:
+            skillDMG = 402 / 100;
+            break;
+        case 8:
+            skillDMG = 428.8 / 100;
+            break;
+        case 9:
+            skillDMG = 455.6 / 100;
+            break;
+        case 10:
+            skillDMG = 482.4 / 100;
+            break;
+        case 11:
+            skillDMG = 509.2 / 100;
+            break;
+        case 12:
+            skillDMG = 536 / 100;
+            break;
+        case 13:
+            skillDMG = 569.5 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
 }

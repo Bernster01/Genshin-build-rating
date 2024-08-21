@@ -5368,17 +5368,112 @@ function windmusterKick(character) {
             windmusterIrisDMG = 45.59 / 100;
             break;
     }
-    
+
     let attack = { Multiplier: fudoiStyleVacuumSluggerDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: windmusterIrisDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     let validElements = ["Pyro", "Hydro", "Electro", "Cryo"];
-    if(validElements.includes(supportingElement)){
+    if (validElements.includes(supportingElement)) {
         let element = supportingElement + "DMGBonus";
-        for(let i = 0;i<3;i++){
+        for (let i = 0; i < 3; i++) {
             attack.Element = element;
             dmg += dmgCalc(attack2, character) * numberOfEnemies;
         }
+    }
+    return dmg;
+}
+
+function magicTrickAstonishingShift(character) {
+    let skillDMG = 0;
+    let boogleCatBoxDMG = 0;
+    let vividShotDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 83.2 / 100;
+            boogleCatBoxDMG = 51.2 / 100;
+            vividShotDMG = 45.6 / 100;
+            break;
+        case 2:
+            skillDMG = 89.44 / 100;
+            boogleCatBoxDMG = 55.04 / 100;
+            vividShotDMG = 49.02 / 100;
+            break;
+        case 3:
+            skillDMG = 95.68 / 100;
+            boogleCatBoxDMG = 58.88 / 100;
+            vividShotDMG = 52.44 / 100;
+            break;
+        case 4:
+            skillDMG = 104 / 100;
+            boogleCatBoxDMG = 64 / 100;
+            vividShotDMG = 57 / 100;
+            break;
+        case 5:
+            skillDMG = 110.24 / 100;
+            boogleCatBoxDMG = 67.84 / 100;
+            vividShotDMG = 60.42 / 100;
+            break;
+        case 6:
+            skillDMG = 116.48 / 100;
+            boogleCatBoxDMG = 71.68 / 100;
+            vividShotDMG = 63.84 / 100;
+            break;
+        case 7:
+            skillDMG = 124.8 / 100;
+            boogleCatBoxDMG = 76.8 / 100;
+            vividShotDMG = 68.4 / 100;
+            break;
+        case 8:
+            skillDMG = 133.12 / 100;
+            boogleCatBoxDMG = 81.92 / 100;
+            vividShotDMG = 72.96 / 100;
+            break;
+        case 9:
+            skillDMG = 141.44 / 100;
+            boogleCatBoxDMG = 141.44 / 100;
+            vividShotDMG = 77.52 / 100;
+            break;
+        case 10:
+            skillDMG = 149.76 / 100;
+            boogleCatBoxDMG = 92.16 / 100;
+            vividShotDMG = 82.08 / 100;
+            break;
+        case 11:
+            skillDMG = 158.08 / 100;
+            boogleCatBoxDMG = 97.28 / 100;
+            vividShotDMG = 86.64 / 100;
+            break;
+        case 12:
+            skillDMG = 166.4 / 100;
+            boogleCatBoxDMG = 102.4 / 100;
+            vividShotDMG = 91.2 / 100;
+            break;
+        case 13:
+            skillDMG = 176.8 / 100;
+            boogleCatBoxDMG = 108.8 / 100;
+            vividShotDMG = 96.9 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let boogleCatBox = { Multiplier: boogleCatBoxDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let vividShot = { Multiplier: vividShotDMG, Element: supportingElement + "DMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let supportedElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    for (let i = 0; i < 11; i++) {
+        if (i % 3 == 0) {
+            boogleCatBox.isReaction = true;
+            vividShot.isReaction = true;
+        }
+        else {
+            boogleCatBox.isReaction = false;
+            vividShot.isReaction = false;
+        } if (i > 5) {
+            if (supportedElements.includes(supportingElement)) {
+                vividShot.Element = supportingElement + "DMGBonus";
+                dmg += dmgCalc(vividShot, character) * numberOfEnemies;
+            }
+        }
+        dmg += dmgCalc(boogleCatBox, character) * numberOfEnemies;
     }
     return dmg;
 }
