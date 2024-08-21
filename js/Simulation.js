@@ -18,7 +18,7 @@ let endEarly = false;
 let getJSON = false;
 let targetsBurning = false;
 let persTimer = -1;
-let elementalDMGSources ={
+let elementalDMGSources = {
     superconductDMG: 0,
     overloadDMG: 0,
     electrochargedDMG: 0,
@@ -28,6 +28,7 @@ let elementalDMGSources ={
     burgeoningDMG: 0,
     swirlDMG: 0,
 }
+let shouldGenerateBountifulCores = false;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -789,6 +790,7 @@ function resetVariables() {
     elementalDMGSources.burningDMG = 0;
     elementalDMGSources.hyperbloomDMG = 0;
     elementalDMGSources.burgeoningDMG = 0;
+    shouldGenerateBountifulCores = false;
 }
 function Simulation(character) {
 
@@ -1724,11 +1726,15 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 burningBonus += 40;
                 meltBonus += 15;
                 vaporizeBonus += 15;
+                burgeoningBonus += 40;
             }
             else if (buff.Type == "ThunderingFury") {
                 overloadedBonus += 40;
                 electroChargedBonus += 40;
                 superconductBonus += 40;
+                hyperbloomBonus += 40;
+                burgeoningBonus += 40;
+                aggravatedBonus += 20;
             }
             else if (buff.Type == "VV") {
                 swirlBonus += 60;
@@ -1742,6 +1748,15 @@ function elementalMasteryCalc(incomingDmg, type, character) {
             }
             else if (buff.Type == "bloomBonus") {
                 bloomBonus += buff.Value;
+            }
+            else if (buff.Type == "Dreamy Dance of Aeons") {
+                let hpToBuff = (character.HP() - 30000);
+                if (hpToBuff < 0)
+                    hpToBuff = 0;
+                let bloomBuff = (hpToBuff / 1000) * 9;
+                if (bloomBuff > 400)
+                    bloomBuff = 400;
+                bloomBonus += bloomBuff;
             }
         });
         vaporizeBonus = (vaporizeBonus == 0) ? 0 : vaporizeBonus / 100;
@@ -1878,7 +1893,10 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.burningDMG += dmg;
                         break;
                     case "Hydro":
-                        dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
+                        if (shouldGenerateBountifulCores)
+                            dmg += bountifulCore(em, lvl, "Dendro", character, bloomBonus);
+                        else
+                            dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
                         elementalDMGSources.bloomDMG += dmg;
                         break;
 
@@ -1896,11 +1914,11 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.hyperbloomDMG += dmg;
                         break;
                 }
-                if(character.name=="Kaveh"){
-                    for(let i = 0; i<5;i++){
-                        dmg+=bloom(em, lvl, "Dendro", character, bloomBonus);
+                if (character.name == "Kaveh") {
+                    for (let i = 0; i < 5; i++) {
+                        dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
                     }
-                    elementalDMGSources.bloomDMG+=dmg;
+                    elementalDMGSources.bloomDMG += dmg;
                 }
 
         }
@@ -1931,7 +1949,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
 
     });
 
-    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((16 * (em / (em + 2000))))+swirlBonus  ) * resCalc(character, element));
+    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((16 * (em / (em + 2000)))) + swirlBonus) * resCalc(character, element));
     if (!isShreded) {
         character.currentBuffs.forEach(buff => {
             if (buff.Type == "VV") {
@@ -1998,7 +2016,12 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
-    return (bloomBaseDmg * bloomEM) * resCalc(character, element);
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 2*2;//2 hits 2 cores
+}
+function bountifulCore(em, lvl, element, character, bloomBonus) {
+    const bloomBaseDmg = 2 * LvlMultiplier[character.level];
+    const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * numberOfEnemies*2;//big aoe
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
     const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];

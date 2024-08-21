@@ -5718,3 +5718,109 @@ function enigmaticFeint(character) {
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
 }
+
+function danceofHaftkarsvar(character) {
+    let skillDMG = 0;
+    let swordHit1DMG = 0;
+    let swordHit2DMG = 0;
+    let luminousIllusionDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 3.34 / 100;
+            swordHit1DMG = 4.55 / 100;
+            swordHit2DMG = 5.14 / 100;
+            luminousIllusionDMG = 7.17 / 100;
+            break;
+        case 2:
+            skillDMG = 3.59 / 100;
+            swordHit1DMG = 4.89 / 100;
+            swordHit2DMG = 5.53 / 100;
+            luminousIllusionDMG = 7.71 / 100;
+            break;
+        case 3:
+            skillDMG = 3.84 / 100;
+            swordHit1DMG = 5.24 / 100;
+            swordHit2DMG = 5.92 / 100;
+            luminousIllusionDMG = 8.24 / 100;
+            break;
+        case 4:
+            skillDMG = 4.17 / 100;
+            swordHit1DMG = 5.69 / 100;
+            swordHit2DMG = 6.43 / 100;
+            luminousIllusionDMG = 8.96 / 100;
+            break;
+        case 5:
+            skillDMG = 4.42 / 100;
+            swordHit1DMG = 6.03 / 100;
+            swordHit2DMG = 6.82 / 100;
+            luminousIllusionDMG = 9.5 / 100;
+            break;
+        case 6:
+            skillDMG = 4.67 / 100;
+            swordHit1DMG = 6.37 / 100;
+            swordHit2DMG = 7.2 / 100;
+            luminousIllusionDMG = 10.04 / 100;
+            break;
+        case 7:
+            skillDMG = 5.01 / 100;
+            swordHit1DMG = 6.83 / 100;
+            swordHit2DMG = 7.72 / 100;
+            luminousIllusionDMG = 10.75 / 100;
+            break;
+        case 8:
+            skillDMG = 5.34 / 100;
+            swordHit1DMG = 7.28 / 100;
+            swordHit2DMG = 8.23 / 100;
+            luminousIllusionDMG = 11.47 / 100;
+            break;
+        case 9:
+            skillDMG = 5.68 / 100;
+            swordHit1DMG = 7.74 / 100;
+            swordHit2DMG = 8.75 / 100;
+            luminousIllusionDMG = 12.19 / 100;
+            break;
+        case 10:
+            skillDMG = 6.01 / 100;
+            swordHit1DMG = 8.19 / 100;
+            swordHit2DMG = 9.26 / 100;
+            luminousIllusionDMG = 12.9 / 100;
+            break;
+        case 11:
+            skillDMG = 6.34 / 100;
+            swordHit1DMG = 8.65 / 100;
+            swordHit2DMG = 9.77 / 100;
+            luminousIllusionDMG = 13.62 / 100;
+            break;
+        case 12:
+            skillDMG = 6.68 / 100;
+            swordHit1DMG = 9.11 / 100;
+            swordHit2DMG = 10.29 / 100;
+            luminousIllusionDMG = 14.34 / 100;
+            break;
+        case 13:
+            skillDMG = 7.1 / 100;
+            swordHit1DMG = 9.67 / 100;
+            swordHit2DMG = 10.93 / 100;
+            luminousIllusionDMG = 15.23 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" }
+    character.normalAttack1.Multiplier = function (level) { return swordHit1DMG};
+    character.normalAttack1.Element = "HydroDMGBonus";
+    character.normalAttack1.isReaction = true;
+    character.normalAttack1.scaling = "HP";
+    character.normalAttack2.Multiplier = function (level) { return swordHit2DMG};
+    character.normalAttack2.Element = "HydroDMGBonus";
+    character.normalAttack2.isReaction = false;
+    character.normalAttack2.scaling = "HP";
+    character.normalAttack3.Multiplier = function (level) { return luminousIllusionDMG};
+    character.normalAttack3.Element = "HydroDMGBonus";
+    character.normalAttack3.isReaction = false;
+    character.normalAttack3.scaling = "HP";
+
+    if(supportingElement=="Dendro"){
+        shouldGenerateBountifulCores = true;
+    }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
+}

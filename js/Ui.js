@@ -246,7 +246,7 @@ const artifactTypes = {
         substats: ["HPflat", "ATKflat", "DEFflat", "CritRate", "CritDMG", "HP%", "ATK%", "DEF%", "ElementalMastery", "EnergyRecharge"]
     },
     "Goblet": {
-        mainstat: ["ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "GeoDMGBonus","AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
+        mainstat: ["HP%", "ATK%", "DEF%", "ElementalMastery", "PyroDMGBonus", "HydroDMGBonus", "GeoDMGBonus", "AnemoDMGBonus", "ElectroDMGBonus", "DendroDMGBonus", "CryoDMGBonus", "PhysicalDMGBonus"],
         substats: ["HPflat", "HP%", "ATKflat", "ATK%", "DEFflat", "DEF%", "CritRate", "CritDMG", "EnergyRecharge", "ElementalMastery"]
     },
     "Circlet": {

@@ -5477,3 +5477,67 @@ function magicTrickAstonishingShift(character) {
     }
     return dmg;
 }
+
+function danceofAbzendegiDistantDreamListeningSpring(character) {
+    let skillDMG = 0;
+    let lingeringAeonDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 18.43 / 100;
+            lingeringAeonDMG = 22.53 / 100;
+            break;
+        case 2:
+            skillDMG = 19.81 / 100;
+            lingeringAeonDMG = 24.22 / 100;
+            break;
+        case 3:
+            skillDMG = 21.2 / 100;
+            lingeringAeonDMG = 25.91 / 100;
+            break;
+        case 4:
+            skillDMG = 23.04 / 100;
+            lingeringAeonDMG = 28.16 / 100;
+            break;
+        case 5:
+            skillDMG = 24.42 / 100;
+            lingeringAeonDMG = 29.85 / 100;
+            break;
+        case 6:
+            skillDMG = 25.8 / 100;
+            lingeringAeonDMG = 31.54 / 100;
+            break;
+        case 7:
+            skillDMG = 27.65 / 100;
+            lingeringAeonDMG = 33.79 / 100;
+            break;
+        case 8:
+            skillDMG = 29.49 / 100;
+            lingeringAeonDMG = 36.04 / 100;
+            break;
+        case 9:
+            skillDMG = 31.33 / 100;
+            lingeringAeonDMG = 38.3 / 100;
+            break;
+        case 10:
+            skillDMG = 33.18 / 100;
+            lingeringAeonDMG = 40.55 / 100;
+            break;
+        case 11:
+            skillDMG = 35.02 / 100;
+            lingeringAeonDMG = 42.8 / 100;
+            break;
+        case 12:
+            skillDMG = 36.86 / 100;
+            lingeringAeonDMG = 45.06 / 100;
+            break;
+        case 13:
+            skillDMG = 39.17 / 100;
+            lingeringAeonDMG = 47.87 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: lingeringAeonDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    return dmg;
+}
