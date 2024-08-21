@@ -731,13 +731,39 @@ const UrakuMisugiri = {
         return GetBaseAttack(this);
     },
     subStat: {
-        Type: "CriteDMG",
+        Type: "CritDMG",
         startValue: "19.2%",
         Value: function () {
             return getSubStat(this);
         }
     },
     passive: function () { return [{ Type: "NormalAttack", Value: 16, Source: "Uraku Misugiri" }, { Type: "ElementalSkill", Value: 24, Source: "Uraku Misugiri" }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const WolfFang = {
+    name: "Wolf-Fang",
+    src: "Weapons/Weapon_Wolf-Fang.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "ElementalBurst", Value: 32, Source: "Wolf-Fang" }, { Type: "ElementalSkill", Value: 32, Source: "Wolf-Fang" }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2970,7 +2996,7 @@ const AllWeapons = {
     ["Favonius Sword"]: FavoniusSword,
     ["Favonius Warbow"]: FavoniusWarbow,
     ["Festering Desire"]: FesteringDesire,
-    ["Fleuve Cendre Ferryman"]:FleuveCendreFerryman,
+    ["Fleuve Cendre Ferryman"]: FleuveCendreFerryman,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
     ["Hakushin Ring"]: HakushinRing,
@@ -3046,6 +3072,7 @@ const AllWeapons = {
     ["Whiteblind"]: Whiteblind,
     ["Windblume Ode"]: WindblumeOde,
     ["Wine and Song"]: WineAndSong,
+    ["Wolf-Fang"]: WolfFang,
     ["Wolf's Gravestone"]: WolfsGravestone,
     index: [
         "Absolution",
@@ -3154,6 +3181,7 @@ const AllWeapons = {
         "Whiteblind",
         "Wine and Song",
         "Windblume Ode",
+        "Wolf-Fang",
         "Wolf's Gravestone"
 
     ],
@@ -3185,6 +3213,7 @@ const AllWeapons = {
         "The Alley Flash",
         "The Flute",
         "Uraku Misugiri",
+        "Wolf-Fang"
 
     ],
     ["Bow"]: [
