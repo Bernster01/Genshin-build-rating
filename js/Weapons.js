@@ -693,6 +693,32 @@ const TheBlackSword = {
     }
 }.Init();
 
+const TheDockhandsAssistant = {
+    name: "The Dockhand&#39s Assistant",
+    src: "Weapons/Weapon_The_Dockhands_Assistant.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "ElementalMastery", Value: 240 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
 const TheFlute = {
     name: "The Flute",
     src: "Weapons/The_Flute.png",
@@ -3057,6 +3083,7 @@ const AllWeapons = {
     ["The Alley Flash"]: TheAlleyFlash,
     ["The Catch"]: TheCatch,
     ["The Bell"]: TheBell,
+    ["The Dockhand's Assistant"]: TheDockhandsAssistant,
     ["The Flute"]: TheFlute,
     ["The Stringless"]: TheStringless,
     ["The Unforged"]: TheUnforged,
@@ -3166,6 +3193,7 @@ const AllWeapons = {
         "The Alley Flash",
         "The Catch",
         "The Bell",
+        "The Dockhand's Assistant",
         "The Flute",
         "The Stringless",
         "The Unforged",
@@ -3211,6 +3239,7 @@ const AllWeapons = {
         "Summit Shaper",
         "Sword of Descension",
         "The Alley Flash",
+        "The Dockhand's Assistant",
         "The Flute",
         "Uraku Misugiri",
         "Wolf-Fang"
