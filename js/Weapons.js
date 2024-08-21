@@ -510,7 +510,32 @@ const SacrificialSword = {
         return this;
     }
 }.Init();
+const SplendorofTranquilWaters = {
+    name: "Splendor of Tranquil Waters",
+    src: "Weapons/Weapon_Splendor_of_Tranquil_Waters.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ElementalSkill", Value: 24 }, { Type: "HP%", Value: 28 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const SummitShaper = {
     name: "Summit Shaper",
     src: "Weapons/Summit_Shaper.png",
@@ -687,7 +712,7 @@ const UrakuMisugiri = {
             return getSubStat(this);
         }
     },
-    passive: function () { return [{ Type: "NormalAttack", Value: 16, Source:"Uraku Misugiri" },{Type: "ElementalSkill", Value:24, Source:"Uraku Misugiri"}] },
+    passive: function () { return [{ Type: "NormalAttack", Value: 16, Source: "Uraku Misugiri" }, { Type: "ElementalSkill", Value: 24, Source: "Uraku Misugiri" }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2973,6 +2998,7 @@ const AllWeapons = {
     ["Snow-Tombed Starsilver"]: SnowTombedStarSilver,
     ["Solar Pearl"]: SolarPearl,
     ["Song of Broken Pines"]: SongOfBrokenPines,
+    ["Splendor of Tranquil Waters"]: SplendorofTranquilWaters,
     ["Staff of Homa"]: StaffOfHoma,
     ["Summit Shaper"]: SummitShaper,
     ["Sword of Descension"]: SwordOfDescension,
@@ -3079,6 +3105,7 @@ const AllWeapons = {
         "Snow-Tombed Starsliver",
         "Solar Pearl",
         "Song of Broken Pines",
+        "Splendor of Tranquil Waters",
         "Staff of Homa",
         "Summit Shaper",
         "Sword of Descension",
@@ -3124,6 +3151,7 @@ const AllWeapons = {
         "Royal Longsword",
         "Sacrificial Sword",
         "Skyward Blade",
+        "Splendor of Tranquil Waters",
         "Summit Shaper",
         "Sword of Descension",
         "The Alley Flash",
