@@ -269,7 +269,32 @@ const IronSting = {
         return this;
     }
 }.Init();
-
+const KeyofKahjNisut = {
+    name: "Key of Khaj-Nisut",
+    src: "Weapons/Weapon_Key_of_Khaj-Nisut.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "14.4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    
+    passive: function(){return [{Type:"HP%",Value:20}]},
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const LionsRoar = {
     name: "Lions Roar",
     src: "Weapons/Lions_Roar.png",
@@ -2826,6 +2851,7 @@ const AllWeapons = {
     ["Iron Sting"]:IronSting,
     ["Kaguras Verity"]:KagurasVerity,
     ["Katsuragikiri Nagamasa"]:KatsuragikiriNagamasa,
+    ["Key of Khaj-Nisut"]:KeyofKahjNisut,
     ["Kitain Cross Spear"]:KitainCrossSpear,
     ["Lions Roar"]:LionsRoar,
     ["Lithic Blade"]:LithicBlade,
@@ -2928,6 +2954,7 @@ const AllWeapons = {
         "Iron Sting",
         "Kaguras Verity",
         "Katsuragikiri Nagamasa",
+        "Key of Khaj-Nisut",
         "Kitain Cross Spear",
         "Lions Roar",
         "Lithic Blade",
@@ -3004,6 +3031,7 @@ const AllWeapons = {
         "Haran Geppaku Futsu",
         "Harbinger of Dawn",
         "Iron Sting",
+        "Key of Khaj-Nisut",
         "Lions Roar",
         "Mistsplitter Reforged",
         "Primordial Jade Cutter",

@@ -16467,7 +16467,7 @@ const Nilou = {
 
     },
 
-    scalingType: "Hybrid",
+    scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,

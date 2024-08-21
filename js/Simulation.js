@@ -1057,6 +1057,20 @@ function Simulation(character) {
                     }
                     if (Character.name == "Arlecchino") {
                         character.bondOfLifeToRemove(character.bondOfLife * 0.075);
+                    } else if (Character.name == "Nilou") {
+                        switch (Character.weapon.name) {
+                            case "Key of Khaj-Nisut":
+                                let stacks = 0;
+                                for (buff of Character.currentBuffs) {
+                                    if (buff.Source == "Key of Khaj-Nisut") {
+                                        stacks++
+                                    }
+                                }
+                                if (stacks < 3) {
+                                    Character.currentBuffs.push({ Type: "ElementalMastery", Value: Character.HP() * (0.12 / 100), Source: "Key of Khaj-Nisut" });
+                                }
+                                break;
+                        }
                     }
                     let dmg = dmgCalc(attackAction, Character) * enemies;
                     totalDmg += dmg;
@@ -1148,6 +1162,17 @@ function Simulation(character) {
                         });
                         if (!hasHaranBuff) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "Haran Geppaku Futsu" });
+                        }
+                        break;
+                    case "Key of Khaj-Nisut":
+                        let stacks = 0;
+                        for (buff of Character.currentBuffs) {
+                            if (buff.Source == "Key of Khaj-Nisut") {
+                                stacks++
+                            }
+                        }
+                        if (stacks < 3) {
+                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: Character.HP() * (0.12 / 100), Source: "Key of Khaj-Nisut" });
                         }
                         break;
                 }
