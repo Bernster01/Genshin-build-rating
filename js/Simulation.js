@@ -1189,17 +1189,8 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "Haran Geppaku Futsu" });
                         }
                         break;
-                    case "Key of Khaj-Nisut":
-                        let stacks = 0;
-                        for (buff of Character.currentBuffs) {
-                            if (buff.Source == "Key of Khaj-Nisut") {
-                                stacks++
-                            }
-                        }
-                        if (stacks < 3) {
-                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: Character.HP() * (0.12 / 100), Source: "Key of Khaj-Nisut" });
-                        }
-                        break;
+
+
                 }
                 if (Character.supportType != "Sub-dps") {
                     let result = Character.elementalSkill.Skill(Character);
@@ -1243,6 +1234,28 @@ function Simulation(character) {
                         if (!thunderingPulseNormalStack) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 13 });
                             thunderingPulseSkillStack = true
+                        }
+                        break;
+                    case "Key of Khaj-Nisut":
+                        let stacks = 0;
+                        for (buff of Character.currentBuffs) {
+                            if (buff.Source == "Key of Khaj-Nisut") {
+                                stacks++
+                            }
+                        }
+                        if (stacks < 3) {
+                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: Character.HP() * (0.12 / 100), Source: "Key of Khaj-Nisut" });
+                        }
+                        break;
+                    case "Fleuve Cendre Ferryman":
+                        let hasFleuveBuff = false;
+                        Character.currentBuffs.forEach(buff => {
+                            if (buff.Source == "Fleuve Cendre Ferryman") {
+                                hasFleuveBuff = true;
+                            }
+                        });
+                        if (!hasFleuveBuff) {
+                            Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 32, Source: "Fleuve Cendre Ferryman" });
                         }
                         break;
                 }
@@ -1719,6 +1732,9 @@ function getCrit(character, attackAction) {
         }
         character.currentBuffs.forEach(buff => {
             if (buff.Type === "PlungeAttackCritRate" && attackAction.type === "PlungeAttack") {
+                bonusCritRate += buff.Value;
+            }
+            else if (buff.Type === "ElementalSkillCritRate" && attackAction.type === "ElementalSkill") {
                 bonusCritRate += buff.Value;
             }
         });

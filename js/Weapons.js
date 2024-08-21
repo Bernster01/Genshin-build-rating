@@ -187,7 +187,32 @@ const FesteringDesire = {
         return this;
     }
 }.Init();
+const FleuveCendreFerryman = {
+    name: "Fleuve Cendre Ferryman",
+    src: "Weapons/Weapon_Fleuve_Cendre_Ferryman.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "10.0%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ElementalSkillCritRate", Value: 16 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const FreedomSworn = {
     name: "Freedom-Sworn",
     src: "Weapons/Freedom_Sworn.png",
@@ -2945,6 +2970,7 @@ const AllWeapons = {
     ["Favonius Sword"]: FavoniusSword,
     ["Favonius Warbow"]: FavoniusWarbow,
     ["Festering Desire"]: FesteringDesire,
+    ["Fleuve Cendre Ferryman"]:FleuveCendreFerryman,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
     ["Hakushin Ring"]: HakushinRing,
@@ -3052,6 +3078,7 @@ const AllWeapons = {
         "Favonius Sword",
         "Favonius Warbow",
         "Festering Desire",
+        "Fleuve Cendre Ferryman",
         "Freedom-Sworn",
         "Frostbearer",
         "Hakushin Ring",
@@ -3138,6 +3165,7 @@ const AllWeapons = {
         "Cinnabar Spindle",
         "Favonius Sword",
         "Festering Desire",
+        "Fleuve Cendre Ferryman",
         "Freedom-Sworn",
         "Haran Geppaku Futsu",
         "Harbinger of Dawn",
