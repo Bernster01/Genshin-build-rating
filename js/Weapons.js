@@ -669,7 +669,31 @@ const TheFlute = {
     }
 }.Init();
 
-
+const UrakuMisugiri = {
+    name: "Uraku Misugiri",
+    src: "Weapons/Uraku-Misugiri.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CriteDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "NormalAttack", Value: 16, Source:"Uraku Misugiri" },{Type: "ElementalSkill", Value:24, Source:"Uraku Misugiri"}] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 //#endregion
 
 //#region Bows
@@ -2963,6 +2987,7 @@ const AllWeapons = {
     ["Thrilling Tales of Dragon Slayers"]: ThrillingTalesOfDragonSlayers,
     ["Thundering Pulse"]: ThunderingPulse,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
+    ["Uraku Misugiri"]: UrakuMisugiri,
     ["Vortex Vanquisher"]: VortexVanquisher,
     ["Wavebreakers Fin"]: WavebreakersFin,
     ["White Tassel"]: WhiteTassel,
@@ -3068,6 +3093,7 @@ const AllWeapons = {
         "Thrilling Tales of Dragon Slayers",
         "Thundering Pulse",
         "Tome of the Eternal Flow",
+        "Uraku Misugiri",
         "Vortex Vanquisher",
         "Wavebreakers Fin",
         "White Tassel",
@@ -3102,6 +3128,7 @@ const AllWeapons = {
         "Sword of Descension",
         "The Alley Flash",
         "The Flute",
+        "Uraku Misugiri",
 
     ],
     ["Bow"]: [

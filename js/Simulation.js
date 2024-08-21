@@ -29,6 +29,8 @@ let elementalDMGSources = {
     swirlDMG: 0,
 }
 let shouldGenerateBountifulCores = false;
+hasUrakuMisugiriBuff = false;
+
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -801,6 +803,7 @@ function resetVariables() {
     elementalDMGSources.hyperbloomDMG = 0;
     elementalDMGSources.burgeoningDMG = 0;
     shouldGenerateBountifulCores = false;
+    hasUrakuMisugiriBuff = false;
 }
 function Simulation(character) {
 
@@ -1112,12 +1115,12 @@ function Simulation(character) {
                 switch (Character.weapon.name) {
                     case "Light of Foliar Incision":
                         if (attackAction.Element != "PhysicalDMGBonus") {
-                            if (attackAction.action != "ChargedAttack" || attackAction.action != "PlungeAttack") {
+                            if (attackAction.type != "ChargedAttack" || attackAction.type != "PlungeAttack") {
                                 //Check if buff from this source is already applied
-                                if(!Character.currentBuffs.some(buff => buff.Source == "Light of Foliar Incision")){
-                                    Character.currentBuffs.push({ Type: "ElementalDMG", Value: (12/100)*Character.EM(), Source: "Light of Foliar Incision" });
+                                if (!Character.currentBuffs.some(buff => buff.Source == "Light of Foliar Incision")) {
+                                    Character.currentBuffs.push({ Type: "ElementalDMG", Value: (12 / 100) * Character.EM(), Source: "Light of Foliar Incision" });
                                 }
-                            
+
                             }
                         }
                 }
@@ -1374,6 +1377,16 @@ function dmgCalc(attackAction, Character) {
                 atkIncrease = 80;
             }
             Character.currentBuffs.push({ Type: "ATK%", Value: -atkIncrease })
+            break;
+        case "Uraku Misugiri":
+            if (attackAction.Element == "GeoDMGBonus" && !hasUrakuMisugiriBuff) {
+                //Find all buffs from Uraku Misugiri
+                Character.currentBuffs.push({ Type: "NormalAttack", Value: 16 });
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 24 });
+                Character.currentBuffs.push({ Type: "DEF%", Value: 20 });
+                hasUrakuMisugiriBuff = true;
+
+            }
             break;
     }
     switch (Character.name) {
@@ -1653,8 +1666,13 @@ function getDamageBonus(character, attackAction) {
             }
             else
                 bonus += buff.Value / 100;
+        } else if (attackAction.type == buff.Type) {
+            bonus += (buff.Value / 100);
 
+        } else if (buff.type == "ElementalDMG") {
+            bonus += (buff.Value / 100);
         }
+
     });
     if (character.ExtraMultiplier != null && character.ExtraMultiplier != undefined && character.ExtraMultiplier != []) {
 
@@ -1667,14 +1685,6 @@ function getDamageBonus(character, attackAction) {
             }
         });
     }
-    character.currentBuffs.forEach(buff => {
-        if (attackAction.type == buff.Type) {
-            bonus += (buff.Value / 100);
-
-        } else if (buff.type =="ElementalDMG") {
-            bonus += (buff.Value / 100);
-        }
-    })
     character.advancedstats.elementalBonuses.forEach(element => {
         if (element.Type == attackAction.Element) {
             bonus += (element.Value / 100);
