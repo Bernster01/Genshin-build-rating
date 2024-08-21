@@ -5786,9 +5786,101 @@ function starsGatheratDusk(character) {
             atkBuff = character.attack() * (200 / 100);
             if (atkBuff > 9000)
                 atkBuff = 9000;
-            character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for:"PlungeAttack" });
+            character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
             break;
         }
     }
     return { dmg: dmg, healing: healing + conHealing, attackBuff: atkBuff };
+}
+function moonjadeDescent(character) {
+    let skillDMG = 0;
+    let adeptalLegacyWhiteJadeRadishDMG = 0;
+    let healing = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 114.56 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 72.16 / 100;
+            healing = ((2.02 / 100) * character.HP()) + 194.21231;
+            break;
+        case 2:
+            skillDMG = 123.15 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 77.57 / 100;
+            healing = ((2.17 / 100) * character.HP()) + 213.63625;
+            break;
+        case 3:
+            skillDMG = 131.74 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 82.98 / 100;
+            healing = ((2.32 / 100) * character.HP()) + 234.67883;
+            break;
+        case 4:
+            skillDMG = 143.2 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 90.2 / 100;
+            healing = ((2.52 / 100) * character.HP()) + 257.3401;
+            break;
+        case 5:
+            skillDMG = 151.79 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 95.61 / 100;
+            healing = ((2.67 / 100) * character.HP()) + 281.62;
+            break;
+        case 6:
+            skillDMG = 160.38 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 101.02 / 100;
+            healing = ((2.82 / 100) * character.HP()) + 307.5186;
+            break;
+        case 7:
+            skillDMG = 171.84 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 108.24 / 100;
+            healing = ((3.03 / 100) * character.HP()) + 335.0358;
+            break;
+        case 8:
+            skillDMG = 183.3 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 115.46 / 100;
+            healing = ((3.23 / 100) * character.HP()) + 364.1717;
+            break;
+        case 9:
+            skillDMG = 194.75 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 122.67 / 100;
+            healing = ((3.43 / 100) * character.HP()) + 394.92627;
+            break;
+        case 10:
+            skillDMG = 206.21 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 129.89 / 100;
+            healing = ((3.63 / 100) * character.HP()) + 427.29947;
+            break;
+        case 11:
+            skillDMG = 217.66 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 137.1 / 100;
+            healing = ((3.83 / 100) * character.HP()) + 461.29135;
+            break;
+        case 12:
+            skillDMG = 229.12 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 144.32 / 100;
+            healing = ((4.03 / 100) * character.HP()) + 496.9019;
+            break;
+        case 13:
+            skillDMG = 243.44 / 100;
+            adeptalLegacyWhiteJadeRadishDMG = 153.34 / 100;
+            healing = ((4.29 / 100) * character.HP()) + 534.1311;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: adeptalLegacyWhiteJadeRadishDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    healing*=5;
+    for (let i = 0; i < 5; i++) {
+        if (i % 3 == 0) {
+            attack2.isReaction = true;
+        }
+        else {
+            attack2.isReaction = false;
+        }
+        dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "A4") {
+            healing += character.HP() * (0.8 / 100) * 5;
+        }
+    }
+    healing *= 1 + (character.advancedstats.healingBonus / 100);
+    return { dmg: dmg, healing: healing };
 }

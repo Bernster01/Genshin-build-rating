@@ -6019,5 +6019,85 @@ function whiteCloudsatDawn(character) {
             character.currentBuffs.push({ Type: "PlungeAttackCritRate", Value: 10, for: "PlungeAttack" });// Full buff
         }
     }
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function raphanusSkyCluster(character) {
+    let whiteJadeRadishDMG = 0;
+    let healing = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            whiteJadeRadishDMG = 29.92 / 100;
+            healing = (character.HP() * (1.71 / 100)) + 165.07991;
+            break;
+        case 2:
+            whiteJadeRadishDMG = 32.16 / 100;
+            healing = (character.HP() * (1.84 / 100)) + 181.5902;
+            break;
+        case 3:
+            whiteJadeRadishDMG = 34.41 / 100;
+            healing = (character.HP() * (1.97 / 100)) + 199.47635;
+            break;
+        case 4:
+            whiteJadeRadishDMG = 37.4 / 100;
+            healing = (character.HP() * (2.14 / 100)) + 218.73834;
+            break;
+        case 5:
+            whiteJadeRadishDMG = 39.64 / 100;
+            healing = (character.HP() * (2.27 / 100)) + 239.3762;
+            break;
+        case 6:
+            whiteJadeRadishDMG = 41.89 / 100;
+            healing = (character.HP() * (2.4 / 100)) + 261.38992;
+            break;
+        case 7:
+            whiteJadeRadishDMG = 44.88 / 100;
+            healing = (character.HP() * (2.57 / 100)) + 284.77948;
+            break;
+        case 8:
+            whiteJadeRadishDMG = 47.87 / 100;
+            healing = (character.HP() * (2.74 / 100)) + 309.54492;
+            break;
+        case 9:
+            whiteJadeRadishDMG = 50.86 / 100;
+            healing = (character.HP() * (2.91 / 100)) + 335.6862;
+            break;
+        case 10:
+            whiteJadeRadishDMG = 53.86 / 100;
+            healing = (character.HP() * (3.09 / 100)) + 363.20334;
+            break;
+        case 11:
+            whiteJadeRadishDMG = 56.85 / 100;
+            healing = (character.HP() * (3.26 / 100)) + 392.09634;
+            break;
+        case 12:
+            whiteJadeRadishDMG = 59.84 / 100;
+            healing = (character.HP() * (3.43 / 100)) + 422.3652;
+            break;
+        case 13:
+            whiteJadeRadishDMG = 63.58 / 100;
+            healing = (character.HP() * (3.64 / 100)) + 454.00992;
+            break;
+    }
+    let whiteJadeRadish = { Multiplier: whiteJadeRadishDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    healing*=10;
+    let dmg = 0;
+    for (let i = 0; i < 10; i++) {
+        if(i%3==0)
+        {
+            whiteJadeRadish.isReaction = true;
+        }
+        else
+        {
+            whiteJadeRadish.isReaction = false;
+        }
+        dmg += dmgCalc(whiteJadeRadish, character);
+    }
+    for(buff of character.currentBuffs){
+        if(buff.Type == "A4"){
+            healing += character.HP()*(0.8/100)*5;
+        }
+    }
+    healing *=1+(character.advancedstats.healingBonus/100);
+    return { dmg: dmg, healing: healing };
 }
