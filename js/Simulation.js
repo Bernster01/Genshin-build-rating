@@ -1596,8 +1596,12 @@ function getDamageBonus(character, attackAction) {
     }
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "AddativeBonusDMG") {
-
-            bonus += buff.Value / 100;
+            if (attackAction.for != undefined) {
+                if(attackAction.type == buff.for)
+                    bonus += buff.Value / 100;
+            }
+            else
+                bonus += buff.Value / 100;
 
         }
     });
@@ -2016,12 +2020,12 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
-    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 2*2;//2 hits 2 cores
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 2 * 2;//2 hits 2 cores
 }
 function bountifulCore(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
-    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * numberOfEnemies*2;//big aoe
+    return (bloomBaseDmg * bloomEM) * resCalc(character, element) * numberOfEnemies * 2;//big aoe
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
     const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];

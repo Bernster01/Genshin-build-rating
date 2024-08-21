@@ -5621,3 +5621,60 @@ function surgentManifestation(character) {
     return dmg;
 
 }
+
+function risingWaters(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 101.87 / 100;
+            break;
+        case 2:
+            skillDMG = 109.51 / 100;
+            break;
+        case 3:
+            skillDMG = 117.15 / 100;
+            break;
+        case 4:
+            skillDMG = 127.33 / 100;
+            break;
+        case 5:
+            skillDMG = 134.97 / 100;
+            break;
+        case 6:
+            skillDMG = 142.61 / 100;
+            break;
+        case 7:
+            skillDMG = 152.8 / 100;
+            break;
+        case 8:
+            skillDMG = 162.99 / 100;
+            break;
+        case 9:
+            skillDMG = 173.17 / 100;
+            break;
+        case 10:
+            skillDMG = 183.36 / 100;
+            break;
+        case 11:
+            skillDMG = 193.55 / 100;
+            break;
+        case 12:
+            skillDMG = 203.73 / 100;
+            break;
+        case 13:
+            skillDMG = 216.47 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for(let i = 0; i < 8; i++){
+        if(i % 4 == 0){
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character);
+    }
+    return dmg;
+}

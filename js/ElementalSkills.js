@@ -5872,3 +5872,83 @@ function razorgrassBlade(character) {
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
 }
+
+function aquacrestSaber(character) {
+    let dewdropDMG = 0;
+    let suffusionDMGBonus = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            dewdropDMG = 32.8 / 100;
+            suffusionDMGBonus = 0.64;
+            break;
+        case 2:
+            dewdropDMG = 35.26 / 100;
+            suffusionDMGBonus = 0.69;
+            break;
+        case 3:
+            dewdropDMG = 37.72 / 100;
+            suffusionDMGBonus = 0.74;
+            break;
+        case 4:
+            dewdropDMG = 41 / 100;
+            suffusionDMGBonus = 0.8;
+            break;
+        case 5:
+            dewdropDMG = 43.46 / 100;
+            suffusionDMGBonus = 0.85;
+            break;
+        case 6:
+            dewdropDMG = 45.92 / 100;
+            suffusionDMGBonus = 0.9;
+            break;
+        case 7:
+            dewdropDMG = 49.2 / 100;
+            suffusionDMGBonus = 0.96;
+            break;
+        case 8:
+            dewdropDMG = 52.48 / 100;
+            suffusionDMGBonus = 1.02;
+            break;
+        case 9:
+            dewdropDMG = 55.76 / 100;
+            suffusionDMGBonus = 1.09;
+            break;
+        case 10:
+            dewdropDMG = 59.04 / 100;
+            suffusionDMGBonus = 1.15;
+            break;
+        case 11:
+            dewdropDMG = 62.32 / 100;
+            suffusionDMGBonus = 1.22;
+            break;
+        case 12:
+            dewdropDMG = 65.6 / 100;
+            suffusionDMGBonus = 1.28;
+            break;
+        case 13:
+            dewdropDMG = 69.7 / 100;
+            suffusionDMGBonus = 1.36;
+            break;
+    }
+    let dewdrop = { Multiplier: dewdropDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = 0;
+    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: (suffusionDMGBonus/100)*character.HP(), for: "ElementalSkill" });
+    for(buff of character.currentBuffs){
+        if(buff.Type == "Clear Waters"){
+            let clearWaterBuff = character.HP()*(45/1000)
+            if(clearWaterBuff>5000)
+                clearWaterBuff = 5000;
+            character.currentBuffs.push({Type: "FlatDMG", Value: clearWaterBuff, for: "ElementalSkill"});
+        }
+    }
+    for (let i = 0; i < 6; i++) {
+        if(i%2==0){
+            dewdrop.isReaction = true;
+        }
+        else{
+            dewdrop.isReaction = false;
+        }
+        dmg += dmgCalc(dewdrop, character);
+    }
+    return dmg;
+}
