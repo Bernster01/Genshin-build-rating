@@ -5932,23 +5932,92 @@ function aquacrestSaber(character) {
     }
     let dewdrop = { Multiplier: dewdropDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
-    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: (suffusionDMGBonus/100)*character.HP(), for: "ElementalSkill" });
-    for(buff of character.currentBuffs){
-        if(buff.Type == "Clear Waters"){
-            let clearWaterBuff = character.HP()*(45/1000)
-            if(clearWaterBuff>5000)
+    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: (suffusionDMGBonus / 100) * character.HP(), for: "ElementalSkill" });
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Clear Waters") {
+            let clearWaterBuff = character.HP() * (45 / 1000)
+            if (clearWaterBuff > 5000)
                 clearWaterBuff = 5000;
-            character.currentBuffs.push({Type: "FlatDMG", Value: clearWaterBuff, for: "ElementalSkill"});
+            character.currentBuffs.push({ Type: "FlatDMG", Value: clearWaterBuff, for: "ElementalSkill" });
         }
     }
     for (let i = 0; i < 6; i++) {
-        if(i%2==0){
+        if (i % 2 == 0) {
             dewdrop.isReaction = true;
         }
-        else{
+        else {
             dewdrop.isReaction = false;
         }
         dmg += dmgCalc(dewdrop, character);
     }
     return dmg;
+}
+
+function whiteCloudsatDawn(character) {
+    let skillDMG = 0;
+    let driftcloudWaveDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 24.8 / 100;
+            driftcloudWaveDMG = 116 / 100;
+            break;
+        case 2:
+            skillDMG = 26.66 / 100;
+            driftcloudWaveDMG = 124.7 / 100;
+            break;
+        case 3:
+            skillDMG = 28.52 / 100;
+            driftcloudWaveDMG = 133.4 / 100;
+            break;
+        case 4:
+            skillDMG = 31 / 100;
+            driftcloudWaveDMG = 145 / 100;
+            break;
+        case 5:
+            skillDMG = 32.86 / 100;
+            driftcloudWaveDMG = 153.7 / 100;
+            break;
+        case 6:
+            skillDMG = 34.72 / 100;
+            driftcloudWaveDMG = 162.4 / 100;
+            break;
+        case 7:
+            skillDMG = 37.2 / 100;
+            driftcloudWaveDMG = 174 / 100;
+            break;
+        case 8:
+            skillDMG = 39.68 / 100;
+            driftcloudWaveDMG = 185.6 / 100;
+            break;
+        case 9:
+            skillDMG = 42.16 / 100;
+            driftcloudWaveDMG = 197.2 / 100;
+            break;
+        case 10:
+            skillDMG = 44.64 / 100;
+            driftcloudWaveDMG = 208.8 / 100;
+            break;
+        case 11:
+            skillDMG = 47.12 / 100;
+            driftcloudWaveDMG = 220.4 / 100;
+            break;
+        case 12:
+            skillDMG = 49.6 / 100;
+            driftcloudWaveDMG = 232 / 100;
+            break;
+        case 13:
+            skillDMG = 52.7 / 100;
+            driftcloudWaveDMG = 246.5 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let driftcloudWave = { Multiplier: driftcloudWaveDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "PlungeAttack" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    dmg += dmgCalc(driftcloudWave, character) * numberOfEnemies;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Galefeather Pursuit") {
+            character.currentBuffs.push({ Type: "PlungeAttackCritRate", Value: 10, for: "PlungeAttack" });// Full buff
+        }
+    }
+    return {dmg:dmg};
 }

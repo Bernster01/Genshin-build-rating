@@ -5667,14 +5667,128 @@ function risingWaters(character) {
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for(let i = 0; i < 8; i++){
-        if(i % 4 == 0){
+    for (let i = 0; i < 8; i++) {
+        if (i % 4 == 0) {
             attack.isReaction = true;
         }
-        else{
+        else {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, character);
     }
     return dmg;
+}
+
+function starsGatheratDusk(character) {
+    let skillDMG = 0;
+    let starwickerDMG = 0;
+    let healing = 0;
+    let conHealing = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 108 / 100;
+            starwickerDMG = 39.2 / 100;
+            healing = (92.16 / 100) * character.attack() + 578;
+            conHealing = (43.01 / 100) * character.attack() + 270;
+            break;
+        case 2:
+            skillDMG = 116.1 / 100;
+            starwickerDMG = 42.14 / 100;
+            healing = (99.07 / 100) * character.attack() + 636;
+            conHealing = (46.23 / 100) * character.attack() + 297;
+            break;
+        case 3:
+            skillDMG = 124.2 / 100;
+            starwickerDMG = 45.08 / 100;
+            healing = (105.98 / 100) * character.attack() + 698;
+            conHealing = (49.46 / 100) * character.attack() + 326;
+            break;
+        case 4:
+            skillDMG = 135 / 100;
+            starwickerDMG = 49 / 100;
+            healing = (115.2 / 100) * character.attack() + 766;
+            conHealing = (53.76 / 100) * character.attack() + 357;
+            break;
+        case 5:
+            skillDMG = 143.1 / 100;
+            starwickerDMG = 51.94 / 100;
+            healing = (122.11 / 100) * character.attack() + 838;
+            conHealing = (56.99 / 100) * character.attack() + 391;
+            break;
+        case 6:
+            skillDMG = 151.2 / 100;
+            starwickerDMG = 54.88 / 100;
+            healing = (129.02 / 100) * character.attack() + 915;
+            conHealing = (60.21 / 100) * character.attack() + 427;
+            break;
+        case 7:
+            skillDMG = 162 / 100;
+            starwickerDMG = 58.8 / 100;
+            healing = (138.24 / 100) * character.attack() + 997;
+            conHealing = (64.51 / 100) * character.attack() + 465;
+            break;
+        case 8:
+            skillDMG = 172.8 / 100;
+            starwickerDMG = 62.72 / 100;
+            healing = (147.46 / 100) * character.attack() + 1083;
+            conHealing = (68.81 / 100) * character.attack() + 506;
+            break;
+        case 9:
+            skillDMG = 183.6 / 100;
+            starwickerDMG = 66.64 / 100;
+            healing = (156.67 / 100) * character.attack() + 1175;
+            conHealing = (73.11 / 100) * character.attack() + 548;
+            break;
+        case 10:
+            skillDMG = 194.4 / 100;
+            starwickerDMG = 70.56 / 100;
+            healing = (165.89 / 100) * character.attack() + 1271;
+            conHealing = (77.41 / 100) * character.attack() + 593;
+            break;
+        case 11:
+            skillDMG = 205.2 / 100;
+            starwickerDMG = 74.48 / 100;
+            healing = (175.1 / 100) * character.attack() + 1372;
+            conHealing = (81.72 / 100) * character.attack() + 640;
+            break;
+        case 12:
+            skillDMG = 216 / 100;
+            starwickerDMG = 78.4 / 100;
+            healing = (184.32 / 100) * character.attack() + 1478;
+            conHealing = (86.02 / 100) * character.attack() + 690;
+            break;
+        case 13:
+            skillDMG = 229.5 / 100;
+            starwickerDMG = 83.3 / 100;
+            healing = (195.84 / 100) * character.attack() + 1589;
+            conHealing = (91.39 / 100) * character.attack() + 742;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let starwicker = { Multiplier: starwickerDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    for (let i = 0; i < 8; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(starwicker, character) * numberOfEnemies;
+    }
+    healing *= 1 + (character.advancedstats.healingBonus / 100);
+    conHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    conHealing *= 6;
+    //A4 buff
+    let atkBuff = 0;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "Consider, the Adeptus in Her Realm") {
+            atkBuff = character.attack() * (200 / 100);
+            if (atkBuff > 9000)
+                atkBuff = 9000;
+            character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for:"PlungeAttack" });
+            break;
+        }
+    }
+    return { dmg: dmg, healing: healing + conHealing, attackBuff: atkBuff };
 }

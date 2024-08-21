@@ -1316,7 +1316,7 @@ function dmgCalc(attackAction, Character) {
     let dmg =
         ((getBaseDamage(attackAction, Character) * getSpecialMultiplier(Character, attackAction)) + getFlatDamage(Character, attackAction))
         * (1 + getDamageBonus(Character, attackAction))
-        * getCrit(Character)
+        * getCrit(Character, attackAction)
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
     dmg = (attackAction.isReaction || (supportingElement == "Bloom" && (attackAction.Element == "PyroDMGBonus" || attackAction.Element == "ElectroDMGBonus"))) ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : dmg;
@@ -1565,11 +1565,15 @@ function getFlatDamage(character, attackAction) {
                 flatDamage += character.DEF() * 0.40;
             break;
     }
-    for (const buff of character.currentBuffs) {
+    for (buff of character.currentBuffs) {
         if (buff.Type == "FlatDMG") {
-            if (buff.for == attackAction.type)
-                flatDamage += buff.Value;
-            else if (buff.for == attackAction.type2) {
+            if (buff.for != undefined) {
+                if (buff.for == attackAction.type)
+                    flatDamage += buff.Value;
+                else if (buff.for == attackAction.type2) {
+                    flatDamage += buff.Value;
+                }
+            } else {
                 flatDamage += buff.Value;
             }
         }
@@ -1597,7 +1601,7 @@ function getDamageBonus(character, attackAction) {
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "AddativeBonusDMG") {
             if (attackAction.for != undefined) {
-                if(attackAction.type == buff.for)
+                if (attackAction.type == buff.for)
                     bonus += buff.Value / 100;
             }
             else
@@ -1644,7 +1648,7 @@ function getDamageBonus(character, attackAction) {
     return bonus;
 
 }
-function getCrit(character) {
+function getCrit(character, attackAction) {
     if (character.critRate() >= 0) {
         let bonusCritRate = 0;
         if (character.name == "Ganyu") {
@@ -1654,6 +1658,11 @@ function getCrit(character) {
                 }
             });
         }
+        character.currentBuffs.forEach(buff => {
+            if (buff.Type === "PlungeAttackCritRate" && attackAction.type === "PlungeAttack") {
+                bonusCritRate += buff.Value;
+            }
+        });
         if (character.critRate() + bonusCritRate > 100) {
 
             bonusCritRate -= character.critRate() + bonusCritRate - 100;
