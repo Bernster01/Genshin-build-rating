@@ -1109,6 +1109,18 @@ function Simulation(character) {
                     }
 
                 }
+                switch (Character.weapon.name) {
+                    case "Light of Foliar Incision":
+                        if (attackAction.Element != "PhysicalDMGBonus") {
+                            if (attackAction.action != "ChargedAttack" || attackAction.action != "PlungeAttack") {
+                                //Check if buff from this source is already applied
+                                if(!Character.currentBuffs.some(buff => buff.Source == "Light of Foliar Incision")){
+                                    Character.currentBuffs.push({ Type: "ElementalDMG", Value: (12/100)*Character.EM(), Source: "Light of Foliar Incision" });
+                                }
+                            
+                            }
+                        }
+                }
                 break;
 
             case "E":
@@ -1659,6 +1671,8 @@ function getDamageBonus(character, attackAction) {
         if (attackAction.type == buff.Type) {
             bonus += (buff.Value / 100);
 
+        } else if (buff.type =="ElementalDMG") {
+            bonus += (buff.Value / 100);
         }
     })
     character.advancedstats.elementalBonuses.forEach(element => {

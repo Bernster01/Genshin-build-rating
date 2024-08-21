@@ -17,8 +17,8 @@ const Absolution = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritDMG",Value:20}]},
+
+    passive: function () { return [{ Type: "CritDMG", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -44,8 +44,8 @@ const AmenomaKageuchi = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:20}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -71,8 +71,8 @@ const AquilaFavonia = {
             return getSubStat(this);
         }
     },
-  
-    passive: function(){return [{Type:"ATK%",Value:20}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -98,8 +98,8 @@ const BlackcliffLongsword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:64}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 64 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -125,8 +125,8 @@ const CinnabarSpindle = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -152,8 +152,8 @@ const FavoniusSword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:80}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 80 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -179,8 +179,8 @@ const FesteringDesire = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"Special",Value:null}]},
+
+    passive: function () { return [{ Type: "Special", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -206,8 +206,8 @@ const FreedomSworn = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:10},{Type:"ATK%",Value:20},{Type:"BasicAttack",Value:16}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 10 }, { Type: "ATK%", Value: 20 }, { Type: "BasicAttack", Value: 16 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -233,8 +233,8 @@ const HaranGeppakuFutsu = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"AddativeBonusDMG",Value:12}]},
+
+    passive: function () { return [{ Type: "AddativeBonusDMG", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -260,8 +260,8 @@ const HarbingerOfDawn = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:28}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 28 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -287,8 +287,8 @@ const IronSting = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:24}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -313,8 +313,8 @@ const KeyofKahjNisut = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"HP%",Value:20}]},
+
+    passive: function () { return [{ Type: "HP%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -339,8 +339,34 @@ const LionsRoar = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:20}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const LightofFoliarIncision = {
+    name: "Light of Foliar Incision",
+    src: "Weapons/Weapon_Light_of_Foliar_Incision.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "CritRate", Value: 4 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -367,8 +393,9 @@ const MistsplitterReforged = {
         }
     },
     passiveStacks: 0,
-    passive: function(){
-    return [{Type:"ElementalDMG",Value:12}]},
+    passive: function () {
+        return [{ Type: "ElementalDMG", Value: 12 }]
+    },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -394,8 +421,8 @@ const PrimordialJadeCutter = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"HP%",Value:20}]},
+
+    passive: function () { return [{ Type: "HP%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -421,8 +448,8 @@ const PrototypeRancour = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:24},{Type:"DEF%",Value:24}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 24 }, { Type: "DEF%", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -448,8 +475,8 @@ const RoyalLongsword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:24}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -475,8 +502,8 @@ const SacrificialSword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -502,8 +529,8 @@ const SummitShaper = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ShieldStrength",Value:20},{Type:"ATK%",Value:40}]},
+
+    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -530,7 +557,7 @@ const SkywardBlade = {
             return getSubStat(this);
         }
     },
-    passive: function(){return[{Type:"CritRate",Value:4}]},
+    passive: function () { return [{ Type: "CritRate", Value: 4 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -556,7 +583,7 @@ const SwordOfDescension = {
             return getSubStat(this);
         }
     },
-    passive: function(){return[{Type:"Special",Value:null}]},
+    passive: function () { return [{ Type: "Special", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -582,7 +609,7 @@ const TheAlleyFlash = {
             return getSubStat(this);
         }
     },
-    passive: function(){return[{Type:"BonusDMG%",Value:24}]},
+    passive: function () { return [{ Type: "BonusDMG%", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -608,7 +635,7 @@ const TheBlackSword = {
             return getSubStat(this);
         }
     },
-    passive: function(){return[{Type:"NormalAttack",Value:40},{Type:"ChargedAttack",Value:40}]},
+    passive: function () { return [{ Type: "NormalAttack", Value: 40 }, { Type: "ChargedAttack", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -634,7 +661,7 @@ const TheFlute = {
             return getSubStat(this);
         }
     },
-    passive: function(){return[{Type:"Special",Value:null}]},
+    passive: function () { return [{ Type: "Special", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -664,8 +691,8 @@ const AlleyHunter = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:40}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -691,8 +718,8 @@ const AmosBow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:52},{Type:"ChargedAttack",Value:52}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 52 }, { Type: "ChargedAttack", Value: 52 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -718,8 +745,8 @@ const BlackcliffWarbow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:56}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 56 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -745,8 +772,8 @@ const CompoundBow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ChargedAttack",Value:32},{Type:"NormalAttack",Value:35.072}]},
+
+    passive: function () { return [{ Type: "ChargedAttack", Value: 32 }, { Type: "NormalAttack", Value: 35.072 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -772,8 +799,8 @@ const ElegyForTheEnd = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalMastery",Value:180},{Type:"ATK",Value:7}]},
+
+    passive: function () { return [{ Type: "ElementalMastery", Value: 180 }, { Type: "ATK", Value: 7 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -799,8 +826,8 @@ const FavoniusWarbow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:80}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 80 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -826,8 +853,8 @@ const Hamayumi = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:64},{Type:"ChargedAttack",Value:48}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 64 }, { Type: "ChargedAttack", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -853,8 +880,8 @@ const MitternachtsWaltz = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:40},{Type:"ATK%",Value:40}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 40 }, { Type: "ATK%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -880,8 +907,8 @@ const MouunsMoon = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:65}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 65 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -907,8 +934,8 @@ const PolarStar = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:12},{Type:"ElementalSkill",Value:12},{Type:"ATK%",Value:27}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 12 }, { Type: "ElementalSkill", Value: 12 }, { Type: "ATK%", Value: 27 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -934,8 +961,8 @@ const Predator = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"Special",Value:0}]},
+
+    passive: function () { return [{ Type: "Special", Value: 0 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -961,8 +988,8 @@ const PrototypeCrescent = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:72}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 72 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -988,8 +1015,8 @@ const RoyalBow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:25}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 25 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1015,8 +1042,8 @@ const Rust = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:80},{Type:"ChargedAttack",Value:-10}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 80 }, { Type: "ChargedAttack", Value: -10 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1042,8 +1069,8 @@ const SacrificialBow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",value:null}]},
+
+    passive: function () { return [{ Type: "", value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1069,8 +1096,8 @@ const SkywardHarp = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritDMG",Value:20}]},
+
+    passive: function () { return [{ Type: "CritDMG", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1096,8 +1123,8 @@ const TheStringless = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalSkill",Value:48},{Type:"ElementalBurst",Value:48}]},
+
+    passive: function () { return [{ Type: "ElementalSkill", Value: 48 }, { Type: "ElementalBurst", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1123,8 +1150,8 @@ const TheViridescentHunt = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1150,8 +1177,8 @@ const ThunderingPulse = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:20}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1177,8 +1204,8 @@ const WindblumeOde = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1212,8 +1239,8 @@ const BlackcliffAgate = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:72}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 72 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1239,8 +1266,8 @@ const DodocoTales = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:16},{Type:"ChargedAttack",Value:32}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 16 }, { Type: "ChargedAttack", Value: 32 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1266,8 +1293,8 @@ const EverlastingMoonglow = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"HealingBonus",Value:10},{Type:"EnergyRecharge",Value:10}]},
+
+    passive: function () { return [{ Type: "HealingBonus", Value: 10 }, { Type: "EnergyRecharge", Value: 10 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1293,8 +1320,8 @@ const EyeOfPerception = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1320,8 +1347,8 @@ const FavoniusCodex = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:80}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 80 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1347,8 +1374,8 @@ const Frostbearer = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1374,8 +1401,8 @@ const HakushinRing = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1401,8 +1428,8 @@ const KagurasVerity = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1428,8 +1455,8 @@ const LostPrayerToTheSacredWinds = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalDMG",Value:32}]},
+
+    passive: function () { return [{ Type: "ElementalDMG", Value: 32 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1455,8 +1482,8 @@ const MappaMare = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalDMG",Value:32}]},
+
+    passive: function () { return [{ Type: "ElementalDMG", Value: 32 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1482,8 +1509,8 @@ const MemoryOfDust = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ShieldStrength",Value:20},{Type:"ATK%",Value:40}]},
+
+    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1509,8 +1536,8 @@ const OathswornEye = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1536,8 +1563,8 @@ const PrototypeAmber = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:15},{Type:"TeamHealing",Value:6}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 15 }, { Type: "TeamHealing", Value: 6 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1563,8 +1590,8 @@ const RoyalGrimoire = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:30}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 30 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1590,8 +1617,8 @@ const SacrificialFragments = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalSkill",Value:180}]},
+
+    passive: function () { return [{ Type: "ElementalSkill", Value: 180 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1617,8 +1644,8 @@ const SkywardAtlas = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalDMG",Value:12}]},
+
+    passive: function () { return [{ Type: "ElementalDMG", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1644,8 +1671,8 @@ const SolarPearl = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:40},{Type:"ElementalSkill",Value:40},{Type:"NormalAttack",Value:40},{Type:"ChargedAttack",Value:40}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 40 }, { Type: "ElementalSkill", Value: 40 }, { Type: "NormalAttack", Value: 40 }, { Type: "ChargedAttack", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1671,8 +1698,8 @@ const TheWidsith = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK",Value:60},{Type:"ElementalMastery",Value:240},{Type:"ElementalDMG",Value:48}]},
+
+    passive: function () { return [{ Type: "ATK", Value: 60 }, { Type: "ElementalMastery", Value: 240 }, { Type: "ElementalDMG", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1698,15 +1725,15 @@ const ThrillingTalesOfDragonSlayers = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"TeamATKBuff",Value:48}]},
+
+    passive: function () { return [{ Type: "TeamATKBuff", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
         return this;
     }
 }.Init();
-const TomeoftheEternalFlow= {
+const TomeoftheEternalFlow = {
     name: "Tome of the Eternal Flow",
     src: "Weapons/Weapon_Tome_of_the_Eternal_Flow.webp",
     weaponType: "Catalyst",
@@ -1724,8 +1751,8 @@ const TomeoftheEternalFlow= {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"HP%",Value:16},{Type:"ChargedAttack",Value:42},{Type:"EnergyRecharge",Value:6}]},//
+
+    passive: function () { return [{ Type: "HP%", Value: 16 }, { Type: "ChargedAttack", Value: 42 }, { Type: "EnergyRecharge", Value: 6 }] },//
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1750,8 +1777,8 @@ const WineAndSong = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:40}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1781,8 +1808,8 @@ const Akuoumaru = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:65}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 65 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1808,8 +1835,8 @@ const BlackcliffSlasher = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:72}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 72 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1835,8 +1862,8 @@ const FavoniusGreatsword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:80}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 80 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1862,8 +1889,8 @@ const KatsuragikiriNagamasa = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:10},{Type:"ElementalSkill",Value:12}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 10 }, { Type: "ElementalSkill", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1889,8 +1916,8 @@ const LithicBlade = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:22},{Type:"CritRate",Value:14}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 22 }, { Type: "CritRate", Value: 14 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1916,8 +1943,8 @@ const LuxuriousSeaLord = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:24}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1943,8 +1970,8 @@ const PrototypeArchaic = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1970,8 +1997,8 @@ const Rainslasher = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRcharge",Value:null}]},
+
+    passive: function () { return [{ Type: "EnergyRcharge", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1997,8 +2024,8 @@ const RedhornStonethresher = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"DEF%",Value:28}]},
+
+    passive: function () { return [{ Type: "DEF%", Value: 28 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2024,8 +2051,8 @@ const RoyalGreatsword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:30}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 30 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2051,8 +2078,8 @@ const SacrificialGreatsword = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2078,8 +2105,8 @@ const SerpentSpine = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:50}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 50 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2105,8 +2132,8 @@ const SkywardPride = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:8}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 8 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2132,8 +2159,8 @@ const SnowTombedStarSilver = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2159,8 +2186,8 @@ const SongOfBrokenPines = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:36},{Type:"NormalAttack",Value:12}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 36 }, { Type: "NormalAttack", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2186,8 +2213,8 @@ const TheBell = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"BonusDMG%",Value:24}]},
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 24 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2213,8 +2240,8 @@ const TheUnforged = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ShieldStrength",Value:20},{Type:"ATK%",Value:20}]},
+
+    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2240,8 +2267,8 @@ const Whiteblind = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:48},{Type:"DEF%",Value:48}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 48 }, { Type: "DEF%", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2267,8 +2294,8 @@ const WolfsGravestone = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:20},{Type:"ATK%",Value:13.3}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 20 }, { Type: "ATK%", Value: 13.3 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2299,8 +2326,8 @@ const BlackTassel = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2326,8 +2353,8 @@ const BlackcliffPole = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:72}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 72 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2353,8 +2380,8 @@ const CalamityQueller = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalDMG",Value:12},{Type:"ATK%",Value:19.2}]},
+
+    passive: function () { return [{ Type: "ElementalDMG", Value: 12 }, { Type: "ATK%", Value: 19.2 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2380,8 +2407,8 @@ const CrescentPike = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2407,8 +2434,8 @@ const Deathmatch = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:32},{Type:"DEF%",Value:32}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 32 }, { Type: "DEF%", Value: 32 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2434,8 +2461,8 @@ const DragonsBane = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2461,8 +2488,8 @@ const DragonspineSpear = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2488,8 +2515,8 @@ const EngulfingLightning = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"",Value:null}]},
+
+    passive: function () { return [{ Type: "", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2515,8 +2542,8 @@ const FavoniusLance = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"EnergyRecharge",Value:80}]},
+
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 80 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2542,8 +2569,8 @@ const KitainCrossSpear = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalSkill",Value:12},{Type:"EnergyRecharge",Value:10}]},
+
+    passive: function () { return [{ Type: "ElementalSkill", Value: 12 }, { Type: "EnergyRecharge", Value: 10 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2569,8 +2596,8 @@ const LithicSpear = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:22},{Type:"CritRate",Value:14}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 22 }, { Type: "CritRate", Value: 14 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2596,8 +2623,8 @@ const PrimordialJadeWingedSpear = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ATK%",Value:18},{Type:"BonusDMG%",Value:8}]},
+
+    passive: function () { return [{ Type: "ATK%", Value: 18 }, { Type: "BonusDMG%", Value: 8 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2623,8 +2650,8 @@ const PrototypeStarglitter = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:26},{Type:"ChargedAttack",Value:26}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 26 }, { Type: "ChargedAttack", Value: 26 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2650,8 +2677,8 @@ const RoyalSpear = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:30}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 30 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2677,8 +2704,8 @@ const SkywardSpine = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"CritRate",Value:8},{Type:"NormalAttack",Value:12}]},
+
+    passive: function () { return [{ Type: "CritRate", Value: 8 }, { Type: "NormalAttack", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2704,8 +2731,8 @@ const StaffOfHoma = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"HP%",Value:20}]},
+
+    passive: function () { return [{ Type: "HP%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2731,8 +2758,8 @@ const TheCatch = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:32}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 32 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2758,8 +2785,8 @@ const VortexVanquisher = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ShieldStrength",Value:20},{Type:"ATK%",Value:40}]},
+
+    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 40 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2785,8 +2812,8 @@ const WavebreakersFin = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"ElementalBurst",Value:65}]},
+
+    passive: function () { return [{ Type: "ElementalBurst", Value: 65 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2812,8 +2839,8 @@ const WhiteTassel = {
             return getSubStat(this);
         }
     },
-    
-    passive: function(){return [{Type:"NormalAttack",Value:48}]},
+
+    passive: function () { return [{ Type: "NormalAttack", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2833,116 +2860,117 @@ function getSubStat(weapon) {
     for (let index = 0; index < weapon.Parent.level.length - 1; index++) {
         lvl = lvl + weapon.Parent.level[index];
 
-}
-// console.log(lvl,weapon);
+    }
+    // console.log(lvl,weapon);
     return subStatScaling[weapon.startValue][lvl];
 
 }
 const AllWeapons = {
     ["Absolution"]: Absolution,
-    ["Alley Hunter"]:AlleyHunter,
-    ["Akuoumaru"]:Akuoumaru,
+    ["Alley Hunter"]: AlleyHunter,
+    ["Akuoumaru"]: Akuoumaru,
     ["Amenoma Kageuchi"]: AmenomaKageuchi,
-    ["Amos Bow"]:AmosBow,
+    ["Amos Bow"]: AmosBow,
     ["Aquila Favonia"]: AquilaFavonia,
-    ["Black Tassel"]:BlackTassel,
-    ["Blackcliff Agate"]:BlackcliffAgate,
+    ["Black Tassel"]: BlackTassel,
+    ["Blackcliff Agate"]: BlackcliffAgate,
     ["Blackcliff Longsword"]: BlackcliffLongsword,
-    ["Blackcliff Pole"]:BlackcliffPole,
-    ["Blackcliff Slasher"]:BlackcliffSlasher,
-    ["Blackcliff Warbow"]:BlackcliffWarbow,
-    ["Calamity Queller"]:CalamityQueller,
-    ["Cinnabar Spindle"]:CinnabarSpindle,
-    ["Crescent Pike"]:CrescentPike,
-    ["Compound Bow"]:CompoundBow,
-    ["Deathmatch"]:Deathmatch,
-    ["Dodoco Tales"]:DodocoTales,
-    ["Dragons Bane"]:DragonsBane,
-    ["Dragonspine Spear"]:DragonspineSpear,
-    ["Elegy for the End"]:ElegyForTheEnd,
-    ["Engulfing Lightning"]:EngulfingLightning,
-    ["Everlasting Moonglow"]:EverlastingMoonglow,
-    ["Eye of Perception"]:EyeOfPerception,
-    ["Favonius Codex"]:FavoniusCodex,
-    ["Favonius Greatsword"]:FavoniusGreatsword,
-    ["Favonius Lance"]:FavoniusLance,
-    ["Favonius Sword"]:FavoniusSword,
-    ["Favonius Warbow"]:FavoniusWarbow,
-    ["Festering Desire"]:FesteringDesire,
-    ["Freedom-Sworn"]:FreedomSworn,
-    ["Frostbearer"]:Frostbearer,
-    ["Hakushin Ring"]:HakushinRing,
-    ["Hamayumi"]:Hamayumi,
-    ["Haran Geppaku Futsu"]:HaranGeppakuFutsu,
-    ["Harbinger of Dawn"]:HarbingerOfDawn,
-    ["Iron Sting"]:IronSting,
-    ["Kaguras Verity"]:KagurasVerity,
-    ["Katsuragikiri Nagamasa"]:KatsuragikiriNagamasa,
-    ["Key of Khaj-Nisut"]:KeyofKahjNisut,
-    ["Kitain Cross Spear"]:KitainCrossSpear,
-    ["Lions Roar"]:LionsRoar,
-    ["Lithic Blade"]:LithicBlade,
-    ["Lithic Spear"]:LithicSpear,
-    ["Lost Prayer to the Sacred Winds"]:LostPrayerToTheSacredWinds,
-    ["Luxurious Sea-Lord"]:LuxuriousSeaLord,
-    ["Mappa Mare"]:MappaMare,
-    ["Memory of Dust"]:MemoryOfDust,
+    ["Blackcliff Pole"]: BlackcliffPole,
+    ["Blackcliff Slasher"]: BlackcliffSlasher,
+    ["Blackcliff Warbow"]: BlackcliffWarbow,
+    ["Calamity Queller"]: CalamityQueller,
+    ["Cinnabar Spindle"]: CinnabarSpindle,
+    ["Crescent Pike"]: CrescentPike,
+    ["Compound Bow"]: CompoundBow,
+    ["Deathmatch"]: Deathmatch,
+    ["Dodoco Tales"]: DodocoTales,
+    ["Dragons Bane"]: DragonsBane,
+    ["Dragonspine Spear"]: DragonspineSpear,
+    ["Elegy for the End"]: ElegyForTheEnd,
+    ["Engulfing Lightning"]: EngulfingLightning,
+    ["Everlasting Moonglow"]: EverlastingMoonglow,
+    ["Eye of Perception"]: EyeOfPerception,
+    ["Favonius Codex"]: FavoniusCodex,
+    ["Favonius Greatsword"]: FavoniusGreatsword,
+    ["Favonius Lance"]: FavoniusLance,
+    ["Favonius Sword"]: FavoniusSword,
+    ["Favonius Warbow"]: FavoniusWarbow,
+    ["Festering Desire"]: FesteringDesire,
+    ["Freedom-Sworn"]: FreedomSworn,
+    ["Frostbearer"]: Frostbearer,
+    ["Hakushin Ring"]: HakushinRing,
+    ["Hamayumi"]: Hamayumi,
+    ["Haran Geppaku Futsu"]: HaranGeppakuFutsu,
+    ["Harbinger of Dawn"]: HarbingerOfDawn,
+    ["Iron Sting"]: IronSting,
+    ["Kaguras Verity"]: KagurasVerity,
+    ["Katsuragikiri Nagamasa"]: KatsuragikiriNagamasa,
+    ["Key of Khaj-Nisut"]: KeyofKahjNisut,
+    ["Kitain Cross Spear"]: KitainCrossSpear,
+    ["Light of Foliar Incision"]: LightofFoliarIncision,
+    ["Lions Roar"]: LionsRoar,
+    ["Lithic Blade"]: LithicBlade,
+    ["Lithic Spear"]: LithicSpear,
+    ["Lost Prayer to the Sacred Winds"]: LostPrayerToTheSacredWinds,
+    ["Luxurious Sea-Lord"]: LuxuriousSeaLord,
+    ["Mappa Mare"]: MappaMare,
+    ["Memory of Dust"]: MemoryOfDust,
     ["Mistsplitter Reforged"]: MistsplitterReforged,
-    ["Mitternachts Waltz"]:MitternachtsWaltz,
-    ["Mouuns Moon"]:MouunsMoon,
-    ["Oathsworn Eye"]:OathswornEye,
+    ["Mitternachts Waltz"]: MitternachtsWaltz,
+    ["Mouuns Moon"]: MouunsMoon,
+    ["Oathsworn Eye"]: OathswornEye,
     ["Polar Star"]: PolarStar,
-    ["Predator"]:Predator,
-    ["Primordial Jade Cutter"]:PrimordialJadeCutter,
-    ["Primordial Jade Winged-Spear"]:PrimordialJadeWingedSpear,
-    ["Prototype Amber"]:PrototypeAmber,
-    ["Prototype Archaic"]:PrototypeArchaic,
-    ["Prototype Crescent"]:PrototypeCrescent,
-    ["Prototype Rancour"]:PrototypeRancour,
-    ["Prototype Starglitter"]:PrototypeStarglitter,
-    ["Rainslasher"]:Rainslasher,
-    ["Redhorn Stonethresher"]:RedhornStonethresher,
-    ["Royal Bow"]:RoyalBow,
-    ["Royal Greatsword"]:RoyalGreatsword,
-    ["Royal Grimoire"]:RoyalGrimoire,
-    ["Royal Longsword"]:RoyalLongsword,
-    ["Royal Spear"]:RoyalSpear,
-    ["Rust"]:Rust,
-    ["Sacrificial Bow"]:SacrificialBow,
-    ["Sacrificial Fragments"]:SacrificialFragments,
-    ["Sacrificial Greatsword"]:SacrificialGreatsword,
-    ["Sacrificial Sword"]:SacrificialSword,
-    ["Serpent Spine"]:SerpentSpine,
-    ["Skyward Atlas"]:SkywardAtlas,
+    ["Predator"]: Predator,
+    ["Primordial Jade Cutter"]: PrimordialJadeCutter,
+    ["Primordial Jade Winged-Spear"]: PrimordialJadeWingedSpear,
+    ["Prototype Amber"]: PrototypeAmber,
+    ["Prototype Archaic"]: PrototypeArchaic,
+    ["Prototype Crescent"]: PrototypeCrescent,
+    ["Prototype Rancour"]: PrototypeRancour,
+    ["Prototype Starglitter"]: PrototypeStarglitter,
+    ["Rainslasher"]: Rainslasher,
+    ["Redhorn Stonethresher"]: RedhornStonethresher,
+    ["Royal Bow"]: RoyalBow,
+    ["Royal Greatsword"]: RoyalGreatsword,
+    ["Royal Grimoire"]: RoyalGrimoire,
+    ["Royal Longsword"]: RoyalLongsword,
+    ["Royal Spear"]: RoyalSpear,
+    ["Rust"]: Rust,
+    ["Sacrificial Bow"]: SacrificialBow,
+    ["Sacrificial Fragments"]: SacrificialFragments,
+    ["Sacrificial Greatsword"]: SacrificialGreatsword,
+    ["Sacrificial Sword"]: SacrificialSword,
+    ["Serpent Spine"]: SerpentSpine,
+    ["Skyward Atlas"]: SkywardAtlas,
     ["Skyward Blade"]: SkywardBlade,
-    ["Skyward Harp"]:SkywardHarp,
-    ["Skyward Pride"]:SkywardPride,
-    ["Skyward Spine"]:SkywardSpine,
-    ["Snow-Tombed Starsilver"]:SnowTombedStarSilver,
-    ["Solar Pearl"]:SolarPearl,
-    ["Song of Broken Pines"]:SongOfBrokenPines,
-    ["Staff of Homa"]:StaffOfHoma,
-    ["Summit Shaper"]:SummitShaper,
-    ["Sword of Descension"]:SwordOfDescension,
-    ["The Alley Flash"]:TheAlleyFlash,
-    ["The Catch"]:TheCatch,
-    ["The Bell"]:TheBell,
-    ["The Flute"]:TheFlute,
-    ["The Stringless"]:TheStringless,
-    ["The Unforged"]:TheUnforged,
-    ["The Viridescent Hunt"]:TheViridescentHunt,
-    ["The Widsith"]:TheWidsith,
-    ["Thrilling Tales of Dragon Slayers"]:ThrillingTalesOfDragonSlayers,
-    ["Thundering Pulse"]:ThunderingPulse,
+    ["Skyward Harp"]: SkywardHarp,
+    ["Skyward Pride"]: SkywardPride,
+    ["Skyward Spine"]: SkywardSpine,
+    ["Snow-Tombed Starsilver"]: SnowTombedStarSilver,
+    ["Solar Pearl"]: SolarPearl,
+    ["Song of Broken Pines"]: SongOfBrokenPines,
+    ["Staff of Homa"]: StaffOfHoma,
+    ["Summit Shaper"]: SummitShaper,
+    ["Sword of Descension"]: SwordOfDescension,
+    ["The Alley Flash"]: TheAlleyFlash,
+    ["The Catch"]: TheCatch,
+    ["The Bell"]: TheBell,
+    ["The Flute"]: TheFlute,
+    ["The Stringless"]: TheStringless,
+    ["The Unforged"]: TheUnforged,
+    ["The Viridescent Hunt"]: TheViridescentHunt,
+    ["The Widsith"]: TheWidsith,
+    ["Thrilling Tales of Dragon Slayers"]: ThrillingTalesOfDragonSlayers,
+    ["Thundering Pulse"]: ThunderingPulse,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
-    ["Vortex Vanquisher"]:VortexVanquisher,
-    ["Wavebreakers Fin"]:WavebreakersFin,
-    ["White Tassel"]:WhiteTassel,
-    ["Whiteblind"]:Whiteblind,
-    ["Windblume Ode"]:WindblumeOde,
-    ["Wine and Song"]:WineAndSong,
-    ["Wolf's Gravestone"]:WolfsGravestone,
-    index:[
+    ["Vortex Vanquisher"]: VortexVanquisher,
+    ["Wavebreakers Fin"]: WavebreakersFin,
+    ["White Tassel"]: WhiteTassel,
+    ["Whiteblind"]: Whiteblind,
+    ["Windblume Ode"]: WindblumeOde,
+    ["Wine and Song"]: WineAndSong,
+    ["Wolf's Gravestone"]: WolfsGravestone,
+    index: [
         "Absolution",
         "Akuoumaru",
         "Alley Hunter",
@@ -2984,6 +3012,7 @@ const AllWeapons = {
         "Katsuragikiri Nagamasa",
         "Key of Khaj-Nisut",
         "Kitain Cross Spear",
+        "Light of Foliar Incision",
         "Lions Roar",
         "Lithic Blade",
         "Lithic Spear",
@@ -3046,9 +3075,9 @@ const AllWeapons = {
         "Wine and Song",
         "Windblume Ode",
         "Wolf's Gravestone"
-        
+
     ],
-    ["Sword"]:[
+    ["Sword"]: [
         "Absolution",
         "Amenoma Kageuchi",
         "Aquila Favonia",
@@ -3061,6 +3090,7 @@ const AllWeapons = {
         "Harbinger of Dawn",
         "Iron Sting",
         "Key of Khaj-Nisut",
+        "Light of Foliar Incision",
         "Lions Roar",
         "Mistsplitter Reforged",
         "Primordial Jade Cutter",
@@ -3072,9 +3102,9 @@ const AllWeapons = {
         "Sword of Descension",
         "The Alley Flash",
         "The Flute",
-        
+
     ],
-    ["Bow"]:[
+    ["Bow"]: [
         "Alley Hunter",
         "Amos Bow",
         "Blackcliff Warbow",
@@ -3096,7 +3126,7 @@ const AllWeapons = {
         "Thundering Pulse",
         "Windblume Ode",
     ],
-    ["Catalyst"]:[
+    ["Catalyst"]: [
         "Blackcliff Agate",
         "Dodoco Tales",
         "Everlasting Moonglow",
@@ -3119,7 +3149,7 @@ const AllWeapons = {
         "Tome of the Eternal Flow",
         "Wine and Song"
     ],
-    ["Claymore"]:[
+    ["Claymore"]: [
         "Akuoumaru",
         "Blackcliff Slasher",
         "Favonius Greatsword",
@@ -3140,7 +3170,7 @@ const AllWeapons = {
         "Whiteblind",
         "Wolf's Gravestone"
     ],
-    ["Polearm"]:[
+    ["Polearm"]: [
         "Black Tassel",
         "Blackcliff Pole",
         "Calamity Queller",
@@ -3161,6 +3191,6 @@ const AllWeapons = {
         "Vortex Vanquisher",
         "Wavebreakers Fin",
         "White Tassel"
-        
+
     ]
 }
