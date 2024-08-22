@@ -6459,7 +6459,7 @@ function reboundHydrotherapy(character) {
     }
     let bolsteringBubblebalm = { Multiplier: bolsteringBubblebalmDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalSkill" }
     let dmg = 0;
-    for(let i = 0; i < 5; i++){
+    for (let i = 0; i < 5; i++) {
         dmg += dmgCalc(bolsteringBubblebalm, character);
     }
     bolsteringBubblebalmHealing *= 1 + (character.advancedstats.healingBonus / 100);
@@ -6470,9 +6470,55 @@ function reboundHydrotherapy(character) {
         }
     }
     let atkbuff
-    if(hasA1){
-        atkbuff = Math.max(((Math.max((character.HP()-30000),0)/1000)*80),2800)*10;
+    if (hasA1) {
+        atkbuff = Math.max(((Math.max((character.HP() - 30000), 0) / 1000) * 80), 2800) * 10;
         character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 8, Source: "Rebound Hydrotherapy" });
     }
     return { dmg: dmg, healing: bolsteringBubblebalmHealing, attackBuff: atkbuff };
+}
+
+function ancientRiteTheThunderingSands(character) {
+    let skillDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 115.6/100;
+            break;
+        case 2:
+            skillDMG = 124.27/100;
+            break;
+        case 3:
+            skillDMG = 132.94/100;
+            break;
+        case 4:
+            skillDMG = 144.5/100;
+            break;
+        case 5:
+            skillDMG = 153.17/100;
+            break;
+        case 6:
+            skillDMG = 161.84/100;
+            break;
+        case 7:
+            skillDMG = 173.4/100;
+            break;
+        case 8:
+            skillDMG = 184.96/100;
+            break;
+        case 9:
+            skillDMG = 196.52/100;
+            break;
+        case 10:
+            skillDMG =208.08/100;
+            break;
+        default:
+            skillDMG = 208.08/100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let supportedElements = ["Pyro", "Cryo", "Hydro","Dendro","Anemo"];
+    if(supportedElements.includes(supportingElement)){
+        character.currentBuffs.push({ Type: "EnergyRecharge", Value: 10, Source: "The Thundering Sands" });
+    }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
 }

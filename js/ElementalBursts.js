@@ -6191,5 +6191,53 @@ function superSaturatedSyringing(character) {
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    return {dmg:dmg};
+    return { dmg: dmg };
+}
+
+function secretRiteTwilightShadowpiercer(character) {
+    let duskBoltDMGIncrease = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            duskBoltDMGIncrease = 196.16 / 100;
+            break;
+        case 2:
+            duskBoltDMGIncrease = 210.87 / 100;
+            break;
+        case 3:
+            duskBoltDMGIncrease = 225.58 / 100;
+            break;
+        case 4:
+            duskBoltDMGIncrease = 245.2 / 100;
+            break;
+        case 5:
+            duskBoltDMGIncrease = 259.91 / 100;
+            break;
+        case 6:
+            duskBoltDMGIncrease = 274.62 / 100;
+            break;
+        case 7:
+            duskBoltDMGIncrease = 294.24 / 100;
+            break;
+        case 8:
+            duskBoltDMGIncrease = 313.86 / 100;
+            break;
+        case 9:
+            duskBoltDMGIncrease = 333.47 / 100;
+            break;
+        case 10:
+            duskBoltDMGIncrease = 353.09 / 100;
+            break;
+        case 11:
+            duskBoltDMGIncrease = 372.7 / 100;
+            break;
+        case 12:
+            duskBoltDMGIncrease = 392.32 / 100;
+            break;
+        case 13:
+            duskBoltDMGIncrease = 416.84 / 100;
+            break;
+    }
+
+    character.currentBuffs.push({ Type: "ChargedAttack", Value: duskBoltDMGIncrease * character.EM(), for: "ChargedAttack" });
+    return 0;
 }

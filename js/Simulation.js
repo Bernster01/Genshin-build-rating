@@ -851,6 +851,8 @@ function Simulation(character) {
                     persTimer += 2;//Ult will be active 
                 }
                 attackAction.type = "NormalAttack";
+                if(character.name =="Sethos")
+                    attackAction.type = "ChargedAttack";
                 switch (action) {
                     case "N1":
                         attackAction.Multiplier = Character.normalAttack1.Multiplier(Character.normalAttackLevel);
