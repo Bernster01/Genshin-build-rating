@@ -6071,3 +6071,78 @@ function kyougenFiveCeremonialPlays(character) {
     return dmg;
 }
 
+function fashionersTanglevineShaft(character) {
+    let tanglevineShaftDMG = 0;
+    let secondaryTanglevineShaftDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            tanglevineShaftDMG = 55.62 / 100;
+            secondaryTanglevineShaftDMG = 67.98 / 100;
+            break;
+        case 2:
+            tanglevineShaftDMG = 59.79 / 100;
+            secondaryTanglevineShaftDMG = 73.08 / 100;
+            break;
+        case 3:
+            tanglevineShaftDMG = 63.96 / 100;
+            secondaryTanglevineShaftDMG = 78.18 / 100;
+            break;
+        case 4:
+            tanglevineShaftDMG = 69.53 / 100;
+            secondaryTanglevineShaftDMG = 84.97 / 100;
+            break;
+        case 5:
+            tanglevineShaftDMG = 73.7 / 100;
+            secondaryTanglevineShaftDMG = 90.07 / 100;
+            break;
+        case 6:
+            tanglevineShaftDMG = 77.87 / 100;
+            secondaryTanglevineShaftDMG = 95.17 / 100;
+            break;
+        case 7:
+            tanglevineShaftDMG = 83.43 / 100;
+            secondaryTanglevineShaftDMG = 101.97 / 100;
+            break;
+        case 8:
+            tanglevineShaftDMG = 88.99 / 100;
+            secondaryTanglevineShaftDMG = 108.77 / 100;
+            break;
+        case 9:
+            tanglevineShaftDMG = 94.55 / 100;
+            secondaryTanglevineShaftDMG = 115.57 / 100;
+            break;
+        case 10:
+            tanglevineShaftDMG = 100.12 / 100;
+            secondaryTanglevineShaftDMG = 122.36 / 100;
+            break;
+        case 11:
+            tanglevineShaftDMG = 105.68 / 100;
+            secondaryTanglevineShaftDMG = 129.16 / 100;
+            break;
+        case 12:
+            tanglevineShaftDMG = 111.24 / 100;
+            secondaryTanglevineShaftDMG = 135.96 / 100;
+            break;
+        case 13:
+            tanglevineShaftDMG = 118.19 / 100;
+            secondaryTanglevineShaftDMG = 144.46 / 100;
+            break;
+    }
+    let attack = { Multiplier: tanglevineShaftDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: secondaryTanglevineShaftDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = 0;
+    for (let i = 0; i < 6; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+            attack2.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+            attack2.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+        dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
+    return dmg;
+}
+

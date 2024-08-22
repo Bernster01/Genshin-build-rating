@@ -723,6 +723,13 @@ function applyBonuses(character) {
             }
 
         }
+    } else if (character.name == "Tighnari") {
+        let buff = character.EM() * (0.06 / 100)
+        if (buff > 60)
+            buff = 60;
+        character.currentBuffs.push({ Type: "ChargedAttack", Value: buff });
+        character.currentBuffs.push({ Type: "ElementalBurst", Value: buff });
+
     }
 }
 function getSetBonus(array, character) {
@@ -964,6 +971,18 @@ function Simulation(character) {
                                     //Heal 30% of HP
                                     character.addHP(0.3 * character.HP());
                                 }
+                            }
+                        } else if (Character.name == "Tighnari") {
+                            let multiplier = Character.chargedAttack.extraMultiplier(Character.normalAttackLevel);
+                            let newAttack = { Multiplier: multiplier, Element: "DendroDMGBonus", isReaction: false, Scaling: "ATK", type: "ChargedAttack" };
+                            for (let i = 0; i < 4; i++) {
+                                if (i % 3 == 0)
+                                    newAttack.isReaction = true;
+                                else
+                                    newAttack.isReaction = false;
+                                let tmpDMG = dmgCalc(newAttack, Character);
+                                totalDmg += tmpDMG;
+                                dmgSources.c += tmpDMG;
                             }
                         }
                         break;

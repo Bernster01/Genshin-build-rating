@@ -6350,3 +6350,52 @@ function hanegaSongoftheWind(character) {
     }
     return dmg;
 }
+
+function vijnanaPhalaMine(character) {
+    let skillDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 149.6 / 100;
+            break;
+        case 2:
+            skillDMG = 160.82 / 100;
+            break;
+        case 3:
+            skillDMG = 172.04 / 100;
+            break;
+        case 4:
+            skillDMG = 187 / 100;
+            break;
+        case 5:
+            skillDMG = 198.22 / 100;
+            break;
+        case 6:
+            skillDMG = 209.44 / 100;
+            break;
+        case 7:
+            skillDMG = 224.4 / 100;
+            break;
+        case 8:
+            skillDMG = 239.36 / 100;
+            break;
+        case 9:
+            skillDMG = 254.32 / 100;
+            break;
+        case 10:
+            skillDMG = 269.28 / 100;
+            break;
+        case 11:
+            skillDMG = 284.24 / 100;
+            break;
+        case 12:
+            skillDMG = 299.2 / 100;
+            break;
+        case 13:
+            skillDMG = 317.9 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
+
+}
