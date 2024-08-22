@@ -6247,3 +6247,106 @@ function icefangRush(character) {
     character.currentBuffs.push({ Type: "NormalAttack", Value: normalDMGBonus, Source: "IcefangRush" });
     return 0;
 }
+
+function hanegaSongoftheWind(character) {
+    let skillDMG = 0;
+    let normalAttack = 0;
+    let chargedAttack = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 95.2 / 100;
+            normalAttack = 132.98 / 100;
+            chargedAttack = 126.39 / 100;
+            break;
+        case 2:
+            skillDMG = 102.34 / 100;
+            normalAttack = 134.96 / 100;
+            chargedAttack = 127.97 / 100;
+            break;
+        case 3:
+            skillDMG = 109.48 / 100;
+            normalAttack = 136.93 / 100;
+            chargedAttack = 129.55 / 100;
+            break;
+        case 4:
+            skillDMG = 119 / 100;
+            normalAttack = 139.5 / 100;
+            chargedAttack = 131.6 / 100;
+            break;
+        case 5:
+            skillDMG = 126.14 / 100;
+            normalAttack = 141.47 / 100;
+            chargedAttack = 133.18 / 100;
+            break;
+        case 6:
+            skillDMG = 133.28 / 100;
+            normalAttack = 143.45 / 100;
+            chargedAttack = 134.76 / 100;
+            break;
+        case 7:
+            skillDMG = 142.8 / 100;
+            normalAttack = 146.02 / 100;
+            chargedAttack = 136.81 / 100;
+            break;
+        case 8:
+            skillDMG = 152.32 / 100;
+            normalAttack = 148.58 / 100;
+            chargedAttack = 138.87 / 100;
+            break;
+        case 9:
+            skillDMG = 161.84 / 100;
+            normalAttack = 151.15 / 100;
+            chargedAttack = 140.92 / 100;
+            break;
+        case 10:
+            skillDMG = 171.36 / 100;
+            normalAttack = 153.72 / 100;
+            chargedAttack = 142.98 / 100;
+            break;
+        case 11:
+            skillDMG = 180.88 / 100;
+            normalAttack = 156.29 / 100;
+            chargedAttack = 145.03 / 100;
+            break;
+        case 12:
+            skillDMG = 190.4 / 100;
+            normalAttack = 158.85 / 100;
+            chargedAttack = 147.08 / 100;
+            break;
+        case 13:
+            skillDMG = 202.3 / 100;
+            normalAttack = 161.42 / 100;
+            chargedAttack = 149.14 / 100;
+            break;
+    }
+    let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    character.normalAttack1.Multiplier = function (level) { return normalAttack };
+    character.normalAttack2.Multiplier = function (level) { return normalAttack };
+    character.chargedAttack.Multiplier = function (level) { return chargedAttack };
+    let hasA1 = false;
+    for (const buff of character.currentBuffs) {
+        if (buff.Type == "Jade-Claimed Flower") {
+            hasA1 = true;
+        }
+    }
+    if (hasA1) {
+        switch (supportingElement) {
+            case "Pyro":
+                character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
+                break;
+            case "Cryo":
+                character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Song of the Wind" });
+                break;
+            case "Electro":
+                character.currentBuffs.push({ Type: "EnergyRecharge", Value: 20, Source: "Song of the Wind" });
+                break;
+            case "Hydro":
+                let sequenceToAdd = ["N1", "N2", "N3", "C"];
+                character.sequence["Dps"] = character.sequence["Dps"].concat(sequenceToAdd);
+                character.sequence["Support"] = character.sequence["Support"].concat(sequenceToAdd);
+                break;
+        }
+    }
+    return dmg;
+}

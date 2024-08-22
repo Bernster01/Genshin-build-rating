@@ -6013,3 +6013,61 @@ function darkgoldWolfbite(character) {
     }
     return dmg;
 }
+
+function kyougenFiveCeremonialPlays(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 147.2 / 100;
+            break;
+        case 2:
+            skillDMG = 158.24 / 100;
+            break;
+        case 3:
+            skillDMG = 169.28 / 100;
+            break;
+        case 4:
+            skillDMG = 184 / 100;
+            break;
+        case 5:
+            skillDMG = 195.04 / 100;
+            break;
+        case 6:
+            skillDMG = 206.08 / 100;
+            break;
+        case 7:
+            skillDMG = 220.8 / 100;
+            break;
+        case 8:
+            skillDMG = 235.52 / 100;
+            break;
+        case 9:
+            skillDMG = 250.24 / 100;
+            break;
+        case 10:
+            skillDMG = 264.96 / 100;
+            break;
+        case 11:
+            skillDMG = 279.68 / 100;
+            break;
+        case 12:
+            skillDMG = 294.4 / 100;
+            break;
+        case 13:
+            skillDMG = 312.8 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for (let i = 0; i < 5; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+    }
+    return dmg;
+}
+
