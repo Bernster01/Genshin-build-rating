@@ -1259,6 +1259,14 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 32, Source: "Fleuve Cendre Ferryman" });
                         }
                         break;
+                    case "Verdict":
+                        //Remove all verdict buffs
+                        for (buff of Character.currentBuffs) {
+                            if (buff.Source == "Verdict") {
+                                Character.currentBuffs.pop(buff);
+                            }
+                        }
+                        break;
                 }
                 break;
 
@@ -1888,7 +1896,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.burningDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized();
+                        crystalized(character);
                         break;
                 }
                 break;
@@ -1923,7 +1931,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.bloomDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized();
+                        crystalized(character);
                         break;
                 }
                 break;
@@ -1954,7 +1962,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         }
                         break;
                     case "Geo":
-                        crystalized();
+                        crystalized(character);
                         break;
                 }
                 break;
@@ -1977,7 +1985,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.swirlDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized();
+                        crystalized(character);
                         break;
                 }
                 break;
@@ -2025,7 +2033,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 break;
             case "Geo":
                 if (type != "Anemo" && type != "Geo" && type != "Dendro") {
-                    crystalized();
+                    crystalized(character);
                 }
                 break;
         }
@@ -2140,10 +2148,23 @@ function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
     return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
 }
-function crystalized() {
+function crystalized(character) {
     //TODO implement crystalized and buff from that
     shardsInPossession++;
     console.log(shardsInPossession);
+    switch (character.weapon.name) {
+        case "Verdict":
+            let buffStacks = 0;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Verdict") {
+                    buffStacks++;
+                }
+            });
+            if (stacks < 2) {
+                character.currentBuffs.push({ Type: "ElementalSkill", Source: "Verdict", Value: 18 });
+            }
+            break;
+    }
     return 0;
 }
 const superconductBaseDMG = {

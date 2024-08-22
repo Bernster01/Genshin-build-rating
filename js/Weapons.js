@@ -2375,6 +2375,33 @@ const TheUnforged = {
     }
 }.Init();
 
+const Verdict = {
+    name: "Verdict",
+    src: "Weapons/Weapon_Verdict.webp",
+    weaponType: "Claymore",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "4.8%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
 const Whiteblind = {
     name: "Whiteblind",
     src: "Weapons/Whiteblind.png",
@@ -3093,6 +3120,7 @@ const AllWeapons = {
     ["Thundering Pulse"]: ThunderingPulse,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
     ["Uraku Misugiri"]: UrakuMisugiri,
+    ["Verdict"]:Verdict,
     ["Vortex Vanquisher"]: VortexVanquisher,
     ["Wavebreakers Fin"]: WavebreakersFin,
     ["White Tassel"]: WhiteTassel,
@@ -3203,6 +3231,7 @@ const AllWeapons = {
         "Thundering Pulse",
         "Tome of the Eternal Flow",
         "Uraku Misugiri",
+        "Verdict",
         "Vortex Vanquisher",
         "Wavebreakers Fin",
         "White Tassel",
@@ -3308,6 +3337,7 @@ const AllWeapons = {
         "Song of Broken Pines",
         "The Bell",
         "The Unforged",
+        "Verdict",
         "Whiteblind",
         "Wolf's Gravestone"
     ],
