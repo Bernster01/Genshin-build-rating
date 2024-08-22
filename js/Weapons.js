@@ -28,7 +28,7 @@ const Absolution = {
 
 const AmenomaKageuchi = {
     name: "Amenoma Kageuchi",
-    src: "Weapons/Amenoma_Kageuchi.png",
+    src: "Weapons/Weapon_Amenoma_Kageuchi.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -55,7 +55,7 @@ const AmenomaKageuchi = {
 
 const AquilaFavonia = {
     name: "Aquila Favonia",
-    src: "Weapons/Aquila_Favonia.png",
+    src: "Weapons/Weapon_Aquila_Favonia.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -82,7 +82,7 @@ const AquilaFavonia = {
 
 const BlackcliffLongsword = {
     name: "Blackcliff Longsword",
-    src: "Weapons/Blackcliff_Longsword.png",
+    src: "Weapons/Weapon_Blackcliff_Longsword.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -109,7 +109,7 @@ const BlackcliffLongsword = {
 
 const CinnabarSpindle = {
     name: "Cinnabar Spindle",
-    src: "Weapons/Cinnabar_Spindle.png",
+    src: "Weapons/Weapon_Cinnabar_Spindle.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -136,7 +136,7 @@ const CinnabarSpindle = {
 
 const FavoniusSword = {
     name: "Favonius Sword",
-    src: "Weapons/Favonius_Sword.png",
+    src: "Weapons/Weapon_Favonius_Sword.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -163,7 +163,7 @@ const FavoniusSword = {
 
 const FesteringDesire = {
     name: "Festering Desire",
-    src: "Weapons/Festering_Desire.png",
+    src: "Weapons/Weapon_Festering_Desire.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -181,6 +181,32 @@ const FesteringDesire = {
     },
 
     passive: function () { return [{ Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const FinaleoftheDeep = {
+    name: "Finale of the Deep",
+    src: "Weapons/Weapon_Finale_of_the_Deep.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK%", Value: 24 },] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -213,9 +239,35 @@ const FleuveCendreFerryman = {
         return this;
     }
 }.Init();
+const FluteofEzpitzal = {
+    name: "Flute of Ezpitzal",
+    src: "Weapons/Weapon_Flute_of_Ezpitzal.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack41",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "DEF",
+        startValue: "15%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "DEF%", Value: 32 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const FreedomSworn = {
     name: "Freedom-Sworn",
-    src: "Weapons/Freedom_Sworn.png",
+    src: "Weapons/Weapon_Freedom-Sworn.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -242,7 +294,7 @@ const FreedomSworn = {
 
 const HaranGeppakuFutsu = {
     name: "Haran Geppaku Futsu",
-    src: "Weapons/Haran_Geppaku_Futsu.png",
+    src: "Weapons/Weapon_Haran_Geppaku_Futsu.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -269,7 +321,7 @@ const HaranGeppakuFutsu = {
 
 const HarbingerOfDawn = {
     name: "Harbinger of Dawn",
-    src: "Weapons/Harbinger_of_Dawn.png",
+    src: "Weapons/Weapon_Harbinger_of_Dawn.webp",
     weaponType: "Sword",
     rarity: 3,
     level: "1b",
@@ -296,7 +348,7 @@ const HarbingerOfDawn = {
 
 const IronSting = {
     name: "Iron Sting",
-    src: "Weapons/Iron_Sting.png",
+    src: "Weapons/Weapon_Iron_Sting.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -314,6 +366,32 @@ const IronSting = {
     },
 
     passive: function () { return [{ Type: "BonusDMG%", Value: 24 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const KagotsurubeIsshin = {
+    name: "Kagotsurube Isshin",
+    src: "Weapons/Weapon_Kagotsurube_Isshin.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK%", Value: 15 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -348,7 +426,7 @@ const KeyofKahjNisut = {
 }.Init();
 const LionsRoar = {
     name: "Lions Roar",
-    src: "Weapons/Lions_Roar.png",
+    src: "Weapons/Weapon_Lions_Roar.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -401,7 +479,7 @@ const LightofFoliarIncision = {
 
 const MistsplitterReforged = {
     name: "Mistsplitter Reforged",
-    src: "Weapons/Mistsplitter_Reforged.png",
+    src: "Weapons/Weapon_Mistsplitter_Reforged.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -430,7 +508,7 @@ const MistsplitterReforged = {
 
 const PrimordialJadeCutter = {
     name: "Primordial Jade Cutter",
-    src: "Weapons/Primordial_Jade_Cutter.png",
+    src: "Weapons/Weapon_Primordial_Jade_Cutter.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -457,7 +535,7 @@ const PrimordialJadeCutter = {
 
 const PrototypeRancour = {
     name: "Prototype Rancour",
-    src: "Weapons/Prototype_Rancour.png",
+    src: "Weapons/Weapon_Prototype_Rancour.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -484,7 +562,7 @@ const PrototypeRancour = {
 
 const RoyalLongsword = {
     name: "Royal Longsword",
-    src: "Weapons/Royal_Longsword.png",
+    src: "Weapons/Weapon_Royal_Longsword.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -511,7 +589,7 @@ const RoyalLongsword = {
 
 const SacrificialSword = {
     name: "Sacrificial Sword",
-    src: "Weapons/Sacrificial_Sword.png",
+    src: "Weapons/Weapon_Sacrificial_Sword.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -529,6 +607,32 @@ const SacrificialSword = {
     },
 
     passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const SapwoodBlade = {
+    name: "Sapwood Blade",
+    src: "Weapons/Weapon_Sapwood_Blade.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "6.7%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ElementalMastery", Value: 120 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -563,7 +667,7 @@ const SplendorofTranquilWaters = {
 }.Init();
 const SummitShaper = {
     name: "Summit Shaper",
-    src: "Weapons/Summit_Shaper.png",
+    src: "Weapons/Weapon_Summit_Shaper.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -591,7 +695,7 @@ const SummitShaper = {
 
 const SkywardBlade = {
     name: "Skyward Blade",
-    src: "Weapons/Skyward_Blade.png",
+    src: "Weapons/Weapon_Skyward_Blade.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -617,7 +721,7 @@ const SkywardBlade = {
 
 const SwordOfDescension = {
     name: "Sword of Descension",
-    src: "Weapons/Sword_of_Descension.png",
+    src: "Weapons/Weapon_Sword_of_Descension.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -640,10 +744,34 @@ const SwordOfDescension = {
         return this;
     }
 }.Init();
-
+const SwordOfNarzissenkreuz = {
+    name: "Sword of Narzissenkreuz",
+    src: "Weapons/Weapon_Sword_of_Narzissenkreuz.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "ATKBlast", Value: 320 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const TheAlleyFlash = {
     name: "The Alley Flash",
-    src: "Weapons/The_Alley_Flash.png",
+    src: "Weapons/Weapon_The_Alley_Flash.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -669,7 +797,7 @@ const TheAlleyFlash = {
 
 const TheBlackSword = {
     name: "The Black Sword",
-    src: "Weapons/The_Black_Sword.png",
+    src: "Weapons/Weapon_The_Black_Sword.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -721,7 +849,7 @@ const TheDockhandsAssistant = {
 
 const TheFlute = {
     name: "The Flute",
-    src: "Weapons/The_Flute.png",
+    src: "Weapons/Weapon_The_Flute.webp",
     weaponType: "Sword",
     rarity: 4,
     level: "1b",
@@ -745,9 +873,35 @@ const TheFlute = {
     }
 }.Init();
 
+const ToukabouShigure = {
+    name: "Toukabou Shigure",
+    src: "Weapons/Weapon_Toukabou_Shigure.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "36",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "BonusDMG%", Value: 32 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init()
+
 const UrakuMisugiri = {
     name: "Uraku Misugiri",
-    src: "Weapons/Uraku-Misugiri.webp",
+    src: "Weapons/Weapon_Uraku-Misugiri.webp",
     weaponType: "Sword",
     rarity: 5,
     level: "1b",
@@ -790,6 +944,31 @@ const WolfFang = {
         }
     },
     passive: function () { return [{ Type: "ElementalBurst", Value: 32, Source: "Wolf-Fang" }, { Type: "ElementalSkill", Value: 32, Source: "Wolf-Fang" }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const XiphosMoonlight = {
+    name: "Xiphos&#39 Moonlight",
+    src: "Weapons/Weapon_Xiphos_Moonlight.webp",
+    weaponType: "Sword",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "36",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+    passive: function () { return [{ Type: "Special", Value:null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3049,7 +3228,9 @@ const AllWeapons = {
     ["Favonius Sword"]: FavoniusSword,
     ["Favonius Warbow"]: FavoniusWarbow,
     ["Festering Desire"]: FesteringDesire,
+    ["Finale of the Deep"]: FinaleoftheDeep,
     ["Fleuve Cendre Ferryman"]: FleuveCendreFerryman,
+    ["Flute of Ezpitzal"]: FluteofEzpitzal,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
     ["Hakushin Ring"]: HakushinRing,
@@ -3057,6 +3238,7 @@ const AllWeapons = {
     ["Haran Geppaku Futsu"]: HaranGeppakuFutsu,
     ["Harbinger of Dawn"]: HarbingerOfDawn,
     ["Iron Sting"]: IronSting,
+    ["Kagotsurube Isshin"]: KagotsurubeIsshin,
     ["Kaguras Verity"]: KagurasVerity,
     ["Katsuragikiri Nagamasa"]: KatsuragikiriNagamasa,
     ["Key of Khaj-Nisut"]: KeyofKahjNisut,
@@ -3094,6 +3276,7 @@ const AllWeapons = {
     ["Sacrificial Fragments"]: SacrificialFragments,
     ["Sacrificial Greatsword"]: SacrificialGreatsword,
     ["Sacrificial Sword"]: SacrificialSword,
+    ["Sapwood Blade"]: SapwoodBlade,
     ["Serpent Spine"]: SerpentSpine,
     ["Skyward Atlas"]: SkywardAtlas,
     ["Skyward Blade"]: SkywardBlade,
@@ -3107,9 +3290,11 @@ const AllWeapons = {
     ["Staff of Homa"]: StaffOfHoma,
     ["Summit Shaper"]: SummitShaper,
     ["Sword of Descension"]: SwordOfDescension,
+    ["Sword of Narzissenkreuz"]: SwordOfNarzissenkreuz,
     ["The Alley Flash"]: TheAlleyFlash,
     ["The Catch"]: TheCatch,
     ["The Bell"]: TheBell,
+    ["The Black Sword"]: TheBlackSword,
     ["The Dockhand's Assistant"]: TheDockhandsAssistant,
     ["The Flute"]: TheFlute,
     ["The Stringless"]: TheStringless,
@@ -3118,9 +3303,10 @@ const AllWeapons = {
     ["The Widsith"]: TheWidsith,
     ["Thrilling Tales of Dragon Slayers"]: ThrillingTalesOfDragonSlayers,
     ["Thundering Pulse"]: ThunderingPulse,
+    ["Toukabou Shigure"]: ToukabouShigure,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
     ["Uraku Misugiri"]: UrakuMisugiri,
-    ["Verdict"]:Verdict,
+    ["Verdict"]: Verdict,
     ["Vortex Vanquisher"]: VortexVanquisher,
     ["Wavebreakers Fin"]: WavebreakersFin,
     ["White Tassel"]: WhiteTassel,
@@ -3129,6 +3315,7 @@ const AllWeapons = {
     ["Wine and Song"]: WineAndSong,
     ["Wolf-Fang"]: WolfFang,
     ["Wolf's Gravestone"]: WolfsGravestone,
+    ["Xiphos' Moonlight"]: XiphosMoonlight,
     index: [
         "Absolution",
         "Akuoumaru",
@@ -3160,7 +3347,9 @@ const AllWeapons = {
         "Favonius Sword",
         "Favonius Warbow",
         "Festering Desire",
+        "Finale of the Deep",
         "Fleuve Cendre Ferryman",
+        "Flute of Ezpitzal",
         "Freedom-Sworn",
         "Frostbearer",
         "Hakushin Ring",
@@ -3168,6 +3357,7 @@ const AllWeapons = {
         "Haran Geppaku Futsu",
         "Harbinger of Dawn",
         "Iron Sting",
+        "Kagotsurube Isshin",
         "Kaguras Verity",
         "Katsuragikiri Nagamasa",
         "Key of Khaj-Nisut",
@@ -3205,6 +3395,7 @@ const AllWeapons = {
         "Sacrificial Fragments",
         "Sacrificial Greatsword",
         "Sacrificial Sword",
+        "Sapwood Blade",
         "Serpent Spine",
         "Skyward Atlas",
         "Skyward Blade",
@@ -3218,9 +3409,11 @@ const AllWeapons = {
         "Staff of Homa",
         "Summit Shaper",
         "Sword of Descension",
+        "Sword of Narzissenkreuz",
         "The Alley Flash",
         "The Catch",
         "The Bell",
+        "The Black Sword",
         "The Dockhand's Assistant",
         "The Flute",
         "The Stringless",
@@ -3229,6 +3422,7 @@ const AllWeapons = {
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
         "Thundering Pulse",
+        "Toukabou Shigure",
         "Tome of the Eternal Flow",
         "Uraku Misugiri",
         "Verdict",
@@ -3239,7 +3433,8 @@ const AllWeapons = {
         "Wine and Song",
         "Windblume Ode",
         "Wolf-Fang",
-        "Wolf's Gravestone"
+        "Wolf's Gravestone",
+        "Xiphos' Moonlight"
 
     ],
     ["Sword"]: [
@@ -3250,11 +3445,14 @@ const AllWeapons = {
         "Cinnabar Spindle",
         "Favonius Sword",
         "Festering Desire",
+        "Finale of the Deep",
         "Fleuve Cendre Ferryman",
+        "Flute of Ezpitzal",
         "Freedom-Sworn",
         "Haran Geppaku Futsu",
         "Harbinger of Dawn",
         "Iron Sting",
+        "Kagotsurube Isshin",
         "Key of Khaj-Nisut",
         "Light of Foliar Incision",
         "Lions Roar",
@@ -3263,15 +3461,21 @@ const AllWeapons = {
         "Prototype Rancour",
         "Royal Longsword",
         "Sacrificial Sword",
+        "Sapwood Blade",
         "Skyward Blade",
         "Splendor of Tranquil Waters",
         "Summit Shaper",
         "Sword of Descension",
+        "Sword of Narzissenkreuz",
         "The Alley Flash",
+        "The Black Sword",
         "The Dockhand's Assistant",
         "The Flute",
+        "Toukabou Shigure",
         "Uraku Misugiri",
-        "Wolf-Fang"
+        "Wolf-Fang",
+        "Xiphos' Moonlight"
+
 
     ],
     ["Bow"]: [
