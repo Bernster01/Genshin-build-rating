@@ -1,6 +1,6 @@
 const Albedo = {
     name: "Albedo",
-    src: "Assets/Characters/Albedo/Albedo.png",
+    src: "Assets/Characters/Albedo/Albedo.webp",
     card: "Assets/Characters/Albedo/Character_Albedo_Portrait.webp",
     element: "GeoCharacter",
     level: "1b",
@@ -672,7 +672,7 @@ const Alhaitham = {
 };
 const Aloy = {
     name: "Aloy",
-    src: "Assets/Characters/Aloy/Aloy.png",
+    src: "Assets/Characters/Aloy/Aloy.webp",
     card: "Assets/Characters/Aloy/Character_Aloy_Portrait.webp",
     element: "CryoCharacter",
     level: "1b",
@@ -966,7 +966,7 @@ const Aloy = {
 };
 const Amber = {
     name: "Amber",
-    src: "Assets/Characters/Amber/Amber.png",
+    src: "Assets/Characters/Amber/Amber.webp",
     card: "Assets/Characters/Amber/Character_Amber_Portrait.webp",
     element: "PyroCharacter",
     level: "1b",
@@ -1640,7 +1640,7 @@ const Arlecchino = {
 };
 const Ayaka = {
     name: "Ayaka",
-    src: "Assets/Characters/Ayaka/Ayaka.png",
+    src: "Assets/Characters/Ayaka/Ayaka.webp",
     card: "Assets/Characters/Ayaka/Character_Kamisato_Ayaka_Portrait.webp",
     element: "CryoCharacter",
     level: "1b",
@@ -1974,7 +1974,7 @@ const Ayaka = {
 };
 const Ayato = {
     name: "Ayato",
-    src: "Assets/Characters/Ayato/Ayato.png",
+    src: "Assets/Characters/Ayato/Ayato.webp",
     card: "Assets/Characters/Ayato/Character_Kamisato_Ayato_Portrait.webp",
     element: "HydroCharacter",
     level: "1b",
@@ -2605,7 +2605,7 @@ const Baizhu = {
 };
 const Barbara = {
     name: "Barbara",
-    src: "Assets/Characters/Barbara/Barbara.png",
+    src: "Assets/Characters/Barbara/Barbara.webp",
     card: "Assets/Characters/Barbara/Character_Barbara_Portrait.webp",
     element: "HydroCharacter",
     level: "1b",
@@ -2920,7 +2920,7 @@ const Barbara = {
 };
 const Beidou = {
     name: "Beidou",
-    src: "Assets/Characters/Beidou/Beidou.png",
+    src: "Assets/Characters/Beidou/Beidou.webp",
     card: "Assets/Characters/Beidou/Character_Beidou_Portrait.webp",
     element: "ElectroCharacter",
     level: "1b",
@@ -3235,7 +3235,7 @@ const Beidou = {
 };
 const Bennett = {
     name: "Bennett",
-    src: "Assets/Characters/Bennet/Bennett.png",
+    src: "Assets/Characters/Bennet/Bennett.webp",
     card: "Assets/Characters/Bennet/Character_Bennett_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -3551,7 +3551,7 @@ const Bennett = {
 const Candace = {
     name: "Candace",
     src: "Assets/Characters/Candace/Candace.webp",
-    card: "Assets/Characters/Candace/Character_Candace_Portrait.png",
+    card: "Assets/Characters/Candace/Character_Candace_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
         let baseattack = {
@@ -4952,7 +4952,7 @@ const Chiori = {
 };
 const Chongyun = {
     name: "Chongyun",
-    src: "Assets/Characters/Chongyun/Chongyun.png",
+    src: "Assets/Characters/Chongyun/Chongyun.webp",
     card: "Assets/Characters/Chongyun/Character_Chongyun_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -6695,7 +6695,7 @@ const Dehya = {
 };
 const Diluc = {
     name: "Diluc",
-    src: "Assets/Characters/Diluc/Diluc.png",
+    src: "Assets/Characters/Diluc/Diluc.webp",
     card: "Assets/Characters/Diluc/Character_Diluc_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -6989,7 +6989,7 @@ const Diluc = {
 };
 const Diona = {
     name: "Diona",
-    src: "Assets/Characters/Diona/Diona.png",
+    src: "Assets/Characters/Diona/Diona.webp",
     card: "Assets/Characters/Diona/Character_Diona_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -8050,7 +8050,7 @@ const Emilie = {
 };
 const Eula = {
     name: "Eula",
-    src: "Assets/Characters/Eula/Eula.png",
+    src: "Assets/Characters/Eula/Eula.webp",
     card: "Assets/Characters/Eula/Character_Eula_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -8727,7 +8727,7 @@ const Faruzan = {
 };
 const Fischl = {
     name: "Fischl",
-    src: "Assets/Characters/Fischl/Fischl.png",
+    src: "Assets/Characters/Fischl/Fischl.webp",
     card: "Assets/Characters/Fischl/Character_Fischl_Portrait.webp",
     element: "ElectroCharacter",
     baseAttack: function () {
@@ -10128,7 +10128,7 @@ const Gaming = {
 };
 const Ganyu = {
     name: "Ganyu",
-    src: "Assets/Characters/Ganyu/Ganyu.png",
+    src: "Assets/Characters/Ganyu/Ganyu.webp",
     card: "Assets/Characters/Ganyu/Character_Ganyu_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -10360,7 +10360,7 @@ const Ganyu = {
 };
 const Gorou = {
     name: "Gorou",
-    src: "Assets/Characters/Gorou/Gorou.png",
+    src: "Assets/Characters/Gorou/Gorou.webp",
     card: "Assets/Characters/Gorou/Character_Gorou_Portrait.webp",
     element: "GeoCharacter",
     level: "1b",
@@ -11017,7 +11017,7 @@ const Heizou = {
 };
 const Hu_Tao = {
     name: "Hu Tao",
-    src: "Assets/Characters/Hu_Tao/Hu_Tao.png",
+    src: "Assets/Characters/Hu_Tao/Hu_Tao.webp",
     card: "Assets/Characters/Hu_Tao/Character_Hu_Tao_Portrait.webp",
     element: "PyroCharacter",
     weaponType: "Polearm",
@@ -11271,7 +11271,7 @@ const Hu_Tao = {
 };
 const Itto = {
     name: "Itto",
-    src: "Assets/Characters/Itto/Itto.png",
+    src: "Assets/Characters/Itto/Itto.webp",
     card: "Assets/Characters/Itto/Character_Arataki_Itto_Portrait.webp",
     element: "GeoCharacter",
     level: "1b",
@@ -11610,7 +11610,7 @@ const Itto = {
 };
 const Jean = {
     name: "Jean",
-    src: "Assets/Characters/Jean/Jean.png",
+    src: "Assets/Characters/Jean/Jean.webp",
     card: "Assets/Characters/Jean/Character_Jean_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -11926,7 +11926,7 @@ const Jean = {
 };
 const Kaeya = {
     name: "Kaeya",
-    src: "Assets/Characters/Kaeya/Kaeya.png",
+    src: "Assets/Characters/Kaeya/Kaeya.webp",
     card: "Assets/Characters/Kaeya/Character_Kaeya_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -12582,7 +12582,7 @@ const Kaveh = {
 };
 const Kazuha = {
     name: "Kazuha",
-    src: "Assets/Characters/Kazuha/Kazuha.png",
+    src: "Assets/Characters/Kazuha/Kazuha.webp",
     card: "Assets/Characters/Kazuha/Character_Kaedehara_Kazuha_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -12899,7 +12899,7 @@ const Kazuha = {
 };
 const Keqing = {
     name: "Keqing",
-    src: "Assets/Characters/Keqing/Keqing.png",
+    src: "Assets/Characters/Keqing/Keqing.webp",
     card: "Assets/Characters/Keqing/Character_Keqing_Portrait.webp",
     element: "ElectroCharacter",
     baseAttack: function () {
@@ -13516,7 +13516,7 @@ const Kirara = {
 };
 const Klee = {
     name: "Klee",
-    src: "Assets/Characters/Klee/Klee.png",
+    src: "Assets/Characters/Klee/Klee.webp",
     card: "Assets/Characters/Klee/Character_Klee_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -13791,7 +13791,7 @@ const Klee = {
 };
 const Kokomi = {
     name: "Kokomi",
-    src: "Assets/Characters/Kokomi/Kokomi.png",
+    src: "Assets/Characters/Kokomi/Kokomi.webp",
     card: "Assets/Characters/Kokomi/Character_Sangonomiya_Kokomi_Portrait.webp",
     element: "HydroCharacter",
     level: "1b",
@@ -14814,7 +14814,7 @@ const Layla = {
 };
 const Lisa = {
     name: "Lisa",
-    src: "Assets/Characters/Lisa/Lisa.png",
+    src: "Assets/Characters/Lisa/Lisa.webp",
     card: "Assets/Characters/Lisa/Character_Lisa_Portrait.webp",
     element: "ElectroCharacter",
     baseAttack: function () {
@@ -16200,7 +16200,7 @@ const Mika = {
 };
 const Mona = {
     name: "Mona",
-    src: "Assets/Characters/Mona/Mona.png",
+    src: "Assets/Characters/Mona/Mona.webp",
     card: "Assets/Characters/Mona/Character_Mona_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
@@ -17857,7 +17857,7 @@ const Nilou = {
 };
 const Ningguang = {
     name: "Ningguang",
-    src: "Assets/Characters/Ningguang/Ningguang.png",
+    src: "Assets/Characters/Ningguang/Ningguang.webp",
     card: "Assets/Characters/Ningguang/Character_Ningguang_Portrait.webp",
     element: "GeoCharacter",
     baseAttack: function () {
@@ -18111,7 +18111,7 @@ const Ningguang = {
 };
 const Noelle = {
     name: "Noelle",
-    src: "Assets/Characters/Noelle/Noelle.png",
+    src: "Assets/Characters/Noelle/Noelle.webp",
     card: "Assets/Characters/Noelle/Character_Noelle_Portrait.webp",
     element: "GeoCharacter",
     baseAttack: function () {
@@ -18411,7 +18411,7 @@ const Noelle = {
 };
 const Qiqi = {
     name: "Qiqi",
-    src: "Assets/Characters/Qiqi/Qiqi.png",
+    src: "Assets/Characters/Qiqi/Qiqi.webp",
     card: "Assets/Characters/Qiqi/Character_Qiqi_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -18669,7 +18669,7 @@ const Qiqi = {
 };
 const Raiden = {
     name: "Raiden",
-    src: "Assets/Characters/Raiden/Raiden.png",
+    src: "Assets/Characters/Raiden/Raiden.webp",
     card: "Assets/Characters/Raiden/Character_Raiden_Shogun_Portrait.webp",
     element: "ElectroCharacter",
     level: "1b",
@@ -18921,7 +18921,7 @@ const Raiden = {
 };
 const Razor = {
     name: "Razor",
-    src: "Assets/Characters/Razor/Razor.png",
+    src: "Assets/Characters/Razor/Razor.webp",
     card: "Assets/Characters/Razor/Character_Razor_Portrait.webp",
     element: "ElectroCharacter",
     baseAttack: function () {
@@ -19199,7 +19199,7 @@ const Razor = {
 };
 const Rosaria = {
     name: "Rosaria",
-    src: "Assets/Characters/Rosaria/Rosaria.png",
+    src: "Assets/Characters/Rosaria/Rosaria.webp",
     card: "Assets/Characters/Rosaria/Character_Rosaria_Portrait.webp",
     element: "CryoCharacter",
     baseAttack: function () {
@@ -19477,7 +19477,7 @@ const Rosaria = {
 };
 const Sara = {
     name: "Sara",
-    src: "Assets/Characters/Sara/Sara.png",
+    src: "Assets/Characters/Sara/Sara.webp",
     card: "Assets/Characters/Sara/Character_Kujou_Sara_Portrait.webp",
     element: "ElectroCharacter",
     level: "1b",
@@ -19777,7 +19777,7 @@ const Sara = {
 };
 const Sayu = {
     name: "Sayu",
-    src: "Assets/Characters/Sayu/Sayu.png",
+    src: "Assets/Characters/Sayu/Sayu.webp",
     card: "Assets/Characters/Sayu/Character_Sayu_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -20438,7 +20438,7 @@ const Sethos = {
 };
 const Shenhe = {
     name: "Shenhe",
-    src: "Assets/Characters/Shenhe/Shenhe.png",
+    src: "Assets/Characters/Shenhe/Shenhe.webp",
     card: "Assets/Characters/Shenhe/Character_Shenhe_Portrait.webp",
     element: "CryoCharacter",
     level: "1b",
@@ -21102,7 +21102,7 @@ const Sigewinne = {
 };
 const Sucrose = {
     name: "Sucrose",
-    src: "Assets/Characters/Sucrose/Sucrose.png",
+    src: "Assets/Characters/Sucrose/Sucrose.webp",
     card: "Assets/Characters/Sucrose/Character_Sucrose_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -21401,7 +21401,7 @@ const Sucrose = {
 };
 const Thoma = {
     name: "Thoma",
-    src: "Assets/Characters/Thoma/Thoma.png",
+    src: "Assets/Characters/Thoma/Thoma.webp",
     card: "Assets/Characters/Thoma/Character_Thoma_Portrait.webp",
     element: "PyroCharacter",
     level: "1b",
@@ -22088,7 +22088,7 @@ const Tighnari = {
 };
 const Tartaglia = {
     name: "Tartaglia",
-    src: "Assets/Characters/Tartaglia/Tartaglia.png",
+    src: "Assets/Characters/Tartaglia/Tartaglia.webp",
     card: "Assets/Characters/Tartaglia/Character_Tartaglia_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
@@ -22365,7 +22365,7 @@ const Tartaglia = {
 };
 const Traveler_Anemo = {
     name: "Traveler (Anemo)",
-    src: "Assets/Characters/Traveler/Traveler.png",
+    src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -22684,7 +22684,7 @@ const Traveler_Anemo = {
 };
 const Traveler_Dendro = {
     name: "Traveler (Dendro)",
-    src: "Assets/Characters/Traveler/Traveler.png",
+    src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "DendroCharacter",
     baseAttack: function () {
@@ -23003,7 +23003,7 @@ const Traveler_Dendro = {
 };
 const Traveler_Electro = {
     name: "Traveler (Electro)",
-    src: "Assets/Characters/Traveler/Traveler.png",
+    src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "ElectroCharacter",
     baseAttack: function () {
@@ -23322,7 +23322,7 @@ const Traveler_Electro = {
 };
 const Traveler_Geo = {
     name: "Traveler (Geo)",
-    src: "Assets/Characters/Traveler/Traveler.png",
+    src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "GeoCharacter",
     baseAttack: function () {
@@ -23641,7 +23641,7 @@ const Traveler_Geo = {
 };
 const Traveler_Hydro = {
     name: "Traveler (Hydro)",
-    src: "Assets/Characters/Traveler/Traveler.png",
+    src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
@@ -23960,7 +23960,7 @@ const Traveler_Hydro = {
 };
 const Venti = {
     name: "Venti",
-    src: "Assets/Characters/Venti/Venti.png",
+    src: "Assets/Characters/Venti/Venti.webp",
     card: "Assets/Characters/Venti/Character_Venti_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -24940,7 +24940,7 @@ const Wriothesley = {
 };
 const Xiangling = {
     name: "Xiangling",
-    src: "Assets/Characters/Xiangling/Xiangling.png",
+    src: "Assets/Characters/Xiangling/Xiangling.webp",
     card: "Assets/Characters/Xiangling/Character_Xiangling_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -25625,7 +25625,7 @@ const Xianyun = {
 };
 const Xiao = {
     name: "Xiao",
-    src: "Assets/Characters/Xiao/Xiao.png",
+    src: "Assets/Characters/Xiao/Xiao.webp",
     card: "Assets/Characters/Xiao/Character_Xiao_Portrait.webp",
     element: "AnemoCharacter",
     baseAttack: function () {
@@ -25878,7 +25878,7 @@ const Xiao = {
 };
 const Xingqiu = {
     name: "Xingqiu",
-    src: "Assets/Characters/Xingqiu/Xingqiu.png",
+    src: "Assets/Characters/Xingqiu/Xingqiu.webp",
     card: "Assets/Characters/Xingqiu/Character_Xingqiu_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
@@ -26200,7 +26200,7 @@ const Xingqiu = {
 };
 const Xinyan = {
     name: "Xinyan",
-    src: "Assets/Characters/Xinyan/Xinyan.png",
+    src: "Assets/Characters/Xinyan/Xinyan.webp",
     card: "Assets/Characters/Xinyan/Character_Xinyan_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -26502,7 +26502,7 @@ const Xinyan = {
 };
 const Yae_Miko = {
     name: "Yae Miko",
-    src: "Assets/Characters/Yae_Miko/Yae_Miko.png",
+    src: "Assets/Characters/Yae_Miko/Yae_Miko.webp",
     card: "Assets/Characters/Yae_Miko/Character_Yae_Miko_Portrait.webp",
     element: "ElectroCharacter",
     level: "1b",
@@ -26803,7 +26803,7 @@ const Yae_Miko = {
 };
 const Yanfei = {
     name: "Yanfei",
-    src: "Assets/Characters/Yanfei/Yanfei.png",
+    src: "Assets/Characters/Yanfei/Yanfei.webp",
     card: "Assets/Characters/Yanfei/Character_Yanfei_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -27447,7 +27447,7 @@ const Yaoyao = {
 const Yelan = {
     name: "Yelan",
     src: "Assets/Characters/Yelan/Yelan.webp",
-    card: "Assets/Characters/Yelan/Character_Yelan_Portrait.png",
+    card: "Assets/Characters/Yelan/Character_Yelan_Portrait.webp",
     element: "HydroCharacter",
     baseAttack: function () {
         let baseattack = {
@@ -27766,7 +27766,7 @@ const Yelan = {
 };
 const Yoimiya = {
     name: "Yoimiya",
-    src: "Assets/Characters/Yoimiya/Yoimiya.png",
+    src: "Assets/Characters/Yoimiya/Yoimiya.webp",
     card: "Assets/Characters/Yoimiya/Character_Yoimiya_Portrait.webp",
     element: "PyroCharacter",
     baseAttack: function () {
@@ -28086,7 +28086,7 @@ const Yoimiya = {
 };
 const Yun_Jin = {
     name: "Yun Jin",
-    src: "Assets/Characters/Yun_Jin/Yun_Jin.png",
+    src: "Assets/Characters/Yun_Jin/Yun_Jin.webp",
     card: "Assets/Characters/Yun_Jin/Character_Yun_Jin_Portrait.webp",
     element: "GeoCharacter",
     level: "1b",
@@ -28410,7 +28410,7 @@ const Yun_Jin = {
 };
 const Zhongli = {
     name: "Zhongli",
-    src: "Assets/Characters/Zhongli/Zhongli.png",
+    src: "Assets/Characters/Zhongli/Zhongli.webp",
     card: "Assets/Characters/Zhongli/Character_Zhongli_Portrait.webp",
     element: "GeoCharacter",
     baseAttack: function () {
@@ -28688,7 +28688,7 @@ const Zhongli = {
 };
 const Empty = {
     name: "Name",
-    src: "Assets/Characters/Name/Name.png",
+    src: "Assets/Characters/Name/Name.webp",
     card: "Assets/Characters/Name/Character_Name_Portrait.webp",
     element: "ElementCharacter",
     baseAttack: function () {
@@ -28781,7 +28781,7 @@ const Empty = {
         ["Dps"]: [],
         ["Support"]: [],
     },
-    weaponType: "waeponType",
+    weaponType: "weaponType",
     normalAttack1: {
         Multiplier: function (level) {
             switch (level) {
