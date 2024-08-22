@@ -5945,14 +5945,71 @@ function astheSunlitSkysSingingSalute(character) {
     let attack = { Multiplier: skillDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: cannonFireSupportDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    for(let i = 0; i<16;i++){
-        if(i%3==0){
+    for (let i = 0; i < 16; i++) {
+        if (i % 3 == 0) {
             attack2.isReaction = true;
         }
-        else{
+        else {
             attack2.isReaction = false;
         }
         dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
+    return dmg;
+}
+
+function darkgoldWolfbite(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 127.2 / 100;
+            break;
+        case 2:
+            skillDMG = 136.74 / 100;
+            break;
+        case 3:
+            skillDMG = 146.28 / 100;
+            break;
+        case 4:
+            skillDMG = 159 / 100;
+            break;
+        case 5:
+            skillDMG = 168.54 / 100;
+            break;
+        case 6:
+            skillDMG = 178.08 / 100;
+            break;
+        case 7:
+            skillDMG = 190.8 / 100;
+            break;
+        case 8:
+            skillDMG = 203.52 / 100;
+            break;
+        case 9:
+            skillDMG = 216.24 / 100;
+            break;
+        case 10:
+            skillDMG = 228.96 / 100;
+            break;
+        case 11:
+            skillDMG = 241.68 / 100;
+            break;
+        case 12:
+            skillDMG = 254.4 / 100;
+            break;
+        case 13:
+            skillDMG = 270.3 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let dmg = 0;
+    for (let i = 0; i < 5; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
     }
     return dmg;
 }

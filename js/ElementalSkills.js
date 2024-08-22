@@ -6149,42 +6149,42 @@ function ceremonialCrystalshot(character) {
     switch (shardsInPossession) {
         case 0:
             totalShots = 5;
-            rosulaShardshot.Multiplier*=(120/100);
+            rosulaShardshot.Multiplier *= (120 / 100);
             break;
         case 1:
             totalShots = 7;
-            rosulaShardshot.Multiplier*=(140/100);
+            rosulaShardshot.Multiplier *= (140 / 100);
             break;
         case 2:
             totalShots = 9;
-            rosulaShardshot.Multiplier*=(166.6/100);
+            rosulaShardshot.Multiplier *= (166.6 / 100);
             break;
         case 3:
             totalShots = 11;
-            rosulaShardshot.Multiplier*=(200/100);
+            rosulaShardshot.Multiplier *= (200 / 100);
             break;
         case 4:
             totalShots = 11;
             dmgBonus = 15;
-            rosulaShardshot.Multiplier*=(200/100);
+            rosulaShardshot.Multiplier *= (200 / 100);
             break;
         case 5:
             totalShots = 11;
             dmgBonus = 30;
-            rosulaShardshot.Multiplier*=(200/100);
+            rosulaShardshot.Multiplier *= (200 / 100);
             break;
         case 6:
             totalShots = 11;
             dmgBonus = 45;
-            rosulaShardshot.Multiplier*=(200/100);
+            rosulaShardshot.Multiplier *= (200 / 100);
             break;
     }
     let buff = { Type: "ElementalSkill", Value: dmgBonus, for: "ElementalSkill" };
     character.currentBuffs.push(buff);
     let dmg = 0;
-    shardsInPossession=0;
-    dmg = dmgCalc(rosulaShardshot, character)*numberOfEnemies;
-   
+    shardsInPossession = 0;
+    dmg = dmgCalc(rosulaShardshot, character) * numberOfEnemies;
+
     character.currentBuffs.pop(buff);
     let hasA1 = false;
     let hasBuff = false;
@@ -6204,4 +6204,45 @@ function ceremonialCrystalshot(character) {
         character.normalAttack3.Element = "GeoDMGBonus";
     }
     return dmg;
+}
+
+function icefangRush(character) {
+    let normalDMGBonus = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            normalDMGBonus = 143.17;
+            break;
+        case 2:
+            normalDMGBonus = 145.75;
+            break;
+        case 3:
+            normalDMGBonus = 148.34;
+            break;
+        case 4:
+            normalDMGBonus = 151.7;
+            break;
+        case 5:
+            normalDMGBonus = 154.29;
+            break;
+        case 6:
+            normalDMGBonus = 156.87;
+            break;
+        case 7:
+            normalDMGBonus = 160.23;
+            break;
+        case 8:
+            normalDMGBonus = 163.59;
+            break;
+        case 9:
+            normalDMGBonus = 166.95;
+            break;
+        case 10:
+            normalDMGBonus = 170.31;
+            break;
+        default:
+            normalDMGBonus = 170.31;
+            break;
+    }
+    character.currentBuffs.push({ Type: "NormalAttack", Value: normalDMGBonus, Source: "IcefangRush" });
+    return 0;
 }

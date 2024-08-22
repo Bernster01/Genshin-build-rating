@@ -253,10 +253,9 @@ class Createcharacter {
         this.weapon = weapon;
         this.baseAttack = baseCharacter.baseAttack;
         this.baseDEF = baseCharacter.baseDEF;
-        this.baseDEF = this.baseDEF();
+
         this.baseHP = baseCharacter.baseHP;
-        this.baseHP = this.baseHP();
-        this.baseAttack = this.baseAttack() + weapon.baseAttack();
+
         this.bondOfLife = 0;
         this.stamina = baseCharacter.stamina;
         this.normalAttack1 = baseCharacter.normalAttack1;
@@ -275,268 +274,281 @@ class Createcharacter {
         this.ExtraMultiplier = baseCharacter.ExtraMultiplier || [];
         this.advancedstats = baseCharacter.advancedstats;
         this.ascensionstats = baseCharacter.ascensionStat;
-        this.bondOfLifeToRemove = function (amount) {
-            this.bondOfLife -= amount;
-            if (this.bondOfLife < 0)
-                this.bondOfLife = 0;
-            ;
+        this.baseHP = this.baseHP();
+        this.currentHP = this.HP();
+        this.baseAttack = this.baseAttack() + weapon.baseAttack();
+        this.baseDEF = this.baseDEF();
+    }
+    removeHP = function (amount) {
+        this.currentHP -= amount;
+        if (this.currentHP < 0)
+            this.currentHP = 0;
+        hpHasDecreased(this);//For passive listening to HP changes
+        hpHasIncresedorDecreased(this);
+    }
+    addHP = function (amount) {
+        this.currentHP += amount;
+        if (this.currentHP > this.HP())
+            this.currentHP = this.HP();
+        hpHasIncreased(this);//For passive listening to HP changes
+        hpHasIncresedorDecreased(this);
+    }
+    bondOfLifeToRemove = function (amount) {
+        this.bondOfLife -= amount;
+        if (this.bondOfLife < 0)
+            this.bondOfLife = 0;
+        ;
+    }
+    applyBondOfLife = function (amount) {
+        this.bondOfLife += amount;
+        if (this.bondOfLife > 200)
+            this.bondOfLife = 200;
+        //Absolution passive
+        if (this.weapon.name == "Absolution") {
+            let stacks = 0;
+            this.currentBuffs.forEach(buff => {
+                if (buff.Source == "Absolution")
+                    stacks++;
+            });
+            if (stacks < 3)
+                this.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 16, Source: "Absolution" });
         }
-        this.applyBondOfLife = function (amount) {
-            this.bondOfLife += amount;
-            if (this.bondOfLife > 200)
-                this.bondOfLife = 200;
-            //Absolution passive
-            if (this.weapon.name == "Absolution") {
-                let stacks = 0;
-                this.currentBuffs.forEach(buff => {
-                    if (buff.Source == "Absolution")
-                        stacks++;
-                });
-                if (stacks < 3)
-                    this.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 16, Source: "Absolution" });
-            }
 
-        }
-        this.getBuffOfType = function (type) {
-            let buffs = this.currentBuffs;
+    }
+    getBuffOfType = function (type) {
+        let buffs = this.currentBuffs;
+        buffs.forEach(buff => {
+            if (buff.Type == type) {
+                return buff;
+            }
+        })
+    }
+    getBuffsOfType = function (type) {
+        let buffs = this.currentBuffs;
+        for (let i = 0; i < type.length; i++) {
             buffs.forEach(buff => {
-                if (buff.Type == type) {
+                if (buff.Type == type[i]) {
                     return buff;
                 }
             })
         }
-        this.getBuffsOfType = function (type) {
-            let buffs = this.currentBuffs;
-            for (let i = 0; i < type.length; i++) {
-                buffs.forEach(buff => {
-                    if (buff.Type == type[i]) {
-                        return buff;
-                    }
-                })
+    }
+    hasBuffOfType = function (type) {
+        let buffs = this.currentBuffs;
+        buffs.forEach(buff => {
+            if (buff.Type == type) {
+                return true;
             }
-        }
-        this.hasBuffOfType = function (type) {
-            let buffs = this.currentBuffs;
+        });
+        return false;
+    }
+
+    attack = function CalculateAttack() {
+        let artifacts = this.artifacts;
+        let baseattack = this.baseAttack;
+
+        let buffs = this.currentBuffs;
+        let totalAtkIncrease = 0.0;
+        let flatAttack = 0;
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "ATK%") {
+                totalAtkIncrease += artifact.Mainstat.Value;
+            } else if (artifact.Mainstat.Type == "ATKflat") {
+                flatAttack += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "ATK%") {
+                    totalAtkIncrease += substat.Value;
+                } else if (substat.Type == "ATKflat") {
+                    flatAttack += substat.Value;
+                }
+
+            });
+        });
+        if (buffs != null && buffs != undefined) {
             buffs.forEach(buff => {
-                if (buff.Type == type) {
-                    return true;
+                if (buff.Type == "ATK%") {
+                    totalAtkIncrease += buff.Value;
                 }
-            });
-            return false;
+                else if (buff.Type == "ATKflat") {
+                    flatAttack += buff.Value;
+                }
+            })
         }
 
-        this.attack = function CalculateAttack() {
-            let artifacts = this.artifacts;
-            let baseattack = this.baseAttack;
+        return Math.floor((baseattack * (1 + (totalAtkIncrease / 100))) + flatAttack);
+    }
+    critRate = function CalculateCritRate() {
+        let critRate = this.advancedstats.critRate;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
 
-            let buffs = this.currentBuffs;
-            let totalAtkIncrease = 0.0;
-            let flatAttack = 0;
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "ATK%") {
-                    totalAtkIncrease += artifact.Mainstat.Value;
-                } else if (artifact.Mainstat.Type == "ATKflat") {
-                    flatAttack += artifact.Mainstat.Value;
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "CritRate") {
+                critRate += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "CritRate") {
+                    critRate += substat.Value;
                 }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "ATK%") {
-                        totalAtkIncrease += substat.Value;
-                    } else if (substat.Type == "ATKflat") {
-                        flatAttack += substat.Value;
-                    }
 
-                });
             });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "ATK%") {
-                        totalAtkIncrease += buff.Value;
-                    }
-                    else if (buff.Type == "ATKflat") {
-                        flatAttack += buff.Value;
-                    }
-                })
-            }
-
-            return Math.floor((baseattack * (1 + (totalAtkIncrease / 100))) + flatAttack);
-        }
-        this.critRate = function CalculateCritRate() {
-            let critRate = this.advancedstats.critRate;
-            let artifacts = this.artifacts;
-            let ascension = this.ascensionstats();
-            let buffs = this.currentBuffs;
-
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "CritRate") {
-                    critRate += artifact.Mainstat.Value;
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "CritRate") {
+                    critRate += buff.Value;
                 }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "CritRate") {
-                        critRate += substat.Value;
-                    }
-
-                });
-            });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "CritRate") {
-                        critRate += buff.Value;
-                    }
-                })
-            }
-
-            if (ascension.Type == "CritRate") {
-                critRate += ascension.Value;
-            }
-
-            return Math.round(critRate * 10) / 10;
-        }
-        this.critDMG = function CalculateCritDmg() {
-            let critDMG = this.advancedstats.critDMG;
-            let artifacts = this.artifacts;
-            let ascension = this.ascensionstats();
-            let buffs = this.currentBuffs;
-
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "CritDMG") {
-                    critDMG += artifact.Mainstat.Value;
-                }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "CritDMG") {
-                        critDMG += substat.Value;
-                    }
-
-                });
-            });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "CritDMG") {
-                        critDMG += buff.Value;
-                    }
-                })
-            }
-
-            if (ascension.Type == "critDMG") {
-                critDMG += ascension.Value;
-            }
-
-            return Math.round(critDMG * 10) / 10;
-        }
-        this.DEF = function () {
-            let DEF = 0;
-            let DEFflat = 0;
-            let artifacts = this.artifacts;
-            let ascension = this.ascensionstats();
-            let buffs = this.currentBuffs;
-
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "DEF%") {
-                    DEF += artifact.Mainstat.Value;
-                }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "DEF%") {
-                        DEF += substat.Value;
-                    }
-                    else if (substat.Type == "DEFflat") {
-                        DEFflat += substat.Value;
-                    }
-
-                });
-            });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "DEF%") {
-                        DEF += buff.Value;
-                    }
-                    else if (buff.Type == "DEFflat") {
-                        DEFflat += buff.Value;
-                    }
-                })
-            }
-
-            if (ascension.Type == "DEF%") {
-                DEF += ascension.Value;
-            }
-
-            return Math.round(((this.baseDEF * (1 + (DEF / 100))) + DEFflat) * 10) / 10;
-        }
-        this.HP = function () {
-            let HP = 0;
-            let HPflat = 0;
-            let artifacts = this.artifacts;
-            let ascension = this.ascensionstats();
-            let buffs = this.currentBuffs;
-
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "HP%") {
-                    HP += artifact.Mainstat.Value;
-                }
-                else if (artifact.Mainstat.Type == "HPflat") {
-                    HPflat += artifact.Mainstat.Value;
-                }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "HP%") {
-                        HP += substat.Value;
-                    }
-                    else if (substat.Type == "HPflat") {
-                        HPflat += substat.Value;
-                    }
-
-                });
-            });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "HP%") {
-                        HP += buff.Value;
-                    }
-                    else if (buff.Type == "HPflat") {
-                        HPflat += buff.Value;
-                    }
-                })
-            }
-
-            if (ascension.Type == "HP%") {
-                HP += ascension.Value;
-            }
-
-            return Math.round(((this.baseHP * (1 + (HP / 100))) + HPflat) * 10) / 10;
-        }
-        this.EM = function () {
-            let em = 0;
-            let artifacts = this.artifacts;
-            let ascension = this.ascensionstats();
-            let buffs = this.currentBuffs;
-
-            artifacts.forEach(artifact => {
-                if (artifact.Mainstat.Type == "ElementalMastery") {
-                    em += artifact.Mainstat.Value;
-                }
-                artifact.Substats.forEach(substat => {
-                    if (substat.Type == "ElementalMastery") {
-                        em += substat.Value;
-                    }
-
-                });
-            });
-            if (buffs != null && buffs != undefined) {
-                buffs.forEach(buff => {
-                    if (buff.Type == "ElementalMastery") {
-                        em += buff.Value;
-                    }
-                })
-            }
-
-            if (ascension.Type == "ElementalMastery") {
-                em += ascension.Value;
-            }
-
-            return em;
+            })
         }
 
+        if (ascension.Type == "CritRate") {
+            critRate += ascension.Value;
+        }
 
+        return Math.round(critRate * 10) / 10;
+    }
+    critDMG = function CalculateCritDmg() {
+        let critDMG = this.advancedstats.critDMG;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
 
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "CritDMG") {
+                critDMG += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "CritDMG") {
+                    critDMG += substat.Value;
+                }
 
+            });
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "CritDMG") {
+                    critDMG += buff.Value;
+                }
+            })
+        }
 
+        if (ascension.Type == "critDMG") {
+            critDMG += ascension.Value;
+        }
+
+        return Math.round(critDMG * 10) / 10;
+    }
+    DEF = function () {
+        let DEF = 0;
+        let DEFflat = 0;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
+
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "DEF%") {
+                DEF += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "DEF%") {
+                    DEF += substat.Value;
+                }
+                else if (substat.Type == "DEFflat") {
+                    DEFflat += substat.Value;
+                }
+
+            });
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "DEF%") {
+                    DEF += buff.Value;
+                }
+                else if (buff.Type == "DEFflat") {
+                    DEFflat += buff.Value;
+                }
+            })
+        }
+
+        if (ascension.Type == "DEF%") {
+            DEF += ascension.Value;
+        }
+
+        return Math.round(((this.baseDEF * (1 + (DEF / 100))) + DEFflat) * 10) / 10;
+    }
+    HP = function () {
+        let HP = 0;
+        let HPflat = 0;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
+
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "HP%") {
+                HP += artifact.Mainstat.Value;
+            }
+            else if (artifact.Mainstat.Type == "HPflat") {
+                HPflat += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "HP%") {
+                    HP += substat.Value;
+                }
+                else if (substat.Type == "HPflat") {
+                    HPflat += substat.Value;
+                }
+
+            });
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "HP%") {
+                    HP += buff.Value;
+                }
+                else if (buff.Type == "HPflat") {
+                    HPflat += buff.Value;
+                }
+            })
+        }
+
+        if (ascension.Type == "HP%") {
+            HP += ascension.Value;
+        }
+
+        return Math.round(((this.baseHP * (1 + (HP / 100))) + HPflat) * 10) / 10;
+    }
+    EM = function () {
+        let em = 0;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
+
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "ElementalMastery") {
+                em += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "ElementalMastery") {
+                    em += substat.Value;
+                }
+
+            });
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "ElementalMastery") {
+                    em += buff.Value;
+                }
+            })
+        }
+
+        if (ascension.Type == "ElementalMastery") {
+            em += ascension.Value;
+        }
+
+        return em;
     }
 }
 function applyBonuses(character) {
@@ -931,6 +943,28 @@ function Simulation(character) {
                                 }
 
                             }
+                        } else if (Character.name == "Wriothesley") {
+
+                            let hasA1 = false;
+                            let buffToRemoveIndex = -1;
+                            character.currentBuffs.forEach(buff => {
+                                if (buff.Type == "There Shall Be a Plea for Justice") {
+                                    hasA1 = true;
+                                }
+                                else if (buff.Source == "There Shall Be a Plea for Justice") {
+                                    buffToRemoveIndex = character.currentBuffs.indexOf(buff);
+                                }
+                            });
+                            if (buffToRemoveIndex != -1)
+                                character.currentBuffs.splice(buffToRemoveIndex, 1);
+                            if (!hasA1) {
+                                if (character.currentHP < 0.6 * character.HP()) {
+
+                                    character.currentBuffs.push({ Type: "ChargedAttack", Value: 50, Source: "There Shall Be a Plea for Justice" });
+                                    //Heal 30% of HP
+                                    character.addHP(0.3 * character.HP());
+                                }
+                            }
                         }
                         break;
 
@@ -1085,6 +1119,37 @@ function Simulation(character) {
                                 }
                                 break;
                         }
+                    } else if (Character.name == "Wriothesley") {
+                        let currentHPPercent = Character.currentHP / Character.HP();
+                        if (currentHPPercent < 0.5) {
+                            //Remove elementalSkill buff
+                            let toRemove = -1;
+                            let index = 0;
+                            character.currentBuffs.forEach(buff => {
+                                if (buff.Source == "IcefangRush") {
+                                    toRemove = index;
+                                }
+                                index++;
+                            });
+                            if (toRemove != -1) {
+                                character.currentBuffs.splice(toRemove, 1);
+                            }
+                        } else {
+                            //Check if buff is already applied
+                            let hasBuff = false;
+                            character.currentBuffs.forEach(buff => {
+                                if (buff.Source == "IcefangRush") {
+                                    hasBuff = true;
+                                }
+                            });
+                            if (!hasBuff) {
+                                Character.elementalSkill.Skill(Character);
+                            } else {
+                                //Remove 4.5% of max hp
+                                Character.removeHP(Character.HP() * 0.045);
+                            }
+                        }
+
                     }
                     let dmg = dmgCalc(attackAction, Character) * enemies;
                     totalDmg += dmg;
@@ -2194,4 +2259,35 @@ const LvlMultiplier = {
     ["80b"]: 1077.443668,
     ["80a"]: 1077.443668,
     ["90b"]: 1446.853458
+}
+
+function hpHasIncresed(character) {
+
+}
+function hpHasDecreased(character) {
+
+}
+function hpHasIncresedorDecreased(character) {
+    switch (character.name) {
+        case "Wriothesley":
+            let hasA4 = false;
+            let stacks = 0;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Type == "A4") {
+                    hasA4 = true;
+
+                }
+                if (buff.Source == "A4") {
+                    stacks++;
+                }
+            });
+            console.log(stacks);
+            if (hasA4 && stacks < 5) {
+                character.currentBuffs.push({ Type: "ATK%", Value: 6, Source: "A4" });
+            }
+            break;
+    }
+    switch (character.weapon.name) {
+
+    }
 }
