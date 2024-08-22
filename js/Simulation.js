@@ -29,8 +29,8 @@ let elementalDMGSources = {
     swirlDMG: 0,
 }
 let shouldGenerateBountifulCores = false;
-hasUrakuMisugiriBuff = false;
-
+let hasUrakuMisugiriBuff = false;
+let shardsInPossession = 6;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -804,6 +804,7 @@ function resetVariables() {
     elementalDMGSources.burgeoningDMG = 0;
     shouldGenerateBountifulCores = false;
     hasUrakuMisugiriBuff = false;
+    shardsInPossession = 6;
 }
 function Simulation(character) {
 
@@ -1886,6 +1887,9 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         dmg += burning(em, lvl, "Pyro", character, burningBonus);
                         elementalDMGSources.burningDMG += dmg;
                         break;
+                    case "Geo":
+                        crystalized();
+                        break;
                 }
                 break;
             case "Hydro":
@@ -1918,6 +1922,9 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         dmg += bloom(em, lvl, "Dendro", character, bloomBonus);
                         elementalDMGSources.bloomDMG += dmg;
                         break;
+                    case "Geo":
+                        crystalized();
+                        break;
                 }
                 break;
             case "Cryo":
@@ -1946,6 +1953,9 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                             enemiesFrozen = true;
                         }
                         break;
+                    case "Geo":
+                        crystalized();
+                        break;
                 }
                 break;
             case "Electro":
@@ -1965,6 +1975,9 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                     case "Anemo":
                         dmg += swirl(em, lvl, "Electro", character, swirlBonus)
                         elementalDMGSources.swirlDMG += dmg;
+                        break;
+                    case "Geo":
+                        crystalized();
                         break;
                 }
                 break;
@@ -2009,6 +2022,12 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                     elementalDMGSources.bloomDMG += dmg;
                 }
 
+                break;
+            case "Geo":
+                if (type != "Anemo" && type != "Geo" && type != "Dendro") {
+                    crystalized();
+                }
+                break;
         }
         if (amplyfyingReaction)
             return dmg;
@@ -2120,6 +2139,12 @@ function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
     const hyperBloomBaseDmg = 3 * LvlMultiplier[character.level];
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
     return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
+}
+function crystalized() {
+    //TODO implement crystalized and buff from that
+    shardsInPossession++;
+    console.log(shardsInPossession);
+    return 0;
 }
 const superconductBaseDMG = {
     "1": 9,

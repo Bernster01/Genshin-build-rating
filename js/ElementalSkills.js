@@ -6080,24 +6080,130 @@ function raphanusSkyCluster(character) {
             break;
     }
     let whiteJadeRadish = { Multiplier: whiteJadeRadishDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    healing*=10;
+    healing *= 10;
     let dmg = 0;
     for (let i = 0; i < 10; i++) {
-        if(i%3==0)
-        {
+        if (i % 3 == 0) {
             whiteJadeRadish.isReaction = true;
         }
-        else
-        {
+        else {
             whiteJadeRadish.isReaction = false;
         }
         dmg += dmgCalc(whiteJadeRadish, character);
     }
-    for(buff of character.currentBuffs){
-        if(buff.Type == "A4"){
-            healing += character.HP()*(0.8/100)*5;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "A4") {
+            healing += character.HP() * (0.8 / 100) * 5;
         }
     }
-    healing *=1+(character.advancedstats.healingBonus/100);
+    healing *= 1 + (character.advancedstats.healingBonus / 100);
     return { dmg: dmg, healing: healing };
+}
+
+function ceremonialCrystalshot(character) {
+    let rosulaShardshotDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            rosulaShardshotDMG = 394.8 / 100;
+            break;
+        case 2:
+            rosulaShardshotDMG = 424.41 / 100;
+            break;
+        case 3:
+            rosulaShardshotDMG = 454.02 / 100;
+            break;
+        case 4:
+            rosulaShardshotDMG = 493.5 / 100;
+            break;
+        case 5:
+            rosulaShardshotDMG = 523.11 / 100;
+            break;
+        case 6:
+            rosulaShardshotDMG = 552.72 / 100;
+            break;
+        case 7:
+            rosulaShardshotDMG = 592.2 / 100;
+            break;
+        case 8:
+            rosulaShardshotDMG = 631.68 / 100;
+            break;
+        case 9:
+            rosulaShardshotDMG = 671.16 / 100;
+            break;
+        case 10:
+            rosulaShardshotDMG = 710.64 / 100;
+            break;
+        case 11:
+            rosulaShardshotDMG = 750.12 / 100;
+            break;
+        case 12:
+            rosulaShardshotDMG = 789.6 / 100;
+            break;
+        case 13:
+            rosulaShardshotDMG = 838.95 / 100;
+            break;
+    }
+    let rosulaShardshot = { Multiplier: rosulaShardshotDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let totalShots = 0;
+    let dmgBonus = 0;
+    switch (shardsInPossession) {
+        case 0:
+            totalShots = 5;
+            rosulaShardshot.Multiplier*=(120/100);
+            break;
+        case 1:
+            totalShots = 7;
+            rosulaShardshot.Multiplier*=(140/100);
+            break;
+        case 2:
+            totalShots = 9;
+            rosulaShardshot.Multiplier*=(166.6/100);
+            break;
+        case 3:
+            totalShots = 11;
+            rosulaShardshot.Multiplier*=(200/100);
+            break;
+        case 4:
+            totalShots = 11;
+            dmgBonus = 15;
+            rosulaShardshot.Multiplier*=(200/100);
+            break;
+        case 5:
+            totalShots = 11;
+            dmgBonus = 30;
+            rosulaShardshot.Multiplier*=(200/100);
+            break;
+        case 6:
+            totalShots = 11;
+            dmgBonus = 45;
+            rosulaShardshot.Multiplier*=(200/100);
+            break;
+    }
+    let buff = { Type: "ElementalSkill", Value: dmgBonus, for: "ElementalSkill" };
+    character.currentBuffs.push(buff);
+    let dmg = 0;
+    shardsInPossession=0;
+    for (let i = 0; i < totalShots; i++) {
+        dmg += dmgCalc(rosulaShardshot, character);
+    }
+   
+    character.currentBuffs.pop(buff);
+    let hasA1 = false;
+    let hasBuff = false;
+    for (buff of character.currentBuffs) {
+        if (buff.Type == "A1") {
+            hasA1 = true;
+        }
+        else if (buff.Source == "A1") {
+            hasBuff = true;
+        }
+    }
+    if (!hasA1 && !hasBuff) {
+        character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "A1" });
+        character.normalAttack1.Element = "GeoDMGBonus";
+        character.normalAttack1.isReaction = true;
+        character.normalAttack2.Element = "GeoDMGBonus";
+        character.normalAttack3.Element = "GeoDMGBonus";
+    }
+    return dmg;
 }

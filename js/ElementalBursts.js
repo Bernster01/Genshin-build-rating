@@ -5866,7 +5866,7 @@ function moonjadeDescent(character) {
     let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: adeptalLegacyWhiteJadeRadishDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    healing*=5;
+    healing *= 5;
     for (let i = 0; i < 5; i++) {
         if (i % 3 == 0) {
             attack2.isReaction = true;
@@ -5883,4 +5883,76 @@ function moonjadeDescent(character) {
     }
     healing *= 1 + (character.advancedstats.healingBonus / 100);
     return { dmg: dmg, healing: healing };
+}
+
+function astheSunlitSkysSingingSalute(character) {
+    let skillDMG = 0;
+    let cannonFireSupportDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 75.2 / 100;
+            cannonFireSupportDMG = 43.15 / 100;
+            break;
+        case 2:
+            skillDMG = 80.84 / 100;
+            cannonFireSupportDMG = 46.39 / 100;
+            break;
+        case 3:
+            skillDMG = 86.48 / 100;
+            cannonFireSupportDMG = 49.62 / 100;
+            break;
+        case 4:
+            skillDMG = 94 / 100;
+            cannonFireSupportDMG = 53.94 / 100;
+            break;
+        case 5:
+            skillDMG = 99.64 / 100;
+            cannonFireSupportDMG = 57.17 / 100;
+            break;
+        case 6:
+            skillDMG = 105.28 / 100;
+            cannonFireSupportDMG = 60.41 / 100;
+            break;
+        case 7:
+            skillDMG = 112.8 / 100;
+            cannonFireSupportDMG = 64.72 / 100;
+            break;
+        case 8:
+            skillDMG = 120.32 / 100;
+            cannonFireSupportDMG = 69.04 / 100;
+            break;
+        case 9:
+            skillDMG = 127.84 / 100;
+            cannonFireSupportDMG = 73.36 / 100;
+            break;
+        case 10:
+            skillDMG = 135.36 / 100;
+            cannonFireSupportDMG = 77.67 / 100;
+            break;
+        case 11:
+            skillDMG = 142.88 / 100;
+            cannonFireSupportDMG = 81.99 / 100;
+            break;
+        case 12:
+            skillDMG = 150.4 / 100;
+            cannonFireSupportDMG = 86.3 / 100;
+            break;
+        case 13:
+            skillDMG = 159.8 / 100;
+            cannonFireSupportDMG = 91.69 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: cannonFireSupportDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    for(let i = 0; i<16;i++){
+        if(i%3==0){
+            attack2.isReaction = true;
+        }
+        else{
+            attack2.isReaction = false;
+        }
+        dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
+    return dmg;
 }
