@@ -27,13 +27,13 @@ function devloadCharacter(){
     document.getElementById("talent_skill").value = 10;
     document.getElementById("talent_burst").value = 10;
     let character = document.createElement("div");
-    character.title = "Ganyu";
-    character.innerHTML = `<img src="Assets/Characters/Ganyu/Ganyu.png" alt="Ganyu"><div class="CryoCharacter"><span>Ganyu</span></div>`;
+    character.title = "Lisa";
+    character.innerHTML = `<img src="Assets/Characters/Lisa/Lisa.png" alt="Lisa"><div class="ElectroCharacter"><span>Lisa</span></div>`;
     selectCharacter(character);
     let weapon = document.createElement("div");
-    weapon.title = "Amos Bow";
+    weapon.title = "The Widsith";
     weapon.innerHTML = `
-    <img src="Assets/Weapons/Amos_Bow.png" alt="Amos Bow"><div class="WeaponsText"><span>Amos Bow</span></div>`;
+    <img src="Assets/Weapons/Weapon_The_Widsith.webp" alt="The Widsith"><div class="WeaponsText"><span>The Widsith</span></div>`;
     selectWeapon(weapon);
     console.log(weapon);
 }

@@ -980,7 +980,7 @@ const XiphosMoonlight = {
 //#region Bows
 const AlleyHunter = {
     name: "Alley Hunter",
-    src: "Weapons/Alley_Hunter.png",
+    src: "Weapons/Weapon_Alley_Hunter.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1007,7 +1007,7 @@ const AlleyHunter = {
 
 const AmosBow = {
     name: "Amos Bow",
-    src: "Weapons/Amos_Bow.png",
+    src: "Weapons/Weapon_Amos_Bow.webp",
     weaponType: "Bow",
     rarity: 5,
     level: "1b",
@@ -1034,7 +1034,7 @@ const AmosBow = {
 
 const BlackcliffWarbow = {
     name: "Blackcliff Warbow",
-    src: "Weapons/Blackcliff_Warbow.png",
+    src: "Weapons/Weapon_Blackcliff_Warbow.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1061,7 +1061,7 @@ const BlackcliffWarbow = {
 
 const CompoundBow = {
     name: "Compound Bow",
-    src: "Weapons/Compound_Bow.png",
+    src: "Weapons/Weapon_Compound_Bow.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1088,7 +1088,7 @@ const CompoundBow = {
 
 const ElegyForTheEnd = {
     name: "Elegy for the End",
-    src: "Weapons/Elegy_for_the_End.png",
+    src: "Weapons/Weapon_Elegy_for_the_End.webp",
     weaponType: "Bow",
     rarity: 5,
     level: "1b",
@@ -1115,7 +1115,7 @@ const ElegyForTheEnd = {
 
 const FavoniusWarbow = {
     name: "Favonius Warbow",
-    src: "Weapons/Favonius_Warbow.png",
+    src: "Weapons/Weapon_Favonius_Warbow.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1142,7 +1142,7 @@ const FavoniusWarbow = {
 
 const Hamayumi = {
     name: "Hamayumi",
-    src: "Weapons/Hamayumi.png",
+    src: "Weapons/Weapon_Hamayumi.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1169,7 +1169,7 @@ const Hamayumi = {
 
 const MitternachtsWaltz = {
     name: "Mitternachts Waltz",
-    src: "Weapons/Mitternachts_Waltz.png",
+    src: "Weapons/Weapon_Mitternachts_Waltz.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1196,7 +1196,7 @@ const MitternachtsWaltz = {
 
 const MouunsMoon = {
     name: "Mouuns Moon",
-    src: "Weapons/Mouuns_Moon.png",
+    src: "Weapons/Weapon_Mouuns_Moon.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1223,7 +1223,7 @@ const MouunsMoon = {
 
 const PolarStar = {
     name: "Polar Star",
-    src: "Weapons/Polar_Star.png",
+    src: "Weapons/Weapon_Polar_Star.webp",
     weaponType: "Bow",
     rarity: 5,
     level: "1b",
@@ -1250,7 +1250,7 @@ const PolarStar = {
 
 const Predator = {
     name: "Predator",
-    src: "Weapons/Predator.png",
+    src: "Weapons/Weapon_Predator.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1277,7 +1277,7 @@ const Predator = {
 
 const PrototypeCrescent = {
     name: "Prototype Crescent",
-    src: "Weapons/Prototype_Crescent.png",
+    src: "Weapons/Weapon_Prototype_Crescent.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1304,7 +1304,7 @@ const PrototypeCrescent = {
 
 const RoyalBow = {
     name: "Royal Bow",
-    src: "Weapons/Royal_Bow.png",
+    src: "Weapons/Weapon_Royal_Bow.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1331,7 +1331,7 @@ const RoyalBow = {
 
 const Rust = {
     name: "Rust",
-    src: "Weapons/Rust.png",
+    src: "Weapons/Weapon_Rust.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1358,7 +1358,7 @@ const Rust = {
 
 const SacrificialBow = {
     name: "Sacrificial Bow",
-    src: "Weapons/Sacrificial_Bow.png",
+    src: "Weapons/Weapon_Sacrificial_Bow.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1385,7 +1385,7 @@ const SacrificialBow = {
 
 const SkywardHarp = {
     name: "Skyward Harp",
-    src: "Weapons/Skyward_Harp.png",
+    src: "Weapons/Weapon_Skyward_Harp.webp",
     weaponType: "Bow",
     rarity: 5,
     level: "1b",
@@ -1412,7 +1412,7 @@ const SkywardHarp = {
 
 const TheStringless = {
     name: "The Stringless",
-    src: "Weapons/The_Stringless.png",
+    src: "Weapons/Weapon_The_Stringless.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1439,7 +1439,7 @@ const TheStringless = {
 
 const TheViridescentHunt = {
     name: "The Viridescent Hunt",
-    src: "Weapons/The_Viridescent_Hunt.png",
+    src: "Weapons/Weapon_The_Viridescent_Hunt.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1466,7 +1466,7 @@ const TheViridescentHunt = {
 
 const ThunderingPulse = {
     name: "Thundering Pulse",
-    src: "Weapons/Thundering_Pulse.png",
+    src: "Weapons/Weapon_Thundering_Pulse.webp",
     weaponType: "Bow",
     rarity: 5,
     level: "1b",
@@ -1493,7 +1493,7 @@ const ThunderingPulse = {
 
 const WindblumeOde = {
     name: "Windblume Ode",
-    src: "Weapons/Windblume_Ode.png",
+    src: "Weapons/Weapon_Windblume_Ode.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
@@ -1528,7 +1528,7 @@ const WindblumeOde = {
 
 const BlackcliffAgate = {
     name: "Blackcliff Agate",
-    src: "Weapons/Blackcliff_Agate.png",
+    src: "Weapons/Weapon_Blackcliff_Agate.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1555,7 +1555,7 @@ const BlackcliffAgate = {
 
 const DodocoTales = {
     name: "Dodoco Tales",
-    src: "Weapons/Dodoco_Tales.png",
+    src: "Weapons/Weapon_Dodoco_Tales.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1582,7 +1582,7 @@ const DodocoTales = {
 
 const EverlastingMoonglow = {
     name: "Everlasting Moonglow",
-    src: "Weapons/Everlasting_Moonglow.png",
+    src: "Weapons/Weapon_Everlasting_Moonglow.webp",
     weaponType: "Catalyst",
     rarity: 5,
     level: "1b",
@@ -1609,7 +1609,7 @@ const EverlastingMoonglow = {
 
 const EyeOfPerception = {
     name: "Eye of Perception",
-    src: "Weapons/Eye_of_Perception.png",
+    src: "Weapons/Weapon_Eye_of_Perception.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1636,7 +1636,7 @@ const EyeOfPerception = {
 
 const FavoniusCodex = {
     name: "Favonius Codex",
-    src: "Weapons/Favonius_Codex.png",
+    src: "Weapons/Weapon_Favonius_Codex.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1663,7 +1663,7 @@ const FavoniusCodex = {
 
 const Frostbearer = {
     name: "Frostbearer",
-    src: "Weapons/Frostbearer.png",
+    src: "Weapons/Weapon_Frostbearer.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1690,7 +1690,7 @@ const Frostbearer = {
 
 const HakushinRing = {
     name: "Hakushin Ring",
-    src: "Weapons/Hakushin_Ring.png",
+    src: "Weapons/Weapon_Hakushin_Ring.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1717,7 +1717,7 @@ const HakushinRing = {
 
 const KagurasVerity = {
     name: "Kaguras Verity",
-    src: "Weapons/Kaguras_Verity.png",
+    src: "Weapons/Weapon_Kaguras_Verity.webp",
     weaponType: "Catalyst",
     rarity: 5,
     level: "1b",
@@ -1744,7 +1744,7 @@ const KagurasVerity = {
 
 const LostPrayerToTheSacredWinds = {
     name: "Lost Prayer to the Sacred Winds",
-    src: "Weapons/Lost_Prayer_to_the_Sacred_Winds.png",
+    src: "Weapons/Weapon_Lost_Prayer_to_the_Sacred_Winds.webp",
     weaponType: "Catalyst",
     rarity: 5,
     level: "1b",
@@ -1771,7 +1771,7 @@ const LostPrayerToTheSacredWinds = {
 
 const MappaMare = {
     name: "Mappa Mare",
-    src: "Weapons/Mappa_Mare.png",
+    src: "Weapons/Weapon_Mappa_Mare.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1798,7 +1798,7 @@ const MappaMare = {
 
 const MemoryOfDust = {
     name: "Memory of Dust",
-    src: "Weapons/Memory_of_Dust.png",
+    src: "Weapons/Weapon_Memory_of_Dust.webp",
     weaponType: "Catalyst",
     rarity: 5,
     level: "1b",
@@ -1825,7 +1825,7 @@ const MemoryOfDust = {
 
 const OathswornEye = {
     name: "Oathsworn Eye",
-    src: "Weapons/Oathsworn_Eye.png",
+    src: "Weapons/Weapon_Oathsworn_Eye.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1852,7 +1852,7 @@ const OathswornEye = {
 
 const PrototypeAmber = {
     name: "Prototype Amber",
-    src: "Weapons/Prototype_Amber.png",
+    src: "Weapons/Weapon_Prototype_Amber.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1879,7 +1879,7 @@ const PrototypeAmber = {
 
 const RoyalGrimoire = {
     name: "Royal Grimoire",
-    src: "Weapons/Royal_Grimoire.png",
+    src: "Weapons/Weapon_Royal_Grimoire.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1906,7 +1906,7 @@ const RoyalGrimoire = {
 
 const SacrificialFragments = {
     name: "Sacrificial Fragments",
-    src: "Weapons/SAcrificial_Fragments.png",
+    src: "Weapons/Weapon_Sacrificial_Fragments.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1933,7 +1933,7 @@ const SacrificialFragments = {
 
 const SkywardAtlas = {
     name: "Skyward Atlas",
-    src: "Weapons/Skyward_Atlas.png",
+    src: "Weapons/Weapon_Skyward_Atlas.webp",
     weaponType: "Catalyst",
     rarity: 5,
     level: "1b",
@@ -1960,7 +1960,7 @@ const SkywardAtlas = {
 
 const SolarPearl = {
     name: "Solar Pearl",
-    src: "Weapons/Solar_Pearl.png",
+    src: "Weapons/Weapon_Solar_Pearl.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -1987,7 +1987,7 @@ const SolarPearl = {
 
 const TheWidsith = {
     name: "The Widsith",
-    src: "Weapons/The_Widsith.png",
+    src: "Weapons/Weapon_The_Widsith.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -2014,7 +2014,7 @@ const TheWidsith = {
 
 const ThrillingTalesOfDragonSlayers = {
     name: "Thrilling Tales of Dragon Slayers",
-    src: "Weapons/Thrilling_Tales_of_Dragon_Slayers.png",
+    src: "Weapons/Weapon_Thrilling_Tales_of_Dragon_Slayers.webp",
     weaponType: "Catalyst",
     rarity: 3,
     level: "1b",
@@ -2066,7 +2066,7 @@ const TomeoftheEternalFlow = {
 }.Init();
 const WineAndSong = {
     name: "Wine and Song",
-    src: "Weapons/Wine_and_Song.png",
+    src: "Weapons/Weapon_Wine_and_Song.webp",
     weaponType: "Catalyst",
     rarity: 4,
     level: "1b",
@@ -2097,7 +2097,7 @@ const WineAndSong = {
 
 const Akuoumaru = {
     name: "Akuoumaru",
-    src: "Weapons/Akuoumaru.png",
+    src: "Weapons/Weapon_Akuoumaru.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2124,7 +2124,7 @@ const Akuoumaru = {
 
 const BlackcliffSlasher = {
     name: "Blackcliff Slasher",
-    src: "Weapons/Blackcliff_Slasher.png",
+    src: "Weapons/Weapon_Blackcliff_Slasher.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2151,7 +2151,7 @@ const BlackcliffSlasher = {
 
 const FavoniusGreatsword = {
     name: "Favonius Greatsword",
-    src: "Weapons/Favonius_Greatsword.png",
+    src: "Weapons/Weapon_Favonius_Greatsword.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2178,7 +2178,7 @@ const FavoniusGreatsword = {
 
 const KatsuragikiriNagamasa = {
     name: "Katsuragikiri Nagamasa",
-    src: "Weapons/Katsuragikiri_Nagamasa.png",
+    src: "Weapons/Weapon_Katsuragikiri_Nagamasa.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2205,7 +2205,7 @@ const KatsuragikiriNagamasa = {
 
 const LithicBlade = {
     name: "Lithic Blade",
-    src: "Weapons/Lithic_Blade.png",
+    src: "Weapons/Weapon_Lithic_Blade.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2232,7 +2232,7 @@ const LithicBlade = {
 
 const LuxuriousSeaLord = {
     name: "Luxurious Sea-Lord",
-    src: "Weapons/Luxurious_Sea_lord.png",
+    src: "Weapons/Weapon_Luxurious_Sea-lord.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2259,7 +2259,7 @@ const LuxuriousSeaLord = {
 
 const PrototypeArchaic = {
     name: "Prototype Archaic",
-    src: "Weapons/Prototype_Archaic.png",
+    src: "Weapons/Weapon_Prototype_Archaic.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2286,7 +2286,7 @@ const PrototypeArchaic = {
 
 const Rainslasher = {
     name: "Rainslasher",
-    src: "Weapons/Rainslasher.png",
+    src: "Weapons/Weapon_Rainslasher.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2313,7 +2313,7 @@ const Rainslasher = {
 
 const RedhornStonethresher = {
     name: "Redhorn Stonethresher",
-    src: "Weapons/Redhorn_Stonethresher.png",
+    src: "Weapons/Weapon_Redhorn_Stonethresher.webp",
     weaponType: "Claymore",
     rarity: 5,
     level: "1b",
@@ -2340,7 +2340,7 @@ const RedhornStonethresher = {
 
 const RoyalGreatsword = {
     name: "Royal Greatsword",
-    src: "Weapons/Royal_Greatsword.png",
+    src: "Weapons/Weapon_Royal_Greatsword.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2367,7 +2367,7 @@ const RoyalGreatsword = {
 
 const SacrificialGreatsword = {
     name: "Sacrificial Greatsword",
-    src: "Weapons/Sacrificial_Greatsword.png",
+    src: "Weapons/Weapon_Sacrificial_Greatsword.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2394,7 +2394,7 @@ const SacrificialGreatsword = {
 
 const SerpentSpine = {
     name: "Serpent Spine",
-    src: "Weapons/Serpent_Spine.png",
+    src: "Weapons/Weapon_Serpent_Spine.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2421,7 +2421,7 @@ const SerpentSpine = {
 
 const SkywardPride = {
     name: "Skyward Pride",
-    src: "Weapons/Skyward_Pride.png",
+    src: "Weapons/Weapon_Skyward_Pride.webp",
     weaponType: "Claymore",
     rarity: 5,
     level: "1b",
@@ -2448,7 +2448,7 @@ const SkywardPride = {
 
 const SnowTombedStarSilver = {
     name: "Snow-Tombed Starsilver",
-    src: "Weapons/Snow_Tombed_Starsilver.png",
+    src: "Weapons/Weapon_Snow-Tombed_Starsilver.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2475,7 +2475,7 @@ const SnowTombedStarSilver = {
 
 const SongOfBrokenPines = {
     name: "Song of Broken Pines",
-    src: "Weapons/Song_of_Broken_Pines.png",
+    src: "Weapons/Weapon_Song_of_Broken_Pines.webp",
     weaponType: "Claymore",
     rarity: 5,
     level: "1b",
@@ -2502,7 +2502,7 @@ const SongOfBrokenPines = {
 
 const TheBell = {
     name: "The Bell",
-    src: "Weapons/The_Bell.png",
+    src: "Weapons/Weapon_The_Bell.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2529,7 +2529,7 @@ const TheBell = {
 
 const TheUnforged = {
     name: "The Unforged",
-    src: "Weapons/The_Unforged.png",
+    src: "Weapons/Weapon_The_Unforged.webp",
     weaponType: "Claymore",
     rarity: 5,
     level: "1b",
@@ -2583,7 +2583,7 @@ const Verdict = {
 
 const Whiteblind = {
     name: "Whiteblind",
-    src: "Weapons/Whiteblind.png",
+    src: "Weapons/Weapon_Whiteblind.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
@@ -2610,7 +2610,7 @@ const Whiteblind = {
 
 const WolfsGravestone = {
     name: "Wolf&#39s Gravestone",
-    src: "Weapons/Wolfs_Gravestone.png",
+    src: "Weapons/Weapon_Wolfs_Gravestone.webp",
     weaponType: "Claymore",
     rarity: 5,
     level: "1b",
@@ -2642,7 +2642,7 @@ const WolfsGravestone = {
 
 const BlackTassel = {
     name: "Black Tassel",
-    src: "Weapons/Black_Tassel.png",
+    src: "Weapons/Weapon_Black_Tassel.webp",
     weaponType: "Polearm",
     rarity: 3,
     level: "1b",
@@ -2669,7 +2669,7 @@ const BlackTassel = {
 
 const BlackcliffPole = {
     name: "Blackcliff Pole",
-    src: "Weapons/Blackcliff_Pole.png",
+    src: "Weapons/Weapon_Blackcliff_Pole.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2696,7 +2696,7 @@ const BlackcliffPole = {
 
 const CalamityQueller = {
     name: "Calamity Queller",
-    src: "Weapons/Calamity_Queller.png",
+    src: "Weapons/Weapon_Calamity_Queller.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -2723,7 +2723,7 @@ const CalamityQueller = {
 
 const CrescentPike = {
     name: "Crescent Pike",
-    src: "Weapons/Crescent_Pike.png",
+    src: "Weapons/Weapon_Crescent_Pike.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2750,7 +2750,7 @@ const CrescentPike = {
 
 const Deathmatch = {
     name: "Deathmatch",
-    src: "Weapons/Deathmatch.png",
+    src: "Weapons/Weapon_Deathmatch.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2777,7 +2777,7 @@ const Deathmatch = {
 
 const DragonsBane = {
     name: "Dragons Bane",
-    src: "Weapons/Dragons_Bane.png",
+    src: "Weapons/Weapon_Dragons_Bane.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2804,7 +2804,7 @@ const DragonsBane = {
 
 const DragonspineSpear = {
     name: "Dragonspine Spear",
-    src: "Weapons/Dragonspine_Spear.png",
+    src: "Weapons/Weapon_Dragonspine_Spear.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2831,7 +2831,7 @@ const DragonspineSpear = {
 
 const EngulfingLightning = {
     name: "Engulfing Lightning",
-    src: "Weapons/Engulfing_Lightning.png",
+    src: "Weapons/Weapon_Engulfing_Lightning.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -2858,7 +2858,7 @@ const EngulfingLightning = {
 
 const FavoniusLance = {
     name: "Favonius Lance",
-    src: "Weapons/Favonius_Lance.png",
+    src: "Weapons/Weapon_Favonius_Lance.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2885,7 +2885,7 @@ const FavoniusLance = {
 
 const KitainCrossSpear = {
     name: "Kitain Cross Spear",
-    src: "Weapons/Kitain_Cross_Spear.png",
+    src: "Weapons/Weapon_Kitain_Cross_Spear.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2912,7 +2912,7 @@ const KitainCrossSpear = {
 
 const LithicSpear = {
     name: "Lithic Spear",
-    src: "Weapons/Lithic_Spear.png",
+    src: "Weapons/Weapon_Lithic_Spear.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2939,7 +2939,7 @@ const LithicSpear = {
 
 const PrimordialJadeWingedSpear = {
     name: "Primordial Jade Winged-Spear",
-    src: "Weapons/Primordial_Jade_Winged_Spear.png",
+    src: "Weapons/Weapon_Primordial_Jade_Winged-Spear.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -2966,7 +2966,7 @@ const PrimordialJadeWingedSpear = {
 
 const PrototypeStarglitter = {
     name: "Prototype Starglitter",
-    src: "Weapons/Prototype_Starglitter.png",
+    src: "Weapons/Weapon_Prototype_Starglitter.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -2993,7 +2993,7 @@ const PrototypeStarglitter = {
 
 const RoyalSpear = {
     name: "Royal Spear",
-    src: "Weapons/Royal_Spear.png",
+    src: "Weapons/Weapon_Royal_Spear.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -3020,7 +3020,7 @@ const RoyalSpear = {
 
 const SkywardSpine = {
     name: "Skyward Spine",
-    src: "Weapons/Skyward_Spine.png",
+    src: "Weapons/Weapon_Skyward_Spine.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -3047,7 +3047,7 @@ const SkywardSpine = {
 
 const StaffOfHoma = {
     name: "Staff of Homa",
-    src: "Weapons/Staff_of_Homa.png",
+    src: "Weapons/Weapon_Staff_of_Homa.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -3074,7 +3074,7 @@ const StaffOfHoma = {
 
 const TheCatch = {
     name: "The Catch",
-    src: "Weapons/The_Catch.png",
+    src: "Weapons/Weapon_The_Catch.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -3101,7 +3101,7 @@ const TheCatch = {
 
 const VortexVanquisher = {
     name: "Vortex Vanquisher",
-    src: "Weapons/Vortex_Vanquisher.png",
+    src: "Weapons/Weapon_Vortex_Vanquisher.webp",
     weaponType: "Polearm",
     rarity: 5,
     level: "1b",
@@ -3128,7 +3128,7 @@ const VortexVanquisher = {
 
 const WavebreakersFin = {
     name: "Wavebreakers Fin",
-    src: "Weapons/Wavebreakers_Fin.png",
+    src: "Weapons/Weapon_Wavebreakers_Fin.webp",
     weaponType: "Polearm",
     rarity: 4,
     level: "1b",
@@ -3155,7 +3155,7 @@ const WavebreakersFin = {
 
 const WhiteTassel = {
     name: "White Tassel",
-    src: "Weapons/White_Tassel.png",
+    src: "Weapons/Weapon_White_Tassel.webp",
     weaponType: "Polearm",
     rarity: 3,
     level: "1b",
