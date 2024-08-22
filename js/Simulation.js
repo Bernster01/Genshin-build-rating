@@ -822,6 +822,8 @@ function resetVariables() {
     elementalDMGSources.burningDMG = 0;
     elementalDMGSources.hyperbloomDMG = 0;
     elementalDMGSources.burgeoningDMG = 0;
+    elementalDMGSources.swirlDMG = 0;
+
     shouldGenerateBountifulCores = false;
     hasUrakuMisugiriBuff = false;
     shardsInPossession = 6;
@@ -1003,9 +1005,9 @@ function Simulation(character) {
                                 });
                                 if (hasA1) {
 
-                                    hatBuff = { Type: "FlatDMG", Value: 0.8 * Character.attack(), Source: "PropSurplus",for:"ChargedAttack" };
+                                    hatBuff = { Type: "FlatDMG", Value: 0.8 * Character.attack(), Source: "PropSurplus", for: "ChargedAttack" };
                                     Character.currentBuffs.push(hatBuff);
-                                    
+
                                 }
                             }
                             let extraDmg = dmgCalc(extraAttack, Character);
@@ -2023,7 +2025,8 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         break;
                     case "Electro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
-                        elementalDMGSources.electroChargedDMG += dmg;
+                        
+                        elementalDMGSources.electrochargedDMG += dmg;
                         break;
                     case "Anemo":
                         dmg += swirl(em, lvl, "Hydro", character, swirlBonus);
@@ -2085,7 +2088,8 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 switch (type) {
                     case "Hydro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
-                        elementalDMGSources.electroChargedDMG += dmg;
+                      
+                        elementalDMGSources.electrochargedDMG += dmg;
                         break;
                     case "Pyro":
                         dmg += overloaded(em, lvl, "Pyro", character, overloadedBonus);
@@ -2266,7 +2270,6 @@ function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
 function crystalized(character) {
     //TODO implement crystalized and buff from that
     shardsInPossession++;
-    console.log(shardsInPossession);
     switch (character.weapon.name) {
         case "Verdict":
             let buffStacks = 0;
