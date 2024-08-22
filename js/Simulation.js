@@ -2281,7 +2281,6 @@ function hpHasIncresedorDecreased(character) {
                     stacks++;
                 }
             });
-            console.log(stacks);
             if (hasA4 && stacks < 5) {
                 character.currentBuffs.push({ Type: "ATK%", Value: 6, Source: "A4" });
             }
