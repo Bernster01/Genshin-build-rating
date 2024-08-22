@@ -6669,5 +6669,7 @@ function bewilderingLights(character) {
     }
     let skillAttack = { Multiplier: (skillDMG+(propSurplusStacks*skillDMGBonus))/100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    character.addHP((character.HP()*0.2)*propSurplusStacks);
+    propSurplusStacks = 0;
     return dmg;
 }

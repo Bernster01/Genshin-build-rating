@@ -853,7 +853,7 @@ function Simulation(character) {
                     persTimer += 2;//Ult will be active 
                 }
                 attackAction.type = "NormalAttack";
-                if(character.name =="Sethos")
+                if (character.name == "Sethos")
                     attackAction.type = "ChargedAttack";
                 switch (action) {
                     case "N1":
@@ -988,15 +988,33 @@ function Simulation(character) {
                                 totalDmg += tmpDMG;
                                 dmgSources.c += tmpDMG;
                             }
-                        }else if(Character.name == "Lyney"){
-                            let extraAttack={Multiplier:Character.chargedAttack.extraMultiplier(2),Element:"PyroDMGBonus",isReaction:false,Scaling:"ATK",type:"ChargedAttack"};
-                            let extraDmg=dmgCalc(extraAttack, Character);
-                            totalDmg+=extraDmg;
-                            dmgSources.c+=extraDmg;
-                            if(Character.currentHP<0.6*Character.HP()){
-                                Character.removeHP(0.2*Character.HP());
+                        } else if (Character.name == "Lyney") {
+                            let extraAttack = { Multiplier: Character.chargedAttack.extraMultiplier(2), Element: "PyroDMGBonus", isReaction: false, Scaling: "ATK", type: "ChargedAttack" };
+                            let hatBuff;
+                            if (Character.currentHP > (0.6 * Character.HP())) {
+                                Character.removeHP(0.2 * Character.HP());
                                 propSurplusStacks++;
+                                let hasA1 = false;
+                                Character.currentBuffs.forEach(buff => {
+                                    if (buff.Type == "A1") {
+                                        hasA1 = true;
+
+                                    }
+                                });
+                                if (hasA1) {
+
+                                    hatBuff = { Type: "FlatDMG", Value: 0.8 * Character.attack(), Source: "PropSurplus",for:"ChargedAttack" };
+                                    Character.currentBuffs.push(hatBuff);
+                                    
+                                }
                             }
+                            let extraDmg = dmgCalc(extraAttack, Character);
+                            totalDmg += extraDmg;
+                            dmgSources.c += extraDmg;
+                            if (hatBuff != undefined) {
+                                Character.currentBuffs.pop(hatBuff);
+                            }
+
                         }
                         break;
 
@@ -2293,7 +2311,7 @@ const LvlMultiplier = {
     ["90b"]: 1446.853458
 }
 
-function hpHasIncresed(character) {
+function hpHasIncreased(character) {
 
 }
 function hpHasDecreased(character) {
