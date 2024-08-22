@@ -6481,44 +6481,139 @@ function ancientRiteTheThunderingSands(character) {
     let skillDMG = 0;
     switch (character.elementalSkill.Level) {
         case 1:
-            skillDMG = 115.6/100;
+            skillDMG = 115.6 / 100;
             break;
         case 2:
-            skillDMG = 124.27/100;
+            skillDMG = 124.27 / 100;
             break;
         case 3:
-            skillDMG = 132.94/100;
+            skillDMG = 132.94 / 100;
             break;
         case 4:
-            skillDMG = 144.5/100;
+            skillDMG = 144.5 / 100;
             break;
         case 5:
-            skillDMG = 153.17/100;
+            skillDMG = 153.17 / 100;
             break;
         case 6:
-            skillDMG = 161.84/100;
+            skillDMG = 161.84 / 100;
             break;
         case 7:
-            skillDMG = 173.4/100;
+            skillDMG = 173.4 / 100;
             break;
         case 8:
-            skillDMG = 184.96/100;
+            skillDMG = 184.96 / 100;
             break;
         case 9:
-            skillDMG = 196.52/100;
+            skillDMG = 196.52 / 100;
             break;
         case 10:
-            skillDMG =208.08/100;
+            skillDMG = 208.08 / 100;
             break;
         default:
-            skillDMG = 208.08/100;
+            skillDMG = 208.08 / 100;
             break;
     }
     let skillAttack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let supportedElements = ["Pyro", "Cryo", "Hydro","Dendro","Anemo"];
-    if(supportedElements.includes(supportingElement)){
+    let supportedElements = ["Pyro", "Cryo", "Hydro", "Dendro", "Anemo"];
+    if (supportedElements.includes(supportingElement)) {
         character.currentBuffs.push({ Type: "EnergyRecharge", Value: 10, Source: "The Thundering Sands" });
     }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     return dmg;
+}
+
+function starfrostSwirl(character) {
+    let flowfrostArrowDMG = 0;
+    let rimestarFlareDMG = 0;
+    let rimestarShardDMG = 0;
+    let atkSPDBonus = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            flowfrostArrowDMG = 67.2 / 100;
+            rimestarFlareDMG = 84 / 100;
+            rimestarShardDMG = 25.2 / 100;
+            atkSPDBonus = 13;
+            break;
+        case 2:
+            flowfrostArrowDMG = 72.24 / 100;
+            rimestarFlareDMG = 90.3 / 100;
+            rimestarShardDMG = 27.09 / 100;
+            atkSPDBonus = 14;
+            break;
+        case 3:
+            flowfrostArrowDMG = 77.28 / 100;
+            rimestarFlareDMG = 96.6 / 100;
+            rimestarShardDMG = 28.98 / 100;
+            atkSPDBonus = 15;
+            break;
+        case 4:
+            flowfrostArrowDMG = 84 / 100;
+            rimestarFlareDMG = 105 / 100;
+            rimestarShardDMG = 31.5 / 100;
+            atkSPDBonus = 16;
+            break;
+        case 5:
+            flowfrostArrowDMG = 89.04 / 100;
+            rimestarFlareDMG = 111.3 / 100;
+            rimestarShardDMG = 33.39 / 100;
+            atkSPDBonus = 17;
+            break;
+        case 6:
+            flowfrostArrowDMG = 94.08 / 100;
+            rimestarFlareDMG = 117.6 / 100;
+            rimestarShardDMG = 35.28 / 100;
+            atkSPDBonus = 18;
+            break;
+        case 7:
+            flowfrostArrowDMG = 100.8 / 100;
+            rimestarFlareDMG = 126 / 100;
+            rimestarShardDMG = 37.8 / 100;
+            atkSPDBonus = 19;
+            break;
+        case 8:
+            flowfrostArrowDMG = 107.52 / 100;
+            rimestarFlareDMG = 134.4 / 100;
+            rimestarShardDMG = 40.32 / 100;
+            atkSPDBonus = 20;
+            break;
+        case 9:
+            flowfrostArrowDMG = 114.24 / 100;
+            rimestarFlareDMG = 142.8 / 100;
+            rimestarShardDMG = 42.84 / 100;
+            atkSPDBonus = 21;
+            break;
+        case 10:
+            flowfrostArrowDMG = 120.96 / 100;
+            rimestarFlareDMG = 151.2 / 100;
+            rimestarShardDMG = 45.36 / 100;
+            atkSPDBonus = 22;
+            break;
+        case 11:
+            flowfrostArrowDMG = 127.68 / 100;
+            rimestarFlareDMG = 159.6 / 100;
+            rimestarShardDMG = 47.88 / 100;
+            atkSPDBonus = 23;
+            break;
+        case 12:
+            flowfrostArrowDMG = 134.4 / 100;
+            rimestarFlareDMG = 168 / 100;
+            rimestarShardDMG = 50.4 / 100;
+            atkSPDBonus = 24;
+            break;
+        case 13:
+            flowfrostArrowDMG = 142.8 / 100;
+            rimestarFlareDMG = 178.5 / 100;
+            rimestarShardDMG = 53.55 / 100;
+            atkSPDBonus = 25;
+            break;
+    }
+    let rimestarFlare = { Multiplier: rimestarFlareDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let rimestarShard = { Multiplier: rimestarShardDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+    let dmg = dmgCalc(rimestarFlare, character) * numberOfEnemies;
+    dmg += dmgCalc(rimestarShard, character) * numberOfEnemies;
+    dmg += dmgCalc(rimestarShard, character) * numberOfEnemies;
+    rimestarFlare.isReaction = true;
+    dmg += dmgCalc(rimestarFlare, character) * numberOfEnemies;
+    return {dmg:dmg, attackBuff: atkSPDBonus};
 }

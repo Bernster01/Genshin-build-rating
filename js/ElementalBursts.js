@@ -6241,3 +6241,66 @@ function secretRiteTwilightShadowpiercer(character) {
     character.currentBuffs.push({ Type: "ChargedAttack", Value: duskBoltDMGIncrease * character.EM(), for: "ChargedAttack" });
     return 0;
 }
+
+function skyfeatherSong(character) {
+    let castHealing = 0;
+    let eagleplumeHealing = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            castHealing = (character.HP() * (12.17 / 100)) + 1172.0355;
+            eagleplumeHealing = (character.HP() * (2.43 / 100)) + 233.95428;
+            break;
+        case 2:
+            castHealing = (character.HP() * (13.08 / 100)) + 1289.2554;
+            eagleplumeHealing = (character.HP() * (2.61 / 100)) + 257.35297;
+            break;
+        case 3:
+            castHealing = (character.HP() * (13.99 / 100)) + 1416.2435;
+            eagleplumeHealing = (character.HP() * (2.8 / 100)) + 282.70154;
+            break;
+        case 4:
+            castHealing = (character.HP() * (15.21 / 100)) + 1553;
+            eagleplumeHealing = (character.HP() * (3.04 / 100)) + 310;
+            break;
+        case 5:
+            castHealing = (character.HP() * (16.12 / 100)) + 1699.5248;
+            eagleplumeHealing = (character.HP() * (3.22 / 100)) + 339.24835;
+            break;
+        case 6:
+            castHealing = (character.HP() * (17.04 / 100)) + 1855.8179;
+            eagleplumeHealing = (character.HP() * (3.4 / 100)) + 370.4466;
+            break;
+        case 7:
+            castHealing = (character.HP() * (18.25 / 100)) + 2021.8794;
+            eagleplumeHealing = (character.HP() * (3.65 / 100)) + 403.59473;
+            break;
+        case 8:
+            castHealing = (character.HP() * (19.47 / 100)) + 2197.7092;
+            eagleplumeHealing = (character.HP() * (3.89 / 100)) + 438.69275;
+            break;
+        case 9:
+            castHealing = (character.HP() * (20.69 / 100)) + 2383.3071;
+            eagleplumeHealing = (character.HP() * (4.13 / 100)) + 475.74066;
+            break;
+        case 10:
+            castHealing = (character.HP() * (21.9 / 100)) + 2578.6736;
+            eagleplumeHealing = (character.HP() * (4.38 / 100)) + 514.73846;
+            break;
+        case 11:
+            castHealing = (character.HP() * (23.12 / 100)) + 2783.8083;
+            eagleplumeHealing = (character.HP() * (4.62 / 100)) + 555.68616;
+            break;
+        case 12:
+            castHealing = (character.HP() * (24.34 / 100)) + 2998.7114;
+            eagleplumeHealing = (character.HP() * (4.86 / 100)) + 598.58374;
+            break;
+        case 13:
+            castHealing = (character.HP() * (25.86 / 100)) + 3223.3828;
+            eagleplumeHealing = (character.HP() * (5.17 / 100)) + 643.4312;
+            break;
+    }
+    castHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    eagleplumeHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    eagleplumeHealing *= 6;
+    return {healing: castHealing+eagleplumeHealing};
+}
