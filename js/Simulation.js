@@ -31,6 +31,7 @@ let elementalDMGSources = {
 let shouldGenerateBountifulCores = false;
 let hasUrakuMisugiriBuff = false;
 let shardsInPossession = 6;
+let propSurplusStacks = 0;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -824,6 +825,7 @@ function resetVariables() {
     shouldGenerateBountifulCores = false;
     hasUrakuMisugiriBuff = false;
     shardsInPossession = 6;
+    propSurplusStacks = 0;
 }
 function Simulation(character) {
 
@@ -985,6 +987,15 @@ function Simulation(character) {
                                 let tmpDMG = dmgCalc(newAttack, Character);
                                 totalDmg += tmpDMG;
                                 dmgSources.c += tmpDMG;
+                            }
+                        }else if(Character.name == "Lyney"){
+                            let extraAttack={Multiplier:Character.chargedAttack.extraMultiplier(2),Element:"PyroDMGBonus",isReaction:false,Scaling:"ATK",type:"ChargedAttack"};
+                            let extraDmg=dmgCalc(extraAttack, Character);
+                            totalDmg+=extraDmg;
+                            dmgSources.c+=extraDmg;
+                            if(Character.currentHP<0.6*Character.HP()){
+                                Character.removeHP(0.2*Character.HP());
+                                propSurplusStacks++;
                             }
                         }
                         break;

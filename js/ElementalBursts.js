@@ -6302,5 +6302,70 @@ function skyfeatherSong(character) {
     castHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 6;
-    return {healing: castHealing+eagleplumeHealing};
+    return { healing: castHealing + eagleplumeHealing };
+}
+
+function woundrousTrickMiracleParade(character) {
+    let skillDMG = 0;
+    let explosionDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 154 / 100;
+            explosionDMG = 414 / 100;
+            break;
+        case 2:
+            skillDMG = 165.55 / 100;
+            explosionDMG = 445.05 / 100;
+            break;
+        case 3:
+            skillDMG = 177.1 / 100;
+            explosionDMG = 476.1 / 100;
+            break;
+        case 4:
+            skillDMG = 192.5 / 100;
+            explosionDMG = 517.5 / 100;
+            break;
+        case 5:
+            skillDMG = 204.05 / 100;
+            explosionDMG = 548.55 / 100;
+            break;
+        case 6:
+            skillDMG = 215.6 / 100;
+            explosionDMG = 579.6 / 100;
+            break;
+        case 7:
+            skillDMG = 231 / 100;
+            explosionDMG = 621 / 100;
+            break;
+        case 8:
+            skillDMG = 246.4 / 100;
+            explosionDMG = 662.4 / 100;
+            break;
+        case 9:
+            skillDMG = 261.8 / 100;
+            explosionDMG = 703.8 / 100;
+            break;
+        case 10:
+            skillDMG = 277.2 / 100;
+            explosionDMG = 745.2 / 100;
+            break;
+        case 11:
+            skillDMG = 292.6 / 100;
+            explosionDMG = 786.6 / 100;
+            break;
+        case 12:
+            skillDMG = 308 / 100;
+            explosionDMG = 828 / 100;
+            break;
+        case 13:
+            skillDMG = 327.25 / 100;
+            explosionDMG = 879.75 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    let attack2 = { Multiplier: explosionDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    propSurplusStacks++;
+    return dmg;
 }

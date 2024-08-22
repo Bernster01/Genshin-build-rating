@@ -6615,5 +6615,59 @@ function starfrostSwirl(character) {
     dmg += dmgCalc(rimestarShard, character) * numberOfEnemies;
     rimestarFlare.isReaction = true;
     dmg += dmgCalc(rimestarFlare, character) * numberOfEnemies;
-    return {dmg:dmg, attackBuff: atkSPDBonus};
+    return { dmg: dmg, attackBuff: atkSPDBonus };
+}
+
+function bewilderingLights(character) {
+    let skillDMG = 0;
+    let skillDMGBonus = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            skillDMG = 167.2;
+            skillDMGBonus = 53.2;
+            break;
+        case 2:
+            skillDMG = 179.74;
+            skillDMGBonus = 57.19;
+            break;
+        case 3:
+            skillDMG = 192.28;
+            skillDMGBonus = 61.18;
+            break;
+        case 4:
+            skillDMG = 209;
+            skillDMGBonus = 66.5;
+            break;
+        case 5:
+            skillDMG = 221.54;
+            skillDMGBonus = 70.49;
+            break;
+        case 6:
+            skillDMG = 234.08;
+            skillDMGBonus = 74.48;
+            break;
+        case 7:
+            skillDMG = 250.8;
+            skillDMGBonus = 74.48;
+            break;
+        case 8:
+            skillDMG = 267.52;
+            skillDMGBonus = 85.12;
+            break;
+        case 9:
+            skillDMG = 284.24;
+            skillDMGBonus = 90.44;
+            break;
+        case 10:
+            skillDMG = 300.96;
+            skillDMGBonus = 95.76;
+            break;
+        default:
+            skillDMG = 300.96;
+            skillDMGBonus = 95.76;
+            break;
+    }
+    let skillAttack = { Multiplier: (skillDMG+(propSurplusStacks*skillDMGBonus))/100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    return dmg;
 }
