@@ -6146,3 +6146,50 @@ function fashionersTanglevineShaft(character) {
     return dmg;
 }
 
+function superSaturatedSyringing(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 11.77 / 100;
+            break;
+        case 2:
+            skillDMG = 12.65 / 100;
+            break;
+        case 3:
+            skillDMG = 13.54 / 100;
+            break;
+        case 4:
+            skillDMG = 14.71 / 100;
+            break;
+        case 5:
+            skillDMG = 15.6 / 100;
+            break;
+        case 6:
+            skillDMG = 16.48 / 100;
+            break;
+        case 7:
+            skillDMG = 17.66 / 100;
+            break;
+        case 8:
+            skillDMG = 18.83 / 100;
+            break;
+        case 9:
+            skillDMG = 20.01 / 100;
+            break;
+        case 10:
+            skillDMG = 21.19 / 100;
+            break;
+        case 11:
+            skillDMG = 22.36 / 100;
+            break;
+        case 12:
+            skillDMG = 23.54 / 100;
+            break;
+        case 13:
+            skillDMG = 25.01 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return {dmg:dmg};
+}

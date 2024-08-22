@@ -6399,3 +6399,80 @@ function vijnanaPhalaMine(character) {
     return dmg;
 
 }
+
+function reboundHydrotherapy(character) {
+    let bolsteringBubblebalmDMG = 0;
+    let bolsteringBubblebalmHealing = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            bolsteringBubblebalmDMG = 2.28 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (2.8 / 100)) + 270;
+            break;
+        case 2:
+            bolsteringBubblebalmDMG = 2.45 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (3.01 / 100)) + 297;
+            break;
+        case 3:
+            bolsteringBubblebalmDMG = 2.62 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (3.22 / 100)) + 326;
+            break;
+        case 4:
+            bolsteringBubblebalmDMG = 2.85 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (3.5 / 100)) + 357;
+            break;
+        case 5:
+            bolsteringBubblebalmDMG = 3.02 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (3.71 / 100)) + 391;
+            break;
+        case 6:
+            bolsteringBubblebalmDMG = 3.19 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (3.92 / 100)) + 427;
+            break;
+        case 7:
+            bolsteringBubblebalmDMG = 3.42 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (4.2 / 100)) + 465;
+            break;
+        case 8:
+            bolsteringBubblebalmDMG = 3.65 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (4.48 / 100)) + 506;
+            break;
+        case 9:
+            bolsteringBubblebalmDMG = 3.88 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (4.76 / 100)) + 548;
+            break;
+        case 10:
+            bolsteringBubblebalmDMG = 4.1 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (5.04 / 100)) + 593;
+            break;
+        case 11:
+            bolsteringBubblebalmDMG = 4.33 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (5.32 / 100)) + 640;
+            break;
+        case 12:
+            bolsteringBubblebalmDMG = 4.56 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (5.6 / 100)) + 690;
+            break;
+        case 13:
+            bolsteringBubblebalmDMG = 4.84 / 100;
+            bolsteringBubblebalmHealing = (character.HP() * (5.95 / 100)) + 742;
+            break;
+    }
+    let bolsteringBubblebalm = { Multiplier: bolsteringBubblebalmDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalSkill" }
+    let dmg = 0;
+    for(let i = 0; i < 5; i++){
+        dmg += dmgCalc(bolsteringBubblebalm, character);
+    }
+    bolsteringBubblebalmHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    let hasA1 = false;
+    for (const buff of character.currentBuffs) {
+        if (buff.Type == "Requires Appropriate Rest") {
+            hasA1 = true;
+        }
+    }
+    let atkbuff
+    if(hasA1){
+        atkbuff = Math.max(((Math.max((character.HP()-30000),0)/1000)*80),2800)*10;
+        character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 8, Source: "Rebound Hydrotherapy" });
+    }
+    return { dmg: dmg, healing: bolsteringBubblebalmHealing, attackBuff: atkbuff };
+}
