@@ -6183,9 +6183,7 @@ function ceremonialCrystalshot(character) {
     character.currentBuffs.push(buff);
     let dmg = 0;
     shardsInPossession=0;
-    for (let i = 0; i < totalShots; i++) {
-        dmg += dmgCalc(rosulaShardshot, character);
-    }
+    dmg = dmgCalc(rosulaShardshot, character)*numberOfEnemies;
    
     character.currentBuffs.pop(buff);
     let hasA1 = false;
