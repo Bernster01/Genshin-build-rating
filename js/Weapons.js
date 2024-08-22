@@ -554,7 +554,7 @@ const SplendorofTranquilWaters = {
         }
     },
 
-    passive: function () { return [{ Type: "ElementalSkill", Value: 24 }, { Type: "HP%", Value: 28 }] },
+    passive: function () { return [{ Type: "HP%", Value: 28 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;

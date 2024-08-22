@@ -4082,6 +4082,7 @@ function salonSolitaire(character) {
             dmg += dmgCalc(mademaoselleCrabalettaAttack, character) * numberOfEnemies;
         }
         dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
+        character.removeHP(character.HP() * 0.02);
     }
     dmg += dmgCalc(ousiaBubbleAttack, character) * numberOfEnemies;
     return { dmg: dmg };

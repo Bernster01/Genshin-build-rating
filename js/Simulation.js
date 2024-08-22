@@ -2287,6 +2287,16 @@ function hpHasIncresedorDecreased(character) {
             break;
     }
     switch (character.weapon.name) {
-
+        case "Splendor of Tranquil Waters":
+            let stacks = 0;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Splendor of Tranquil Waters") {
+                    stacks++;
+                }
+            });
+            if (stacks < 3) {
+                character.currentBuffs.push({ Type: "ElementalSkill", Value: 8, Source: "Splendor of Tranquil Waters" });
+            }
+            break;
     }
 }
