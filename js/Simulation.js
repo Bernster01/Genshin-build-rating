@@ -42,6 +42,14 @@ let silvershowerElementalStack = false;
 let silvershowerBondofLifeStack = false;
 let silvershowerHealingStack = false;
 let scionOftheBlazingSunBuff = false;
+let beaconOfTheReedSeaBuff = false;
+let forestRegaliaBuff = false;
+let mailedFlowerBuff = false;
+let tidalShadowBuff = false;
+let portablePowerSawStacks = 0;
+let portablePowerSawBuff = false;
+
+
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -660,6 +668,9 @@ function applyBonuses(character) {
         case "Staff of Homa":
             character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.01, Source: "Staff of Homa" });
             break;
+        case "Makhaira Aquamarine":
+            character.currentBuffs.push({ Type: "ATK%", Value: (48 / 100) * character.EM() });
+            break;
 
     }
     character.currentBuffs.push({ Type: character.ascensionstats().Type, Value: character.ascensionstats().Value })
@@ -884,6 +895,13 @@ function resetVariables() {
     silvershowerBondofLifeStack = false;
     silvershowerHealingStack = false;
     scionOftheBlazingSunBuff = false;
+
+    beaconOfTheReedSeaBuff = false;
+    forestRegaliaBuff = false;
+    mailedFlowerBuff = false;
+    tidalShadowBuff = false;
+    portablePowerSawStacks = 0;
+    portablePowerSawBuff = false;
 }
 function Simulation(character) {
 
@@ -1308,9 +1326,9 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "ElementalMastery", Value: 80, Source: "Ibis Piercer", for: "ChargedAttack" });
                         }
                     case "Scion of the Blazing Sun":
-                        if(attackAction.type == "ChargedAttack" && !scionOftheBlazingSunBuff){
+                        if (attackAction.type == "ChargedAttack" && !scionOftheBlazingSunBuff) {
                             scionOftheBlazingSunBuff = true;
-                            Character.currentBuffs.push({Type:"ChargedAttack", Value: 56, Source: "Scion of the Blazing Sun"});
+                            Character.currentBuffs.push({ Type: "ChargedAttack", Value: 56, Source: "Scion of the Blazing Sun" });
                         }
                 }
                 break;
@@ -1505,6 +1523,27 @@ function Simulation(character) {
                             }
                             silvershowerElementalStack = true;
                         }
+                        break;
+                    case "Beacon of the Reed Sea":
+                        if (!beaconOfTheReedSeaBuff) {
+                            Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "Beacon of the Reed Sea" });
+                            beaconOfTheReedSeaBuff = true;
+                        }
+                        break;
+                    case "Mailed Flower":
+                        if (!mailedFlowerBuff) {
+                            character.currentBuffs.push({ Type: "ElementalMastery", Value: 96, Source: "Mailed Flower" });
+                            character.currentBuffs.push({ Type: "ATK%", Value: 24, Source: "Mailed Flower" });
+                        }
+                        break;
+                    case "Portable Power Saw":
+                        if (!portablePowerSawBuff) {
+                            character.currentBuffs.push({ Type: "ElementalMastery", Value: 80 * portablePowerSawStacks, Source: "Portable Power Saw" });
+                            portablePowerSawBuff = true;
+                            portablePowerSawStacks = 0;
+                        }
+                        break;
+
                 }
                 break;
 
@@ -1574,9 +1613,16 @@ function Simulation(character) {
                             rangeGaugeStacks = 0;
                         }
                         break;
-                }
-                break;
+                    case "Portable Power Saw":
+                        if (!portablePowerSawBuff) {
+                            character.currentBuffs.push({ Type: "ElementalMastery", Value: 80 * portablePowerSawStacks, Source: "Portable Power Saw" });
+                            portablePowerSawBuff = true;
+                            portablePowerSawStacks = 0;
+                            break;
+                        }
+                        break;
 
+                }
         }
     });
     if (Character.name == "Kazuha") {
@@ -2067,6 +2113,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
     let burgeoningBonus = 0;
     let dmg = 0;
     let amplyfyingReaction = false;
+    hasTriggerdAReaction(character);
     if (supportingElement == null) {
         return incomingDmg;
     }
@@ -2453,7 +2500,25 @@ const LvlMultiplier = {
     ["80a"]: 1077.443668,
     ["90b"]: 1446.853458
 }
-
+function hasTriggerdDendroReaction(character) {
+    switch (character.weapon.name) {
+        case "Forest Regalia":
+            if (!forestRegaliaBuff) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 120, Source: "Forest Regalia" });
+            }
+            break;
+    }
+}
+function hasTriggerdAReaction(character) {
+    switch (character.weapon.name) {
+        case "Mailed Flower":
+            if (!mailedFlowerBuff) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 96, Source: "Mailed Flower" });
+                character.currentBuffs.push({ Type: "ATK%", Value: 24, Source: "Mailed Flower" });
+            }
+            break;
+    }
+}
 function hpHasIncreased(character) {
     switch (character.weapon.name) {
         case "Song of Stillness":
@@ -2541,5 +2606,17 @@ function healingHasOccured(character) {
                 }
                 silvershowerHealingStack = true;
             }
+            break;
+        case "Tidal Shadow":
+            if (!tidalShadowBuff) {
+                character.currentBuffs.push({ Type: "ATK%", Value: 48, Source: "Tidal Shadow" });
+                tidalShadowBuff = true;
+            }
+            break;
+        case "Portable Power Saw":
+            portablePowerSawStacks++;
+            if (portablePowerSawStacks > 3)
+                portablePowerSawStacks = 3;
+            break;
     }
 }

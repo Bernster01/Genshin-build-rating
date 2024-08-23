@@ -968,7 +968,7 @@ const XiphosMoonlight = {
             return getSubStat(this);
         }
     },
-    passive: function () { return [{ Type: "Special", Value:null }] },
+    passive: function () { return [{ Type: "Special", Value: null }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1341,7 +1341,7 @@ const kingsSquire = {
         }
     },
 
-    passive: function () { return [{Type:"ATKBlast",Value:180}] },
+    passive: function () { return [{ Type: "ATKBlast", Value: 180 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2456,7 +2456,32 @@ const BlackcliffSlasher = {
         return this;
     }
 }.Init();
+const BeaconoftheReedSea = {
+    name: "Beacon of the Reed Sea",
+    src: "Weapons/Weapon_Beacon_of_the_Reed_Sea.webp",
+    weaponType: "Claymore",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "7.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "HP%", Value: 32 }, { Type: "ATK%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const FavoniusGreatsword = {
     name: "Favonius Greatsword",
     src: "Weapons/Weapon_Favonius_Greatsword.webp",
@@ -2483,7 +2508,32 @@ const FavoniusGreatsword = {
         return this;
     }
 }.Init();
+const ForestRegalia = {
+    name: "Forest Regalia",
+    src: "Weapons/Weapon_Forest_Regalia.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "6.7%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const KatsuragikiriNagamasa = {
     name: "Katsuragikiri Nagamasa",
     src: "Weapons/Weapon_Katsuragikiri_Nagamasa.webp",
@@ -2564,7 +2614,85 @@ const LuxuriousSeaLord = {
         return this;
     }
 }.Init();
+const MailedFlower = {
+    name: "Mailed Flower",
+    src: "Weapons/Weapon_Mailed_Flower.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "24",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const MakhairaAquamarine = {
+    name: "Makhaira Aquamarine",
+    src: "Weapons/Weapon_Makhaira_Aquamarine.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "36",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const PortablePowerSaw = {
+    name: "Portable Power Saw",
+    src: "Weapons/Weapon_Portable_Power_Saw.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack41",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "12%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const PrototypeArchaic = {
     name: "Prototype Archaic",
     src: "Weapons/Weapon_Prototype_Archaic.webp",
@@ -2808,6 +2936,58 @@ const SongOfBrokenPines = {
     }
 }.Init();
 
+const TalkingStick = {
+    name: "Talking Stick",
+    src: "Weapons/Weapon_Talking_Stick.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK%", Value: 16 },{Type: "ElementalDMG",Value:12}] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const TidalShadow = {
+    name: "Tidal Shadow",
+    src: "Weapons/Weapon_Tidal_Shadow.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const TheBell = {
     name: "The Bell",
     src: "Weapons/Weapon_The_Bell.webp",
@@ -2855,6 +3035,33 @@ const TheUnforged = {
     },
 
     passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const UltimateOverlordsMegaMagicSword = {
+    name: "Ultimate Overlord&#39s Mega Magic Sword",
+    src: "Weapons/Weapon_Ultimate_Overlords_Mega_Magic_Sword.webp",
+    weaponType: "Claymore",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "10.8%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK", Value: 48 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3513,6 +3720,7 @@ const AllWeapons = {
     ["Amos Bow"]: AmosBow,
     ["Aqua Simulacra"]: AquaSimulacra,
     ["Aquila Favonia"]: AquilaFavonia,
+    ["Beacon of the Reed Sea"]: BeaconoftheReedSea,
     ["Black Tassel"]: BlackTassel,
     ["Blackcliff Agate"]: BlackcliffAgate,
     ["Blackcliff Longsword"]: BlackcliffLongsword,
@@ -3543,6 +3751,7 @@ const AllWeapons = {
     ["Finale of the Deep"]: FinaleoftheDeep,
     ["Fleuve Cendre Ferryman"]: FleuveCendreFerryman,
     ["Flute of Ezpitzal"]: FluteofEzpitzal,
+    ["Forest Regalia"]: ForestRegalia,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
     ["Hakushin Ring"]: HakushinRing,
@@ -3564,6 +3773,8 @@ const AllWeapons = {
     ["Lithic Spear"]: LithicSpear,
     ["Lost Prayer to the Sacred Winds"]: LostPrayerToTheSacredWinds,
     ["Luxurious Sea-Lord"]: LuxuriousSeaLord,
+    ["Mailed Flower"]: MailedFlower,
+    ["Makhaira Aquamarine"]: MakhairaAquamarine,
     ["Mappa Mare"]: MappaMare,
     ["Memory of Dust"]: MemoryOfDust,
     ["Mistsplitter Reforged"]: MistsplitterReforged,
@@ -3571,6 +3782,7 @@ const AllWeapons = {
     ["Mouuns Moon"]: MouunsMoon,
     ["Oathsworn Eye"]: OathswornEye,
     ["Polar Star"]: PolarStar,
+    ["Portable Power Saw"]: PortablePowerSaw,
     ["Predator"]: Predator,
     ["Primordial Jade Cutter"]: PrimordialJadeCutter,
     ["Primordial Jade Winged-Spear"]: PrimordialJadeWingedSpear,
@@ -3610,6 +3822,7 @@ const AllWeapons = {
     ["Summit Shaper"]: SummitShaper,
     ["Sword of Descension"]: SwordOfDescension,
     ["Sword of Narzissenkreuz"]: SwordOfNarzissenkreuz,
+    ["Talking Stick"]: TalkingStick,
     ["The Alley Flash"]: TheAlleyFlash,
     ["The Catch"]: TheCatch,
     ["The Bell"]: TheBell,
@@ -3623,8 +3836,10 @@ const AllWeapons = {
     ["The Widsith"]: TheWidsith,
     ["Thrilling Tales of Dragon Slayers"]: ThrillingTalesOfDragonSlayers,
     ["Thundering Pulse"]: ThunderingPulse,
+    ["Tidal Shadow"]: TidalShadow,
     ["Toukabou Shigure"]: ToukabouShigure,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
+    ["Ultimate Overlord's Mega Magic Sword"]: UltimateOverlordsMegaMagicSword,
     ["Uraku Misugiri"]: UrakuMisugiri,
     ["Verdict"]: Verdict,
     ["Vortex Vanquisher"]: VortexVanquisher,
@@ -3644,6 +3859,7 @@ const AllWeapons = {
         "Amos Bow",
         "Aqua Simulacra",
         "Aquila Favonia",
+        "Beacon of the Reed Sea",
         "Black Tassel",
         "Blackcliff Agate",
         "Blackcliff Longsword",
@@ -3674,6 +3890,7 @@ const AllWeapons = {
         "Finale of the Deep",
         "Fleuve Cendre Ferryman",
         "Flute of Ezpitzal",
+        "Forest Regalia",
         "Freedom-Sworn",
         "Frostbearer",
         "Hakushin Ring",
@@ -3695,6 +3912,8 @@ const AllWeapons = {
         "Lithic Spear",
         "Lost Prayer to the Sacred Winds",
         "Luxurious Sea-Lord",
+        "Mailed Flower",
+        "Makhaira Aquamarine",
         "Mappa Mare",
         "Memory of Dust",
         "Mistsplitter Reforged",
@@ -3702,6 +3921,7 @@ const AllWeapons = {
         "Mouuns Moon",
         "Oathsworn Eye",
         "Polar Star",
+        "Portable Power Saw",
         "Predator",
         "Primordial Jade Cutter",
         "Primordial Jade Winged-Spear",
@@ -3741,6 +3961,7 @@ const AllWeapons = {
         "Summit Shaper",
         "Sword of Descension",
         "Sword of Narzissenkreuz",
+        "Talking Stick",
         "The Alley Flash",
         "The Catch",
         "The Bell",
@@ -3754,6 +3975,7 @@ const AllWeapons = {
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
         "Thundering Pulse",
+        "Tidal Shadow",
         "Toukabou Shigure",
         "Tome of the Eternal Flow",
         "Uraku Misugiri",
@@ -3869,11 +4091,16 @@ const AllWeapons = {
     ],
     ["Claymore"]: [
         "Akuoumaru",
+        "Beacon of the Reed Sea",
         "Blackcliff Slasher",
         "Favonius Greatsword",
+        "Forest Regalia",
         "Katsuragikiri Nagamasa",
         "Lithic Blade",
         "Luxurious Sea-Lord",
+        "Mailed Flower",
+        "Makhaira Aquamarine",
+        "Portable Power Saw",
         "Prototype Archaic",
         "Rainslasher",
         "Redhorn Stonethresher",
@@ -3883,8 +4110,10 @@ const AllWeapons = {
         "Skyward Pride",
         "Snow-Tombed Starsilver",
         "Song of Broken Pines",
+        "Talking Stick",
         "The Bell",
         "The Unforged",
+        "Tidal Shadow",
         "Verdict",
         "Whiteblind",
         "Wolf's Gravestone"
