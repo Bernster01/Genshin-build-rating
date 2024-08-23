@@ -827,8 +827,15 @@ function getSetBonus(array, character) {
 
         }
         if (count >= 4) {
-            character.currentBuffs.push(artifactSets[array[i]].twoPiece);
-
+            //Check twoPiece and fourPiece is a lust instead of the expected object
+            if (artifactSets[array[i]].twoPiece.Type == undefined) {
+                artifactSets[array[i]].twoPiece.forEach(buff => {
+                    character.currentBuffs.push(buff);
+                });
+            }
+            else {
+                character.currentBuffs.push(artifactSets[array[i]].twoPiece);
+            }
             if (artifactSets[array[i]].fourPiece != undefined) {
                 if (currentSet == "Gladiator's Finale") {
                     if (character.weapon.weaponType == "Sword" || character.weapon.weaponType == "Claymore" || character.weapon.weaponType == "Polearm") {
@@ -860,7 +867,14 @@ function getSetBonus(array, character) {
                         artifactSets[array[i]].fourPiece.forEach(buff => { character.currentBuffs.push(buff) });
                     }
                     else {
-                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                        if (artifactSets[array[i]].fourPiece.Type == undefined) {
+                            artifactSets[array[i]].fourPiece.forEach(buff => {
+                                character.currentBuffs.push(buff);
+                            });
+                        }
+                        else {
+                            character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                        }
                     }
 
                 }
@@ -869,7 +883,14 @@ function getSetBonus(array, character) {
             break;
         }
         else if (count >= 2) {
-            character.currentBuffs.push(artifactSets[array[i]].twoPiece);
+            if (artifactSets[array[i]].twoPiece.Type == undefined) {
+                artifactSets[array[i]].twoPiece.forEach(buff => {
+                    character.currentBuffs.push(buff);
+                });
+            }
+            else {
+                character.currentBuffs.push(artifactSets[array[i]].twoPiece);
+            }
         }
         setsDone.push(currentSet);
     }
