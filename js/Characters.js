@@ -83,7 +83,7 @@ const Albedo = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -419,7 +419,7 @@ const Alhaitham = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -755,7 +755,7 @@ const Aloy = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1049,7 +1049,7 @@ const Amber = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1387,7 +1387,7 @@ const Arlecchino = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1723,7 +1723,7 @@ const Ayaka = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2057,7 +2057,7 @@ const Ayato = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2372,7 +2372,7 @@ const Baizhu = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2688,7 +2688,7 @@ const Barbara = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3003,7 +3003,7 @@ const Beidou = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3317,7 +3317,7 @@ const Bennett = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3632,7 +3632,7 @@ const Candace = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3946,7 +3946,7 @@ const Charlotte = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -4309,7 +4309,7 @@ const Chevreuse = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -4672,7 +4672,7 @@ const Chiori = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5034,7 +5034,7 @@ const Chongyun = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5328,7 +5328,7 @@ const Clorinde = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5690,7 +5690,7 @@ const Collei = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6052,7 +6052,7 @@ const Cyno = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6414,7 +6414,7 @@ const Dehya = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6777,7 +6777,7 @@ const Diluc = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7071,7 +7071,7 @@ const Diona = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7407,7 +7407,7 @@ const Dori = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7770,7 +7770,7 @@ const Emilie = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8132,7 +8132,7 @@ const Eula = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8446,7 +8446,7 @@ const Faruzan = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8809,7 +8809,7 @@ const Fischl = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -9123,7 +9123,7 @@ const Freminet = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -9485,7 +9485,7 @@ const Furina = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -9848,7 +9848,7 @@ const Gaming = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10210,7 +10210,7 @@ const Ganyu = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10443,7 +10443,7 @@ const Gorou = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10737,7 +10737,7 @@ const Heizou = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11100,7 +11100,7 @@ const Hu_Tao = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11354,7 +11354,7 @@ const Itto = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11692,7 +11692,7 @@ const Jean = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12008,7 +12008,7 @@ const Kaeya = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12302,7 +12302,7 @@ const Kaveh = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12664,7 +12664,7 @@ const Kazuha = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12981,7 +12981,7 @@ const Keqing = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13235,7 +13235,7 @@ const Kirara = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13598,7 +13598,7 @@ const Klee = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13875,7 +13875,7 @@ const Kokomi = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14170,7 +14170,7 @@ const Kuki = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14533,7 +14533,7 @@ const Layla = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14896,7 +14896,7 @@ const Lisa = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15171,7 +15171,7 @@ const Lynette = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15533,7 +15533,7 @@ const Lyney = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15919,7 +15919,7 @@ const Mika = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16282,7 +16282,7 @@ const Mona = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16557,7 +16557,7 @@ const Nahida = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16919,7 +16919,7 @@ const Navia = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -17281,7 +17281,7 @@ const Neuvillette = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -17577,7 +17577,7 @@ const Nilou = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -17939,7 +17939,7 @@ const Ningguang = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18193,7 +18193,7 @@ const Noelle = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18493,7 +18493,7 @@ const Qiqi = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18752,7 +18752,7 @@ const Raiden = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19003,7 +19003,7 @@ const Razor = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19281,7 +19281,7 @@ const Rosaria = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19560,7 +19560,7 @@ const Sara = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19859,7 +19859,7 @@ const Sayu = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20158,7 +20158,7 @@ const Sethos = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20522,7 +20522,7 @@ const Shenhe = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20821,7 +20821,7 @@ const Sigewinne = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21184,7 +21184,7 @@ const Sucrose = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21485,7 +21485,7 @@ const Thoma = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21784,7 +21784,7 @@ const Tighnari = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22170,7 +22170,7 @@ const Tartaglia = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22447,7 +22447,7 @@ const Traveler_Anemo = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22766,7 +22766,7 @@ const Traveler_Dendro = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23085,7 +23085,7 @@ const Traveler_Electro = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23404,7 +23404,7 @@ const Traveler_Geo = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23723,7 +23723,7 @@ const Traveler_Hydro = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24042,7 +24042,7 @@ const Venti = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24298,7 +24298,7 @@ const Wanderer = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24660,7 +24660,7 @@ const Wriothesley = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25022,7 +25022,7 @@ const Xiangling = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25343,7 +25343,7 @@ const Xianyun = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25707,7 +25707,7 @@ const Xiao = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25960,7 +25960,7 @@ const Xingqiu = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26282,7 +26282,7 @@ const Xinyan = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26585,7 +26585,7 @@ const Yae_Miko = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26885,7 +26885,7 @@ const Yanfei = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27165,7 +27165,7 @@ const Yaoyao = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27528,7 +27528,7 @@ const Yelan = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27848,7 +27848,7 @@ const Yoimiya = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28170,7 +28170,7 @@ const Yun_Jin = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28492,7 +28492,7 @@ const Zhongli = {
         ]
 
     },
-
+    subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28770,7 +28770,7 @@ const Empty = {
         ]
 
     },
-
+    subDpsType:"Off-field",
     scalingType: "Type",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,

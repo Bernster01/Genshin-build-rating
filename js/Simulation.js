@@ -1,4 +1,4 @@
-let bestBuild = {};
+let bestBuild = { Dps: {}, Support: {} };
 let supportingElement = null;
 let enemiesFrozen = false;
 let role = "Dps";
@@ -59,6 +59,19 @@ let cranesEchoingCallBuff = false;
 let flowingPurityBuff = false;
 let jadefallsSplendorBuff = false;
 let tulaytullahsRemembranceBuff = false;
+let partyHasDeepwoodMemories = false;
+let deepWoodMemoriesBuff = false;
+let desertPavilionChronicleBuff = false;
+let flowerOfparadiseLostStacks = 0;
+let fragmentOfHarmonicWhimsyStacks = 0;
+let marechausseeHunterStacks = 0;
+let hasShield = false;
+let nighttimeWhispersInTheEchoingWoodsBuff = false;
+let gildedDreamsBuff = false;
+let unfinishedReverieBuff = false;
+let nymphsDreamNormalStack = false;
+let nymphsDreamSkillStack = false;
+let nymphsDreamBurstStack = false;
 
 
 async function getBestBuildForCharacter(character, amount) {
@@ -107,11 +120,20 @@ async function downloadJSON(build) {
 async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
+
     for (const character in AllCharacters) {
+        let tmpRole = "Dps";
         if (character == "index")
             continue;
         const element = AllCharacters[character];
         let result = await FindBestBuild(element, 10);
+        //Switch to other role
+        if (role == "Dps")
+            role = "Support";
+        else
+            role = "Dps";
+        let result2 = await FindBestBuild(element, 10);
+        tmpRole = role;
         if (result == null || result == undefined) {
             console.log(character + " FAILED");
         }
@@ -129,11 +151,11 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let result = await FindBestBuild(simulatedCharacter, runs);
     console.log("USER:");
     let result2 = Simulation(userCharacter);
-    let score = EvalBuilds(result2, bestBuild[baseCharacter.name], role);
+    let score = EvalBuilds(result2, bestBuild[role][baseCharacter.name], role);
     console.log("USER:");
     console.log(result2);
     console.log("BEST:");
-    console.log(bestBuild[baseCharacter.name]);
+    console.log(bestBuild[role][baseCharacter.name]);
     let card = generateCharacterCard(result2.character, score, supportingElement, role, elementalResonance, true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
@@ -149,9 +171,8 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
 
 async function FindBestBuild(baseChar, times) {
 
-    let startTime = Date.now();
     let bestScore = await findBestBuildLoop(baseChar, times);
-    let stopTime = Date.now();
+
 
     endEarly = false;
     return bestScore;
@@ -188,12 +209,12 @@ async function findBestBuildLoop(baseChar, times) {
 
             applyBonuses(newCharacter);
             let result = Simulation(newCharacter);
-            if (bestBuild[currentCharacter] == "" || bestBuild[currentCharacter] == undefined) {
-                bestBuild[currentCharacter] = result;
+            if (bestBuild[role][currentCharacter] == "" || bestBuild[role][currentCharacter] == undefined) {
+                bestBuild[role][currentCharacter] = result;
             }
-            let evalResult = EvalBuilds(result, bestBuild[currentCharacter], role);
+            let evalResult = EvalBuilds(result, bestBuild[role][currentCharacter], role);
             if (evalResult > 100) {
-                bestBuild[currentCharacter] = result;
+                bestBuild[role][currentCharacter] = result;
                 bestScore = evalResult;
 
             }
@@ -271,6 +292,8 @@ function GenerateSequence() {
 
 }
 class Createcharacter {
+    artifactFourPiece = "";
+    artifactTwoPiece = [];
     constructor(baseCharacter, weapon, artifacts) {
         this.name = baseCharacter.name;
         this.src = baseCharacter.src;
@@ -285,7 +308,7 @@ class Createcharacter {
         this.baseDEF = baseCharacter.baseDEF;
 
         this.baseHP = baseCharacter.baseHP;
-
+        this.subDpsType = baseCharacter.subDpsType;
         this.bondOfLife = 0;
         this.stamina = baseCharacter.stamina;
         this.normalAttack1 = baseCharacter.normalAttack1;
@@ -806,6 +829,9 @@ function applyBonuses(character) {
         character.currentBuffs.push({ Type: "ElementalBurst", Value: buff });
 
     }
+    if (partyHasDeepwoodMemories) {
+        character.currentBuffs.push({ Type: "ResShred", Value: 30, Element: "DendroDMGBonus" });
+    }
 }
 function getSetBonus(array, character) {
     let setsDone = [];
@@ -827,6 +853,7 @@ function getSetBonus(array, character) {
 
         }
         if (count >= 4) {
+            character.artifactFourPiece = currentSet.replace(/_/g, " ");
             //Check twoPiece and fourPiece is a lust instead of the expected object
             if (artifactSets[array[i]].twoPiece.Type == undefined) {
                 artifactSets[array[i]].twoPiece.forEach(buff => {
@@ -861,6 +888,10 @@ function getSetBonus(array, character) {
                     if (character.element == "CryoCharacter") {
                         character.currentBuffs.push(artifactSets[array[i]].fourPiece);
                     }
+                } else if (currentSet == "Golden Troupe") {
+                    if (character.subDpsType == "Off-field" && role == "Support") {
+                        character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
+                    }
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
@@ -883,6 +914,7 @@ function getSetBonus(array, character) {
             break;
         }
         else if (count >= 2) {
+            character.artifactTwoPiece.push(currentSet.replace(/_/g, " "));
             if (artifactSets[array[i]].twoPiece.Type == undefined) {
                 artifactSets[array[i]].twoPiece.forEach(buff => {
                     character.currentBuffs.push(buff);
@@ -957,6 +989,19 @@ function resetVariables() {
     flowingPurityBuff = false;
     jadefallsSplendorBuff = false;
     tulaytullahsRemembranceBuff = false;
+
+    deepWoodMemoriesBuff = false;
+    flowerOfparadiseLostStacks = 0;
+    fragmentOfHarmonicWhimsyStacks = 0;
+    marechausseeHunterStacks = 0;
+    nighttimeWhispersInTheEchoingWoodsBuff = false;
+    hasShield = false;
+    gildedDreamsBuff = false;
+    unfinishedReverieBuff = false;
+
+    nymphsDreamNormalStack = false;
+    nymphsDreamSkillStack = false;
+    nymphsDreamBurstStack = false;
 }
 function Simulation(character) {
 
@@ -1411,6 +1456,48 @@ function Simulation(character) {
                         }
                         break;
                 }
+                switch (Character.artifactFourPiece) {
+                    case "Desert Pavilion Chronicle":
+                        if (attackAction.type == "ChargedAttack" && !dialoguesOfTheDesertSagesBuff) {
+                            dialoguesOfTheDesertSagesBuff = true;
+                            Character.currentBuffs.push({ Type: "ChargedAttack", Value: 40, Source: "Desert Pavilion Chronicle" });
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "Desert Pavilion Chronicle" });
+                            Character.currentBuffs.push({ Type: "PlungeAttack", Value: 40, Source: "Desert Pavilion Chronicle" });
+                            Character.currentBuffs.push({ Type: "ATK%", Value: 15, Source: "Desert Pavilion Chronicle" });
+                        }
+                        break;
+                    case "Nymph&#39s Embrace":
+                        if (!nymphsDreamNormalStack) {
+                            if (!nymphsDreamSkillStack && !nymphsDreamBurstStack) {
+                                character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 4, Source: "Nymph's Embrace" });
+                                character.currentBuffs.push({ Type: "ATK%", Value: 7, Source: "Nymph's Embrace" });
+                                nymphsDreamNormalStack = true;
+                            }
+                            else {
+                                let hydroBuff;
+                                let attackBuff;
+                                for (buff of character.currentBuffs) {
+                                    if (buff.Source == "Nymph's Embrace") {
+                                        if (buff.Type == "HydroDMGBonus") {
+                                            hydroBuff = buff;
+                                        }
+                                        else if (buff.Type == "ATK%") {
+                                            attackBuff = buff;
+                                        }
+                                    }
+                                }
+                                if (nymphsDreamSkillStack && nymphsDreamBurstStack) {
+                                    hydroBuff.Value = 15;
+                                    attackBuff.Value = 25;
+                                }
+                                else {
+                                    hydroBuff.Value = 9;
+                                    attackBuff.Value = 16;
+                                }
+                            }
+                        }
+                        break;
+                }
                 break;
 
             case "E":
@@ -1553,7 +1640,7 @@ function Simulation(character) {
                             }
                         }
                         break;
-                    case "King's Squire":
+                    case "King#39s Squire":
                         if (!kingsSquireBuff) {
                             Character.currentBuffs.push({ Type: "ElementalMastery", Value: 140, Source: "king's Squire" });
                             kingsSquireBuff = true;
@@ -1623,7 +1710,7 @@ function Simulation(character) {
                             portablePowerSawStacks = 0;
                         }
                         break;
-                    case "Prospector's Drill":
+                    case "Prospector#39s Drill":
                         if (!prospectorsDrillBuff) {
                             character.currentBuffs.push({ Type: "ATK%", Value: 7 * prospectorsDrillStacks, Source: "Prospector's Drill" });
                             character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * prospectorsDrillStacks, Source: "Prospector's Drill" });
@@ -1656,6 +1743,51 @@ function Simulation(character) {
                         }
                         break;
 
+                }
+                //Check for artifact buffs
+                switch (Character.artifactFourPiece) {
+                    case "Deepwood Memories":
+                        if (!partyHasDeepwoodMemories && !deepWoodMemoriesBuff) {
+                            character.currentBuffs.push({ Type: "ResShred", Element: "DendroDMGBonus", Value: 30, Source: "Deepwood Memories" });
+                        }
+                        break;
+                    case "Nighttime Whispers in the Echoing Woods":
+                        if (!nighttimeWhispersInTheEchoingWoodsBuff) {
+                            character.currentBuffs.push({ Type: "ElementalDMG", Value: (hasShield) ? 50 : 20, Source: "Nighttime Whispers in the Echoing Woods" });
+                            nighttimeWhispersInTheEchoingWoodsBuff = true;
+                        }
+                        break;
+                    case "Nymph&#39s Embrace":
+                        if (!nymphsDreamSkillStack) {
+                            if (!nymphsDreamBurstStack && !nymphsDreamNormalStack) {
+                                character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 4, Source: "Nymph's Embrace" });
+                                character.currentBuffs.push({ Type: "ATK%", Value: 7, Source: "Nymph's Embrace" });
+                                nymphsDreamSkillStack = true;
+                            }
+                            else {
+                                let hydroBuff;
+                                let attackBuff;
+                                for (buff of character.currentBuffs) {
+                                    if (buff.Source == "Nymph's Embrace") {
+                                        if (buff.Type == "HydroDMGBonus") {
+                                            hydroBuff = buff;
+                                        }
+                                        else if (buff.Type == "ATK%") {
+                                            attackBuff = buff;
+                                        }
+                                    }
+                                }
+                                if (nymphsDreamBurstStack && nymphsDreamNormalStack) {
+                                    hydroBuff.Value = 15;
+                                    attackBuff.Value = 25;
+                                }
+                                else {
+                                    hydroBuff.Value = 9;
+                                    attackBuff.Value = 16;
+                                }
+                            }
+                        }
+                        break;
                 }
                 break;
 
@@ -1711,7 +1843,7 @@ function Simulation(character) {
                     dmgSources.q += qDmg;
                 }
                 switch (Character.weapon.name) {
-                    case "King's Squire":
+                    case "King#39s Squire":
                         if (!kingsSquireBuff) {
                             Character.currentBuffs.push({ Type: "ElementalMastery", Value: 140, Source: "king's Squire" });
                             kingsSquireBuff = true;
@@ -1733,7 +1865,7 @@ function Simulation(character) {
                             break;
                         }
                         break;
-                    case "Prospector's Drill":
+                    case "Prospector#39s Drill":
                         if (!prospectorsDrillBuff) {
                             character.currentBuffs.push({ Type: "ATK%", Value: 7 * prospectorsDrillStacks, Source: "Prospector's Drill" });
                             character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * prospectorsDrillStacks, Source: "Prospector's Drill" });
@@ -1741,10 +1873,48 @@ function Simulation(character) {
                             prospectorsDrillStacks = 0;
                         }
                         break;
-                    case "Jadefall's Splendor":
+                    case "Jadefall#39s Splendor":
                         if (!jadefallsSplendorBuff) {
                             character.currentBuffs.push({ Type: "ElementalDMG", Value: (character.HP() / 1000) * (0.3 / 100), Source: "Jadefall's Splendor" });
                             jadefallsSplendorBuff = true;
+                        }
+                        break;
+                }
+                switch (Character.artifactFourPiece) {
+                    case "Deepwood Memories":
+                        if (!partyHasDeepwoodMemories && !deepWoodMemoriesBuff) {
+                            character.currentBuffs.push({ Type: "ResShred", Element: "DendroDMGBonus", Value: 30, Source: "Deepwood Memories" });
+                        }
+                        break;
+                    case "Nymph&#39s Embrace":
+                        if (!nymphsDreamBurstStack) {
+                            if (!nymphsDreamSkillStack && !nymphsDreamNormalStack) {
+                                character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 4, Source: "Nymph's Embrace" });
+                                character.currentBuffs.push({ Type: "ATK%", Value: 7, Source: "Nymph's Embrace" });
+                                nymphsDreamBurstStack = true;
+                            }
+                            else {
+                                let hydroBuff;
+                                let attackBuff;
+                                for (buff of character.currentBuffs) {
+                                    if (buff.Source == "Nymph's Embrace") {
+                                        if (buff.Type == "HydroDMGBonus") {
+                                            hydroBuff = buff;
+                                        }
+                                        else if (buff.Type == "ATK%") {
+                                            attackBuff = buff;
+                                        }
+                                    }
+                                }
+                                if (nymphsDreamSkillStack && nymphsDreamNormalStack) {
+                                    hydroBuff.Value = 15;
+                                    attackBuff.Value = 25;
+                                }
+                                else {
+                                    hydroBuff.Value = 9;
+                                    attackBuff.Value = 16;
+                                }
+                            }
                         }
                         break;
                 }
@@ -1774,6 +1944,17 @@ function Simulation(character) {
         }
     }
     totalDmg += transformitiveDMG;
+    //Ocean hue and song of days past cecks
+    switch (Character.artifactFourPiece) {
+        case "Ocean-Hue Clam":
+            let oceanDMG = heal * (90 / 100);
+            totalDmg += oceanDMG;
+            dmgSources.Ocean_Hue_Clam_DMG += oceanDMG;
+            break;
+        case "Song of Days Past":
+            atkBuff *= (8 / 100);
+            break;
+    }
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff + bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
 }
@@ -2278,6 +2459,12 @@ function elementalMasteryCalc(incomingDmg, type, character) {
             else if (buff.Type == "bloomBonus") {
                 bloomBonus += buff.Value;
             }
+            else if (buff.Type == "HyperbloomBonus") {
+                hyperbloomBonus += buff.Value;
+            }
+            else if (buff.Type == "BurgeoningBonus") {
+                burgeoningBonus += buff.Value;
+            }
             else if (buff.Type == "Dreamy Dance of Aeons") {
                 let hpToBuff = (character.HP() - 30000);
                 if (hpToBuff < 0)
@@ -2286,6 +2473,11 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 if (bloomBuff > 400)
                     bloomBuff = 400;
                 bloomBonus += bloomBuff;
+            }
+            else if (buff.Type == "Flower of Paradise") {
+                bloomBonus += buff.Value;
+                hyperbloomBonus += buff.Value;
+                burgeoningBonus += buff.value;
             }
         });
         vaporizeBonus = (vaporizeBonus == 0) ? 0 : vaporizeBonus / 100;
@@ -2566,25 +2758,30 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
+    hasTriggerdABloomTypeReaction(character);
     return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 2 * 2;//2 hits 2 cores
 }
 function bountifulCore(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
+    hasTriggerdABloomTypeReaction(character);
     return (bloomBaseDmg * bloomEM) * resCalc(character, element) * numberOfEnemies * 2;//big aoe
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
     const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];
     const burgeoningEM = 1 + (16 * (em / (em + 1200))) + burgeoningBonus;
+    hasTriggerdABloomTypeReaction(character);
     return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
     const hyperBloomBaseDmg = 3 * LvlMultiplier[character.level];
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
+    hasTriggerdABloomTypeReaction(character);
     return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
 }
 function crystalized(character) {
-    //TODO implement crystalized and buff from that
+    shieldCreated(character);
+    hasShield = true;
     shardsInPossession++;
     switch (character.weapon.name) {
         case "Verdict":
@@ -2651,6 +2848,7 @@ function hasTriggerdDendroReaction(character) {
             break;
 
     }
+
 }
 function hasTriggerdAReaction(character) {
     switch (character.weapon.name) {
@@ -2678,6 +2876,15 @@ function hasTriggerdAReaction(character) {
             if (fruitStacks < 3) {
                 character.currentBuffs.push({ Type: "ElementalMastery", Value: 36, Source: "Fruit of Fulfillment" });
                 character.currentBuffs.push({ Type: "ATK%", Value: -5, Source: "Fruit of Fulfillment" });
+            }
+            break;
+    }
+    switch (character.artifactFourPiece) {
+        case "Gilded Dreams":
+            if (!gildedDreamsBuff) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 75, Source: "Gilded Dreams" });
+                character.currentBuffs.push({ Type: "ATK%", Value: 21, Source: "Gilded Dreams" });
+                gildedDreamsBuff = true;
             }
             break;
     }
@@ -2747,6 +2954,14 @@ function hpHasIncresedorDecreased(character) {
             }
             break;
     }
+    switch (character.artifactFourPiece) {
+        case "Marechaussee Hunter":
+            if (marechausseeHunterStacks < 3) {
+                marechausseeHunterStacks++;
+                character.currentBuffs.push({ Type: "CritRate", Value: 12, Source: "Marechaussee Hunter" });
+            }
+            break;
+    }
 }
 function healingHasOccured(character) {
     switch (character.weapon.name) {
@@ -2803,7 +3018,7 @@ function healingHasOccured(character) {
                 dialoguesOfTheDesertSagesBuff = true;
             }
             break;
-        case "Prospector's Drill":
+        case "Prospector#39s Drill":
             prospectorsDrillStacks++;
             if (prospectorsDrillStacks > 3)
                 prospectorsDrillStacks = 3;
@@ -2812,7 +3027,7 @@ function healingHasOccured(character) {
 }
 function bondOfLifeChanged(character) {
     switch (character.weapon.name) {
-        case "Crimson Moon's Semblance":
+        case "Crimson Moon&#39s Semblance":
             let buff;
             let bigBuff;
             character.currentBuffs.forEach(b => {
@@ -2833,6 +3048,13 @@ function bondOfLifeChanged(character) {
             }
             break;
     }
+    switch (character.artifactFourPiece) {
+        case "Fragment of Harmonic Whimsy":
+            if (fragmentOfHarmonicWhimsyStacks < 3) {
+                fragmentOfHarmonicWhimsyStacks++;
+                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 18, Source: "Fragment of Harmonic Whimsy" });
+            }
+    }
 }
 function hitBurningTarget(character, source) {
     switch (character.weapon.name) {
@@ -2850,14 +3072,46 @@ function hitBurningTarget(character, source) {
             }
             break;
     }
+    switch (character.artifactFourPiece) {
+        case "Unfinished Reverie":
+            if (role == "Support" && character.subDpsType == "Off-field") {
+                if (!unfinishedReverieBuff) {
+                    character.currentBuffs.push({ Type: "AddativBonusDMG", Value: 50, Source: "Unfinished Reverie" });
+                    unfinishedReverieBuff = true;
+                }
+            }
+            break;
+    }
 }
 function shieldCreated(character) {
     switch (character.weapon.name) {
-        case "Jadefall's Splendor":
+        case "Jadefall#39s Splendor":
             if (!jadefallsSplendorBuff) {
                 character.currentBuffs.push({ Type: "ElementalDMG", Value: (character.HP() / 1000) * (0.3 / 100), Source: "Jadefall's Splendor" });
                 jadefallsSplendorBuff = true;
             }
             break;
+    }
+    switch (character.artifactFourPiece) {
+        case "Nighttime Whispers in the Echoing Woods":
+            if (nighttimeWhispersInTheEchoingWoodsBuff) {
+                //Check if buff is 50 or 20 value
+                let buff = character.currentBuffs.find(b => b.Source == "Nighttime Whispers in the Echoing Woods");
+                if (buff.Value == 20) {
+                    buff.Value = 50;
+                }
+            }
+            break;
+    }
+}
+function hasTriggerdABloomTypeReaction(character) {
+    switch (character.artifactFourPiece) {
+        case "Flower of Paradise":
+            if (flowerOfparadiseLostStacks < 4) {
+                character.currentBuffs.push({ Type: "bloomBonus", Value: 25, Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "HyperBloomBonus", Value: 25, Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "BurgeoningBonus", Value: 25, Source: "Flower of Paradise" });
+                flowerOfparadiseLostStacks++;
+            }
     }
 }
