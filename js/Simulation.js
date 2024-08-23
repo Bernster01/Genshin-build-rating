@@ -48,6 +48,17 @@ let mailedFlowerBuff = false;
 let tidalShadowBuff = false;
 let portablePowerSawStacks = 0;
 let portablePowerSawBuff = false;
+let crimsonMoonsSemblanceBondofLifeBuff = false;
+let dialoguesOfTheDesertSagesBuff = false;
+let missiveWindspearBuff = false;
+let moonpiercerBuff = false;
+let sapwoodBladeBuff = false;
+let prospectorsDrillStacks = 0;
+let prospectorsDrillBuff = false;
+let cranesEchoingCallBuff = false;
+let flowingPurityBuff = false;
+let jadefallsSplendorBuff = false;
+let tulaytullahsRemembranceBuff = false;
 
 
 async function getBestBuildForCharacter(character, amount) {
@@ -100,7 +111,7 @@ async function validateAllCharacters() {
         if (character == "index")
             continue;
         const element = AllCharacters[character];
-        let result = await FindBestBuild(element, 10);
+        let result = await FindBestBuild(element, 100);
         if (result == null || result == undefined) {
             console.log(character + " FAILED");
         }
@@ -316,7 +327,7 @@ class Createcharacter {
         this.bondOfLife -= amount;
         if (this.bondOfLife < 0)
             this.bondOfLife = 0;
-        ;
+        bondOfLifeChanged(this);
     }
     applyBondOfLife = function (amount) {
         this.bondOfLife += amount;
@@ -367,6 +378,7 @@ class Createcharacter {
                 silvershowerBondofLifeStack = true;
             }
         }
+        bondOfLifeChanged(this);
 
     }
     getBuffOfType = function (type) {
@@ -669,7 +681,13 @@ function applyBonuses(character) {
             character.currentBuffs.push({ Type: "ATKflat", Value: character.HP() * 0.01, Source: "Staff of Homa" });
             break;
         case "Makhaira Aquamarine":
-            character.currentBuffs.push({ Type: "ATK%", Value: (48 / 100) * character.EM() });
+            character.currentBuffs.push({ Type: "ATKflat", Value: (48 / 100) * character.EM() });
+            break;
+        case "Staff of the Scarlet Sands":
+            character.currentBuffs.push({ Type: "ATKflat", Value: (52 / 100) * character.EM() });
+            break;
+        case "Wandering Evenstar":
+            character.currentBuffs.push({ Type: "ATKflat", Value: (48 / 100) * character.EM() });
             break;
 
     }
@@ -885,6 +903,9 @@ function resetVariables() {
     shardsInPossession = 6;
     propSurplusStacks = 0;
 
+    sapwoodBladeBuff = false;
+
+    //some bow buffs
     huntersPathBuff = false;
     ibisPiercerBuffStacks = 0;
     kingsSquireBuff = false;
@@ -895,13 +916,26 @@ function resetVariables() {
     silvershowerBondofLifeStack = false;
     silvershowerHealingStack = false;
     scionOftheBlazingSunBuff = false;
-
+    //some claymore buffs
     beaconOfTheReedSeaBuff = false;
     forestRegaliaBuff = false;
     mailedFlowerBuff = false;
     tidalShadowBuff = false;
     portablePowerSawStacks = 0;
     portablePowerSawBuff = false;
+    //Some polearm buffs
+    crimsonMoonsSemblanceBondofLifeBuff = false;
+    dialoguesOfTheDesertSagesBuff = false;
+    missiveWindspearBuff = false;
+    moonpiercerBuff = false;
+    prospectorsDrillStacks = 0;
+    prospectorsDrillBuff = false;
+
+    //Some catalyst buffs
+    cranesEchoingCallBuff = false;
+    flowingPurityBuff = false;
+    jadefallsSplendorBuff = false;
+    tulaytullahsRemembranceBuff = false;
 }
 function Simulation(character) {
 
@@ -1315,21 +1349,46 @@ function Simulation(character) {
 
                             }
                         }
+                        break;
                     case "Hunter's Path":
                         if (attackAction.type == "ChargedAttack" && !huntersPathBuff) {
                             Character.currentBuffs.push({ Type: "FlatDMG", Value: (160 / 100) * Character.EM(), Source: "Hunter's Path", for: "ChargedAttack" });
                             huntersPathBuff = true;
                         }
+                        break;
                     case "Ibis Piercer":
                         if (attackAction.type == "ChargedAttack" && ibisPiercerBuffStacks < 2) {
                             ibisPiercerBuffStacks++;
                             Character.currentBuffs.push({ Type: "ElementalMastery", Value: 80, Source: "Ibis Piercer", for: "ChargedAttack" });
                         }
+                        break;
                     case "Scion of the Blazing Sun":
                         if (attackAction.type == "ChargedAttack" && !scionOftheBlazingSunBuff) {
                             scionOftheBlazingSunBuff = true;
                             Character.currentBuffs.push({ Type: "ChargedAttack", Value: 56, Source: "Scion of the Blazing Sun" });
                         }
+                        break;
+                    case "Ballad of the Boundless Blue":
+                        if (attackAction.type == "ChargedAttack" || attackAction.type == "NormalAttack") {
+                            let stacks = 0;
+                            for (const buff of Character.currentBuffs) {
+                                if (buff.Source == "Ballad of the Boundless Blue") {
+                                    stacks++;
+                                }
+                            }
+                            if (stacks < 3) {
+                                character.currentBuffs.push({ Type: "NormalAttack", Value: 16, Source: "Ballad of the Boundless Blue" });
+                                character.currentBuffs.push({ Type: "ChargedAttack", Value: 12, Source: "Ballad of the Boundless Blue" });
+                            }
+                        }
+                        break;
+                    case "Crane's Echoing Call":
+                        if (attackAction.type == "PlungeAttack" && !cranesEchoingCallBuff) {
+                            cranesEchoingCallBuff = true;
+                            atkBuff += character.attack() * 0.2;
+                            character.currentBuffs.push({ Type: "PlungeAttack", Value: 20, Source: "Crane's Echoing Call", for: "PlungeAttack" });
+                        }
+                        break;
                 }
                 break;
 
@@ -1543,6 +1602,38 @@ function Simulation(character) {
                             portablePowerSawStacks = 0;
                         }
                         break;
+                    case "Prospector's Drill":
+                        if (!prospectorsDrillBuff) {
+                            character.currentBuffs.push({ Type: "ATK%", Value: 7 * prospectorsDrillStacks, Source: "Prospector's Drill" });
+                            character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * prospectorsDrillStacks, Source: "Prospector's Drill" });
+                            prospectorsDrillBuff = true;
+                            prospectorsDrillStacks = 0;
+                        }
+                        break;
+                    case "Staff of the Scarlet Sands":
+                        let scarlettStacks = 0;
+                        for (buff of Character.currentBuffs) {
+                            if (buff.Source == "Staff of the Scarlet Sands") {
+                                scarlettStacks++;
+                            }
+                        }
+                        if (scarlettStacks < 3) {
+                            Character.currentBuffs.push({ Type: "ATKflat", Value: (28 / 100) * Character.EM(), Source: "Staff of the Scarlet Sands" });
+                        }
+                        break;
+                    case "Flowing Purity":
+                        if (!flowingPurityBuff) {
+                            Character.currentBuffs.push({ Type: "ElementalDMG", Value: 16, Source: "Flowing Purity" });
+                            Character.applyBondOfLife(24);
+                            flowingPurityBuff = true;
+                        }
+                        break;
+                    case "Tulaytullah's Remembrance":
+                        if (!tulaytullahsRemembranceBuff) {
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 48, Source: "Tulaytullah's Remembrance" });
+                            tulaytullahsRemembranceBuff = true;
+                        }
+                        break;
 
                 }
                 break;
@@ -1621,7 +1712,20 @@ function Simulation(character) {
                             break;
                         }
                         break;
-
+                    case "Prospector's Drill":
+                        if (!prospectorsDrillBuff) {
+                            character.currentBuffs.push({ Type: "ATK%", Value: 7 * prospectorsDrillStacks, Source: "Prospector's Drill" });
+                            character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * prospectorsDrillStacks, Source: "Prospector's Drill" });
+                            prospectorsDrillBuff = true;
+                            prospectorsDrillStacks = 0;
+                        }
+                        break;
+                    case "Jadefall's Splendor":
+                        if (!jadefallsSplendorBuff) {
+                            character.currentBuffs.push({ Type: "ElementalDMG", Value: (character.HP() / 1000) * (0.3 / 100), Source: "Jadefall's Splendor" });
+                            jadefallsSplendorBuff = true;
+                        }
+                        break;
                 }
         }
     });
@@ -1728,6 +1832,9 @@ function dmgCalc(attackAction, Character) {
 
             });
             break;
+    }
+    if (targetsBurning) {
+        hitBurningTarget(Character, attackAction.Element);
     }
     return dmg;
 }
@@ -2432,6 +2539,7 @@ function burning(em, lvl, element, character, burningBonus) {
     const burningBaseDmg = 0.25 * LvlMultiplier[character.level];
     const burningEM = 1 + (16 * (em / (em + 1200))) + burningBonus;
     targetsBurning = true;
+    hitBurningTarget(character, "Burning");
     return (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
 }
 function bloom(em, lvl, element, character, bloomBonus) {
@@ -2505,8 +2613,22 @@ function hasTriggerdDendroReaction(character) {
         case "Forest Regalia":
             if (!forestRegaliaBuff) {
                 character.currentBuffs.push({ Type: "ElementalMastery", Value: 120, Source: "Forest Regalia" });
+                forestRegaliaBuff = true;
             }
             break;
+        case "Moonpiercer":
+            if (!moonpiercerBuff) {
+                character.currentBuffs.push({ Type: "ATK%", Value: 32, Source: "Moonpiercer" });
+                moonpiercerBuff = true
+            }
+            break;
+        case "Sapwood Blade":
+            if (!sapwoodBladeBuff) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 120, Source: "Sapwood Blade" });
+                sapwoodBladeBuff = true;
+            }
+            break;
+
     }
 }
 function hasTriggerdAReaction(character) {
@@ -2515,6 +2637,26 @@ function hasTriggerdAReaction(character) {
             if (!mailedFlowerBuff) {
                 character.currentBuffs.push({ Type: "ElementalMastery", Value: 96, Source: "Mailed Flower" });
                 character.currentBuffs.push({ Type: "ATK%", Value: 24, Source: "Mailed Flower" });
+                mailedFlowerBuff = true;
+            }
+            break;
+        case "Missive Windspear":
+            if (!missiveWindspearBuff) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 96, Source: "Missive Windspear" });
+                character.currentBuffs.push({ Type: "ATK%", Value: 24, Source: "Missive Windspear" });
+                missiveWindspearBuff = true;
+            }
+            break;
+        case "Fruit of Fulfillment":
+            let fruitStacks = 0;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Fruit of Fulfillment") {
+                    fruitStacks++;
+                }
+            });
+            if (fruitStacks < 3) {
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 36, Source: "Fruit of Fulfillment" });
+                character.currentBuffs.push({ Type: "ATK%", Value: -5, Source: "Fruit of Fulfillment" });
             }
             break;
     }
@@ -2567,6 +2709,22 @@ function hpHasIncresedorDecreased(character) {
             if (rangeGaugeStacks > 3)
                 rangeGaugeStacks = 3;
         }
+            break;
+        case "Cashflow Supervision":
+            let cashflowStacks = 0;
+            character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Cashflow Supervision") {
+                    cashflowStacks++;
+                }
+            });
+            if (cashflowStacks < 3) {
+                character.currentBuffs.push({ Type: "NormalAttack", Value: 16, Source: "Cashflow Supervision" });
+                character.currentBuffs.push({ Type: "ChargedAttack", Value: 14, Source: "Cashflow Supervision" });
+                if (cashflowStacks == 2) {
+                    character.currentBuffs.push({ Type: "ATK%", Value: 12, Source: "Cashflow Supervision" }); //Should be atkspeed but that is not supported so atk% will be used at 150% atkspeed value
+                }
+            }
+            break;
     }
 }
 function healingHasOccured(character) {
@@ -2617,6 +2775,68 @@ function healingHasOccured(character) {
             portablePowerSawStacks++;
             if (portablePowerSawStacks > 3)
                 portablePowerSawStacks = 3;
+            break;
+        case "Dialogues of the Desert Sages":
+            if (!dialoguesOfTheDesertSagesBuff) {
+                character.currentBuffs.push({ Type: "EnergyRecharge", Value: 24, Source: "Dialogues of the Desert Sages" });
+                dialoguesOfTheDesertSagesBuff = true;
+            }
+            break;
+        case "Prospector's Drill":
+            prospectorsDrillStacks++;
+            if (prospectorsDrillStacks > 3)
+                prospectorsDrillStacks = 3;
+            break;
+    }
+}
+function bondOfLifeChanged(character) {
+    switch (character.weapon.name) {
+        case "Crimson Moon's Semblance":
+            let buff;
+            let bigBuff;
+            character.currentBuffs.forEach(b => {
+                if (b.Source == "Crimson Moon's Semblance" && b.extra == "smallBuff") {
+                    buff = b;
+                }
+                else if (b.Source == "Crimson Moon's Semblance" && b.extra == "bigBuff") {
+                    bigBuff = b;
+                }
+            });
+            if (character.bondOfLife > 0 && buff == undefined) {
+                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 12, Source: "Crimson Moon's Semblance", extra: "smallBuff" });
+            } else if (character.bondOfLife > 30 && bigBuff == undefined) {
+                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 24, Source: "Crimson Moon's Semblance", extra: "bigBuff" });
+            }
+            if (character.bondOfLife < 30 && bigBuff != undefined) {
+                character.currentBuffs = character.currentBuffs.filter(b => b.Source != "Crimson Moon's Semblance" && b.extra != "bigBuff");
+            }
+            break;
+    }
+}
+function hitBurningTarget(character, source) {
+    switch (character.weapon.name) {
+        case "Lumidouce Elegy":
+            if (source == "Burning" || source == "DendroDMGBonus") {
+                let stacks = 0;
+                character.currentBuffs.forEach(buff => {
+                    if (buff.Source == "Lumidouce Elegy") {
+                        stacks++;
+                    }
+                });
+                if (stacks < 2) {
+                    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 18, Source: "Lumidouce Elegy" });
+                }
+            }
+            break;
+    }
+}
+function shieldCreated(character) {
+    switch (character.weapon.name) {
+        case "Jadefall's Splendor":
+            if (!jadefallsSplendorBuff) {
+                character.currentBuffs.push({ Type: "ElementalDMG", Value: (character.HP() / 1000) * (0.3 / 100), Source: "Jadefall's Splendor" });
+                jadefallsSplendorBuff = true;
+            }
             break;
     }
 }

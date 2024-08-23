@@ -1,4 +1,4 @@
-//#region Swords 
+//#region Swords w
 const Absolution = {
     name: "Absolution",
     src: "Weapons/Weapon_Absolution.webp",
@@ -632,7 +632,7 @@ const SapwoodBlade = {
         }
     },
 
-    passive: function () { return [{ Type: "ElementalMastery", Value: 120 }] },
+    passive: function () { return [] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1833,7 +1833,58 @@ const WindblumeOde = {
 //#endregion
 
 //#region Catalyst
+const AThousandFloatingDreams = {
+    name: "A Thousand Floating Dreams",
+    src: "Weapons/Weapon_A_Thousand_Floating_Dreams.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "58",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ElementalMastery", Value: 98 }, { Type: "DendroDMGBonus", Value: 10 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const BalladOfTheBoundlessBlue = {
+    name: "Ballad of the Boundless Blue",
+    src: "Weapons/Weapon_Ballad_of_the_Boundless_Blue.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "6.7%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const BlackcliffAgate = {
     name: "Blackcliff Agate",
     src: "Weapons/Weapon_Blackcliff_Agate.webp",
@@ -1860,7 +1911,58 @@ const BlackcliffAgate = {
         return this;
     }
 }.Init();
+const CashflowSupervision = {
+    name: "Cashflow Supervision",
+    src: "Weapons/Weapon_Cashflow_Supervision.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "4.8%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ATK%", Value: 16 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const CranesEchoingCall = {
+    name: "Crane&#39s Echoing Call",
+    src: "Weapons/Weapon_Cranes_Echoing_Call.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack49",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "3.6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const DodocoTales = {
     name: "Dodoco Tales",
     src: "Weapons/Weapon_Dodoco_Tales.webp",
@@ -1969,6 +2071,33 @@ const FavoniusCodex = {
     }
 }.Init();
 
+const FlowingPurity = {
+    name: "Flowing Purity",
+    src: "Weapons/Weapon_Flowing_Purity.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
 const Frostbearer = {
     name: "Frostbearer",
     src: "Weapons/Weapon_Frostbearer.webp",
@@ -1995,7 +2124,32 @@ const Frostbearer = {
         return this;
     }
 }.Init();
+const FruitOfFulfillment = {
+    name: "Fruit of Fulfillment",
+    src: "Weapons/Weapon_Fruit_of_Fulfillment.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "10.0%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const HakushinRing = {
     name: "Hakushin Ring",
     src: "Weapons/Weapon_Hakushin_Ring.webp",
@@ -2010,6 +2164,33 @@ const HakushinRing = {
     subStat: {
         Type: "EnergyRecharge",
         startValue: "6.7%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const JadefallsSplendor = {
+    name: "Jadefall&#39s Splendor",
+    src: "Weapons/Weapon_Jadefalls_Splendor.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "10.8%",
         Value: function () {
             return getSubStat(this);
         }
@@ -2238,7 +2419,32 @@ const SacrificialFragments = {
         return this;
     }
 }.Init();
+const SacrificialJade = {
+    name: "Sacrificial Jade",
+    src: "Weapons/Weapon_Sacrificial_Jade.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack41",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "8%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "HP%", Value: 64 },{Type:"ElementalMastery",Value:80}] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const SkywardAtlas = {
     name: "Skyward Atlas",
     src: "Weapons/Weapon_Skyward_Atlas.webp",
@@ -2366,6 +2572,58 @@ const TomeoftheEternalFlow = {
     },
 
     passive: function () { return [{ Type: "HP%", Value: 16 }, { Type: "ChargedAttack", Value: 42 }, { Type: "EnergyRecharge", Value: 6 }] },//
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const TulaytullahsRemembrance = {
+    name: "Tulaytullah&#39s Remembrance",
+    src: "Weapons/Weapon_Tulaytullahs_Remembrance.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "9.6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATK%", Value: 15 }] },//
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const WanderingEvenstar = {
+    name: "Wandering Evenstar",
+    src: "Weapons/Weapon_Wandering_Evenstar.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "36",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2955,7 +3213,7 @@ const TalkingStick = {
         }
     },
 
-    passive: function () { return [{ Type: "ATK%", Value: 16 },{Type: "ElementalDMG",Value:12}] },
+    passive: function () { return [{ Type: "ATK%", Value: 16 }, { Type: "ElementalDMG", Value: 12 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3154,7 +3412,32 @@ const WolfsGravestone = {
 //#endregion
 
 //#region Polearm
+const BalladoftheFjords = {
+    name: "Ballad of the Fjords",
+    src: "Weapons/Weapon_Ballad_of_the_Fjords.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ElementalMastery", Value: 240 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const BlackTassel = {
     name: "Black Tassel",
     src: "Weapons/Weapon_Black_Tassel.webp",
@@ -3262,7 +3545,32 @@ const CrescentPike = {
         return this;
     }
 }.Init();
+const CrimsonMoonsSemblance = {
+    name: "Crimson Moon&#39s Semblance",
+    src: "Weapons/Weapon_Crimson_Moons_Semblance.webp",
+    weaponType: "Polearm",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack48",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "4.8%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const Deathmatch = {
     name: "Deathmatch",
     src: "Weapons/Weapon_Deathmatch.webp",
@@ -3289,7 +3597,32 @@ const Deathmatch = {
         return this;
     }
 }.Init();
+const DialoguesOfTheDesertSages = {
+    name: "Dialogues of the Desert Sages",
+    src: "Weapons/Weapon_Dialogues_of_the_Desert_Sages.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const DragonsBane = {
     name: "Dragons Bane",
     src: "Weapons/Weapon_Dragons_Bane.webp",
@@ -3451,7 +3784,84 @@ const LithicSpear = {
         return this;
     }
 }.Init();
+const LumidouceElegy = {
+    name: "Lumidouce Elegy",
+    src: "Weapons/Weapon_Lumidouce_Elegy.webp",
+    weaponType: "Polearm",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "7.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ATK%", Value: 15 }, { Type: "EnergyRecharge", Value: 25 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const MissiveWindspear = {
+    name: "Missive Windspear",
+    src: "Weapons/Weapon_Missive_Windspear.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const Moonpiercer = {
+    name: "Moonpiercer",
+    src: "Weapons/Weapon_Moonpiercer.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "24",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const PrimordialJadeWingedSpear = {
     name: "Primordial Jade Winged-Spear",
     src: "Weapons/Weapon_Primordial_Jade_Winged-Spear.webp",
@@ -3479,6 +3889,34 @@ const PrimordialJadeWingedSpear = {
     }
 }.Init();
 
+const ProspectorsDrill = {
+    name: "Prospector&#39s Drill",
+    src: "Weapons/Weapon_Prospectors_Drill.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+
 const PrototypeStarglitter = {
     name: "Prototype Starglitter",
     src: "Weapons/Weapon_Prototype_Starglitter.webp",
@@ -3505,7 +3943,32 @@ const PrototypeStarglitter = {
         return this;
     }
 }.Init();
+const RightfulReward = {
+    name: "Rightful Reward",
+    src: "Weapons/Weapon_Rightful_Reward.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "EnergyRecharge", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const RoyalSpear = {
     name: "Royal Spear",
     src: "Weapons/Weapon_Royal_Spear.webp",
@@ -3586,7 +4049,32 @@ const StaffOfHoma = {
         return this;
     }
 }.Init();
+const StaffOfTheScarletSands = {
+    name: "Staff of the Scarlet Sands",
+    src: "Weapons/Weapon_Staff_of_the_Scarlet_Sands.webp",
+    weaponType: "Polearm",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "9.6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const TheCatch = {
     name: "The Catch",
     src: "Weapons/Weapon_The_Catch.webp",
@@ -3713,6 +4201,7 @@ function getSubStat(weapon) {
 
 }
 const AllWeapons = {
+    ["A Thousand Floating Dreams"]: AThousandFloatingDreams,
     ["Absolution"]: Absolution,
     ["Alley Hunter"]: AlleyHunter,
     ["Akuoumaru"]: Akuoumaru,
@@ -3720,6 +4209,8 @@ const AllWeapons = {
     ["Amos Bow"]: AmosBow,
     ["Aqua Simulacra"]: AquaSimulacra,
     ["Aquila Favonia"]: AquilaFavonia,
+    ["Ballad of the Boundless Blue"]: BalladOfTheBoundlessBlue,
+    ["Ballad of the Fjords"]: BalladoftheFjords,
     ["Beacon of the Reed Sea"]: BeaconoftheReedSea,
     ["Black Tassel"]: BlackTassel,
     ["Blackcliff Agate"]: BlackcliffAgate,
@@ -3728,12 +4219,16 @@ const AllWeapons = {
     ["Blackcliff Slasher"]: BlackcliffSlasher,
     ["Blackcliff Warbow"]: BlackcliffWarbow,
     ["Calamity Queller"]: CalamityQueller,
+    ["Cashflow Supervision"]: CashflowSupervision,
     ["Cinnabar Spindle"]: CinnabarSpindle,
     ["Cloudforged"]: Cloudforged,
+    ["Crane's Echoing Call"]: CranesEchoingCall,
     ["Crescent Pike"]: CrescentPike,
+    ["Crimson Moon's Semblance"]: CrimsonMoonsSemblance,
     ["Compound Bow"]: CompoundBow,
     ["Deathmatch"]: Deathmatch,
     ["Dodoco Tales"]: DodocoTales,
+    ["Dialogues of the Desert Sages"]: DialoguesOfTheDesertSages,
     ["Dragons Bane"]: DragonsBane,
     ["Dragonspine Spear"]: DragonspineSpear,
     ["Elegy for the End"]: ElegyForTheEnd,
@@ -3750,10 +4245,12 @@ const AllWeapons = {
     ["Festering Desire"]: FesteringDesire,
     ["Finale of the Deep"]: FinaleoftheDeep,
     ["Fleuve Cendre Ferryman"]: FleuveCendreFerryman,
+    ["Flowing Purity"]: FlowingPurity,
     ["Flute of Ezpitzal"]: FluteofEzpitzal,
     ["Forest Regalia"]: ForestRegalia,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
+    ["Fruit of Fulfillment"]: FruitOfFulfillment,
     ["Hakushin Ring"]: HakushinRing,
     ["Hamayumi"]: Hamayumi,
     ["Haran Geppaku Futsu"]: HaranGeppakuFutsu,
@@ -3761,6 +4258,7 @@ const AllWeapons = {
     ["Hunter's Path"]: HuntersPath,
     ["Ibis Piercer"]: IbisPiercer,
     ["Iron Sting"]: IronSting,
+    ["Jadefall's Splendor"]: JadefallsSplendor,
     ["Kagotsurube Isshin"]: KagotsurubeIsshin,
     ["Kaguras Verity"]: KagurasVerity,
     ["Katsuragikiri Nagamasa"]: KatsuragikiriNagamasa,
@@ -3772,13 +4270,16 @@ const AllWeapons = {
     ["Lithic Blade"]: LithicBlade,
     ["Lithic Spear"]: LithicSpear,
     ["Lost Prayer to the Sacred Winds"]: LostPrayerToTheSacredWinds,
+    ["Lumidouce Elegy"]: LumidouceElegy,
     ["Luxurious Sea-Lord"]: LuxuriousSeaLord,
     ["Mailed Flower"]: MailedFlower,
     ["Makhaira Aquamarine"]: MakhairaAquamarine,
     ["Mappa Mare"]: MappaMare,
     ["Memory of Dust"]: MemoryOfDust,
+    ["Missive Windspear"]: MissiveWindspear,
     ["Mistsplitter Reforged"]: MistsplitterReforged,
     ["Mitternachts Waltz"]: MitternachtsWaltz,
+    ["Moonpiecer"]: Moonpiercer,
     ["Mouuns Moon"]: MouunsMoon,
     ["Oathsworn Eye"]: OathswornEye,
     ["Polar Star"]: PolarStar,
@@ -3786,14 +4287,16 @@ const AllWeapons = {
     ["Predator"]: Predator,
     ["Primordial Jade Cutter"]: PrimordialJadeCutter,
     ["Primordial Jade Winged-Spear"]: PrimordialJadeWingedSpear,
+    ["Prospector's Drill"]: ProspectorsDrill,
     ["Prototype Amber"]: PrototypeAmber,
     ["Prototype Archaic"]: PrototypeArchaic,
     ["Prototype Crescent"]: PrototypeCrescent,
     ["Prototype Rancour"]: PrototypeRancour,
     ["Prototype Starglitter"]: PrototypeStarglitter,
     ["Rainslasher"]: Rainslasher,
-    ["Redhorn Stonethresher"]: RedhornStonethresher,
     ["Range Gauge"]: RangeGauge,
+    ["Redhorn Stonethresher"]: RedhornStonethresher,
+    ["Rightful Reward"]: RightfulReward,
     ["Royal Bow"]: RoyalBow,
     ["Royal Greatsword"]: RoyalGreatsword,
     ["Royal Grimoire"]: RoyalGrimoire,
@@ -3803,6 +4306,7 @@ const AllWeapons = {
     ["Sacrificial Bow"]: SacrificialBow,
     ["Sacrificial Fragments"]: SacrificialFragments,
     ["Sacrificial Greatsword"]: SacrificialGreatsword,
+    ["Sacrificial Jade"]: SacrificialJade,
     ["Sacrificial Sword"]: SacrificialSword,
     ["Sapwood Blade"]: SapwoodBlade,
     ["Scion of the Blazing Sun"]: ScionoftheBlazingSun,
@@ -3817,6 +4321,7 @@ const AllWeapons = {
     ["Solar Pearl"]: SolarPearl,
     ["Song of Broken Pines"]: SongOfBrokenPines,
     ["Song of Stillness"]: SongofStillness,
+    ["Staff of the Scarlet Sands"]: StaffOfTheScarletSands,
     ["Splendor of Tranquil Waters"]: SplendorofTranquilWaters,
     ["Staff of Homa"]: StaffOfHoma,
     ["Summit Shaper"]: SummitShaper,
@@ -3839,10 +4344,12 @@ const AllWeapons = {
     ["Tidal Shadow"]: TidalShadow,
     ["Toukabou Shigure"]: ToukabouShigure,
     ["Tome of the Eternal Flow"]: TomeoftheEternalFlow,
+    ["Tulaytullah's Remembrance"]: TulaytullahsRemembrance,
     ["Ultimate Overlord's Mega Magic Sword"]: UltimateOverlordsMegaMagicSword,
     ["Uraku Misugiri"]: UrakuMisugiri,
     ["Verdict"]: Verdict,
     ["Vortex Vanquisher"]: VortexVanquisher,
+    ["Wandering Evenstar"]: WanderingEvenstar,
     ["Wavebreakers Fin"]: WavebreakersFin,
     ["White Tassel"]: WhiteTassel,
     ["Whiteblind"]: Whiteblind,
@@ -3852,6 +4359,7 @@ const AllWeapons = {
     ["Wolf's Gravestone"]: WolfsGravestone,
     ["Xiphos' Moonlight"]: XiphosMoonlight,
     index: [
+        "A Thousand Floating Dreams",
         "Absolution",
         "Akuoumaru",
         "Alley Hunter",
@@ -3859,6 +4367,8 @@ const AllWeapons = {
         "Amos Bow",
         "Aqua Simulacra",
         "Aquila Favonia",
+        "Ballad of the Boundless Blue",
+        "Ballad of the Fjords",
         "Beacon of the Reed Sea",
         "Black Tassel",
         "Blackcliff Agate",
@@ -3867,12 +4377,16 @@ const AllWeapons = {
         "Blackcliff Slasher",
         "Blackcliff Warbow",
         "Calamity Queller",
+        "Cashflow Supervision",
         "Cinnabar Spindle",
         "Cloudforged",
+        "Crane's Echoing Call",
         "Crescent Pike",
+        "Crimson Moon's Semblance",
         "Compound Bow",
         "Deathmatch",
         "Dodoco Tales",
+        "Dialogues of the Desert Sages",
         "Dragons Bane",
         "Dragonspine Spear",
         "Elegy for the End",
@@ -3889,10 +4403,12 @@ const AllWeapons = {
         "Festering Desire",
         "Finale of the Deep",
         "Fleuve Cendre Ferryman",
+        "Flowing Purity",
         "Flute of Ezpitzal",
         "Forest Regalia",
         "Freedom-Sworn",
         "Frostbearer",
+        "Fruit of Fulfillment",
         "Hakushin Ring",
         "Hamayumi",
         "Haran Geppaku Futsu",
@@ -3900,6 +4416,7 @@ const AllWeapons = {
         "Hunter's Path",
         "Ibis Piercer",
         "Iron Sting",
+        "Jadefall's Splendor",
         "Kagotsurube Isshin",
         "Kaguras Verity",
         "Katsuragikiri Nagamasa",
@@ -3911,13 +4428,16 @@ const AllWeapons = {
         "Lithic Blade",
         "Lithic Spear",
         "Lost Prayer to the Sacred Winds",
+        "Lumidouce Elegy",
         "Luxurious Sea-Lord",
         "Mailed Flower",
         "Makhaira Aquamarine",
         "Mappa Mare",
         "Memory of Dust",
+        "Missive Windspear",
         "Mistsplitter Reforged",
         "Mitternachts Waltz",
+        "Moonpiecer",
         "Mouuns Moon",
         "Oathsworn Eye",
         "Polar Star",
@@ -3925,6 +4445,7 @@ const AllWeapons = {
         "Predator",
         "Primordial Jade Cutter",
         "Primordial Jade Winged-Spear",
+        "Prospector's Drill",
         "Prototype Amber",
         "Prototype Archaic",
         "Prototype Crescent",
@@ -3933,6 +4454,7 @@ const AllWeapons = {
         "Rainslasher",
         "Range Gauge",
         "Redhorn Stonethresher",
+        "Rightful Reward",
         "Royal Bow",
         "Royal Greatsword",
         "Royal Grimoire",
@@ -3942,6 +4464,7 @@ const AllWeapons = {
         "Sacrificial Bow",
         "Sacrificial Fragments",
         "Sacrificial Greatsword",
+        "Sacrificial Jade",
         "Sacrificial Sword",
         "Sapwood Blade",
         "Scion of the Blazing Sun",
@@ -3958,6 +4481,7 @@ const AllWeapons = {
         "Song of Stillness",
         "Splendor of Tranquil Waters",
         "Staff of Homa",
+        "Staff of the Scarlet Sands",
         "Summit Shaper",
         "Sword of Descension",
         "Sword of Narzissenkreuz",
@@ -3978,9 +4502,11 @@ const AllWeapons = {
         "Tidal Shadow",
         "Toukabou Shigure",
         "Tome of the Eternal Flow",
+        "Tulaytullah's Remembrance",
         "Uraku Misugiri",
         "Verdict",
         "Vortex Vanquisher",
+        "Wandering Evenstar",
         "Wavebreakers Fin",
         "White Tassel",
         "Whiteblind",
@@ -4067,13 +4593,20 @@ const AllWeapons = {
         "Windblume Ode",
     ],
     ["Catalyst"]: [
+        "A Thousand Floating Dreams",
+        "Ballad of the Boundless Blue",
         "Blackcliff Agate",
+        "Cashflow Supervision",
+        "Crane's Echoing Call",
         "Dodoco Tales",
         "Everlasting Moonglow",
         "Eye of Perception",
         "Favonius Codex",
+        "Flowing Purity",
         "Frostbearer",
+        "Fruit of Fulfillment",
         "Hakushin Ring",
+        "Jadefall's Splendor",
         "Kaguras Verity",
         "Lost Prayer to the Sacred Winds",
         "Mappa Mare",
@@ -4082,11 +4615,14 @@ const AllWeapons = {
         "Prototype Amber",
         "Royal Grimoire",
         "Sacrificial Fragments",
+        "Sacrificial Jade",
         "Skyward Atlas",
         "Solar Pearl",
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
         "Tome of the Eternal Flow",
+        "Tulaytullah's Remembrance",
+        "Wandering Evenstar",
         "Wine and Song"
     ],
     ["Claymore"]: [
@@ -4119,22 +4655,31 @@ const AllWeapons = {
         "Wolf's Gravestone"
     ],
     ["Polearm"]: [
+        "Ballad of the Fjords",
         "Black Tassel",
         "Blackcliff Pole",
         "Calamity Queller",
         "Crescent Pike",
+        "Crimson Moon's Semblance",
         "Deathmatch",
+        "Dialogues of the Desert Sages",
         "Dragons Bane",
         "Dragonspine Spear",
         "Engulfing Lightning",
         "Favonius Lance",
         "Kitain Cross Spear",
         "Lithic Spear",
+        "Lumidouce Elegy",
+        "Missive Windspear",
+        "Moonpiecer",
         "Primordial Jade Winged-Spear",
+        "Prospector's Drill",
         "Prototype Starglitter",
+        "Rightful Reward",
         "Royal Spear",
         "Skyward Spine",
         "Staff of Homa",
+        "Staff of the Scarlet Sands",
         "The Catch",
         "Vortex Vanquisher",
         "Wavebreakers Fin",
