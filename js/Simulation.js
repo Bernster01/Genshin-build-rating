@@ -32,6 +32,16 @@ let shouldGenerateBountifulCores = false;
 let hasUrakuMisugiriBuff = false;
 let shardsInPossession = 6;
 let propSurplusStacks = 0;
+let huntersPathBuff = false;
+let ibisPiercerBuffStacks = 0;
+let kingsSquireBuff = false;
+let rangeGaugeStacks = 0;
+let rangeGaugeBuff = false;
+let SongofStillnessBuff = false;
+let silvershowerElementalStack = false;
+let silvershowerBondofLifeStack = false;
+let silvershowerHealingStack = false;
+let scionOftheBlazingSunBuff = false;
 async function getBestBuildForCharacter(character, amount) {
     let result = await FindBestBuild(character, amount);
     downloadJSON(getBuildAsJSON(bestBuild[character.name]));
@@ -313,6 +323,41 @@ class Createcharacter {
             });
             if (stacks < 3)
                 this.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 16, Source: "Absolution" });
+        } else if (this.weapon.name == "Silvershower Heart-strings") {
+            if (!silvershowerBondofLifeStack) {
+                let stacks = 0;
+                let buffValue = 0;
+                if (silvershowerElementalStack)
+                    stacks++;
+                if (silvershowerHealingStack)
+                    stacks++;
+                switch (stacks) {
+                    case 0:
+                        buffValue = 12;
+                        break;
+                    case 1:
+                        buffValue = 24;
+                        break;
+                    case 2:
+                        buffValue = 40;
+                        break;
+
+                }
+                if (!silvershowerElementalStack && !silvershowerHealingStack) {
+                    this.currentBuffs.push({ Type: "HP%", Value: buffValue, Source: "Silvershower Heart-strings" });
+                } else {
+                    for (buff of this.currentBuffs) {
+                        if (buff.Source == "Silvershower Heart-strings") {
+                            buff.Value = buffValue;
+                        }
+                    }
+                }
+                if (silvershowerElementalStack && silvershowerHealingStack) {
+                    //Silvershower Heart-strings has all stacks now
+                    character.currentBuffs.push({ Type: "ElementalBurstCritRate", Value: 28, Source: "Silvershower Heart-strings" });
+                }
+                silvershowerBondofLifeStack = true;
+            }
         }
 
     }
@@ -828,6 +873,17 @@ function resetVariables() {
     hasUrakuMisugiriBuff = false;
     shardsInPossession = 6;
     propSurplusStacks = 0;
+
+    huntersPathBuff = false;
+    ibisPiercerBuffStacks = 0;
+    kingsSquireBuff = false;
+    rangeGaugeStacks = 0;
+    rangeGaugeBuff = false;
+    SongofStillnessBuff = false;
+    silvershowerElementalStack = false;
+    silvershowerBondofLifeStack = false;
+    silvershowerHealingStack = false;
+    scionOftheBlazingSunBuff = false;
 }
 function Simulation(character) {
 
@@ -1241,6 +1297,21 @@ function Simulation(character) {
 
                             }
                         }
+                    case "Hunter's Path":
+                        if (attackAction.type == "ChargedAttack" && !huntersPathBuff) {
+                            Character.currentBuffs.push({ Type: "FlatDMG", Value: (160 / 100) * Character.EM(), Source: "Hunter's Path", for: "ChargedAttack" });
+                            huntersPathBuff = true;
+                        }
+                    case "Ibis Piercer":
+                        if (attackAction.type == "ChargedAttack" && ibisPiercerBuffStacks < 2) {
+                            ibisPiercerBuffStacks++;
+                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: 80, Source: "Ibis Piercer", for: "ChargedAttack" });
+                        }
+                    case "Scion of the Blazing Sun":
+                        if(attackAction.type == "ChargedAttack" && !scionOftheBlazingSunBuff){
+                            scionOftheBlazingSunBuff = true;
+                            Character.currentBuffs.push({Type:"ChargedAttack", Value: 56, Source: "Scion of the Blazing Sun"});
+                        }
                 }
                 break;
 
@@ -1384,6 +1455,56 @@ function Simulation(character) {
                             }
                         }
                         break;
+                    case "King's Squire":
+                        if (!kingsSquireBuff) {
+                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: 140, Source: "king's Squire" });
+                            kingsSquireBuff = true;
+                        }
+                        break;
+                    case "Range Gauge":
+                        if (!rangeGaugeBuff) {
+                            Character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * rangeGaugeStacks, Source: "Range Gauge" });
+                            Character.currentBuffs.push({ Type: "ATK%", Value: 7 * rangeGaugeStacks, Source: "Range Gauge" });
+                            rangeGaugeBuff = true;
+                            rangeGaugeStacks = 0;
+                        }
+                        break;
+                    case "Silvershower Heart-strings":
+                        if (!silvershowerElementalStack) {
+                            let stacks = 0;
+                            let buffValue = 0;
+                            if (silvershowerBondofLifeStack)
+                                stacks++;
+                            if (silvershowerHealingStack)
+                                stacks++;
+                            switch (stacks) {
+                                case 0:
+                                    buffValue = 12;
+                                    break;
+                                case 1:
+                                    buffValue = 24;
+                                    break;
+                                case 2:
+                                    buffValue = 40;
+                                    break;
+
+                            }
+                            if (!silvershowerBondofLifeStack && !silvershowerHealingStack) {
+                                Character.currentBuffs.push({ Type: "HP%", Value: buffValue, Source: "Silvershower Heart-strings" });
+                            } else {
+                                //Find the buff and update it
+                                for (buff of Character.currentBuffs) {
+                                    if (buff.Source == "Silvershower Heart-strings") {
+                                        buff.Value = buffValue;
+                                    }
+                                }
+                            }
+                            if (silvershowerHealingStack && silvershowerBondofLifeStack) {
+                                //Silvershower Heart-strings has all stacks now
+                                character.currentBuffs.push({ Type: "ElementalBurstCritRate", Value: 28, Source: "Silvershower Heart-strings" });
+                            }
+                            silvershowerElementalStack = true;
+                        }
                 }
                 break;
 
@@ -1437,6 +1558,22 @@ function Simulation(character) {
 
                     totalDmg += qDmg;
                     dmgSources.q += qDmg;
+                }
+                switch (Character.weapon.name) {
+                    case "King's Squire":
+                        if (!kingsSquireBuff) {
+                            Character.currentBuffs.push({ Type: "ElementalMastery", Value: 140, Source: "king's Squire" });
+                            kingsSquireBuff = true;
+                        }
+                        break;
+                    case "Range Gauge":
+                        if (!rangeGaugeBuff) {
+                            Character.currentBuffs.push({ Type: "ElementalDMG", Value: 13 * rangeGaugeStacks, Source: "Range Gauge" });
+                            Character.currentBuffs.push({ Type: "ATK%", Value: 7 * rangeGaugeStacks, Source: "Range Gauge" });
+                            rangeGaugeBuff = true;
+                            rangeGaugeStacks = 0;
+                        }
+                        break;
                 }
                 break;
 
@@ -1808,7 +1945,7 @@ function getDamageBonus(character, attackAction) {
         } else if (attackAction.type == buff.Type) {
             bonus += (buff.Value / 100);
 
-        } else if (buff.type == "ElementalDMG") {
+        } else if (buff.type == "ElementalDMG" && attackAction.Element != "PhysicalDMGBonus") {
             bonus += (buff.Value / 100);
         }
 
@@ -1861,6 +1998,9 @@ function getCrit(character, attackAction) {
                 bonusCritRate += buff.Value;
             }
             else if (buff.Type === "ElementalSkillCritRate" && attackAction.type === "ElementalSkill") {
+                bonusCritRate += buff.Value;
+            }
+            else if (buff.Type == "ElementalBurstCritRate" && attackAction.type == "ElementalBurst") {
                 bonusCritRate += buff.Value;
             }
         });
@@ -2025,7 +2165,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         break;
                     case "Electro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
-                        
+
                         elementalDMGSources.electrochargedDMG += dmg;
                         break;
                     case "Anemo":
@@ -2088,7 +2228,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 switch (type) {
                     case "Hydro":
                         dmg += electroCharged(em, lvl, "Electro", character, electroChargedBonus);
-                      
+
                         elementalDMGSources.electrochargedDMG += dmg;
                         break;
                     case "Pyro":
@@ -2315,7 +2455,13 @@ const LvlMultiplier = {
 }
 
 function hpHasIncreased(character) {
-
+    switch (character.weapon.name) {
+        case "Song of Stillness":
+            if (!SongofStillnessBuff) {
+                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 32, Source: "Song of Stillness" });
+                SongofStillnessBuff = true;
+            }
+    }
 }
 function hpHasDecreased(character) {
 
@@ -2351,5 +2497,49 @@ function hpHasIncresedorDecreased(character) {
                 character.currentBuffs.push({ Type: "ElementalSkill", Value: 8, Source: "Splendor of Tranquil Waters" });
             }
             break;
+        case "Range Gauge": {
+            rangeGaugeStacks++;
+            if (rangeGaugeStacks > 3)
+                rangeGaugeStacks = 3;
+        }
+    }
+}
+function healingHasOccured(character) {
+    switch (character.weapon.name) {
+        case "Silvershower Heart-strings":
+            if (!silvershowerHealingStack) {
+                let stacks = 0;
+                let buffValue = 0;
+                if (silvershowerElementalStack)
+                    stacks++;
+                if (silvershowerBondofLifeStack)
+                    stacks++;
+                switch (stacks) {
+                    case 0:
+                        buffValue = 12;
+                        break;
+                    case 1:
+                        buffValue = 24;
+                        break;
+                    case 2:
+                        buffValue = 40;
+                        break;
+
+                }
+                if (!silvershowerElementalStack && !silvershowerBondofLifeStack) {
+                    character.currentBuffs.push({ Type: "HP%", Value: buffValue, Source: "Silvershower Heart-strings" });
+                } else {
+                    for (buff of character.currentBuffs) {
+                        if (buff.Source == "Silvershower Heart-strings") {
+                            buff.Value = buffValue;
+                        }
+                    }
+                }
+                if (silvershowerElementalStack && silvershowerBondofLifeStack) {
+                    //Silvershower Heart-strings has all stacks now
+                    character.currentBuffs.push({ Type: "ElementalBurstCritRate", Value: 28, Source: "Silvershower Heart-strings" });
+                }
+                silvershowerHealingStack = true;
+            }
     }
 }

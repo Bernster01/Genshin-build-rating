@@ -1031,7 +1031,32 @@ const AmosBow = {
         return this;
     }
 }.Init();
+const AquaSimulacra = {
+    name: "Aqua Simulacra",
+    src: "Weapons/Weapon_Aqua_Simulacra.webp",
+    weaponType: "Bow",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "HP%", Value: 16 }, { Type: "BonusDMG%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const BlackcliffWarbow = {
     name: "Blackcliff Warbow",
     src: "Weapons/Weapon_Blackcliff_Warbow.webp",
@@ -1058,7 +1083,32 @@ const BlackcliffWarbow = {
         return this;
     }
 }.Init();
+const Cloudforged = {
+    name: "Cloudforged",
+    src: "Weapons/Weapon_Cloudforged.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ElementalMastery",
+        startValue: "36",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ElementalMastery", Value: 120 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const CompoundBow = {
     name: "Compound Bow",
     src: "Weapons/Weapon_Compound_Bow.webp",
@@ -1106,6 +1156,59 @@ const ElegyForTheEnd = {
     },
 
     passive: function () { return [{ Type: "ElementalMastery", Value: 180 }, { Type: "ATK", Value: 7 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const EndoftheLine = {
+    name: "End of the Line",
+    src: "Weapons/Weapon_End_of_the_Line.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "10.0%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ATKBlast", Value: 160 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+
+const FadingTwilight = {
+    name: "Fading Twilight",
+    src: "Weapons/Weapon_Fading_Twilight.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "EnergyRecharge",
+        startValue: "6.7%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "BonusDMG%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -1167,6 +1270,84 @@ const Hamayumi = {
     }
 }.Init();
 
+const HuntersPath = {
+    name: "Hunter&#39s Path",
+    src: "Weapons/Weapon_Hunters_Path.webp",
+    weaponType: "Bow",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "9.6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ElementalDMG", Value: 12 }, { Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const IbisPiercer = {
+    name: "Ibis Piercer",
+    src: "Weapons/Weapon_Ibis_Piercer.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const kingsSquire = {
+    name: "King&#39s Squire",
+    src: "Weapons/Weapon_Kings_Squire.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack41",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "12%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{Type:"ATKBlast",Value:180}] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const MitternachtsWaltz = {
     name: "Mitternachts Waltz",
     src: "Weapons/Weapon_Mitternachts_Waltz.webp",
@@ -1301,7 +1482,32 @@ const PrototypeCrescent = {
         return this;
     }
 }.Init();
+const RangeGauge = {
+    name: "Range Gauge",
+    src: "Weapons/Weapon_Range_Gauge.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "6%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const RoyalBow = {
     name: "Royal Bow",
     src: "Weapons/Weapon_Royal_Bow.webp",
@@ -1382,7 +1588,58 @@ const SacrificialBow = {
         return this;
     }
 }.Init();
+const ScionoftheBlazingSun = {
+    name: "Scion of the Blazing Sun",
+    src: "Weapons/Weapon_Scion_of_the_Blazing_sun.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritRate",
+        startValue: "4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "ATKBlast", value: 120 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const SilvershowerHeartStrings = {
+    name: "Silvershower Heart-strings",
+    src: "Weapons/Weapon_Silvershower_Heartstrings.webp",
+    weaponType: "Bow",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "14.4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const SkywardHarp = {
     name: "Skyward Harp",
     src: "Weapons/Weapon_Skyward_Harp.webp",
@@ -1409,7 +1666,58 @@ const SkywardHarp = {
         return this;
     }
 }.Init();
+const SongofStillness = {
+    name: "Song of Stillness",
+    src: "Weapons/Weapon_Song_of_Stillness.webp",
+    weaponType: "Bow",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "ATK%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "Special", Value: null }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
+const TheFirstGreatMagic = {
+    name: "The First Great Magic",
+    src: "Weapons/Weapon_The_First_Great_Magic.webp",
+    weaponType: "Bow",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack46",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "14.4%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [{ Type: "ChargedAttack", Value: 16 }, { Type: "ATK%", Value: 28 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const TheStringless = {
     name: "The Stringless",
     src: "Weapons/Weapon_The_Stringless.webp",
@@ -3203,6 +3511,7 @@ const AllWeapons = {
     ["Akuoumaru"]: Akuoumaru,
     ["Amenoma Kageuchi"]: AmenomaKageuchi,
     ["Amos Bow"]: AmosBow,
+    ["Aqua Simulacra"]: AquaSimulacra,
     ["Aquila Favonia"]: AquilaFavonia,
     ["Black Tassel"]: BlackTassel,
     ["Blackcliff Agate"]: BlackcliffAgate,
@@ -3212,6 +3521,7 @@ const AllWeapons = {
     ["Blackcliff Warbow"]: BlackcliffWarbow,
     ["Calamity Queller"]: CalamityQueller,
     ["Cinnabar Spindle"]: CinnabarSpindle,
+    ["Cloudforged"]: Cloudforged,
     ["Crescent Pike"]: CrescentPike,
     ["Compound Bow"]: CompoundBow,
     ["Deathmatch"]: Deathmatch,
@@ -3219,9 +3529,11 @@ const AllWeapons = {
     ["Dragons Bane"]: DragonsBane,
     ["Dragonspine Spear"]: DragonspineSpear,
     ["Elegy for the End"]: ElegyForTheEnd,
+    ["End of the Line"]: EndoftheLine,
     ["Engulfing Lightning"]: EngulfingLightning,
     ["Everlasting Moonglow"]: EverlastingMoonglow,
     ["Eye of Perception"]: EyeOfPerception,
+    ["Fading Twilight"]: FadingTwilight,
     ["Favonius Codex"]: FavoniusCodex,
     ["Favonius Greatsword"]: FavoniusGreatsword,
     ["Favonius Lance"]: FavoniusLance,
@@ -3237,11 +3549,14 @@ const AllWeapons = {
     ["Hamayumi"]: Hamayumi,
     ["Haran Geppaku Futsu"]: HaranGeppakuFutsu,
     ["Harbinger of Dawn"]: HarbingerOfDawn,
+    ["Hunter's Path"]: HuntersPath,
+    ["Ibis Piercer"]: IbisPiercer,
     ["Iron Sting"]: IronSting,
     ["Kagotsurube Isshin"]: KagotsurubeIsshin,
     ["Kaguras Verity"]: KagurasVerity,
     ["Katsuragikiri Nagamasa"]: KatsuragikiriNagamasa,
     ["Key of Khaj-Nisut"]: KeyofKahjNisut,
+    ["King's Squire"]: kingsSquire,
     ["Kitain Cross Spear"]: KitainCrossSpear,
     ["Light of Foliar Incision"]: LightofFoliarIncision,
     ["Lions Roar"]: LionsRoar,
@@ -3266,6 +3581,7 @@ const AllWeapons = {
     ["Prototype Starglitter"]: PrototypeStarglitter,
     ["Rainslasher"]: Rainslasher,
     ["Redhorn Stonethresher"]: RedhornStonethresher,
+    ["Range Gauge"]: RangeGauge,
     ["Royal Bow"]: RoyalBow,
     ["Royal Greatsword"]: RoyalGreatsword,
     ["Royal Grimoire"]: RoyalGrimoire,
@@ -3277,7 +3593,9 @@ const AllWeapons = {
     ["Sacrificial Greatsword"]: SacrificialGreatsword,
     ["Sacrificial Sword"]: SacrificialSword,
     ["Sapwood Blade"]: SapwoodBlade,
+    ["Scion of the Blazing Sun"]: ScionoftheBlazingSun,
     ["Serpent Spine"]: SerpentSpine,
+    ["Silvershower Heart-strings"]: SilvershowerHeartStrings,
     ["Skyward Atlas"]: SkywardAtlas,
     ["Skyward Blade"]: SkywardBlade,
     ["Skyward Harp"]: SkywardHarp,
@@ -3286,6 +3604,7 @@ const AllWeapons = {
     ["Snow-Tombed Starsilver"]: SnowTombedStarSilver,
     ["Solar Pearl"]: SolarPearl,
     ["Song of Broken Pines"]: SongOfBrokenPines,
+    ["Song of Stillness"]: SongofStillness,
     ["Splendor of Tranquil Waters"]: SplendorofTranquilWaters,
     ["Staff of Homa"]: StaffOfHoma,
     ["Summit Shaper"]: SummitShaper,
@@ -3296,6 +3615,7 @@ const AllWeapons = {
     ["The Bell"]: TheBell,
     ["The Black Sword"]: TheBlackSword,
     ["The Dockhand's Assistant"]: TheDockhandsAssistant,
+    ["The First Great Magic"]: TheFirstGreatMagic,
     ["The Flute"]: TheFlute,
     ["The Stringless"]: TheStringless,
     ["The Unforged"]: TheUnforged,
@@ -3322,6 +3642,7 @@ const AllWeapons = {
         "Alley Hunter",
         "Amenoma Kageuchi",
         "Amos Bow",
+        "Aqua Simulacra",
         "Aquila Favonia",
         "Black Tassel",
         "Blackcliff Agate",
@@ -3331,6 +3652,7 @@ const AllWeapons = {
         "Blackcliff Warbow",
         "Calamity Queller",
         "Cinnabar Spindle",
+        "Cloudforged",
         "Crescent Pike",
         "Compound Bow",
         "Deathmatch",
@@ -3338,9 +3660,11 @@ const AllWeapons = {
         "Dragons Bane",
         "Dragonspine Spear",
         "Elegy for the End",
+        "End of the Line",
         "Engulfing Lightning",
         "Everlasting Moonglow",
         "Eye of Preception",
+        "Fading Twilight",
         "Favonius Codex",
         "Favonius Greatsword",
         "Favonius Lance",
@@ -3356,11 +3680,14 @@ const AllWeapons = {
         "Hamayumi",
         "Haran Geppaku Futsu",
         "Harbinger of Dawn",
+        "Hunter's Path",
+        "Ibis Piercer",
         "Iron Sting",
         "Kagotsurube Isshin",
         "Kaguras Verity",
         "Katsuragikiri Nagamasa",
         "Key of Khaj-Nisut",
+        "King's Squire",
         "Kitain Cross Spear",
         "Light of Foliar Incision",
         "Lions Roar",
@@ -3384,6 +3711,7 @@ const AllWeapons = {
         "Prototype Rancour",
         "Prototype Starglitter",
         "Rainslasher",
+        "Range Gauge",
         "Redhorn Stonethresher",
         "Royal Bow",
         "Royal Greatsword",
@@ -3396,7 +3724,9 @@ const AllWeapons = {
         "Sacrificial Greatsword",
         "Sacrificial Sword",
         "Sapwood Blade",
+        "Scion of the Blazing Sun",
         "Serpent Spine",
+        "Silvershower Heart-strings",
         "Skyward Atlas",
         "Skyward Blade",
         "Skyward Harp",
@@ -3405,6 +3735,7 @@ const AllWeapons = {
         "Snow-Tombed Starsliver",
         "Solar Pearl",
         "Song of Broken Pines",
+        "Song of Stillness",
         "Splendor of Tranquil Waters",
         "Staff of Homa",
         "Summit Shaper",
@@ -3415,6 +3746,7 @@ const AllWeapons = {
         "The Bell",
         "The Black Sword",
         "The Dockhand's Assistant",
+        "The First Great Magic",
         "The Flute",
         "The Stringless",
         "The Unforged",
@@ -3481,20 +3813,32 @@ const AllWeapons = {
     ["Bow"]: [
         "Alley Hunter",
         "Amos Bow",
+        "Aqua Simulacra",
         "Blackcliff Warbow",
+        "Cloudforged",
         "Compound Bow",
+        "End of the Line",
         "Elegy for the End",
+        "Fading Twilight",
         "Favonius Warbow",
         "Hamayumi",
+        "Hunter's Path",
+        "Ibis Piercer",
+        "King's Squire",
         "Mitternachts Waltz",
         "Mouuns Moon",
         "Polar Star",
         "Predator",
         "Prototype Crescent",
+        "Range Gauge",
         "Royal Bow",
         "Rust",
         "Sacrificial Bow",
+        "Scion of the Blazing Sun",
+        "Silvershower Heart-strings",
         "Skyward Harp",
+        "Song of Stillness",
+        "The First Great Magic",
         "The Stringless",
         "The Viridescent Hunt",
         "Thundering Pulse",

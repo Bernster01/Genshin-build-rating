@@ -5790,6 +5790,7 @@ function starsGatheratDusk(character) {
             break;
         }
     }
+    healingHasOccured(character);
     return { dmg: dmg, healing: healing + conHealing, attackBuff: atkBuff };
 }
 function moonjadeDescent(character) {
@@ -5881,6 +5882,7 @@ function moonjadeDescent(character) {
             healing += character.HP() * (0.8 / 100) * 5;
         }
     }
+    healingHasOccured(character);
     healing *= 1 + (character.advancedstats.healingBonus / 100);
     return { dmg: dmg, healing: healing };
 }
@@ -6302,6 +6304,7 @@ function skyfeatherSong(character) {
     castHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 6;
+    healingHasOccured(character);
     return { healing: castHealing + eagleplumeHealing };
 }
 

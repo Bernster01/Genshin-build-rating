@@ -231,6 +231,7 @@ function letTheShowBegin(Character) {
 
     healing += regenPerHit * 16 * healingBonus * encore;
     healing += regenPerHit * 4 * 4 * healingBonus * encore;
+    healingHasOccured(Character);
     return { healing: healing };
 }
 
@@ -1495,7 +1496,7 @@ function breastplate(Character) {
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     let heal = healing * (chance / 100) * 12;
     shield *= (1 + (Character.advancedstats.shieldStrength / 100));
-
+    healingHasOccured(Character);
     return { dmg: dmg, shield: shield, healing: heal };
 }
 
@@ -1601,8 +1602,8 @@ function heraldofFrost(Character) {
     }
 
     let heal = regenCon * 4 + (regenHit * 8 * 4) * (1 + (Character.advancedstats.healingBonus / 100));
-
-
+    
+    healingHasOccured(Character);
 
     return { dmg: dmg, healing: heal };
 }
@@ -1773,7 +1774,7 @@ function fuuinDash(Character) {
             heal = ((Character.EM() * 1.2) + 300) * 4;
         }
     })
-
+    healingHasOccured(Character);
     return { dmg: dmg, healing: heal };
 }
 
@@ -3048,6 +3049,7 @@ function kuragesOath(Character) {
         heal += healing * (1 + (Character.advancedstats.healingBonus / 100));
 
     }
+    healingHasOccured(Character);
     return { dmg: dmg, healing: heal };
 }
 
@@ -3699,6 +3701,7 @@ function oTearsIShallRepay(character) {
             character.advancedstats.elementalBonuses[1].Value -= currentBonus;
             //Calc new bonus
             let healing = character.HP() * 0.16 * sourewaterDroplets;
+            healingHasOccured(character);
             currentHP = currentHP + healing;
             if (currentHP > character.HP())
                 currentHP = character.HP();
@@ -3780,6 +3783,7 @@ function universalDiagnosis(character) {
     dmg += dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack, character) * numberOfEnemies;
     let healing = multiplier2 * (1 + (character.advancedstats.healingBonus / 100));
+    healingHasOccured(character);
     return { dmg: dmg, healing: healing };
 }
 function sacredRiteHeronsSanctum(character) {
@@ -4084,6 +4088,7 @@ function salonSolitaire(character) {
         dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
         character.removeHP(character.HP() * 0.02);
     }
+    healingHasOccured(character);
     dmg += dmgCalc(ousiaBubbleAttack, character) * numberOfEnemies;
     return { dmg: dmg };
 }
@@ -4288,6 +4293,7 @@ function shortRangeRapidInterdictionFire(character) {
             character.currentBuffs.push({ Type: "ATK%", Value: atkBuff, Source: "Vertical Force Coordination" });
         }
     }
+    healingHasOccured(character);
     return { dmg: dmg, healing: totalHealing, attackBuff: atkBuff };
 }
 
@@ -5179,6 +5185,7 @@ function sanctifyingRing(character) {
         }
         dmg += dmgCalc(grassRingofSancitifaction, character) * numberOfEnemies;
     }
+    healingHasOccured(character);
     return { dmg: dmg, healing: grassRingofSancitifactionHealing };
 }
 
@@ -6097,6 +6104,7 @@ function raphanusSkyCluster(character) {
             healing += character.HP() * (0.8 / 100) * 5;
         }
     }
+    healingHasOccured(character);
     healing *= 1 + (character.advancedstats.healingBonus / 100);
     return { dmg: dmg, healing: healing };
 }
@@ -6474,6 +6482,7 @@ function reboundHydrotherapy(character) {
         atkbuff = Math.max(((Math.max((character.HP() - 30000), 0) / 1000) * 80), 2800) * 10;
         character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 8, Source: "Rebound Hydrotherapy" });
     }
+    healingHasOccured(character);
     return { dmg: dmg, healing: bolsteringBubblebalmHealing, attackBuff: atkbuff };
 }
 
