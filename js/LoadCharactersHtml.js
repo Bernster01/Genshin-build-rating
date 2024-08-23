@@ -111,8 +111,8 @@ function loadMockArtifacts() {
     document.getElementById("circlet_substat_4_type").src = "Assets/Icons/Icon_Attribute_Health.webp";
     document.getElementById("circlet_substat_4_value").innerText = 4.7;
 
-    document.getElementById("circlet_set").dataset.set = "Blizzard Strayer";
-    document.getElementById("circlet_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Circlet.webp')";
+    document.getElementById("circlet_set").dataset.set = "Blizzard_Strayer";
+    document.getElementById("circlet_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard_Strayer_Circlet.webp')";
 
     document.getElementById("flower_mainstat_type").dataset.type = "HPflat";
     document.getElementById("flower_mainstat_type").title = "HPflat";
@@ -139,8 +139,8 @@ function loadMockArtifacts() {
     document.getElementById("flower_substat_4_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
     document.getElementById("flower_substat_4_value").innerText = 7.3;
 
-    document.getElementById("flower_set").dataset.set = "Blizzard Strayer";
-    document.getElementById("flower_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Flower.webp')";
+    document.getElementById("flower_set").dataset.set = "Blizzard_Strayer";
+    document.getElementById("flower_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard_Strayer_Flower.webp')";
 
     document.getElementById("plume_mainstat_type").dataset.type = "ATKflat";
     document.getElementById("plume_mainstat_type").title = "ATKflat";
@@ -167,8 +167,8 @@ function loadMockArtifacts() {
     document.getElementById("plume_substat_4_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
     document.getElementById("plume_substat_4_value").innerText = 12.4;
 
-    document.getElementById("plume_set").dataset.set = "Blizzard Strayer";
-    document.getElementById("plume_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Plume.webp')";
+    document.getElementById("plume_set").dataset.set = "Blizzard_Strayer";
+    document.getElementById("plume_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard_Strayer_Plume.webp')";
 
     document.getElementById("sands_mainstat_type").dataset.type = "ATK%";
     document.getElementById("sands_mainstat_type").title = "ATK%";
@@ -195,8 +195,8 @@ function loadMockArtifacts() {
     document.getElementById("sands_substat_4_type").src = "Assets/Icons/Icon_Attribute_Critical_Hit.webp";
     document.getElementById("sands_substat_4_value").innerText = 10.9;
 
-    document.getElementById("sands_set").dataset.set = "Blizzard Strayer";
-    document.getElementById("sands_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard Strayer Sands.webp')";
+    document.getElementById("sands_set").dataset.set = "Blizzard_Strayer";
+    document.getElementById("sands_set").style.backgroundImage = "url('Assets/Artifacts/Blizzard_Strayer_Sands.webp')";
 
     document.getElementById("goblet_mainstat_type").dataset.type = "CryoDMGBonus";
     document.getElementById("goblet_mainstat_type").title = "CryoDMGBonus";
@@ -222,8 +222,8 @@ function loadMockArtifacts() {
     document.getElementById("goblet_substat_4_type").title = "EnergyRecharge";
     document.getElementById("goblet_substat_4_value").innerText = 5.8;
 
-    document.getElementById("goblet_set").dataset.set = "Viridescent Venerer";
-    document.getElementById("goblet_set").style.backgroundImage = "url('Assets/Artifacts/Viridescent Venerer Goblet.webp')";
+    document.getElementById("goblet_set").dataset.set = "Viridescent_Venerer";
+    document.getElementById("goblet_set").style.backgroundImage = "url('Assets/Artifacts/Viridescent_Venerer_Goblet.webp')";
 }
 function loadMockArtifacts2() {
     let procent = 40;

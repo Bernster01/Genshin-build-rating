@@ -111,7 +111,7 @@ async function validateAllCharacters() {
         if (character == "index")
             continue;
         const element = AllCharacters[character];
-        let result = await FindBestBuild(element, 100);
+        let result = await FindBestBuild(element, 10);
         if (result == null || result == undefined) {
             console.log(character + " FAILED");
         }

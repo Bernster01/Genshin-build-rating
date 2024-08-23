@@ -12,100 +12,100 @@ function getArtifactSetsAsHtmlOption(){
     return htmlCode;
 }
 const sets ={
-    [0]:"Archaic Petra",
-    [1]:"Blizzard Strayer",
-    [2]:"Bloodstained Chivalry",
-    [3]:"Crimson Witch of Flames",
-    [4]:"Echoes of an Offering",
-    [5]:"Emblem of Severed Fate",  
-    [6]:"Gladiators Finale",
-    [7]:"Heart of Depth",
-    [8]:"Husk of Opulent Dreams",
+    [0]:"Archaic_Petra",
+    [1]:"Blizzard_Strayer",
+    [2]:"Bloodstained_Chivalry",
+    [3]:"Crimson_Witch_of_Flames",
+    [4]:"Echoes_of_an_Offering",
+    [5]:"Emblem_of_Severed_Fate",  
+    [6]:"Gladiators_Finale",
+    [7]:"Heart_of_Depth",
+    [8]:"Husk_of_Opulent_Dreams",
     [9]:"Lavawalker",
-    [10]:"Maiden Beloved",
-    [11]:"Noblesse Oblige",
-    [12]:"Ocean-Hued Clam",
-    [13]:"Pale Flame",
-    [14]:"Retracing Bolide",
-    [15]:"Shimenawas Reminiscence",
-    [16]:"Tenacity of the Millelith",
-    [17]:"Thundering Fury",
+    [10]:"Maiden_Beloved",
+    [11]:"Noblesse_Oblige",
+    [12]:"Ocean-Hued_Clam",
+    [13]:"Pale_Flame",
+    [14]:"Retracing_Bolide",
+    [15]:"Shimenawas_Reminiscence",
+    [16]:"Tenacity_of_the_Millelith",
+    [17]:"Thundering_Fury",
     [18]:"Thundersoother",
-    [19]:"Vermillion Hereafter",
-    [20]:"Viridescent Venerer",
-    [21]:"Wanderers Troupe"
+    [19]:"Vermillion_Hereafter",
+    [20]:"Viridescent_Venerer",
+    [21]:"Wanderers_Troupe"
 }
 const setsList = [
-"Archaic Petra",
-"Blizzard Strayer",
-"Bloodstained Chivalry",
-"Crimson Witch of Flames",
-"Echoes of an Offering",
-"Emblem of Severed Fate",
-"Gladiators Finale",
-"Heart of Depth",
-"Husk of Opulent Dreams",
+"Archaic_Petra",
+"Blizzard_Strayer",
+"Bloodstained_Chivalry",
+"Crimson_Witch_of_Flames",
+"Echoes_of_an_Offering",
+"Emblem_of_Severed_Fate",
+"Gladiators_Finale",
+"Heart_of_Depth",
+"Husk_of_Opulent_Dreams",
 "Lavawalker",
-"Maiden Beloved",
-"Noblesse Oblige",
-"Ocean-Hued Clam",
-"Pale Flame",
-"Retracing Bolide",
-"Shimenawas Reminiscence",
-"Tenacity of the Millelith",
-"Thundering Fury",
+"Maiden_Beloved",
+"Noblesse_Oblige",
+"Ocean-Hued_Clam",
+"Pale_Flame",
+"Retracing_Bolide",
+"Shimenawas_Reminiscence",
+"Tenacity_of_the_Millelith",
+"Thundering_Fury",
 "Thundersoother",
-"Vermillion Hereafter",
-"Viridescent Venerer",
-"Wanderers Troupe"
+"Vermillion_Hereafter",
+"Viridescent_Venerer",
+"Wanderers_Troupe"
 ];
 
 const artifactSets ={
-    ["Archaic Petra"]:{
+    ["Archaic_Petra"]:{
         Type: "Archaic Petra",
         twoPiece:{Type:"GeoDMGBonus",Value:15},
         fourPiece:{Type:"BonusDMG%",Value:35}
     },
-    ["Blizzard Strayer"]:{
+    ["Blizzard_Strayer"]:{
         Type: "Blizzard Strayer",
         twoPiece:{Type:"CryoBonusDMG",Value:15},
         fourPiece:{Type:"CritRate",Value:20}
     },
-    ["Bloodstained Chivalry"]:{
+    ["Bloodstained_Chivalry"]:{
         Type: "Bloodstained Chivalry",
         twoPiece:{Type:"PhysicalDMGBonus",Value:25},
         fourPiece:{Type:"ChargedAttack",Value:50}
     },
-    ["Crimson Witch of Flames"]:{
+    ["Crimson_Witch_of_Flames"]:{
         Type: "Crimson Witch of Flames",
         twoPiece:{Type:"PyroDMGBonus",Value:15}
         
     },
-    ["Echoes of an Offering"]:{
+    ["Echoes_of_an_Offering"]:{
         Type: "Echoes of an Offering",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:{Type:"Echoes"}
         
     },
-    ["Emblem of Severed Fate"]:{
+    ["Emblem_of_Severed_Fate"]:{
         Type: "Emblem of Severed Fate",
         twoPiece:{Type:"EnergyRecharge",Value:20},
         fourPiece:{Type:"Emblem"}
         
     },
-    ["Gladiators Finale"]:{
+    ["Gladiators_Finale"]:{
         Type: "Gladiators Finale",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:{Type:"NormalAttack",Value:35},
         
     },
-    ["Heart of Depth"]:{
+    ["Heart_of_Depth"]:{
         Type: "Heart of Depth",
         twoPiece:{Type:"HydroDMGBonus",Value:15},
         fourPiece:{Type:"Heart of Depth",Value:null}
         
     },
-    ["Husk of Opulent Dreams"]:{
+    ["Husk_of_Opulent_Dreams"]:{
         Type: "Husk of Opulent Dreams",
         twoPiece:{Type:"DEF%",Value:30},
         fourPiece:[{Type:"DEF%",Value:24},{Type:"GeoDMGBonus",Value:24}]
@@ -117,27 +117,27 @@ const artifactSets ={
         fourPiece:{Type:"BonusDMG%",Value:0.35},
         
     },
-    ["Maiden Beloved"]:{
+    ["Maiden_Beloved"]:{
         Type: "Maiden Beloved",
         twoPiece:{Type:"HealingBonus",Value:15},
         
     },
-    ["Noblesse Oblige"]:{
+    ["Noblesse_Oblige"]:{
         Type: "Noblesse Oblige",
         twoPiece:{Type:"BurstDMG%",Value:20},
         
     },
-    ["Ocean-Hued Clam"]:{
+    ["Ocean-Hued_Clam"]:{
         Type: "Ocean-Hued Clam",
         twoPiece:{Type:"HealingBonus",Value:15},
         fourPiece:{Type:"Ocean-Hued Clam",Value:null}
         
     },
-    ["Pale Flame"]:{
+    ["Pale_Flame"]:{
         Type: "Pale Flame",
         twoPiece:{Type:"PhysicalDMGBonus",Value:25}
     },
-    ["Retracing Bolide"]:{
+    ["Retracing_Bolide"]:{
         Type: "Retracing Bolide",
         twoPiece:{Type:"ShieldStrength",Value:35},
         fourPiece:[
@@ -145,7 +145,7 @@ const artifactSets ={
             {Type:"NormalAttack",Value:40}
         ]
     },
-    ["Shimenawas Reminiscence"]:{
+    ["Shimenawas_Reminiscence"]:{
         Type: "Shimenawas Reminiscence",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:[
@@ -155,12 +155,12 @@ const artifactSets ={
             {Type:"EnergyRecharge",Value:-20}
         ]
     },
-    ["Tenacity of the Millelith"]:{
+    ["Tenacity_of_the_Millelith"]:{
         Type: "Tenacity of the Millelith",
         twoPiece:{Type:"HP%",Value:20}
         
     },
-    ["Thundering Fury"]:{
+    ["Thundering_Fury"]:{
         Type: "Thundering Fury",
         twoPiece:{Type:"ElectroDMGBonus",Value:15}
         
@@ -171,19 +171,19 @@ const artifactSets ={
         fourPiece:{Type:"",Value:35}
         
     },
-    ["Vermillion Hereafter"]:{
+    ["Vermillion_Hereafter"]:{
         Type: "Vermillion Hereafter",
         twoPiece:{Type:"ATK%",Value:18},
         fourPiece:{Type:"Vermillion Hereafter",Value:null}
         
     },
-    ["Viridescent Venerer"]:{
+    ["Viridescent_Venerer"]:{
         Type: "Viridescent Venerer",
         twoPiece:{Type:"AnemoDMGBonus",Value:15},
         fourPiece:{Type:"VV",Value:null}
         
     },
-    ["Wanderers Troupe"]:{
+    ["Wanderers_Troupe"]:{
         Type: "Wanderers Troupe",
         twoPiece:{Type:"ElementalMastery",Value:80},
         fourPiece:{Type:"ChargedAttack",Value:35},

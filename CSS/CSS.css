@@ -431,19 +431,19 @@ position: relative;
 	grid-row: 2;
 }
 #flower_set{
-	background-image: url("../Assets/Artifacts/None Flower.webp");
+	background-image: url("../Assets/Artifacts/None_Flower.webp");
 }
 #plume_set{
-	background-image: url("../Assets/Artifacts/None Plume.webp");
+	background-image: url("../Assets/Artifacts/None_Plume.webp");
 }
 #sands_set{
-	background-image: url("../Assets/Artifacts/None Sands.webp");
+	background-image: url("../Assets/Artifacts/None_Sands.webp");
 }
 #goblet_set{
-	background-image: url("../Assets/Artifacts/None Goblet.webp");
+	background-image: url("../Assets/Artifacts/None_Goblet.webp");
 }
 #circlet_set{
-	background-image: url("../Assets/Artifacts/None Circlet.webp");
+	background-image: url("../Assets/Artifacts/None_Circlet.webp");
 }
 
 

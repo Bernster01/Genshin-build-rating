@@ -42,7 +42,8 @@ function getArtifactSetList(artifact) {
     setsList.forEach(element => {
         //Insert a \ before any ' in element to prevent the string from being split
         let safeElement = element.replace(/'/g, "\\'");
-        list += `<img class="artifactSet"  onclick="selectArtifactSet('${safeElement}',this,'${artifact}')" title="${element}" alt="${element}" src="Assets/Artifacts/${element} ${artifact}.webp" />`
+        element = safeElement.replace(/ /g, "_");
+        list += `<img class="artifactSet"  onclick="selectArtifactSet('${safeElement}',this,'${artifact}')" title="${element}" alt="${element}" src="Assets/Artifacts/${element}_${artifact}.webp" />`
     });
     return list;
 }
@@ -58,8 +59,9 @@ function getArtifactStatsList(artifact, type) {
 function selectArtifactSet(element, target, type) {
     //Insert a \ before any ' in element to prevent the string from being split
     element = element.replace(/'/g, "\\'");
+    element = element.replace(/ /g, "_");
     let obj = target.parentElement.parentElement;
-    obj.style.backgroundImage = `url("Assets/Artifacts/${element} ${type}.webp")`;
+    obj.style.backgroundImage = `url("Assets/Artifacts/${element}_${type}.webp")`;
     obj.dataset.set = element;
     target.parentElement.style.display = "none";
 }
