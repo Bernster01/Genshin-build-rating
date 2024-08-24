@@ -120,25 +120,25 @@ async function downloadJSON(build) {
 async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
+    let result = await FindBestBuild(AllCharacters["Albedo"], 1);
+    // for (const character in AllCharacters) {
+    //     let tmpRole = "Dps";
+    //     if (character == "index")
+    //         continue;
+    //     // const element = AllCharacters[character];
+    //     let result = await FindBestBuild(element, 1);
+    //     //Switch to other role
+    //     if (role == "Dps")
+    //         role = "Support";
+    //     else
+    //         role = "Dps";
+    //     let result2 = await FindBestBuild(element, 1);
+    //     tmpRole = role;
+    //     if (result == null || result == undefined) {
+    //         console.log(character + " FAILED");
+    //     }
 
-    for (const character in AllCharacters) {
-        let tmpRole = "Dps";
-        if (character == "index")
-            continue;
-        const element = AllCharacters[character];
-        let result = await FindBestBuild(element, 10);
-        //Switch to other role
-        if (role == "Dps")
-            role = "Support";
-        else
-            role = "Dps";
-        let result2 = await FindBestBuild(element, 10);
-        tmpRole = role;
-        if (result == null || result == undefined) {
-            console.log(character + " FAILED");
-        }
-
-    }
+    // }
     let stopTime = Date.now();
     console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
     console.log(bestBuild);
@@ -166,7 +166,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     parentDoc.style.display = "flex";
     let size = (window.innerWidth < 1920) ? window.innerWidth / 1920 : 1;
     setTimeout(function () {
-        parentDoc.style.transform = "scale("+size+")";
+        parentDoc.style.transform = "scale(" + size + ")";
     }, 100);
     return true;
 }
@@ -186,7 +186,8 @@ async function findBestBuildLoop(baseChar, times) {
     for (let index = 0; index < times; index++) {
         if (endEarly)
             return bestScore;
-
+        let artifacts = GenerateArtifacts(baseChar.scalingType)
+        let articatCombosTested = [];
         AllWeapons[baseChar.weaponType].forEach(weaponToUse => {
             let character = deepClone(baseChar);
             supportType = character.supportType;
@@ -203,32 +204,63 @@ async function findBestBuildLoop(baseChar, times) {
                 character.normalAttackLevel = 11;
 
             }
-            let newCharacter = new Createcharacter(
-                character,
-                weapon,
-                GenerateArtifacts(character.scalingType)
-            );
 
-            applyBonuses(newCharacter);
-            let result = Simulation(newCharacter);
-            if (bestBuild[role][currentCharacter] == "" || bestBuild[role][currentCharacter] == undefined) {
-                bestBuild[role][currentCharacter] = result;
-            }
-            let evalResult = EvalBuilds(result, bestBuild[role][currentCharacter], role);
-            if (evalResult > 100) {
-                bestBuild[role][currentCharacter] = result;
-                bestScore = evalResult;
+            //Go through each artifact set 4piece combo and 2piece combos
+            setsList.forEach(set => {
+                let newCharacter = new Createcharacter(
+                    deepClone(character),
+                    deepClone(weapon),
+                    artifacts
+                );
+                //test the 4 piece set
+                newCharacter.artifacts = changeSet4piece(set, newCharacter.artifacts);
+                applyBonuses(newCharacter);
+                let result = Simulation(newCharacter);
+                if (bestBuild[role][currentCharacter] == "" || bestBuild[role][currentCharacter] == undefined) {
+                    bestBuild[role][currentCharacter] = result;
+                }
+                let evalResult = EvalBuilds(result, bestBuild[role][currentCharacter], role);
+                if (evalResult > 100) {
+                    bestBuild[role][currentCharacter] = deepClone(result);
+                    bestScore = evalResult;
 
-            }
+                }
 
+                //Test all 2 piece combos
+                setsList.forEach(set2 => {
+                    //Check if the set has already been tested with set2
+                    let alreadyTested = false;
+                    articatCombosTested.forEach(combo => {
+                        if (combo == set + set2)
+                            alreadyTested = true;
+                    });
+                    if (alreadyTested) {
+                        return;
+                    }
+                    newCharacter2 = new Createcharacter(
+                        deepClone(character),
+                        deepClone(weapon),
+                        artifacts
+                    );
+                    newCharacter2.artifacts = changeSet2piece([set, set2], newCharacter2.artifacts);
+                    applyBonuses(newCharacter);
 
-        },);
-        if (index % 100 == 0) {
+                    let result2 = Simulation(newCharacter2);
+                    let evalResult2 = EvalBuilds(result2, bestBuild[role][currentCharacter], role);
+                    if (evalResult2 > 100) {
+                        bestBuild[role][currentCharacter] = deepClone(result2);
+                        bestScore = evalResult2;
+                    }
+                    articatCombosTested.push(set + set2);
+                });
+            });
+        });
+        if (index % 1 == 0) {
             document.getElementById("currentSimRun").innerText = index;
             document.getElementById("percentDone").innerText = Math.floor(index / times * 100);
             document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
             document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
-            document.getElementById("loadingPaimon-container").style.width = Math.floor(index / times * 100) +17.5+ "%";
+            document.getElementById("loadingPaimon-container").style.width = Math.floor(index / times * 100) + 17.5 + "%";
             await delay(4);
         }
     }
@@ -334,6 +366,12 @@ class Createcharacter {
         this.currentHP = this.HP();
         this.baseAttack = this.baseAttack() + weapon.baseAttack();
         this.baseDEF = this.baseDEF();
+    }
+    reset() {
+        this.currentHP = this.HP();
+        this.bondOfLife = 0;
+        this.currentBuffs = [this.passive1, this.passive2];
+        this.ExtraMultiplier = [];
     }
     removeHP = function (amount) {
         this.currentHP -= amount;

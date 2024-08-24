@@ -181,7 +181,35 @@ function GenerateRandomArtifact(piece,scaling){
                 break;
         }   
     }
-    let set = sets[GetRandomNumber(0,17)];
+    let set = sets[GetRandomNumber(0,33)];
     let artifact= new Artifact(piece,mainStat,subStat1,subStat2,subStat3,subStat4,set);
     return artifact;
+}
+function changeSet4piece(setToHave,artifacts){
+
+    artifacts.forEach(artifact => {
+        artifact.Set = setToHave;
+    });
+    return artifacts;
+}
+function changeSet2piece(setsToHave,artifacts){
+    //Set two pieces to the same set and 2 pieces to another set and 1 random set
+    let set1 = setsToHave[0];
+    let set2 = setsToHave[1];
+    let set3 = sets[GetRandomNumber(0,33)];
+    
+    let index = 0;
+    artifacts.forEach(artifact => {
+        if(index < 2){
+            artifact.Set = set1;
+        }
+        else if(index < 4){
+            artifact.Set = set2;
+        }
+        else{
+            artifact.Set = set3;
+        }
+        index++;
+    });
+    return artifacts;
 }
