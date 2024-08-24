@@ -5,7 +5,7 @@ async function prepare(button) {
     let runs = document.getElementById("simulationRuns").value;
 
     if (runs === "" || runs === null || runs === undefined) {
-        runs = 1000;
+        runs = 15;
     }
 
     //Prepare the character for the simulation

@@ -74,11 +74,8 @@ let nymphsDreamSkillStack = false;
 let nymphsDreamBurstStack = false;
 
 
-async function getBestBuildForCharacter(character, amount) {
-    let result = await FindBestBuild(character, amount);
-    downloadJSON(getBuildAsJSON(bestBuild[character.name]));
-}
-function getBuildAsJSON(build) {
+
+function getBuild(build) {
     let character = build.character;
     let b = {
         character: {
@@ -99,9 +96,15 @@ function getBuildAsJSON(build) {
         dmg: {
             totalDmg: build.dmg,
             sources: build.dmgSources,
+        },
+        supportValues:{
+            healing:build.healing,
+            buff:build.buff,
+            shield:build.shield
         }
+
     }
-    return JSON.stringify(b);
+    return b;
 }
 async function downloadJSON(build) {
     let result = window.confirm("Download build?");
@@ -120,25 +123,24 @@ async function downloadJSON(build) {
 async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
-    let result = await FindBestBuild(AllCharacters["Albedo"], 1);
-    // for (const character in AllCharacters) {
-    //     let tmpRole = "Dps";
-    //     if (character == "index")
-    //         continue;
-    //     // const element = AllCharacters[character];
-    //     let result = await FindBestBuild(element, 1);
-    //     //Switch to other role
-    //     if (role == "Dps")
-    //         role = "Support";
-    //     else
-    //         role = "Dps";
-    //     let result2 = await FindBestBuild(element, 1);
-    //     tmpRole = role;
-    //     if (result == null || result == undefined) {
-    //         console.log(character + " FAILED");
-    //     }
-
-    // }
+    for (const character in AllCharacters) {
+        let tmpRole = "Dps";
+        if (character == "index")
+            continue;
+        const element = AllCharacters[character];
+        let result = await FindBestBuild(element, 40);
+        //Switch to other role
+        if (role == "Dps")
+            role = "Support";
+        else
+            role = "Dps";
+        let result2 = await FindBestBuild(element, 40);
+        tmpRole = role;
+        if (result == null || result == undefined) {
+            console.log(character + " FAILED");
+        }
+        await delay(4);
+    }
     let stopTime = Date.now();
     console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
     console.log(bestBuild);
@@ -217,11 +219,11 @@ async function findBestBuildLoop(baseChar, times) {
                 applyBonuses(newCharacter);
                 let result = Simulation(newCharacter);
                 if (bestBuild[role][currentCharacter] == "" || bestBuild[role][currentCharacter] == undefined) {
-                    bestBuild[role][currentCharacter] = result;
+                    bestBuild[role][currentCharacter] = getBuild(deepClone(result));
                 }
                 let evalResult = EvalBuilds(result, bestBuild[role][currentCharacter], role);
                 if (evalResult > 100) {
-                    bestBuild[role][currentCharacter] = deepClone(result);
+                    bestBuild[role][currentCharacter] = getBuild(deepClone(result));
                     bestScore = evalResult;
 
                 }
@@ -248,7 +250,7 @@ async function findBestBuildLoop(baseChar, times) {
                     let result2 = Simulation(newCharacter2);
                     let evalResult2 = EvalBuilds(result2, bestBuild[role][currentCharacter], role);
                     if (evalResult2 > 100) {
-                        bestBuild[role][currentCharacter] = deepClone(result2);
+                        bestBuild[role][currentCharacter] = getBuild(deepClone(result));
                         bestScore = evalResult2;
                     }
                     articatCombosTested.push(set + set2);
@@ -922,6 +924,7 @@ function getSetBonus(array, character) {
                         artifactSets[array[i]].fourPiece.forEach(buff => {
 
                             character.currentBuffs.push(buff);
+                            character.currentBuffs.push({Type:"EnergyRecharge",Value:-20});
                         });
                     }
                 }

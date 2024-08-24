@@ -1,5 +1,6 @@
 function EvalBuilds(userBuild, currentBestBuild, role) {
     let userScore = 0;
+
     switch (role) {
         case "Dps":
             userScore = dpsEval(userBuild, currentBestBuild);
@@ -9,11 +10,15 @@ function EvalBuilds(userBuild, currentBestBuild, role) {
             break;
     }
 
-
+    //Check if userbuild has energyrecharge for the offset deduct % of score depending on how much is missing
+    if (userBuild.energyRecharge < userBuild.character.energyOffset) {
+        let percentMissing = setuserBuild.energyRecharge/userBuild.character.energyOff
+        userScore*= percentMissing;
+    }
     return userScore;
 }
 function dpsEval(userBuild, currentBestBuild) {
-    return Math.floor((userBuild.dmg / currentBestBuild.dmg) * 100);
+    return Math.floor((userBuild.dmg / currentBestBuild.dmg.totalDmg) * 100);
 
 }
 function supportEval(userBuild, currentBestBuild) {
@@ -63,7 +68,7 @@ function supportEval(userBuild, currentBestBuild) {
 
 
 function healerEval(userBuild, currentBestBuild) {
-    return Math.floor((userBuild.healing / currentBestBuild.healing) * 100);
+    return Math.floor((userBuild.healing / currentBestBuild.supportValues.healing) * 100);
 }
 function healerSubDpsEval(userBuild, currentBestBuild) {
     let healScore = healerEval(userBuild, currentBestBuild);
@@ -76,7 +81,7 @@ function healerShieldEval(userBuild, currentBestBuild) {
     return Math.floor((healScore * .75) + (shieldScore * .25));
 }
 function bufferEval(userBuild, currentBestBuild) {
-    return Math.floor((userBuild.buff / currentBestBuild.buff) * 100);
+    return Math.floor((userBuild.buff / currentBestBuild.supportValues.buff) * 100);
 }
 function bufferShieldEval(userBuild, currentBestBuild) {
     let bufferScore = bufferEval(userBuild, currentBestBuild);
@@ -97,7 +102,7 @@ function bufferHealerEval(userBuild, currentBestBuild) {
     return Math.floor((bufferScore * .75) + (healScore * .15)+ (dmgSore * .10));
 }
 function shieldEval(userBuild, currentBestBuild) {
-    return Math.floor((userBuild.shield / currentBestBuild.shield) * 100);
+    return Math.floor((userBuild.shield / currentBestBuild.supportValues.shield) * 100);
 }
 function shieldBufferEval(userBuild, currentBestBuild) {
     let shieldScore = shieldEval(userBuild, currentBestBuild);

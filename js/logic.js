@@ -1,3 +1,4 @@
+
 function searchCharacters(input) {
     const search = input.toLowerCase();
     const characters = document.querySelectorAll(".Character");
@@ -55,7 +56,7 @@ function starterFunction() {
     document.getElementById("endEarlyBtn").addEventListener("click", function () {
         endEarly = true;
     });
-    validateAllCharacters();
+    // validateAllCharacters();
     updateArtifactBefore();
     //Add event listener to the card that scales the card to fit screen
     window.addEventListener("resize", function () {
@@ -73,6 +74,13 @@ function starterFunction() {
             }
         }
     });
+    //Get JSON from ../data/currentBestBuild.json
+    fetch("../data/currentBestBuild.json")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            bestBuild = data;
+        });
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions
