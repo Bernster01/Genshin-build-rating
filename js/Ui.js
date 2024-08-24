@@ -256,3 +256,17 @@ const artifactTypes = {
         substats: ["HPflat", "HP%", "ATKflat", "ATK%", "DEFflat", "DEF%", "CritRate", "CritDMG", "EnergyRecharge", "ElementalMastery"]
     },
 }
+
+function updateArtifactBefore() {
+    let artifacts = document.querySelectorAll(".artifact");
+    //change the ::before content of the artifact to the element's id
+    artifacts.forEach(element => {
+        let style = document.createElement('style');
+        style.innerHTML = `#${element.id}:before {content: "${capitalizeFirstLetter(element.id)}" !important;}`;
+        document.head.appendChild(style);
+
+    });
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

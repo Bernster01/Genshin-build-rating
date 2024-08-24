@@ -413,6 +413,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
 }
 
 `;
+    
     return { card, css };
 }
 function getElement(character) {
@@ -570,6 +571,7 @@ function placeCharacterCards(code) {
 
         container.insertAdjacentHTML("beforeend", htmlCode);
     })
+
 }
 
 function deleteCharacterCard(name, bool) {
@@ -611,17 +613,18 @@ function closeDeleteCharacterCardPrompt() {
 function showBigger(element) {
     let doc = document.getElementById("result-container2");
     let doc2 = document.getElementById("result-container-container2");
+ 
     doc2.innerHTML = "";
     doc2.insertAdjacentHTML("beforeend", element.innerHTML);
     doc.style.display = "Flex";
     setTimeout(function () {
-        doc.style.transform = "translate(-50%,-50%) scale(1)";
+        doc.style.transform = "scale(1)";
     }, 100);
 }
 function closeCharacterCard2() {
     let doc = document.getElementById("result-container2");
     let doc2 = document.getElementById("result-container-container2");
-    doc.style.transform = "translate(-50%,50%) scale(0.1)";
+    doc.style.transform = "scale(0.1)";
     setTimeout(function () {
         doc.style.display = "none";
         doc2.innerHTML = "";

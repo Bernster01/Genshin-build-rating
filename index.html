@@ -21,6 +21,7 @@
 	<script src="js/CharacterCard.js"></script>
 	<script src="js/logic.js"></script>
 </head>
+
 <body onload="LoadCharacters()">
 	<div class="container" id="containerHelper">
 		<div id="backgroundOverlay"></div>
@@ -28,13 +29,11 @@
 
 			<header>
 
-				<h1>Rate my build<h1>
+				<h1>Rate my build</h1>
 
 			</header>
 			<div class="content-container">
-				<div>
-					<h1>Select Character</h1>
-				</div>
+
 
 				<div id="LoadoutContainer">
 					<div id="roleInputContainer">
@@ -42,16 +41,18 @@
 						<input type="range" min="1" max="2" value="1" class="slider" id="roleInput">
 						<p>Support</p>
 					</div>
-					
+
 					<div id="characterContainer">
 						<div id="characterContainerUpper">
 							<div id="weaponContainer">
-								<img alt="Select" src="Assets/Weapons/Icon_Sword.png" title="Select"
-									id="SelectWeaponImg"
-									onclick="switchDisplay(document.getElementById('weaponBox'),'flex')"></img>
+								<figure id="weapon_figure">
+									<img alt="Select" src="Assets/Weapons/Icon_Sword.png" title="Select"
+										id="SelectWeaponImg"
+										onclick="switchDisplay(document.getElementById('weaponBox'),'flex')">
+								</figure>
 								<div class="SelectBox" id="weaponBox" style="display:none">
-									<input type="text" id="weaponSearch" placeholder="Search for a character..."
-										onkeyup="searchWeapons(this.value)">
+									<input type="text" class="text-input" id="weaponSearch"
+										placeholder="Search for a character..." onkeyup="searchWeapons(this.value)">
 									<div class="characterIcons" id="weaponIcons">
 										<span id="noResults">Hm... seems nothing matched</span>
 										<span id="noCharacterSelected">Please select a character first</span>
@@ -84,108 +85,117 @@
 							<div id="characterSelecting">
 								<img alt="Select" src="Assets/Characters/Paimon/Character_Paimon_Portrait.webp"
 									title="Select" id="SelectCharcterImg"
-									onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')"></img>
+									onclick="switchDisplay(document.getElementById('CharacterBox'),'flex')">
 								<div class="SelectBox" id="CharacterBox" style="display:none">
-									<input type="text" id="characterSearch" placeholder="Search for a character..."
-										onkeyup="searchCharacters(this.value)">
+									<input type="text" class="text-input" id="characterSearch"
+										placeholder="Search for a character..." onkeyup="searchCharacters(this.value)">
 									<div class="characterIcons" id="characterIcons">
 										<span id="noResults">Hm... seems nothing matched</span>
 									</div>
 								</div>
-								<div class="stat-container">
-									<div>
-										<div>
-											<label for="character_level">Character</label>
-											<select id="character_level">
-												<option value="1b">Level 1</option>
-												<option value="10b">Level 10/10</option>
-												<option value="10a">Level 10/20</option>
-												<option value="20b">Level 20/20</option>
-												<option value="20a">Level 20/30</option>
-												<option value="30b">Level 30/30</option>
-												<option value="30a">Level 30/40</option>
-												<option value="40b">Level 40/40</option>
-												<option value="40a">Level 40/50</option>
-												<option value="50b">Level 50/50</option>
-												<option value="50a">Level 50/60</option>
-												<option value="60b">Level 60/60</option>
-												<option value="60a">Level 60/70</option>
-												<option value="70b">Level 70/70</option>
-												<option value="70a">Level 70/80</option>
-												<option value="80b">Level 80/80</option>
-												<option value="80a">Level 80/90</option>
-												<option value="90b">Level 90/90</option>
-											</select>
-										</div>
-										<div>
-											<label for="constellation">Constellation</label>
-											<select id="constellation">
-												<option value="0">C0</option>
-												<option value="1">C1</option>
-												<option value="2">C2</option>
-												<option value="3">C3</option>
-												<option value="4">C4</option>
-												<option value="5">C5</option>
-												<option value="6">C6</option>
-											</select>
-										</div>
-									</div>
-									<div>
-										<div>
-											<label for="normal_attack">Normal Attack</label>
-											<select id="normal_attack">
-												<option value="1">Level 1</option>
-												<option value="2">Level 2</option>
-												<option value="3">Level 3</option>
-												<option value="4">Level 4</option>
-												<option value="5">Level 5</option>
-												<option value="6">Level 6</option>
-												<option value="7">Level 7</option>
-												<option value="8">Level 8</option>
-												<option value="9">Level 9</option>
-												<option value="10">Level 10</option>
-											</select>
-											<label for="talent_skill">Elemental Skill</label>
-											<select id="talent_skill">
-												<option value="1">Level 1</option>
-												<option value="2">Level 2</option>
-												<option value="3">Level 3</option>
-												<option value="4">Level 4</option>
-												<option value="5">Level 5</option>
-												<option value="6">Level 6</option>
-												<option value="7">Level 7</option>
-												<option value="8">Level 8</option>
-												<option value="9">Level 9</option>
-												<option value="10">Level 10</option>
-												<option value="11">Level 11</option>
-												<option value="12">Level 12</option>
-												<option value="13">Level 13</option>
-											</select>
-											<label for="talent_burst">Elemental Burst</label>
-											<select id="talent_burst">
-												<option value="1">Level 1</option>
-												<option value="2">Level 2</option>
-												<option value="3">Level 3</option>
-												<option value="4">Level 4</option>
-												<option value="5">Level 5</option>
-												<option value="6">Level 6</option>
-												<option value="7">Level 7</option>
-												<option value="8">Level 8</option>
-												<option value="9">Level 9</option>
-												<option value="10">Level 10</option>
-												<option value="11">Level 11</option>
-												<option value="12">Level 12</option>
-												<option value="13">Level 13</option>
-											</select>
-										</div>
-									</div>
 
+
+
+
+							</div>
+						</div>
+						<div class="stat-container">
+							<div id="character_level">
+								<div>
+									<label for="character_level">Character</label>
+									<select id="character_level">
+										<option value="1b">Level 1</option>
+										<option value="10b">Level 10/10</option>
+										<option value="10a">Level 10/20</option>
+										<option value="20b">Level 20/20</option>
+										<option value="20a">Level 20/30</option>
+										<option value="30b">Level 30/30</option>
+										<option value="30a">Level 30/40</option>
+										<option value="40b">Level 40/40</option>
+										<option value="40a">Level 40/50</option>
+										<option value="50b">Level 50/50</option>
+										<option value="50a">Level 50/60</option>
+										<option value="60b">Level 60/60</option>
+										<option value="60a">Level 60/70</option>
+										<option value="70b">Level 70/70</option>
+										<option value="70a">Level 70/80</option>
+										<option value="80b">Level 80/80</option>
+										<option value="80a">Level 80/90</option>
+										<option value="90b">Level 90/90</option>
+									</select>
+								</div>
+								<div>
+									<label for="constellation">Constellation</label>
+									<select id="constellation">
+										<option value="0">C0</option>
+										<option value="1">C1</option>
+										<option value="2">C2</option>
+										<option value="3">C3</option>
+										<option value="4">C4</option>
+										<option value="5">C5</option>
+										<option value="6">C6</option>
+									</select>
 								</div>
 							</div>
+							<div id="talent_level">
+
+								<div>
+									<label for="normal_attack">Normal Attack</label>
+									<select id="normal_attack">
+										<option value="1">Level 1</option>
+										<option value="2">Level 2</option>
+										<option value="3">Level 3</option>
+										<option value="4">Level 4</option>
+										<option value="5">Level 5</option>
+										<option value="6">Level 6</option>
+										<option value="7">Level 7</option>
+										<option value="8">Level 8</option>
+										<option value="9">Level 9</option>
+										<option value="10">Level 10</option>
+									</select>
+								</div>
+								<div>
+									<label for="talent_skill">Elemental Skill</label>
+									<select id="talent_skill">
+										<option value="1">Level 1</option>
+										<option value="2">Level 2</option>
+										<option value="3">Level 3</option>
+										<option value="4">Level 4</option>
+										<option value="5">Level 5</option>
+										<option value="6">Level 6</option>
+										<option value="7">Level 7</option>
+										<option value="8">Level 8</option>
+										<option value="9">Level 9</option>
+										<option value="10">Level 10</option>
+										<option value="11">Level 11</option>
+										<option value="12">Level 12</option>
+										<option value="13">Level 13</option>
+									</select>
+								</div>
+								<div>
+									<label for="talent_burst">Elemental Burst</label>
+									<select id="talent_burst">
+										<option value="1">Level 1</option>
+										<option value="2">Level 2</option>
+										<option value="3">Level 3</option>
+										<option value="4">Level 4</option>
+										<option value="5">Level 5</option>
+										<option value="6">Level 6</option>
+										<option value="7">Level 7</option>
+										<option value="8">Level 8</option>
+										<option value="9">Level 9</option>
+										<option value="10">Level 10</option>
+										<option value="11">Level 11</option>
+										<option value="12">Level 12</option>
+										<option value="13">Level 13</option>
+									</select>
+								</div>
+							</div>
+
 						</div>
 						<div id="artifactContainer">
 							<div class="artifact" id="flower">
-								<div class="artifact-left" id="flower_set" >
+								<div class="artifact-left" id="flower_set">
 									<div class="artifactSetList" id="flowerSetList" style="display: none;"></div>
 									<div class="artifact_img_gradient"
 										onclick="stopPropagation(), showHide('flowerSetList'),addEventlistenerArtifactList('flowerSetList')">
@@ -193,10 +203,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('flowerMainstatList'),stopPropagation(),addEventlistenerArtifactList('flowerMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="flower_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
+											id="flower_mainstat_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="flower_mainstat_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="flower_mainstat_value">0</span>
 										<span id="flower_mainstat_percentIcon"></span>
 										<div class="artifactStatsList" id="flowerMainstatList" style="display: none;">
 
@@ -207,10 +218,11 @@
 									<div class="substat" id="flower_substat_1">
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat1List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat1List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_1_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="flower_substat_1_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="flower_substat_1_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="flower_substat_1_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="flowerSubstat1List" style="display: none;">
 
@@ -219,10 +231,11 @@
 									<div class="substat" id="flower_substat_2">
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat2List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat2List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_2_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="flower_substat_2_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="flower_substat_2_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="flower_substat_2_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="flowerSubstat2List" style="display: none;">
 
@@ -231,10 +244,11 @@
 									<div class="substat" id="flower_substat_3">
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat3List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat3List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_3_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="flower_substat_3_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="flower_substat_3_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="flower_substat_3_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="flowerSubstat3List" style="display: none;">
 
@@ -243,10 +257,11 @@
 									<div class="substat" id="flower_substat_4">
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat4List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat4List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="flower_substat_4_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="flower_substat_4_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="flower_substat_4_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="flower_substat_4_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="flowerSubstat4List" style="display: none;">
 
@@ -264,10 +279,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('plumeMainstatList'),stopPropagation(),addEventlistenerArtifactList('plumeMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Attack.webp" title="Flat ATK" id="plume_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Attack.webp" title="Flat ATK"
+											id="plume_mainstat_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="plume_mainstat_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="plume_mainstat_value">0</span>
 										<span id="plume_mainstat_percentIcon"></span>
 										<div class="artifactStatsList" id="plumeMainstatList" style="display: none;">
 
@@ -280,10 +296,11 @@
 									<div class="substat" id="plume_substat_1">
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat1List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat1List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_1_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="plume_substat_1_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="plume_substat_1_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="plume_substat_1_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="plumeSubstat1List" style="display: none;">
 
@@ -292,10 +309,11 @@
 									<div class="substat" id="plume_substat_2">
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat2List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat2List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_2_type" />
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="plume_substat_2_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="plume_substat_2_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="plume_substat_2_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="plumeSubstat2List" style="display: none;">
 
@@ -304,10 +322,11 @@
 									<div class="substat" id="plume_substat_3">
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat3List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat3List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_3_type" />
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="plume_substat_3_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="plume_substat_3_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="plume_substat_3_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="plumeSubstat3List" style="display: none;">
 
@@ -316,10 +335,11 @@
 									<div class="substat" id="plume_substat_4">
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat4List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat4List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="plume_substat_4_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="plume_substat_4_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="plume_substat_4_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="plume_substat_4_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="plumeSubstat4List" style="display: none;">
 
@@ -337,10 +357,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('sandsMainstatList'),stopPropagation(),addEventlistenerArtifactList('sandsMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="sands_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
+											id="sands_mainstat_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="sands_mainstat_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="sands_mainstat_value">0</span>
 										<span id="sands_mainstat_percentIcon">%</span>
 										<div class="artifactStatsList" id="sandsMainstatList" style="display: none;">
 
@@ -353,10 +374,11 @@
 									<div class="substat" id="sands_substat_1">
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat1List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat1List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_1_type" />
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="sands_substat_1_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="sands_substat_1_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="sands_substat_1_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="sandsSubstat1List" style="display: none;">
 
@@ -365,10 +387,11 @@
 									<div class="substat" id="sands_substat_2">
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat2List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat2List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_2_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="sands_substat_2_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="sands_substat_2_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="sands_substat_2_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="sandsSubstat2List" style="display: none;">
 
@@ -377,10 +400,11 @@
 									<div class="substat" id="sands_substat_3">
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat3List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat3List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_3_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="sands_substat_3_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="sands_substat_3_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="sands_substat_3_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="sandsSubstat3List" style="display: none;">
 
@@ -389,10 +413,11 @@
 									<div class="substat" id="sands_substat_4">
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat4List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat4List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="sands_substat_4_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="sands_substat_4_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="sands_substat_4_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="sands_substat_4_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="sandsSubstat4List" style="display: none;">
 
@@ -410,10 +435,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('gobletMainstatList'),stopPropagation(),addEventlistenerArtifactList('gobletMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"id="goblet_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
+											id="goblet_mainstat_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="goblet_mainstat_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="goblet_mainstat_value">0</span>
 										<span id="goblet_mainstat_percentIcon">%</span>
 										<div class="artifactStatsList" id="gobletMainstatList" style="display: none;">
 
@@ -426,10 +452,11 @@
 									<div class="substat" id="goblet_substat_1">
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat1List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_1_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="goblet_substat_1_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="goblet_substat_1_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="goblet_substat_1_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="gobletSubstat1List" style="display: none;">
 
@@ -438,10 +465,11 @@
 									<div class="substat" id="goblet_substat_2">
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat2List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_2_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="goblet_substat_2_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="goblet_substat_2_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="goblet_substat_2_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="gobletSubstat2List" style="display: none;">
 
@@ -450,10 +478,11 @@
 									<div class="substat" id="goblet_substat_3">
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat3List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_3_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="goblet_substat_3_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="goblet_substat_3_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="goblet_substat_3_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="gobletSubstat3List" style="display: none;">
 
@@ -462,10 +491,11 @@
 									<div class="substat" id="goblet_substat_4">
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat4List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="goblet_substat_4_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="goblet_substat_4_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="goblet_substat_4_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="goblet_substat_4_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="gobletSubstat4List" style="display: none;">
 
@@ -482,10 +512,11 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" id="circlet_mainstat_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
+											id="circlet_mainstat_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="circlet_mainstat_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="circlet_mainstat_value">0</span>
 										<span id="circlet_mainstat_percentIcon">%</span>
 										<div class="artifactStatsList" id="circletMainstatList" style="display: none;">
 
@@ -498,10 +529,11 @@
 									<div class="substat" id="circlet_substat_1">
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat1List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_1_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="circlet_substat_1_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="circlet_substat_1_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="circlet_substat_1_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="circletSubstat1List" style="display: none;">
 
@@ -510,10 +542,11 @@
 									<div class="substat" id="circlet_substat_2">
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat2List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_2_type"/>
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="circlet_substat_2_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="circlet_substat_2_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="circlet_substat_2_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="circletSubstat2List" style="display: none;">
 
@@ -522,10 +555,11 @@
 									<div class="substat" id="circlet_substat_3">
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat3List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_3_type" />
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="circlet_substat_3_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="circlet_substat_3_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="circlet_substat_3_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="circletSubstat3List" style="display: none;">
 
@@ -534,10 +568,11 @@
 									<div class="substat" id="circlet_substat_4">
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat4List')"
-											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%" id="circlet_substat_4_type" />
+											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
+											id="circlet_substat_4_type" />
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
-											onkeyup="UpdateArtifact(this,false)"
-											onblur="UpdateArtifact(this,false)" id="circlet_substat_4_value">0</span>
+											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
+											id="circlet_substat_4_value">0</span>
 										<span class="artifact_percent">%</span>
 										<div class="artifactStatsList" id="circletSubstat4List" style="display: none;">
 
@@ -546,126 +581,139 @@
 								</div>
 							</div>
 						</div>
+
+
+						<div id="elementalResonanceContainer">
+							<h2>Elemental Resonance</h2>
+
+
+							<div class="elementalResonanceContainer">
+								<div onclick="selectResonance('Pyro',this)">
+									<img src="Elements/pyro.png" />
+								</div>
+								<div onclick="selectResonance('Hydro',this)">
+									<img src="Elements/hydro.png" />
+								</div>
+								<div onclick="selectResonance('Anemo',this)">
+									<img src="Elements/anemo.png" />
+								</div>
+								<div onclick="selectResonance('Geo',this)">
+									<img src="Elements/geo.png" />
+								</div>
+								<div onclick="selectResonance('Electro',this)">
+									<img src="Elements/electro.png" />
+								</div>
+								<div onclick="selectResonance('Dendro',this)">
+									<img src="Elements/dendro.png" />
+								</div>
+								<div onclick="selectResonance('Cryo',this)">
+									<img src="Elements/cryo.png" />
+								</div>
+							</div>
+						</div>
+						<div id="supportingElementContainer">
+							<h2>Onfield Element</h2>
+							<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
+									id="SelectedSupportingElement"></span></div>
+
+							<div class="supportingElementContainer" id="supportingElement">
+								<div onclick="selectSupportingElement('Pyro',this)">
+									<img src="Elements/pyro.png" />
+									<span>Pyro</span>
+								</div>
+								<div onclick="selectSupportingElement('Hydro',this)">
+									<img src="Elements/hydro.png" />
+									<span>Hydro</span>
+								</div>
+								<div onclick="selectSupportingElement('Anemo',this)">
+									<img src="Elements/anemo.png" />
+									<span>Anemo</span>
+								</div>
+								<div onclick="selectSupportingElement('Electro',this)">
+									<img src="Elements/electro.png" />
+									<span>Electro</span>
+								</div>
+								<div onclick="selectSupportingElement('Dendro',this)">
+									<img src="Elements/dendro.png" />
+									<span>Dendro</span>
+								</div>
+								<div onclick="selectSupportingElement('Cryo',this)">
+									<img src="Elements/cryo.png" />
+									<span>Cryo</span>
+								</div>
+								<div onclick="selectSupportingElement('Bloom',this)">
+									<img src="Elements/bloom.png" />
+									<span>Bloom</span>
+								</div>
+							</div>
+						</div>
+						<label for="simulationRuns">Simulation Runs</label>
+						<input type="number" id="simulationRuns" placeholder="default 1000" />
+						<button onclick="prepare(this)" id="rate-button"></button>
 					</div>
-					<div id="elementalResonanceContainer">
-						<h2>Elemental Resonance</h2>
+				</div>
+				<div id="result-container-centerer">
+					<div id="result-container">
+						<div class="exit-btn generic-btn" onclick="closeCharacterCard()">
+							<i class="fa-solid fa-x"></i>
+						</div>
 
+						<div id="result-container-container">
 
-						<div class="elementalResonanceContainer">
-							<div onclick="selectResonance('Pyro',this)">
-								<img src="Elements/pyro.png" />
+						</div>
+						<div id="result-buttons">
+							<div>
+								<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
 							</div>
-							<div onclick="selectResonance('Hydro',this)">
-								<img src="Elements/hydro.png" />
-							</div>
-							<div onclick="selectResonance('Anemo',this)">
-								<img src="Elements/anemo.png" />
-							</div>
-							<div onclick="selectResonance('Geo',this)">
-								<img src="Elements/geo.png" />
-							</div>
-							<div onclick="selectResonance('Electro',this)">
-								<img src="Elements/electro.png" />
-							</div>
-							<div onclick="selectResonance('Dendro',this)">
-								<img src="Elements/dendro.png" />
-							</div>
-							<div onclick="selectResonance('Cryo',this)">
-								<img src="Elements/cryo.png" />
+							<div>
+								<button class="generic-btn p1rem br2rem">More Details</button>
 							</div>
 						</div>
 					</div>
-					<div id="supportingElementContainer">
-						<h2>Onfield Element</h2>
-						<div id="CurrentlySelectedSupportingElement"><span>Currently Selected: </span> <span
-								id="SelectedSupportingElement"></span></div>
-
-						<div class="supportingElementContainer" id="supportingElement">
-							<div onclick="selectSupportingElement('Pyro',this)">
-								<img src="Elements/pyro.png" />
-								<span>Pyro</span>
-							</div>
-							<div onclick="selectSupportingElement('Hydro',this)">
-								<img src="Elements/hydro.png" />
-								<span>Hydro</span>
-							</div>
-							<div onclick="selectSupportingElement('Anemo',this)">
-								<img src="Elements/anemo.png" />
-								<span>Anemo</span>
-							</div>
-							<div onclick="selectSupportingElement('Electro',this)">
-								<img src="Elements/electro.png" />
-								<span>Electro</span>
-							</div>
-							<div onclick="selectSupportingElement('Dendro',this)">
-								<img src="Elements/dendro.png" />
-								<span>Dendro</span>
-							</div>
-							<div onclick="selectSupportingElement('Cryo',this)">
-								<img src="Elements/cryo.png" />
-								<span>Cryo</span>
-							</div>
-							<div onclick="selectSupportingElement('Bloom',this)">
-								<img src="Elements/bloom.png" />
-								<span>Bloom</span>
-							</div>
-						</div>
-					</div>
-					<label for="simulationRuns">Simulation Runs</label>
-					<input type="number" id="simulationRuns" placeholder="default 1000" />
-					<button class="generic-btn p1rem br2rem" onclick="prepare(this)" id="rate-button">Rate my
-						build!</button>
 				</div>
 			</div>
-			<div id="result-container">
-				<div class="exit-btn generic-btn" onclick="closeCharacterCard()">
+			<div id="saved-characters-cards-container">
+				<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
+					<span class="noselect">Your characters</span>
+				</div>
+				<div id="saved-characters-cards-wrapper">
+
+				</div>
+			</div>
+			<div id="delete-character-card-prompt-container"></div>
+			<div id="result-container2">
+				<div class="exit-btn generic-btn" onclick="closeCharacterCard2()">
 					<i class="fa-solid fa-x"></i>
 				</div>
 
-				<div id="result-container-container">
+				<div id="result-container-container2">
 
 				</div>
-				<div id="result-buttons">
-					<div>
-						<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
-					</div>
-					<div>
-						<button class="generic-btn p1rem br2rem">More Details</button>
-					</div>
+			</div>
+
+			<footer>
+				<p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or
+					registered trademarks of HoYoverse.</p>
+			</footer>
+		</div>
+	</div>
+	<div id="simRunScreen">
+		<div class="sim-running-box">
+			<p>Simulating... Run: <span id="currentSimRun"></span>/<span id="howManySimRuns"></span> (<span
+					id="percentDone"></span>%)</p>
+			<div id="loadingPaimon-wrapper">
+				<div id="loadingPaimon-container">
+					<figure id="loadingPaimon">
+						<img src="Assets/Characters/Paimon/Icon_3.webp" />
+					</figure>
 				</div>
 			</div>
+			<div class="sim-progress-bar">
+				<div id="simProgressBar"></div>
+			</div>
+			<p>Estimated time left: <span id="timeLeft"></span></p>
+			<button id="endEarlyBtn">End early</button>
 		</div>
-		<div id="saved-characters-cards-container">
-			<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
-				<span class="noselect">Your characters</span>
-			</div>
-			<div id="saved-characters-cards-wrapper">
-
-			</div>
-		</div>
-		<div id="delete-character-card-prompt-container"></div>
-		<div id="result-container2">
-			<div class="exit-btn generic-btn" onclick="closeCharacterCard2()">
-				<i class="fa-solid fa-x"></i>
-			</div>
-
-			<div id="result-container-container2">
-
-			</div>
-		</div>
-		<div id="simRunScreen">
-			<div class="sim-running-box">
-				<p>Simulating... Run: <span id="currentSimRun"></span>/<span id="howManySimRuns"></span> (<span id="percentDone"></span>%)</p>
-				<div class="sim-progress-bar">
-					<div id="simProgressBar"></div>
-				</div>
-				<p>Estimated time left: <span id="timeLeft"></span></p>
-				<button id="endEarlyBtn">End early</button>
-			</div>
-		</div>
-		<footer>
-			<p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or registered trademarks of HoYoverse.</p>
-		</footer>
 	</div>
 	<script src="js/ElementalSkills.js"></script>
 	<script src="js/ElementalBursts.js"></script>
@@ -691,10 +739,13 @@
 			loadWeapons(character.title);
 		}
 		function selectWeapon(weapon) {
+			let background = document.getElementById('weapon_figure');
 			let img = document.getElementById("SelectWeaponImg");
 			img.src = weapon.childNodes[1].src
 			img.title = weapon.childNodes[1].alt;
 			img.alt = weapon.childNodes[1].alt;
+			console.log();
+			background.style.backgroundImage = `url(Assets/Rarity_Backgrounds/Background_Item_${AllWeapons[weapon.childNodes[1].alt].rarity}_Star.webp)`;
 			document.getElementById("weaponBox").style.display = "none";
 
 		}
@@ -719,13 +770,16 @@
 		function displayWeapons() {
 			let doc = document.getElementById("Weapons");
 			doc.style.visibility = "Visible";
+
 		}
 		function closeCharacterCard() {
 			let doc = document.getElementById("result-container");
-			doc.style.transform = "translate(-50%,50%) scale(0.1)";
+			doc.style.transform = "translate(0,100%) scale(0.1)";
 			setTimeout(function () {
 				doc.style.display = "none";
+				document.getElementById("result-container-centerer").style.display = "none";
 			}, 500);
+		
 		}
 		let characterCardOnHover = document.getElementById("saved-characters-cards-btn");
 		characterCardOnHover.addEventListener("mouseenter", function () {

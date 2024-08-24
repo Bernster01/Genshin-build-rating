@@ -161,10 +161,12 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let parentDoc = document.getElementById("result-container");
     doc.innerHTML = "";
     doc.insertAdjacentHTML('beforeend', card.card);
-    parentDoc.style.transform = "translate(-50%,50%) scale(0.1)";
+    document.getElementById("result-container-centerer").style.display = "flex";
+    parentDoc.style.transform = "scale(0.1)";
     parentDoc.style.display = "flex";
+    let size = (window.innerWidth < 1920) ? window.innerWidth / 1920 : 1;
     setTimeout(function () {
-        parentDoc.style.transform = "translate(-50%,-50%) scale(1)";
+        parentDoc.style.transform = "scale("+size+")";
     }, 100);
     return true;
 }
@@ -226,7 +228,8 @@ async function findBestBuildLoop(baseChar, times) {
             document.getElementById("percentDone").innerText = Math.floor(index / times * 100);
             document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
             document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
-            await delay(1);
+            document.getElementById("loadingPaimon-container").style.width = Math.floor(index / times * 100) +17.5+ "%";
+            await delay(4);
         }
     }
     return bestScore;

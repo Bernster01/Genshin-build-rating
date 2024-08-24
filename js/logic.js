@@ -1,10 +1,10 @@
-function searchCharacters(input){
+function searchCharacters(input) {
     const search = input.toLowerCase();
     const characters = document.querySelectorAll(".Character");
     let numberOfCharacters = 0;
     characters.forEach(function (element) {
         const name = element.title.toLowerCase();
-      
+
         if (name.includes(search)) {
             element.style.display = "block";
             numberOfCharacters++;
@@ -12,19 +12,19 @@ function searchCharacters(input){
             element.style.display = "none";
         }
     });
-    if(numberOfCharacters === 0){
+    if (numberOfCharacters === 0) {
         document.getElementById("noResults").style.display = "block";
-    }else{
+    } else {
         document.getElementById("noResults").style.display = "none";
     }
 }
-function searchWeapons(input){
+function searchWeapons(input) {
     const search = input.toLowerCase();
     const weapons = document.querySelectorAll(".Weapons");
     let numberOfWeapons = 0;
     weapons.forEach(function (element) {
         const name = element.title.toLowerCase();
-      
+
         if (name.includes(search)) {
             element.style.display = "block";
             numberOfWeapons++;
@@ -32,30 +32,47 @@ function searchWeapons(input){
             element.style.display = "none";
         }
     });
-    if(numberOfWeapons === 0){
+    if (numberOfWeapons === 0) {
         document.getElementById("noResults").style.display = "block";
-    }else{
+    } else {
         document.getElementById("noResults").style.display = "none";
     }
 }
-function switchDisplay(target,type){
-    if(target.style.display === "none"){
+function switchDisplay(target, type) {
+    if (target.style.display === "none") {
         target.style.display = type;
     }
-    else{
+    else {
         target.style.display = "none";
     }
-    
+
 }
 
-function starterFunction(){
-    document.getElementById("roleInput").addEventListener("change", function(){
+function starterFunction() {
+    document.getElementById("roleInput").addEventListener("change", function () {
         selectRole(this.value);
     });
-    document.getElementById("endEarlyBtn").addEventListener("click", function(){
-        endEarly=true;
+    document.getElementById("endEarlyBtn").addEventListener("click", function () {
+        endEarly = true;
     });
     validateAllCharacters();
+    updateArtifactBefore();
+    //Add event listener to the card that scales the card to fit screen
+    window.addEventListener("resize", function () {
+        let container = document.getElementById("result-container");
+        if (container != null || container != undefined) {
+            let windowWidth = window.innerWidth;
+            if(windowWidth < 1920){
+
+            
+            container.style.transform = `scale(${windowWidth / 1920})`;
+            }
+            else
+            {
+                container.style.transform = "scale(1)";
+            }
+        }
+    });
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions
@@ -84,4 +101,4 @@ function deepClone(obj, hash = new WeakMap()) {
 
     return result;
 }
-document.addEventListener("DOMContentLoaded", starterFunction );
+document.addEventListener("DOMContentLoaded", starterFunction);

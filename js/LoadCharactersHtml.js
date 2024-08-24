@@ -78,10 +78,10 @@ function loadWeapons(character) {
     weapon.innerHTML = "";
     console.log(character)
     AllWeapons[AllCharacters[character].weaponType].forEach(Weapon => {
-        let htmlCode = "<div class='Weapons' title='" + AllWeapons[Weapon].name + "' onmouseup='selectWeapon(this)'> <img src='Assets/" + AllWeapons[Weapon].src + "' alt='" + AllWeapons[Weapon].name + "'> <div class='WeaponsText'><span>" + AllWeapons[Weapon].name + "</span></div></div>";
+        let htmlCode = `<div class='Weapons' style='background-image:url(Assets/Rarity_Backgrounds/Background_Item_${AllWeapons[Weapon].rarity}_Star.webp)' title='${AllWeapons[Weapon].name}' onmouseup='selectWeapon(this)'> <img src='Assets/${AllWeapons[Weapon].src}' alt='${AllWeapons[Weapon].name}'> <div class='WeaponsText'><span>${AllWeapons[Weapon].name}</span></div></div>`;
         weapon.insertAdjacentHTML("beforeend", htmlCode);
     });
-
+ 
 
 }
 function loadMockArtifacts() {

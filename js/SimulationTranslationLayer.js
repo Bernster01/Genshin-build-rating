@@ -27,7 +27,7 @@ async function prepare(button) {
     //Set artifacts
     let artifacts = getArtifacts();
     //run simulation
-    simScreen.style.display = "flex";
+    simScreen.style.display = "grid";
     document.getElementById("howManySimRuns").innerText = runs;
     await delay(200);
     if (getJSON) {
