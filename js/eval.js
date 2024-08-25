@@ -9,11 +9,13 @@ function EvalBuilds(userBuild, currentBestBuild, role) {
             userScore = supportEval(userBuild, currentBestBuild);
             break;
     }
-
     //Check if userbuild has energyrecharge for the offset deduct % of score depending on how much is missing
-    if (userBuild.energyRecharge < userBuild.character.energyOffset) {
-        let percentMissing = setuserBuild.energyRecharge/userBuild.character.energyOff
-        userScore*= percentMissing;
+    if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
+        let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
+        if (percentMissing < .33) {
+            percentMissing = .33;
+        }
+        userScore = Math.floor(userScore * percentMissing);
     }
     return userScore;
 }
@@ -94,12 +96,12 @@ function bufferDpsEval(userBuild, currentBestBuild) {
     return Math.floor((bufferScore * .75) + (dmgScore * .25));
 }
 function bufferHealerEval(userBuild, currentBestBuild) {
-    
+
     let bufferScore = bufferEval(userBuild, currentBestBuild);
     let healScore = healerEval(userBuild, currentBestBuild);
     let dmgSore = dpsEval(userBuild, currentBestBuild);
-    
-    return Math.floor((bufferScore * .75) + (healScore * .15)+ (dmgSore * .10));
+
+    return Math.floor((bufferScore * .75) + (healScore * .15) + (dmgSore * .10));
 }
 function shieldEval(userBuild, currentBestBuild) {
     return Math.floor((userBuild.shield / currentBestBuild.supportValues.shield) * 100);

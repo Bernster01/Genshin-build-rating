@@ -682,6 +682,37 @@ class Createcharacter {
 
         return em;
     }
+    energyRecharge = function () {
+        let er = 0;
+        let artifacts = this.artifacts;
+        let ascension = this.ascensionstats();
+        let buffs = this.currentBuffs;
+
+        artifacts.forEach(artifact => {
+            if (artifact.Mainstat.Type == "EnergyRecharge") {
+                er += artifact.Mainstat.Value;
+            }
+            artifact.Substats.forEach(substat => {
+                if (substat.Type == "EnergyRecharge") {
+                    er += substat.Value;
+                }
+
+            });
+        });
+        if (buffs != null && buffs != undefined) {
+            buffs.forEach(buff => {
+                if (buff.Type == "EnergyRecharge") {
+                    er += buff.Value;
+                }
+            })
+        }
+
+        if (ascension.Type == "EnergyRecharge") {
+            er += ascension.Value;
+        }
+
+        return er;
+    }
 }
 function applyBonuses(character) {
     let mainstat = character.artifacts[4].Mainstat;
