@@ -88,7 +88,7 @@ const Albedo = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N5", "C"],
@@ -424,7 +424,7 @@ const Alhaitham = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2", "N3", "C"],
@@ -1054,7 +1054,7 @@ const Amber = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "C", "C", "C", "N1", "N2", "N3", "N4", "N5"],
@@ -1392,7 +1392,7 @@ const Arlecchino = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 130,
+    energyOffset: 125,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "E", "C", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5"],
@@ -1729,7 +1729,7 @@ const Ayaka = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "Q", "E", "N1", "N2", "N3", "N4", "C"],
@@ -2063,7 +2063,7 @@ const Ayato = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
@@ -2378,7 +2378,7 @@ const Baizhu = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 125,
     supportType: "Healer",
     supportType2: "Shield",
     sequence: {
@@ -2694,7 +2694,7 @@ const Barbara = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Healer",
     sequence: {
         ["Dps"]: ["N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
@@ -3009,7 +3009,7 @@ const Beidou = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 180,
+    energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "N2", "E", "N1", "N2", "Q", "N1", "N2", "E"],
@@ -3323,7 +3323,7 @@ const Bennett = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 160,
+    energyOffset: 145,
     supportType: "ATKBooster",
     supportType2: "Healer",
     sequence: {
@@ -3638,7 +3638,7 @@ const Candace = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 220,
+    energyOffset: 195,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N1", "N2", "3", "E", "N1", "N2", "N3"],
@@ -3952,7 +3952,7 @@ const Charlotte = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 145,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
@@ -4315,7 +4315,7 @@ const Chevreuse = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 170,
+    energyOffset: 150,
     supportType: "ATKBooster",
     supportType2: "Sub-dps",
     sequence: {
@@ -4678,7 +4678,7 @@ const Chiori = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N3", "N4", "C", "C", "N1", "N2", "N3", "N3", "N4", "C", "C"],
@@ -5696,7 +5696,7 @@ const Collei = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 185,
+    energyOffset: 165,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
@@ -6058,7 +6058,7 @@ const Cyno = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 160,
+    energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "Q", "E", "N1", "N2", "N3", "N4", "N4", "E", "N1", "N2", "N3", "N4", "N4", "E", "N1", "N2", "N3", "N4", "N4", "E", "N1", "N2", "N3", "N4", "N4", "E", "N1", "N2", "N3", "N4", "N4", "E", "N1", "N2", "N3", "N4", "N4", "E"],//Combo from KQM https://keqingmains.com/q/cyno-quickguide/
@@ -6420,7 +6420,7 @@ const Dehya = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 145,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
@@ -6783,7 +6783,7 @@ const Diluc = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 120,
+    energyOffset: 115,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N3", "N4", "Q", "E", "N1", "N2", "N3"],
@@ -7077,7 +7077,7 @@ const Diona = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 160,
+    energyOffset: 145,
     supportType: "Shield",
     supportType2: "Healer",
     sequence: {
@@ -7413,7 +7413,7 @@ const Dori = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 130,
+    energyOffset: 125,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
@@ -7776,7 +7776,7 @@ const Emilie = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N3", "N4", "Q", "N1", "N2", "N3", "N4", "E"],
@@ -8138,7 +8138,7 @@ const Eula = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 160,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E"],
@@ -8452,7 +8452,7 @@ const Faruzan = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "ElementalBuffer",
     supportType2: "ATKBooster",
     sequence: {
@@ -8815,7 +8815,7 @@ const Fischl = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "Q", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
@@ -9129,7 +9129,7 @@ const Freminet = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 160,
+    energyOffset: 145,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "E", "N1", "E", "N1", "N2", "E", "N1", "E", "N1", "N2", "E"],
@@ -9491,7 +9491,7 @@ const Furina = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     supportType: "Healer",
     sequence: {
@@ -9854,7 +9854,7 @@ const Gaming = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "P", "Q", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P"],
@@ -10216,7 +10216,7 @@ const Ganyu = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "C", "C", "C", "C", "E", "C", "C", "C", "C"],
@@ -10449,7 +10449,7 @@ const Gorou = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "ATKBooster",
     supportType2: "Sub-dps",
     sequence: {
@@ -10743,7 +10743,7 @@ const Heizou = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 130,
+    energyOffset: 125,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "C", "Q", "N1", "E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],
@@ -11106,7 +11106,7 @@ const Hu_Tao = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "Q"],
@@ -11360,7 +11360,7 @@ const Itto = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         //"P" used for superlative final slash
@@ -11698,7 +11698,7 @@ const Jean = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
@@ -12014,7 +12014,7 @@ const Kaeya = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
@@ -12308,7 +12308,7 @@ const Kaveh = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N1", "N2", "N3", "E", "N1", "N2", "N3", "N1", "N2", "N3", "E"],
@@ -12670,7 +12670,7 @@ const Kazuha = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "ElementalBuffer",
     sequence: {
         ["Dps"]: ["E", "P", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E", "P"],
@@ -12987,7 +12987,7 @@ const Keqing = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 120,
+    energyOffset: 110,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C"],
@@ -13241,7 +13241,7 @@ const Kirara = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
@@ -13604,7 +13604,7 @@ const Klee = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 120,
+    energyOffset: 115,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "E", "Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
@@ -13881,7 +13881,7 @@ const Kokomi = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Healer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],
@@ -14176,7 +14176,7 @@ const Kuki = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
@@ -14539,7 +14539,7 @@ const Layla = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
@@ -14902,7 +14902,7 @@ const Lisa = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 120,
+    energyOffset: 110,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C", "E"],
@@ -15177,7 +15177,7 @@ const Lynette = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "Q", "N1", "E", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
@@ -15539,7 +15539,7 @@ const Lyney = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["C", "C", "C", "C", "Q", "E"],
@@ -15925,7 +15925,7 @@ const Mika = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "ATKBooster",
     supportType2: "Healer",
     sequence: {
@@ -16288,7 +16288,7 @@ const Mona = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C",],
@@ -16925,7 +16925,7 @@ const Navia = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "Q"],//Assuming enough shard from start
@@ -17287,7 +17287,7 @@ const Neuvillette = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: { //each C is 0.5 of charged attack
         ["Dps"]: ["Q", "C", "C", "C", "C", "C", "C", "E", "C", "C", "C", "C", "C", "C", "N1", "N2", "N3", "E", "C", "C", "C", "C", "C", "C",],
@@ -17583,7 +17583,7 @@ const Nilou = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3"],
@@ -17945,7 +17945,7 @@ const Ningguang = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C"],
@@ -18199,7 +18199,7 @@ const Noelle = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Shield",
     supportType2: "Healer",
     sequence: {
@@ -18499,7 +18499,7 @@ const Qiqi = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Healer",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C"],
@@ -18758,7 +18758,7 @@ const Raiden = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 180,
+    energyOffset: 160,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "C", "N1", "C", "N1", "C"],
@@ -19287,7 +19287,7 @@ const Rosaria = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3"],
@@ -19566,7 +19566,7 @@ const Sara = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 130,
     supportType: "ATKBooster",
     sequence: {
         ["Dps"]: ["E", "C", "Q", "C", "C", "C", "C", "C"],
@@ -19865,7 +19865,7 @@ const Sayu = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Healer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
@@ -20164,7 +20164,7 @@ const Sethos = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 120,
+    energyOffset: 115,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3", "E"],
@@ -20528,7 +20528,7 @@ const Shenhe = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "ATKBooster",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "C", "N1", "C", "N1", "C"],
@@ -20827,7 +20827,7 @@ const Sigewinne = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "ATKBooster",
     supportType2: "Healer",
     sequence: {
@@ -21190,7 +21190,7 @@ const Sucrose = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "ElementalBuffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
@@ -21491,7 +21491,7 @@ const Thoma = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 145,
     supportType: "Shield",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5",],
@@ -21790,7 +21790,7 @@ const Tighnari = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "C", "Q", "C", "C"],
@@ -22176,7 +22176,7 @@ const Tartaglia = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "Q"],
@@ -24048,7 +24048,7 @@ const Venti = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "C", "C", "C", "C", "C", "E"],
@@ -24304,7 +24304,7 @@ const Wanderer = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "C", "E", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
@@ -24666,7 +24666,7 @@ const Wriothesley = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "Q"],
@@ -25028,7 +25028,7 @@ const Xiangling = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 180,
+    energyOffset: 155,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
@@ -25349,7 +25349,7 @@ const Xianyun = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 180,
+    energyOffset: 165,
     supportType: "ATKBooster",
     supportType2: "Healer",
     supportType3: "Sub-dps",
@@ -25713,7 +25713,7 @@ const Xiao = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "E", "Q", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1", "P", "N1"],
@@ -25966,7 +25966,7 @@ const Xingqiu = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 180,
+    energyOffset: 160,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
@@ -26288,7 +26288,7 @@ const Xinyan = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 125,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
@@ -26591,7 +26591,7 @@ const Yae_Miko = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],
@@ -26891,7 +26891,7 @@ const Yanfei = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 145,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "C", "Q", "C", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
@@ -27534,7 +27534,7 @@ const Yelan = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 200,
+    energyOffset: 185,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],

@@ -84,6 +84,7 @@ function getBuild(build) {
             normalAttackLevel: character.normalAttackLevel,
             elementalSkillLevel: character.elementalSkill,
             elementalBurstLevel: character.elementalBurst,
+            buffs: character.currentBuffs,
         },
         artifacts: character.artifacts,
         weapon: {
