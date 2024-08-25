@@ -213,10 +213,7 @@ const artifactSets = {
     ["Retracing_Bolide"]: {
         Type: "Retracing Bolide",
         twoPiece: { Type: "ShieldStrength", Value: 35 },
-        fourPiece: [
-            { Type: "ChargedAttack", Value: 40 },
-            { Type: "NormalAttack", Value: 40 }
-        ]
+       
     },
     ["Shimenawas_Reminiscence"]: {
         Type: "Shimenawas Reminiscence",

@@ -1399,6 +1399,7 @@ const Arlecchino = {
         ["Support"]: ["Q", "E", "C", "N1", "N2", "N3", "N4", "N5", "C",],
     },
     weaponType: "Polearm",
+    goesOffFieldDuringCombo: true,
     normalAttack1: {
         Multiplier: function (level) {
             switch (level) {

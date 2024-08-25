@@ -73,7 +73,7 @@ let nymphsDreamNormalStack = false;
 let nymphsDreamSkillStack = false;
 let nymphsDreamBurstStack = false;
 let shimenawasReminiscenceBuff = false;
-
+let retracingBolideBuff = false;
 
 function getBuild(build) {
     let character = build.character;
@@ -959,6 +959,17 @@ function getSetBonus(array, character) {
                     if (character.subDpsType == "Off-field" && role == "Support") {
                         character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     }
+                } else if(currentSet == "Retracing Bolide"){ 
+                    if(hasShield){
+                        let buffs =  [
+                            { Type: "ChargedAttack", Value: 40 },
+                            { Type: "NormalAttack", Value: 40 }
+                        ];
+                        buffs.forEach(b => {
+                            character.currentBuffs.push({ Type: b.Type, Value: b.Value, Source: "Retracing Bolide" });
+                        });
+                        retracingBolideBuff = true;
+                    }
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
@@ -1070,6 +1081,7 @@ function resetVariables() {
     nymphsDreamSkillStack = false;
     nymphsDreamBurstStack = false;
     shimenawasReminiscenceBuff = false;
+    retracingBolideBuff = false;
 }
 function Simulation(character) {
 
@@ -3186,7 +3198,7 @@ function shieldCreated(character) {
     }
     switch (character.artifactFourPiece) {
         case "Nighttime Whispers in the Echoing Woods":
-            if (nighttimeWhispersInTheEchoingWoodsBuff) {
+            if (!nighttimeWhispersInTheEchoingWoodsBuff) {
                 //Check if buff is 50 or 20 value
                 let buff = character.currentBuffs.find(b => b.Source == "Nighttime Whispers in the Echoing Woods");
                 if (buff.Value == 20) {
@@ -3194,6 +3206,17 @@ function shieldCreated(character) {
                 }
             }
             break;
+        case "Retracing Bolide":
+            if(!retracingBolideBuff){
+                let buffs =  [
+                    { Type: "ChargedAttack", Value: 40 },
+                    { Type: "NormalAttack", Value: 40 }
+                ];
+                buffs.forEach(b => {
+                    character.currentBuffs.push({ Type: b.Type, Value: b.Value, Source: "Retracing Bolide" });
+                });
+                retracingBolideBuff = true;
+            }
     }
 }
 function hasTriggerdABloomTypeReaction(character) {
