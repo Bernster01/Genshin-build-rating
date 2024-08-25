@@ -74,6 +74,8 @@ let nymphsDreamSkillStack = false;
 let nymphsDreamBurstStack = false;
 let shimenawasReminiscenceBuff = false;
 let retracingBolideBuff = false;
+let summitShaperBuff = false;
+
 
 function getBuild(build) {
     let character = build.character;
@@ -788,6 +790,13 @@ function applyBonuses(character) {
         case "Wandering Evenstar":
             character.currentBuffs.push({ Type: "ATKflat", Value: (48 / 100) * character.EM() });
             break;
+        case "Summit Shaper": 
+            if (!summitShaperBuff) {
+                character.currentBuffs.push({ Type: "ATK%", Value: 40, Source: "Summit Shaper" });
+                summitShaperBuff = true;
+            }
+            break;
+
 
     }
     character.currentBuffs.push({ Type: character.ascensionstats().Type, Value: character.ascensionstats().Value })
@@ -960,9 +969,9 @@ function getSetBonus(array, character) {
                     if (character.subDpsType == "Off-field" && role == "Support") {
                         character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     }
-                } else if(currentSet == "Retracing Bolide"){ 
-                    if(hasShield){
-                        let buffs =  [
+                } else if (currentSet == "Retracing Bolide") {
+                    if (hasShield) {
+                        let buffs = [
                             { Type: "ChargedAttack", Value: 40 },
                             { Type: "NormalAttack", Value: 40 }
                         ];
@@ -1036,7 +1045,7 @@ function resetVariables() {
     propSurplusStacks = 0;
 
     sapwoodBladeBuff = false;
-
+    summitShaperBuff = false;
     //some bow buffs
     huntersPathBuff = false;
     ibisPiercerBuffStacks = 0;
@@ -3196,6 +3205,13 @@ function shieldCreated(character) {
                 jadefallsSplendorBuff = true;
             }
             break;
+        case "Summit Shaper": 
+            if (!summitShaperBuff) {
+                character.currentBuffs.push({ Type: "ATK%", Value: 40, Source: "Summit Shaper" });
+                summitShaperBuff = true;
+            }
+            break;
+        
     }
     switch (character.artifactFourPiece) {
         case "Nighttime Whispers in the Echoing Woods":
@@ -3208,8 +3224,8 @@ function shieldCreated(character) {
             }
             break;
         case "Retracing Bolide":
-            if(!retracingBolideBuff){
-                let buffs =  [
+            if (!retracingBolideBuff) {
+                let buffs = [
                     { Type: "ChargedAttack", Value: 40 },
                     { Type: "NormalAttack", Value: 40 }
                 ];

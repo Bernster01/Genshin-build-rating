@@ -1,4 +1,4 @@
-//#region Swords w
+//#region Swords
 const Absolution = {
     name: "Absolution",
     src: "Weapons/Weapon_Absolution.webp",
@@ -684,7 +684,7 @@ const SummitShaper = {
         }
     },
 
-    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }, { Type: "ATK%", Value: 40 }] },
+    passive: function () { return [{ Type: "ShieldStrength", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
