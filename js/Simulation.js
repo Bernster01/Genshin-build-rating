@@ -1838,6 +1838,7 @@ function Simulation(character) {
                 switch (Character.artifactFourPiece) {
                     case "Deepwood Memories":
                         if (!partyHasDeepwoodMemories && !deepWoodMemoriesBuff) {
+                            deepWoodMemoriesBuff = true;
                             character.currentBuffs.push({ Type: "ResShred", Element: "DendroDMGBonus", Value: 30, Source: "Deepwood Memories" });
                         }
                         break;
@@ -1990,6 +1991,7 @@ function Simulation(character) {
                 switch (Character.artifactFourPiece) {
                     case "Deepwood Memories":
                         if (!partyHasDeepwoodMemories && !deepWoodMemoriesBuff) {
+                            deepWoodMemoriesBuff = true;
                             character.currentBuffs.push({ Type: "ResShred", Element: "DendroDMGBonus", Value: 30, Source: "Deepwood Memories" });
                         }
                         break;
