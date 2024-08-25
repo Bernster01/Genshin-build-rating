@@ -72,7 +72,7 @@ let unfinishedReverieBuff = false;
 let nymphsDreamNormalStack = false;
 let nymphsDreamSkillStack = false;
 let nymphsDreamBurstStack = false;
-
+let shimenawasReminiscenceBuff = false;
 
 
 function getBuild(build) {
@@ -97,10 +97,10 @@ function getBuild(build) {
             totalDmg: build.dmg,
             sources: build.dmgSources,
         },
-        supportValues:{
-            healing:build.healing,
-            buff:build.buff,
-            shield:build.shield
+        supportValues: {
+            healing: build.healing,
+            buff: build.buff,
+            shield: build.shield
         }
 
     }
@@ -227,7 +227,7 @@ async function findBestBuildLoop(baseChar, times) {
                     bestScore = evalResult;
 
                 }
-
+                newCharacter = null;
                 //Test all 2 piece combos
                 setsList.forEach(set2 => {
                     //Check if the set has already been tested with set2
@@ -245,7 +245,7 @@ async function findBestBuildLoop(baseChar, times) {
                         artifacts
                     );
                     newCharacter2.artifacts = changeSet2piece([set, set2], newCharacter2.artifacts);
-                    applyBonuses(newCharacter);
+                    applyBonuses(newCharacter2);
 
                     let result2 = Simulation(newCharacter2);
                     let evalResult2 = EvalBuilds(result2, bestBuild[role][currentCharacter], role);
@@ -253,6 +253,7 @@ async function findBestBuildLoop(baseChar, times) {
                         bestBuild[role][currentCharacter] = getBuild(deepClone(result));
                         bestScore = evalResult2;
                     }
+                    newCharacter2 = null;
                     articatCombosTested.push(set + set2);
                 });
             });
@@ -683,7 +684,7 @@ class Createcharacter {
         return em;
     }
     energyRecharge = function () {
-        let er = 0;
+        let er = 100;
         let artifacts = this.artifacts;
         let ascension = this.ascensionstats();
         let buffs = this.currentBuffs;
@@ -950,15 +951,6 @@ function getSetBonus(array, character) {
 
                     }
                 }
-                else if (currentSet == "Shimenawa's Reminiscence") {
-                    if (character.name != "Yoimiya") {
-                        artifactSets[array[i]].fourPiece.forEach(buff => {
-
-                            character.currentBuffs.push(buff);
-                            character.currentBuffs.push({Type:"EnergyRecharge",Value:-20});
-                        });
-                    }
-                }
                 else if (currentSet == "Blizzard Strayer") {
                     if (character.element == "CryoCharacter") {
                         character.currentBuffs.push(artifactSets[array[i]].fourPiece);
@@ -1077,6 +1069,7 @@ function resetVariables() {
     nymphsDreamNormalStack = false;
     nymphsDreamSkillStack = false;
     nymphsDreamBurstStack = false;
+    shimenawasReminiscenceBuff = false;
 }
 function Simulation(character) {
 
@@ -1863,6 +1856,23 @@ function Simulation(character) {
                             }
                         }
                         break;
+                    case "Shimenawas Reminiscence":
+                        if (!Character.goesOffFieldDuringCombo && role != "Support") {
+                            if (!shimenawasReminiscenceBuff) {
+                                shimenawasReminiscenceBuff = true;
+                                let buffs = [
+                                    { Type: "ChargedAttack", Value: 50 },
+                                    { Type: "NormalAttack", Value: 50 },
+                                    { Type: "PlungeAttack", Value: 50 },
+                                    { Type: "EnergyRecharge", Value: -20 }];
+                                buffs.forEach(buff => {
+                                    character.currentBuffs.push(buff);
+                                });
+
+                            }
+                        }
+
+                        break;
                 }
                 break;
 
@@ -2029,6 +2039,13 @@ function Simulation(character) {
         case "Song of Days Past":
             atkBuff *= (8 / 100);
             break;
+        case "Shimenawas Reminiscence":
+            let dmgToReduce = dmgSources.q * 0.25;
+            dmgSources.q -= dmgToReduce;
+            totalDmg -= dmgToReduce;
+            break;
+
+
     }
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff + bonusMultiplier, shield: shield, dmgSources: dmgSources };
 

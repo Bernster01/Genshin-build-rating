@@ -79,7 +79,7 @@ function starterFunction() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            bestBuild = data;
+            // bestBuild = data;
         });
 }
 function deepClone(obj, hash = new WeakMap()) {

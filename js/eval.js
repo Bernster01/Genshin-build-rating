@@ -12,11 +12,12 @@ function EvalBuilds(userBuild, currentBestBuild, role) {
     //Check if userbuild has energyrecharge for the offset deduct % of score depending on how much is missing
     if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
         let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
-        if (percentMissing < .33) {
+        if (percentMissing > .33) {
             percentMissing = .33;
         }
-        userScore = Math.floor(userScore * percentMissing);
+        userScore = Math.floor(userScore * (1-(percentMissing)));
     }
+   
     return userScore;
 }
 function dpsEval(userBuild, currentBestBuild) {

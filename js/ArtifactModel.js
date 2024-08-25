@@ -220,13 +220,7 @@ const artifactSets = {
     },
     ["Shimenawas_Reminiscence"]: {
         Type: "Shimenawas Reminiscence",
-        twoPiece: { Type: "ATK%", Value: 18 },
-        fourPiece: [
-            { Type: "ChargedAttack", Value: 50 },
-            { Type: "NormalAttack", Value: 50 },
-            { Type: "PlungeAttack", Value: 50 },
-            { Type: "EnergyRecharge", Value: -20 }
-        ]
+        twoPiece: { Type: "ATK%", Value: 18 }
     },
     ["Song_of_Days_Past"]: {
         Type: "Song of Days Past",
