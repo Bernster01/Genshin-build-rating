@@ -165,6 +165,3 @@ function runSimulation(character, weapon, artifacts, runs) {
     // validateAllCharacters();
     return runSim(character, weapon, artifacts, runs);
 }
-function getBestBuild() {
-
-}

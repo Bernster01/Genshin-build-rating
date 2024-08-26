@@ -18,7 +18,7 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	background: var(--secondary-color);
-	
+
 
 }
 
@@ -32,30 +32,35 @@ header {
 	overflow: hidden;
 	z-index: 2;
 }
-#containerHelper{
+
+#containerHelper {
 	background-repeat: no-repeat;
 	background-size: 180% 200vh;
 	background-position: top;
 }
-#backgroundOverlay{
-	background: rgba(0,0,0,0.2);
+
+#backgroundOverlay {
+	background: rgba(0, 0, 0, 0.2);
 	position: fixed;
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
-	z-index:1;
+	z-index: 1;
 }
-#content{
+
+#content {
 	z-index: 2;
 }
-.content-container{
+
+.content-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	margin-top: 5rem;
 }
-.content-container::before{
+
+.content-container::before {
 	content: "Input your characters and weapons to get started!";
 	position: absolute;
 	z-index: 10;
@@ -64,7 +69,8 @@ header {
 	border: 0.5rem solid var(--main-color);
 	border-radius: 1rem;
 }
-.content-container::after{
+
+.content-container::after {
 	content: "";
 	position: absolute;
 	z-index: 9;
@@ -76,6 +82,7 @@ header {
 	background-position: center;
 	transform: translate(200%, -90%) rotate(15deg);
 }
+
 h1 {
 	margin-top: 50px;
 	text-align: center;
@@ -86,10 +93,10 @@ h1 {
 }
 
 header h1 {
-	
+
 	text-align: center;
 
-	margin:0 !important;
+	margin: 0 !important;
 }
 
 footer {
@@ -122,8 +129,9 @@ footer {
 	position: absolute;
 
 }
-#roleInputContainer{
-	width:40%;
+
+#roleInputContainer {
+	width: 40%;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -160,15 +168,17 @@ footer {
 	text-align: center;
 
 }
-.Weapons{
+
+.Weapons {
 	width: 30%;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	height: max-content;
 }
+
 .EmptyCharacter {
-	margin:0;
+	margin: 0;
 }
 
 
@@ -179,7 +189,8 @@ footer {
 	font-size: 1.1em;
 }
 
-.Character:hover,.Weapons:hover {
+.Character:hover,
+.Weapons:hover {
 	transform: scale(1.05);
 	box-shadow: 2px 8px 24px 2px #000000;
 }
@@ -214,43 +225,49 @@ footer {
 	margin-bottom: 20rem;
 	display: flex;
 }
-#LoadoutContainer h2{
-	width:80%;
+
+#LoadoutContainer h2 {
+	width: 80%;
 	text-align: center;
 }
-#characterContainer{
-width: 100%;
-height: 50%;
-margin-top: 5rem;
-display: flex;
-flex-direction: column;
-align-items: center;
-position: relative;
+
+#characterContainer {
+	width: 100%;
+	height: 50%;
+	margin-top: 5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
 }
-#characterContainerUpper{
+
+#characterContainerUpper {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
 	position: relative;
-	width:100%;
+	width: 100%;
 }
-#characterSelecting{
+
+#characterSelecting {
 	cursor: pointer;
 	position: relative;
 	z-index: 1;
-	width: 60%;
+	width: 70%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height:1200px;
+	height: 1200px;
 }
-#characterSelecting img{
-	max-width:100%;
+
+#characterSelecting img {
+	max-width: 100%;
 	filter: drop-shadow(10px 60px 50px #575757);
 	object-fit: contain;
 }
+
 .SelectBox {
 	display: none;
 	flex-direction: column;
@@ -269,38 +286,42 @@ position: relative;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 	z-index: 5;
 }
-.characterIcons{
-	width:100%;
-	height:100%;
+
+.characterIcons {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	overflow-y: scroll;
 }
-#noResults{
+
+#noResults {
 	display: none;
 }
-#artifactContainer{
+
+#artifactContainer {
 	display: flex;
 	/* background-color: red; */
-	width:100%;
+	width: 100%;
 	height: auto;
 	position: relative;
 	justify-content: center;
 	align-content: center;
 	flex-wrap: wrap;
-	margin:1rem;
+	margin: 1rem;
 }
 
-#talentAndConstellationContainer{
-	width:20%;
+#talentAndConstellationContainer {
+	width: 20%;
 	height: 100%;
 }
-.artifact{
+
+.artifact {
 	user-select: none;
 	background-color: var(--tertiary-color);
 	border-radius: 1rem;
@@ -311,37 +332,40 @@ position: relative;
 	position: relative;
 	height: 200px;
 	width: 450px;
-	margin:1rem;
+	margin: 1rem;
 }
-.artifact::before{
+
+.artifact::before {
 	content: "Artifact";
 	position: absolute;
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding:0.25rem 1rem;
+	padding: 0.25rem 1rem;
 	border: 0.25rem solid var(--main-color);
 	border-radius: 1rem;
 	background-color: var(--tertiary-color);
 	z-index: 2;
 }
-.artifactSetList::before{
+
+.artifactSetList::before {
 	content: "Choose an artifact set";
 	position: absolute;
 	top: 0;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding:0.25rem 0.6rem;
+	padding: 0.25rem 0.6rem;
 	border: 0.25rem solid var(--main-color);
 	border-radius: 1rem;
 	background-color: var(--tertiary-color);
 	z-index: 9;
 }
-.artifactSetList{
-	padding-top:2rem;
+
+.artifactSetList {
+	padding-top: 2rem;
 }
 
-.artifact-left{
+.artifact-left {
 	width: 40%;
 	display: flex;
 	flex-direction: column;
@@ -353,10 +377,11 @@ position: relative;
 	position: relative;
 	z-index: 2;
 }
-.artifact-right{
+
+.artifact-right {
 	width: 60%;
 	display: flex;
-	flex-direction:row-reverse;
+	flex-direction: row-reverse;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
@@ -364,14 +389,16 @@ position: relative;
 	padding: 2rem 0rem;
 	z-index: 1;
 }
-.artifact span{
-	min-width:10px;
+
+.artifact span {
+	min-width: 10px;
 	font-size: 18pt;
 	white-space: nowrap;
-	margin:0;
+	margin: 0;
 	position: relative;
 }
-.mainstat{
+
+.mainstat {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -387,7 +414,8 @@ position: relative;
 	z-index: 2;
 
 }
-.substat{
+
+.substat {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -395,26 +423,29 @@ position: relative;
 	position: relative;
 	width: 50%;
 }
-.artifact img{
+
+.artifact img {
 	cursor: pointer;
 	position: relative;
 }
-.artifact img{
+
+.artifact img {
 	width: 40px;
 	height: 40px;
 }
-.artifact_img_gradient{
+
+.artifact_img_gradient {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: flex-end;
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 100%;
 	position: relative;
 	z-index: 1;
 }
 
-.artifactStatsList{
+.artifactStatsList {
 	background-color: var(--tertiary-color);
 	border-radius: 1rem;
 	border: 0.5rem solid var(--main-color);
@@ -424,35 +455,39 @@ position: relative;
 	overflow: hidden;
 	z-index: 1;
 }
-.artifactStatsList div{
+
+.artifactStatsList div {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
-	width:100%;
-	height:100%;
+	width: 100%;
+	height: 100%;
 	font-size: 1rem !important;
 	padding: 1rem;
 	cursor: pointer;
 	position: relative;
 	transition: background-color 0.75s;
-	
+
 }
-.artifactStatsList div:hover{
+
+.artifactStatsList div:hover {
 	background-color: #3D3B3C;
 	transition: background-color 0.5s;
 }
-.artifactStatsList div span{
+
+.artifactStatsList div span {
 	font-size: 1.5rem !important;
 }
-.artifactSetList{
+
+.artifactSetList {
 	background-color: var(--tertiary-color);
 	border-radius: 1rem;
 	border: 0.5rem solid var(--main-color);
 	position: absolute;
 	top: 0;
 	left: 0;
-	min-width:400px;
+	min-width: 400px;
 	cursor: auto;
 	display: none;
 	flex-direction: row;
@@ -460,49 +495,62 @@ position: relative;
 
 	z-index: 3;
 }
-.artifactSet{
+
+.artifactSet {
 	width: 100px !important;
 	height: 100px !important;
-	transition: transform 0.5s ease-out, filter 0.2s ease-out; 
+	transition: transform 0.5s ease-out, filter 0.2s ease-out;
 }
-.artifactSet:hover{
+
+.artifactSet:hover {
 	transform: scale(1.3);
 	filter: drop-shadow(0px 0px 8px #3a3a3a);
 }
-#flower{
-	z-index:5;
+
+#flower {
+	z-index: 5;
 }
-#plume{
-	z-index:4;
+
+#plume {
+	z-index: 4;
 }
-#sands{
-	z-index:3;
+
+#sands {
+	z-index: 3;
 }
-#goblet{
-	z-index:2;
+
+#goblet {
+	z-index: 2;
 }
-#circlet{
-	z-index:1;
+
+#circlet {
+	z-index: 1;
 }
+
 .Weapon {
 	background: var(--tertiary-color);
 	border-color: var(--main-color);
 	grid-column: 1;
 	grid-row: 2;
 }
-#flower_set{
+
+#flower_set {
 	background-image: url("../Assets/Artifacts/None_Flower.webp");
 }
-#plume_set{
+
+#plume_set {
 	background-image: url("../Assets/Artifacts/None_Plume.webp");
 }
-#sands_set{
+
+#sands_set {
 	background-image: url("../Assets/Artifacts/None_Sands.webp");
 }
-#goblet_set{
+
+#goblet_set {
 	background-image: url("../Assets/Artifacts/None_Goblet.webp");
 }
-#circlet_set{
+
+#circlet_set {
 	background-image: url("../Assets/Artifacts/None_Circlet.webp");
 }
 
@@ -566,21 +614,47 @@ position: relative;
 #weaponContainer {
 	display: flex;
 	flex-direction: column;
-	justify-items: center;
+	justify-items: flex-end;
 	align-items: center;
-	border: 0.2vw solid var(--main-color);
 	border-radius: 1vw;
 	aspect-ratio: 1/1;
-	width: 40%;
+	width: 30%;
 	height: auto;
-	
+
 	padding: 1vw;
 	position: relative;
 
 }
-#weaponContainer img{
-	filter: drop-shadow(0px 0px 10px #636363);
+
+.weapon_Stats {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+	background-color: var(--tertiary-color);
+	border-radius: 1rem;
+	border: 0.25rem solid var(--main-color);
+	padding: 1rem;
 }
+
+#weapon_figure {
+	border-radius: 1rem;
+
+	background-size: cover;
+	border: 0.2rem solid var(--main-color);
+	cursor: pointer;
+	width: 45%;
+	margin:0;
+}
+
+#weaponContainer img {
+	filter: drop-shadow(0px 0px 10px #636363);
+	object-fit: fill;
+	width: 100%;
+	height: 100%;
+}
+
 #TalentContainer {
 
 	display: flex;
@@ -676,7 +750,8 @@ position: relative;
 	background: linear-gradient(66deg, rgba(0, 254, 230, 1) 0%, rgba(125, 255, 233, 1) 40%, rgba(125, 255, 233, 1) 60%, rgba(0, 254, 230, 1) 100%);
 
 }
-.DendroCharacter{
+
+.DendroCharacter {
 	background: linear-gradient(66deg, rgba(0, 254, 0, 1) 0%, rgba(125, 255, 125, 1) 40%, rgba(125, 255, 125, 1) 60%, rgba(0, 254, 0, 1) 100%);
 }
 
@@ -745,19 +820,21 @@ select {
 	padding: 0.75em;
 	box-shadow: 0em 0.4em 4em -1em;
 
-	
+
 }
 
 #RoleSelectionContainer div {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	width:100%;
+	width: 100%;
 }
-#RoleSelectionContainer div span{
-	width:10%;
-	margin:0;
+
+#RoleSelectionContainer div span {
+	width: 10%;
+	margin: 0;
 }
+
 .elementalResonanceContainer {
 	display: flex;
 	flex-direction: row;
@@ -946,6 +1023,7 @@ span {
 	flex-direction: column;
 	align-items: center;
 }
+
 #result-container-centerer {
 	display: none;
 	flex-direction: column;
@@ -958,6 +1036,7 @@ span {
 	height: 100%;
 	z-index: 99999;
 }
+
 #result-container {
 	display: none;
 	transition: all 0.5s ease-in-out;
@@ -968,6 +1047,7 @@ span {
 	box-shadow: 0px 0px 128px 32px;
 	border-radius: 2rem;
 }
+
 #result-container2 {
 	display: none;
 	position: fixed;
@@ -975,7 +1055,7 @@ span {
 	left: 0;
 	margin-top: 50vh;
 	margin-left: 50vw;
-	transform: translate(-50%,50%) scale(0.1);
+	transform: translate(-50%, 50%) scale(0.1);
 	transition: all 0.5s ease-in-out;
 	z-index: 99;
 }
@@ -984,6 +1064,7 @@ span {
 	box-shadow: 0px 0px 128px 32px;
 	border-radius: 2rem;
 }
+
 .exit-btn {
 	cursor: pointer;
 	border-radius: 50% !important;
@@ -1060,44 +1141,50 @@ span {
 	border-radius: 1rem 1rem 0 0;
 	z-index: 1;
 	box-shadow: 0px 0px 0px 0px;
-	transition: box-shadow 1s ease-in ;
+	transition: box-shadow 1s ease-in;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
 	overflow-y: scroll;
 }
-.saved-character-card{
+
+.saved-character-card {
 	height: 150px;
 	width: 300px;
 	position: absolute;
 	transition: transform 0.2s ease-in-out;
-	z-index:9
+	z-index: 9
 }
-.saved-character-card-container{
-	width:300px;
-	height:150px;
-	display:flex;
-    align-items: flex-end;
-    justify-content: center;
+
+.saved-character-card-container {
+	width: 300px;
+	height: 150px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
 }
-.saved-character-card:hover{
+
+.saved-character-card:hover {
 	transform: scale(1.32);
 	z-index: 10;
 }
-.transform-card{
-	margin-top:-25rem;
-	margin-left:-13rem;
+
+.transform-card {
+	margin-top: -25rem;
+	margin-left: -13rem;
 	transform: scale(0.15);
 	z-index: 1;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
 }
-.delete-character-card{
-	margin-top:1.5rem;
-	position:absolute;
+
+.delete-character-card {
+	margin-top: 1.5rem;
+	position: absolute;
 }
-.prompt-container{
+
+.prompt-container {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -1106,12 +1193,14 @@ span {
 	margin-left: calc(50vw - 280px);
 	height: 100px;
 	width: 500px;
-	
+
 }
-#delete-character-card-prompt-container{
-	z-index:99;
+
+#delete-character-card-prompt-container {
+	z-index: 99;
 }
-.delete-character-card-prompt-wrapper{
+
+.delete-character-card-prompt-wrapper {
 	background: #C1BDB3;
 	border: #5F5B6B solid 0.2rem;
 	width: 100%;
@@ -1120,49 +1209,56 @@ span {
 	padding-top: 1rem;
 	box-shadow: 0px 0px 16rem 3rem;
 }
-.delete-character-card-prompt{
+
+.delete-character-card-prompt {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	
+
 }
-.delete-character-card-prompt-btns{
+
+.delete-character-card-prompt-btns {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	width: 50%;
 }
-.delete-character-card-prompt-btns button{
-padding: 0.5rem 2rem;
-border-radius: 2rem;
-}
-#elementalResonanceContainer{
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-}
-#supportingElementContainer{
-	display:flex;
-	flex-direction:column;
-	align-items:center;
+
+.delete-character-card-prompt-btns button {
+	padding: 0.5rem 2rem;
+	border-radius: 2rem;
 }
 
-.flex-row{
-	display:flex;
-	flex-direction:row;
+#elementalResonanceContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
-#constellationContainer{
-	display:flex;
-	flex-direction:column;
+
+#supportingElementContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+#constellationContainer {
+	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
-	align-items:flex-end;
+	align-items: flex-end;
 	width: 80%;
 	height: 50%;
 	position: relative;
 }
-.constellation{
-	width:80px;
-	height:80px;
+
+.constellation {
+	width: 80px;
+	height: 80px;
 	background-color: white;
 	position: relative;
 	display: flex;
@@ -1173,28 +1269,32 @@ border-radius: 2rem;
 	transition: filter 0.125s ease-out;
 	cursor: pointer;
 }
-.constellation:hover{
+
+.constellation:hover {
 	filter: drop-shadow(0px 0px 16px #d7f8fb);
 }
-.constellation-selected{
+
+.constellation-selected {
 	filter: drop-shadow(0px 0px 60px #58eeff) !important;
 	background-color: #58eeff !important;
 	transform: scale(1.25) !important;
 	transition: filter 1s ease-out, background-color 1s ease-out, transform 1s ease-out;
 }
-#simRunScreen{
-	width:100%;
-	height:100vh;
-	position:fixed;
-	background-color: rgba(0,0,0,0.5);
+
+#simRunScreen {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.5);
 	z-index: 9999;
 	display: none;
 	justify-content: center;
 	align-items: center;
 	top: 0;
-    left: 0;
+	left: 0;
 }
-.sim-running-box{
+
+.sim-running-box {
 	width: 100%;
 	min-width: 600px;
 	height: 30%;
@@ -1207,13 +1307,15 @@ border-radius: 2rem;
 	align-items: center;
 	justify-content: center;
 }
-.sim-progress-bar{
+
+.sim-progress-bar {
 	width: 90%;
 	height: 10px;
 	background-color: var(--main-color);
 	border-radius: 1rem;
 }
-#simProgressBar{
+
+#simProgressBar {
 	width: 100%;
 	height: 10px;
 	background: linear-gradient(90deg, #ff8308, #f83c00, #ff8308, #ffd700);
@@ -1221,7 +1323,8 @@ border-radius: 2rem;
 	border-radius: 1rem;
 	animation: gradientAnimation 5s infinite;
 }
-#loadingPaimon-wrapper{
+
+#loadingPaimon-wrapper {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -1229,7 +1332,8 @@ border-radius: 2rem;
 	width: 100%;
 	height: 30%;
 }
-#loadingPaimon-container{
+
+#loadingPaimon-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -1238,33 +1342,36 @@ border-radius: 2rem;
 
 }
 
-#loadingPaimon{
+#loadingPaimon {
 	animation: paimonLoading 2s infinite linear;
 	transition: transform 0.5s ease-out;
-	
+
 }
-#loadingPaimon img{
+
+#loadingPaimon img {
 	width: 100px;
 	height: 100px;
 }
 
 
-#rate-button{
+#rate-button {
 	background-image: url("../Assets/Characters/Paimon/Icon_2.webp");
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 200px;
 	height: 200px;
-	background-color: rgba(0,0,0,0);
+	background-color: rgba(0, 0, 0, 0);
 	border: none;
 	cursor: pointer;
 	transition: transform 0.2s ease-out, filter 0.2s ease-out;
 }
-#rate-button:hover{
+
+#rate-button:hover {
 	transform: scale(1.1);
 	filter: drop-shadow(0px 0px 16px #d7f8fb);
 }
-.text-input{
+
+.text-input {
 	width: 85%;
 	height: 100%;
 	background-color: var(--tertiary-color);
@@ -1273,14 +1380,17 @@ border-radius: 2rem;
 	padding: 1.5rem;
 	font-size: 1.5rem;
 }
-.text-input::placeholder{
+
+.text-input::placeholder {
 	color: var(--main-color);
 }
-.text-input:focus{
+
+.text-input:focus {
 	outline: none;
 	border: #ffd700 solid 0.2rem;
 }
-.stat-container{
+
+.stat-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -1293,7 +1403,8 @@ border-radius: 2rem;
 	padding-top: 1rem;
 	max-width: 650px;
 }
-.stat-container::before{
+
+.stat-container::before {
 	content: "Character levels";
 	position: absolute;
 	z-index: 10;
@@ -1303,7 +1414,8 @@ border-radius: 2rem;
 	border-radius: 1rem;
 	transform: translate(0%, -190%);
 }
-.stat-container select{
+
+.select {
 	height: 35px;
 	width: 100%;
 	border: var(--main-color) solid 0.1rem;
@@ -1312,29 +1424,35 @@ border-radius: 2rem;
 	cursor: pointer;
 	font-size: 1rem;
 }
-.stat-container select:hover{
+
+.stat-container select:hover {
 	border: #ffd700 solid 0.2rem;
 }
-.stat-container select:focus{
+
+.stat-container select:focus {
 	border: #ffd700 solid 0.2rem;
 }
-.stat-container option{
+
+.stat-container option {
 	background-color: var(--tertiary-color);
 }
-#character_level_container{
+
+#character_level_container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
 }
-#character_level_container div{
+
+#character_level_container div {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
-#talent_level{
+
+#talent_level {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -1349,16 +1467,16 @@ border-radius: 2rem;
 	align-items: center;
 }
 
-#simulationRuns{
+#simulationRuns {
 	width: 20%;
-	height: 100%;
 	background-color: var(--tertiary-color);
 	border: var(--main-color) solid 0.2rem;
 	border-radius: 1rem;
-	padding: 1.5rem;
 	font-size: 1.5rem;
+	padding: 0.5rem;
 }
-#endEarlyBtn{
+
+#endEarlyBtn {
 	width: 20%;
 	height: 20%;
 	background-color: var(--tertiary-color);
@@ -1371,43 +1489,70 @@ border-radius: 2rem;
 	font-size: 1rem;
 	cursor: pointer;
 }
-#endEarlyBtn:hover{
+
+#endEarlyBtn:hover {
 	background-color: #646464;
 }
+#simulation_settings{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 40%;
+	background-color: var(--tertiary-color);
+	border: var(--main-color) solid 0.2rem;
+	border-radius: 1rem;
+	padding: 1.5rem;
+}
+#simulation_settings div{
+	margin:1rem;
+}
+#simulation_settings div select{
+	font-size: 1.25rem;
+}
 @keyframes gradientAnimation {
-	
+
 	0% {
 		background-position: 100% 50%;
-	  }
-	  25% {
+	}
+
+	25% {
 		background-position: 50% 50%;
-	  }
-	  50% {
+	}
+
+	50% {
 		background-position: 0% 50%;
-	  }
-	  75% {
+	}
+
+	75% {
 		background-position: 50% 50%;
-	  }
-	  100% {
+	}
+
+	100% {
 		background-position: 100% 50%;
-	  }
+	}
 }
+
 @keyframes paimonLoading {
 
-	0%{
-		transform: translate(0,0) scale(1) rotate(0deg);
+	0% {
+		transform: translate(0, 0) scale(1) rotate(0deg);
 	}
-	25%{
-		transform: translate(0,5%) scale(1.05) rotate(9deg);
+
+	25% {
+		transform: translate(0, 5%) scale(1.05) rotate(9deg);
 	}
-	50%{
-		transform: translate(0,10%) scale(1) rotate(0deg);
+
+	50% {
+		transform: translate(0, 10%) scale(1) rotate(0deg);
 	}
-	75%{
-		transform: translate(0,5%) scale(1.05) rotate(-9deg);
+
+	75% {
+		transform: translate(0, 5%) scale(1.05) rotate(-9deg);
 	}
-	100%{
-		transform: translate(0,0) scale(1) rotate(0deg);
+
+	100% {
+		transform: translate(0, 0) scale(1) rotate(0deg);
 	}
-	
+
 }

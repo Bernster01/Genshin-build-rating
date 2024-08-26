@@ -36,12 +36,6 @@
 
 
 				<div id="LoadoutContainer">
-					<div id="roleInputContainer">
-						<p>DPS</p>
-						<input type="range" min="1" max="2" value="1" class="slider" id="roleInput">
-						<p>Support</p>
-					</div>
-
 					<div id="characterContainer">
 						<div id="characterContainerUpper">
 							<div id="weaponContainer">
@@ -58,9 +52,9 @@
 										<span id="noCharacterSelected">Please select a character first</span>
 									</div>
 								</div>
-								<div>
-									<p>Weapon</p>
-									<select id="weapon_level">
+								<div class="weapon_Stats">
+									<p id="weapon_name">Weapon</p>
+									<select class="select" id="weapon_level">
 										<option value="1b">Level 1</option>
 										<option value="10b">Level 10/10</option>
 										<option value="10a">Level 10/20</option>
@@ -103,7 +97,7 @@
 							<div id="character_level_container">
 								<div>
 									<label for="character_level">Character</label>
-									<select id="character_level">
+									<select class="select" id="character_level">
 										<option value="1b">Level 1</option>
 										<option value="10b">Level 10/10</option>
 										<option value="10a">Level 10/20</option>
@@ -126,7 +120,7 @@
 								</div>
 								<div>
 									<label for="constellation">Constellation</label>
-									<select id="constellation">
+									<select class="select" id="constellation">
 										<option value="0">C0</option>
 										<option value="1">C1</option>
 										<option value="2">C2</option>
@@ -141,7 +135,7 @@
 
 								<div>
 									<label for="normal_attack">Normal Attack</label>
-									<select id="normal_attack">
+									<select class="select" id="normal_attack">
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
 										<option value="3">Level 3</option>
@@ -156,7 +150,7 @@
 								</div>
 								<div>
 									<label for="talent_skill">Elemental Skill</label>
-									<select id="talent_skill">
+									<select class="select" id="talent_skill">
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
 										<option value="3">Level 3</option>
@@ -174,7 +168,7 @@
 								</div>
 								<div>
 									<label for="talent_burst">Elemental Burst</label>
-									<select id="talent_burst">
+									<select class="select" id="talent_burst">
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
 										<option value="3">Level 3</option>
@@ -647,8 +641,31 @@
 								</div>
 							</div>
 						</div>
-						<label for="simulationRuns">Simulation Runs</label>
-						<input type="number" id="simulationRuns" placeholder="default 15" >
+						<section id="simulation_settings">
+							<h3>Settings</h3>
+							<div>
+								<label for="role">Role</label>
+								<select class="select" id="roleInput">
+									<option value="1">Main DPS</option>
+									<option value="2">Support (incl. Sub-dps)</option>
+								</select>
+							</div>
+							<div>
+								<label for="hasDeepwoodInParty" id="deepwoodLabel">Does your party have deepwood
+									equiped?</label>
+								<input type="checkbox" id="hasDeepwoodInParty">
+							</div>
+							<div>
+								<label for="partyGivesShield" id="partyGivesShieldLabel">Does your party generate
+									shields?</label>
+								<input type="checkbox" id="partyGivesShield">
+							</div>
+							
+								<label for="simulationRuns">Simulation Runs</label>
+								<input type="number" id="simulationRuns" placeholder="default 15">
+							</div>
+						</section>
+
 						<button onclick="prepare(this)" id="rate-button"></button>
 					</div>
 				</div>
@@ -662,12 +679,12 @@
 
 						</div>
 						<div id="result-buttons">
-							<div>
+							<!-- <div> TODO: Implement save feature
 								<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
 							</div>
-							<div>
+							<div> TODO: Implement more details feature
 								<button class="generic-btn p1rem br2rem">More Details</button>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -737,6 +754,17 @@
 			target.alt = character.title;
 			selectedCharacter = character.title;
 			loadWeapons(character.title);
+			//set weapon to default
+			resetWeaponToDeafault();
+		}
+		function resetWeaponToDeafault() {
+			let img = document.getElementById("SelectWeaponImg");
+			img.src = "Assets/Weapons/Icon_Sword.png";
+			img.title = "Weapon";
+			img.alt = "Weapon";
+			let background = document.getElementById('weapon_figure');
+			background.style.backgroundImage = `url(Assets/Rarity_Backgrounds/Background_Item_1_Star.webp)`;
+			document.getElementById("weapon_name").innerText = "Weapon";
 		}
 		function selectWeapon(weapon) {
 			let background = document.getElementById('weapon_figure');
@@ -747,6 +775,7 @@
 			console.log();
 			background.style.backgroundImage = `url(Assets/Rarity_Backgrounds/Background_Item_${AllWeapons[weapon.childNodes[1].alt].rarity}_Star.webp)`;
 			document.getElementById("weaponBox").style.display = "none";
+			document.getElementById("weapon_name").innerText = weapon.childNodes[1].alt;
 
 		}
 

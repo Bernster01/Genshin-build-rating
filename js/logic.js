@@ -60,6 +60,22 @@ function starterFunction() {
     document.getElementById("endEarlyBtn").addEventListener("click", function () {
         endEarly = true;
     });
+    document.getElementById("hasDeepwoodInParty").addEventListener("change", function () {
+        if (this.checked) {
+            partyHasDeepwoodMemories = true;
+        }
+        else {
+            partyHasDeepwoodMemories = false;
+        }
+    }); 
+    document.getElementById("partyGivesShield").addEventListener("change", function () {
+        if (this.checked) {
+            hasShield = true;
+        }
+        else {
+            hasShield = false;
+        }
+    });
     // validateAllCharacters();
     updateArtifactBefore();
     //Add event listener to the card that scales the card to fit screen
