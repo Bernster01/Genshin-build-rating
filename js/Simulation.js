@@ -75,6 +75,8 @@ let nymphsDreamBurstStack = false;
 let shimenawasReminiscenceBuff = false;
 let retracingBolideBuff = false;
 let summitShaperBuff = false;
+let paleFlameStacks = 0;
+
 
 
 function getBuild(build) {
@@ -980,6 +982,10 @@ function getSetBonus(array, character) {
                         });
                         retracingBolideBuff = true;
                     }
+                }else if (currentSet == "Bloodstained Chivalry") {
+                    if(character.havePhysicalChargedAttack){
+                        character.currentBuffs.push({ Type: "ChargedAttack", Value: 50,Source:"Bloodstained Chivalry" });
+                    }
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
@@ -1092,6 +1098,8 @@ function resetVariables() {
     nymphsDreamBurstStack = false;
     shimenawasReminiscenceBuff = false;
     retracingBolideBuff = false;
+    paleFlameStacks = 0;
+
 }
 function Simulation(character) {
 
@@ -1896,6 +1904,14 @@ function Simulation(character) {
                         }
 
                         break;
+                    case "Pale Flame":
+                        if(paleFlameStacks<2){
+                            paleFlameStacks++;
+                            character.currentBuffs.push({Type:"ATK%", Value: 9, Source: "Pale Flame"});
+                            if(paleFlameStacks==2){
+                                character.currentBuffs.push({Type:"ATK%", Value: 18, Source: "Pale Flame"});
+                            }
+                        }
                 }
                 break;
 

@@ -97,8 +97,7 @@ const artifactSets = {
     },
     ["Bloodstained_Chivalry"]: {
         Type: "Bloodstained Chivalry",
-        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 },
-        fourPiece: { Type: "ChargedAttack", Value: 50 }
+        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 }
     },
     ["Crimson_Witch_of_Flames"]: {
         Type: "Crimson Witch of Flames",

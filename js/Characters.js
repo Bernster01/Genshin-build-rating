@@ -3004,6 +3004,7 @@ const Beidou = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -3318,6 +3319,7 @@ const Bennett = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
@@ -4310,6 +4312,7 @@ const Chevreuse = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
@@ -6415,6 +6418,7 @@ const Dehya = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
@@ -6778,6 +6782,7 @@ const Diluc = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -7408,6 +7413,7 @@ const Dori = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
@@ -8133,6 +8139,7 @@ const Eula = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -9124,6 +9131,7 @@ const Freminet = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -11987,6 +11995,7 @@ const Kaeya = {
         }
         return baseDEF[this.level];
     },
+    havePhysicalChargedAttack: true,
     elementalMastery: 0,
     advancedstats: {
         critRate: 5,
@@ -14171,6 +14180,7 @@ const Kuki = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
@@ -19004,6 +19014,7 @@ const Razor = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -19282,6 +19293,7 @@ const Rosaria = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -22448,6 +22460,7 @@ const Traveler_Anemo = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -22767,6 +22780,7 @@ const Traveler_Dendro = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -23086,6 +23100,7 @@ const Traveler_Electro = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -23405,6 +23420,7 @@ const Traveler_Geo = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -23724,6 +23740,7 @@ const Traveler_Hydro = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
@@ -25001,6 +25018,7 @@ const Xiangling = {
         }
         return baseDEF[this.level];
     },
+    havePhysicalChargedAttack: true,
     elementalMastery: 0,
     advancedstats: {
         critRate: 5,
@@ -28493,6 +28511,7 @@ const Zhongli = {
         ]
 
     },
+    havePhysicalChargedAttack: true,
     subDpsType:"On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
