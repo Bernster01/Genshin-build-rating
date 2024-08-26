@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Rate my build - Genshin impact</title>
 	<link rel="icon" href="Assets/Icons/Element_Geo.svg">
-	</link>
 	<script src="https://kit.fontawesome.com/7060ae4657.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="CSS/CSS.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -54,7 +54,7 @@
 									<input type="text" class="text-input" id="weaponSearch"
 										placeholder="Search for a character..." onkeyup="searchWeapons(this.value)">
 									<div class="characterIcons" id="weaponIcons">
-										<span id="noResults">Hm... seems nothing matched</span>
+										<span id="noWeaponResults">Hm... seems nothing matched</span>
 										<span id="noCharacterSelected">Please select a character first</span>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 							</div>
 						</div>
 						<div class="stat-container">
-							<div id="character_level">
+							<div id="character_level_container">
 								<div>
 									<label for="character_level">Character</label>
 									<select id="character_level">
@@ -204,7 +204,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('flowerMainstatList'),stopPropagation(),addEventlistenerArtifactList('flowerMainstatList')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
-											id="flower_mainstat_type" />
+											id="flower_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_mainstat_value">0</span>
@@ -219,7 +219,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat1List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat1List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="flower_substat_1_type" />
+											id="flower_substat_1_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_substat_1_value">0</span>
@@ -232,7 +232,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat2List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat2List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="flower_substat_2_type" />
+											id="flower_substat_2_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_substat_2_value">0</span>
@@ -245,7 +245,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat3List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat3List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="flower_substat_3_type" />
+											id="flower_substat_3_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_substat_3_value">0</span>
@@ -258,7 +258,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('flowerSubstat4List'),stopPropagation(),addEventlistenerArtifactList('flowerSubstat4List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="flower_substat_4_type" />
+											id="flower_substat_4_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_substat_4_value">0</span>
@@ -280,7 +280,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('plumeMainstatList'),stopPropagation(),addEventlistenerArtifactList('plumeMainstatList')"
 											src="Assets/Icons/Icon_Attribute_Attack.webp" title="Flat ATK"
-											id="plume_mainstat_type" />
+											id="plume_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_mainstat_value">0</span>
@@ -297,7 +297,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat1List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat1List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="plume_substat_1_type" />
+											id="plume_substat_1_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_substat_1_value">0</span>
@@ -310,7 +310,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat2List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat2List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="plume_substat_2_type" />
+											id="plume_substat_2_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_substat_2_value">0</span>
@@ -323,7 +323,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat3List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat3List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="plume_substat_3_type" />
+											id="plume_substat_3_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_substat_3_value">0</span>
@@ -336,7 +336,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('plumeSubstat4List'),stopPropagation(),addEventlistenerArtifactList('plumeSubstat4List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="plume_substat_4_type" />
+											id="plume_substat_4_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_substat_4_value">0</span>
@@ -358,7 +358,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('sandsMainstatList'),stopPropagation(),addEventlistenerArtifactList('sandsMainstatList')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
-											id="sands_mainstat_type" />
+											id="sands_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_mainstat_value">0</span>
@@ -375,7 +375,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat1List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat1List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="sands_substat_1_type" />
+											id="sands_substat_1_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_substat_1_value">0</span>
@@ -388,7 +388,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat2List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat2List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="sands_substat_2_type" />
+											id="sands_substat_2_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_substat_2_value">0</span>
@@ -401,7 +401,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat3List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat3List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="sands_substat_3_type" />
+											id="sands_substat_3_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_substat_3_value">0</span>
@@ -414,7 +414,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('sandsSubstat4List'),stopPropagation(),addEventlistenerArtifactList('sandsSubstat4List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="sands_substat_4_type" />
+											id="sands_substat_4_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_substat_4_value">0</span>
@@ -436,7 +436,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('gobletMainstatList'),stopPropagation(),addEventlistenerArtifactList('gobletMainstatList')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
-											id="goblet_mainstat_type" />
+											id="goblet_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_mainstat_value">0</span>
@@ -453,7 +453,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat1List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="goblet_substat_1_type" />
+											id="goblet_substat_1_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_substat_1_value">0</span>
@@ -466,7 +466,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat2List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="goblet_substat_2_type" />
+											id="goblet_substat_2_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_substat_2_value">0</span>
@@ -479,7 +479,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat3List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="goblet_substat_3_type" />
+											id="goblet_substat_3_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_substat_3_value">0</span>
@@ -492,7 +492,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('gobletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('gobletSubstat4List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="goblet_substat_4_type" />
+											id="goblet_substat_4_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_substat_4_value">0</span>
@@ -513,7 +513,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%"
-											id="circlet_mainstat_type" />
+											id="circlet_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_mainstat_value">0</span>
@@ -530,7 +530,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat1List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat1List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="circlet_substat_1_type" />
+											id="circlet_substat_1_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_substat_1_value">0</span>
@@ -543,7 +543,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat2List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat2List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="circlet_substat_2_type" />
+											id="circlet_substat_2_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_substat_2_value">0</span>
@@ -556,7 +556,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat3List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat3List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="circlet_substat_3_type" />
+											id="circlet_substat_3_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_substat_3_value">0</span>
@@ -569,7 +569,7 @@
 										<img class="artifact_icon"
 											onclick="showHide('circletSubstat4List'),stopPropagation(),addEventlistenerArtifactList('circletSubstat4List')"
 											src="Assets/Icons/Icon_Attribute_Health.webp" title="HP%" alt="HP%"
-											id="circlet_substat_4_type" />
+											id="circlet_substat_4_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_substat_4_value">0</span>
@@ -589,25 +589,25 @@
 
 							<div class="elementalResonanceContainer">
 								<div onclick="selectResonance('Pyro',this)">
-									<img src="Elements/pyro.png" />
+									<img src="Elements/pyro.png" alt="Pyro elemental resonance">
 								</div>
 								<div onclick="selectResonance('Hydro',this)">
-									<img src="Elements/hydro.png" />
+									<img src="Elements/hydro.png" alt="Hydro elemental resonance">
 								</div>
 								<div onclick="selectResonance('Anemo',this)">
-									<img src="Elements/anemo.png" />
+									<img src="Elements/anemo.png" alt="Anemo elemental resonance">
 								</div>
 								<div onclick="selectResonance('Geo',this)">
-									<img src="Elements/geo.png" />
+									<img src="Elements/geo.png" alt="Geo elemental resonance">
 								</div>
 								<div onclick="selectResonance('Electro',this)">
-									<img src="Elements/electro.png" />
+									<img src="Elements/electro.png" alt="Electro elemental resonance">
 								</div>
 								<div onclick="selectResonance('Dendro',this)">
-									<img src="Elements/dendro.png" />
+									<img src="Elements/dendro.png" alt="Dendro elemental resonance">
 								</div>
 								<div onclick="selectResonance('Cryo',this)">
-									<img src="Elements/cryo.png" />
+									<img src="Elements/cryo.png" alt="Cryo elemental resonance">
 								</div>
 							</div>
 						</div>
@@ -618,37 +618,37 @@
 
 							<div class="supportingElementContainer" id="supportingElement">
 								<div onclick="selectSupportingElement('Pyro',this)">
-									<img src="Elements/pyro.png" />
+									<img src="Elements/pyro.png" alt="Pyro">
 									<span>Pyro</span>
 								</div>
 								<div onclick="selectSupportingElement('Hydro',this)">
-									<img src="Elements/hydro.png" />
+									<img src="Elements/hydro.png" alt="Hydro">
 									<span>Hydro</span>
 								</div>
 								<div onclick="selectSupportingElement('Anemo',this)">
-									<img src="Elements/anemo.png" />
+									<img src="Elements/anemo.png" alt="Anemo">
 									<span>Anemo</span>
 								</div>
 								<div onclick="selectSupportingElement('Electro',this)">
-									<img src="Elements/electro.png" />
+									<img src="Elements/electro.png" alt="Electro">
 									<span>Electro</span>
 								</div>
 								<div onclick="selectSupportingElement('Dendro',this)">
-									<img src="Elements/dendro.png" />
+									<img src="Elements/dendro.png" alt="Dendro">
 									<span>Dendro</span>
 								</div>
 								<div onclick="selectSupportingElement('Cryo',this)">
-									<img src="Elements/cryo.png" />
+									<img src="Elements/cryo.png" alt="Cryo">
 									<span>Cryo</span>
 								</div>
 								<div onclick="selectSupportingElement('Bloom',this)">
-									<img src="Elements/bloom.png" />
+									<img src="Elements/Bloom.png" alt="Bloom">
 									<span>Bloom</span>
 								</div>
 							</div>
 						</div>
 						<label for="simulationRuns">Simulation Runs</label>
-						<input type="number" id="simulationRuns" placeholder="default 15" />
+						<input type="number" id="simulationRuns" placeholder="default 15" >
 						<button onclick="prepare(this)" id="rate-button"></button>
 					</div>
 				</div>
@@ -704,7 +704,7 @@
 			<div id="loadingPaimon-wrapper">
 				<div id="loadingPaimon-container">
 					<figure id="loadingPaimon">
-						<img src="Assets/Characters/Paimon/Icon_3.webp" />
+						<img src="Assets/Characters/Paimon/Icon_3.webp" alt="Paimon riding a beast">
 					</figure>
 				</div>
 			</div>
@@ -779,7 +779,7 @@
 				doc.style.display = "none";
 				document.getElementById("result-container-centerer").style.display = "none";
 			}, 500);
-		
+
 		}
 		let characterCardOnHover = document.getElementById("saved-characters-cards-btn");
 		characterCardOnHover.addEventListener("mouseenter", function () {

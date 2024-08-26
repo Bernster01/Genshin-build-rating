@@ -1321,14 +1321,14 @@ border-radius: 2rem;
 .stat-container option{
 	background-color: var(--tertiary-color);
 }
-#character_level{
+#character_level_container{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
 	align-items: center;
 	width: 100%;
 }
-#character_level div{
+#character_level_container div{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

@@ -33,10 +33,14 @@ function searchWeapons(input) {
             element.style.display = "none";
         }
     });
+    if(document.getElementById("noWeaponResults") === null){
+        let html = `	<span id="noWeaponResults">Hm... seems nothing matched</span>`;
+        document.getElementById("weaponIcons").insertAdjacentHTML("beforeend", html);
+    }
     if (numberOfWeapons === 0) {
-        document.getElementById("noResults").style.display = "block";
+        document.getElementById("noWeaponResults").style.display = "block";
     } else {
-        document.getElementById("noResults").style.display = "none";
+        document.getElementById("noWeaponResults").style.display = "none";
     }
 }
 function switchDisplay(target, type) {
