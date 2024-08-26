@@ -2848,7 +2848,7 @@ const LithicBlade = {
 
 const LuxuriousSeaLord = {
     name: "Luxurious Sea-Lord",
-    src: "Weapons/Weapon_Luxurious_Sea-lord.webp",
+    src: "Weapons/Weapon_Luxurious_Sea-Lord.webp",
     weaponType: "Claymore",
     rarity: 4,
     level: "1b",
