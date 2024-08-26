@@ -260,7 +260,7 @@ const artifactSets = {
     ["Vourukashas_Glow"]: {
         Type: "Vourukashas Glow",
         twoPiece: { Type: "HP%", Value: 20 },
-        fourPiece: [{ Type: "ElementalSkill", Value: 40 }, { Type: "ElementalBurst", Value: 40 }]
+        fourPiece: [{ Type: "ElementalSkill", Value: 20 }, { Type: "ElementalBurst", Value: 20 }]
 
     },
     ["Wanderers_Troupe"]: {
