@@ -1,4 +1,4 @@
-import { Createcharacter } from "./js/character.js";
+import { Createcharacter } from "../character.js";
 let charts = {};
 let elementalResonance = ["", ""];
 let supportingElement = null;
