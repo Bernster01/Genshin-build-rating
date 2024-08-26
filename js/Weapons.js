@@ -1590,7 +1590,7 @@ const SacrificialBow = {
 }.Init();
 const ScionoftheBlazingSun = {
     name: "Scion of the Blazing Sun",
-    src: "Weapons/Weapon_Scion_of_the_Blazing_sun.webp",
+    src: "Weapons/Weapon_Scion_of_the_Blazing_Sun.webp",
     weaponType: "Bow",
     rarity: 4,
     level: "1b",
