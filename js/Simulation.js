@@ -76,7 +76,7 @@ let shimenawasReminiscenceBuff = false;
 let retracingBolideBuff = false;
 let summitShaperBuff = false;
 let paleFlameStacks = 0;
-
+let archaicPetraBuff = false;
 
 
 function getBuild(build) {
@@ -792,7 +792,7 @@ function applyBonuses(character) {
         case "Wandering Evenstar":
             character.currentBuffs.push({ Type: "ATKflat", Value: (48 / 100) * character.EM() });
             break;
-        case "Summit Shaper": 
+        case "Summit Shaper":
             if (!summitShaperBuff) {
                 character.currentBuffs.push({ Type: "ATK%", Value: 40, Source: "Summit Shaper" });
                 summitShaperBuff = true;
@@ -982,9 +982,9 @@ function getSetBonus(array, character) {
                         });
                         retracingBolideBuff = true;
                     }
-                }else if (currentSet == "Bloodstained Chivalry") {
-                    if(character.havePhysicalChargedAttack){
-                        character.currentBuffs.push({ Type: "ChargedAttack", Value: 50,Source:"Bloodstained Chivalry" });
+                } else if (currentSet == "Bloodstained Chivalry") {
+                    if (character.havePhysicalChargedAttack) {
+                        character.currentBuffs.push({ Type: "ChargedAttack", Value: 50, Source: "Bloodstained Chivalry" });
                     }
                 }
                 else {
@@ -1099,7 +1099,7 @@ function resetVariables() {
     shimenawasReminiscenceBuff = false;
     retracingBolideBuff = false;
     paleFlameStacks = 0;
-
+    archaicPetraBuff = false;
 }
 function Simulation(character) {
 
@@ -1905,11 +1905,11 @@ function Simulation(character) {
 
                         break;
                     case "Pale Flame":
-                        if(paleFlameStacks<2){
+                        if (paleFlameStacks < 2) {
                             paleFlameStacks++;
-                            character.currentBuffs.push({Type:"ATK%", Value: 9, Source: "Pale Flame"});
-                            if(paleFlameStacks==2){
-                                character.currentBuffs.push({Type:"ATK%", Value: 18, Source: "Pale Flame"});
+                            character.currentBuffs.push({ Type: "ATK%", Value: 9, Source: "Pale Flame" });
+                            if (paleFlameStacks == 2) {
+                                character.currentBuffs.push({ Type: "ATK%", Value: 18, Source: "Pale Flame" });
                             }
                         }
                 }
@@ -2382,7 +2382,7 @@ function getFlatDamage(character, attackAction) {
             break;
         case "Everlasting Moonglow":
             if (attackAction.type != "ElementalSkill" && attackAction.type != "ElementalBurst" && attackAction.type != "ChargedAttack" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
-                flatDamage += character.HP() * (1/100);
+                flatDamage += character.HP() * (1 / 100);
         case "Redhorn Stonethresher":
             if (attackAction.type != "ElementalSkill" && attackAction.type != "ElementalBurst" && attackAction.type != "PlungeAttack" && attackAction.type != undefined)
                 flatDamage += character.DEF() * 0.40;
@@ -2652,7 +2652,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.burningDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized(character);
+                        crystalized(character, type);
                         break;
                 }
                 break;
@@ -2688,7 +2688,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.bloomDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized(character);
+                        crystalized(character, type);
                         break;
                 }
                 break;
@@ -2719,7 +2719,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         }
                         break;
                     case "Geo":
-                        crystalized(character);
+                        crystalized(character, type);
                         break;
                 }
                 break;
@@ -2743,7 +2743,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                         elementalDMGSources.swirlDMG += dmg;
                         break;
                     case "Geo":
-                        crystalized(character);
+                        crystalized(character, type);
                         break;
                 }
                 break;
@@ -2791,7 +2791,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 break;
             case "Geo":
                 if (type != "Anemo" && type != "Geo" && type != "Dendro") {
-                    crystalized(character);
+                    crystalized(character, type);
                 }
                 break;
         }
@@ -2911,7 +2911,7 @@ function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
     hasTriggerdABloomTypeReaction(character);
     return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
 }
-function crystalized(character) {
+function crystalized(character, element) {
     shieldCreated(character);
     hasShield = true;
     shardsInPossession++;
@@ -2925,6 +2925,14 @@ function crystalized(character) {
             });
             if (stacks < 2) {
                 character.currentBuffs.push({ Type: "ElementalSkill", Source: "Verdict", Value: 18 });
+            }
+            break;
+    }
+    switch (character.artifactFourPiece) {
+        case "Archaic Petra":
+            if (!archaicPetraBuff) {
+                character.currentBuffs.push({ Type: element + "DMGBonus", Source: "Archaic Petra", Value: 35 });
+                archaicPetraBuff = true;
             }
             break;
     }
@@ -3223,13 +3231,13 @@ function shieldCreated(character) {
                 jadefallsSplendorBuff = true;
             }
             break;
-        case "Summit Shaper": 
+        case "Summit Shaper":
             if (!summitShaperBuff) {
                 character.currentBuffs.push({ Type: "ATK%", Value: 40, Source: "Summit Shaper" });
                 summitShaperBuff = true;
             }
             break;
-        
+
     }
     switch (character.artifactFourPiece) {
         case "Nighttime Whispers in the Echoing Woods":

@@ -88,7 +88,6 @@ const artifactSets = {
     ["Archaic_Petra"]: {
         Type: "Archaic Petra",
         twoPiece: { Type: "GeoDMGBonus", Value: 15 },
-        fourPiece: { Type: "BonusDMG%", Value: 35 }
     },
     ["Blizzard_Strayer"]: {
         Type: "Blizzard Strayer",
