@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate my build - Genshin impact - Details</title>
+    <link rel="icon" href="Assets/Icons/Element_Geo.svg">
+    <script src="https://kit.fontawesome.com/7060ae4657.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/CSS.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <!--App module-->
+    <script type="module" src="js/details/app.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Rate my build - Details</h1>
+    </header>
+    <div class="details-container">
+        <main id="details-container">
+            <a href="index.html"><u>Return to simulation</u></a>
+            <section id="character">
+                <h2 id="character_name">Character</h2>
+                <p id="result_info"></p>
+                <img id="character_img">
+            </section>
+            <section id="compareBuilds">
+                <h2>Compare Builds</h2>
+                <div id="compareBuilds_container">
+                   
+                    <div id="artifacts">
+
+                    </div>
+                </div>
+            </section>
+            <h2>Damage Distrubution%</h2>
+            <section class="graph" id="graphs">
+                <div class="circleGraphs">
+                    <h3>Your Build</h3>
+                    <div>
+                        <canvas id="userGraph"></canvas>
+                    </div>
+                </div>
+                <div class="circleGraphs">
+                    <h3>Our Build</h3>
+                    <div>
+
+                        <canvas id="bestBuildGraph"></canvas>
+                    </div>
+                </div>
+            </section>
+            <section class="graph" id="damageGraph_container">
+                <h2>Damage</h2>
+                <div id="damageGraph_container">
+                    <canvas id="damageGraph"></canvas>
+                </div>
+            </section>
+           
+        </main>
+    </div>
+    <aside id="error-screen">
+        <section>
+            <img src="Assets/Characters/Paimon/Icon_5.webp" alt="Paimon laying down">
+            <p>Hmm.. something went wrong? If you have simulated please do so again.</p>
+            <p>You can do that <a href="/index.html">here</a>.</p>
+        </section>
+    </aside>
+    <footer>
+        <p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or
+            registered trademarks of HoYoverse.</p>
+    </footer>
+</body>
+<script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js
+"></script>
+
+<script src="js/details/graphs.js"></script>
+<script src="js/ElementalSkills.js"></script>
+<script src="js/ElementalBursts.js" ></script>
+<script src="js/Characters.js"></script>
+<script src="js/Weapons.js"></script>
+<script src="js/ArtifactModel.js"></script>
+<script src="js/WeaponScaling.js"></script>
+</html>

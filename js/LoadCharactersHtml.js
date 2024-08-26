@@ -190,7 +190,7 @@ function loadMockArtifacts() {
     document.getElementById("sands_substat_3_type").src = "Assets/Icons/Icon_Attribute_Defense.webp";
     document.getElementById("sands_substat_3_value").innerText = 19;
 
-    document.getElementById("sands_substat_4_type").dataset.type = "CriteRate";
+    document.getElementById("sands_substat_4_type").dataset.type = "CritRate";
     document.getElementById("sands_substat_4_type").title = "CritRate";
     document.getElementById("sands_substat_4_type").src = "Assets/Icons/Icon_Attribute_Critical_Hit.webp";
     document.getElementById("sands_substat_4_value").innerText = 10.9;

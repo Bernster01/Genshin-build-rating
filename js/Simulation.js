@@ -77,9 +77,9 @@ let retracingBolideBuff = false;
 let summitShaperBuff = false;
 let paleFlameStacks = 0;
 let archaicPetraBuff = false;
+let userBuild = {};
 
-
-function getBuild(build) {
+function getBuild(build,score) {
     let character = build.character;
     let b = {
         character: {
@@ -89,6 +89,7 @@ function getBuild(build) {
             elementalSkillLevel: character.elementalSkill,
             elementalBurstLevel: character.elementalBurst,
             buffs: character.currentBuffs,
+            element: character.element,
         },
         artifacts: character.artifacts,
         weapon: {
@@ -106,7 +107,8 @@ function getBuild(build) {
             healing: build.healing,
             buff: build.buff,
             shield: build.shield
-        }
+        },
+        buildScore: score
 
     }
     return b;
@@ -175,6 +177,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     setTimeout(function () {
         parentDoc.style.transform = "scale(" + size + ")";
     }, 100);
+    userBuild = getBuild(result2, score);
     return true;
 }
 
@@ -228,7 +231,7 @@ async function findBestBuildLoop(baseChar, times) {
                 }
                 let evalResult = EvalBuilds(result, bestBuild[role][currentCharacter], role);
                 if (evalResult > 100) {
-                    bestBuild[role][currentCharacter] = getBuild(deepClone(result));
+                    bestBuild[role][currentCharacter] = getBuild(deepClone(result), evalResult);
                     bestScore = evalResult;
 
                 }
@@ -255,7 +258,7 @@ async function findBestBuildLoop(baseChar, times) {
                     let result2 = Simulation(newCharacter2);
                     let evalResult2 = EvalBuilds(result2, bestBuild[role][currentCharacter], role);
                     if (evalResult2 > 100) {
-                        bestBuild[role][currentCharacter] = getBuild(deepClone(result));
+                        bestBuild[role][currentCharacter] = getBuild(deepClone(result), evalResult);
                         bestScore = evalResult2;
                     }
                     newCharacter2 = null;

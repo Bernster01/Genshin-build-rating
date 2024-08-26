@@ -129,4 +129,5 @@ function deepClone(obj, hash = new WeakMap()) {
 
     return result;
 }
+
 document.addEventListener("DOMContentLoaded", starterFunction);

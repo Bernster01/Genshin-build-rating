@@ -38,7 +38,7 @@ async function prepare(button) {
         await runSimulation(baseCharacter, weapon, artifacts, runs);
         simScreen.style.display = "none";
     }
-       
+
 }
 function getArtifacts() {
     const circletMainstat = { Type: document.getElementById("circlet_mainstat_type").dataset.type, Value: Number.parseFloat(document.getElementById("circlet_mainstat_value").innerText) };
@@ -164,4 +164,25 @@ function runSimulation(character, weapon, artifacts, runs) {
     bestDMG = 0;
     // validateAllCharacters();
     return runSim(character, weapon, artifacts, runs);
+}
+
+function sendBuild() {
+    //Go to details.html with a post package
+    let baseUrl = window.location.href.split("?")[0];
+    //remove index.html from the url
+    baseUrl = baseUrl.replace("index.html", "");
+    let destintaion = "details.html";
+
+    let user = JSON.stringify(userBuild);
+    console.log(JSON.stringify(bestBuild[role][userBuild.character.name]));
+    let build = JSON.stringify(bestBuild[role][userBuild.character.name]);
+    //Delete session storage
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("currentBestBuild");
+    //store tmp in session storage
+    sessionStorage.setItem("user", user);
+    sessionStorage.setItem("currentBestBuild", build);
+    //redirect to details.html
+    window = window.open(baseUrl+destintaion, "_self");
+
 }
