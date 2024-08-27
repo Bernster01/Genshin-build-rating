@@ -1711,7 +1711,7 @@ const TheFirstGreatMagic = {
         }
     },
 
-    passive: function () { return [{ Type: "ChargedAttack", Value: 16 }, { Type: "ATK%", Value: 28 }] },
+    passive: function () { return [{ Type: "ChargedAttack", Value: 16 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;

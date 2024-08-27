@@ -3,7 +3,10 @@ async function prepare(button) {
     endEarly = false;
     let simScreen = document.getElementById("simRunScreen");
     let runs = document.getElementById("simulationRuns").value;
-
+    const partyMemberElement1 = document.getElementById("partyMemberElement1").value;
+    const partyMemberElement2 = document.getElementById("partyMemberElement2").value;
+    const partyMemberElement3 = document.getElementById("partyMemberElement3").value;
+    partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
     if (runs === "" || runs === null || runs === undefined) {
         runs = 15;
     }

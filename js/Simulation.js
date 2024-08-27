@@ -78,8 +78,8 @@ let summitShaperBuff = false;
 let paleFlameStacks = 0;
 let archaicPetraBuff = false;
 let userBuild = {};
-
-function getBuild(build,score) {
+let partyMemberElements = [];
+function getBuild(build, score) {
     let character = build.character;
     let b = {
         character: {
@@ -801,6 +801,15 @@ function applyBonuses(character) {
                 summitShaperBuff = true;
             }
             break;
+        case "The First Great Magic":
+            let hasSameElement = 0;
+            partyMemberElements.forEach(element => {
+                if (element == character.element)
+                    hasSameElement++;
+            });
+            character.currentBuffs.push({ Type: "ATK%", Value: 16 * hasSameElement, Source: "The First Great Magic" });
+            break;
+
 
 
     }
