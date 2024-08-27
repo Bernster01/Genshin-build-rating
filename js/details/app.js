@@ -81,8 +81,8 @@ function tableBuilder(builds) {
     const usersPyroDMGBonus = user.advancedstats.elementalBonuses[0].Value > build.advancedstats.elementalBonuses[0].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[0].Value < build.advancedstats.elementalBonuses[0].Value ? buildIsHigherImg : "-";
     const usersHydroDMGBonus = user.advancedstats.elementalBonuses[1].Value > build.advancedstats.elementalBonuses[1].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[1].Value < build.advancedstats.elementalBonuses[1].Value ? buildIsHigherImg : "-";
     const usersDendroDMGBonus = user.advancedstats.elementalBonuses[2].Value > build.advancedstats.elementalBonuses[2].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[2].Value < build.advancedstats.elementalBonuses[2].Value ? buildIsHigherImg : "-";
-    const usersAnemoDMGBonus = user.advancedstats.elementalBonuses[3].Value > build.advancedstats.elementalBonuses[3].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[3].Value < build.advancedstats.elementalBonuses[3].Value ? buildIsHigherImg : "-";
-    const usersElectroDMGBonus = user.advancedstats.elementalBonuses[4].Value > build.advancedstats.elementalBonuses[4].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[4].Value < build.advancedstats.elementalBonuses[4].Value ? buildIsHigherImg : "-";
+    const usersAnemoDMGBonus = user.advancedstats.elementalBonuses[4].Value > build.advancedstats.elementalBonuses[4].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[4].Value < build.advancedstats.elementalBonuses[4].Value ? buildIsHigherImg : "-";
+    const usersElectroDMGBonus = user.advancedstats.elementalBonuses[3].Value > build.advancedstats.elementalBonuses[3].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[3].Value < build.advancedstats.elementalBonuses[3].Value ? buildIsHigherImg : "-";
     const usersCryoDMGBonus = user.advancedstats.elementalBonuses[5].Value > build.advancedstats.elementalBonuses[5].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[5].Value < build.advancedstats.elementalBonuses[5].Value ? buildIsHigherImg : "-";
     const usersGeoDMGBonus = user.advancedstats.elementalBonuses[6].Value > build.advancedstats.elementalBonuses[6].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[6].Value < build.advancedstats.elementalBonuses[6].Value ? buildIsHigherImg : "-";
     const usersPhysicalDMGBonus = user.advancedstats.elementalBonuses[7].Value > build.advancedstats.elementalBonuses[7].Value ? userIsHigherImg : user.advancedstats.elementalBonuses[7].Value < build.advancedstats.elementalBonuses[7].Value ? buildIsHigherImg : "-";
@@ -204,16 +204,17 @@ function tableBuilder(builds) {
                 <td>${user.advancedstats.elementalBonuses[2].Value}%</td>
                 <td>${usersDendroDMGBonus}</td>
                 <td>${build.advancedstats.elementalBonuses[2].Value}%</td>
-            <tr>
-                <td>Anemo DMG Bonus</td>
+            </tr>
+             <tr>
+                <td>Electro DMG Bonus</td>
                 <td>${user.advancedstats.elementalBonuses[3].Value}%</td>
-                <td>${usersAnemoDMGBonus}</td>
+                <td>${usersElectroDMGBonus}</td>
                 <td>${build.advancedstats.elementalBonuses[3].Value}%</td>
             </tr>
             <tr>
-                <td>Electro DMG Bonus</td>
+                <td>Anemo DMG Bonus</td>
                 <td>${user.advancedstats.elementalBonuses[4].Value}%</td>
-                <td>${usersElectroDMGBonus}</td>
+                <td>${usersAnemoDMGBonus}</td>
                 <td>${build.advancedstats.elementalBonuses[4].Value}%</td>
             </tr>
             <tr>
