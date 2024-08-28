@@ -127,7 +127,7 @@ const artifactSets = {
     ["Flower_of_Paradise_Lost"]: {
         Type: "Flower of Paradise Lost",
         twoPiece: { Type: "ElementalMastery", Value: 80 },
-        fourPiece: { Type: "Flower of Paradise Lost", Value: null }
+        fourPiece: { Type: "Flower of Paradise Lost", Value: 40 }
     },
     ["Fragment_of_Harmonic_Whimsy"]: {
         Type: "Fragment of Harmonic Whimsy",

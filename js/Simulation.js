@@ -2631,7 +2631,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                     bloomBuff = 400;
                 bloomBonus += bloomBuff;
             }
-            else if (buff.Type == "Flower of Paradise") {
+            else if (buff.Type == "Flower of Paradise Lost") {
                 bloomBonus += buff.Value;
                 hyperbloomBonus += buff.Value;
                 burgeoningBonus += buff.value;
@@ -2962,7 +2962,7 @@ function crystalized(character, element) {
                     buffStacks++;
                 }
             });
-            if (stacks < 2) {
+            if (buffStacks < 2) {
                 character.currentBuffs.push({ Type: "ElementalSkill", Source: "Verdict", Value: 18 });
             }
             break;
@@ -3303,11 +3303,11 @@ function shieldCreated(character) {
 }
 function hasTriggerdABloomTypeReaction(character) {
     switch (character.artifactFourPiece) {
-        case "Flower of Paradise":
+        case "Flower of Paradise Lost":
             if (flowerOfparadiseLostStacks < 4) {
-                character.currentBuffs.push({ Type: "bloomBonus", Value: 25, Source: "Flower of Paradise" });
-                character.currentBuffs.push({ Type: "HyperBloomBonus", Value: 25, Source: "Flower of Paradise" });
-                character.currentBuffs.push({ Type: "BurgeoningBonus", Value: 25, Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "bloomBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "HyperBloomBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "BurgeoningBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
                 flowerOfparadiseLostStacks++;
             }
     }
