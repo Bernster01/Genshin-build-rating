@@ -127,7 +127,7 @@ async function downloadJSON(build) {
     a.download = "build.json";
     a.click();
 }
-async function validateAllCharacters() {
+async function validateAllCharacters(runs = 1) {
     //Goes through all characters and validates them
     let startTime = Date.now();
     for (const character in AllCharacters) {
@@ -139,11 +139,11 @@ async function validateAllCharacters() {
 
         role = "Dps";
         console.log("Simulating Dps " + character);
-        let result = await FindBestBuild(element, 1);
+        let result = await FindBestBuild(element, runs);
         //Switch to other role
         role = "Support";
         console.log("Simulating Support " + character);
-        let result2 = await FindBestBuild(element, 1);
+        let result2 = await FindBestBuild(element, runs);
 
         role = tmpRole;
         if (result == null || result == undefined) {
