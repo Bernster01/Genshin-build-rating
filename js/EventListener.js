@@ -5,7 +5,7 @@ function selectSupportingElement(element, obj, type) {
     let doc2 = document.getElementById("SelectedSupportingElement").innerText = "";
     obj.removeAttribute("id");
     obj.style.width = "fit-content";
-    supportingElement = null;
+    supportingElement = "noElement";
     obj.style.height = "85px";
     obj.setAttribute("onclick", "selectSupportingElement('" + element + "',this,false)");
     obj.remove();

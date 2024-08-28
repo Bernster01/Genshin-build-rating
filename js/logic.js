@@ -94,13 +94,7 @@ function starterFunction() {
             }
         }
     });
-    //Get JSON from ../data/currentBestBuild.json
-    fetch("../data/currentBestBuild.json")
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            // bestBuild = data;
-        });
+    
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions

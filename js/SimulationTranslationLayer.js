@@ -10,7 +10,7 @@ async function prepare(button) {
     if (runs === "" || runs === null || runs === undefined) {
         runs = 15;
     }
-
+    setBestBuild();
     //Prepare the character for the simulation
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterImg").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponImg").title];
@@ -188,4 +188,14 @@ function sendBuild() {
     //redirect to details.html
     window = window.open(baseUrl+destintaion, "_self");
 
+}
+async function setBestBuild(){
+   let build = await getBestBuildFromJSON(supportingElement)
+    bestBuild = build;
+}
+async function getBestBuildFromJSON(element = "noElement") {
+        //Get JSON from ../data/currentBestBuild.json
+    let data =  await fetch(`../data/currentBestBuild_${element}.json`);
+    let result =  await data.json();
+    return result;
 }

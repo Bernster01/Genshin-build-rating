@@ -1,5 +1,5 @@
 let bestBuild = { Dps: {}, Support: {} };
-let supportingElement = null;
+let supportingElement = "noElement";
 let enemiesFrozen = false;
 let role = "Dps";
 let mistSplitterNormalStack = false;
@@ -131,22 +131,25 @@ async function validateAllCharacters() {
     //Goes through all characters and validates them
     let startTime = Date.now();
     for (const character in AllCharacters) {
-        let tmpRole = "Dps";
+        console.log("Generating Build for " + character);
+        let tmpRole = role;
         if (character == "index")
             continue;
         const element = AllCharacters[character];
-        let result = await FindBestBuild(element, 40);
-        //Switch to other role
-        if (role == "Dps")
-            role = "Support";
-        else
+       
             role = "Dps";
-        let result2 = await FindBestBuild(element, 40);
-        tmpRole = role;
+        console.log("Simulating Dps " + character);
+        let result = await FindBestBuild(element, 200);
+        //Switch to other role
+       role = "Support";
+        console.log("Simulating Support " + character);
+        let result2 = await FindBestBuild(element, 200);
+
+        role = tmpRole;
         if (result == null || result == undefined) {
             console.log(character + " FAILED");
         }
-        await delay(4);
+        await delay(100);
     }
     let stopTime = Date.now();
     console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
@@ -194,6 +197,7 @@ async function findBestBuildLoop(baseChar, times) {
     let startTime = Date.now();
     let currentCharacter = baseChar.name;
     for (let index = 0; index < times; index++) {
+        console.log(baseChar.name + " " + role + " Run " + index + " of " + times);
         if (endEarly)
             return bestScore;
         let artifacts = GenerateArtifacts(baseChar.scalingType)
@@ -274,6 +278,7 @@ async function findBestBuildLoop(baseChar, times) {
             document.getElementById("loadingPaimon-container").style.width = Math.floor(index / times * 100) + 17.5 + "%";
             await delay(4);
         }
+
     }
     return bestScore;
 }

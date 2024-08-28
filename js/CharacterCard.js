@@ -31,7 +31,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
         Goblet: importedArtifacts[4]
     }
     
-    let supportingElementHtmlCode = (supportingElement != null && supportingElement != "null") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
+    let supportingElementHtmlCode = (supportingElement != null && supportingElement != "noElement") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
     if (!createData) {
         
     }
