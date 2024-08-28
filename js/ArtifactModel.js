@@ -92,7 +92,6 @@ const artifactSets = {
     ["Blizzard_Strayer"]: {
         Type: "Blizzard Strayer",
         twoPiece: { Type: "CryoBonusDMG", Value: 15 },
-        fourPiece: { Type: "CritRate", Value: 20 }
     },
     ["Bloodstained_Chivalry"]: {
         Type: "Bloodstained Chivalry",
@@ -143,7 +142,6 @@ const artifactSets = {
     ["Gladiators_Finale"]: {
         Type: "Gladiators Finale",
         twoPiece: { Type: "ATK%", Value: 18 },
-        fourPiece: { Type: "NormalAttack", Value: 35 },
 
     },
     ["Golden_Troupe"]: {
@@ -167,7 +165,6 @@ const artifactSets = {
     ["Lavawalker"]: {
         Type: "Lavawalker",
         twoPiece: { Type: "", Value: null },
-        fourPiece: { Type: "BonusDMG%", Value: 0.35 },
 
     },
     ["Maiden_Beloved"]: {
@@ -236,7 +233,6 @@ const artifactSets = {
     ["Thundersoother"]: {
         Type: "Thundersoother",
         twoPiece: { Type: "", Value: null },
-        fourPiece: { Type: "", Value: 35 }
 
     },
     ["Unfinished_Reverie"]: {
@@ -266,7 +262,7 @@ const artifactSets = {
     ["Wanderers_Troupe"]: {
         Type: "Wanderers Troupe",
         twoPiece: { Type: "ElementalMastery", Value: 80 },
-        fourPiece: { Type: "ChargedAttack", Value: 35 },
+       
     }
 }
 let artifactPieces = {

@@ -136,20 +136,20 @@ async function validateAllCharacters() {
         if (character == "index")
             continue;
         const element = AllCharacters[character];
-       
-            role = "Dps";
+
+        role = "Dps";
         console.log("Simulating Dps " + character);
-        let result = await FindBestBuild(element, 200);
+        let result = await FindBestBuild(element, 1);
         //Switch to other role
-       role = "Support";
+        role = "Support";
         console.log("Simulating Support " + character);
-        let result2 = await FindBestBuild(element, 200);
+        let result2 = await FindBestBuild(element, 1);
 
         role = tmpRole;
         if (result == null || result == undefined) {
             console.log(character + " FAILED");
         }
-        await delay(100);
+        await delay(4);
     }
     let stopTime = Date.now();
     console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
@@ -970,19 +970,21 @@ function getSetBonus(array, character) {
             if (artifactSets[array[i]].fourPiece != undefined) {
                 if (currentSet == "Gladiator's Finale") {
                     if (character.weapon.weaponType == "Sword" || character.weapon.weaponType == "Claymore" || character.weapon.weaponType == "Polearm") {
-                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                        character.currentBuffs.push({ Type: "NormalAttack", Value: 35, Source: "Gladiator's Finale" });
                     }
                 }
                 else if (currentSet == "Wanderer's Troupe") {
 
                     if (character.weapon.weaponType == "Bow" || character.weapon.weaponType == "Catalyst") {
-                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                        character.currentBuffs.push({ Type: "ChargedAttack", Value: 35, Source: "Wanderer's Troupe" });
 
                     }
                 }
                 else if (currentSet == "Blizzard Strayer") {
-                    if (character.element == "CryoCharacter") {
-                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+                    if (character.element == "CryoCharacter" || supportingElement == "Cryo") {
+                        character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Blizzard Strayer" });
+                        if (character.element == "HydroCharacter" || supportingElement == "Hydro")
+                            character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Blizzard Strayer (Frozen)" });
                     }
                 } else if (currentSet == "Golden Troupe") {
                     if (character.subDpsType == "Off-field" && role == "Support") {
@@ -1003,20 +1005,23 @@ function getSetBonus(array, character) {
                     if (character.havePhysicalChargedAttack) {
                         character.currentBuffs.push({ Type: "ChargedAttack", Value: 50, Source: "Bloodstained Chivalry" });
                     }
+                } else if (currentSet == "Lavawalker") {
+                    if (character.element == "PyroCharacter" || supportingElement == "Pyro") {
+                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35, Source: "Lavawalker" });
+                    }
+                } else if (currentSet == "Thundersoother") {
+                    if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
+                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35, Source: "Thunder Soother" });
+                    }
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
                         artifactSets[array[i]].fourPiece.forEach(buff => { character.currentBuffs.push(buff) });
                     }
                     else {
-                        if (artifactSets[array[i]].fourPiece.Type == undefined) {
-                            artifactSets[array[i]].fourPiece.forEach(buff => {
-                                character.currentBuffs.push(buff);
-                            });
-                        }
-                        else {
-                            character.currentBuffs.push(artifactSets[array[i]].fourPiece);
-                        }
+
+                        character.currentBuffs.push(artifactSets[array[i]].fourPiece);
+
                     }
 
                 }
@@ -2599,11 +2604,14 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 swirlBonus += 60;
             }
             else if (buff.Type == "All things Are of the Earth") {
-                burningBonus += buff.Value.transformitiveBonus
-                bloomBonus += buff.Value.transformitiveBonus
-                hyperbloomBonus += buff.Value.transformitiveBonus
-                burgeoningBonus += buff.Value.transformitiveBonus
-
+                let maxHPPercent = character.HP() / 1000;
+                if (maxHPPercent > 50)
+                    maxHPPercent = 50;
+                const bonus = 2 * maxHPPercent;
+                bloomBonus += bonus;
+                burgeoningBonus += bonus;
+                hyperbloomBonus += bonus;
+                burningBonus += bonus;
             }
             else if (buff.Type == "bloomBonus") {
                 bloomBonus += buff.Value;
@@ -2871,6 +2879,13 @@ function aggravate(character) {
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "Aggravate") {
             aggravateBonus = buff.Value;
+        } else if (buff.Type == "All things Are of the Earth") {
+            let maxHPPercent = character.HP() / 1000;
+            if (maxHPPercent > 50)
+                maxHPPercent = 50;
+            const bonus = 0.8 * maxHPPercent;
+            aggravateBonus += bonus;
+
         }
     });
     aggravateBonus = (aggravateBonus == 0) ? 0 : aggravateBonus / 100;
@@ -2886,6 +2901,13 @@ function spread(character) {
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "Spread") {
             spreadBonus = buff.Value;
+        } else if (buff.Type == "All things Are of the Earth") {
+            let maxHPPercent = character.HP() / 1000;
+            if (maxHPPercent > 50)
+                maxHPPercent = 50;
+            const bonus = 0.8 * maxHPPercent;
+            spreadBonus += bonus;
+
         }
     });
     spreadBonus = (spreadBonus == 0) ? 0 : spreadBonus / 100;
@@ -3258,7 +3280,7 @@ function shieldCreated(character) {
     }
     switch (character.artifactFourPiece) {
         case "Nighttime Whispers in the Echoing Woods":
-            if (!nighttimeWhispersInTheEchoingWoodsBuff) {
+            if (nighttimeWhispersInTheEchoingWoodsBuff) {
                 //Check if buff is 50 or 20 value
                 let buff = character.currentBuffs.find(b => b.Source == "Nighttime Whispers in the Echoing Woods");
                 if (buff.Value == 20) {
