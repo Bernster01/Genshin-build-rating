@@ -31,7 +31,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
         Goblet: importedArtifacts[4]
     }
     
-    let supportingElementHtmlCode = (supportingElement != null && supportingElement != "noElement") ? `<img src="../Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
+    let supportingElementHtmlCode = (supportingElement != null && supportingElement != "noElement") ? `<img src="./Elements/${supportingElement}.png" alt="${supportingElement}">` : "<span>No on field element</span>";
     if (!createData) {
         
     }
@@ -481,7 +481,7 @@ function getResonance(resonances) {
         for (let key in resonances) {
             resonancesList.push(resonances[key].toLowerCase());
             if (resonances[key] != "") {
-                htmlCode += `<img src="Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
+                htmlCode += `<img src="./Elements/${resonancesList[key]}.png" alt="${resonancesList[key]}">`;
             }
         }
     }
