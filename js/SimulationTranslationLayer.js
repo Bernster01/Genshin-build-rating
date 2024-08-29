@@ -191,6 +191,10 @@ function sendBuild() {
 }
 async function setBestBuild(){
    let build = await getBestBuildFromJSON(supportingElement)
+   if(build === undefined || build === null){
+       console.log("No build found");
+       return;
+   }
     bestBuild = build;
 }
 async function getBestBuildFromJSON(element = "noElement") {
