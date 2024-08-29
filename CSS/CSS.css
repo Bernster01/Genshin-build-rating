@@ -1646,12 +1646,16 @@ span {
 	max-height: 400px;
 	object-fit: contain;
 }
-
+#table_container{
+	border: var(--main-color) solid 0.25rem;
+	border-radius: 2rem;
+	overflow: hidden;
+}
 .compareTable {
 	width: 100%;
 	background-color: var(--tertiary-color);
 	border-collapse: collapse;
-	border: var(--main-color) solid 0.25rem;
+	/* border: var(--main-color) solid 0.25rem; */
 	
 
 }
@@ -1663,6 +1667,10 @@ span {
 
 .compareTable tr {
 	border-bottom: var(--main-color) solid 0.25rem;
+
+}
+.compareTable tr:last-child {
+	border-bottom: none;
 
 }
 .compareTable tr td:first-child {
@@ -1707,6 +1715,7 @@ span {
 	border-radius: 1rem;
 	padding: 1rem;
 }
+
 @keyframes paimonLoading {
 
 	0% {

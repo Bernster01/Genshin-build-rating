@@ -79,22 +79,20 @@ function starterFunction() {
     // validateAllCharacters();
     updateArtifactBefore();
     //Add event listener to the card that scales the card to fit screen
-    window.addEventListener("resize", function () {
-        let container = document.getElementById("result-container");
-        if (container != null || container != undefined) {
-            let windowWidth = window.innerWidth;
-            if(windowWidth < 1920){
-
-            
-            container.style.transform = `scale(${windowWidth / 1920})`;
-            }
-            else
-            {
-                container.style.transform = "scale(1)";
-            }
-        }
-    });
+    window.addEventListener("resize", scaleCard);
     
+}
+function scaleCard() {
+    let container = document.getElementById("result-container");
+    if (container != null || container != undefined) {
+      
+       let maxHeigth = window.innerHeight * 0.7;
+         let maxWidth = window.innerWidth * 0.9;
+
+        
+        container.style.transform = `scale(${Math.min(maxWidth / container.offsetWidth, maxHeigth / container.offsetHeight)})`;
+        
+    }
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions

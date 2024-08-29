@@ -179,6 +179,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let size = (window.innerWidth < 1920) ? window.innerWidth / 1920 : 1;
     setTimeout(function () {
         parentDoc.style.transform = "scale(" + size + ")";
+        scaleCard();
     }, 100);
     userBuild = getBuild(result2, score);
     return true;
