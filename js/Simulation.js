@@ -3061,8 +3061,16 @@ function hasTriggerdAReaction(character) {
     switch (character.artifactFourPiece) {
         case "Gilded Dreams":
             if (!gildedDreamsBuff) {
-                character.currentBuffs.push({ Type: "ElementalMastery", Value: 75, Source: "Gilded Dreams" });
-                character.currentBuffs.push({ Type: "ATK%", Value: 21, Source: "Gilded Dreams" });
+                let sameElement = 0;
+                let differentElement = 0;
+                partyMemberElements.forEach(element => {
+                    if (element == character.element)
+                        sameElement++;
+                    else
+                        differentElement++;
+                });
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 75*differentElement, Source: "Gilded Dreams" });
+                character.currentBuffs.push({ Type: "ATK%", Value: 21*sameElement, Source: "Gilded Dreams" });
                 gildedDreamsBuff = true;
             }
             break;
