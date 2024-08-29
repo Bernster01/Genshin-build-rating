@@ -490,28 +490,28 @@ function getResonance(resonances) {
 }
 function getGrade(score) {
     let grade;
-    if (score >= 0 && score <= 30) {
+    if (score >= 0 && score < 30) {
         grade = "F";
     }
-    else if (score >= 31 && score <= 40) {
+    else if (score >= 30 && score <= 35) {
         grade = "E";
     }
-    else if (score >= 41 && score <= 50) {
+    else if (score >= 35 && score < 45) {
         grade = "D";
     }
-    else if (score >= 51 && score <= 60) {
+    else if (score >= 45 && score < 55) {
         grade = "C";
     }
-    else if (score >= 61 && score <= 70) {
+    else if (score >= 55 && score < 65) {
         grade = "B";
     }
-    else if (score >= 71 && score <= 80) {
+    else if (score >= 65 && score < 75) {
         grade = "A";
     }
-    else if (score >= 81 && score <= 90) {
+    else if (score >= 75 && score < 85) {
         grade = "S";
     }
-    else if (score >= 91 && score <= 100) {
+    else if (score >= 85 && score <= 100) {
         grade = "S+";
     }
     else if (score >= 101) {
