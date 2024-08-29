@@ -775,7 +775,7 @@ select {
 	justify-content: space-evenly;
 }
 
-.supportingElementContainer div {
+.selectableSupportingElement {
 	display: flex;
 	flex-direction: column;
 	background: var(--tertiary-color);

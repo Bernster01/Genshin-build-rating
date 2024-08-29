@@ -1,41 +1,26 @@
-function selectSupportingElement(element, obj, type) {
-  if (type) {
-    let doc = document.getElementById('supportingElement');
-
-    let doc2 = document.getElementById("SelectedSupportingElement").innerText = "";
-    obj.removeAttribute("id");
-    obj.style.width = "fit-content";
+function selectSupportingElement(element, obj) {
+  //Check if the element is already selected
+  const selectedElement = obj.classList.contains("selectedElement");
+  const selectedContainer = document.getElementById("CurrentlySelectedSupportingElement");
+  const unSelectedContainer = document.getElementById("supportingElement");
+  
+  //If the selected element is clicked
+  if (selectedElement) {
+    obj.classList.remove("selectedElement");
+    //Append the selectedElement to the container
+    unSelectedContainer.appendChild(obj);
     supportingElement = "noElement";
-    obj.style.height = "85px";
-    obj.setAttribute("onclick", "selectSupportingElement('" + element + "',this,false)");
-    obj.remove();
-    doc.appendChild(obj);
-
-
-  } else {
-    let doc;
-    let doc2 = document.getElementById("CurrentlySelectedSupportingElement");
-    if (document.getElementById("CurrentlySelected") != null) {
-      doc = document.getElementById("CurrentlySelected");
-
-      doc.style.width = "fit-content";
-
-      doc.setAttribute("onclick", "selectSupportingElement('" + element + "',this,false)");
-      doc.style.height = "85px";
-      doc.removeAttribute("id");
-      obj.parentElement.appendChild(doc);
-    }
-
-
-    document.getElementById("SelectedSupportingElement").innerText = element;
-    obj.setAttribute("id", "CurrentlySelected");
-    obj.setAttribute("onclick", "selectSupportingElement('" + element + "',this,true)");
-    obj.remove();
-    doc2.appendChild(obj);
-    obj.style.width = "92px";
-    obj.style.height = "130px";
-    supportingElement = element;
+    return;
   }
+  //If new element is selected
+  //Add the selectedElement class to the clicked element
+  obj.classList.add("selectedElement");
+
+  supportingElement = element;
+  //Append the selectedElement to the container
+  selectedContainer.appendChild(obj);
+ 
+  
 }
 
 function selectRole(value) {
