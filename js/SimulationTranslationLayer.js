@@ -195,7 +195,7 @@ async function setBestBuild(){
 }
 async function getBestBuildFromJSON(element = "noElement") {
         //Get JSON from ../data/currentBestBuild.json
-    let data =  await fetch(`../data/currentBestBuild_${element}.json`);
+    let data =  await fetch(`/data/currentBestBuild_${element}.json`);
     let result =  await data.json();
     return result;
 }
