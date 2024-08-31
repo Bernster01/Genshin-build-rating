@@ -597,7 +597,7 @@ function applyBonuses(character) {
         }
     });
     if (character.name == "Neuvillette") {
-        for (buff of character.currentBuffs) {
+        for (const buff of character.currentBuffs) {
             if (buff.Type == "Discipline of the Supreme Arbitration") {
                 let currentHP = character.HP();
                 //Add 0.6% bonus for every 1% of current HP over 30% max hp
