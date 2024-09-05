@@ -4,35 +4,17 @@ function circleGraph(user, build) {
     let userCtx = document.getElementById('userGraph').getContext('2d');
     let buildCtx = document.getElementById('bestBuildGraph').getContext('2d');
     console.log(user);
-    const userData = {
-        normalattack: user.dmg.sources.n ? Math.floor((user.dmg.sources.n/user.dmg.totalDmg)*100) : 0,
-        chargedattack: user.dmg.sources.c ? Math.floor((user.dmg.sources.c/user.dmg.totalDmg)*100) : 0,
-        plungingattack: user.dmg.sources.p ? Math.floor((user.dmg.sources.p/user.dmg.totalDmg)*100) : 0,
-        elementalSkill: user.dmg.sources.e ? Math.floor((user.dmg.sources.e/user.dmg.totalDmg)*100) : 0,
-        elementalburst: user.dmg.sources.q ? Math.floor((user.dmg.sources.q/user.dmg.totalDmg)*100) : 0,
-    };
+    const userData = getData(user,true);
     let userGraph = new Chart(userCtx, {
         type: 'pie',
         data: {
-            labels: ['Normal Attack', 'Charged Attack', 'Plunging Attack', 'Elemental Skill', 'Elemental Burst'],
+            labels: userData.labels,
             datasets: [{
                 label: 'Damage Source Percentage',
-                data: [userData.normalattack, userData.chargedattack, userData.plungingattack, userData.elementalSkill, userData.elementalburst],
+                data: userData.datasets,
 
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
+                backgroundColor: userData.backgroundColor,
+                borderColor: userData.borderColor,
                 borderWidth: 2,
                 hoverOffset: 35,
                 hoverBorderColor: 'rgba(0,0,0,1)',
@@ -48,35 +30,17 @@ function circleGraph(user, build) {
             }
         }
     });
-    const buildData = {
-        normalattack: build.dmg.sources.n ? Math.floor((build.dmg.sources.n/build.dmg.totalDmg)*100) : 0,
-        chargedattack: build.dmg.sources.c ? Math.floor((build.dmg.sources.c/build.dmg.totalDmg)*100) : 0,
-        plungingattack: build.dmg.sources.p ? Math.floor((build.dmg.sources.p/build.dmg.totalDmg)*100) : 0,
-        elementalSkill: build.dmg.sources.e ? Math.floor((build.dmg.sources.e/build.dmg.totalDmg)*100) : 0,
-        elementalburst: build.dmg.sources.q ? Math.floor((build.dmg.sources.q/build.dmg.totalDmg)*100) : 0,
-    };
+    const buildData = getData(build,true);
     let buildGraph = new Chart(buildCtx, {
         type: 'pie',
         data: {
-            labels: ['Normal Attack', 'Charged Attack', 'Plunging Attack', 'Elemental Skill', 'Elemental Burst'],
-            datasets: [{
+            labels: buildData.labels,
+                datasets: [{
                 label: 'Damage Source Percentage',
-                data: [buildData.normalattack, buildData.chargedattack, buildData.plungingattack, buildData.elementalSkill, buildData.elementalburst],
+                data: buildData.datasets,
 
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
+                backgroundColor: buildData.backgroundColor,
+                borderColor: buildData.borderColor,
                 borderWidth: 2,
                 hoverOffset: 35,
                 hoverBorderColor: 'rgba(0,0,0,1)',
@@ -95,26 +59,26 @@ function circleGraph(user, build) {
 
     return { userGraph, buildGraph };
 }
-function barGraphDamage(user, build){
-    let graph = document.getElementById('damageGraph').getContext('2d');
-    let userDmg = user.dmg.totalDmg;
-    let buildDmg = build.dmg.totalDmg;
-    let labels = ["Total Damage","Normal Attack","Charged Attack","Plunging Attack","Elemental Skill","Elemental Burst"];
-    let userData = [userDmg, user.dmg.sources.n, user.dmg.sources.c, user.dmg.sources.p, user.dmg.sources.e, user.dmg.sources.q];
-    let buildData = [buildDmg, build.dmg.sources.n, build.dmg.sources.c, build.dmg.sources.p, build.dmg.sources.e, build.dmg.sources.q];
+function barGraphDamage(user, build) {
+    const graph = document.getElementById('damageGraph').getContext('2d');
+    const userDmg = user.dmg.totalDmg;
+    const buildDmg = build.dmg.totalDmg;
+    const userData = getData(user);
+    const buildData = getData(build);
+    let labels = userData.labels;
     let graphData = {
         labels: labels,
         datasets: [
             {
                 label: "You",
-                data: userData,
+                data: userData.datasets,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
             },
             {
                 label: "Our build",
-                data: buildData,
+                data: buildData.datasets,
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -136,4 +100,151 @@ function barGraphDamage(user, build){
     });
     return dmgGraph;
 }
+/**
+    * Get the data for the graph
+    * @param {Object} build - the build object
+    * @param {Boolean} asPercentage - if the data should be in percentage (if left empty, it will be false)
+    * @returns {Object} - the data for the graph
+ */
+function getData(build, asPercentage = false) {
+    const colorData = {
+        normalattack: {
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+        },
+        chargedattack: {
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+        },
+        plungingattack: {
+            backgroundColor: 'rgba(255, 206, 86, 0.5)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+        },
+        elementalSkill: {
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+        },
+        elementalburst: {
+            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+        },
+        superconductDMG: {
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+        },
+        overloadedDMG: {
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+        },
+        electrochargedDMG: {
+            backgroundColor: 'rgba(255, 206, 86, 0.5)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+        },
+        swirlDMG: {
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+        },
+        burningDMG: {
+            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+        },
+        bloomDMG: {
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+        },
+        burgeoningDMG: {
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+        },
+        hyperbloomDMG: {
+            backgroundColor: 'rgba(255, 206, 86, 0.5)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+        },
 
+
+
+    };
+    const total = build.dmg.totalDmg;
+    //Check what dmg source to use
+    let data = {labels:[], datasets:[],backgroundColor:[], borderColor:[]};
+    if (build.dmg.sources.n) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.n/total*100: build.dmg.sources.n);
+        data.labels.push('Normal Attack');
+        data.backgroundColor.push(colorData.normalattack.backgroundColor);
+        data.borderColor.push(colorData.normalattack.borderColor);
+    }
+    if (build.dmg.sources.c) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.c/total*100: build.dmg.sources.c);
+        data.labels.push('Charged Attack');
+        data.backgroundColor.push(colorData.chargedattack.backgroundColor);
+        data.borderColor.push(colorData.chargedattack.borderColor);
+    }
+    if (build.dmg.sources.p) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.p/total*100: build.dmg.sources.p);
+        data.labels.push('Plunging Attack');
+        data.backgroundColor.push(colorData.plungingattack.backgroundColor);
+        data.borderColor.push(colorData.plungingattack.borderColor);
+    }
+    if (build.dmg.sources.e) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.e/total*100: build.dmg.sources.e);
+        data.labels.push('Elemental Skill');
+        data.backgroundColor.push(colorData.elementalSkill.backgroundColor);
+        data.borderColor.push(colorData.elementalSkill.borderColor);
+    }
+    if (build.dmg.sources.q) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.q/total*100: build.dmg.sources.q);
+        data.labels.push('Elemental Burst');
+        data.backgroundColor.push(colorData.elementalburst.backgroundColor);
+        data.borderColor.push(colorData.elementalburst.borderColor);
+    }
+    if(build.dmg.sources.superconductDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.superconductDMG/total*100: build.dmg.sources.superconductDMG);
+        data.labels.push('Superconduct DMG');
+        data.backgroundColor.push(colorData.superconductDMG.backgroundColor);
+        data.borderColor.push(colorData.superconductDMG.borderColor);
+
+    }
+    if(build.dmg.sources.overloadedDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.overloadedDMG/total*100: build.dmg.sources.overloadedDMG);
+        data.labels.push('Overloaded DMG');
+        data.backgroundColor.push(colorData.overloadedDMG.backgroundColor);
+        data.borderColor.push(colorData.overloadedDMG.borderColor);
+    }
+    if(build.dmg.sources.electrochargedDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.electrochargedDMG/total*100: build.dmg.sources.electrochargedDMG);
+        data.labels.push('Electrocharged DMG');
+        data.backgroundColor.push(colorData.electrochargedDMG.backgroundColor);
+        data.borderColor.push(colorData.electrochargedDMG.borderColor);
+    }
+    if(build.dmg.sources.bloomDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.bloomDMG/total*100: build.dmg.sources.bloomDMG);
+        data.labels.push('Bloom DMG');
+        data.backgroundColor.push(colorData.bloomDMG.backgroundColor);
+        data.borderColor.push(colorData.bloomDMG.borderColor);
+    }
+    if(build.dmg.sources.burningDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.burningDMG/total*100: build.dmg.sources.burningDMG);
+        data.labels.push('Burning DMG');
+        data.backgroundColor.push(colorData.burningDMG.backgroundColor);
+        data.borderColor.push(colorData.burningDMG.borderColor);
+    }
+    if(build.dmg.sources.hyperbloomDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.hyperbloomDMG/total*100: build.dmg.sources.hyperbloomDMG);
+        data.labels.push('Hyperbloom DMG');
+        data.backgroundColor.push(colorData.hyperbloomDMG.backgroundColor);
+        data.borderColor.push(colorData.hyperbloomDMG.borderColor);
+    }
+    if(build.dmg.sources.burgeoningDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.burgeoningDMG/total*100: build.dmg.sources.burgeoningDMG);
+        data.labels.push('Burgeoning DMG');
+        data.backgroundColor.push(colorData.burgeoningDMG.backgroundColor);
+        data.borderColor.push(colorData.burgeoningDMG.borderColor);
+    }
+    if(build.dmg.sources.swirlDMG){
+        data.datasets.push((asPercentage) ? build.dmg.sources.swirlDMG/total*100: build.dmg.sources.swirlDMG);
+        data.labels.push('Swirl DMG');
+        data.backgroundColor.push(colorData.swirlDMG.backgroundColor);
+        data.borderColor.push(colorData.swirlDMG.borderColor);
+    }
+    return data;
+}
