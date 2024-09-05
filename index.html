@@ -615,19 +615,23 @@
 									<img src="Elements/pyro.png" alt="Pyro">
 									<span>Pyro</span>
 								</div>
-								<div onclick="selectSupportingElement('Hydro',this)" class="selectableSupportingElement">
+								<div onclick="selectSupportingElement('Hydro',this)"
+									class="selectableSupportingElement">
 									<img src="Elements/hydro.png" alt="Hydro">
 									<span>Hydro</span>
 								</div>
-								<div onclick="selectSupportingElement('Anemo',this)" class="selectableSupportingElement">
+								<div onclick="selectSupportingElement('Anemo',this)"
+									class="selectableSupportingElement">
 									<img src="Elements/anemo.png" alt="Anemo">
 									<span>Anemo</span>
 								</div>
-								<div onclick="selectSupportingElement('Electro',this)" class="selectableSupportingElement">
+								<div onclick="selectSupportingElement('Electro',this)"
+									class="selectableSupportingElement">
 									<img src="Elements/electro.png" alt="Electro">
 									<span>Electro</span>
 								</div>
-								<div onclick="selectSupportingElement('Dendro',this)" class="selectableSupportingElement">
+								<div onclick="selectSupportingElement('Dendro',this)"
+									class="selectableSupportingElement">
 									<img src="Elements/dendro.png" alt="Dendro">
 									<span>Dendro</span>
 								</div>
@@ -635,7 +639,8 @@
 									<img src="Elements/cryo.png" alt="Cryo">
 									<span>Cryo</span>
 								</div>
-								<div onclick="selectSupportingElement('Bloom',this)" class="selectableSupportingElement">
+								<div onclick="selectSupportingElement('Bloom',this)"
+									class="selectableSupportingElement">
 									<img src="Elements/Bloom.png" alt="Bloom">
 									<span>Bloom</span>
 								</div>
@@ -650,42 +655,49 @@
 									<option value="2">Support (incl. Sub-dps)</option>
 								</select>
 							</div>
-							<div>
-								<h3>What elements does the party members have? (Default = specific element)</h3>
-								<label for="partyMemberElement1">Party member 1</label>
-								<select id="partyMemberElement1">
-									<option value="">Default</option>
-									<option value="PyroCharacter">Pyro</option>
-									<option value="HydroCharacter">Hydro</option>
-									<option value="AnemoCharacter">Anemo</option>
-									<option value="GeoCharacter">Geo</option>
-									<option value="ElectroCharacter">Electro</option>
-									<option value="DendroCharacter">Dendro</option>
-									<option value="CryoCharacter">Cryo</option>
-								</select>
-								<label for="partyMemberElement2">Party member 2</label>
-								<select id="partyMemberElement2">
-									<option value="">Default</option>
-									<option value="PyroCharacter">Pyro</option>
-									<option value="HydroCharacter">Hydro</option>
-									<option value="AnemoCharacter">Anemo</option>
-									<option value="GeoCharacter">Geo</option>
-									<option value="ElectroCharacter">Electro</option>
-									<option value="DendroCharacter">Dendro</option>
-									<option value="CryoCharacter">Cryo</option>
-								</select>
-								<label for="partyMemberElement3">Party member 3</label>
-								<select id="partyMemberElement3">
-									<option value="">Default</option>
-									<option value="PyroCharacter">Pyro</option>
-									<option value="HydroCharacter">Hydro</option>
-									<option value="AnemoCharacter">Anemo</option>
-									<option value="GeoCharacter">Geo</option>
-									<option value="ElectroCharacter">Electro</option>
-									<option value="DendroCharacter">Dendro</option>
-									<option value="CryoCharacter">Cryo</option>
-								</select>
-
+							<div >
+								<h3>What elements does the party members have?/h3>
+								<div id="partySelection">
+									<div>
+										<label for="partyMemberElement1">Party member 1</label>
+										<select id="partyMemberElement1">
+											<option value="">No specific</option>
+											<option value="PyroCharacter">Pyro</option>
+											<option value="HydroCharacter">Hydro</option>
+											<option value="AnemoCharacter">Anemo</option>
+											<option value="GeoCharacter">Geo</option>
+											<option value="ElectroCharacter">Electro</option>
+											<option value="DendroCharacter">Dendro</option>
+											<option value="CryoCharacter">Cryo</option>
+										</select>
+									</div>
+									<div>
+										<label for="partyMemberElement2">Party member 2</label>
+										<select id="partyMemberElement2">
+											<option value="">No specific</option>
+											<option value="PyroCharacter">Pyro</option>
+											<option value="HydroCharacter">Hydro</option>
+											<option value="AnemoCharacter">Anemo</option>
+											<option value="GeoCharacter">Geo</option>
+											<option value="ElectroCharacter">Electro</option>
+											<option value="DendroCharacter">Dendro</option>
+											<option value="CryoCharacter">Cryo</option>
+										</select>
+									</div>
+									<div>
+										<label for="partyMemberElement3">Party member 3</label>
+										<select id="partyMemberElement3">
+											<option value="">No specific</option>
+											<option value="PyroCharacter">Pyro</option>
+											<option value="HydroCharacter">Hydro</option>
+											<option value="AnemoCharacter">Anemo</option>
+											<option value="GeoCharacter">Geo</option>
+											<option value="ElectroCharacter">Electro</option>
+											<option value="DendroCharacter">Dendro</option>
+											<option value="CryoCharacter">Cryo</option>
+										</select>
+									</div>
+								</div>
 							</div>
 							<div>
 								<label for="hasDeepwoodInParty" id="deepwoodLabel">Does your party have deepwood
@@ -698,59 +710,59 @@
 								<input type="checkbox" id="partyGivesShield">
 							</div>
 
-							
-								<label for="simulationRuns">Simulation Runs</label>
-								<input type="number" id="simulationRuns" placeholder="default 15">
-							</div>
-						</section>
 
-						<button onclick="prepare(this)" id="rate-button"></button>
+							<label for="simulationRuns">Simulation Runs</label>
+							<input type="number" id="simulationRuns" placeholder="default 15">
 					</div>
+					</section>
+
+					<button onclick="prepare(this)" id="rate-button"></button>
 				</div>
-				<div id="result-container-centerer">
-					<div id="result-container">
-						<div class="exit-btn generic-btn" onclick="closeCharacterCard()">
-							<i class="fa-solid fa-x"></i>
-						</div>
+			</div>
+			<div id="result-container-centerer">
+				<div id="result-container">
+					<div class="exit-btn generic-btn" onclick="closeCharacterCard()">
+						<i class="fa-solid fa-x"></i>
+					</div>
 
-						<div id="result-container-container">
+					<div id="result-container-container">
 
-						</div>
-						<div id="result-buttons">
-							<!-- <div>
+					</div>
+					<div id="result-buttons">
+						<!-- <div>
 								<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
 							</div> -->
-							<div>
-								<button class="generic-btn p1rem br2rem" onclick="sendBuild()">More Details</button>
-							</div>
+						<div>
+							<button class="generic-btn p1rem br2rem" onclick="sendBuild()">More Details</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="saved-characters-cards-container">
-				<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
-					<span class="noselect">Your characters</span>
-				</div>
-				<div id="saved-characters-cards-wrapper">
-
-				</div>
-			</div>
-			<div id="delete-character-card-prompt-container"></div>
-			<div id="result-container2">
-				<div class="exit-btn generic-btn" onclick="closeCharacterCard2()">
-					<i class="fa-solid fa-x"></i>
-				</div>
-
-				<div id="result-container-container2">
-
-				</div>
-			</div>
-
-			<footer>
-				<p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or
-					registered trademarks of HoYoverse.</p>
-			</footer>
 		</div>
+		<div id="saved-characters-cards-container">
+			<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
+				<span class="noselect">Your characters</span>
+			</div>
+			<div id="saved-characters-cards-wrapper">
+
+			</div>
+		</div>
+		<div id="delete-character-card-prompt-container"></div>
+		<div id="result-container2">
+			<div class="exit-btn generic-btn" onclick="closeCharacterCard2()">
+				<i class="fa-solid fa-x"></i>
+			</div>
+
+			<div id="result-container-container2">
+
+			</div>
+		</div>
+
+		<footer>
+			<p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or
+				registered trademarks of HoYoverse.</p>
+		</footer>
+	</div>
 	</div>
 	<div id="simRunScreen">
 		<div class="sim-running-box">
