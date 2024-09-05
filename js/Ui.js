@@ -89,10 +89,10 @@ function showOrHidePercentIcon(target, type) {
     }
 }
 
-function showHide(targetId) {
+function showHide(targetId, type = "block") {
     let target = document.getElementById(targetId);
     if (target.style.display === "none") {
-        target.style.display = "block";
+        target.style.display = type;
     } else {
         target.style.display = "none";
     }
