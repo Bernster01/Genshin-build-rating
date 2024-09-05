@@ -439,7 +439,9 @@ footer {
 	width: 40px;
 	height: 40px;
 }
-
+.artifact_icon{
+	filter: drop-shadow(2px 2px 2px #000000);
+}
 .artifact_img_gradient {
 	display: flex;
 	flex-direction: row;
