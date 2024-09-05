@@ -90,6 +90,7 @@ function getBuild(build, score) {
             elementalBurstLevel: character.elementalBurst,
             buffs: character.currentBuffs,
             element: character.element,
+            splashArt: character.card,
         },
         artifacts: character.artifacts,
         weapon: {

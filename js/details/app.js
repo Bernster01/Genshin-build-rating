@@ -13,7 +13,7 @@ function starterFunction() {
     let damageGrahp = barGraphDamage(builds.user, builds.build);
     // applyBackgrounds(builds);
     document.getElementById("character_name").innerText = builds.user.character.name;
-    document.getElementById("character_img").src = `Assets/Characters/${builds.user.character.name}/Character_${builds.user.character.name}_Portrait.webp`;
+    document.getElementById("character_img").src = `${builds.user.character.splashArt}`;
     const characters = simulateOnce(builds);
     const table = tableBuilder(characters);
     document.getElementById("table_container").insertAdjacentElement("afterbegin", table);
@@ -261,7 +261,7 @@ function artifactBuilder(character,type) {
         "CritDMG": "Icon_Attribute_Critical_Damage.webp",
         "HealingBonus": "Icon_Attribute_Healing.webp",
         "PyroDMGBonus": "Element_Pyro.svg",
-        "HydroDMGBonus": "Element_Hydro.svh",
+        "HydroDMGBonus": "Element_Hydro.svg",
         "DendroDMGBonus": "Element_Dendro.svg",
         "ElectroDMGBonus": "Element_Electro.svg",
         "AnemoDMGBonus": "Element_Anemo.svg",
