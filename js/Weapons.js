@@ -2518,7 +2518,7 @@ const TheWidsith = {
         }
     },
 
-    passive: function () { return [{ Type: "ATK", Value: 60 }, { Type: "ElementalMastery", Value: 240 }, { Type: "ElementalDMG", Value: 48 }] },
+    passive: function () { return [{ Type: "ATK", Value: 60/3 }, { Type: "ElementalMastery", Value: 240/3 }, { Type: "ElementalDMG", Value: 48/3 }] }, //can only get 1 buff at a time so we divide by 3 to "simulate" the buff
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
