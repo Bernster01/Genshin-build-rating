@@ -79,6 +79,9 @@ let paleFlameStacks = 0;
 let archaicPetraBuff = false;
 let userBuild = {};
 let partyMemberElements = [];
+let obsidianCodexBuff = false;
+let obsidianCodexBuff2 = false;
+
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -1124,6 +1127,8 @@ function resetVariables() {
     retracingBolideBuff = false;
     paleFlameStacks = 0;
     archaicPetraBuff = false;
+    obsidianCodexBuff = false;
+    obsidianCodexBuff2 = false;
 }
 function Simulation(character) {
 
@@ -2869,7 +2874,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
                 haveBuff = true;
         });
         if (!haveBuff && havePassive) {
-            character.currentBuffs.push({ Type: supportingElement+"DMGBonus", Source: "Poetics of Fuubutsu", Value: character.EM() * 0.04 })
+            character.currentBuffs.push({ Type: supportingElement + "DMGBonus", Source: "Poetics of Fuubutsu", Value: character.EM() * 0.04 })
         }
     }
     return dmg;
@@ -3060,8 +3065,8 @@ function hasTriggerdAReaction(character) {
                     else
                         differentElement++;
                 });
-                character.currentBuffs.push({ Type: "ElementalMastery", Value: 75*differentElement, Source: "Gilded Dreams" });
-                character.currentBuffs.push({ Type: "ATK%", Value: 21*sameElement, Source: "Gilded Dreams" });
+                character.currentBuffs.push({ Type: "ElementalMastery", Value: 75 * differentElement, Source: "Gilded Dreams" });
+                character.currentBuffs.push({ Type: "ATK%", Value: 21 * sameElement, Source: "Gilded Dreams" });
                 gildedDreamsBuff = true;
             }
             break;
@@ -3304,10 +3309,26 @@ function hasTriggerdABloomTypeReaction(character) {
     switch (character.artifactFourPiece) {
         case "Flower of Paradise Lost":
             if (flowerOfparadiseLostStacks < 4) {
-                character.currentBuffs.push({ Type: "bloomBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
-                character.currentBuffs.push({ Type: "HyperBloomBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
-                character.currentBuffs.push({ Type: "BurgeoningBonus", Value: 40*(25/100), Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "bloomBonus", Value: 40 * (25 / 100), Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "HyperBloomBonus", Value: 40 * (25 / 100), Source: "Flower of Paradise" });
+                character.currentBuffs.push({ Type: "BurgeoningBonus", Value: 40 * (25 / 100), Source: "Flower of Paradise" });
                 flowerOfparadiseLostStacks++;
+            }
+    }
+}
+function enteredNightsoulBlessing(character) {
+    if(character.artifactTwoPiece[0] == "Obsidian Codex" || character.artifactTwoPiece[1] == "Obsidian Codex"){
+            if (!obsidianCodexBuff) {
+                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 15, Source: "Obsidian Codex" });
+                character
+                obsidianCodexBuff = true;
+            }
+    }
+    switch (character.artifactFourPiece) {
+        case "Obsidian Codex":
+            if (!obsidianCodexBuff2) {
+                character.currentBuffs.push({ Type: "CritRate", Value: 40, Source: "Obsidian Codex" });
+                obsidianCodexBuff2 = true;
             }
     }
 }

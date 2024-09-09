@@ -340,6 +340,8 @@ function simulateOnce(builds) {
     let baseCharacter = AllCharacters[builds.user.character.name];
     let character1 = deepClone(baseCharacter);
     let character2 = deepClone(baseCharacter);
+    //Replace &#39 with ' for the weapon name
+    builds.user.weapon.name = builds.user.weapon.name.replace("&#39", "'");
     let weapon1 = deepClone(AllWeapons[builds.user.weapon.name]);
     weapon1.level = builds.user.weapon.level;
     let weapon2 = deepClone(AllWeapons[builds.build.weapon.name]);

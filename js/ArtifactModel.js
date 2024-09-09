@@ -33,19 +33,20 @@ const sets = {
     [18]:"Nighttime_Whispers_in_the_Echoing_Woods",
     [19]:"Noblesse_Oblige",
     [20]:"Nymphs_Dream",
-    [21]:"Ocean-Hued_Clam",
-    [22]:"Pale_Flame",
-    [23]:"Retracing_Bolide",
-    [24]:"Shimenawas_Reminiscence",
-    [25]:"Song_of_Days_Past",
-    [26]:"Tenacity_of_the_Millelith",
-    [27]:"Thundering_Fury",
-    [28]:"Thundersoother",
-    [29]:"Unfinished_Reverie",
-    [30]:"Vermillion_Hereafter",
-    [31]:"Viridescent_Venerer",
-    [32]:"Vourukashas_Glow",
-    [33]:"Wanderers_Troupe"
+    [21]:"Obsidian_Codex",
+    [22]:"Ocean-Hued_Clam",
+    [23]:"Pale_Flame",
+    [24]:"Retracing_Bolide",
+    [25]:"Shimenawas_Reminiscence",
+    [26]:"Song_of_Days_Past",
+    [27]:"Tenacity_of_the_Millelith",
+    [28]:"Thundering_Fury",
+    [29]:"Thundersoother",
+    [30]:"Unfinished_Reverie",
+    [31]:"Vermillion_Hereafter",
+    [32]:"Viridescent_Venerer",
+    [33]:"Vourukashas_Glow",
+    [34]:"Wanderers_Troupe"
 }
 const setsList = [
     "Archaic_Petra",
@@ -69,6 +70,7 @@ const setsList = [
     "Nighttime_Whispers_in_the_Echoing_Woods",
     "Noblesse_Oblige",
     "Nymphs_Dream",
+    "Obsidian_Codex",
     "Ocean-Hued_Clam",
     "Pale_Flame",
     "Retracing_Bolide",
@@ -193,6 +195,12 @@ const artifactSets = {
         Type: "Nymphs Dream",
         twoPiece: { Type: "HydroDMGBonus", Value: 15 },
         fourPiece: { Type: "Nymphs Dream", Value: null }
+
+    }, 
+    ["Obsidian_Codex"]: {
+        Type: "Obsidian Codex",
+        twoPiece: { Type: "Obsidian_Codex", Value: null },
+        fourPiece: { Type: "Obsidian_Codex", Value: null }
 
     },
     ["Ocean-Hued_Clam"]: {

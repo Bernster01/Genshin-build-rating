@@ -6745,5 +6745,6 @@ function surfsharkWavebreaker(character) {
     character.normalAttack1.Multiplier = function (level) { return surgingBite+(waveMomentumBonus*3)};
     character.normalAttack2.Multiplier = function (level) { return (surgingBite+(waveMomentumBonus*3))*(28/100)};
     character.nightsoul = true;
+    enteredNightsoulBlessing(character);
     return 0;
 }
