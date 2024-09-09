@@ -819,7 +819,10 @@ function applyBonuses(character) {
             });
             character.currentBuffs.push({ Type: "ATK%", Value: 16 * hasSameElement, Source: "The First Great Magic" });
             break;
-
+        case "Sacrifical Jade":
+            if(character.subDpsType == "Off-field"){
+                character.currentBuffs.push({ Type: "HP%", Value: 64 },{Type:"ElementalMastery",Value:80});
+            }
 
 
     }

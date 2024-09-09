@@ -2438,7 +2438,7 @@ const SacrificialJade = {
         }
     },
 
-    passive: function () { return [{ Type: "HP%", Value: 64 },{Type:"ElementalMastery",Value:80}] },
+    passive: function () { return [] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
