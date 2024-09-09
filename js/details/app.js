@@ -17,7 +17,7 @@ function starterFunction() {
     const characters = simulateOnce(builds);
     const table = tableBuilder(characters);
     document.getElementById("table_container").insertAdjacentElement("afterbegin", table);
-    const userArtifact = artifactBuilder(builds.user,"Your");
+    const userArtifact = artifactBuilder(builds.user, "Your");
     const buildArtifact = artifactBuilder(builds.build, "Our");
     document.getElementById("artifacts").appendChild(userArtifact);
     document.getElementById("artifacts").appendChild(buildArtifact);
@@ -62,13 +62,17 @@ function tableBuilder(builds) {
     let build = builds.build;
     console.log(user);
     let table = document.createElement("table");
+    user.level = convertBuildLevel(user.level);
+    build.level = convertBuildLevel(build.level);
+    user.weapon.level = convertBuildLevel(user.weapon.level);
+    build.weapon.level = convertBuildLevel(build.weapon.level);
     let userIsHigherImg = `<img src="Assets/Icons/arrow-up.svg" style="width: 20px; height: 20px; title="You have higer" alt="Green arrow pointing up">`;
     let buildIsHigherImg = `<img src="Assets/Icons/arrow-down.svg" style="width: 20px; height: 20px;" title="You have lower" alt="Red arrow pointing Down">`;
-    const usersLevelIsHigherLowerOrEqual = user.level > build.level ? userIsHigherImg : user.level < build.level ? buildIsHigherImg : "-";
+    const usersLevelIsHigherLowerOrEqual = user.level.value > build.level.value ? userIsHigherImg : user.level.value < build.level.value ? buildIsHigherImg : "-";
     const usersNormalAttackIsHigherLowerOrEqual = user.normalAttackLevel > build.normalAttackLevel ? userIsHigherImg : user.normalAttackLevel < build.normalAttackLevel ? buildIsHigherImg : "-";
     const usersElementalSkillIsHigherLowerOrEqual = user.elementalSkill.Level > build.elementalSkill.Level ? userIsHigherImg : user.elementalSkill.Level < build.elementalSkill.Level ? buildIsHigherImg : "-";
     const usersElementalBurstIsHigherLowerOrEqual = user.elementalBurst.Level > build.elementalBurst.Level ? userIsHigherImg : user.elementalBurst.Level < build.elementalBurst.Level ? buildIsHigherImg : "-";
-    const usersWeaponIsHigherLowerOrEqual = user.weapon.level > build.weapon.level ? userIsHigherImg : user.weapon.level < build.weapon.level ? buildIsHigherImg : "-";
+    const usersWeaponIsHigherLowerOrEqual = user.weapon.level.value > build.weapon.level.value ? userIsHigherImg : user.weapon.level.value < build.weapon.level.value ? buildIsHigherImg : "-";
     const usersHP = user.HP() > build.HP() ? userIsHigherImg : user.HP() < build.HP() ? buildIsHigherImg : "-";
     const usersATK = user.attack() > build.attack() ? userIsHigherImg : user.attack() < build.attack() ? buildIsHigherImg : "-";
     const usersDEF = user.DEF() > build.DEF() ? userIsHigherImg : user.DEF() < build.DEF() ? buildIsHigherImg : "-";
@@ -97,9 +101,9 @@ function tableBuilder(builds) {
             <th>Our ${build.name}</th>
             <tr>
                 <td>Character Level</td>
-                <td>${user.level}</td>
+                <td>${user.level.Level}</td>
                 <td>${usersLevelIsHigherLowerOrEqual}</td>
-                <td>${build.level}</td>
+                <td>${build.level.Level}</td>
             </tr>
               <tr>
                 <td>Normal Attack Level</td>
@@ -128,9 +132,9 @@ function tableBuilder(builds) {
             </tr>
             <tr>
                 <td>Weapon Level</td>
-                <td>${user.weapon.level}</td>
+                <td>${user.weapon.level.Level}</td>
                 <td>${usersWeaponIsHigherLowerOrEqual}</td>
-                <td>${build.weapon.level}</td>
+                <td>${build.weapon.level.Level}</td>
             </tr>
             <tr>
                 <td>HP</td>
@@ -242,7 +246,25 @@ function tableBuilder(builds) {
     table.innerHTML = innerHTML;
     return table;
 }
-function artifactBuilder(character,type) {
+function convertBuildLevel(level) {
+    switch (level) {
+        case "1b": return { Level: "1/20", Value: 1 };
+        case "20b": return { Level: "20/20", Value: 20 };
+        case "20a": return { Level: "20/40", Value: 21 };
+        case "40b": return { Level: "40/40", Value: 40 };
+        case "40a": return { Level: "40/50", Value: 41 };
+        case "50b": return { Level: "50/50", Value: 50 };
+        case "50a": return { Level: "50/60", Value: 51 };
+        case "60b": return { Level: "60/60", Value: 60 };
+        case "60a": return { Level: "60/70", Value: 61 };
+        case "70b": return { Level: "70/70", Value: 70 };
+        case "70a": return { Level: "70/80", Value: 71 };
+        case "80b": return { Level: "80/80", Value: 80 };
+        case "80a": return { Level: "80/90", Value: 81 };
+        case "90b": return { Level: "90/90", Value: 90 };
+    }
+}
+function artifactBuilder(character, type) {
     let artifactContainer = document.createElement("div");
     artifactContainer.classList.add("compareArtifacts");
     let h3 = document.createElement("h3");
@@ -270,12 +292,12 @@ function artifactBuilder(character,type) {
         "PhysicalDMGBonus": "Icon_Attribute_Physical.svg",
     }
     const shouldHavePercentIcon = [
-        "ATK%", 
-        "HP%", 
-        "DEF%", 
-        "CritRate", 
-        "CritDMG", 
-        "EnergyRecharge", 
+        "ATK%",
+        "HP%",
+        "DEF%",
+        "CritRate",
+        "CritDMG",
+        "EnergyRecharge",
         "HealingBonus",
         "PyroDMGBonus",
         "HydroDMGBonus",
@@ -296,7 +318,7 @@ function artifactBuilder(character,type) {
 											src="Assets/Icons/${artifactImgTranslation[artifact.Mainstat.Type]}" title="${artifact.Mainstat.Type}" alt="${artifact.Mainstat.Type}"
 											id="${artifact.Type}_mainstat_type">
 										<span id="${artifact.Type}_mainstat_value">${artifact.Mainstat.Value}</span>
-										<span id="${artifact.Type}_mainstat_percentIcon">${(shouldHavePercentIcon.includes(artifact.Mainstat.Type)) ? "%":""}</span>
+										<span id="${artifact.Type}_mainstat_percentIcon">${(shouldHavePercentIcon.includes(artifact.Mainstat.Type)) ? "%" : ""}</span>
 									</div>
                                 </div>
 								<div class="artifact-right">
@@ -306,19 +328,19 @@ function artifactBuilder(character,type) {
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="${artifact.Type}_substat_1_value">${artifact.Substats[0].Value}</span>
-										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[0].Type)) ? "%":""}</span>
+										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[0].Type)) ? "%" : ""}</span>
 									</div>
 									<div class="substat" id="${artifact.Type}_substat_2">
 										<img class="artifact_icon" src="Assets/Icons/${artifactImgTranslation[artifact.Substats[1].Type]}" title="${artifact.Substats[1].Type}" alt="${artifact.Substats[1].Type}"
 											id="goblet_substat_2_type">
 										<span id="${artifact.Type}_substat_2_value">${artifact.Substats[1].Value}</span>
-										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[1].Type)) ? "%":""}</span>
+										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[1].Type)) ? "%" : ""}</span>
 									</div>
 									<div class="substat" id="${artifact.Type}_substat_3">
 										<img class="artifact_icon" src="Assets/Icons/${artifactImgTranslation[artifact.Substats[2].Type]}" title="${artifact.Substats[2].Type}" alt="${artifact.Substats[2].Type}"
 											id="${artifact.Type}_substat_3_type">
 										<span id="${artifact.Type}_substat_3_value">${artifact.Substats[2].Value}</span>
-										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[2].Type)) ? "%":""}</span>
+										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[2].Type)) ? "%" : ""}</span>
 									</div>
 									<div class="substat" id="${artifact.Type}_substat_4">
 										<img class="artifact_icon" src="Assets/Icons/${artifactImgTranslation[artifact.Substats[3].Type]}" title="${artifact.Substats[3].Type}" alt="${artifact.Substats[3].Type}"
@@ -326,7 +348,7 @@ function artifactBuilder(character,type) {
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="${artifact.Type}_substat_4_value">${artifact.Substats[3].Value}</span>
-										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[3].Type)) ? "%":""}</span>
+										<span class="artifact_percent">${(shouldHavePercentIcon.includes(artifact.Substats[3].Type)) ? "%" : ""}</span>
 									</div>
 								</div>
 							</div>
