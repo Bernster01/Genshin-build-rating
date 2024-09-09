@@ -1425,10 +1425,14 @@ function Simulation(character) {
                 } else {
 
                     let enemies = 1;
-                    if (Character.weapon.Type != "Bow" || Character.weapon.Type != "Catalyst") {
+                    if (Character.weapon.Type != "Bow" && Character.weapon.Type != "Catalyst") {
                         enemies = numberOfEnemies;
                     }
-
+                    if (Character.name == "Mualani" && attackAction == "N2") {
+                        enemies = numberOfEnemies;
+                        if (enemies > 5)
+                            enemies = 5;
+                    }
                     if (Character.name == "Yoimiya") {
                         switch (action) {
                             case "N1":
@@ -2154,11 +2158,13 @@ function dmgCalc(attackAction, Character) {
     //Damage Calculation 
     let dmg =
         ((getBaseDamage(attackAction, Character) * getSpecialMultiplier(Character, attackAction)) + getFlatDamage(Character, attackAction))
-        * (1 + getDamageBonus(Character, attackAction))
+        * getDamageBonus(Character, attackAction)
         * getCrit(Character, attackAction)
         * defCalc(Character)
         * resCalc(Character, attackAction.Element);
-    dmg = (attackAction.isReaction || (supportingElement == "Bloom" && (attackAction.Element == "PyroDMGBonus" || attackAction.Element == "ElectroDMGBonus"))) ? (elementalMasteryCalc(dmg, attackAction.Element, Character)) : dmg;
+    if (attackAction.isReaction || (supportingElement == "Bloom" && (attackAction.Element == "PyroDMGBonus" || attackAction.Element == "ElectroDMGBonus"))) {
+        dmg = elementalMasteryCalc(dmg, attackAction.Element, Character)
+    }
     switch (Character.weapon.name) {
         case "Engulfing Lightning":
             let atkIncrease = (Character.advancedstats.energyRecharge - 100) * 0.28;
@@ -3317,12 +3323,12 @@ function hasTriggerdABloomTypeReaction(character) {
     }
 }
 function enteredNightsoulBlessing(character) {
-    if(character.artifactTwoPiece[0] == "Obsidian Codex" || character.artifactTwoPiece[1] == "Obsidian Codex"){
-            if (!obsidianCodexBuff) {
-                character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 15, Source: "Obsidian Codex" });
-                character
-                obsidianCodexBuff = true;
-            }
+    if (character.artifactTwoPiece[0] == "Obsidian Codex" || character.artifactTwoPiece[1] == "Obsidian Codex") {
+        if (!obsidianCodexBuff) {
+            character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 15, Source: "Obsidian Codex" });
+            character
+            obsidianCodexBuff = true;
+        }
     }
     switch (character.artifactFourPiece) {
         case "Obsidian Codex":
