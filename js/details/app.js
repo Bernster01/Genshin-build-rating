@@ -68,11 +68,11 @@ function tableBuilder(builds) {
     build.weapon.level = convertBuildLevel(build.weapon.level);
     let userIsHigherImg = `<img src="Assets/Icons/arrow-up.svg" style="width: 20px; height: 20px; title="You have higer" alt="Green arrow pointing up">`;
     let buildIsHigherImg = `<img src="Assets/Icons/arrow-down.svg" style="width: 20px; height: 20px;" title="You have lower" alt="Red arrow pointing Down">`;
-    const usersLevelIsHigherLowerOrEqual = user.level.value > build.level.value ? userIsHigherImg : user.level.value < build.level.value ? buildIsHigherImg : "-";
+    const usersLevelIsHigherLowerOrEqual = user.level.Value > build.level.Value ? userIsHigherImg : user.level.Value < build.level.Value ? buildIsHigherImg : "-";
     const usersNormalAttackIsHigherLowerOrEqual = user.normalAttackLevel > build.normalAttackLevel ? userIsHigherImg : user.normalAttackLevel < build.normalAttackLevel ? buildIsHigherImg : "-";
     const usersElementalSkillIsHigherLowerOrEqual = user.elementalSkill.Level > build.elementalSkill.Level ? userIsHigherImg : user.elementalSkill.Level < build.elementalSkill.Level ? buildIsHigherImg : "-";
     const usersElementalBurstIsHigherLowerOrEqual = user.elementalBurst.Level > build.elementalBurst.Level ? userIsHigherImg : user.elementalBurst.Level < build.elementalBurst.Level ? buildIsHigherImg : "-";
-    const usersWeaponIsHigherLowerOrEqual = user.weapon.level.value > build.weapon.level.value ? userIsHigherImg : user.weapon.level.value < build.weapon.level.value ? buildIsHigherImg : "-";
+    const usersWeaponIsHigherLowerOrEqual = user.weapon.level.Value > build.weapon.level.Value ? userIsHigherImg : user.weapon.level.Value < build.weapon.level.Value ? buildIsHigherImg : "-";
     const usersHP = user.HP() > build.HP() ? userIsHigherImg : user.HP() < build.HP() ? buildIsHigherImg : "-";
     const usersATK = user.attack() > build.attack() ? userIsHigherImg : user.attack() < build.attack() ? buildIsHigherImg : "-";
     const usersDEF = user.DEF() > build.DEF() ? userIsHigherImg : user.DEF() < build.DEF() ? buildIsHigherImg : "-";
