@@ -2366,6 +2366,32 @@ const PrototypeAmber = {
     }
 }.Init();
 
+const RingofYaxche = {
+    name: "Ring of Yaxche",
+    src: "Weapons/Weapon_Ring_of_Yaxche.webp",
+    weaponType: "Catalyst",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "HP%",
+        startValue: "9%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
+
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const RoyalGrimoire = {
     name: "Royal Grimoire",
     src: "Weapons/Weapon_Royal_Grimoire.webp",
@@ -2491,7 +2517,7 @@ const SolarPearl = {
         }
     },
 
-    passive: function () { return [{ Type: "ElementalBurst", Value: 40 }, { Type: "ElementalSkill", Value: 40 }, { Type: "NormalAttack", Value: 40 }, { Type: "ChargedAttack", Value: 40 }] },
+    passive: function () { return [{ Type: "ElementalBurst", Value: 40/0.7 }, { Type: "ElementalSkill", Value: 40/0.7 }, { Type: "NormalAttack", Value: 40/0.7 }, { Type: "ChargedAttack", Value: 40/0.7 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2543,7 +2569,7 @@ const TheWidsith = {
         }
     },
 
-    passive: function () { return [{ Type: "ATK", Value: 60/3 }, { Type: "ElementalMastery", Value: 240/3 }, { Type: "ElementalDMG", Value: 48/3 }] }, //can only get 1 buff at a time so we divide by 3 to "simulate" the buff
+    passive: function () { return [{ Type: "ATK", Value: 60 / 3 }, { Type: "ElementalMastery", Value: 240 / 3 }, { Type: "ElementalDMG", Value: 48 / 3 }] }, //can only get 1 buff at a time so we divide by 3 to "simulate" the buff
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -4322,6 +4348,7 @@ const AllWeapons = {
     ["Range Gauge"]: RangeGauge,
     ["Redhorn Stonethresher"]: RedhornStonethresher,
     ["Rightful Reward"]: RightfulReward,
+    ["Ring of Yaxche"]: RingofYaxche,
     ["Royal Bow"]: RoyalBow,
     ["Royal Greatsword"]: RoyalGreatsword,
     ["Royal Grimoire"]: RoyalGrimoire,
@@ -4481,6 +4508,7 @@ const AllWeapons = {
         "Range Gauge",
         "Redhorn Stonethresher",
         "Rightful Reward",
+        "Ring of Yaxche",
         "Royal Bow",
         "Royal Greatsword",
         "Royal Grimoire",
@@ -4640,6 +4668,7 @@ const AllWeapons = {
         "Memory of Dust",
         "Oathsworn Eye",
         "Prototype Amber",
+        "Ring of Yaxche",
         "Royal Grimoire",
         "Sacrificial Fragments",
         "Sacrificial Jade",

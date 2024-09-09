@@ -83,6 +83,7 @@ let obsidianCodexBuff = false;
 let obsidianCodexBuff2 = false;
 let surfUpBuff = false;
 let surfUpBuffStacks = 0;
+let hasRingofYaxcheBuff = false;
 
 function getBuild(build, score) {
     let character = build.character;
@@ -1117,6 +1118,7 @@ function resetVariables() {
     tulaytullahsRemembranceBuff = false;
     surfUpBuff = false;
     surfUpBuffStacks = 0;
+    hasRingofYaxcheBuff = false;
 
     deepWoodMemoriesBuff = false;
     flowerOfparadiseLostStacks = 0;
@@ -1595,7 +1597,7 @@ function Simulation(character) {
                         break;
                     case "Surf&#39s Up":
                         if (surfUpBuff) {
-                            if(action=="N2")
+                            if (action == "N2")
                                 break;
                             surfUpBuffStacks--;
                             if (surfUpBuffStacks < 0) {
@@ -1724,6 +1726,15 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 48, Source: "Surf's Up" });
                             surfUpBuff = true;
                             surfUpBuffStacks = 4;
+                        }
+                        break;
+                    case "Ring of Yaxche":
+                        if (!hasRingofYaxcheBuff) {
+                            hasRingofYaxcheBuff = true;
+                            let buffValue = Math.round(character.HP()/1000);
+                            if(buffValue > 32)
+                                buffValue = 32;
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: buffValue, Source: "Ring of Yaxche" });
                         }
                         break;
 
