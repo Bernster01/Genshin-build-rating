@@ -277,7 +277,7 @@ async function findBestBuildLoop(baseChar, times) {
             document.getElementById("percentDone").innerText = Math.floor(index / times * 100);
             document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
             document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
-            document.getElementById("loadingPaimon-container").style.width = Math.floor(index / times * 100) + 17.5 + "%";
+            document.getElementById("loadingPaimon").style.left = Math.floor(index / times * 100) + "%";
             await delay(4);
         }
 
@@ -2829,17 +2829,17 @@ function elementalMasteryCalc(incomingDmg, type, character) {
     }
 }
 function overloaded(em, lvl, element, character, overloadedBonus) {
-    return ((superconductBaseDMG[lvl] * 4) * (1 + ((16 * (em / (em + 2000)))) + overloadedBonus) * resCalc(character, element));
+    return ((LvlMultiplier[character.level] * 2) * (1 + ((16 * (em / (em + 2000)))) + overloadedBonus) * resCalc(character, element));
 }
 function electroCharged(em, lvl, element, character, electroChargedBonus) {
-    return ((superconductBaseDMG[lvl] * 2.4) * (1 + ((16 * (em / (em + 2000)))) + electroChargedBonus) * resCalc(character, element)) * 3.5;
+    return ((LvlMultiplier[character.level] * 1.2) * (1 + ((16 * (em / (em + 2000)))) + electroChargedBonus) * resCalc(character, element)) * 1.2; //1.2 ticks per attack
 }
 function superconduct(em, lvl, element, character, superconductBonus) {
     if (!superconductRes) {
         character.currentBuffs.push({ Type: "ResShred", Value: 40, Element: "PhysicalDMGBonus" });
         superconductRes = true;
     }
-    return ((superconductBaseDMG[lvl]) * (1 + ((16 * (em / (em + 2000)))) + superconductBonus) * resCalc(character, element));
+    return ((LvlMultiplier[character.level] * 0.5) * (1 + ((16 * (em / (em + 2000)))) + superconductBonus) * resCalc(character, element));
 }
 function swirl(em, lvl, element, character, swirlBonus) {
     let isShreded = false;
@@ -2849,7 +2849,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
 
     });
 
-    let dmg = ((superconductBaseDMG[lvl] * 1.2) * (1 + ((16 * (em / (em + 2000)))) + swirlBonus) * resCalc(character, element));
+    let dmg = ((LvlMultiplier[character.level] * 0.6) * (1 + ((16 * (em / (em + 2000)))) + swirlBonus) * resCalc(character, element));
     if (!isShreded) {
         character.currentBuffs.forEach(buff => {
             if (buff.Type == "VV") {
@@ -2869,7 +2869,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
                 haveBuff = true;
         });
         if (!haveBuff && havePassive) {
-            character.currentBuffs.push({ Type: supportingElement, Source: "Poetics of Fuubutsu", Value: character.EM() * 0.04 })
+            character.currentBuffs.push({ Type: supportingElement+"DMGBonus", Source: "Poetics of Fuubutsu", Value: character.EM() * 0.04 })
         }
     }
     return dmg;
@@ -2979,18 +2979,7 @@ function crystalized(character, element) {
     }
     return 0;
 }
-const superconductBaseDMG = {
-    "1": 9,
-    "10": 17,
-    "20": 40,
-    "30": 68,
-    "40": 104,
-    "50": 162,
-    "60": 245,
-    "70": 383,
-    "80": 540,
-    "90": 725
-}
+
 const LvlMultiplier = {
     ["1b"]: 17.165605,
     ["20b"]: 80.584775,

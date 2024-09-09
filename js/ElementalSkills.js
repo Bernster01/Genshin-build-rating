@@ -1043,16 +1043,18 @@ function chihayaburu(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, Type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = Character.plungeAttack.Multiplier(Character.normalAttackLevel);
-    if (supportingElement != null || supportingElement != undefined) {
+    const swirlAbleElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    if (swirlAbleElements.includes(supportingElement)) {
         attack.Element = supportingElement;
         Character.currentBuffs.forEach(buff => {
             if (buff.Type == "Soumon Sowrdmanship") {
-                attack.Multiplier += 2;
-                attack.isReaction = false;
+                const a1passiveAttack = { Multiplier: 200/100, Element: supportingElement, Scaling: "ATK", isReaction: true, Type: "PlungingAttack" }
+               dmg += dmgCalc(attack, Character) * numberOfEnemies;
 
             }
         });
     }
+    attack.Type = "PlungingAttack"; 
     dmg += dmgCalc(attack, Character) * numberOfEnemies; //Plunge Attack
     return { dmg: dmg };
 }

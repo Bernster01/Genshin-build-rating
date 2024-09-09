@@ -12682,7 +12682,7 @@ const Kazuha = {
     energyOffset: 135,
     supportType: "ElementalBuffer",
     sequence: {
-        ["Dps"]: ["E", "P", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E", "P"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
         ["Support"]: ["E", "P", "Q"],
     },
     weaponType: "Sword",

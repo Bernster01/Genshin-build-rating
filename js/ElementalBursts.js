@@ -1099,16 +1099,20 @@ function kazuhaSlash(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
-    let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    let dmg = dmgCalc(attack, Character) * numberOfEnemies; //Initial hit
     attack.Multiplier = dOT;
-    dmg += dmgCalc(attack, Character) * 5 * numberOfEnemies;
-    if (supportingElement != null || supportingElement != undefined) {
-
-        attack.Multiplier = elementalDmg;
-        attack.Element = supportingElement;
-        dmg += dmgCalc(attack, Character) * 5 * numberOfEnemies;
+    let elementalAttack = { Multiplier: 0, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    const swirlableElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    if(swirlableElements.includes(supportingElement)){
+        elementalAttack.Multiplier = elementalDmg;
+        elementalAttack.Element = supportingElement + "DMGBonus";
     }
-
+    for(let i = 0; i < 5; i++){
+        attack.Multiplier = elementalDmg;
+        dmg += dmgCalc(attack, Character) * numberOfEnemies;
+        dmg += dmgCalc(elementalAttack, Character) * numberOfEnemies;
+        
+    }
     return { dmg: dmg };
 }
 
