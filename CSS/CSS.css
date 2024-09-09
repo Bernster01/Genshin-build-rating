@@ -1657,7 +1657,7 @@ span {
 }
 
 #character img {
-	max-height: 400px;
+	max-height: 800px;
 	object-fit: contain;
 }
 #table_container{
