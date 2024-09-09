@@ -825,7 +825,7 @@ function applyBonuses(character) {
             break;
         case "Sacrifical Jade":
             if (character.subDpsType == "Off-field") {
-                character.currentBuffs.push({ Type: "HP%", Value: 64 }, { Type: "ElementalMastery", Value: 80 });
+                character.currentBuffs.push({ Type: "HP%", Value: 40 }, { Type: "ElementalMastery", Value: 50 });
             }
 
 
@@ -1573,7 +1573,7 @@ function Simulation(character) {
                     case "Scion of the Blazing Sun":
                         if (attackAction.type == "ChargedAttack" && !scionOftheBlazingSunBuff) {
                             scionOftheBlazingSunBuff = true;
-                            Character.currentBuffs.push({ Type: "ChargedAttack", Value: 56, Source: "Scion of the Blazing Sun" });
+                            Character.currentBuffs.push({ Type: "ChargedAttack", Value: 35, Source: "Scion of the Blazing Sun" });
                         }
                         break;
                     case "Ballad of the Boundless Blue":

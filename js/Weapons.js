@@ -813,7 +813,7 @@ const TheBlackSword = {
             return getSubStat(this);
         }
     },
-    passive: function () { return [{ Type: "NormalAttack", Value: 40 }, { Type: "ChargedAttack", Value: 40 }] },
+    passive: function () { return [{ Type: "NormalAttack", Value: 25 }, { Type: "ChargedAttack", Value: 25 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -943,7 +943,7 @@ const WolfFang = {
             return getSubStat(this);
         }
     },
-    passive: function () { return [{ Type: "ElementalBurst", Value: 32, Source: "Wolf-Fang" }, { Type: "ElementalSkill", Value: 32, Source: "Wolf-Fang" }] },
+    passive: function () { return [{ Type: "ElementalBurst", Value: 20, Source: "Wolf-Fang" }, { Type: "ElementalSkill", Value: 20, Source: "Wolf-Fang" }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -2517,7 +2517,7 @@ const SolarPearl = {
         }
     },
 
-    passive: function () { return [{ Type: "ElementalBurst", Value: 40/0.7 }, { Type: "ElementalSkill", Value: 40/0.7 }, { Type: "NormalAttack", Value: 40/0.7 }, { Type: "ChargedAttack", Value: 40/0.7 }] },
+    passive: function () { return [{ Type: "ElementalBurst", Value: 25/0.7 }, { Type: "ElementalSkill", Value: 25/0.7 }, { Type: "NormalAttack", Value: 25/0.7 }, { Type: "ChargedAttack", Value: 25/0.7 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3156,7 +3156,7 @@ const SerpentSpine = {
         }
     },
 
-    passive: function () { return [{ Type: "BonusDMG%", Value: 50 }] },
+    passive: function () { return [{ Type: "BonusDMG%", Value: 35 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3264,7 +3264,7 @@ const TalkingStick = {
         }
     },
 
-    passive: function () { return [{ Type: "ATK%", Value: 16 }, { Type: "ElementalDMG", Value: 12 }] },
+    passive: function () { return [{ Type: "ATK%", Value: 10 }, { Type: "ElementalDMG", Value: 7.5 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3482,7 +3482,7 @@ const BalladoftheFjords = {
         }
     },
 
-    passive: function () { return [{ Type: "ElementalMastery", Value: 240 }] },
+    passive: function () { return [{ Type: "ElementalMastery", Value: 150 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
@@ -3641,7 +3641,7 @@ const Deathmatch = {
         }
     },
 
-    passive: function () { return [{ Type: "ATK%", Value: 32 }, { Type: "DEF%", Value: 32 }] },
+    passive: function () { return [{ Type: "ATK%", Value: 20 }, { Type: "DEF%", Value: 20 }] },
     Init: function () {
         this.subStat.Parent = this;
         delete this.Init;
