@@ -1554,7 +1554,7 @@ function Simulation(character) {
                             }
                         }
                         break;
-                    case "Hunter's Path":
+                    case "Hunter&#39s Path":
                         if (attackAction.type == "ChargedAttack" && !huntersPathBuff) {
                             Character.currentBuffs.push({ Type: "FlatDMG", Value: (160 / 100) * Character.EM(), Source: "Hunter's Path", for: "ChargedAttack" });
                             huntersPathBuff = true;
@@ -1586,7 +1586,7 @@ function Simulation(character) {
                             }
                         }
                         break;
-                    case "Crane's Echoing Call":
+                    case "Crane&#39s Echoing Call":
                         if (attackAction.type == "PlungeAttack" && !cranesEchoingCallBuff) {
                             cranesEchoingCallBuff = true;
                             atkBuff += character.attack() * 0.2;
@@ -1898,7 +1898,7 @@ function Simulation(character) {
                             flowingPurityBuff = true;
                         }
                         break;
-                    case "Tulaytullah's Remembrance":
+                    case "Tulaytullah&#39s Remembrance":
                         if (!tulaytullahsRemembranceBuff) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 48, Source: "Tulaytullah's Remembrance" });
                             tulaytullahsRemembranceBuff = true;
@@ -3373,7 +3373,7 @@ function enteredNightsoulBlessing(character) {
 }
 function vaporizeTriggerd(character) {
     switch (character.weapon.name) {
-        case "Surf's Up":
+        case "Surf&#39s Up":
             if (surfUpBuff) {
                 surfUpBuffStacks++;
                 if (surfUpBuffStacks > 4) {
