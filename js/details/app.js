@@ -24,7 +24,7 @@ function starterFunction() {
     let text = `You got a Score of ${Math.floor(builds.user.buildScore)} resulting in a grade of ${getGrade(builds.user.buildScore)}.`;
     let energyPercent = Math.floor((characters.user.energyRecharge() / characters.user.energyOffset) * 100);
     if (energyPercent < 100) {
-        text += ` Your energy recharge is ${energyPercent}% of the recommended amount of ${characters.user.energyOffset}. Your score suffered negatively because of this.`;
+        text += `\n  Your energy recharge is ${energyPercent}% of the recommended amount of ${characters.user.energyOffset}. Your score suffered negatively because of this.`;
     }
     document.getElementById("result_info").innerText = text
 }
