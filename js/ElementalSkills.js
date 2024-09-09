@@ -1048,13 +1048,13 @@ function chihayaburu(Character) {
         attack.Element = supportingElement;
         Character.currentBuffs.forEach(buff => {
             if (buff.Type == "Soumon Sowrdmanship") {
-                const a1passiveAttack = { Multiplier: 200/100, Element: supportingElement, Scaling: "ATK", isReaction: true, Type: "PlungingAttack" }
-               dmg += dmgCalc(attack, Character) * numberOfEnemies;
+                const a1passiveAttack = { Multiplier: 200 / 100, Element: supportingElement, Scaling: "ATK", isReaction: true, Type: "PlungingAttack" }
+                dmg += dmgCalc(attack, Character) * numberOfEnemies;
 
             }
         });
     }
-    attack.Type = "PlungingAttack"; 
+    attack.Type = "PlungingAttack";
     dmg += dmgCalc(attack, Character) * numberOfEnemies; //Plunge Attack
     return { dmg: dmg };
 }
@@ -1604,7 +1604,7 @@ function heraldofFrost(Character) {
     }
 
     let heal = regenCon * 4 + (regenHit * 8 * 4) * (1 + (Character.advancedstats.healingBonus / 100));
-    
+
     healingHasOccured(Character);
 
     return { dmg: dmg, healing: heal };
@@ -6678,9 +6678,72 @@ function bewilderingLights(character) {
             skillDMGBonus = 95.76;
             break;
     }
-    let skillAttack = { Multiplier: (skillDMG+(propSurplusStacks*skillDMGBonus))/100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let skillAttack = { Multiplier: (skillDMG + (propSurplusStacks * skillDMGBonus)) / 100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-    character.addHP((character.HP()*0.2)*propSurplusStacks);
+    character.addHP((character.HP() * 0.2) * propSurplusStacks);
     propSurplusStacks = 0;
     return dmg;
+}
+function surfsharkWavebreaker(character) {
+    let surgingBite = 0;
+    let waveMomentumBonus = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            surgingBite = 21.7 / 100;
+            waveMomentumBonus = 4.34 / 100;
+            break;
+        case 2:
+            surgingBite = 23.33 / 100;
+            waveMomentumBonus = 4.67 / 100;
+            break;
+        case 3:
+            surgingBite = 24.95 / 100;
+            waveMomentumBonus = 4.99 / 100;
+            break;
+        case 4:
+            surgingBite = 27.13 / 100;
+            waveMomentumBonus = 5.42 / 100;
+            break;
+        case 5:
+            surgingBite = 28.75 / 100;
+            waveMomentumBonus = 5.75 / 100;
+            break;
+        case 6:
+            surgingBite = 30.38 / 100;
+            waveMomentumBonus = 6.08 / 100;
+            break;
+        case 7:
+            surgingBite = 32.55 / 100;
+            waveMomentumBonus = 6.51 / 100;
+            break;
+        case 8:
+            surgingBite = 34.72 / 100;
+            waveMomentumBonus = 6.94 / 100;
+            break;
+        case 9:
+            surgingBite = 36.89 / 100;
+            waveMomentumBonus = 7.38 / 100;
+            break;
+        case 10:
+            surgingBite = 39.06 / 100;
+            waveMomentumBonus = 7.81 / 100;
+            break;
+        case 11:
+            surgingBite = 41.23 / 100;
+            waveMomentumBonus = 8.25 / 100;
+            break;
+        case 12:
+            surgingBite = 43.4 / 100;
+            waveMomentumBonus = 8.68 / 100;
+            break;
+        case 13:
+            surgingBite = 46.11 / 100;
+            waveMomentumBonus = 9.22 / 100;
+            break;
+
+    }
+    character.normalAttack1.Multiplier = function (level) { return surgingBite+(waveMomentumBonus*3)};
+    character.normalAttack2.Multiplier = function (level) { return (surgingBite+(waveMomentumBonus*3))*(28/100)};
+    character.nightsoul = true;
+    return 0;
 }

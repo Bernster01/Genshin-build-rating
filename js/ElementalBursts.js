@@ -1103,15 +1103,15 @@ function kazuhaSlash(Character) {
     attack.Multiplier = dOT;
     let elementalAttack = { Multiplier: 0, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     const swirlableElements = ["Pyro", "Hydro", "Electro", "Cryo"];
-    if(swirlableElements.includes(supportingElement)){
+    if (swirlableElements.includes(supportingElement)) {
         elementalAttack.Multiplier = elementalDmg;
         elementalAttack.Element = supportingElement + "DMGBonus";
     }
-    for(let i = 0; i < 5; i++){
+    for (let i = 0; i < 5; i++) {
         attack.Multiplier = elementalDmg;
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
         dmg += dmgCalc(elementalAttack, Character) * numberOfEnemies;
-        
+
     }
     return { dmg: dmg };
 }
@@ -6374,5 +6374,61 @@ function woundrousTrickMiracleParade(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     propSurplusStacks++;
+    return dmg;
+}
+function boomsharkaLaka(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 58.44 / 100;
+            break;
+        case 2:
+            skillDMG = 62.82 / 100;
+            break;
+        case 3:
+            skillDMG = 67.21 / 100;
+            break;
+        case 4:
+            skillDMG = 73.05 / 100;
+            break;
+        case 5:
+            skillDMG = 77.43 / 100;
+            break;
+        case 6:
+            skillDMG = 81.81 / 100;
+            break;
+        case 7:
+            skillDMG = 87.66 / 100;
+            break;
+        case 8:
+            skillDMG = 93.5 / 100;
+            break;
+        case 9:
+            skillDMG = 99.35 / 100;
+            break;
+        case 10:
+            skillDMG = 105.19 / 100;
+            break;
+        case 11:
+            skillDMG = 111.03 / 100;
+            break;
+        case 12:
+            skillDMG = 116.88 / 100;
+            break;
+        case 13:
+            skillDMG = 124.18 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
+    let hasA4 = false;
+    character.currentBuffs.forEach(buff => {
+        if (buff.Type == "A4") {
+            hasA4 = true;
+        }
+    });
+    if (hasA4){
+        character.currentBuffs.push({ Type: "FlatDMG", Value: character.HP() * (30 / 100), for: "ElementalBurst" });//Currently only 2 stacks of A4 can be achived will update when more natlan character come out.
+    }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
 }

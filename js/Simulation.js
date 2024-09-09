@@ -359,7 +359,7 @@ class Createcharacter {
         this.weapon = weapon;
         this.baseAttack = baseCharacter.baseAttack;
         this.baseDEF = baseCharacter.baseDEF;
-
+        this.nightsoul = false;
         this.baseHP = baseCharacter.baseHP;
         this.subDpsType = baseCharacter.subDpsType;
         this.bondOfLife = 0;
