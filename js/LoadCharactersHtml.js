@@ -18,6 +18,7 @@ function LoadCharacters() {
     loadArtifactLists();
     loadMockArtifacts();
     devloadCharacter();
+    loadLastBuildFromSessionStorage();
 
 }
 function devloadCharacter(){
@@ -300,4 +301,92 @@ function loadBackground(){
     
 }
 
+function loadLastBuildFromSessionStorage(){
+    //Check if there is a build in the session storage
+    let build = sessionStorage.getItem("user");
+    if (build === null) {
+        build = [];
+    }
+    else {
+        build = JSON.parse(build);
+    }
+    //If there is a build in the session storage, load it
+    if (build) {
+        // console.log(build);
+        let character = document.createElement("div");
+        character.title = build.character.name;
+        character.innerHTML = `<img src="" alt="${build.character.name}"><div class="${build.character.element}"><span>${build.character.name}</span></div>`;
+        selectCharacter(character);
+        let weapon = document.createElement("div");
+        weapon.title = build.weapon.name;
+        weapon.innerHTML = `<img src="Assets/${AllWeapons[build.weapon.name].src}" alt="${build.weapon.name}"><div class="WeaponsText"><span>${build.weapon.name}</span></div>`;
+        selectWeapon(weapon);
+        document.getElementById("character_level").value = build.character.level;
+        document.getElementById("weapon_level").value = build.weapon.level;
+        document.getElementById("normal_attack").value = build.character.normalAttackLevel;
+        document.getElementById("talent_skill").value = build.character.elementalSkillLevel.Level;
+        document.getElementById("talent_burst").value = build.character.elementalBurstLevel.Level;
+        loadArtifacts(build.artifacts);
+    }
 
+
+}
+
+
+function loadArtifacts(artifacts){
+   
+    const artifactImgTranslation = {
+        "HP%": "Icon_Attribute_Health.webp",
+        "ATK%": "Icon_Attribute_Attack.webp",
+        "DEF%": "Icon_Attribute_Defense.webp",
+        "ATKflat": "Icon_Attribute_Attack.webp",
+        "HPflat": "Icon_Attribute_Health.webp",
+        "DEFflat": "Icon_Attribute_Defense.webp",
+        "ElementalMastery": "Icon_Attribute_Elemental_Mastery.webp",
+        "EnergyRecharge": "Icon_Attribute_Energy_Recharge.webp",
+        "CritRate": "Icon_Attribute_Critical_Hit.webp",
+        "CritDMG": "Icon_Attribute_Critical_Damage.webp",
+        "HealingBonus": "Icon_Attribute_Healing.webp",
+        "PyroDMGBonus": "Element_Pyro.svg",
+        "HydroDMGBonus": "Element_Hydro.svg",
+        "DendroDMGBonus": "Element_Dendro.svg",
+        "ElectroDMGBonus": "Element_Electro.svg",
+        "AnemoDMGBonus": "Element_Anemo.svg",
+        "CryoDMGBonus": "Element_Cryo.svg",
+        "GeoDMGBonus": "Element_Geo.svg",
+        "PhysicalDMGBonus": "Icon_Attribute_Physical.svg",
+    }
+    for (let i = 0; i < artifacts.length; i++) {
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_mainstat_type").dataset.type = artifacts[i].Mainstat.Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_mainstat_type").title = artifacts[i].Mainstat.Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_mainstat_type").src = "Assets/Icons/"+artifactImgTranslation[artifacts[i].Mainstat.Type];
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_mainstat_value").innerText = artifacts[i].Mainstat.Value;
+
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_1_type").dataset.type = artifacts[i].Substats[0].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_1_type").title = artifacts[i].Substats[0].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_1_type").src = "Assets/Icons/"+artifactImgTranslation[artifacts[i].Substats[0].Type];
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_1_value").innerText = artifacts[i].Substats[0].Value;
+
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_2_type").dataset.type = artifacts[i].Substats[1].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_2_type").title = artifacts[i].Substats[1].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_2_type").src = "Assets/Icons/"+artifactImgTranslation[artifacts[i].Substats[1].Type];
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_2_value").innerText = artifacts[i].Substats[1].Value;
+
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_3_type").dataset.type = artifacts[i].Substats[2].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_3_type").title = artifacts[i].Substats[2].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_3_type").src = "Assets/Icons/"+artifactImgTranslation[artifacts[i].Substats[2].Type];
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_3_value").innerText = artifacts[i].Substats[2].Value;
+
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_4_type").dataset.type = artifacts[i].Substats[3].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_4_type").title = artifacts[i].Substats[3].Type;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_4_type").src = "Assets/Icons/"+artifactImgTranslation[artifacts[i].Substats[3].Type];
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_substat_4_value").innerText = artifacts[i].Substats[3].Value;      
+        
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_set").dataset.set = artifacts[i].Set;
+        document.getElementById(artifacts[i].Type.toLowerCase() + "_set").style.backgroundImage = "url('Assets/Artifacts/"+artifacts[i].Set+"_"+artifacts[i].Type+".webp')";
+
+
+    }
+
+    
+}

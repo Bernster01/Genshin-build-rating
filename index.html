@@ -810,13 +810,20 @@
 		function selectWeapon(weapon) {
 			let background = document.getElementById('weapon_figure');
 			let img = document.getElementById("SelectWeaponImg");
-			img.src = weapon.childNodes[1].src
-			img.title = weapon.childNodes[1].alt;
-			img.alt = weapon.childNodes[1].alt;
-			console.log();
-			background.style.backgroundImage = `url(Assets/Rarity_Backgrounds/Background_Item_${AllWeapons[weapon.childNodes[1].alt].rarity}_Star.webp)`;
+			//Remove #text childs from weapon
+			weapon.childNodes.forEach((child) => {
+				if (child.nodeType == 3) {
+					weapon.removeChild(child);
+				}
+			});
+			
+			img.src = weapon.childNodes[0].src
+			img.title = weapon.childNodes[0].alt;
+			img.alt = weapon.childNodes[0].alt;
+			console.log(weapon.childNodes[0]);
+			background.style.backgroundImage = `url(Assets/Rarity_Backgrounds/Background_Item_${AllWeapons[weapon.childNodes[0].alt].rarity}_Star.webp)`;
 			document.getElementById("weaponBox").style.display = "none";
-			document.getElementById("weapon_name").innerText = weapon.childNodes[1].alt;
+			document.getElementById("weapon_name").innerText = weapon.childNodes[0].alt;
 
 		}
 
