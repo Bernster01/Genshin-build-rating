@@ -1536,7 +1536,9 @@ span {
 	border-radius: 1rem;
 	padding: 1.5rem;
 }
-
+#simulation_settings h3{
+	text-align: center;
+}
 #simulation_settings div {
 	margin: 1rem;
 }
