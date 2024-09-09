@@ -3781,7 +3781,32 @@ const FavoniusLance = {
         return this;
     }
 }.Init();
+const FootprintoftheRainbow = {
+    name: "Footprint of the Rainbow",
+    src: "Weapons/Weapon_Footprint_of_the_Rainbow.webp",
+    weaponType: "Polearm",
+    rarity: 4,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack42",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "DEF%",
+        startValue: "11.3%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const KitainCrossSpear = {
     name: "Kitain Cross Spear",
     src: "Weapons/Weapon_Kitain_Cross_Spear.webp",
@@ -4299,6 +4324,7 @@ const AllWeapons = {
     ["Flowing Purity"]: FlowingPurity,
     ["Flute of Ezpitzal"]: FluteofEzpitzal,
     ["Forest Regalia"]: ForestRegalia,
+    ["Footprint of the Rainbow"]: FootprintoftheRainbow,
     ["Freedom-Sworn"]: FreedomSworn,
     ["Frostbearer"]: Frostbearer,
     ["Fruit of Fulfillment"]: FruitOfFulfillment,
@@ -4459,6 +4485,7 @@ const AllWeapons = {
         "Flowing Purity",
         "Flute of Ezpitzal",
         "Forest Regalia",
+        "Footprint of the Rainbow",
         "Freedom-Sworn",
         "Frostbearer",
         "Fruit of Fulfillment",
@@ -4724,6 +4751,7 @@ const AllWeapons = {
         "Dragonspine Spear",
         "Engulfing Lightning",
         "Favonius Lance",
+        "Footprint of the Rainbow",
         "Kitain Cross Spear",
         "Lithic Spear",
         "Lumidouce Elegy",

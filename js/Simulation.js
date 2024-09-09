@@ -84,6 +84,7 @@ let obsidianCodexBuff2 = false;
 let surfUpBuff = false;
 let surfUpBuffStacks = 0;
 let hasRingofYaxcheBuff = false;
+let footprintOfTheRainbowBuff = false;
 
 function getBuild(build, score) {
     let character = build.character;
@@ -1110,6 +1111,7 @@ function resetVariables() {
     moonpiercerBuff = false;
     prospectorsDrillStacks = 0;
     prospectorsDrillBuff = false;
+    footprintOfTheRainbowBuff = false;
 
     //Some catalyst buffs
     cranesEchoingCallBuff = false;
@@ -1731,10 +1733,16 @@ function Simulation(character) {
                     case "Ring of Yaxche":
                         if (!hasRingofYaxcheBuff) {
                             hasRingofYaxcheBuff = true;
-                            let buffValue = Math.round(character.HP()/1000);
-                            if(buffValue > 32)
+                            let buffValue = Math.round(character.HP() / 1000);
+                            if (buffValue > 32)
                                 buffValue = 32;
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: buffValue, Source: "Ring of Yaxche" });
+                        }
+                        break;
+                    case "Footprint of the Rainbow":
+                        if(!footprintOfTheRainbowBuff){
+                            footprintOfTheRainbowBuff = true;
+                            Character.currentBuffs.push({Type: "DEF%", Value: 32, Source: "Footprint of the Rainbow"});
                         }
                         break;
 
