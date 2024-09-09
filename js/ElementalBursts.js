@@ -6426,9 +6426,57 @@ function boomsharkaLaka(character) {
             hasA4 = true;
         }
     });
-    if (hasA4){
+    if (hasA4) {
         character.currentBuffs.push({ Type: "FlatDMG", Value: character.HP() * (30 / 100), for: "ElementalBurst" });//Currently only 2 stacks of A4 can be achived will update when more natlan character come out.
     }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    return dmg;
+}
+
+function timetoGetSerious(character) {
+    let skillDMG = 0;
+    switch (character.elementalBurst.Level) {
+        case 1:
+            skillDMG = 380.57 / 100;
+            break;
+        case 2:
+            skillDMG = 413.66 / 100;
+            break;
+        case 3:
+            skillDMG = 442.52 / 100;
+            break;
+        case 4:
+            skillDMG = 481 / 100;
+            break;
+        case 5:
+            skillDMG = 509.86 / 100;
+            break;
+        case 6:
+            skillDMG = 538.72 / 100;
+            break;
+        case 7:
+            skillDMG = 577.2 / 100;
+            break;
+        case 8:
+            skillDMG = 615.68 / 100;
+            break;
+        case 9:
+            skillDMG = 654.16 / 100;
+            break;
+        case 10:
+            skillDMG = 692.64 / 100;
+            break;
+        case 11:
+            skillDMG = 731.12 / 100;
+            break;
+        case 12:
+            skillDMG = 769.6 / 100;
+            break;
+        case 13:
+            skillDMG = 817.7 / 100;
+            break;
+    }
+    let attack = { Multiplier: skillDMG, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
 }

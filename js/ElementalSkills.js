@@ -6742,9 +6742,94 @@ function surfsharkWavebreaker(character) {
             break;
 
     }
-    character.normalAttack1.Multiplier = function (level) { return surgingBite+(waveMomentumBonus*3)};
-    character.normalAttack2.Multiplier = function (level) { return (surgingBite+(waveMomentumBonus*3))*(28/100)};
+    character.normalAttack1.Multiplier = function (level) { return surgingBite + (waveMomentumBonus * 3) };
+    character.normalAttack2.Multiplier = function (level) { return (surgingBite + (waveMomentumBonus * 3)) * (28 / 100) };
     character.nightsoul = true;
     enteredNightsoulBlessing(character);
     return 0;
+}
+
+function goGoTurboTwirly(character) {
+    let mountedDMG = 0;
+    let independentDMG = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            mountedDMG = 87.76 / 100;
+            independentDMG = 63.76 / 100;
+            break;
+        case 2:
+            mountedDMG = 94.34 / 100;
+            independentDMG = 68.54 / 100;
+            break;
+        case 3:
+            mountedDMG = 100.92 / 100;
+            independentDMG = 73.32 / 100;
+            break;
+        case 4:
+            mountedDMG = 109.7 / 100;
+            independentDMG = 79.7 / 100;
+            break;
+        case 5:
+            mountedDMG = 116.28 / 100;
+            independentDMG = 84.48 / 100;
+            break;
+        case 6:
+            mountedDMG = 122.86 / 100;
+            independentDMG = 89.26 / 100;
+            break;
+        case 7:
+            mountedDMG = 131.64 / 100;
+            independentDMG = 95.64 / 100;
+            break;
+        case 8:
+            mountedDMG = 140.42 / 100;
+            independentDMG = 102.02 / 100;
+            break;
+        case 9:
+            mountedDMG = 149.19 / 100;
+            independentDMG = 108.39 / 100;
+            break;
+        case 10:
+            mountedDMG = 157.97 / 100;
+            independentDMG = 114.77 / 100;
+            break;
+        case 11:
+            mountedDMG = 166.74 / 100;
+            independentDMG = 121.14 / 100;
+            break;
+        case 12:
+            mountedDMG = 175.52 / 100;
+            independentDMG = 127.52 / 100;
+            break;
+        case 13:
+            mountedDMG = 186.49 / 100;
+            independentDMG = 135.49 / 100;
+            break;
+    }
+    let independentAttack = { Multiplier: independentDMG, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: true, type: "ElementalSkill" }
+    let hasA4 = false;
+    character.nightsoul = true;
+    enteredNightsoulBlessing(character);
+    for (const buff of character.currentBuffs) {
+        if (buff.Type == "A4") {
+            hasA4 = true;
+        }
+    }
+    if(hasA4){
+        character.currentBuffs.push({ Type: "NormalAttack", Value: (20/100)*character.DEF(), Source: "Go Go, Turbo!" });
+        character.currentBuffs.push({ Type: "ElementalSkill", Value: (20/100)*character.DEF(), Source: "Go Go, Turbo!" });
+    }
+    switch(role){
+        case "Dps":
+            character.normalAttack1.Multiplier = function (level) { return mountedDMG };
+            break;
+        case "Support":
+            let dmg = 0;
+            for (let i = 0; i < 6; i++) {
+                dmg += dmgCalc(independentAttack, character) * numberOfEnemies;
+            }
+            return dmg;
+    }
+    return 0;
+
 }
