@@ -2498,7 +2498,32 @@ const SolarPearl = {
         return this;
     }
 }.Init();
+const SurfsUp = {
+    name: "Surf&#39s Up",
+    src: "Weapons/Weapon_Surfs_Up.webp",
+    weaponType: "Catalyst",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "CritDMG",
+        startValue: "19.2%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [{ Type: "HP%", Value: 20 }] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const TheWidsith = {
     name: "The Widsith",
     src: "Weapons/Weapon_The_Widsith.webp",
@@ -4325,6 +4350,7 @@ const AllWeapons = {
     ["Splendor of Tranquil Waters"]: SplendorofTranquilWaters,
     ["Staff of Homa"]: StaffOfHoma,
     ["Summit Shaper"]: SummitShaper,
+    ["Surf's Up"]: SurfsUp,
     ["Sword of Descension"]: SwordOfDescension,
     ["Sword of Narzissenkreuz"]: SwordOfNarzissenkreuz,
     ["Talking Stick"]: TalkingStick,
@@ -4483,6 +4509,7 @@ const AllWeapons = {
         "Staff of Homa",
         "Staff of the Scarlet Sands",
         "Summit Shaper",
+        "Surf's Up",
         "Sword of Descension",
         "Sword of Narzissenkreuz",
         "Talking Stick",
@@ -4618,6 +4645,7 @@ const AllWeapons = {
         "Sacrificial Jade",
         "Skyward Atlas",
         "Solar Pearl",
+        "Surf's Up",
         "The Widsith",
         "Thrilling Tales of Dragon Slayers",
         "Tome of the Eternal Flow",

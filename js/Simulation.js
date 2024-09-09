@@ -81,6 +81,8 @@ let userBuild = {};
 let partyMemberElements = [];
 let obsidianCodexBuff = false;
 let obsidianCodexBuff2 = false;
+let surfUpBuff = false;
+let surfUpBuffStacks = 0;
 
 function getBuild(build, score) {
     let character = build.character;
@@ -820,8 +822,8 @@ function applyBonuses(character) {
             character.currentBuffs.push({ Type: "ATK%", Value: 16 * hasSameElement, Source: "The First Great Magic" });
             break;
         case "Sacrifical Jade":
-            if(character.subDpsType == "Off-field"){
-                character.currentBuffs.push({ Type: "HP%", Value: 64 },{Type:"ElementalMastery",Value:80});
+            if (character.subDpsType == "Off-field") {
+                character.currentBuffs.push({ Type: "HP%", Value: 64 }, { Type: "ElementalMastery", Value: 80 });
             }
 
 
@@ -1113,6 +1115,8 @@ function resetVariables() {
     flowingPurityBuff = false;
     jadefallsSplendorBuff = false;
     tulaytullahsRemembranceBuff = false;
+    surfUpBuff = false;
+    surfUpBuffStacks = 0;
 
     deepWoodMemoriesBuff = false;
     flowerOfparadiseLostStacks = 0;
@@ -1589,6 +1593,24 @@ function Simulation(character) {
                             character.currentBuffs.push({ Type: "PlungeAttack", Value: 20, Source: "Crane's Echoing Call", for: "PlungeAttack" });
                         }
                         break;
+                    case "Surf&#39s Up":
+                        if (surfUpBuff) {
+                            if(action=="N2")
+                                break;
+                            surfUpBuffStacks--;
+                            if (surfUpBuffStacks < 0) {
+                                surfUpBuffStacks = 0;
+                            }
+                            let buff;
+                            for (buff of character.currentBuffs) {
+                                if (buff.Source == "Surf's Up") {
+                                    if (buff.Type == "NormalAttack") {
+                                        buff.Value = 12 * surfUpBuffStacks;
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
                 switch (Character.artifactFourPiece) {
                     case "Desert Pavilion Chronicle":
@@ -1697,7 +1719,13 @@ function Simulation(character) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "Haran Geppaku Futsu" });
                         }
                         break;
-
+                    case "Surf&#39s Up":
+                        if (!surfUpBuff) {
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 48, Source: "Surf's Up" });
+                            surfUpBuff = true;
+                            surfUpBuffStacks = 4;
+                        }
+                        break;
 
                 }
                 if (Character.supportType != "Sub-dps") {
@@ -2674,6 +2702,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 switch (type) {
                     case "Hydro":
                         dmg = vaporizeMultiplier * incomingDmg;
+                        vaporizeTriggerd(character);
                         amplyfyingReaction = true;
                         break;
                     case "Electro":
@@ -2701,6 +2730,7 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 switch (type) {
                     case "Pyro":
                         dmg = reverseVaporizeMultiplier * incomingDmg;
+                        vaporizeTriggerd(character);
                         amplyfyingReaction = true;
                         break;
                     case "Electro":
@@ -3338,6 +3368,25 @@ function enteredNightsoulBlessing(character) {
             if (!obsidianCodexBuff2) {
                 character.currentBuffs.push({ Type: "CritRate", Value: 40, Source: "Obsidian Codex" });
                 obsidianCodexBuff2 = true;
+            }
+    }
+}
+function vaporizeTriggerd(character) {
+    switch (character.weapon.name) {
+        case "Surf's Up":
+            if (surfUpBuff) {
+                surfUpBuffStacks++;
+                if (surfUpBuffStacks > 4) {
+                    surfUpBuffStacks = 4;
+                }
+                let buff;
+                for (buff of character.currentBuffs) {
+                    if (buff.Source == "Surf's Up") {
+                        if (buff.Type == "NormalAttack") {
+                            buff.Value = 12 * surfUpBuffStacks;
+                        }
+                    }
+                }
             }
     }
 }
