@@ -741,37 +741,44 @@ footer {
 
 .GeoCharacter {
 	background: linear-gradient(66deg, rgba(220, 160, 70, 1) 0%, rgba(255, 210, 120, 1) 50%, rgba(220, 160, 70, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .PyroCharacter {
 	background: linear-gradient(66deg, rgba(254, 0, 0, 1) 0%, rgba(255, 60, 60, 1) 40%, rgba(255, 60, 60, 1) 60%, rgba(254, 0, 0, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .HydroCharacter {
 	background: linear-gradient(66deg, rgba(0, 26, 254, 1) 0%, rgba(30, 90, 255, 1) 45%, rgba(30, 90, 255, 1) 55%, rgba(0, 26, 254, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .ElectroCharacter {
 	background: linear-gradient(66deg, rgba(255, 0, 255, 1) 0%, rgba(255, 100, 255, 1) 40%, rgba(255, 100, 255, 1) 60%, rgba(255, 0, 255, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .AnemoCharacter {
 	background: linear-gradient(66deg, rgba(0, 254, 153, 1) 0%, rgba(100, 255, 111, 1) 40%, rgba(100, 255, 111, 1) 60%, rgba(0, 254, 153, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .CryoCharacter {
 	background: linear-gradient(66deg, rgba(0, 254, 230, 1) 0%, rgba(125, 255, 233, 1) 40%, rgba(125, 255, 233, 1) 60%, rgba(0, 254, 230, 1) 100%);
-	z-index: 1;
+	z-index: 1;    z-index: 1;
+    position: relative;
 }
 
 .DendroCharacter {
 	background: linear-gradient(66deg, rgba(0, 254, 0, 1) 0%, rgba(125, 255, 125, 1) 40%, rgba(125, 255, 125, 1) 60%, rgba(0, 254, 0, 1) 100%);
 	z-index: 1;
+	position: relative;
 }
 
 select {
