@@ -311,7 +311,7 @@ function loadLastBuildFromSessionStorage(){
         build = JSON.parse(build);
     }
     //If there is a build in the session storage, load it
-    if (build) {
+    if (build != null && build != undefined && build.length > 0) {
         // console.log(build);
         let character = document.createElement("div");
         character.title = build.character.name;
