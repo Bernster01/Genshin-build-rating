@@ -85,7 +85,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                     justify-content: center;
                     font-size:32pt;">
                     <span style="margin:0;">Role:&nbsp</span>
-                    <span style="margin:0;">${role}</span>
+                    <span style="margin:0;">${role == "Dps" ? "On-field dps ":character.supportType}</span>
 
                     </div>
                     <div class="character-card-info-group" style="margin-top:0;">
