@@ -27,7 +27,7 @@ function starterFunction() {
     const buildArtifact = artifactBuilder(builds.build, "Our");
     document.getElementById("artifacts").appendChild(userArtifact);
     document.getElementById("artifacts").appendChild(buildArtifact);
-    let text = `You got a Score of ${Math.floor(builds.user.buildScore)} resulting in a grade of ${getGrade(builds.user.buildScore)}.`;
+    let text = `You got a Score of ${Math.floor(builds.user.buildScore)} resulting in a grade of "${getGrade(builds.user.buildScore)}-tier".`;
     let energyPercent = Math.floor((characters.user.energyRecharge() / characters.user.energyOffset) * 100);
     if (energyPercent < 100) {
         text += `\n  Your energy recharge is ${energyPercent}% of the recommended amount of ${characters.user.energyOffset}. Your score suffered negatively because of this.`;
@@ -144,106 +144,106 @@ function tableBuilder(builds) {
             </tr>
             <tr>
                 <td>HP</td>
-                <td>${user.HP()}</td>
+                <td>${round(user.HP(),1)}</td>
                 <td>${usersHP}</td>
-                <td>${build.HP()}</td>
+                <td>${round(build.HP(),1)}</td>
             </tr>
             <tr>
                 <td>ATK</td>
-                <td>${user.attack()}</td>
+                <td>${round(user.attack(),1)}</td>
                 <td>${usersATK}</td>
-                <td>${build.attack()}</td>
+                <td>${round(build.attack(),1)}</td>
             </tr>
             <tr>
                 <td>DEF</td>
-                <td>${user.DEF()}</td>
+                <td>${round(user.DEF(),1)}</td>
                 <td>${usersDEF}</td>
-                <td>${build.DEF()}</td>
+                <td>${round(build.DEF(),1)}</td>
             </tr>
             <tr>
                 <td>Crit Rate</td>
-                <td>${user.critRate()}%</td>
+                <td>${round(user.critRate(),1)}%</td>
                 <td>${usersCritRate}</td>
-                <td>${build.critRate()}%</td>
+                <td>${round(build.critRate(),1)}%</td>
             </tr>
             <tr>
                 <td>Crit Damage</td>
-                <td>${user.critDMG()}%</td>
+                <td>${round(user.critDMG(),1)}%</td>
                 <td>${usersCritDMG}</td>
-                <td>${build.critDMG()}%</td>
+                <td>${round(build.critDMG(),1)}%</td>
             </tr>
             <tr>
                 <td>Elemental Mastery</td>
-                <td>${user.EM()}</td>
+                <td>${round(user.EM(),1)}</td>
                 <td>${usersEM}</td>
-                <td>${build.EM()}</td>
+                <td>${round(build.EM(),1)}</td>
             </tr>
             <tr>
                 <td>Energy Recharge</td>
-                <td>${user.advancedstats.energyRecharge}%</td>
+                <td>${round(user.advancedstats.energyRecharge,1)}%</td>
                 <td>${usersEnergyRecharge}</td>
-                <td>${build.advancedstats.energyRecharge}%</td>
+                <td>${round(build.advancedstats.energyRecharge,1)}%</td>
             </tr>
             <tr>
                 <td>Healing Bonus</td>
-                <td>${user.advancedstats.healingBonus}%</td>
+                <td>${round(user.advancedstats.healingBonus,1)}%</td>
                 <td>${usersHealingBonus}</td>
-                <td>${build.advancedstats.healingBonus}%</td>
+                <td>${round(build.advancedstats.healingBonus,1)}%</td>
             </tr>
             <tr>
                 <td>Shield Strength</td>
-                <td>${user.advancedstats.shieldStrength}</td>
+                <td>${round(user.advancedstats.shieldStrength,1)}</td>
                 <td>${usersShieldStrength}</td>
-                <td>${build.advancedstats.shieldStrength}</td>
+                <td>${round(build.advancedstats.shieldStrength,1)}</td>
             </tr>
             
             <tr>
                 <td>Pyro DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[0].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[0].Value,1)}%</td>
                 <td>${usersPyroDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[0].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[0].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Hydro DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[1].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[1].Value,1)}%</td>
                 <td>${usersHydroDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[1].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[1].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Dendro DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[2].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[2].Value,1)}%</td>
                 <td>${usersDendroDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[2].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[2].Value,1)}%</td>
             </tr>
              <tr>
                 <td>Electro DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[3].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[3].Value,1)}%</td>
                 <td>${usersElectroDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[3].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[3].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Anemo DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[4].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[4].Value,1)}%</td>
                 <td>${usersAnemoDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[4].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[4].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Cryo DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[5].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[5].Value,1)}%</td>
                 <td>${usersCryoDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[5].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[5].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Geo DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[6].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[6].Value,1)}%</td>
                 <td>${usersGeoDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[6].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[6].Value,1)}%</td>
             </tr>
             <tr>
                 <td>Physical DMG Bonus</td>
-                <td>${user.advancedstats.elementalBonuses[7].Value}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[7].Value,1)}%</td>
                 <td>${usersPhysicalDMGBonus}</td>
-                <td>${build.advancedstats.elementalBonuses[7].Value}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[7].Value,1)}%</td>
             </tr>
 
 
