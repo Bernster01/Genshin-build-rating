@@ -11,7 +11,12 @@ function starterFunction() {
     role = builds.user.role;
     charts = circleGraph(builds.user, builds.build);
     let damageGrahp = barGraphDamage(builds.user, builds.build);
-    let supportGraph = barGraphSupport(builds.user, builds.build);
+    if(role == "Support"){
+        let supportGraph = barGraphSupport(builds.user, builds.build);
+    }
+    else {
+        document.getElementById("supportGraph_section").style.display = "none";
+    }
     // applyBackgrounds(builds);
     document.getElementById("character_name").innerText = builds.user.character.name;
     document.getElementById("character_img").src = `${builds.user.character.splashArt}`;
