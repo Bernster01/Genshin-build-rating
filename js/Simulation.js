@@ -999,6 +999,7 @@ function getSetBonus(array, character) {
                             character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Blizzard Strayer (Frozen)" });
                     }
                 } else if (currentSet == "Golden Troupe") {
+                    character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     if (character.subDpsType == "Off-field" && role == "Support") {
                         character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     }

@@ -61,21 +61,21 @@ function tableBuilder(builds) {
     let user = builds.user;
     let build = builds.build;
     console.log(user);
+   
     let table = document.createElement("table");
-    user.level = convertBuildLevel(user.level);
-    build.level = convertBuildLevel(build.level);
-    user.weapon.level = convertBuildLevel(user.weapon.level);
-    build.weapon.level = convertBuildLevel(build.weapon.level);
+    // build.weapon.level = convertBuildLevel(build.weapon.level);
+  
     let userIsHigherImg = `<img src="Assets/Icons/arrow-up.svg" style="width: 20px; height: 20px; title="You have higer" alt="Green arrow pointing up">`;
     let buildIsHigherImg = `<img src="Assets/Icons/arrow-down.svg" style="width: 20px; height: 20px;" title="You have lower" alt="Red arrow pointing Down">`;
-    const usersLevelIsHigherLowerOrEqual = user.level.Value > build.level.Value ? userIsHigherImg : user.level.Value < build.level.Value ? buildIsHigherImg : "-";
+    const usersLevelIsHigherLowerOrEqual =  convertBuildLevel(user.level).Value > convertBuildLevel(build.level).Value ? userIsHigherImg :  convertBuildLevel(user.level).Value <  convertBuildLevel(build.level).Value ? buildIsHigherImg : "-";
     const usersNormalAttackIsHigherLowerOrEqual = user.normalAttackLevel > build.normalAttackLevel ? userIsHigherImg : user.normalAttackLevel < build.normalAttackLevel ? buildIsHigherImg : "-";
     const usersElementalSkillIsHigherLowerOrEqual = user.elementalSkill.Level > build.elementalSkill.Level ? userIsHigherImg : user.elementalSkill.Level < build.elementalSkill.Level ? buildIsHigherImg : "-";
     const usersElementalBurstIsHigherLowerOrEqual = user.elementalBurst.Level > build.elementalBurst.Level ? userIsHigherImg : user.elementalBurst.Level < build.elementalBurst.Level ? buildIsHigherImg : "-";
-    const usersWeaponIsHigherLowerOrEqual = user.weapon.level.Value > build.weapon.level.Value ? userIsHigherImg : user.weapon.level.Value < build.weapon.level.Value ? buildIsHigherImg : "-";
+    const usersWeaponIsHigherLowerOrEqual =  convertBuildLevel(user.weapon.level).Value > convertBuildLevel(build.weapon.level).Value ? userIsHigherImg : convertBuildLevel(user.weapon.level).Value < convertBuildLevel(build.weapon.level).Value ? buildIsHigherImg : "-";
     const usersHP = user.HP() > build.HP() ? userIsHigherImg : user.HP() < build.HP() ? buildIsHigherImg : "-";
     const usersATK = user.attack() > build.attack() ? userIsHigherImg : user.attack() < build.attack() ? buildIsHigherImg : "-";
     const usersDEF = user.DEF() > build.DEF() ? userIsHigherImg : user.DEF() < build.DEF() ? buildIsHigherImg : "-";
+  
     const usersCritRate = user.critRate() > build.critRate() ? userIsHigherImg : user.critRate() < build.critRate() ? buildIsHigherImg : "-";
     const usersCritDMG = user.critDMG() > build.critDMG() ? userIsHigherImg : user.critDMG() < build.critDMG() ? buildIsHigherImg : "-";
     const usersEM = user.EM() > build.EM() ? userIsHigherImg : user.EM() < build.EM() ? buildIsHigherImg : "-";
@@ -101,9 +101,9 @@ function tableBuilder(builds) {
             <th>Our ${build.name}</th>
             <tr>
                 <td>Character Level</td>
-                <td>${user.level.Level}</td>
+                <td>${convertBuildLevel(user.level).Level}</td>
                 <td>${usersLevelIsHigherLowerOrEqual}</td>
-                <td>${build.level.Level}</td>
+                <td>${convertBuildLevel(build.level).Level}</td>
             </tr>
               <tr>
                 <td>Normal Attack Level</td>
@@ -132,9 +132,9 @@ function tableBuilder(builds) {
             </tr>
             <tr>
                 <td>Weapon Level</td>
-                <td>${user.weapon.level.Level}</td>
+                <td>${convertBuildLevel(user.weapon.level).Level}</td>
                 <td>${usersWeaponIsHigherLowerOrEqual}</td>
-                <td>${build.weapon.level.Level}</td>
+                <td>${convertBuildLevel(build.weapon.level).Level}</td>
             </tr>
             <tr>
                 <td>HP</td>
