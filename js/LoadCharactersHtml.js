@@ -319,6 +319,7 @@ function loadLastBuildFromSessionStorage(){
         selectCharacter(character);
         let weapon = document.createElement("div");
         weapon.title = build.weapon.name;
+        build.weapon.name = build.weapon.name.replace("&#39", "'");
         weapon.innerHTML = `<img src="Assets/${AllWeapons[build.weapon.name].src}" alt="${build.weapon.name}"><div class="WeaponsText"><span>${build.weapon.name}</span></div>`;
         selectWeapon(weapon);
         document.getElementById("character_level").value = build.character.level;
