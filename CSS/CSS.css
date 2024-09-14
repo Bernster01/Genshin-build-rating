@@ -835,8 +835,6 @@ h1 {
 	text-align: center;
 	font-size: 4em;
 
-
-
 }
 
 #CurrentlySelectedSupportingElement {
@@ -1641,6 +1639,17 @@ span {
 }
 #damageGraph_container{
 	flex-direction: column;
+}
+#supportGraph_section{
+	flex-direction: column;
+}
+#supportGraph_container {
+	width: 100%;
+    min-height: 600px;
+    background-color: var(--tertiary-color);
+    border: var(--main-color) solid 0.25rem;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 .circleGraphs {
 	width: 49.9%;

@@ -103,6 +103,45 @@ function barGraphDamage(user, build) {
     });
     return dmgGraph;
 }
+function barGraphSupport(user, build) {
+    const graph = document.getElementById('supportGraph').getContext('2d');
+    let userData = getSupportData(user);
+    let buildData = getSupportData(build);
+    console.log(userData);
+    let graphData = {
+        labels: userData.labels,
+        datasets: [
+            {
+                label: "You",
+                data: userData.datasets,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: "Our build",
+                data: buildData.datasets,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }
+        ]
+    };
+    let supportGraph = new Chart(graph, {
+        type: 'bar',
+        data: graphData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    return supportGraph;
+}
 /**
     * Get the data for the graph
     * @param {Object} build - the build object
@@ -248,6 +287,30 @@ function getData(build, asPercentage = false) {
         data.labels.push('Swirl DMG');
         data.backgroundColor.push(colorData.swirlDMG.backgroundColor);
         data.borderColor.push(colorData.swirlDMG.borderColor);
+    }
+    return data;
+}
+
+function getSupportData(build){
+    //Check supportValues.healing .shield and .buff
+    let data = { labels: [], datasets: [], backgroundColor: [], borderColor: [] };
+    if (build.supportValues.healing) {
+        data.datasets.push(build.supportValues.healing);
+        data.labels.push('Healing');
+        data.backgroundColor.push('rgba(255, 99, 132, 0.5)');
+        data.borderColor.push('rgb(255, 99, 132)');
+    }
+    if (build.supportValues.shield) {
+        data.datasets.push(build.supportValues.shield);
+        data.labels.push('Shield');
+        data.backgroundColor.push('rgba(230, 230, 0, 0.5)');
+        data.borderColor.push('rgb(230, 230, 0)');
+    }
+    if (build.supportValues.buff) {
+        data.datasets.push(build.supportValues.buff);
+        data.labels.push('Buff');
+        data.backgroundColor.push('rgba(153, 204, 255, 0.5)');
+        data.borderColor.push('rgb(153, 204, 255)');
     }
     return data;
 }

@@ -11,6 +11,7 @@ function starterFunction() {
     role = builds.user.role;
     charts = circleGraph(builds.user, builds.build);
     let damageGrahp = barGraphDamage(builds.user, builds.build);
+    let supportGraph = barGraphSupport(builds.user, builds.build);
     // applyBackgrounds(builds);
     document.getElementById("character_name").innerText = builds.user.character.name;
     document.getElementById("character_img").src = `${builds.user.character.splashArt}`;
