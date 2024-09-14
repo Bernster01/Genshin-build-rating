@@ -135,7 +135,7 @@ function getData(build, asPercentage = false) {
             backgroundColor: 'rgba(153, 153, 255, 0.5)',
             borderColor: 'rgb(153, 153, 255)',
         },
-        overloadedDMG: {
+        overloadDMG: {
             backgroundColor: 'rgba(255, 0, 102, 0.5)',
             borderColor: 'rgb(255, 0, 102)',
         },
@@ -207,11 +207,11 @@ function getData(build, asPercentage = false) {
         data.borderColor.push(colorData.superconductDMG.borderColor);
 
     }
-    if (build.dmg.sources.overloadedDMG) {
-        data.datasets.push((asPercentage) ? build.dmg.sources.overloadedDMG / total * 100 : build.dmg.sources.overloadedDMG);
-        data.labels.push('Overloaded DMG');
-        data.backgroundColor.push(colorData.overloadedDMG.backgroundColor);
-        data.borderColor.push(colorData.overloadedDMG.borderColor);
+    if (build.dmg.sources.overloadDMG) {
+        data.datasets.push((asPercentage) ? build.dmg.sources.overloadDMG / total * 100 : build.dmg.sources.overloadDMG);
+        data.labels.push('Overload DMG');
+        data.backgroundColor.push(colorData.overloadDMG.backgroundColor);
+        data.borderColor.push(colorData.overloadDMG.borderColor);
     }
     if (build.dmg.sources.electrochargedDMG) {
         data.datasets.push((asPercentage) ? build.dmg.sources.electrochargedDMG / total * 100 : build.dmg.sources.electrochargedDMG);
