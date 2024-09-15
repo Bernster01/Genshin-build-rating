@@ -62,8 +62,8 @@ function generateCharacterCard(character, score, supportingElement, role, resona
             display: flex;
             flex-direction: column;
             align-items: center;">
-                <h1 id="result-splash-name" style="margin:0;">Genshin Helper</h1>
-                <h2 style="border:none; margin: -1rem 0rem 0rem 0rem;">Rate my build</h2>
+                <h1 id="result-splash-name" style="margin:0;">Gacha Build Rating</h1>
+                <h2 style="border:none; margin: -1rem 0rem 0rem 0rem;">Genshin Impact</h2>
                 <h4 style="border:none;">Date: ${date}</h4>
             </div>
             <div class="result-splash-top-info-part">
