@@ -37,6 +37,7 @@ function devloadCharacter(){
     <img src="Assets/Weapons/Weapon_Amos_Bow.webp" alt="Amos Bow"><div class="WeaponsText"><span>Amos Bow</span></div>`;
     selectWeapon(weapon);
     console.log(weapon);
+    loadMockArtifacts();
 }
 function loadArtifactLists(){
     document.getElementById("flowerSetList").innerHTML = getArtifactSetList("Flower");

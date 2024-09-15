@@ -11,7 +11,7 @@ async function prepare(button) {
     const partyMemberElement3 = document.getElementById("partyMemberElement3").value;
     partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
     if (runs === "" || runs === null || runs === undefined) {
-        runs = 15;
+        runs = 25;
     }
     setBestBuild();
     //Prepare the character for the simulation
