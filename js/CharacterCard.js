@@ -68,7 +68,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
             </div>
             <div class="result-splash-top-info-part">
                 <h1 id="result-splash-name" style="margin:0;">${character.name}</h1>
-                <span id="result-splash-score" style="font-size:32pt;">Grade: ${grade} tier</span>
+                <span id="result-splash-grade" style="font-size:32pt;">Grade: ${grade} tier</span>
                 <span id="result-splash-score" style="font-size:14pt; margin-top: -1rem;">Score: ${score}/100</span>
             </div>
             <div class="result-splash-top-info-part">
