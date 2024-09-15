@@ -1943,3 +1943,37 @@ span {
 		width: 100%;
 	}
 }
+@media only screen and (max-width: 400px){
+
+	#elementalResonanceContainer img{
+		width: 40px;
+	}
+	.supportingElementContainer{
+		flex-wrap: wrap;
+	}
+	.artifact-right span{
+		font-size: 1rem;
+	}
+	.stat-container{
+		width: 100%;
+	}
+	.stat-container .select{
+		font-size: 0.75rem;
+	}
+	#simulation_settings{
+		width: 100%;
+	}
+	#simulation_settings div select{
+		font-size: 0.75rem;
+	}
+	#simulation_settings div label{
+		font-size: 0.75rem;
+	}
+	#simulation_settings div h3{
+		font-size: 0.75rem;
+	}
+	#simulationRuns{
+		font-size: 1rem;
+		width: 50%;
+	}
+}
