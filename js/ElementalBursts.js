@@ -3708,8 +3708,7 @@ function ParticularFieldFettersOfPhenomena(Character) {
             multiplier2 = 206.72 / 100;
             break;
     }
-    let attack1 = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
-    let attack2 = { Multiplier: multiplier2, Element: "DendroDMGBonus", Scaling: "EM", isReaction: false, type: "ElementalBurst" };
+    let attack1 = { Multiplier: (multiplier1*character.ATK())+(multiplier2*character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Mysteries Laid Bare") {
             let buffAmount = Character.EM() * 0.1;
@@ -3718,8 +3717,17 @@ function ParticularFieldFettersOfPhenomena(Character) {
             Character.currentBuffs.push({ Type: "ElementalBurst", Value: buffAmount });
         }
     });
-    let dmg = dmgCalc(attack1, Character) * 10 * numberOfEnemies;
-    dmg += dmgCalc(attack2, Character) * 10 * numberOfEnemies;
+    let dmg = 0;
+    let instances = 4;
+    if(role == "Support")
+        instances +=10;
+    for (let i = 0; i < instances; i++) {
+        if(i%3==0 || i == 0)
+            attack1.isReaction = true;
+        else
+            attack1.isReaction = false;
+        dmg += dmgCalc(attack1, Character) * numberOfEnemies;
+    }
     return dmg;
 }
 

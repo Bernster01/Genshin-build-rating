@@ -427,7 +427,7 @@ const Alhaitham = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2", "N3", "C", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2", "N3", "C"],
+        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1","N2","N3","C", "N1", "N2", "N3", "N1","N2","N3","C"],
         ["Support"]: ["E", "N1", "N2", "N3", "C", "Q"],
     },
     weaponType: "Sword",
