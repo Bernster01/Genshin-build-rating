@@ -1,4 +1,7 @@
 async function prepare(button) {
+    if (!notValidSettings()) {
+        return;
+    }
     button.isDisabled = true;
     endEarly = false;
     let simScreen = document.getElementById("simRunScreen");
@@ -186,21 +189,49 @@ function sendBuild() {
     sessionStorage.setItem("user", user);
     sessionStorage.setItem("currentBestBuild", build);
     //redirect to details.html
-    window = window.open(baseUrl+destintaion, "_self");
+    window = window.open(baseUrl + destintaion, "_self");
 
 }
-async function setBestBuild(){
+async function setBestBuild() {
     return;
-   let build = await getBestBuildFromJSON(supportingElement)
-   if(build === undefined || build === null){
-       console.log("No build found");
-       return;
-   }
+    let build = await getBestBuildFromJSON(supportingElement)
+    if (build === undefined || build === null) {
+        console.log("No build found");
+        return;
+    }
     bestBuild = build;
 }
 async function getBestBuildFromJSON(element = "noElement") {
-        //Get JSON from ../data/currentBestBuild.json
-    let data =  await fetch(`./data/currentBestBuild_${element}.json`);
-    let result =  await data.json();
+    //Get JSON from ../data/currentBestBuild.json
+    let data = await fetch(`./data/currentBestBuild_${element}.json`);
+    let result = await data.json();
     return result;
+}
+function notValidSettings() {
+    let character = document.getElementById("SelectCharcterImg").title;
+    let weapon = document.getElementById("SelectWeaponImg").title;
+    if (character === "Select" || weapon === "Select") {
+        alert("Please select a character and a weapon");
+        return false;
+    }
+    //Check artifacts
+    let artifacts = getArtifacts();
+    for (let i = 0; i < artifacts.length; i++) {
+        if (artifacts[i].Mainstat.Type === undefined) {
+            alert("Please select a mainstat for all artifacts");
+            return false;
+        }
+        if(artifacts[i].Set === undefined) {
+            alert("Please select a set for all artifacts");
+            return false;
+        }
+        for (let j = 0; j < artifacts[i].Substats.length; j++) {
+            if (artifacts[i].Substats[j].Type === undefined) {
+                alert("Please select a substat for all artifacts");
+                return false;
+            }
+        }
+
+    }
+    return true;
 }

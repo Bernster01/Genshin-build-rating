@@ -16,8 +16,8 @@ function LoadCharacters() {
    
 
     loadArtifactLists();
-    loadMockArtifacts();
-    devloadCharacter();
+    // loadMockArtifacts();
+    // devloadCharacter();
     loadLastBuildFromSessionStorage();
 
 }
@@ -305,7 +305,7 @@ function loadLastBuildFromSessionStorage(){
     //Check if there is a build in the session storage
     let build = sessionStorage.getItem("user");
     if (build === null) {
-        build = [];
+        return;
     }
     else {
         build = JSON.parse(build);
