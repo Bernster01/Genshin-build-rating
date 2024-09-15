@@ -1,1 +1,2 @@
-# GenshinHelper
+# Genshin Build Rating
+
