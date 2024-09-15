@@ -17,8 +17,8 @@ async function prepare(button) {
     //Prepare the character for the simulation
     let baseCharacter = AllCharacters[document.getElementById("SelectCharcterImg").title];
     let weapon = AllWeapons[document.getElementById("SelectWeaponImg").title];
-    console.log(baseCharacter);
-    console.log(weapon);
+    // console.log(baseCharacter);
+    // console.log(weapon);
     //Set levels
     baseCharacter.level = document.getElementById("character_level").value;
     weapon.level = document.getElementById("weapon_level").value;
@@ -162,10 +162,10 @@ function getArtifacts() {
     return [circlet, flower, plume, sands, goblet];
 }
 function runSimulation(character, weapon, artifacts, runs) {
-    console.log("Running simulation");
-    console.log(character);
-    console.log(weapon);
-    console.log(artifacts);
+    // console.log("Running simulation");
+    // console.log(character);
+    // console.log(weapon);
+    // console.log(artifacts);
     bestSupportScore = 0;
     bestDMG = 0;
     // validateAllCharacters();
@@ -180,7 +180,7 @@ function sendBuild() {
     let destintaion = "details.html";
 
     let user = JSON.stringify(userBuild);
-    console.log(JSON.stringify(bestBuild[role][userBuild.character.name]));
+    // console.log(JSON.stringify(bestBuild[role][userBuild.character.name]));
     let build = JSON.stringify(bestBuild[role][userBuild.character.name]);
     //Delete session storage
     sessionStorage.removeItem("user");

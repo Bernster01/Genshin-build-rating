@@ -124,8 +124,8 @@ function getBuild(build, score) {
 async function downloadJSON(build) {
     let result = window.confirm("Download build?");
     if (!result) {
-        console.log("Download canceled");
-        console.log(JSON.parse(build));
+        // console.log("Download canceled");
+        // console.log(JSON.parse(build));
         return;
     }
     let blob = new Blob([build], { type: "application/json" });
@@ -139,18 +139,18 @@ async function validateAllCharacters(runs = 1) {
     //Goes through all characters and validates them
     let startTime = Date.now();
     for (const character in AllCharacters) {
-        console.log("Generating Build for " + character);
+        // console.log("Generating Build for " + character);
         let tmpRole = role;
         if (character == "index")
             continue;
         const element = AllCharacters[character];
 
         role = "Dps";
-        console.log("Simulating Dps " + character);
+        // console.log("Simulating Dps " + character);
         let result = await FindBestBuild(element, runs);
         //Switch to other role
         role = "Support";
-        console.log("Simulating Support " + character);
+        // console.log("Simulating Support " + character);
         let result2 = await FindBestBuild(element, runs);
 
         role = tmpRole;
@@ -160,8 +160,8 @@ async function validateAllCharacters(runs = 1) {
         await delay(4);
     }
     let stopTime = Date.now();
-    console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
-    console.log(bestBuild);
+    // console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
+    // console.log(bestBuild);
 }
 async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
@@ -169,13 +169,13 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
     let result = await FindBestBuild(simulatedCharacter, runs);
-    console.log("USER:");
+    // console.log("USER:");
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild[role][baseCharacter.name], role);
-    console.log("USER:");
-    console.log(result2);
-    console.log("BEST:");
-    console.log(bestBuild[role][baseCharacter.name]);
+    // console.log("USER:");
+    // console.log(result2);
+    // console.log("BEST:");
+    // console.log(bestBuild[role][baseCharacter.name]);
     let card = generateCharacterCard(result2.character, score, supportingElement, role, elementalResonance, true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
@@ -206,7 +206,7 @@ async function findBestBuildLoop(baseChar, times) {
     let startTime = Date.now();
     let currentCharacter = baseChar.name;
     for (let index = 0; index < times; index++) {
-        console.log(baseChar.name + " " + role + " Run " + index + " of " + times);
+        // console.log(baseChar.name + " " + role + " Run " + index + " of " + times);
         if (endEarly)
             return bestScore;
         let artifacts = GenerateArtifacts(baseChar.scalingType)
