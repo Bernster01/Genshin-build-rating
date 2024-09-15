@@ -1943,7 +1943,7 @@ span {
 		width: 100%;
 	}
 }
-@media only screen and (max-width: 400px){
+@media only screen and (max-width: 600px){
 
 	#elementalResonanceContainer img{
 		width: 40px;
