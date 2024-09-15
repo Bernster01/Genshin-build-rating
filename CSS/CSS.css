@@ -1145,7 +1145,7 @@ span {
 }
 
 #saved-characters-cards-container {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 100%;
 	position: fixed;
