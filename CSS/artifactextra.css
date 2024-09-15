@@ -1,0 +1,36 @@
+@media only screen and (max-width: 800px) {
+    .artifact {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        height: 150px;
+        
+    }
+    .artifact::before{
+        font-size: 0.8rem !important;
+        padding: 0.2rem;
+    }
+    .artifact .artifact-left {
+        width: 30%;
+        margin: 0;
+        padding: 0;
+    }
+    .artifact .artifact-right {
+        width: 70%;
+        margin: 0;
+        padding: 0;
+    }
+    .artifact .artifact-right span{
+        font-size: 0.9rem;
+    }
+    .substat{
+        width: 40%;
+    }
+    .mainstat span{
+      font-size: 1.1rem;
+    }
+    .artifact img{
+        width:35px;
+        height:35px;
+    }
+}
