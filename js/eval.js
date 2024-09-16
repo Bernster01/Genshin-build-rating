@@ -66,7 +66,18 @@ function supportEval(userBuild, currentBestBuild) {
                 default:
                     return shieldEval(userBuild, currentBestBuild);
             }
-    }
+        case "ElementalBuffer":
+            switch (userBuild.character.supportType2) {
+                case "Sub-dps":
+                    return bufferDpsEval(userBuild, currentBestBuild);
+                case "Healer":
+                    return bufferHealerEval(userBuild, currentBestBuild);
+                case "Shield":
+                    return bufferShieldEval(userBuild, currentBestBuild);
+                default:
+                    return bufferEval(userBuild, currentBestBuild);
+            }
+        }
 }
 
 

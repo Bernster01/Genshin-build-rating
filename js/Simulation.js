@@ -2136,9 +2136,14 @@ function Simulation(character) {
             }
         });
     }
+    // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
     let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
-        bonusMultiplier = (atkBuff * 2) + 100;
+        if(character.supportType == "ATKBooster"){
+        bonusMultiplier = (atkBuff * 1.4)+100;
+        }else{
+            bonusMultiplier = 20;
+        }
     let tmp = 0;
     for (source in dmgSources) {
         dmgSources[source] = Math.round(dmgSources[source]);
@@ -2923,7 +2928,7 @@ function swirl(em, lvl, element, character, swirlBonus) {
         });
 
     }
-    if (character.name = "Kazuha") {
+    if (character.name == "Kazuha") {
         let haveBuff = false;
         let havePassive = false;
         character.currentBuffs.forEach(buff => {
