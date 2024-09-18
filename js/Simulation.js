@@ -980,30 +980,30 @@ function getSetBonus(array, character) {
                 character.currentBuffs.push(artifactSets[array[i]].twoPiece);
             }
             if (artifactSets[array[i]].fourPiece != undefined) {
-                if (currentSet == "Gladiator's Finale") {
+                if (currentSet == "Gladiators_Finale") {
                     if (character.weapon.weaponType == "Sword" || character.weapon.weaponType == "Claymore" || character.weapon.weaponType == "Polearm") {
                         character.currentBuffs.push({ Type: "NormalAttack", Value: 35, Source: "Gladiator's Finale" });
                     }
                 }
-                else if (currentSet == "Wanderer's Troupe") {
+                else if (currentSet == "Wanderers_Troupe") {
 
                     if (character.weapon.weaponType == "Bow" || character.weapon.weaponType == "Catalyst") {
                         character.currentBuffs.push({ Type: "ChargedAttack", Value: 35, Source: "Wanderer's Troupe" });
 
                     }
                 }
-                else if (currentSet == "Blizzard Strayer") {
+                else if (currentSet == "Blizzard_Strayer") {
                     if (character.element == "CryoCharacter" || supportingElement == "Cryo") {
                         character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Blizzard Strayer" });
                         if (character.element == "HydroCharacter" || supportingElement == "Hydro")
                             character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Blizzard Strayer (Frozen)" });
                     }
-                } else if (currentSet == "Golden Troupe") {
+                } else if (currentSet == "Golden_Troupe") {
                     character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     if (character.subDpsType == "Off-field" && role == "Support") {
                         character.currentBuffs.push({ Type: "ElementalSkill", Value: 25, Source: "Golden Troupe" });
                     }
-                } else if (currentSet == "Retracing Bolide") {
+                } else if (currentSet == "Retracing_Bolide") {
                     if (hasShield) {
                         let buffs = [
                             { Type: "ChargedAttack", Value: 40 },
@@ -1014,7 +1014,7 @@ function getSetBonus(array, character) {
                         });
                         retracingBolideBuff = true;
                     }
-                } else if (currentSet == "Bloodstained Chivalry") {
+                } else if (currentSet == "Bloodstained_Chivalry") {
                     if (character.havePhysicalChargedAttack) {
                         character.currentBuffs.push({ Type: "ChargedAttack", Value: 50, Source: "Bloodstained Chivalry" });
                     }
@@ -1026,6 +1026,11 @@ function getSetBonus(array, character) {
                     if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
                         character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35, Source: "Thunder Soother" });
                     }
+                } else if(currentSet == "Vourukashas_Glow"){
+                    if(role =="dps" || (role =="Support" && character.name =="Dehya")){
+                        character.currentBuffs.push({Type:"ElementalSkill",Value:(8*5)-10,Source:"Vourukasha's Glow"});
+                        character.currentBuffs.push({Type:"ElementalBurst",Value:(8*5)-10,Source:"Vourukasha's Glow"});
+                    } 
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
