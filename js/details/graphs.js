@@ -291,7 +291,7 @@ function getData(build, asPercentage = false) {
     return data;
 }
 
-function getSupportData(build){
+function getSupportData(build) {
     //Check supportValues.healing .shield and .buff
     let data = { labels: [], datasets: [], backgroundColor: [], borderColor: [] };
     if (build.supportValues.healing) {
@@ -301,8 +301,13 @@ function getSupportData(build){
         data.borderColor.push('rgb(255, 99, 132)');
     }
     if (build.supportValues.shield) {
+        if (build.character.name == "Dehya") {
+            data.labels.push('Damage Mitigation');
+        } else {
+         
+            data.labels.push('Shield');
+        }
         data.datasets.push(build.supportValues.shield);
-        data.labels.push('Shield');
         data.backgroundColor.push('rgba(230, 230, 0, 0.5)');
         data.borderColor.push('rgb(230, 230, 0)');
     }

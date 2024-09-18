@@ -17,6 +17,6 @@
     {
         "date": "September 18 2024",
         "version": "1.4.1",
-        "description": "Changed how some evaluations are calculated."
+        "description": "Changed how some evaluations are calculated. <br> Changed Deyha mitigation calculation."
     }
 ]

@@ -3888,6 +3888,7 @@ function moltenInferno(character) {
     let indomitableFlameDMG = 0;
     let rangingFlameDMG = 0;
     let fieldDMG = 0;
+    let mitigaition  =32;
     switch (character.elementalSkill.Level) {
         case 1:
             indomitableFlameDMG = 112.88 / 100;
@@ -3961,7 +3962,7 @@ function moltenInferno(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     dmg += dmgCalc(coordAttack, character) * numberOfEnemies * 4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
-    let shield = character.HP() * (200 / 100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
+    let shield = 16000 * ( (mitigaition +(2*(character.elementalSkill.Level-1)))/100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
     return { dmg: dmg, shield: shield };
 }
 
