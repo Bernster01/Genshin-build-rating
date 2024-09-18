@@ -1220,6 +1220,16 @@ function Simulation(character) {
                 Character.energyOffset -= 5;
             }
             break;
+        case "Candace":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("N1");
+                Character.sequence[role].push("N2");
+                Character.sequence[role].push("N3");
+            }
+            if(Character.constellations >= 4){
+                Character.sequence[role].push("E");
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

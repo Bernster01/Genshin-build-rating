@@ -3906,6 +3906,17 @@ function sacredRiteHeronsSanctum(character) {
     }
     let attack = { Multiplier: multiplier, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    if (character.constellations >= 2) {
+        let hasBuff = false;
+        for (buff of character.currentBuffs) {
+            if (buff.source == "C2") {
+                hasBuff = true;
+            }
+        }
+        if (!hasBuff) {
+            character.currentBuffs.push({ Type: "HP%", Value: 20, source: "C2" });
+        }
+    }
     return dmg;
 }
 

@@ -3682,7 +3682,7 @@ const Candace = {
     energyOffset: 195,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N1", "N2", "3", "E", "N1", "N2", "N3"],
+        ["Dps"]: ["E", "Q", "N1", "N1", "N2", "N3", "E", "N1", "N2", "N3"],
         ["Support"]: ["E", "Q",]
     },
     weaponType: "Polearm",
