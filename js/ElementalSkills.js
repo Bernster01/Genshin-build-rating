@@ -104,12 +104,30 @@ function solarIsotoma(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let dmg = dmgCalc(attack, Character, "ElementalSkill");
-    dmg *= numberOfEnemies;
+    let dmg = dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
     attack = { Multiplier: skillMultiplier2, Element: "GeoDMGBonus", Scaling: "DEF", type: "ElementalSkill", isReaction: false }
-    let dmg2 = dmgCalc(attack, Character);
-    dmg2 *= 45;
-    dmg += dmg2;
+    if (Character.constellations > 0) {
+        Character.energyOffset -= 20;
+    }
+    if (Character.constellations >= 4) {
+        Character.currentBuffs.push({ Type: "PluningAttack", Value: 30 });
+    }
+    if (Character.constellations == 6) {
+        const crystalizeAbleElements = ["Pyro", "Electro", "Hydro", "Cryo"];
+        if (crystalizeAbleElements.includes(supportingElement)) {
+            Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 17 });
+        }
+    }
+    for (let i = 0; i < 15; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+
+        }
+        dmg += dmgCalc(attack, Character, "ElementalSkill") * numberOfEnemies;
+    }
     return dmg;
 }
 
@@ -3888,7 +3906,7 @@ function moltenInferno(character) {
     let indomitableFlameDMG = 0;
     let rangingFlameDMG = 0;
     let fieldDMG = 0;
-    let mitigaition  =32;
+    let mitigaition = 32;
     switch (character.elementalSkill.Level) {
         case 1:
             indomitableFlameDMG = 112.88 / 100;
@@ -3962,7 +3980,7 @@ function moltenInferno(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     dmg += dmgCalc(coordAttack, character) * numberOfEnemies * 4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
-    let shield = 16000 * ( (mitigaition +(2*(character.elementalSkill.Level-1)))/100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
+    let shield = 16000 * ((mitigaition + (2 * (character.elementalSkill.Level - 1))) / 100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
     return { dmg: dmg, shield: shield };
 }
 
@@ -6816,11 +6834,11 @@ function goGoTurboTwirly(character) {
             hasA4 = true;
         }
     }
-    if(hasA4){
-        character.currentBuffs.push({ Type: "NormalAttack", Value: (20/100)*character.DEF(), Source: "Go Go, Turbo!" });
-        character.currentBuffs.push({ Type: "ElementalSkill", Value: (20/100)*character.DEF(), Source: "Go Go, Turbo!" });
+    if (hasA4) {
+        character.currentBuffs.push({ Type: "NormalAttack", Value: (20 / 100) * character.DEF(), Source: "Go Go, Turbo!" });
+        character.currentBuffs.push({ Type: "ElementalSkill", Value: (20 / 100) * character.DEF(), Source: "Go Go, Turbo!" });
     }
-    switch(role){
+    switch (role) {
         case "Dps":
             character.normalAttack1.Multiplier = function (level) { return mountedDMG };
             break;

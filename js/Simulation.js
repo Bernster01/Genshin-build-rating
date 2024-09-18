@@ -163,19 +163,21 @@ async function validateAllCharacters(runs = 1) {
     // console.log("ALL SUCCEDED in " + (stopTime - startTime) / 1000 + "seconds");
     // console.log(bestBuild);
 }
-async function runSim(baseCharacter, baseWeapon, artifacts, runs) {
+async function runSim(baseCharacter, baseWeapon, artifacts, runs, constellation = 0) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
     applyBonuses(userCharacter);
+    console.log(constellation);
+    userCharacter.constellations = constellation;
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
     let result = await FindBestBuild(simulatedCharacter, runs);
     // console.log("USER:");
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild[role][baseCharacter.name], role);
-    // console.log("USER:");
-    // console.log(result2);
-    // console.log("BEST:");
-    // console.log(bestBuild[role][baseCharacter.name]);
+    console.log("USER:");
+    console.log(result2);
+    console.log("BEST:");
+    console.log(bestBuild[role][baseCharacter.name]);
     let card = generateCharacterCard(result2.character, score, supportingElement, role, elementalResonance, true);
     let doc = document.getElementById("result-container-container");
     let parentDoc = document.getElementById("result-container");
@@ -387,6 +389,7 @@ class Createcharacter {
         this.ExtraMultiplier = baseCharacter.ExtraMultiplier || [];
         this.advancedstats = baseCharacter.advancedstats;
         this.ascensionstats = baseCharacter.ascensionStat;
+        this.constellations = 0;
         this.baseHP = this.baseHP();
         this.currentHP = this.HP();
         this.baseAttack = this.baseAttack() + weapon.baseAttack();

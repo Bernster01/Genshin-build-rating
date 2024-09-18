@@ -126,6 +126,11 @@ function tectonicTide(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    //C2
+    if (Character.constellation >= 2) {
+        const flatDMG = Character.DEF() * 0.3*4;
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: flatDMG, for: "ElementalBurst" });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack = { Multiplier: Multiplier2, Element: "GeoDMGBonus", Scaling: "ATK" }
     dmg += dmgCalc(attack, Character) * numberOfEnemies * 7;
