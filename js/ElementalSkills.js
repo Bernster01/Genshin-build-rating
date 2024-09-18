@@ -1,3 +1,5 @@
+
+
 function hyouka(Character) {
     let skillMultiplier = 0;
     switch (Character.elementalSkill.Level) {
@@ -2865,32 +2867,42 @@ function kyouka(Character) {
         }
 
     });
-    if (hasPassive) {
-        namisenStacks = 4;
-        for (let index = 0; index < 15; index++) {
-            switch (index % 3) {
-                case 0:
-                    attack.isReaction = true;
-                    attack.Multiplier = oneHit * ((namisen * namisenStacks) * Character.HP());
-                    break;
-                case 1:
-                    attack.isReaction = false;
-                    attack.Multiplier = twoHit * ((namisen * namisenStacks) * Character.HP());
-                    break;
-                case 2:
-                    attack.isReaction = false;
-                    attack.Multiplier = threeHit * ((namisen * namisenStacks) * Character.HP());
-                    break;
+    let instances = 15;
+    if (Character.constellations >= 4) {
+        instances = 18;
+    }
+    attack.Scaling = "Combined"
+    namisenStacks = 4;
+    if (Character.constellations >= 2) {
+        namisenStacks = 6;
+        Character.currentBuffs.push({ Type: "HP%", Value: 50 });
+    }
+    for (let index = 0; index < instances; index++) {
+        switch (index % 3) {
+            case 0:
+                attack.isReaction = true;
+                attack.Multiplier = oneHit * ((namisen * namisenStacks/100) * Character.HP());
+                break;
+            case 1:
+                attack.isReaction = false;
+                attack.Multiplier = twoHit * ((namisen * namisenStacks/100) * Character.HP());
+                break;
+            case 2:
+                attack.isReaction = false;
+                attack.Multiplier = threeHit * ((namisen * namisenStacks/100) * Character.HP());
+                break;
 
-            }
-            attack.type = "NormalAttack";
-            dmg += dmgCalc(attack, Character) * numberOfEnemies;
         }
-    } else {
-
+        attack.type = "NormalAttack";
+        dmg += dmgCalc(attack, Character) * numberOfEnemies;
     }
 
 
+    if(Character.constellations >= 6){
+        let extraAttack = { Multiplier: 450 / 100, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+        dmg += dmgCalc(extraAttack, Character) * numberOfEnemies;
+        dmg += dmgCalc(extraAttack, Character) * numberOfEnemies;
+    }
 
 
     return dmg;
@@ -4290,13 +4302,13 @@ function framingFreezingPointComposition(character) {
     }
     let attack = { Multiplier: photoDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let mark = { Multiplier: markDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    if(character.constellations>=4){
+    if (character.constellations >= 4) {
         character.currentBuffs.push({ Type: "ElementalSkill", Value: 10, Source: "C4" });
     }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     let heal = 0
-    if(character.constellations>=6){
-        let extraAttack = { Multiplier: 180/100, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    if (character.constellations >= 6) {
+        let extraAttack = { Multiplier: 180 / 100, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
         dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
         dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
         let heal = character.attack() * 0.42 * (1 + (character.advancedstats.healingBonus / 100));
@@ -4305,10 +4317,10 @@ function framingFreezingPointComposition(character) {
     for (let i = 0; i < 4; i++) {
         dmg += dmgCalc(mark, character) * numberOfEnemies;
     }
-    if(character.constellations>=2){
+    if (character.constellations >= 2) {
         character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "C2" });
     }
-    return { dmg: dmg, healing: heal};
+    return { dmg: dmg, healing: heal };
 }
 
 function shortRangeRapidInterdictionFire(character) {
@@ -4385,32 +4397,32 @@ function shortRangeRapidInterdictionFire(character) {
     let attack = { Multiplier: holdDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let attack2 = { Multiplier: overloadedBallDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let extraInstance = 1;
-    if(character.constellations>=4){
+    if (character.constellations >= 4) {
         extraInstance = 3;
     }
-    let dmg = dmgCalc(attack, character) * numberOfEnemies*extraInstance;
+    let dmg = dmgCalc(attack, character) * numberOfEnemies * extraInstance;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
-    if(character.constellations >= 2){
-        let extraAttack = { Multiplier: 120/100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+    if (character.constellations >= 2) {
+        let extraAttack = { Multiplier: 120 / 100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
         dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
         dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
 
     }
     let atkBuff = 0;
     let totalHealing = healing * 6 * (1 + (character.advancedstats.healingBonus / 100));
-    if(character.constellations>=6){
-        totalHealing += character.HP() * (10/100) * (1 + (character.advancedstats.healingBonus / 100));
+    if (character.constellations >= 6) {
+        totalHealing += character.HP() * (10 / 100) * (1 + (character.advancedstats.healingBonus / 100));
     }
     for (buff of character.currentBuffs) {
         if (buff.Type == "Vertical Force Coordination") {
             atkBuff += Math.floor(character.HP() / 1000);
-            if(atkBuff>40){
+            if (atkBuff > 40) {
                 atkBuff = 40;
             }
             character.currentBuffs.push({ Type: "ATK%", Value: atkBuff, Source: "Vertical Force Coordination" });
         }
     }
-    if(character.constellations>=6){
+    if (character.constellations >= 6) {
         atkBuff += 60;
     }
     healingHasOccured(character);
