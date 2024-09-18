@@ -1235,6 +1235,10 @@ function Simulation(character) {
                 Character.energyOffset -= 25;
             }
             break;
+        case "Ayaka":
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ChargedAttack", Value: 297, Source: "C6" });
+            }
     }
     Character.sequence[role].forEach(action => {
 

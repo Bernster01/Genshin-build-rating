@@ -57,11 +57,19 @@ function soumetsu(Character) {
     }
     let attack = { Multiplier: Multiplier2, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if(Character.constellations >= 4){
+        Character.currentBuffs.push({Type:"defReduction",Value:30});
+    }
     for (let index = 0; index < 7; index++) {
         attack.Multiplier = Multiplier;
         dmg += dmgCalc(attack, Character) * numberOfEnemies
 
+    }
+    if(Character.constellations >= 2){
+        extraAttack = {Multiplier:Multiplier*0.2,Element:"CryoDMGBonus",Scaling:"ATK",isReaction:true,type:"ElementalBurst"};
+        for (let index = 0; index < 7; index++) {
+            dmg += dmgCalc(extraAttack, Character) * numberOfEnemies * 2
+        }
     }
 
 
