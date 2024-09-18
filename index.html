@@ -37,9 +37,10 @@
 			<section id="about">
 				<h2>Info</h2>
 				<p>
-					This site will grade your build based on the character, weapon and artifacts you have selected. 
-					Do not take the results too seriously, it should be more of a guideline as this site have simplified the calculations and is not
-					100% accurate. 
+					This site will grade your build based on the character, weapon and artifacts you have selected.
+					Do not take the results too seriously, it should be more of a guideline as this site have simplified
+					the calculations and is not
+					100% accurate.
 					<br>
 					<br>
 					<b>How to use:</b>
@@ -56,7 +57,8 @@
 					<br>
 					6. Select the elemental resonance.
 					<br>
-					7. Select the onfield element. (Currently only supports one element so combos like quickbloom is not supported)
+					7. Select the onfield element. (Currently only supports one element so combos like quickbloom is not
+					supported)
 					<br>
 					8. Change settings if needed.
 					<br>
@@ -222,8 +224,7 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('flowerMainstatList'),stopPropagation(),addEventlistenerArtifactList('flowerMainstatList')"
-											src="Assets/Icons/empty.png" title="To be set"
-											id="flower_mainstat_type">
+											src="Assets/Icons/empty.png" title="To be set" id="flower_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="flower_mainstat_value">0</span>
@@ -298,8 +299,7 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('plumeMainstatList'),stopPropagation(),addEventlistenerArtifactList('plumeMainstatList')"
-											src="Assets/Icons/empty.png" title="To be set"
-											id="plume_mainstat_type">
+											src="Assets/Icons/empty.png" title="To be set" id="plume_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="plume_mainstat_value">0</span>
@@ -376,8 +376,7 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('sandsMainstatList'),stopPropagation(),addEventlistenerArtifactList('sandsMainstatList')"
-											src="Assets/Icons/empty.png" title="To be set"
-											id="sands_mainstat_type">
+											src="Assets/Icons/empty.png" title="To be set" id="sands_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="sands_mainstat_value">0</span>
@@ -454,8 +453,7 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('gobletMainstatList'),stopPropagation(),addEventlistenerArtifactList('gobletMainstatList')"
-											src="Assets/Icons/empty.png" title="To be set"
-											id="goblet_mainstat_type">
+											src="Assets/Icons/empty.png" title="To be set" id="goblet_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="goblet_mainstat_value">0</span>
@@ -531,8 +529,7 @@
 									<div class="mainstat">
 										<img class="artifact_icon"
 											onclick="showHide('circletMainstatList'),stopPropagation(),addEventlistenerArtifactList('circletMainstatList')"
-											src="Assets/Icons/empty.png" title="To be set"
-											id="circlet_mainstat_type">
+											src="Assets/Icons/empty.png" title="To be set" id="circlet_mainstat_type">
 										<span contenteditable="" onclick="UpdateArtifact(this,true)"
 											onkeyup="UpdateArtifact(this,false)" onblur="UpdateArtifact(this,false)"
 											id="circlet_mainstat_value">0</span>
@@ -680,7 +677,7 @@
 									<option value="2">Support (incl. Sub-dps)</option>
 								</select>
 							</div>
-							<div >
+							<div>
 								<h3>What elements does the party members have?</h3>
 								<div id="partySelection">
 									<div>
@@ -743,6 +740,16 @@
 
 					<button onclick="prepare(this)" id="rate-button"></button>
 				</div>
+				<aside class="changelog">
+					<article>
+						<header>
+							<h2>Changelog</h2>
+						</header>
+						<div id="changelog">
+
+						</div>
+					</article>
+				</aside>
 			</div>
 			<div id="result-container-centerer">
 				<div id="result-container">
@@ -758,12 +765,15 @@
 								<button class="generic-btn p1rem br2rem" onclick="save(currentCardData)">Save</button>
 							</div> -->
 						<div>
-							<button class="generic-btn p1rem br2rem detail-btn" onclick="sendBuild()">More Details</button>
+							<button class="generic-btn p1rem br2rem detail-btn" onclick="sendBuild()">More
+								Details</button>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
+
 		<div id="saved-characters-cards-container">
 			<div id="saved-characters-cards-btn" onclick="switchCharacterCardContainer()">
 				<span class="noselect">Your characters</span>
@@ -786,7 +796,8 @@
 		<footer>
 			<p>© HoYoverse. All rights reserved. HoYoverse and Genshin Impact are trademarks, services marks, or
 				registered trademarks of HoYoverse.</p>
-			<p><a href="https://www.flaticon.com/free-icons/empty" title="empty icons">Empty icons created by Freepik - Flaticon</a></p>
+			<p><a href="https://www.flaticon.com/free-icons/empty" title="empty icons">Empty icons created by Freepik -
+					Flaticon</a></p>
 		</footer>
 	</div>
 	</div>
@@ -851,7 +862,7 @@
 					weapon.removeChild(child);
 				}
 			});
-			
+
 			img.src = weapon.childNodes[0].src
 			img.title = weapon.childNodes[0].alt;
 			img.alt = weapon.childNodes[0].alt;
@@ -915,6 +926,7 @@
 
 	<script src="js/EventListener.js"> </script>
 	<script src="js/eval.js"></script>
+	<script defer src="js/changelog.js"></script>
 </body>
 
 </html>

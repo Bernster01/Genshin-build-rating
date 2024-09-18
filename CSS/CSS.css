@@ -237,7 +237,7 @@ footer {
 	box-shadow: 0vh 0.5em 2em -1em;
 	margin: 20%;
 	margin-top: 1%;
-	margin-bottom: 20rem;
+	margin-bottom: 5rem;
 	display: flex;
 }
 
@@ -1773,7 +1773,44 @@ span {
 	border-radius: 1rem;
 	padding: 1rem;
 }
-
+.changelog{
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	background-color: var(--secondary-color);
+	border: var(--main-color) solid 0.25rem;
+	border-radius: 1rem;
+	padding: 2rem;
+	padding-top: 0;
+}
+.change{
+	background-color: var(--tertiary-color);
+	border: var(--main-color) solid 0.25rem;
+	border-radius: 1rem;
+	margin: 1rem;
+	padding: 1rem;
+	width: 80%;
+	
+}
+#changelog{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.seeMoreBtn{
+	background-color: var(--tertiary-color);
+	border: var(--main-color) solid 0.25rem;
+	border-radius: 1rem;
+	padding: 1rem;
+	cursor: pointer;
+	transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	margin: 1rem;
+}
+.seeMoreBtn:hover{
+	border: var(--tertiary-color) solid 0.25rem;
+	box-shadow: 0px 0px 32px 4px;
+}
 @keyframes paimonLoading {
 
 	0% {
@@ -1820,6 +1857,7 @@ span {
 	#LoadoutContainer{
 		min-width: 0px;
 		width: 100%;
+		margin-bottom:1rem;
 	}
 	#characterContainerUpper{
 		flex-direction: column-reverse;
