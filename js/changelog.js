@@ -3,7 +3,7 @@ let currentNumberOfChanges = 1;
 let maxChanges = false;
 async function insertChangesToChangelog() {
     const changeLog = document.getElementById('changelog');
-    const json = await fetch('../data/changes.json').then(response => response.json());
+    const json = await fetch('./data/changes.json').then(response => response.json());
     json.reverse();
     changeLogInfo = json;
     //reverse the array so the latest changes are on top
