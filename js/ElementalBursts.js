@@ -300,13 +300,17 @@ function stormbreaker(Character) {
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let attack2 = { Multiplier: Multiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    for (let i = 1; i >= 15; i++) {
-        if (i % 2) {
+    let extraArcs = 0;
+    if(Character.constellations >= 2){
+        extraArcs = 2;
+    }
+    for (let i = 1; i <=15; i++) {
+        if (i % 3==0) {
             attack2.isReaction = true;
-            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+            dmg += dmgCalc(attack, Character) * (numberOfEnemies+extraArcs);
         } else {
-            attack2.isReaction = true;
-            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+            attack2.isReaction = false;
+            dmg += dmgCalc(attack, Character) * (numberOfEnemies+extraArcs);
         }
     }
     return dmg;

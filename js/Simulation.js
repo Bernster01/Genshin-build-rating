@@ -1160,7 +1160,7 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
-    let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0, other:[]};
+    let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0, other: [] };
     switch (Character.name) {
         case "Amber":
             if (Character.constellations >= 4) {
@@ -1200,8 +1200,19 @@ function Simulation(character) {
             if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 10;
+            }
+            break;
+        case "Beidou":
+            if (Character.constellations >= 4) {
+                let extraDMGAttack_beidou = { Multiplier: 20/100, Element: "ElectroDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
+                const extra_beidouDMG = dmgCalc(extraDMGAttack_beidou, Character) * 6;
+                totalDmg += extra_beidouDMG;
+                dmgSources.n += extra_beidouDMG;
+            }
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ResShred", Element: "ElectroDMGBonus", Value: 15, Source: "C6", for: "NormalAttack" });
             }
             break;
     }
@@ -2203,17 +2214,17 @@ function Simulation(character) {
                 let Baizhu_extraAttack = { Multiplier: 250 / 100, Element: "DendroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: true, Source: "Baizhu" };
                 let AdditonalDMG_Baizhu = dmgCalc(Baizhu_extraAttack, Character) * 3;
                 let AdditonalHeal_Baizhu = 0.2 * Character.elementalSkill.Skill(Character).healing;
-                if(AdditonalHeal_Baizhu == NaN){
+                if (AdditonalHeal_Baizhu == NaN) {
                     AdditonalHeal_Baizhu = 0;
                 }
                 totalDmg += AdditonalDMG_Baizhu;
                 heal += AdditonalHeal_Baizhu;
-                dmgSources.other.push({dmg:AdditonalDMG_Baizhu,label:"C2"});
+                dmgSources.other.push({ dmg: AdditonalDMG_Baizhu, label: "C2" });
             }
-            if(Character.constellations >=4){
+            if (Character.constellations >= 4) {
                 atkBuff += 80;
             }
-            if(Character.constellations >=6){
+            if (Character.constellations >= 6) {
                 let extraShield_Baizhu = holisticRevivification(Character).shield;
                 shield += extraShield_Baizhu;
             }

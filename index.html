@@ -871,7 +871,8 @@
 				default:
 					//Reset options for normal attack to 10
 					const select2 = document.getElementById("normal_attack");
-					select2.innerHTML = `
+					if(select2.length > 10){
+						select2.innerHTML = `
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
 										<option value="3">Level 3</option>
@@ -883,6 +884,8 @@
 										<option value="9">Level 9</option>
 										<option value="10">Level 10</option>
 					`;
+					}
+					
 
 					break;
 			}
