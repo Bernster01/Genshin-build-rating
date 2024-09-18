@@ -3722,6 +3722,14 @@ function ParticularFieldFettersOfPhenomena(Character) {
             Character.currentBuffs.push({ Type: "ElementalBurst", Value: buffAmount });
         }
     });
+    //C2, C4
+    if(Character.constellation >= 2){
+        Character.currentBuffs.push({ Type: "ElementalMastery", Value: 200 });
+    }
+    if(Character.constellation >= 4){
+        Character.currentBuffs.push({ Type: "DendroDMGBonus", Value: 30 });
+    }
+
     let dmg = 0;
     let instances = 4;
     if(role == "Support")

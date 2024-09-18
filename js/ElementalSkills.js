@@ -3576,8 +3576,32 @@ function UniversalityAnElaborationOnForm(Character) {
             Character.currentBuffs.push({ Type: "ElementalSkillDMG", Value: buffAmount });
         }
     });
+    //C6
+    if (Character.elementalSkill.Level >= 6) {
+        hasBuff = false;
+        for (buff of Character.currentBuffs) {
+            if (buff.source == "C6") {
+                hasBuff = true;
+            }
+
+        }
+        if (!hasBuff) {
+            Character.currentBuffs.push({ Type: "CritRate", Value: 10, source: "C6" });
+            Character.currentBuffs.push({ Type: "CritDMG", Value: 70, source: "C6" });
+        }
+
+    }
+
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    dmg += dmgCalc(attack2, Character) * numberOfEnemies;
+    for (let i = 0; i < 6; i++) {
+        if (i % 3 == 0) {
+            attack2.isReaction = true;
+        }
+        else {
+            attack2.isReaction = false;
+        }
+        dmg += dmgCalc(attack2, Character) * numberOfEnemies;
+    }
     return dmg;
 }
 
