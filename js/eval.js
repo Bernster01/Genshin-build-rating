@@ -39,7 +39,7 @@ function supportEval(userBuild, currentBestBuild) {
                 case "shield":
                     return healerShieldEval(userBuild, currentBestBuild);
                 default:
-                    return healerDpsEval(userBuild, currentBestBuild);
+                    return healerSubDpsEval(userBuild, currentBestBuild);
             }
         case "ATKBooster":
             switch (userBuild.character.supportType2) {

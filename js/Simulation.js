@@ -172,7 +172,7 @@ async function runSim(baseCharacter, baseWeapon, artifacts, runs, constellation 
 
     let result = await FindBestBuild(simulatedCharacter, runs);
     // console.log("USER:");
-   
+
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild[role][baseCharacter.name], role);
     console.log("USER:");
@@ -1160,7 +1160,7 @@ function Simulation(character) {
     let Character = character;
     let totalDmg = 0;
     let shield = 0;
-    let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0 };
+    let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0, other:[]};
     switch (Character.name) {
         case "Amber":
             if (Character.constellations >= 4) {
@@ -1186,6 +1186,11 @@ function Simulation(character) {
         case "Arlecchino":
             if (Character.constellations >= 4) {
                 Character.energyOffset -= 15;
+            }
+            break;
+        case "Baizhu":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("E");
             }
             break;
     }
@@ -2174,13 +2179,36 @@ function Simulation(character) {
                 }
         }
     });
-    if (Character.name == "Kazuha") {
-        Character.currentBuffs.forEach(buff => {
-            if (buff.Source == "Poetics of Fuubutsu") {
-                atkBuff += buff.Value;
+    switch (Character.name) {
+        case "Kazuha":
+            Character.currentBuffs.forEach(buff => {
+                if (buff.Source == "Poetics of Fuubutsu") {
+                    atkBuff += buff.Value;
+                }
+            });
+            break;
+        case "Baizhu":
+            if (Character.constellations >= 2) {
+                let Baizhu_extraAttack = { Multiplier: 250 / 100, Element: "DendroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: true, Source: "Baizhu" };
+                let AdditonalDMG_Baizhu = dmgCalc(Baizhu_extraAttack, Character) * 3;
+                let AdditonalHeal_Baizhu = 0.2 * Character.elementalSkill.Skill(Character).healing;
+                if(AdditonalHeal_Baizhu == NaN){
+                    AdditonalHeal_Baizhu = 0;
+                }
+                totalDmg += AdditonalDMG_Baizhu;
+                heal += AdditonalHeal_Baizhu;
+                dmgSources.other.push({dmg:AdditonalDMG_Baizhu,label:"C2"});
             }
-        });
+            if(Character.constellations >=4){
+                atkBuff += 80;
+            }
+            if(Character.constellations >=6){
+                let extraShield_Baizhu = holisticRevivification(Character).shield;
+                shield += extraShield_Baizhu;
+            }
+            break;
     }
+
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
     let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
@@ -2191,6 +2219,13 @@ function Simulation(character) {
         }
     let tmp = 0;
     for (source in dmgSources) {
+        //if other loop through
+        if (source == "other") {
+            for (otherSource in dmgSources[source]) {
+                dmgSources[source][otherSource].dmg = Math.round(dmgSources[source][otherSource].dmg);
+            }
+            continue;
+        }
         dmgSources[source] = Math.round(dmgSources[source]);
         tmp += dmgSources[source];
     }

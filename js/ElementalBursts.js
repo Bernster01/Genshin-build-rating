@@ -3975,6 +3975,9 @@ function holisticRevivification(character) {
             break;
     }
     let attack1 = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if(character.constellations >= 6){
+        character.currentBuffs.push({ Type: "FlatDMG", Value: character.HP() * (8/100), for:"ElementalBurst" });
+    }
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     for (buff of character.currentBuffs) {
         if (buff.Type == "All things Are of the Earth") {
@@ -3990,8 +3993,8 @@ function holisticRevivification(character) {
         }
     }
     dmg = dmgCalc(attack1, character) * numberOfEnemies * 4;
-    shield = shield * character.advancedstats.shieldStrength * 5;
-    let heal = healing * character.advancedstats.healingBonus * 5;
+    shield = shield * (1+(character.advancedstats.shieldStrength>0?character.advancedstats.shieldStrength/100:0)) * 5;
+    let heal = healing * (1+(character.advancedstats.healingBonus>0?character.advancedstats.healingBonus/100:0)) * 5;
     return { dmg: dmg, shield: shield, heal: heal };
 }
 

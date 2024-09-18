@@ -202,6 +202,30 @@ function getData(build, asPercentage = false) {
             backgroundColor: 'rgba(153, 51, 153, 0.5)',
             borderColor: 'rgb(153, 51, 153)',
         },
+        other1: {
+            backgroundColor: 'rgba(255, 153, 204, 0.5)',
+            borderColor: 'rgb(255, 153, 204)',
+        },
+        other2: {
+            backgroundColor: 'rgba(255, 204, 153, 0.5)',
+            borderColor: 'rgb(255, 204, 153)',
+        },
+        other3: {
+            backgroundColor: 'rgba(153, 153, 255, 0.5)',
+            borderColor: 'rgb(153, 153, 255)',
+        },
+        other4: {
+            backgroundColor: 'rgba(255, 0, 102, 0.5)',
+            borderColor: 'rgb(255, 0, 102)',
+        },
+        other5: {
+            backgroundColor: 'rgba(92, 0, 230, 0.5)',
+            borderColor: 'rgb(92, 0, 230)',
+        },
+        other6: {
+            backgroundColor: 'rgb(128, 255, 191, 0.5)',
+            borderColor: 'rgb(128, 255, 191)',
+        },
 
 
 
@@ -287,6 +311,16 @@ function getData(build, asPercentage = false) {
         data.labels.push('Swirl DMG');
         data.backgroundColor.push(colorData.swirlDMG.backgroundColor);
         data.borderColor.push(colorData.swirlDMG.borderColor);
+    }
+    //Check sources.other list
+    if (build.dmg.sources.other) {
+        for (let i = 0; i < build.dmg.sources.other.length; i++) {
+            let source = build.dmg.sources.other[i];
+            data.datasets.push((asPercentage) ? source.dmg / total * 100 : source.dmg);
+            data.labels.push(source.label);
+            data.backgroundColor.push(colorData['other' + (i + 1)].backgroundColor);
+            data.borderColor.push(colorData['other' + (i + 1)].borderColor);
+        }
     }
     return data;
 }
