@@ -4290,11 +4290,25 @@ function framingFreezingPointComposition(character) {
     }
     let attack = { Multiplier: photoDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let mark = { Multiplier: markDMG, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    if(character.constellations>=4){
+        character.currentBuffs.push({ Type: "ElementalSkill", Value: 10, Source: "C4" });
+    }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let heal = 0
+    if(character.constellations>=6){
+        let extraAttack = { Multiplier: 180/100, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+        dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
+        dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
+        let heal = character.attack() * 0.42 * (1 + (character.advancedstats.healingBonus / 100));
+        healingHasOccured(character);
+    }
     for (let i = 0; i < 4; i++) {
         dmg += dmgCalc(mark, character) * numberOfEnemies;
     }
-    return { dmg: dmg };
+    if(character.constellations>=2){
+        character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "C2" });
+    }
+    return { dmg: dmg, healing: heal};
 }
 
 function shortRangeRapidInterdictionFire(character) {

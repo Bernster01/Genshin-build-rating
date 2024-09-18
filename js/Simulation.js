@@ -1230,6 +1230,11 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
+        case "Charlotte":
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 25;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

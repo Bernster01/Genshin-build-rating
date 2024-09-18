@@ -4432,6 +4432,10 @@ function stillPhotoComprehensiveConfirmation(character) {
     let totalHeal = castHealing + (continHealing * 9) * (1 + (character.advancedstats.healingBonus / 100));
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies * 9;
+    if (character.constellations >= 1) {
+        let extraHeal = character.attack() * (80 / 100)*3;
+        totalHeal += extraHeal*(1 + (character.advancedstats.healingBonus / 100));
+    }
     return { dmg: dmg, healing: totalHeal };
 }
 
