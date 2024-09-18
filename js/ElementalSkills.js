@@ -3692,6 +3692,26 @@ function allIsAsh(character) {
     }
     if (!hasBuff)
         character.currentBuffs.push({ Type: "BloodDirective", Value: numberOfEnemies });//Enemies with blood directive
+    if (character.constellations >= 2) {
+        let extraAttack = { Multiplier: 900 / 100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+        for (let i = 0; i < 3; i++) {
+            dmg += dmgCalc(extraAttack, character);
+        }
+    }
+    if (character.constellations >= 6) {
+        let hasBuff = false;
+        for (buff of character.currentBuffs) {
+            if (buff.source == "C6") {
+                hasBuff = true;
+            }
+        }
+        if (!hasBuff) {
+            character.currentBuffs.push({ Type: "CritRate", Value: 10, for: "NormalAttack", source: "C6" });
+            character.currentBuffs.push({ Type: "CritRate", Value: 10, for: "ElementalBurst", source: "C6" });
+            character.currentBuffs.push({ Type: "CritDMG", Value: 70, for: "NormalAttack", source: "C6" });
+            character.currentBuffs.push({ Type: "CritDMG", Value: 70, for: "ElementalBurst", source: "C6" });
+        }
+    }
     return dmg;
 }
 

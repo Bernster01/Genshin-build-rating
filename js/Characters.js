@@ -83,7 +83,7 @@ const Albedo = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -419,7 +419,7 @@ const Alhaitham = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -427,7 +427,7 @@ const Alhaitham = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1","N2","N3","C", "N1", "N2", "N3", "N1","N2","N3","C"],
+        ["Dps"]: ["Q", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "E", "N1", "N2", "N3", "N1", "N2", "N3", "C", "N1", "N2", "N3", "N1", "N2", "N3", "C"],
         ["Support"]: ["E", "N1", "N2", "N3", "C", "Q"],
     },
     weaponType: "Sword",
@@ -755,7 +755,7 @@ const Aloy = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1049,7 +1049,7 @@ const Amber = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1388,7 +1388,7 @@ const Arlecchino = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -1424,6 +1424,14 @@ const Arlecchino = {
                     return 87.27 / 100
                 case 10:
                     return 93.9 / 100
+                case 11:
+                    return 100.52 / 100
+                case 12:
+                    return 107.15 / 100
+                case 13:
+                    return 113.78 / 100
+                default:
+                    return 93.9 / 100
             }
         },
         Element: "PyroDMGBonus",
@@ -1453,6 +1461,12 @@ const Arlecchino = {
                     return 95.73 / 100
                 case 10:
                     return 103 / 100
+                case 11:
+                    return 110.27 / 100
+                case 12:
+                    return 117.54 / 100
+                case 13:
+                    return 124.81 / 100
             }
         },
         Element: "PyroDMGBonus",
@@ -1483,6 +1497,12 @@ const Arlecchino = {
                     return 120.13 / 100
                 case 10:
                     return 129.25 / 100
+                case 11:
+                    return 138.37 / 100
+                case 12:
+                    return 147.5 / 100
+                case 13:
+                    return 156.62 / 100
             }
         },
         Element: "PyroDMGBonus",
@@ -1512,6 +1532,12 @@ const Arlecchino = {
                     return (68.24 * 2) / 100
                 case 10:
                     return (73.43 * 2) / 100
+                case 11:
+                    return (78.61 * 2) / 100
+                case 12:
+                    return (83.79 * 2) / 100
+                case 13:
+                    return (88.98 * 2) / 100
             }
         },
         Element: "PyroDMGBonus",
@@ -1541,6 +1567,12 @@ const Arlecchino = {
                     return 128.57 / 100
                 case 10:
                     return 138.34 / 100
+                case 11:
+                    return 148.1 / 100
+                case 12:
+                    return 157.87 / 100
+                case 13:
+                    return 167.63 / 100
             }
         },
         Element: "PyroDMGBonus",
@@ -1570,10 +1602,16 @@ const Arlecchino = {
                     return 166.85 / 100
                 case 10:
                     return 179.52 / 100
+                case 11:
+                    return 192.19 / 100
+                case 12:
+                    return 204.86 / 100
+                case 13:
+                    return 217.54 / 100
             }
         },
         Element: "PyroDMGBonus",
-        isReaction: false,
+        isReaction: true,
         scaling: "ATK"
     },
     plungeAttack: {
@@ -1725,7 +1763,7 @@ const Ayaka = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2059,7 +2097,7 @@ const Ayato = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2374,7 +2412,7 @@ const Baizhu = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -2690,7 +2728,7 @@ const Barbara = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3006,7 +3044,7 @@ const Beidou = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3321,7 +3359,7 @@ const Bennett = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3636,7 +3674,7 @@ const Candace = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -3950,7 +3988,7 @@ const Charlotte = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -4314,7 +4352,7 @@ const Chevreuse = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -4677,7 +4715,7 @@ const Chiori = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5039,7 +5077,7 @@ const Chongyun = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5333,7 +5371,7 @@ const Clorinde = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -5695,7 +5733,7 @@ const Collei = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6057,7 +6095,7 @@ const Cyno = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6420,7 +6458,7 @@ const Dehya = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -6784,7 +6822,7 @@ const Diluc = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7078,7 +7116,7 @@ const Diona = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7415,7 +7453,7 @@ const Dori = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -7778,7 +7816,7 @@ const Emilie = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8141,7 +8179,7 @@ const Eula = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8455,7 +8493,7 @@ const Faruzan = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8818,7 +8856,7 @@ const Fischl = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -8826,7 +8864,7 @@ const Fischl = {
     energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "Q","E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
+        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
         ["Support"]: ["E", "Q", "E"]
     },
     weaponType: "Bow",
@@ -9133,7 +9171,7 @@ const Freminet = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -9495,7 +9533,7 @@ const Furina = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -9858,7 +9896,7 @@ const Gaming = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10220,7 +10258,7 @@ const Ganyu = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10453,7 +10491,7 @@ const Gorou = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -10747,7 +10785,7 @@ const Heizou = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11110,7 +11148,7 @@ const Hu_Tao = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11364,7 +11402,7 @@ const Itto = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11373,7 +11411,7 @@ const Itto = {
     supportType: "Sub-dps",
     sequence: {
         //"P" used for superlative final slash
-        ["Dps"]: ["Q", "N1","E","N1","N2","C","C","C","C","P","N1","N2","N3","N4","C","C","C","C","P","E","P"],
+        ["Dps"]: ["Q", "N1", "E", "N1", "N2", "C", "C", "C", "C", "P", "N1", "N2", "N3", "N4", "C", "C", "C", "C", "P", "E", "P"],
         ["Support"]: ["E"],
     },
     weaponType: "Claymore",
@@ -11702,7 +11740,7 @@ const Jean = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -11985,7 +12023,7 @@ const Kachina = {
             ["40b"]: 330.00,
             ["40a"]: 365.27,
             ["50b"]: 420.15,
-            ["50a"]: 467.17	,
+            ["50a"]: 467.17,
             ["60b"]: 522.04,
             ["60a"]: 557.31,
             ["70b"]: 612.12,
@@ -12018,7 +12056,7 @@ const Kachina = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "DEF",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12026,8 +12064,8 @@ const Kachina = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E","N1","N1","N1","N1","N1","N1"],
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "N1", "N1", "N1", "N1", "N1", "N1"],
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Polearm",
     normalAttack1: {
@@ -12381,7 +12419,7 @@ const Kaeya = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -12675,7 +12713,7 @@ const Kaveh = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13037,7 +13075,7 @@ const Kazuha = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13354,7 +13392,7 @@ const Keqing = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13608,7 +13646,7 @@ const Kirara = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -13971,7 +14009,7 @@ const Klee = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14248,7 +14286,7 @@ const Kokomi = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14544,7 +14582,7 @@ const Kuki = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -14907,7 +14945,7 @@ const Layla = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15270,7 +15308,7 @@ const Lisa = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15545,7 +15583,7 @@ const Lynette = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -15907,7 +15945,7 @@ const Lyney = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16293,7 +16331,7 @@ const Mika = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16656,7 +16694,7 @@ const Mona = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16931,7 +16969,7 @@ const Mualani = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -16939,8 +16977,8 @@ const Mualani = {
     energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","N1","N2","N1","N2","N1","N2","Q"],//N2 is mini sharks from N1
-        ["Support"]: ["E","N1","N","Q"],
+        ["Dps"]: ["E", "N1", "N2", "N1", "N2", "N1", "N2", "Q"],//N2 is mini sharks from N1
+        ["Support"]: ["E", "N1", "N", "Q"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -17293,7 +17331,7 @@ const Nahida = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -17655,7 +17693,7 @@ const Navia = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18017,7 +18055,7 @@ const Neuvillette = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18313,7 +18351,7 @@ const Nilou = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18675,7 +18713,7 @@ const Ningguang = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -18929,7 +18967,7 @@ const Noelle = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19229,7 +19267,7 @@ const Qiqi = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19488,7 +19526,7 @@ const Raiden = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -19740,7 +19778,7 @@ const Razor = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20019,7 +20057,7 @@ const Rosaria = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20298,7 +20336,7 @@ const Sara = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20597,7 +20635,7 @@ const Sayu = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -20896,7 +20934,7 @@ const Sethos = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21260,7 +21298,7 @@ const Shenhe = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21559,7 +21597,7 @@ const Sigewinne = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "HP",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -21922,7 +21960,7 @@ const Sucrose = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22223,7 +22261,7 @@ const Thoma = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22522,7 +22560,7 @@ const Tighnari = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -22908,7 +22946,7 @@ const Tartaglia = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23186,7 +23224,7 @@ const Traveler_Anemo = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23506,7 +23544,7 @@ const Traveler_Dendro = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -23826,7 +23864,7 @@ const Traveler_Electro = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24146,7 +24184,7 @@ const Traveler_Geo = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24466,7 +24504,7 @@ const Traveler_Hydro = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -24785,7 +24823,7 @@ const Venti = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25041,7 +25079,7 @@ const Wanderer = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25403,7 +25441,7 @@ const Wriothesley = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -25766,7 +25804,7 @@ const Xiangling = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26087,7 +26125,7 @@ const Xianyun = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26451,7 +26489,7 @@ const Xiao = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -26704,7 +26742,7 @@ const Xingqiu = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27026,7 +27064,7 @@ const Xinyan = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27329,7 +27367,7 @@ const Yae_Miko = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27629,7 +27667,7 @@ const Yanfei = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -27909,7 +27947,7 @@ const Yaoyao = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28272,7 +28310,7 @@ const Yelan = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28592,7 +28630,7 @@ const Yoimiya = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "ATK",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -28914,7 +28952,7 @@ const Yun_Jin = {
         ]
 
     },
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -29237,7 +29275,7 @@ const Zhongli = {
 
     },
     havePhysicalChargedAttack: true,
-    subDpsType:"On-field",
+    subDpsType: "On-field",
     scalingType: "Hybrid",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
@@ -29515,7 +29553,7 @@ const Empty = {
         ]
 
     },
-    subDpsType:"Off-field",
+    subDpsType: "Off-field",
     scalingType: "Type",
     normalAttackTalent: 1,
     elementalSkillTalent: 1,

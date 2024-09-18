@@ -24,7 +24,6 @@ async function prepare(button) {
     weapon.level = document.getElementById("weapon_level").value;
     //Set constellation
     let constellations = document.getElementById("constellation").value;
-    console.log(constellations);
     //Set weapon refinement
     /*TODO: Add weapon refinement*/
     //Set talents

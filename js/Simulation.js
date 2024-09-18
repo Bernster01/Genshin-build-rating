@@ -98,6 +98,7 @@ function getBuild(build, score) {
             buffs: character.currentBuffs,
             element: character.element,
             splashArt: character.card,
+            energyOffset: character.energyOffset,
         },
         artifacts: character.artifacts,
         weapon: {
@@ -166,12 +167,12 @@ async function validateAllCharacters(runs = 1) {
 async function runSim(baseCharacter, baseWeapon, artifacts, runs, constellation = 0) {
     let userCharacter = new Createcharacter(deepClone(baseCharacter), baseWeapon, artifacts);
     applyBonuses(userCharacter);
-    console.log(constellation);
     userCharacter.constellations = constellation;
     let simulatedCharacter = AllCharacters[userCharacter.name];
 
     let result = await FindBestBuild(simulatedCharacter, runs);
     // console.log("USER:");
+   
     let result2 = Simulation(userCharacter);
     let score = EvalBuilds(result2, bestBuild[role][baseCharacter.name], role);
     console.log("USER:");
@@ -1029,11 +1030,11 @@ function getSetBonus(array, character) {
                     if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
                         character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35, Source: "Thunder Soother" });
                     }
-                } else if(currentSet == "Vourukashas_Glow"){
-                    if(role =="dps" || (role =="Support" && character.name =="Dehya")){
-                        character.currentBuffs.push({Type:"ElementalSkill",Value:(8*5)-10,Source:"Vourukasha's Glow"});
-                        character.currentBuffs.push({Type:"ElementalBurst",Value:(8*5)-10,Source:"Vourukasha's Glow"});
-                    } 
+                } else if (currentSet == "Vourukashas_Glow") {
+                    if (role == "dps" || (role == "Support" && character.name == "Dehya")) {
+                        character.currentBuffs.push({ Type: "ElementalSkill", Value: (8 * 5) - 10, Source: "Vourukasha's Glow" });
+                        character.currentBuffs.push({ Type: "ElementalBurst", Value: (8 * 5) - 10, Source: "Vourukasha's Glow" });
+                    }
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
@@ -1160,27 +1161,33 @@ function Simulation(character) {
     let totalDmg = 0;
     let shield = 0;
     let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0 };
-    switch(Character.name){
+    switch (Character.name) {
         case "Amber":
             if (Character.constellations >= 4) {
                 Character.sequence[role].push("E");
             }
             break;
         case "Itto":
-            if(Character.constellations >=1){
-                Character.sequence["Dps"] = ["Q","N1","E","C","C","C","C","C","C","P","N1","N2","N3","N4","C","C","C","C","P","E","P"]
+            if (Character.constellations >= 1) {
+                Character.sequence["Dps"] = ["Q", "N1", "E", "C", "C", "C", "C", "C", "C", "P", "N1", "N2", "N3", "N4", "C", "C", "C", "C", "P", "E", "P"]
             }
-            if(Character.constellations >=2){
-                Character.energyOffset-=30;
+            if (Character.constellations >= 2) {
+                Character.energyOffset -= 30;
             }
-            if(Character.constellations>=6){
+            if (Character.constellations >= 6) {
                 Character.sequence["Dps"].push("C");
                 Character.sequence["Dps"].push("C");
                 Character.sequence["Dps"].push("C");
                 Character.sequence["Dps"].push("C");
                 Character.sequence["Dps"].push("C");
-                Character.currentBuffs.push({Type:"CritDMG",Value:70, for:"ChargedAttack"});
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 70, for: "ChargedAttack" });
             }
+            break;
+        case "Arlecchino":
+            if (Character.constellations >= 4) {
+                Character.energyOffset -= 15;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1551,11 +1558,11 @@ function Simulation(character) {
 
                     }
                     let dmg = dmgCalc(attackAction, Character) * enemies;
-                    if (Character.name =="Amber"){
-                        if(Character.constellations >=1){
-                            if(attackAction.type =="ChargedAttack"){
+                    if (Character.name == "Amber") {
+                        if (Character.constellations >= 1) {
+                            if (attackAction.type == "ChargedAttack") {
                                 console.log(dmg);
-                                dmg*=1.2 //Second arrow
+                                dmg *= 1.2 //Second arrow
                             }
                         }
                     }
@@ -1779,9 +1786,9 @@ function Simulation(character) {
                         }
                         break;
                     case "Footprint of the Rainbow":
-                        if(!footprintOfTheRainbowBuff){
+                        if (!footprintOfTheRainbowBuff) {
                             footprintOfTheRainbowBuff = true;
-                            Character.currentBuffs.push({Type: "DEF%", Value: 32, Source: "Footprint of the Rainbow"});
+                            Character.currentBuffs.push({ Type: "DEF%", Value: 32, Source: "Footprint of the Rainbow" });
                         }
                         break;
 
@@ -2177,9 +2184,9 @@ function Simulation(character) {
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
     let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
-        if(character.supportType == "ATKBooster"){
-        bonusMultiplier = (atkBuff * 1.4)+100;
-        }else{
+        if (character.supportType == "ATKBooster") {
+            bonusMultiplier = (atkBuff * 1.4) + 100;
+        } else {
             bonusMultiplier = 20;
         }
     let tmp = 0;
@@ -2496,6 +2503,21 @@ function getFlatDamage(character, attackAction) {
                     case 10:
                         masqueOfTheRedDeathIncreaseMultiplier = 238 / 100;
                         break;
+                    case 11:
+                        masqueOfTheRedDeathIncreaseMultiplier = 254.8 / 100;
+                        break;
+                    case 12:
+                        masqueOfTheRedDeathIncreaseMultiplier = 271.6 / 100;
+                        break;
+                    case 13:
+                        masqueOfTheRedDeathIncreaseMultiplier = 288.4 / 100;
+                        break;
+                    default:
+                        masqueOfTheRedDeathIncreaseMultiplier = 238 / 100;
+                        break;
+                }
+                if (character.constellations >= 1) {
+                    masqueOfTheRedDeathIncreaseMultiplier += (100 / 100);
                 }
                 flatDamage += character.attack() * (masqueOfTheRedDeathIncreaseMultiplier * (1 + (character.bondOfLife / 100)));
 

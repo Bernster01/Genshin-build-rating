@@ -28,7 +28,7 @@ function starterFunction() {
     document.getElementById("artifacts").appendChild(userArtifact);
     document.getElementById("artifacts").appendChild(buildArtifact);
     let text = `You got a Score of ${Math.floor(builds.user.buildScore)} resulting in a grade of "${getGrade(builds.user.buildScore)}-tier".`;
-    let energyPercent = Math.floor((characters.user.energyRecharge() / characters.user.energyOffset) * 100);
+    let energyPercent = Math.floor((characters.user.energyRecharge() / builds.user.character.energyOffset) * 100);
     if (energyPercent < 100) {
         text += `\n  Your energy recharge is ${energyPercent}% of the recommended amount of ${characters.user.energyOffset}. Your score suffered negatively because of this.`;
     }

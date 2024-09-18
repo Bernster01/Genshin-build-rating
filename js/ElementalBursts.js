@@ -3790,6 +3790,9 @@ function BalemoonRising(Character) {
             break;
     }
     let attack = { Multiplier: multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.attack() * ((700/100)*Character.bondOfLife), for:"ElementalBurst" });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     //Absorb blood directive
     let buffToRemove = "";
