@@ -1193,6 +1193,17 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
+        case "Barbara":
+            if (Character.constellations >= 1) {
+                Character.energyOffset -= 5;
+            }
+            if (Character.constellations >= 2) {
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 10;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
