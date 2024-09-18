@@ -4384,15 +4384,34 @@ function shortRangeRapidInterdictionFire(character) {
     }
     let attack = { Multiplier: holdDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let attack2 = { Multiplier: overloadedBallDMG, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let extraInstance = 1;
+    if(character.constellations>=4){
+        extraInstance = 3;
+    }
+    let dmg = dmgCalc(attack, character) * numberOfEnemies*extraInstance;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    if(character.constellations >= 2){
+        let extraAttack = { Multiplier: 120/100, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
+        dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
+        dmg += dmgCalc(extraAttack, character) * numberOfEnemies;
+
+    }
     let atkBuff = 0;
     let totalHealing = healing * 6 * (1 + (character.advancedstats.healingBonus / 100));
+    if(character.constellations>=6){
+        totalHealing += character.HP() * (10/100) * (1 + (character.advancedstats.healingBonus / 100));
+    }
     for (buff of character.currentBuffs) {
         if (buff.Type == "Vertical Force Coordination") {
             atkBuff += Math.floor(character.HP() / 1000);
+            if(atkBuff>40){
+                atkBuff = 40;
+            }
             character.currentBuffs.push({ Type: "ATK%", Value: atkBuff, Source: "Vertical Force Coordination" });
         }
+    }
+    if(character.constellations>=6){
+        atkBuff += 60;
     }
     healingHasOccured(character);
     return { dmg: dmg, healing: totalHealing, attackBuff: atkBuff };
