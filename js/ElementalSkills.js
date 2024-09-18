@@ -175,6 +175,17 @@ function explosivePuppet(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: true }
+    if (Character.constellations >= 2) {
+        let hasBuff = false;
+        Character.currentBuffs.forEach(buff => {
+            if (buff.source == "C2") {
+                hasBuff = true;
+            }
+        });
+        if (!hasBuff) {
+            Character.currentBuffs.push({ Type: "ElementalSkill", Value: 200, source: "C2" });
+        }
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     return dmg;
 }

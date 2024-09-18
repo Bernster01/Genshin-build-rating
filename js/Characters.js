@@ -1233,7 +1233,8 @@ const Amber = {
             }
         },
         Element: "PyroDMGBonus",
-        isReaction: true
+        isReaction: true,
+        scaling: "ATK"
     },
     plungeAttack: {
         Multiplier: function (level) { return 0 },

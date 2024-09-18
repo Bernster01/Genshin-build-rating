@@ -1160,6 +1160,13 @@ function Simulation(character) {
     let totalDmg = 0;
     let shield = 0;
     let dmgSources = { n: 0, c: 0, p: 0, e: 0, q: 0 };
+    switch(Character.name){
+        case "Amber":
+            if (Character.constellations >= 4) {
+                Character.sequence[role].push("E");
+            }
+            break;
+    }
     Character.sequence[role].forEach(action => {
 
 
@@ -1527,8 +1534,16 @@ function Simulation(character) {
                             }
                         }
 
-                    }
+                    } 
                     let dmg = dmgCalc(attackAction, Character) * enemies;
+                    if (Character.name =="Amber"){
+                        if(Character.constellations >=1){
+                            if(attackAction.type =="ChargedAttack"){
+                                console.log(dmg);
+                                dmg*=1.2 //Second arrow
+                            }
+                        }
+                    }
                     totalDmg += dmg;
                     if (Character.name == "Cyno") {
                         let isInUlt = false;

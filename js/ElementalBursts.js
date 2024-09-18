@@ -185,7 +185,9 @@ function fieryRain(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if(Character.constellations >=6){
+        Character.currentBuffs.push({Type:"ATK%",Value:15});
+    }
 
 
     return dmg;
