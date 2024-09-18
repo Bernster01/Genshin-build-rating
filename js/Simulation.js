@@ -1215,6 +1215,11 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "ResShred", Element: "ElectroDMGBonus", Value: 15, Source: "C6", for: "NormalAttack" });
             }
             break;
+        case "Bennett":
+            if(Character.constellations >= 2){
+                Character.energyOffset -= 5;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

@@ -391,7 +391,22 @@ function fantasticVoyage(Character) {
     let healing = Multiplier2 * 5 * (1 + (Character.advancedstats.healingBonus / 100));
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     let attackBuff = Multiplier3;
-
+    if(Character.constellations >= 1){
+        attackBuff+=0.2*Character.baseAttack;
+    }
+    Character.currentBuffs.push({Type:"ATKflat",Value:attackBuff});
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({Type:"PyroDMGBonus",Value:15});
+        Character.normalAttack1.Element = "PyroDMGBonus";
+        Character.normalAttack1.isReaction = true;
+        Character.normalAttack2.Element = "PyroDMGBonus";
+        Character.normalAttack2.isReaction = false;
+        Character.normalAttack3.Element = "PyroDMGBonus";
+        Character.normalAttack3.isReaction = false;
+        Character.normalAttack4.Element = "PyroDMGBonus";
+        Character.normalAttack4.isReaction = false;
+        
+    }
     return { dmg: dmg, healing: healing, attackBuff: attackBuff };
 }
 
