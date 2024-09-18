@@ -13,5 +13,10 @@
         "date": "September 18 2024",
         "version": "1.3.12",
         "description": "Changed the artifact set 'Vourukasha's Glow' to be more accurate. <br> Fixed some artifacts four piece bonus not activating"
+    },
+    {
+        "date": "September 18 2024",
+        "version": "1.4.1",
+        "description": "Changed how some evaluations are calculated."
     }
 ]

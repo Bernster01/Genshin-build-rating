@@ -39,7 +39,7 @@ function supportEval(userBuild, currentBestBuild) {
                 case "shield":
                     return healerShieldEval(userBuild, currentBestBuild);
                 default:
-                    return healerEval(userBuild, currentBestBuild);
+                    return healerDpsEval(userBuild, currentBestBuild);
             }
         case "ATKBooster":
             switch (userBuild.character.supportType2) {
@@ -50,7 +50,7 @@ function supportEval(userBuild, currentBestBuild) {
                 case "Healer":
                     return bufferHealerEval(userBuild, currentBestBuild);
                 default:
-                    return bufferEval(userBuild, currentBestBuild);
+                    return bufferDpsEval(userBuild, currentBestBuild);
             }
 
         case "Sub-dps":
@@ -64,7 +64,7 @@ function supportEval(userBuild, currentBestBuild) {
                 case "Healer":
                     return shieldHealerEval(userBuild, currentBestBuild);
                 default:
-                    return shieldEval(userBuild, currentBestBuild);
+                    return shieldDpsEval(userBuild, currentBestBuild);
             }
         case "ElementalBuffer":
             switch (userBuild.character.supportType2) {
@@ -75,7 +75,7 @@ function supportEval(userBuild, currentBestBuild) {
                 case "Shield":
                     return bufferShieldEval(userBuild, currentBestBuild);
                 default:
-                    return bufferEval(userBuild, currentBestBuild);
+                    return bufferDpsEval(userBuild, currentBestBuild);
             }
         }
 }
@@ -100,7 +100,7 @@ function bufferEval(userBuild, currentBestBuild) {
 function bufferShieldEval(userBuild, currentBestBuild) {
     let bufferScore = bufferEval(userBuild, currentBestBuild);
     let shieldScore = shieldEval(userBuild, currentBestBuild);
-    return Math.floor((bufferScore * .75) + (shieldScore * .25));
+    return Math.floor((bufferScore * .65) + (shieldScore * .35));
 }
 function bufferDpsEval(userBuild, currentBestBuild) {
     let bufferScore = bufferEval(userBuild, currentBestBuild);
@@ -113,7 +113,7 @@ function bufferHealerEval(userBuild, currentBestBuild) {
     let healScore = healerEval(userBuild, currentBestBuild);
     let dmgSore = dpsEval(userBuild, currentBestBuild);
 
-    return Math.floor((bufferScore * .75) + (healScore * .15) + (dmgSore * .10));
+    return Math.floor((bufferScore * .50) + (healScore * .30) + (dmgSore * .20));
 }
 function shieldEval(userBuild, currentBestBuild) {
     return Math.floor((userBuild.shield / currentBestBuild.supportValues.shield) * 100);
@@ -121,7 +121,7 @@ function shieldEval(userBuild, currentBestBuild) {
 function shieldBufferEval(userBuild, currentBestBuild) {
     let shieldScore = shieldEval(userBuild, currentBestBuild);
     let bufferScore = bufferEval(userBuild, currentBestBuild);
-    return Math.floor((shieldScore * .75) + (bufferScore * .25));
+    return Math.floor((shieldScore * .65) + (bufferScore * .35));
 }
 function shieldDpsEval(userBuild, currentBestBuild) {
     let shieldScore = shieldEval(userBuild, currentBestBuild);
