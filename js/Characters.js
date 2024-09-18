@@ -8825,8 +8825,8 @@ const Fischl = {
     energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "Q", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
-        ["Support"]: ["E", "Q",]
+        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "Q","E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
+        ["Support"]: ["E", "Q", "E"]
     },
     weaponType: "Bow",
     normalAttack1: {

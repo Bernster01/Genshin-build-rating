@@ -770,20 +770,20 @@ function midnightPhantasmagoria(Character) {
     }
     let attack = { Multiplier: Multiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    attack.Multiplier = Multiplier;
-    attack.type = "ElementalSkill";
-    for (let i = 1; i <= 12; i++) {
-        //Fischl have different ICD
-        if (i % 4 == 0) {
-            attack.isReaction = true;
-            dmg += dmgCalc(attack, Character);
-        }
-        else {
-            attack.isReaction = false;
-            dmg += dmgCalc(attack, Character);
-        }
+    // attack.Multiplier = Multiplier;
+    // attack.type = "ElementalSkill";
+    // for (let i = 1; i <= 12; i++) {
+    //     //Fischl have different ICD
+    //     if (i % 4 == 0) {
+    //         attack.isReaction = true;
+    //         dmg += dmgCalc(attack, Character);
+    //     }
+    //     else {
+    //         attack.isReaction = false;
+    //         dmg += dmgCalc(attack, Character);
+    //     }
 
-    }
+    // }
 
     return dmg;
 }

@@ -17,6 +17,6 @@
     {
         "date": "September 18 2024",
         "version": "1.4.1",
-        "description": "Changed how some evaluations are calculated. <br> Changed Deyha mitigation calculation."
+        "description": "Changed how some evaluations are calculated. <br> Changed Deyha mitigation calculation. <br> Fixed Fischl burst having damage from elemental skill"
     }
 ]
