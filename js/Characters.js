@@ -11373,7 +11373,7 @@ const Itto = {
     supportType: "Sub-dps",
     sequence: {
         //"P" used for superlative final slash
-        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "C", "C", "C", "P", "N1", "N2", "N3", "N4", "C", "C", "C", "C", "P", "E"],
+        ["Dps"]: ["Q", "N1","E","N1","N2","C","C","C","C","P","N1","N2","N3","N4","C","C","C","C","P","E","P"],
         ["Support"]: ["E"],
     },
     weaponType: "Claymore",

@@ -1166,6 +1166,21 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
+        case "Itto":
+            if(Character.constellations >=1){
+                Character.sequence["Dps"] = ["Q","N1","E","C","C","C","C","C","C","P","N1","N2","N3","N4","C","C","C","C","P","E","P"]
+            }
+            if(Character.constellations >=2){
+                Character.energyOffset-=30;
+            }
+            if(Character.constellations>=6){
+                Character.sequence["Dps"].push("C");
+                Character.sequence["Dps"].push("C");
+                Character.sequence["Dps"].push("C");
+                Character.sequence["Dps"].push("C");
+                Character.sequence["Dps"].push("C");
+                Character.currentBuffs.push({Type:"CritDMG",Value:70, for:"ChargedAttack"});
+            }
     }
     Character.sequence[role].forEach(action => {
 
@@ -1534,7 +1549,7 @@ function Simulation(character) {
                             }
                         }
 
-                    } 
+                    }
                     let dmg = dmgCalc(attackAction, Character) * enemies;
                     if (Character.name =="Amber"){
                         if(Character.constellations >=1){
