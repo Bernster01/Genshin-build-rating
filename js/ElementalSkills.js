@@ -700,11 +700,26 @@ function icetideVortex(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
+    if(Character.constellations >=1){
+        let hasBuff = false;
+        Character.currentBuffs.forEach(buff => {
+            if(buff.Source == "C1")
+                hasBuff = true;
+        });
+        if(!hasBuff){
+            Character.currentBuffs.push({Type: "PhysicalDMGBonus", Value: 30, Source: "C1"});
+        }
+    }
     switch (grimheartStack) {
         case 0: case 1:
             attack.Multiplier = skillMultiplier;
             dmg = dmgCalc(attack, Character) * numberOfEnemies;
-            grimheartStack += 2;
+            grimheartStack += 1;
+            for(let buff of Character.currentBuffs){
+                if(buff.Type == "Wellspring of War-Lust"){
+                    grimheartStack += 1;
+                }
+            }
             break;
         case 2:
             attack.Multiplier = skillMultiplier2;
@@ -729,7 +744,8 @@ function icetideVortex(Character) {
             Character.currentBuffs.push({ Type: "ResShred", Value: res, Element: "PhysicalDMGBonus" });
             grimheartStack = 0;
             break;
-    }
+            
+        }
 
     return dmg;
 }

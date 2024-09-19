@@ -8187,7 +8187,7 @@ const Eula = {
     energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E"],
+        ["Dps"]: ["E","N1", "N2", "N3","N4", "E","N1", "N2", "N3", "N4","Q"],
         ["Support"]: ["E", "E", "E"]
     },
     weaponType: "Claymore",

@@ -743,10 +743,12 @@ function glacialIllumination(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    let tmp = dmg;
     let stacks = 13;
     if (Character.weapon.name == "Song of Broken Pines") {
         stacks += 1
+    }
+    if(Character.constellations >= 6){
+        stacks += 11;
     }
     attack.Multiplier = Multiplier2 + (Multiplier3 * stacks);
     attack.isReaction = false;
