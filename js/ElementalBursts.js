@@ -4640,6 +4640,12 @@ function lastLightFall(character) {
     let attack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
     character.applyBondOfLife(bondOfLifeGain);
+    if(character.constellations >= 4){
+        let buff = 2 * character.bondOfLife;
+        if(buff >200)
+            buff = 200;
+        character.currentBuffs.push({Type:"ElementalBurst", Value: buff});
+    }
     for (let i = 0; i < 5; i++) {
         if (i == 0 || i % 3) {
             attack.isReaction = true;

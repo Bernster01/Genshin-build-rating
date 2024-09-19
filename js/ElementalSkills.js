@@ -4514,8 +4514,8 @@ function flutteringHasode(character, getMultiplier = false) {
             upwardSweepAttackDMGdef = 396.53 / 100;
             break;
     }
-    if(getMultiplier){
-        return {tamotoDMGdef, tamotoDMGatk, upwardSweepAttackDMGatk, upwardSweepAttackDMGdef};
+    if (getMultiplier) {
+        return { tamotoDMGdef, tamotoDMGatk, upwardSweepAttackDMGatk, upwardSweepAttackDMGdef };
     }
     tamotoDMGatk = tamotoDMGatk * character.attack();
     tamotoDMGdef = tamotoDMGdef * character.DEF();
@@ -4527,10 +4527,10 @@ function flutteringHasode(character, getMultiplier = false) {
     let attack2 = { Multiplier: tamotoDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     let hasGeoConstruct = 1;
-    if(partyMemberElements.includes("GeoCharacter")){
+    if (partyMemberElements.includes("GeoCharacter")) {
         hasGeoConstruct = 2;
     }
-    if(character.constellations >= 1){
+    if (character.constellations >= 1) {
         hasGeoConstruct = 2;
     }
     for (let i = 0; i < 4 * hasGeoConstruct; i++) {
@@ -4659,11 +4659,11 @@ function huntersVigil(character) {
             impaletheNightlvl3DMG = 60.15 / 100;
             break;
     }
-    let swiftHunt1lvl = { Multiplier: swiftHunt1lvlDMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
-    let swiftHunt2lvl = { Multiplier: swiftHunt2lvlDMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
-    let impaletheNightlvl1 = { Multiplier: impaletheNightlvl1DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let impaletheNightlvl2 = { Multiplier: impaletheNightlvl2DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let impaletheNightlvl3 = { Multiplier: impaletheNightlvl3DMG, Element: "Electro", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let swiftHunt1lvl = { Multiplier: swiftHunt1lvlDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+    let swiftHunt2lvl = { Multiplier: swiftHunt2lvlDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+    let impaletheNightlvl1 = { Multiplier: impaletheNightlvl1DMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let impaletheNightlvl2 = { Multiplier: impaletheNightlvl2DMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    let impaletheNightlvl3 = { Multiplier: impaletheNightlvl3DMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
     let hasLawfulRemuneration = false;
     let hasDarkShatteringFlame = false;
@@ -4678,6 +4678,11 @@ function huntersVigil(character) {
         }
 
     }
+    if(character.constellations >=6){
+        character.currentBuffs.push({ Type: "CritRate", Value: 10, Source: "C6" });
+        character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6" });
+    }
+    
     for (let i = 0; i < 24; i++) {
         //Combo 6[N1,N2,N3,E] where swifthunt is N and impale is E where lvl depends on bondoflife
         //Assuming 1000 heal every 3rd attack from support
@@ -4706,15 +4711,26 @@ function huntersVigil(character) {
             let heal = 2000;
             let percentHeal = heal / character.HP() * 100;
             character.applyBondOfLife(percentHeal);
-            if (hasDarkShatteringFlame && (supportingElement != null || supportingElement != undefined)) {
+            if (hasDarkShatteringFlame && (supportingElement != null && supportingElement != undefined && supportingElement != "" && supportingElement != "noElement")) {
                 for (buffs of character.currentBuffs) {
                     if (buffs.Source == "Dark-Shattering Flame") {
-                        let increase = (20 / 100) * character.attack();
-                        if (increase > 600)
-                            increase = 600;
-                        buffs.Value += increase;
-                        if (buffs.Value > 1800)
-                            buffs.Value = 1800;
+                        if (character.constellations >= 2) {
+                            let increase = (30 / 100) * character.attack();
+                            if (increase > 900)
+                                increase = 900;
+                            buffs.Value += increase;
+                            if (buffs.Value > 2700)
+                                buffs.Value = 2700;
+                        }
+                        else {
+                            let increase = (20 / 100) * character.attack();
+                            if (increase > 600)
+                                increase = 600;
+                            buffs.Value += increase;
+                            if (buffs.Value > 1800)
+                                buffs.Value = 1800;
+                        }
+
                     }
                 }
             }
@@ -4756,6 +4772,7 @@ function huntersVigil(character) {
             character.applyBondOfLife(35);
         }
     }
+
     return dmg;
 }
 

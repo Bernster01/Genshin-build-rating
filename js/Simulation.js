@@ -1258,11 +1258,11 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
-        case "Chongyun":{
+        case "Chongyun": {
             if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 10;
             }
         }
@@ -1784,12 +1784,12 @@ function Simulation(character) {
                 }
                 switch (Character.name) {
                     case "Chongyun":
-                        if(character.constellations >= 1){
-                            if(action=="N4"){
-                                const chongyun_extra_attack = { Multiplier: 50/100, Element: "CryoDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
-                                let chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
-                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
-                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
+                        if (character.constellations >= 1) {
+                            if (action == "N4") {
+                                const chongyun_extra_attack = { Multiplier: 50 / 100, Element: "CryoDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
+                                let chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character) * numberOfEnemies;
+                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character) * numberOfEnemies;
+                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character) * numberOfEnemies;
                                 totalDmg += chongyun_extra_dmg;
                                 let hasC1Source = false;
                                 for (source of dmgSources.other) {
@@ -1799,7 +1799,7 @@ function Simulation(character) {
                                     }
                                 }
                                 if (!hasC1Source) {
-                                dmgSources.other.push({label:"C1", dmg: chongyun_extra_dmg});
+                                    dmgSources.other.push({ label: "C1", dmg: chongyun_extra_dmg });
                                 }
                             }
                         }
@@ -1916,6 +1916,31 @@ function Simulation(character) {
                     let eDmg = Character.elementalSkill.Skill(Character);
                     totalDmg += eDmg;
                     dmgSources.e += eDmg;
+                    switch (character.name) {
+                        case "Clorinde":
+                            dmgSources.e -= eDmg;
+                            dmgSources.n += eDmg;
+                            if(character.constellations>= 1){
+                                const extraNormalAttack = { Multiplier: 30 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+                                let dmg = 0;
+                                for(let i = 0; i < 6; i++){
+                                    dmg = dmgCalc(extraNormalAttack, character);
+                                }
+                                totalDmg += dmg;
+                                dmgSources.other.push({ label: "C1 - Coordinated Attacks", dmg: dmg });
+                            }
+                            if(character.constellations>= 6){
+                                //Shade attacks 
+                                const shadeAttack = { Multiplier: 200 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
+                                let dmg = 0;
+                                for(let i = 0; i < 6; i++){
+                                    dmg += dmgCalc(shadeAttack, character);
+                                }
+                                totalDmg += dmg;
+                                dmgSources.other.push({ label: "C6 - Glimbright Shade", dmg: dmg });
+                            }
+                            break;
+                    }
 
                 }
                 switch (Character.weapon.name) {
