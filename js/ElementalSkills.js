@@ -576,6 +576,9 @@ function icyPaws(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    if (Character.constellations >= 2) {
+        Character.currentBuffs.push({ Type: "ElementalSkill", Value: 15, });
+    }
     let dmg = dmgCalc(attack, Character);
     for (let index = 0; index <= 5; index++) {
         if (index % 3 == 0) {
@@ -590,7 +593,9 @@ function icyPaws(Character) {
     let shield = skillMultiplier2 * (1 + (Character.advancedstats.shieldStrength / 100));
     if (Character.weapon.name == "Sacrificial Bow")
         shield *= 2;
-
+    if (Character.constellations >= 2) {
+        shield *= 1.15;
+    }
     return { dmg: dmg, shield: shield };
 }
 
@@ -4058,14 +4063,14 @@ function moltenInferno(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     let extraInstances = 0;
-    if(character.constellations >2){
-        extraInstances =2;
-        character.currentBuffs.push({Type:"ElementalSkill",Value:50});
+    if (character.constellations > 2) {
+        extraInstances = 2;
+        character.currentBuffs.push({ Type: "ElementalSkill", Value: 50 });
     }
-    for (let i = 0; i<4+extraInstances; i++) {  //Max for 4 instances of field dmg (Every 2.5s over 12s)
+    for (let i = 0; i < 4 + extraInstances; i++) {  //Max for 4 instances of field dmg (Every 2.5s over 12s)
         dmg += dmgCalc(coordAttack, character) * numberOfEnemies
     }
-  
+
     let shield = 16000 * ((mitigaition + (2 * (character.elementalSkill.Level - 1))) / 100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
     return { dmg: dmg, shield: shield };
 }
@@ -4247,12 +4252,12 @@ function floralBrush(character) {
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     attack.isReaction = false;
     const dendroReactionElements = ["Pyro", "Hydro", "Electro", "Cryo"];
-    if(dendroReactionElements.includes(supportingElement) || character.constellations >= 2){
-        let a1Attack = { Multiplier: 40/100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    if (dendroReactionElements.includes(supportingElement) || character.constellations >= 2) {
+        let a1Attack = { Multiplier: 40 / 100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
         dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
         a1Attack.isReaction = false;
         dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
-        if(character.constellations >= 2){
+        if (character.constellations >= 2) {
             dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
             a1Attack.isReaction = true;
             dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
@@ -4699,11 +4704,11 @@ function huntersVigil(character) {
         }
 
     }
-    if(character.constellations >=6){
+    if (character.constellations >= 6) {
         character.currentBuffs.push({ Type: "CritRate", Value: 10, Source: "C6" });
         character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6" });
     }
-    
+
     for (let i = 0; i < 24; i++) {
         //Combo 6[N1,N2,N3,E] where swifthunt is N and impale is E where lvl depends on bondoflife
         //Assuming 1000 heal every 3rd attack from support
@@ -4890,8 +4895,8 @@ function secretRiteChasmicSoulfarer(character) {
         }
     }
     dmg += dmgCalc(enhancedAttack, character) * numberOfEnemies;
-    cynoC6Stacks +=4;
-    if(cynoC6Stacks >8)
+    cynoC6Stacks += 4;
+    if (cynoC6Stacks > 8)
         cynoC6Stacks = 8;
     return dmg;
 }

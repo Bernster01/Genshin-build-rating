@@ -1319,6 +1319,16 @@ function Simulation(character) {
                 Character.sequence["Dps"].push("N1", "N2");
             }
             break;
+        case "Diona":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 4){
+                if(role =="Dps"){
+                    Character.sequence["Dps"].push("C","C","C");
+                }
+            }
+        break;
     }
     Character.sequence[role].forEach(action => {
 

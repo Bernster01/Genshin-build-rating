@@ -587,7 +587,7 @@ function dawn(Character) {
 function signatureMix(Character) {
     let Multiplier = 0;
     let Multiplier2 = 0;
-    let Multiplier3 = 0;
+    let Multipler3 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
             Multiplier = 80 / 100;
@@ -661,8 +661,13 @@ function signatureMix(Character) {
     for (let i = 1; i <= 6; i++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
     }
-    let heal = Multiplier3 * 6;
-    return { dmg: dmg, heal, heal };
+    let heal = Multipler3 * 6;
+    if(Character.constellations >= 6){
+        
+        heal *=1+((30/100)/2);
+       
+    }
+    return { dmg: dmg, healing: heal };
 }
 
 function glacialIllumination(Character) {

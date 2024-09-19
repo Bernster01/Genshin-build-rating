@@ -7121,7 +7121,7 @@ const Diona = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 145,
+    energyOffset: 120,
     supportType: "Shield",
     supportType2: "Healer",
     sequence: {
