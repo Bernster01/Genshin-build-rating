@@ -2881,15 +2881,15 @@ function kyouka(Character) {
         switch (index % 3) {
             case 0:
                 attack.isReaction = true;
-                attack.Multiplier = oneHit * ((namisen * namisenStacks/100) * Character.HP());
+                attack.Multiplier = oneHit * ((namisen * namisenStacks / 100) * Character.HP());
                 break;
             case 1:
                 attack.isReaction = false;
-                attack.Multiplier = twoHit * ((namisen * namisenStacks/100) * Character.HP());
+                attack.Multiplier = twoHit * ((namisen * namisenStacks / 100) * Character.HP());
                 break;
             case 2:
                 attack.isReaction = false;
-                attack.Multiplier = threeHit * ((namisen * namisenStacks/100) * Character.HP());
+                attack.Multiplier = threeHit * ((namisen * namisenStacks / 100) * Character.HP());
                 break;
 
         }
@@ -2898,7 +2898,7 @@ function kyouka(Character) {
     }
 
 
-    if(Character.constellations >= 6){
+    if (Character.constellations >= 6) {
         let extraAttack = { Multiplier: 450 / 100, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
         dmg += dmgCalc(extraAttack, Character) * numberOfEnemies;
         dmg += dmgCalc(extraAttack, Character) * numberOfEnemies;
@@ -4429,7 +4429,7 @@ function shortRangeRapidInterdictionFire(character) {
     return { dmg: dmg, healing: totalHealing, attackBuff: atkBuff };
 }
 
-function flutteringHasode(character) {
+function flutteringHasode(character, getMultiplier = false) {
     let tamotoDMGdef = 0;
     let tamotoDMGatk = 0;
     let upwardSweepAttackDMGatk = 0;
@@ -4514,6 +4514,9 @@ function flutteringHasode(character) {
             upwardSweepAttackDMGdef = 396.53 / 100;
             break;
     }
+    if(getMultiplier){
+        return {tamotoDMGdef, tamotoDMGatk, upwardSweepAttackDMGatk, upwardSweepAttackDMGdef};
+    }
     tamotoDMGatk = tamotoDMGatk * character.attack();
     tamotoDMGdef = tamotoDMGdef * character.DEF();
     upwardSweepAttackDMGatk = upwardSweepAttackDMGatk * character.attack();
@@ -4523,7 +4526,16 @@ function flutteringHasode(character) {
     let attack = { Multiplier: upwardSweepAttackDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let attack2 = { Multiplier: tamotoDMG, Element: "GeoDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    dmg += dmgCalc(attack2, character) * numberOfEnemies * 2 * 4;
+    let hasGeoConstruct = 1;
+    if(partyMemberElements.includes("GeoCharacter")){
+        hasGeoConstruct = 2;
+    }
+    if(character.constellations >= 1){
+        hasGeoConstruct = 2;
+    }
+    for (let i = 0; i < 4 * hasGeoConstruct; i++) {
+        dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    }
 
     for (buffs of character.currentBuffs) {
         if (buffs.Type == "Tailor-Made") {

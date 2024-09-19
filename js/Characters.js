@@ -4970,8 +4970,8 @@ const Chiori = {
         Value: null
     },
     passive2: {
-        Type: "GeoDMGBonus",
-        Value: 20
+        Type: "The Finishing Touch",
+        Value: 0
     },
     constellations: {
         Amount: 0,

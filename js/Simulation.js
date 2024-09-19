@@ -1206,7 +1206,7 @@ function Simulation(character) {
             break;
         case "Beidou":
             if (Character.constellations >= 4) {
-                let extraDMGAttack_beidou = { Multiplier: 20/100, Element: "ElectroDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
+                let extraDMGAttack_beidou = { Multiplier: 20 / 100, Element: "ElectroDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
                 const extra_beidouDMG = dmgCalc(extraDMGAttack_beidou, Character) * 6;
                 totalDmg += extra_beidouDMG;
                 dmgSources.n += extra_beidouDMG;
@@ -1216,7 +1216,7 @@ function Simulation(character) {
             }
             break;
         case "Bennett":
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.energyOffset -= 5;
             }
             break;
@@ -1226,12 +1226,12 @@ function Simulation(character) {
                 Character.sequence[role].push("N2");
                 Character.sequence[role].push("N3");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.sequence[role].push("E");
             }
             break;
         case "Charlotte":
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 25;
             }
             break;
@@ -1239,6 +1239,25 @@ function Simulation(character) {
             if (Character.constellations >= 6) {
                 Character.currentBuffs.push({ Type: "ChargedAttack", Value: 297, Source: "C6" });
             }
+            break;
+        case "Chiori":
+            if (partyMemberElements.includes("GeoCharacter") || Character.constellations >= 1) {
+                //Check for The Finishing Touch
+                let hasTheFinishingTouch = false;
+                for (buff of Character.currentBuffs) {
+                    if (buff.Type == "The Finishing Touch") {
+                        hasTheFinishingTouch = true;
+                    }
+                }
+                if (hasTheFinishingTouch) {
+                    Character.currentBuffs.push({ Type: "GeoDMGBonus", Value: 20, Source: "The Finishing Touch" });
+                }
+
+            }
+            if(Character.constellations >= 6){
+                Character.sequence[role].push("E");
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -2223,6 +2242,30 @@ function Simulation(character) {
                         }
                         break;
                 }
+                switch (Character.name) {
+                    case "Chiori":
+                        if (Character.constellations >= 2) {
+                            const chiori_skill_multipliers = Character.elementalSkill.Skill(Character, true);
+                            let kinu_doll = { Multiplier: ((Character.DEF() * chiori_skill_multipliers.tamotoDMGdef) + (Character.attack() * chiori_skill_multipliers.tamotoDMGatk)) * (170 / 100), Element: "GeoDMGBonus", Scaling: "Combined", type: "ElementalSkill", isReaction: true, Source: "Chiori" };
+                            let kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                            kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                            kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                            totalDmg += kinu_doll_dmg;
+                            dmgSources.other.push({ dmg: kinu_doll_dmg, label: "C2" });
+                        }
+                        if (Character.constellations >= 4) {
+                            if (role == "Support") {
+                                const chiori_skill_multipliers = Character.elementalSkill.Skill(Character, true);
+                                let kinu_doll = { Multiplier: ((Character.DEF() * chiori_skill_multipliers.tamotoDMGdef) + (Character.attack() * chiori_skill_multipliers.tamotoDMGatk)) * (170 / 100), Element: "GeoDMGBonus", Scaling: "Combined", type: "ElementalSkill", isReaction: true, Source: "Chiori" };
+                                let kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                                kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                                kinu_doll_dmg = dmgCalc(kinu_doll, Character) * numberOfEnemies;
+                                totalDmg += kinu_doll_dmg;
+                                dmgSources.other.push({ dmg: kinu_doll_dmg, label: "C4" });
+                            }
+                        }
+                        break;
+                }
         }
     });
     switch (Character.name) {
@@ -2602,6 +2645,13 @@ function getFlatDamage(character, attackAction) {
                 }
                 flatDamage += character.attack() * (masqueOfTheRedDeathIncreaseMultiplier * (1 + (character.bondOfLife / 100)));
 
+            }
+            break;
+        case "Chiori":
+            if (character.constellations >= 6) {
+                if (attackAction.type == "NormalAttack") {
+                    flatDamage += character.DEF() * (235 / 100);
+                }
             }
             break;
     }

@@ -9,7 +9,7 @@ async function prepare(button) {
     const partyMemberElement1 = document.getElementById("partyMemberElement1").value;
     const partyMemberElement2 = document.getElementById("partyMemberElement2").value;
     const partyMemberElement3 = document.getElementById("partyMemberElement3").value;
-    let partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
+    partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
     if (runs === "" || runs === null || runs === undefined) {
         runs = 25;
     }
