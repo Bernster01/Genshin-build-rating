@@ -4057,7 +4057,15 @@ function moltenInferno(character) {
     let coordAttack = { Multiplier: fieldDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
-    dmg += dmgCalc(coordAttack, character) * numberOfEnemies * 4;//Max for 4 instances of field dmg (Every 2.5s over 12s)
+    let extraInstances = 0;
+    if(character.constellations >2){
+        extraInstances =2;
+        character.currentBuffs.push({Type:"ElementalSkill",Value:50});
+    }
+    for (let i = 0; i<4+extraInstances; i++) {  //Max for 4 instances of field dmg (Every 2.5s over 12s)
+        dmg += dmgCalc(coordAttack, character) * numberOfEnemies
+    }
+  
     let shield = 16000 * ((mitigaition + (2 * (character.elementalSkill.Level - 1))) / 100);//Psudeo shield not really a shield but for the sake of calculations we call it a shield
     return { dmg: dmg, shield: shield };
 }

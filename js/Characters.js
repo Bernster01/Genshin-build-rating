@@ -6463,7 +6463,7 @@ const Dehya = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 145,
+    energyOffset: 240,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {

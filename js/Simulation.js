@@ -1285,6 +1285,23 @@ function Simulation(character) {
             if (Character.constellations >= 1) {
                 Character.sequence[role].push("N1", "N2", "N3", "N4", "N4");
             }
+            break;
+        case "Dehya":
+            
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "HP%", Value: 20, Source: "C1" });
+            }
+            if(Character.constellations >=4){
+                Character.energyOffset -= 40;
+            }
+            if(Character.constellations >=6){
+                Character.energyOffset -= 20;
+            }
+
+            if(role == "Support"){
+                Character.energyOffset = 100;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -2772,6 +2789,16 @@ function getFlatDamage(character, attackAction) {
             if (character.constellations >= 6) {
                 if (attackAction.type == "NormalAttack") {
                     flatDamage += character.DEF() * (235 / 100);
+                }
+            }
+            break;
+        case "Dehya":
+            if(character.constellations >= 1){
+                if(attackAction.type == "ElementalSkill"){
+                    flatDamage += character.HP() * (3.6 / 100);
+                }
+                else if(attackAction.type == "ElementalBurst"){
+                    flatDamage += character.HP() * (6 / 100);
                 }
             }
             break;
