@@ -9176,7 +9176,7 @@ const Freminet = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 145,
+    energyOffset: 155,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "E", "N1", "E", "N1", "N2", "E", "N1", "E", "N1", "N2", "E"],

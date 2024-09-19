@@ -5294,6 +5294,9 @@ function pressurizedFloe(character) {
     let shatteringPressureAttack = { Multiplier: shatteringPressure, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let shatteringPressureAttack4 = { Multiplier: shatteringPressure4, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let dmg = dmgCalc(frost * 2, character) * numberOfEnemies * 1.6;//1.6 avg normal attacks per e use
+    if(character.constellations >= 1){
+        character.currentBuffs.push({Type: "CritRate", Value: 15, Source: "C1"});
+    }
     switch (persTimer) {
         case -1:
             dmg += dmgCalc(upwardThrust, character) * numberOfEnemies;
@@ -5314,6 +5317,9 @@ function pressurizedFloe(character) {
         default:
             console.log("opsie " + persTimer);
             break;
+    }
+    if(character.constellations >= 1){
+        character.currentBuffs.push({Type: "CritRate", Value: -15, Source: "C1"});
     }
     return dmg;
 }

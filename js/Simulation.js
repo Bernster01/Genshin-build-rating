@@ -1364,6 +1364,24 @@ function Simulation(character) {
                 }
             }
             break;
+        case "Freminet":
+           
+            if (Character.constellations >= 2) {
+                console.log(Character.energyOffset);
+                Character.energyOffset -= 22.5;
+                console.log(Character.energyOffset);
+            }
+            if (Character.constellations >= 4) {
+                if (supportingElement == "Hydro" || supportingElement == "Electro") {
+                    Character.currentBuffs.push({ Type: "ATK%", Value: 18, Source: "C6" });
+                }
+            }
+            if (Character.constellations >= 6) {
+                if (supportingElement == "Hydro" || supportingElement == "Electro") {
+                    Character.currentBuffs.push({ Type: "CritDMG", Value: 36, Source: "C6" });
+                }
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
