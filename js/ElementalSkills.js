@@ -700,14 +700,14 @@ function icetideVortex(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
-    if(Character.constellations >=1){
+    if (Character.constellations >= 1) {
         let hasBuff = false;
         Character.currentBuffs.forEach(buff => {
-            if(buff.Source == "C1")
+            if (buff.Source == "C1")
                 hasBuff = true;
         });
-        if(!hasBuff){
-            Character.currentBuffs.push({Type: "PhysicalDMGBonus", Value: 30, Source: "C1"});
+        if (!hasBuff) {
+            Character.currentBuffs.push({ Type: "PhysicalDMGBonus", Value: 30, Source: "C1" });
         }
     }
     switch (grimheartStack) {
@@ -715,8 +715,8 @@ function icetideVortex(Character) {
             attack.Multiplier = skillMultiplier;
             dmg = dmgCalc(attack, Character) * numberOfEnemies;
             grimheartStack += 1;
-            for(let buff of Character.currentBuffs){
-                if(buff.Type == "Wellspring of War-Lust"){
+            for (let buff of Character.currentBuffs) {
+                if (buff.Type == "Wellspring of War-Lust") {
                     grimheartStack += 1;
                 }
             }
@@ -744,8 +744,8 @@ function icetideVortex(Character) {
             Character.currentBuffs.push({ Type: "ResShred", Value: res, Element: "PhysicalDMGBonus" });
             grimheartStack = 0;
             break;
-            
-        }
+
+    }
 
     return dmg;
 }
@@ -808,16 +808,16 @@ function nightrider(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    if(Character.constellations >= 2){
-        attack.Multiplier += 200/100;
+    if (Character.constellations >= 2) {
+        attack.Multiplier += 200 / 100;
     }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = skillMultiplier;
     let c6extraDuration = 0;
-    if(Character.constellations >= 6){
+    if (Character.constellations >= 6) {
         c6extraDuration = 2;
     }
-    for (let i = 1; i <= 10+c6extraDuration; i++) {
+    for (let i = 1; i <= 10 + c6extraDuration; i++) {
         //Fischl have different ICD
         if (i % 4 == 0) {
             attack.isReaction = true;
@@ -4206,6 +4206,10 @@ function salonSolitaire(character) {
     let ousiaBubbleAttack = { Multiplier: ousiaBubbleDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
     for (let i = 0; i < 20; i++) {
+        if (character.constellations >= 6 && role == "Dps" && i == 16) {
+            character.currentBuffs.push({ Type: "HP%", Value: 140/5, Source: "C2" });
+            break;
+        }
         if (i % 2 == 0) {
             surintendanteChevalmarinAttack.isReaction = false;
             gentilhommeUsherAttack.isReaction = false;
@@ -4214,18 +4218,34 @@ function salonSolitaire(character) {
             surintendanteChevalmarinAttack.isReaction = true;
             gentilhommeUsherAttack.isReaction = true;
         }
-        if (i < 10) {
+        if (i % 2 == 0) {
             dmg += dmgCalc(gentilhommeUsherAttack, character) * numberOfEnemies;
         }
-        if (i < 6) {
+        if (i % 4 == 0) {
             dmg += dmgCalc(mademaoselleCrabalettaAttack, character) * numberOfEnemies;
+        }
+        if(i % 4 == 0 && character.constellations >= 2){
+                character.currentBuffs.push({ Type: "HP%", Value: 140/5, Source: "C2" });
         }
         dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
         character.removeHP(character.HP() * 0.02);
     }
+    let heal = 0;
+    if (character.constellations >= 6) {
+        if (role == "Dps")
+            heal = singerofManyWatersHealing * 3;
+        else if (role == "Support") {
+            heal = character.HP() * (4 / 100) * 6;
+        }
+        character.normalAttack1.Element = "HydroDMGBonus";
+        character.normalAttack2.Element = "HydroDMGBonus";
+        character.normalAttack3.Element = "HydroDMGBonus";
+        character.normalAttack4.Element = "HydroDMGBonus";
+
+    }
     healingHasOccured(character);
     dmg += dmgCalc(ousiaBubbleAttack, character) * numberOfEnemies;
-    return { dmg: dmg };
+    return { dmg: dmg, healing: heal };
 }
 
 function floralBrush(character) {
@@ -4986,7 +5006,7 @@ function spiritWardingLampTroubleshooterCannon(character) {
     let dmg = dmgCalc(troubleshooterShot, character) * numberOfEnemies;
     dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
     dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
-    if(character.constellations >= 1){
+    if (character.constellations >= 1) {
         dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
     }
     return { dmg: dmg };
@@ -5190,12 +5210,12 @@ function windRealmofNasamjnin(character) {
     let pressurizedCollapseVortex = { Multiplier: pressurizedCollapseVortexDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
-    if(character.constellations >= 6){
-        for(let i = 0; i < 4; i++){
-            if(i % 3 == 0){
+    if (character.constellations >= 6) {
+        for (let i = 0; i < 4; i++) {
+            if (i % 3 == 0) {
                 pressurizedCollapseVortex.isReaction = true;
             }
-            else{
+            else {
                 pressurizedCollapseVortex.isReaction = false;
             }
             dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
@@ -5294,8 +5314,8 @@ function pressurizedFloe(character) {
     let shatteringPressureAttack = { Multiplier: shatteringPressure, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let shatteringPressureAttack4 = { Multiplier: shatteringPressure4, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let dmg = dmgCalc(frost * 2, character) * numberOfEnemies * 1.6;//1.6 avg normal attacks per e use
-    if(character.constellations >= 1){
-        character.currentBuffs.push({Type: "CritRate", Value: 15, Source: "C1"});
+    if (character.constellations >= 1) {
+        character.currentBuffs.push({ Type: "CritRate", Value: 15, Source: "C1" });
     }
     switch (persTimer) {
         case -1:
@@ -5318,8 +5338,8 @@ function pressurizedFloe(character) {
             console.log("opsie " + persTimer);
             break;
     }
-    if(character.constellations >= 1){
-        character.currentBuffs.push({Type: "CritRate", Value: -15, Source: "C1"});
+    if (character.constellations >= 1) {
+        character.currentBuffs.push({ Type: "CritRate", Value: -15, Source: "C1" });
     }
     return dmg;
 }

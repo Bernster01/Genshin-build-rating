@@ -41,7 +41,7 @@ function supportEval(userBuild, currentBestBuild) {
                 default:
                     return healerSubDpsEval(userBuild, currentBestBuild);
             }
-        case "ATKBooster":
+        case "Buffer":
             switch (userBuild.character.supportType2) {
                 case "Shield":
                     return bufferShieldEval(userBuild, currentBestBuild);

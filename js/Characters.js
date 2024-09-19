@@ -3365,7 +3365,7 @@ const Bennett = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 145,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Healer",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "E", "N1", "N2", "N3"],
@@ -4358,7 +4358,7 @@ const Chevreuse = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 150,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
@@ -8499,8 +8499,7 @@ const Faruzan = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 240,
-    supportType: "ElementalBuffer",
-    supportType2: "ATKBooster",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "C", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
         ["Support"]: ["E", "C", "Q"],
@@ -9538,11 +9537,12 @@ const Furina = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
-    supportType: "Sub-dps",
-    supportType: "Healer",
+    energyOffset: 180,
+    supportType: "Buffer",
+    supportType2: "Sub-dps",
+    supportType3: "Healer",
     sequence: {
-        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N1", "N2", "N3"],
         ["Support"]: ["Q", "E"],
     },
     weaponType: "Sword",
@@ -10497,7 +10497,7 @@ const Gorou = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 130,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
@@ -13081,7 +13081,7 @@ const Kazuha = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 135,
-    supportType: "ElementalBuffer",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
         ["Support"]: ["E", "P", "Q"],
@@ -16337,7 +16337,7 @@ const Mika = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 135,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Healer",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N1", "N2", "N3", "N1", "N2", "N3"],
@@ -20342,7 +20342,7 @@ const Sara = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 130,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "C", "Q", "C", "C", "C", "C", "C"],
         ["Support"]: ["E", "C", "Q",],
@@ -21304,7 +21304,7 @@ const Shenhe = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 135,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "C", "N1", "C", "N1", "C"],
         ["Support"]: ["E", "Q",],
@@ -21603,7 +21603,7 @@ const Sigewinne = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 140,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Healer",
     sequence: {
         ["Dps"]: ["E", "Q"],
@@ -21966,7 +21966,7 @@ const Sucrose = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 140,
-    supportType: "ElementalBuffer",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
         ["Support"]: ["E", "Q",],
@@ -26131,7 +26131,7 @@ const Xianyun = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 165,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Healer",
     supportType3: "Sub-dps",
     sequence: {
@@ -28958,7 +28958,7 @@ const Yun_Jin = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 140,
-    supportType: "ATKBooster",
+    supportType: "Buffer",
     supportType2: "Shield",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],

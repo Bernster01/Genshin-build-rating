@@ -64,7 +64,10 @@ function barGraphDamage(user, build) {
     let userDmg = [user.dmg.totalDmg];
     let buildDmg = [build.dmg.totalDmg];
     const userData = getData(user);
-    const buildData = getData(build);
+    let buildData = getData(build);
+    console.log(userData);
+    console.log(buildData);
+    buildData = insertEmptyData(userData, buildData);
     let labels = ["Total Damage"];
     labels = labels.concat(userData.labels);
     userDmg = userDmg.concat(userData.datasets);
@@ -107,6 +110,7 @@ function barGraphSupport(user, build) {
     const graph = document.getElementById('supportGraph').getContext('2d');
     let userData = getSupportData(user);
     let buildData = getSupportData(build);
+    buildData = insertEmptyData(userData, buildData);
     console.log(userData);
     let graphData = {
         labels: userData.labels,
@@ -141,6 +145,17 @@ function barGraphSupport(user, build) {
         }
     });
     return supportGraph;
+}
+function insertEmptyData(userData, buildData) {
+    let labels = userData.labels;
+    let datasets = buildData.labels;
+    for (let i = 0; i < labels.length; i++) {
+        if (!datasets.includes(labels[i])) {
+            buildData.datasets.splice(i, 0, 0);
+            buildData.labels.splice(i, 0, labels[i]);
+        }
+    }
+    return buildData;
 }
 /**
     * Get the data for the graph

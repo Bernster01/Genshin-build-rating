@@ -4252,50 +4252,86 @@ function leonineBite(character) {
 
 function letThePeopleRejoice(character) {
     let skillDMG = 0;
+    let dmgBonus = 0;
+    let healingBonus = 0;
     switch (character.elementalBurst.Level) {
         case 1:
             skillDMG = 11.41 / 100;
+            dmgBonus = 0.07;
+            healingBonus = 0.01;
             break;
         case 2:
             skillDMG = 12.26 / 100;
+            dmgBonus = 0.09;
+            healingBonus = 0.02;
             break;
         case 3:
             skillDMG = 13.12 / 100;
+            dmgBonus = 0.11;
+            healingBonus = 0.03;
             break;
         case 4:
             skillDMG = 14.26 / 100;
+            dmgBonus = 0.13;
+            healingBonus = 0.04;
             break;
         case 5:
             skillDMG = 15.11 / 100;
+            dmgBonus = 0.15;
+            healingBonus = 0.05;
             break;
         case 6:
             skillDMG = 15.97 / 100;
+            dmgBonus = 0.17;
+            healingBonus = 0.06;
             break;
         case 7:
             skillDMG = 17.11 / 100;
+            dmgBonus = 0.19;
+            healingBonus = 0.07;
             break;
         case 8:
             skillDMG = 18.25 / 100;
+            dmgBonus = 0.21;
+            healingBonus = 0.08;
             break;
         case 9:
             skillDMG = 19.39 / 100;
+            dmgBonus = 0.23;
+            healingBonus = 0.09;
             break;
         case 10:
             skillDMG = 20.53 / 100;
+            dmgBonus = 0.25;
+            healingBonus = 0.1;
             break;
         case 11:
             skillDMG = 21.67 / 100;
+            dmgBonus = 0.27;
+            healingBonus = 0.11;
             break;
         case 12:
             skillDMG = 22.81 / 100;
+            dmgBonus = 0.29;
+            healingBonus = 0.12;
             break;
         case 13:
             skillDMG = 24.24 / 100;
+            dmgBonus = 0.31;
+            healingBonus = 0.13;
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    return { dmg: dmg };
+    let fanfare = 300;
+    if(character.constellations >= 1){
+        fanfare = 400;
+    }
+    
+    character.advancedstats.healingBonus += healingBonus*fanfare;
+    let buff = fanfare * dmgBonus;
+    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: buff });
+    return { dmg: dmg,attackBuff: buff};
 
 
 }

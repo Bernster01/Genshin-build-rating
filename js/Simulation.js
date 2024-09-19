@@ -100,6 +100,23 @@ function getBuild(build, score) {
             element: character.element,
             splashArt: character.card,
             energyOffset: character.energyOffset,
+            hp: character.HP(),
+            attack: character.attack(),
+            critRate: character.critRate(),
+            critDMG: character.critDMG(),
+            def: character.DEF(),
+            em: character.EM(),
+            energyRecharge: character.energyRecharge(),
+            healingBonus: character.advancedstats.healingBonus,
+            shieldStrength: character.advancedstats.shieldStrength,
+            pyroDMGBonus: character.advancedstats.elementalBonuses[0],
+            hydroDMGBonus: character.advancedstats.elementalBonuses[1],
+            dendroDMGBonus: character.advancedstats.elementalBonuses[2],
+            electroDMGBonus: character.advancedstats.elementalBonuses[3],
+            anemoDMGBonus: character.advancedstats.elementalBonuses[4],
+            cryoDMGBonus: character.advancedstats.elementalBonuses[5],
+            geoDMGBonus: character.advancedstats.elementalBonuses[6],
+            physicalDMGBonus: character.advancedstats.elementalBonuses[7],
         },
         artifacts: character.artifacts,
         weapon: {
@@ -1380,6 +1397,14 @@ function Simulation(character) {
                 if (supportingElement == "Hydro" || supportingElement == "Electro") {
                     Character.currentBuffs.push({ Type: "CritDMG", Value: 36, Source: "C6" });
                 }
+            }
+            break;
+        case "Furina":
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 40;
+            }
+            if(Character.constellations >= 6){
+                Character.sequence["Support"].push("N1","N2","N3","N1","N2","N3");
             }
             break;
     }
@@ -2938,6 +2963,15 @@ function getFlatDamage(character, attackAction) {
                 }
                 else if (attackAction.type == "ElementalBurst") {
                     flatDamage += character.HP() * (6 / 100);
+                }
+            }
+            break;
+        case "Furina":
+            if(character.constellations >= 6 && attackAction.type == "NormalAttack"){
+                
+                flatDamage += character.HP() * (18 / 100);
+                if(role == "Dps"){
+                    flatDamage += character.HP() * (25 / 100);
                 }
             }
             break;
