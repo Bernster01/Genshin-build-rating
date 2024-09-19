@@ -1349,6 +1349,21 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "ResShred", Value: 30, Source: "C2", Element:"DendroDMGBonus" });
             }
             break;
+        case "Faruzan":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("C");
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 6){
+                Character.energyOffset -= 30;
+                Character.currentBuffs.push({Type:"CritRate",Value:40,Source:"C6"});
+                if(role == "Support"){
+                    atkBuff += 400;
+                }
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

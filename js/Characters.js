@@ -6830,8 +6830,8 @@ const Diluc = {
     energyOffset: 115,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "N1", "N2", "E", "N1", "N2","E","N1", "N2", "E", "N1", "N2"],
-        ["Support"]: ["E","E","E", "Q",]
+        ["Dps"]: ["Q", "N1", "N2", "E", "N1", "N2", "E", "N1", "N2", "E", "N1", "N2"],
+        ["Support"]: ["E", "E", "E", "Q",]
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -7462,7 +7462,7 @@ const Dori = {
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E", "N1", "N2", "N1", "N2",],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N1", "N2",],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Claymore",
@@ -8187,7 +8187,7 @@ const Eula = {
     energyOffset: 135,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E","N1", "N2", "N3","N4", "E","N1", "N2", "N3", "N4","Q"],
+        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "E", "N1", "N2", "N3", "N4", "Q"],
         ["Support"]: ["E", "E", "E"]
     },
     weaponType: "Claymore",
@@ -8498,12 +8498,12 @@ const Faruzan = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 240,
     supportType: "ElementalBuffer",
     supportType2: "ATKBooster",
     sequence: {
-        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "C"],
-        ["Support"]: ["Q", "E"],
+        ["Dps"]: ["E", "C", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],
+        ["Support"]: ["E", "C", "Q"],
     },
     weaponType: "Bow",
     normalAttack1: {

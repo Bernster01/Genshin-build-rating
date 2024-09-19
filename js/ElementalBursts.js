@@ -4986,6 +4986,9 @@ function theWindsSecretWay(character) {
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if(character.constellations >= 2){
+        attack.Multiplier *= 1+(3/7);
+    }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     character.currentBuffs.push({ Type: "AnemoBonus", Value: anemoBonus });
     let atkBuff = 0;

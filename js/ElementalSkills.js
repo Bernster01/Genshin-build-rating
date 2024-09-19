@@ -5183,6 +5183,17 @@ function windRealmofNasamjnin(character) {
     let pressurizedCollapseVortex = { Multiplier: pressurizedCollapseVortexDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
+    if(character.constellations >= 6){
+        for(let i = 0; i < 4; i++){
+            if(i % 3 == 0){
+                pressurizedCollapseVortex.isReaction = true;
+            }
+            else{
+                pressurizedCollapseVortex.isReaction = false;
+            }
+            dmg += dmgCalc(pressurizedCollapseVortex, character) * numberOfEnemies;
+        }
+    }
     return { dmg: dmg };
 }
 
