@@ -4961,7 +4961,11 @@ function spiritWardingLampTroubleshooterCannon(character) {
     let troubleshooterShot = { Multiplier: troubleshooterShotDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let afterSalesServiceRound = { Multiplier: afterSalesServiceRoundDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalSkill" }
     let dmg = dmgCalc(troubleshooterShot, character) * numberOfEnemies;
-    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies * 2;
+    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
+    dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
+    if(character.constellations >= 1){
+        dmg += dmgCalc(afterSalesServiceRound, character) * numberOfEnemies;
+    }
     return { dmg: dmg };
 }
 const LumidouceCase = {

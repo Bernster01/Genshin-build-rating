@@ -1026,11 +1026,11 @@ function getSetBonus(array, character) {
                     }
                 } else if (currentSet == "Lavawalker") {
                     if (character.element == "PyroCharacter" || supportingElement == "Pyro") {
-                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35*0.6, Source: "Lavawalker" });
+                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35 * 0.6, Source: "Lavawalker" });
                     }
                 } else if (currentSet == "Thundersoother") {
                     if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
-                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35*0.6, Source: "Thunder Soother" });
+                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35 * 0.6, Source: "Thunder Soother" });
                     }
                 } else if (currentSet == "Vourukashas_Glow") {
                     if (role == "dps" || (role == "Support" && character.name == "Dehya")) {
@@ -1287,48 +1287,59 @@ function Simulation(character) {
             }
             break;
         case "Dehya":
-            
+
             if (Character.constellations >= 1) {
                 Character.currentBuffs.push({ Type: "HP%", Value: 20, Source: "C1" });
             }
-            if(Character.constellations >=4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 40;
             }
-            if(Character.constellations >=6){
+            if (Character.constellations >= 6) {
                 Character.energyOffset -= 20;
             }
 
-            if(role == "Support"){
+            if (role == "Support") {
                 Character.energyOffset = 100;
             }
             break;
         case "Diluc":
             if (Character.constellations >= 1) {
                 Character.currentBuffs.push({ Type: "AddativeDMGBonus", Value: 15, Source: "C1" });
-                
+
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "C2" });
                 Character.sequence["Dps"].push("N1", "N2");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.currentBuffs.push({ Type: "ElementalSkill", Value: 40, Source: "C4" });
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.currentBuffs.push({ Type: "NormalAttack", Value: 30, Source: "C6" });
                 Character.sequence["Dps"].push("N1", "N2");
             }
             break;
         case "Diona":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 4){
-                if(role =="Dps"){
-                    Character.sequence["Dps"].push("C","C","C");
+            if (Character.constellations >= 4) {
+                if (role == "Dps") {
+                    Character.sequence["Dps"].push("C", "C", "C");
                 }
             }
-        break;
+            break;
+        case "Dori":
+            if (Character.constellations >= 6) {
+                if (supportingElement == "Dendro") {
+                    Character.sequence["Dps"] = ["Q", "E", "N1", "N2", "N1", "N2", "E", "N1", "N2", "N1", "N2",]
+                    if (Character.artifactFourPiece == "Thundering Fury")
+                        Character.sequence["Dps"] = ["Q", "E", "N1", "N2", "N1", "N2", "E", "N1", "N2", "N1", "N2", "E", "N1", "N2", "N1", "N2",]
+                }
+                Character.normalAttack1.Element = "ElectroDMGBonus";
+                Character.normalAttack2.Element = "ElectroDMGBonus";
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1882,7 +1893,7 @@ function Simulation(character) {
                                     }
                                 }
                                 if (hasA1) {
-                                    let duststalkerBoltAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", isReaction: true, Scaling: "ATK", type: "ElementalSkill",type2: "Duststalker Bolt"  };
+                                    let duststalkerBoltAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", isReaction: true, Scaling: "ATK", type: "ElementalSkill", type2: "Duststalker Bolt" };
                                     let duststalkerBoltDmg = dmgCalc(duststalkerBoltAttack, Character);
                                     totalDmg += duststalkerBoltDmg;
                                     let hasDuststalkerBoltSource = false;
@@ -1907,10 +1918,10 @@ function Simulation(character) {
                 break;
 
             case "E":
-               
+
                 Character.currentBuffs.forEach(buff => {
                     if (buff.Type == "Heart of Depth") {
-                        
+
                         if (!HoD) {
                             Character.currentBuffs.push({ Type: "NormalAttack", Value: 30 });
                             Character.currentBuffs.push({ Type: "ChargedAttack", Value: 30 });
@@ -1918,7 +1929,7 @@ function Simulation(character) {
                         HoD = true;
                     }
                 });
-                
+
                 switch (Character.weapon.name) {
                     case "Festering Desire":
                         Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
@@ -2430,6 +2441,25 @@ function Simulation(character) {
                             }
                         }
                         break;
+                    case "Dori":
+                        if (character.constellations >= 2) {
+                            let jinniAttack = { Multiplier: 50 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "Special" };
+                            for (let i = 0; i < 6; i++) {
+                                let jinniDmg = dmgCalc(jinniAttack, character);
+                                totalDmg += jinniDmg;
+                                let hasC2Source = false;
+                                for (let source of dmgSources.other) {
+                                    if (source.label == "C2") {
+                                        hasC2Source = true;
+                                        source.dmg += jinniDmg;
+                                    }
+                                }
+                                if (!hasC2Source) {
+                                    dmgSources.other.push({ dmg: jinniDmg, label: "C2" });
+                                }
+                            }
+                        }
+                        break;
                 }
         }
     });
@@ -2820,11 +2850,11 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Dehya":
-            if(character.constellations >= 1){
-                if(attackAction.type == "ElementalSkill"){
+            if (character.constellations >= 1) {
+                if (attackAction.type == "ElementalSkill") {
                     flatDamage += character.HP() * (3.6 / 100);
                 }
-                else if(attackAction.type == "ElementalBurst"){
+                else if (attackAction.type == "ElementalBurst") {
                     flatDamage += character.HP() * (6 / 100);
                 }
             }

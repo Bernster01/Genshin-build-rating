@@ -4857,7 +4857,9 @@ function alcazarzaraysExactitude(character) {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, character) * numberOfEnemies;
+        
     }
+
     return { dmg: dmg, healing: conHealing * 6 };
 }
 

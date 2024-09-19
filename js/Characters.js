@@ -7462,7 +7462,7 @@ const Dori = {
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "C", "C", "C", "C"],
+        ["Dps"]: ["Q","E", "N1", "N2", "N1", "N2",],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Claymore",
