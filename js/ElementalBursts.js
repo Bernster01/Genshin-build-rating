@@ -4755,6 +4755,7 @@ function sacredRiteWolfsSwiftness(character) {
 
     //Buffs
     character.currentBuffs.push({ Type: "Pactsworn Pathclearer", Value: 0 });//ult state for skill
+    character.currentBuffs.push({ Type: "ElementalMastery", Value: 100 });
     let hasA4 = false;
     for (buff of character.currentBuffs) {
         if (buff.Type == "Authority Over the Nine Bows") {
@@ -4768,6 +4769,9 @@ function sacredRiteWolfsSwiftness(character) {
         let flatDamage2 = (150 / 100) * character.EM();
         character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage2, for: "NormalAttack" });
     }
+    cynoC6Stacks +=4;
+    if(cynoC6Stacks >8)
+        cynoC6Stacks = 8;
     return 0;
 }
 

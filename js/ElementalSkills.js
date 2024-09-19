@@ -4251,6 +4251,7 @@ function floralBrush(character) {
         }
     }
     dmg += dmgCalc(attack, character) * numberOfEnemies;
+
     return dmg;
 
 }
@@ -4881,7 +4882,9 @@ function secretRiteChasmicSoulfarer(character) {
         }
     }
     dmg += dmgCalc(enhancedAttack, character) * numberOfEnemies;
-
+    cynoC6Stacks +=4;
+    if(cynoC6Stacks >8)
+        cynoC6Stacks = 8;
     return dmg;
 }
 

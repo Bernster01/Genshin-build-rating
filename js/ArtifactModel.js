@@ -90,18 +90,22 @@ const artifactSets = {
     ["Archaic_Petra"]: {
         Type: "Archaic Petra",
         twoPiece: { Type: "GeoDMGBonus", Value: 15 },
+        fourPiece: { Type: "Archaic Petra", Value: null }
     },
     ["Blizzard_Strayer"]: {
         Type: "Blizzard Strayer",
         twoPiece: { Type: "CryoBonusDMG", Value: 15 },
+        fourPiece: { Type: "Blizzard Strayer", Value: null }
     },
     ["Bloodstained_Chivalry"]: {
         Type: "Bloodstained Chivalry",
-        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 }
+        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 },
+        fourPiece: { Type: "Bloodstained Chivalry", Value: null }
     },
     ["Crimson_Witch_of_Flames"]: {
         Type: "Crimson Witch of Flames",
-        twoPiece: { Type: "PyroDMGBonus", Value: 15 }
+        twoPiece: { Type: "PyroDMGBonus", Value: 15 },
+        fourPiece: { Type: "Crimson Witch of Flames", Value: null }
 
     },
     ["Deepwood_Memories"]: {
@@ -144,6 +148,7 @@ const artifactSets = {
     ["Gladiators_Finale"]: {
         Type: "Gladiators Finale",
         twoPiece: { Type: "ATK%", Value: 18 },
+        fourPiece: { Type: "Gladiators Finale", Value: null }
 
     },
     ["Golden_Troupe"]: {
@@ -167,11 +172,13 @@ const artifactSets = {
     ["Lavawalker"]: {
         Type: "Lavawalker",
         twoPiece: { Type: "", Value: null },
+        fourPiece: { Type: "Lavawalker", Value: null }
 
     },
     ["Maiden_Beloved"]: {
         Type: "Maiden Beloved",
         twoPiece: { Type: "HealingBonus", Value: 15 },
+        fourPiece: { Type: "Maiden Beloved", Value: null }
 
     },
     ["Marechaussee_Hunter"]: {
@@ -189,6 +196,7 @@ const artifactSets = {
     ["Noblesse_Oblige"]: {
         Type: "Noblesse Oblige",
         twoPiece: { Type: "BurstDMG%", Value: 20 },
+        fourPiece: { Type: "Noblesse Oblige", Value: null }
 
     },
     ["Nymphs_Dream"]: {
@@ -211,16 +219,19 @@ const artifactSets = {
     },
     ["Pale_Flame"]: {
         Type: "Pale Flame",
-        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 }
+        twoPiece: { Type: "PhysicalDMGBonus", Value: 25 },
+        fourPiece: { Type: "Pale Flame", Value: null }
     },
     ["Retracing_Bolide"]: {
         Type: "Retracing Bolide",
         twoPiece: { Type: "ShieldStrength", Value: 35 },
+        fourPiece: { Type: "Retracing Bolide", Value: null }
        
     },
     ["Shimenawas_Reminiscence"]: {
         Type: "Shimenawas Reminiscence",
-        twoPiece: { Type: "ATK%", Value: 18 }
+        twoPiece: { Type: "ATK%", Value: 18 },
+        fourPiece: { Type: "Shimenawas Reminiscence", Value: null }
     },
     ["Song_of_Days_Past"]: {
         Type: "Song of Days Past",
@@ -230,17 +241,22 @@ const artifactSets = {
     },
     ["Tenacity_of_the_Millelith"]: {
         Type: "Tenacity of the Millelith",
-        twoPiece: { Type: "HP%", Value: 20 }
+        twoPiece: { Type: "HP%", Value: 20 },
+        fourPiece: { Type: "Tenacity of the Millelith", Value: null }
+        
 
     },
     ["Thundering_Fury"]: {
         Type: "Thundering Fury",
-        twoPiece: { Type: "ElectroDMGBonus", Value: 15 }
+        twoPiece: { Type: "ElectroDMGBonus", Value: 15 },
+        fourPiece: { Type: "Thundersoother", Value: null }
+        
 
     },
     ["Thundersoother"]: {
         Type: "Thundersoother",
         twoPiece: { Type: "", Value: null },
+        fourPiece: { Type: "Thundersoother", Value: null }
 
     },
     ["Unfinished_Reverie"]: {

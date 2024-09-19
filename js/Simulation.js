@@ -85,7 +85,8 @@ let surfUpBuff = false;
 let surfUpBuffStacks = 0;
 let hasRingofYaxcheBuff = false;
 let footprintOfTheRainbowBuff = false;
-
+let cynoC6Stacks = 0;
+let HoD = false;
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -974,6 +975,7 @@ function getSetBonus(array, character) {
         }
         if (count >= 4) {
             character.artifactFourPiece = currentSet.replace(/_/g, " ");
+
             //Check twoPiece and fourPiece is a lust instead of the expected object
             if (artifactSets[array[i]].twoPiece.Type == undefined) {
                 artifactSets[array[i]].twoPiece.forEach(buff => {
@@ -1024,16 +1026,22 @@ function getSetBonus(array, character) {
                     }
                 } else if (currentSet == "Lavawalker") {
                     if (character.element == "PyroCharacter" || supportingElement == "Pyro") {
-                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35, Source: "Lavawalker" });
+                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35*0.6, Source: "Lavawalker" });
                     }
                 } else if (currentSet == "Thundersoother") {
                     if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
-                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35, Source: "Thunder Soother" });
+                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35*0.6, Source: "Thunder Soother" });
                     }
                 } else if (currentSet == "Vourukashas_Glow") {
                     if (role == "dps" || (role == "Support" && character.name == "Dehya")) {
                         character.currentBuffs.push({ Type: "ElementalSkill", Value: (8 * 5) - 10, Source: "Vourukasha's Glow" });
                         character.currentBuffs.push({ Type: "ElementalBurst", Value: (8 * 5) - 10, Source: "Vourukasha's Glow" });
+                    }
+                } else if (currentSet == "Thundering_Fury") {
+                    character.currentBuffs.push({ Type: "ThunderingFury", Value: 40, Source: "Thundering Fury" });
+                    character.currentBuffs.push({ Type: "Aggravate", Value: 20, Source: "Thundering Fury" });
+                    if ((character.element == "ElectroCharacter" && supportingElement == "Dendro") || (character.element == "DendroCharacter" && supportingElement == "Electro")) {
+                        character.sequence[role].push("E");
                     }
                 }
                 else {
@@ -1088,7 +1096,7 @@ function resetVariables() {
     elementalDMGSources.hyperbloomDMG = 0;
     elementalDMGSources.burgeoningDMG = 0;
     elementalDMGSources.swirlDMG = 0;
-
+    HoD = false;
     shouldGenerateBountifulCores = false;
     hasUrakuMisugiriBuff = false;
     shardsInPossession = 6;
@@ -1268,11 +1276,15 @@ function Simulation(character) {
         }
         case "Collei":
             if (Character.constellations >= 1) {
-                if(role == "Support"){
+                if (role == "Support") {
                     Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 20, Source: "C1" });
                 }
             }
             break;
+        case "Cyno":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("N1", "N2", "N3", "N4", "N4");
+            }
     }
     Character.sequence[role].forEach(action => {
 
@@ -1652,21 +1664,8 @@ function Simulation(character) {
                         }
                     }
                     totalDmg += dmg;
-                    if (Character.name == "Cyno") {
-                        let isInUlt = false;
-                        for (buff of Character.currentBuffs) {
-                            if (buff.Type == "Pactsworn Pathclearer") {
-                                isInUlt = true;
-                                break;
-                            }
-                        }
-                        if (isInUlt) {
-                            dmgSources.q += dmg;
-                        } else {
-                            dmgSources.n += dmg;
-                        }
-                    }
-                    else if (attackAction.type == "NormalAttack") {
+
+                    if (attackAction.type == "NormalAttack") {
                         dmgSources.n += dmg;
                     }
                     else if (attackAction.type == "ChargedAttack") {
@@ -1791,7 +1790,7 @@ function Simulation(character) {
                 }
                 switch (Character.name) {
                     case "Chongyun":
-                        if (character.constellations >= 1) {
+                        if (Character.constellations >= 1) {
                             if (action == "N4") {
                                 const chongyun_extra_attack = { Multiplier: 50 / 100, Element: "CryoDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
                                 let chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character) * numberOfEnemies;
@@ -1811,20 +1810,71 @@ function Simulation(character) {
                             }
                         }
                         break;
+                    case "Cyno":
+                        if (Character.constellations >= 2) {
+                            if (attackAction.type == "NormalAttack") {
+
+                                let hasC2Buff = false;
+                                for (let buff of Character.currentBuffs) {
+                                    if (buff.source == "C2") {
+
+                                        hasC2Buff = true;
+                                        buff.Value += 10;
+                                        if (buff.Value > 50)
+                                            buff.Value = 50;
+                                    }
+                                }
+                                if (!hasC2Buff) {
+                                    Character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 10, source: "C2" });
+                                }
+                            }
+                        }
+                        if (Character.constellations >= 6) {
+                            if (cynoC6Stacks != 0) {
+                                let hasA1 = false;
+                                for (let buff of Character.currentBuffs) {
+                                    if (buff.Type == "Featherfall Judgment") {
+                                        hasA1 = true;
+                                    }
+                                }
+                                if (hasA1) {
+                                    let duststalkerBoltAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", isReaction: true, Scaling: "ATK", type: "ElementalSkill",type2: "Duststalker Bolt"  };
+                                    let duststalkerBoltDmg = dmgCalc(duststalkerBoltAttack, Character);
+                                    totalDmg += duststalkerBoltDmg;
+                                    let hasDuststalkerBoltSource = false;
+                                    for (source of dmgSources.other) {
+                                        if (source.label == "C6 - Duststalker Bolt") {
+                                            hasDuststalkerBoltSource = true;
+                                            source.dmg += duststalkerBoltDmg;
+                                        }
+                                    }
+                                    if (!hasDuststalkerBoltSource) {
+                                        dmgSources.other.push({ label: "C6 - Duststalker Bolt", dmg: duststalkerBoltDmg });
+                                    }
+                                    cynoC6Stacks--;
+                                    if (cynoC6Stacks < 0) {
+                                        cynoC6Stacks = 0;
+                                    }
+                                }
+                            }
+                        }
+                        break;
                 }
                 break;
 
             case "E":
-                let HoD = false;
+               
                 Character.currentBuffs.forEach(buff => {
                     if (buff.Type == "Heart of Depth") {
+                        
+                        if (!HoD) {
+                            Character.currentBuffs.push({ Type: "NormalAttack", Value: 30 });
+                            Character.currentBuffs.push({ Type: "ChargedAttack", Value: 30 });
+                        }
                         HoD = true;
                     }
                 });
-                if (HoD) {
-                    Character.currentBuffs.push({ Type: "NormalAttack", Value: 30 });
-                    Character.currentBuffs.push({ Type: "ChargedAttack", Value: 30 });
-                }
+                
                 switch (Character.weapon.name) {
                     case "Festering Desire":
                         Character.currentBuffs.push({ Type: "ElementalSkill", Value: 32, Source: "Festering Desire" });
@@ -1927,20 +1977,20 @@ function Simulation(character) {
                         case "Clorinde":
                             dmgSources.e -= eDmg;
                             dmgSources.n += eDmg;
-                            if(character.constellations>= 1){
+                            if (character.constellations >= 1) {
                                 const extraNormalAttack = { Multiplier: 30 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
                                 let dmg = 0;
-                                for(let i = 0; i < 6; i++){
+                                for (let i = 0; i < 6; i++) {
                                     dmg = dmgCalc(extraNormalAttack, character);
                                 }
                                 totalDmg += dmg;
                                 dmgSources.other.push({ label: "C1 - Coordinated Attacks", dmg: dmg });
                             }
-                            if(character.constellations>= 6){
+                            if (character.constellations >= 6) {
                                 //Shade attacks 
                                 const shadeAttack = { Multiplier: 200 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "NormalAttack" }
                                 let dmg = 0;
-                                for(let i = 0; i < 6; i++){
+                                for (let i = 0; i < 6; i++) {
                                     dmg += dmgCalc(shadeAttack, character);
                                 }
                                 totalDmg += dmg;
@@ -2785,7 +2835,10 @@ function getDamageBonus(character, attackAction) {
         } else if (attackAction.type == buff.Type) {
             bonus += (buff.Value / 100);
 
+
         } else if (buff.type == "ElementalDMG" && attackAction.Element != "PhysicalDMGBonus") {
+            bonus += (buff.Value / 100);
+        } else if (buff.Type == attackAction.Element) {
             bonus += (buff.Value / 100);
         }
 
@@ -2929,7 +2982,6 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 superconductBonus += 40;
                 hyperbloomBonus += 40;
                 burgeoningBonus += 40;
-                aggravatedBonus += 20;
             }
             else if (buff.Type == "VV") {
                 swirlBonus += 60;
