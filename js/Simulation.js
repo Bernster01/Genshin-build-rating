@@ -1418,6 +1418,23 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type:"CritRate",Value:20,Source:"C6", for:"PlungeAttack"});
                 Character.currentBuffs.push({Type:"CritDMG",Value:40,Source:"C6", for:"PlungeAttack"});
             }
+            break;
+        case "Ganyu":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Source: "C1", Element: "CryoDMGBonus" });
+                Character.energyOffset -= 15;
+            }
+            if(Character.constellations >= 2){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:25,Source:"C4"});
+            }
+            if(Character.constellations >= 6){
+                Character.sequence["Dps"] = ["E","C","E","C","Q","C","C","C","C","C","C"]
+                Character.sequence["Support"] = ["E","C","E","C","Q"]
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

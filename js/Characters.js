@@ -10263,11 +10263,11 @@ const Ganyu = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 135,
+    energyOffset: 140,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "E", "C", "C", "C", "C", "E", "C", "C", "C", "C"],
-        ["Support"]: ["Q", "E", "C", "E", "C"]
+        ["Dps"]: ["Q", "E", "C", "C", "C", "E", "C", "C", "C"],
+        ["Support"]: ["E","Q"]
     },
     weaponType: "Bow",
     normalAttack1: {
