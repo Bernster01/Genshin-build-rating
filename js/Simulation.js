@@ -1343,23 +1343,23 @@ function Simulation(character) {
         case "Emilie":
             if (Character.constellations >= 1) {
                 Character.currentBuffs.push({ Type: "ElementalSkill", Value: 20, Source: "C1" });
-                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 20, Source: "C1" ,for:"Cleardew Cologne" });
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 20, Source: "C1", for: "Cleardew Cologne" });
             }
             if (Character.constellations >= 2) {
-                Character.currentBuffs.push({ Type: "ResShred", Value: 30, Source: "C2", Element:"DendroDMGBonus" });
+                Character.currentBuffs.push({ Type: "ResShred", Value: 30, Source: "C2", Element: "DendroDMGBonus" });
             }
             break;
         case "Faruzan":
             if (Character.constellations >= 1) {
                 Character.sequence[role].push("C");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.energyOffset -= 30;
-                Character.currentBuffs.push({Type:"CritRate",Value:40,Source:"C6"});
-                if(role == "Support"){
+                Character.currentBuffs.push({ Type: "CritRate", Value: 40, Source: "C6" });
+                if (role == "Support") {
                     atkBuff += 400;
                 }
             }
@@ -1938,6 +1938,26 @@ function Simulation(character) {
                             }
                         }
                         break;
+                    case "Fischl":
+                        if (Character.constellations >= 1) {
+                            if (attackAction.type == "NormalAttack") {
+                                let extraOzAttack = { Multiplier: 22 / 100, Element: "PhysicalDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
+                                let extraOzDmg = dmgCalc(extraOzAttack, Character);
+                                totalDmg += extraOzDmg;
+                                let hasOzSource = false;
+                                for (source of dmgSources.other) {
+                                    if (source.source == "C1") {
+                                        hasOzSource = true;
+                                        source.dmg += extraOzDmg;
+                                    }
+                                }
+                                if (!hasOzSource) {
+                                    dmgSources.other.push({ label: "C1 - Oz Coordinated", source: "C1", dmg: extraOzDmg });
+                                }
+
+                            }
+                        }
+                        break;
                 }
                 break;
 
@@ -2082,6 +2102,26 @@ function Simulation(character) {
                                 let dmg = dmgCalc(cuileinAnbar, character);
                                 totalDmg += dmg;
                                 dmgSources.other.push({ label: "C6 - Cuilein Anbar", dmg: dmg });
+                            }
+                            break;
+                        case "Fischl":
+                            if (character.constellations >= 6) {
+                                let ozAttack = { Multiplier: 33 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+                                let ozDmg = 0;
+                                for (let i = 0; i < 12; i++) {
+                                    ozDmg += dmgCalc(ozAttack, character);
+                                }
+                                totalDmg += ozDmg;
+                                let hasOzSource = false;
+                                for (source of dmgSources.other) {
+                                    if (source.source == "C6") {
+                                        hasOzSource = true;
+                                        source.dmg += ozDmg;
+                                    }
+                                }
+                                if (!hasOzSource) {
+                                    dmgSources.other.push({ label: "C6 - Midnight Phantasmagoria", dmg: ozDmg, source: "C6" });
+                                }
                             }
                             break;
                     }

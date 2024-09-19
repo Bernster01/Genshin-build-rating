@@ -808,9 +808,16 @@ function nightrider(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+    if(Character.constellations >= 2){
+        attack.Multiplier += 200/100;
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = skillMultiplier;
-    for (let i = 1; i <= 12; i++) {
+    let c6extraDuration = 0;
+    if(Character.constellations >= 6){
+        c6extraDuration = 2;
+    }
+    for (let i = 1; i <= 10+c6extraDuration; i++) {
         //Fischl have different ICD
         if (i % 4 == 0) {
             attack.isReaction = true;
