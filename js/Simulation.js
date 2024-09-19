@@ -1302,6 +1302,23 @@ function Simulation(character) {
                 Character.energyOffset = 100;
             }
             break;
+        case "Diluc":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "AddativeDMGBonus", Value: 15, Source: "C1" });
+                
+            }
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "C2" });
+                Character.sequence["Dps"].push("N1", "N2");
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 40, Source: "C4" });
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({ Type: "NormalAttack", Value: 30, Source: "C6" });
+                Character.sequence["Dps"].push("N1", "N2");
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

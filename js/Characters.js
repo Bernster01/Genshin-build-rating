@@ -6830,8 +6830,8 @@ const Diluc = {
     energyOffset: 115,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "N2", "N3", "N4", "Q", "E", "N1", "N2", "N3"],
-        ["Support"]: ["E", "Q",]
+        ["Dps"]: ["Q", "N1", "N2", "E", "N1", "N2","E","N1", "N2", "E", "N1", "N2"],
+        ["Support"]: ["E","E","E", "Q",]
     },
     weaponType: "Claymore",
     normalAttack1: {
