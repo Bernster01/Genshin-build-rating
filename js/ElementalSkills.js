@@ -5097,7 +5097,7 @@ function fragranceExtraction(character) {
             if (hasA1 && LumidouceCase.scents == 2) {
                 LumidouceCase.scents = 0;
                 //Big dmg
-                let bigDMG = { Multiplier: 600 / 100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "Special" }
+                let bigDMG = { Multiplier: 600 / 100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "Cleardew Cologne" }
                 dmg += dmgCalc(bigDMG, character) * numberOfEnemies;
             }
         }

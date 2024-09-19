@@ -4908,9 +4908,21 @@ function aromaticExplication(character) {
     }
     let attack = { Multiplier: lumiDouceCaselvl3DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for (let i = 0; i < 9; i++) {
-        dmg += dmgCalc(attack, character) * (numberOfEnemies - 1);//-1 because cooldown on targetable
-        attack.isReaction = false;
+    let c6 = 0;
+    let c6extraAttacks = 0;
+    if(character.constellations >= 6){
+        c6 = 1;
+        c6extraAttacks = 7;
+    }
+    for (let i = 0; i < 9+c6extraAttacks; i++) {
+        if(i == 0 || i % 3 == 0){
+            attack.isReaction = true;
+        }
+        else{
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * (numberOfEnemies - 1+c6);//-1 because cooldown on targetable
+       
     }
     return dmg;
 }

@@ -1340,6 +1340,15 @@ function Simulation(character) {
                 Character.normalAttack2.Element = "ElectroDMGBonus";
             }
             break;
+        case "Emilie":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 20, Source: "C1" });
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 20, Source: "C1" ,for:"Cleardew Cologne" });
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 30, Source: "C2", Element:"DendroDMGBonus" });
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
