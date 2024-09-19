@@ -9901,7 +9901,7 @@ const Gaming = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 170,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "P", "Q", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P", "N1", "N2", "E", "P"],

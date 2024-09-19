@@ -1407,6 +1407,17 @@ function Simulation(character) {
                 Character.sequence["Support"].push("N1","N2","N3","N1","N2","N3");
             }
             break;
+        case "Gaming":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type:"ATK%",Value:20,Source:"C2"});
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 30;
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"CritRate",Value:20,Source:"C6", for:"PlungeAttack"});
+                Character.currentBuffs.push({Type:"CritDMG",Value:40,Source:"C6", for:"PlungeAttack"});
+            }
     }
     Character.sequence[role].forEach(action => {
 
