@@ -463,8 +463,13 @@ function cloudPartingStar(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
-    for (let i = 1; i <= 3; i++) {
-        for (let n = 1; n <= 3; n++) {
+    let extraSword = 0
+    if(Character.constellations >= 6){
+        extraSword = 1;
+        Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:15, for:"ElementalBurst"});
+    }
+    for (let i = 1; i <= 3+extraSword; i++) {
+        for (let n = 1; n <= 3+extraSword; n++) {
             if (n % 3 == 0) {
                 attack.isReaction = true;
                 dmg += dmgCalc(attack, Character);

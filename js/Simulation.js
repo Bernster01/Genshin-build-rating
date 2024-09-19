@@ -1254,10 +1254,18 @@ function Simulation(character) {
                 }
 
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.sequence[role].push("E");
             }
             break;
+        case "Chongyun":{
+            if (Character.constellations >= 2) {
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 10;
+            }
+        }
     }
     Character.sequence[role].forEach(action => {
 
@@ -1769,6 +1777,29 @@ function Simulation(character) {
                                 else {
                                     hydroBuff.Value = 9;
                                     attackBuff.Value = 16;
+                                }
+                            }
+                        }
+                        break;
+                }
+                switch (Character.name) {
+                    case "Chongyun":
+                        if(character.constellations >= 1){
+                            if(action=="N4"){
+                                const chongyun_extra_attack = { Multiplier: 50/100, Element: "CryoDMGBonus", isReaction: false, Scaling: "ATK", type: "NormalAttack" };
+                                let chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
+                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
+                                chongyun_extra_dmg = dmgCalc(chongyun_extra_attack, Character)*numberOfEnemies;
+                                totalDmg += chongyun_extra_dmg;
+                                let hasC1Source = false;
+                                for (source of dmgSources.other) {
+                                    if (source.label == "C1") {
+                                        hasC1Source = true;
+                                        source.dmg += chongyun_extra_dmg;
+                                    }
+                                }
+                                if (!hasC1Source) {
+                                dmgSources.other.push({label:"C1", dmg: chongyun_extra_dmg});
                                 }
                             }
                         }
