@@ -4238,6 +4238,18 @@ function floralBrush(character) {
     let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     attack.isReaction = false;
+    const dendroReactionElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    if(dendroReactionElements.includes(supportingElement) || character.constellations >= 2){
+        let a1Attack = { Multiplier: 40/100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+        dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
+        a1Attack.isReaction = false;
+        dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
+        if(character.constellations >= 2){
+            dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
+            a1Attack.isReaction = true;
+            dmg += dmgCalc(a1Attack, character) * numberOfEnemies;
+        }
+    }
     dmg += dmgCalc(attack, character) * numberOfEnemies;
     return dmg;
 

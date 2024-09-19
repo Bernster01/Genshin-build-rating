@@ -1266,6 +1266,13 @@ function Simulation(character) {
                 Character.energyOffset -= 10;
             }
         }
+        case "Collei":
+            if (Character.constellations >= 1) {
+                if(role == "Support"){
+                    Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 20, Source: "C1" });
+                }
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1938,6 +1945,14 @@ function Simulation(character) {
                                 }
                                 totalDmg += dmg;
                                 dmgSources.other.push({ label: "C6 - Glimbright Shade", dmg: dmg });
+                            }
+                            break;
+                        case "Collei":
+                            if (character.constellations >= 6) {
+                                let cuileinAnbar = { Multiplier: 200 / 100, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
+                                let dmg = dmgCalc(cuileinAnbar, character);
+                                totalDmg += dmg;
+                                dmgSources.other.push({ label: "C6 - Cuilein Anbar", dmg: dmg });
                             }
                             break;
                     }
