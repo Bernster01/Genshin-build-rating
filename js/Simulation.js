@@ -226,6 +226,9 @@ async function findBestBuildLoop(baseChar, times) {
     let bestScore = 0;
     let startTime = Date.now();
     let currentCharacter = baseChar.name;
+    let latestBuildTime = Date.now();
+    let improvements = 0;
+    updateImprovements(improvements);
     for (let index = 0; index < times; index++) {
         // console.log(baseChar.name + " " + role + " Run " + index + " of " + times);
         if (endEarly)
@@ -267,7 +270,10 @@ async function findBestBuildLoop(baseChar, times) {
                 if (evalResult > 100) {
                     bestBuild[role][currentCharacter] = getBuild(deepClone(result), evalResult);
                     bestScore = evalResult;
-
+                    improvements++;
+                    updateImprovements(improvements);
+                    latestBuildTime = Date.now();
+                    
                 }
                 newCharacter = null;
                 //Test all 2 piece combos
@@ -294,6 +300,9 @@ async function findBestBuildLoop(baseChar, times) {
                     if (evalResult2 > 100) {
                         bestBuild[role][currentCharacter] = getBuild(deepClone(result), evalResult);
                         bestScore = evalResult2;
+                        improvements++;
+                        updateImprovements(improvements);
+                        latestBuildTime = Date.now();
                     }
                     newCharacter2 = null;
                     articatCombosTested.push(set + set2);
@@ -301,16 +310,45 @@ async function findBestBuildLoop(baseChar, times) {
             });
         });
         if (index % 1 == 0) {
+            const timeSinceLastBuildElement = document.getElementById("build_improvements_time");
+            timeSinceLastBuildElement.innerText = formatTime((Date.now() - latestBuildTime) / 1000);
             document.getElementById("currentSimRun").innerText = index;
             document.getElementById("percentDone").innerText = Math.floor(index / times * 100);
             document.getElementById("simProgressBar").style.width = Math.floor(index / times * 100) + "%";
-            document.getElementById("timeLeft").innerText = Math.floor((Date.now() - startTime) / index * (times - index) / 1000) + " seconds";
+            document.getElementById("timeLeft").innerText = formatTime(Math.floor((Date.now() - startTime) / index * (times - index) / 1000));
             document.getElementById("loadingPaimon").style.left = Math.floor(index / times * 100) + "%";
+            //
+          
             await delay(4);
         }
 
     }
+    
     return bestScore;
+}
+async function updateImprovements(number){
+    await delay(4);
+    const improvements = document.getElementById("build_improvements");
+    improvements.innerText = number;
+   
+
+}
+function formatTime(seconds) {
+    if(seconds <1){
+        return "< 1 second";
+    }
+    seconds = Math.floor(seconds);
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    let sec = seconds % 60;
+    let output = "";
+    if (hours > 0)
+        output += hours + " hours ";
+    if (minutes > 0)
+        output += minutes + " minutes ";
+    if (sec > 0)
+        output += sec + " seconds";
+    return output;
 }
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

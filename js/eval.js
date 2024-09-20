@@ -1,4 +1,4 @@
-let numberOfBuilds = 0;
+
 function EvalBuilds(userBuild, currentBestBuild, role) {
     let userScore = 0;
 
@@ -119,22 +119,22 @@ function supportEval(userBuild, currentBestBuild) {
     
 
     // console.log(avg_score, healer_score, buffer_score, shield_score, dps_score,userBuild.character.energyRecharge() < userBuild.character.energyOffset);
-    let userScore = avg_score;
-    if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
-        let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
-        if (percentMissing > .2) {
-            percentMissing = .2;
-        }
+    // let userScore = avg_score;
+    // if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
+    //     let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
+    //     if (percentMissing > .2) {
+    //         percentMissing = .2;
+    //     }
         
-        userScore = Math.floor(userScore * (1 - (percentMissing)));
+    //     userScore = Math.floor(userScore * (1 - (percentMissing)));
        
-    }
-    if(userScore >100){
-        numberOfBuilds++;
-        console.log("Found a better build: ", numberOfBuilds);
-        console.log(newWeights);
-        // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
-     }
+    // }
+    // if(userScore >100){
+    //     numberOfBuilds++;
+    //     console.log("Found a better build: ", numberOfBuilds);
+    //     console.log(newWeights);
+    //     // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
+    //  }
     return avg_score;
     // switch (userBuild.character.supportType) {
     //     case "Healer":

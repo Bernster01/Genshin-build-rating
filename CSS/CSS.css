@@ -1336,9 +1336,9 @@ span {
 }
 
 .sim-running-box {
-	width: 100%;
+	width: 110%;
 	min-width: 600px;
-	height: 30%;
+	height: 32%;
 	background-color: var(--tertiary-color);
 	border: var(--main-color) solid 0.2rem;
 	border-radius: 1rem;
