@@ -884,7 +884,7 @@ function trailOfTheQilin(Character) {
     return dmg;
 }
 
-function guideToAtferlife(Character) {
+function guideToAtferlife(Character, shouldReturnMultiplier = false) {
     let skillMultiplier = 0;
     let atkIncrease = 0;
     switch (Character.elementalSkill.Level) {
@@ -941,18 +941,22 @@ function guideToAtferlife(Character) {
             atkIncrease = 7.15 / 100;
             break;
     }
+    if(shouldReturnMultiplier){
+        return skillMultiplier;
+    }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let atkIncreaseRoof = Character.baseattack * 4;
     atkIncrease *= Character.HP();
     if (atkIncrease > atkIncreaseRoof)
         atkIncrease = atkIncreaseRoof;
     Character.currentBuffs.push({ Type: "ATKflat", Value: atkIncrease });
+   
     let dmg = dmgCalc(attack, Character) * numberOfEnemies * 2;
     Character.chargedAttack.Element = "PyroDMGBonus";
     Character.chargedAttack.isReaction = true;
     Character.normalAttack1.Element = "PyroDMGBonus";
     Character.normalAttack1.isReaction = true;
-
+    
     return dmg;
 }
 

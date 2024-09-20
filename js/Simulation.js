@@ -1382,7 +1382,7 @@ function Simulation(character) {
             }
             break;
         case "Freminet":
-           
+
             if (Character.constellations >= 2) {
                 console.log(Character.energyOffset);
                 Character.energyOffset -= 22.5;
@@ -1400,23 +1400,23 @@ function Simulation(character) {
             }
             break;
         case "Furina":
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 40;
             }
-            if(Character.constellations >= 6){
-                Character.sequence["Support"].push("N1","N2","N3","N1","N2","N3");
+            if (Character.constellations >= 6) {
+                Character.sequence["Support"].push("N1", "N2", "N3", "N1", "N2", "N3");
             }
             break;
         case "Gaming":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type:"ATK%",Value:20,Source:"C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "C2" });
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 30;
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"CritRate",Value:20,Source:"C6", for:"PlungeAttack"});
-                Character.currentBuffs.push({Type:"CritDMG",Value:40,Source:"C6", for:"PlungeAttack"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "C6", for: "PlungeAttack" });
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 40, Source: "C6", for: "PlungeAttack" });
             }
             break;
         case "Ganyu":
@@ -1424,32 +1424,32 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "ResShred", Value: 15, Source: "C1", Element: "CryoDMGBonus" });
                 Character.energyOffset -= 15;
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"AddativeBonusDMG",Value:25,Source:"C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 25, Source: "C4" });
             }
-            if(Character.constellations >= 6){
-                Character.sequence["Dps"] = ["E","C","E","C","Q","C","C","C","C","C","C"]
-                Character.sequence["Support"] = ["E","C","E","C","Q"]
+            if (Character.constellations >= 6) {
+                Character.sequence["Dps"] = ["E", "C", "E", "C", "Q", "C", "C", "C", "C", "C", "C"]
+                Character.sequence["Support"] = ["E", "C", "E", "C", "Q"]
             }
             break;
         case "Gorou":
-            if(Character.constellations >= 4){
-                if(partyMemberElements.includes("GeoCharacter")){
-                    let gorou_heal = (50/100)*Character.DEF() *6;
+            if (Character.constellations >= 4) {
+                if (partyMemberElements.includes("GeoCharacter")) {
+                    let gorou_heal = (50 / 100) * Character.DEF() * 6;
                     heal += gorou_heal;
                 }
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 let numberOfGeo = 0;
                 partyMemberElements.forEach(element => {
-                    if(element == "GeoCharacter")
+                    if (element == "GeoCharacter")
                         numberOfGeo++;
                 });
                 let buffValue = 0;
-                switch(numberOfGeo){
+                switch (numberOfGeo) {
                     case 1:
                         buffValue = 10;
                         break;
@@ -1460,8 +1460,16 @@ function Simulation(character) {
                         buffValue = 40;
                         break;
                 }
-                Character.currentBuffs.push({Type:"GeoDMGBonus",Value:buffValue,Source:"C6"});
+                Character.currentBuffs.push({ Type: "GeoDMGBonus", Value: buffValue, Source: "C6" });
                 atkBuff += buffValue;
+            }
+            break;
+        case "Hu Tao":
+            if (Character.constellations >= 1) {
+                Character.sequence["Dps"].push("N1", "C", "N1", "C", "N1", "C");
+            }
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 100, Source: "C2" });
             }
             break;
     }
@@ -3024,11 +3032,18 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Furina":
-            if(character.constellations >= 6 && attackAction.type == "NormalAttack"){
-                
+            if (character.constellations >= 6 && attackAction.type == "NormalAttack") {
+
                 flatDamage += character.HP() * (18 / 100);
-                if(role == "Dps"){
+                if (role == "Dps") {
                     flatDamage += character.HP() * (25 / 100);
+                }
+            }
+            break;
+        case "Hu Tao":
+            if(character.constellations>=2){
+                if(attackAction.type=="ElementalSkill"){
+                    flatDamage+=character.HP()*(0.10/100);
                 }
             }
             break;

@@ -934,7 +934,10 @@ function spiritSoother(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if(Character.constellations>=2){
+        let blood_blossom = {Multiplier:Character.elementalSkill.Skill(Character,true),Element:"PyroDMGBonus",Scaling:"ATK",isReaction:true,type:"ElementalSkill"};
+        dmg += dmgCalc(blood_blossom, Character) * numberOfEnemies *2 ;
+    }
     return dmg;
 }
 
@@ -2958,7 +2961,7 @@ function forwardUntoVictory(Character) {
 
     }
 
-
+    
     return { dmg: dmg, atkBuff: defense };
 }
 

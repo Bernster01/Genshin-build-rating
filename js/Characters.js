@@ -11156,8 +11156,8 @@ const Hu_Tao = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "Q"],
-        ["Support"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "Q"],
+        ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C","N1", "C","N1", "C", "Q"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Polearm",
     normalAttack1: {
