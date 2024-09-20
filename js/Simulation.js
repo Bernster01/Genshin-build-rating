@@ -970,6 +970,7 @@ function applyBonuses(character) {
     if (partyHasDeepwoodMemories) {
         character.currentBuffs.push({ Type: "ResShred", Value: 30, Element: "DendroDMGBonus" });
     }
+  
 }
 function getSetBonus(array, character) {
     let setsDone = [];
@@ -1175,6 +1176,9 @@ function resetVariables() {
     archaicPetraBuff = false;
     obsidianCodexBuff = false;
     obsidianCodexBuff2 = false;
+    if(document.getElementById("partyGivesShield").checked){
+        hasShield = true;
+    }
 }
 function Simulation(character) {
 
@@ -1485,6 +1489,23 @@ function Simulation(character) {
                 let health = 14000;
                 let extraShield = 14000*(1-0.35);
                 shield += extraShield;
+            }
+            break;
+        case "Kachina":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 10;
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"DEF%", Value:16, Source:"C4"});
+                atkBuff += 16;
+            }
+            if(Character.constellations >= 6){
+                if(hasShield){
+                    let c6Attack = {Multiplier: 200/100, Element: "GeoDMGBonus", isReaction: false, Scaling: "DEF", type: "Special"};
+                    let c6Dmg = dmgCalc(c6Attack, Character);
+                    totalDmg += c6Dmg;
+                    dmgSources.other.push({label:"C6", dmg:c6Dmg});
+                }
             }
     }
     Character.sequence[role].forEach(action => {
