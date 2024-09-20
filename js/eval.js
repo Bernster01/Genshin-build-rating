@@ -48,54 +48,93 @@ function supportEval(userBuild, currentBestBuild) {
     if (dps_score > 200) {
         dps_score = 200;
     }
-    // console.log(healer_score, buffer_score, shield_score);
+    let healer_weight = 0;
+    let buffer_weight = 0;
+    let shield_weight = 0;
+    let dps_weight = 0;
+    //Main weight is 50% of the score
     switch (userBuild.character.supportType) {
         case "Healer":
-            healer_score *= 8;
+            healer_weight += 0.5;
             break;
         case "Buffer":
-            buffer_score *= 8;
+            buffer_weight += 0.5;
             break;
         case "Shield":
-            shield_score *= 8;
+            shield_weight += 0.5;
             break;
         default:
-            dps_score *= 8;
+            dps_weight += 0.5;
             break;
+    
     }
-
+    //Sub weight1 is 20% of the score
     switch (userBuild.character.supportType2) {
         case "Healer":
-            healer_score *= 4;
+            healer_weight += 0.2;
             break;
         case "Buffer":
-            buffer_score *= 4;
+            buffer_weight += 0.2;
             break;
         case "Shield":
-            shield_score *= 4;
+            shield_weight += 0.2;
             break;
         default:
-            dps_score *= 4;
+            dps_weight += 0.2;
             break;
     }
-    let total_score = healer_score + buffer_score + shield_score + dps_score;
-    let avg_score = Math.floor(total_score / 14);
+    //Dps weight is 10% of the score
+    dps_weight += 0.10;
+    //Remaining weight is 20% of the score
+    let remaining_weight = 1 - (healer_weight + buffer_weight + shield_weight + dps_weight);
+    let divider = 0;
+    const weights = [healer_weight, buffer_weight, shield_weight, dps_weight];
+    for (let i = 0; i < weights.length; i++) {
+        if (weights[i] == 0) {
+            divider++;
+        }
+    }
+    if(healer_weight == 0){
+        healer_weight = remaining_weight/divider;
+    }
+    if(buffer_weight == 0){
+        buffer_weight = remaining_weight/divider;
+    }
+    if(shield_weight == 0){
+        shield_weight = remaining_weight/divider;
+    }
+    if(dps_weight == 0){
+        dps_weight = remaining_weight/divider;
+    }
+    healer_weight = Math.round(healer_weight * 1000)/1000;
+    buffer_weight = Math.round(buffer_weight * 1000)/1000;
+    shield_weight = Math.round(shield_weight * 1000)/1000;
+    dps_weight = Math.round(dps_weight * 1000)/1000;
+    const newWeights = [healer_weight, buffer_weight, shield_weight, dps_weight];
+    let avg_score = Math.floor((healer_score * healer_weight) + (buffer_score * buffer_weight) + (shield_score * shield_weight) + (dps_score * dps_weight));
+
+  
+    
+
+    
+
     // console.log(avg_score, healer_score, buffer_score, shield_score, dps_score,userBuild.character.energyRecharge() < userBuild.character.energyOffset);
-    // let userScore = avg_score;
-    // if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
-    //     let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
-    //     if (percentMissing > .2) {
-    //         percentMissing = .2;
-    //     }
+    let userScore = avg_score;
+    if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
+        let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
+        if (percentMissing > .2) {
+            percentMissing = .2;
+        }
         
-    //     userScore = Math.floor(userScore * (1 - (percentMissing)));
+        userScore = Math.floor(userScore * (1 - (percentMissing)));
        
-    // }
-    // if(userScore >100){
-    //     numberOfBuilds++;
-    //     // console.log("Found a better build: ", numberOfBuilds);
-    //     // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
-    //  }
+    }
+    if(userScore >100){
+        numberOfBuilds++;
+        console.log("Found a better build: ", numberOfBuilds);
+        console.log(newWeights);
+        // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
+     }
     return avg_score;
     // switch (userBuild.character.supportType) {
     //     case "Healer":
