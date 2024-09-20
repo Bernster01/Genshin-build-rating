@@ -1435,6 +1435,35 @@ function Simulation(character) {
                 Character.sequence["Support"] = ["E","C","E","C","Q"]
             }
             break;
+        case "Gorou":
+            if(Character.constellations >= 4){
+                if(partyMemberElements.includes("GeoCharacter")){
+                    let gorou_heal = (50/100)*Character.DEF() *6;
+                    heal += gorou_heal;
+                }
+            }
+            if(Character.constellations >= 6){
+                let numberOfGeo = 0;
+                partyMemberElements.forEach(element => {
+                    if(element == "GeoCharacter")
+                        numberOfGeo++;
+                });
+                let buffValue = 0;
+                switch(numberOfGeo){
+                    case 1:
+                        buffValue = 10;
+                        break;
+                    case 2:
+                        buffValue = 20;
+                        break;
+                    case 3:
+                        buffValue = 40;
+                        break;
+                }
+                Character.currentBuffs.push({Type:"GeoDMGBonus",Value:buffValue,Source:"C6"});
+                atkBuff += buffValue;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
