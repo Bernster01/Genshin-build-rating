@@ -1472,6 +1472,20 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "CritRate", Value: 100, Source: "C2" });
             }
             break;
+        case "Jean":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type:"ATK%", Value:15, Source:"C2"});
+                atkBuff += 15;
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"ResShred", Value:40, Element:"AnemoDMGBonus", Source:"C4"});
+                atkBuff += 40;
+            }
+            if (Character.constellations >= 6) {
+                let health = 14000;
+                let extraShield = 14000*(1-0.35);
+                shield += extraShield;
+            }
     }
     Character.sequence[role].forEach(action => {
 

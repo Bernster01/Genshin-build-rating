@@ -13,8 +13,8 @@ function EvalBuilds(userBuild, currentBestBuild, role) {
     //Check if userbuild has energyrecharge for the offset deduct % of score depending on how much is missing
     if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
         let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
-        if (percentMissing > .2) {
-            percentMissing = .2;
+        if (percentMissing > .4) {
+            percentMissing = .4;
         }
         userScore = Math.floor(userScore * (1 - (percentMissing)));
     }
@@ -81,21 +81,21 @@ function supportEval(userBuild, currentBestBuild) {
     let total_score = healer_score + buffer_score + shield_score + dps_score;
     let avg_score = Math.floor(total_score / 14);
     // console.log(avg_score, healer_score, buffer_score, shield_score, dps_score,userBuild.character.energyRecharge() < userBuild.character.energyOffset);
-    let userScore = avg_score;
-    if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
-        let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
-        if (percentMissing > .2) {
-            percentMissing = .2;
-        }
+    // let userScore = avg_score;
+    // if (userBuild.character.energyRecharge() < userBuild.character.energyOffset) {
+    //     let percentMissing = userBuild.character.energyRecharge() / userBuild.character.energyOffset;
+    //     if (percentMissing > .2) {
+    //         percentMissing = .2;
+    //     }
         
-        userScore = Math.floor(userScore * (1 - (percentMissing)));
+    //     userScore = Math.floor(userScore * (1 - (percentMissing)));
        
-    }
-    if(userScore >100){
-        numberOfBuilds++;
-        console.log("Found a better build: ", numberOfBuilds);
-        // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
-     }
+    // }
+    // if(userScore >100){
+    //     numberOfBuilds++;
+    //     // console.log("Found a better build: ", numberOfBuilds);
+    //     // console.log("Healer: ", healer_score, "Buffer: ", buffer_score, "Shield: ", shield_score, "Dps: ", dps_score);
+    //  }
     return avg_score;
     // switch (userBuild.character.supportType) {
     //     case "Healer":
