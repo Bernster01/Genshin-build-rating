@@ -1604,8 +1604,17 @@ function Simulation(character) {
             }
             break;
         case "Kuki":
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ElementalMastery", Value: 150, Source: "C6" });
+            }
+            break;
+        case "Layla":
+            if (Character.constellations >= 2) {
+                Character.energyOffset -= 30;
+            }
             if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"ElementalMastery", Value:150, Source:"C6"});
+                Character.currentBuffs.push({Type:"ElementalSkill", Value:40, Source:"C6"});
+                Character.currentBuffs.push({Type:"ElementalBurst", Value:40, Source:"C6"});
             }
             break;
     }
@@ -2845,12 +2854,18 @@ function Simulation(character) {
             }
             break;
         case "Kuki":
-            if(Character.constellations >=4){
+            if (Character.constellations >= 4) {
                 let extraAttack = { Multiplier: 9.7 / 100, Element: "ElectroDMGBonus", Scaling: "HP", type: "ElementalSkill", isReaction: true, Source: "Kuki" };
                 let AdditonalDMG_Kuki = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
                 totalDmg += AdditonalDMG_Kuki;
                 dmgSources.other.push({ dmg: AdditonalDMG_Kuki, label: "C4" });
             }
+            break;
+        case "Layla":
+            if(Character.constellations >= 4){
+                atkBuff += Character.HP() * (5 / 100);
+            }
+            break;
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);

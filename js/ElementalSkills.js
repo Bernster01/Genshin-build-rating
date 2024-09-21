@@ -5760,6 +5760,9 @@ function nightsofFormalFocus(character) {
             dmg += dmgCalc(shootingStar, character);
         }
     }
+    if(character.constellations >=1){
+        shield *=1.2;
+    }
     return { dmg: dmg, shield: shield };
 }
 function allSchemestoKnow(character) {

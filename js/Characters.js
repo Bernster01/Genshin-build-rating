@@ -14587,7 +14587,7 @@ const Kuki = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 165,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {
@@ -14950,7 +14950,7 @@ const Layla = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 180,
     supportType: "Shield",
     supportType2: "Sub-dps",
     sequence: {
