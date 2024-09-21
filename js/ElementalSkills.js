@@ -1307,13 +1307,13 @@ function jumpyDumpty(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    if(Character.constellations >= 2){
+    if (Character.constellations >= 2) {
         let has = false;
         Character.currentBuffs.forEach(buff => {
-            if(buff.Source == "C2")
+            if (buff.Source == "C2")
                 has = true;
         });
-        if(!has)
+        if (!has)
             Character.currentBuffs.push({ Type: "defReduction", Value: 23, Source: "C2" });
     }
     attack.isReaction = false;
@@ -3289,7 +3289,7 @@ function tenguStormcall(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    if(Character.constellations >= 2){
+    if (Character.constellations >= 2) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies * 0.3;
     }
     let buff = skillMultiplier2 * Character.baseattack;
@@ -5454,11 +5454,11 @@ function sanctifyingRing(character) {
         grassRingofSancitifactionHealing += ((75 / 100) * character.EM());
     }
     let extraAttacks = 0;
-    if(character.constellations >= 2){
+    if (character.constellations >= 2) {
         extraAttacks = 2;
     }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-    for (let i = 0; i < 8+extraAttacks; i++) {
+    for (let i = 0; i < 8 + extraAttacks; i++) {
         if (i % 2 == 0) {
             grassRingofSancitifaction.isReaction = true;
         }
@@ -5468,7 +5468,7 @@ function sanctifyingRing(character) {
         dmg += dmgCalc(grassRingofSancitifaction, character) * numberOfEnemies;
     }
     healingHasOccured(character);
-    return { dmg: dmg, healing: grassRingofSancitifactionHealing*(8+extraAttacks) };
+    return { dmg: dmg, healing: grassRingofSancitifactionHealing * (8 + extraAttacks) };
 }
 
 function bestialAscent(character) {
@@ -5760,8 +5760,8 @@ function nightsofFormalFocus(character) {
             dmg += dmgCalc(shootingStar, character);
         }
     }
-    if(character.constellations >=1){
-        shield *=1.2;
+    if (character.constellations >= 1) {
+        shield *= 1.2;
     }
     return { dmg: dmg, shield: shield };
 }
@@ -6009,6 +6009,25 @@ function enigmaticFeint(character) {
     }
     let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
+    if (character.constellations >= 6) {
+        let hasC6buff = false;
+        for (buff of character.currentBuffs) {
+            if (buff.Source == "C6") {
+                hasC6buff = true;
+            }
+        }
+        if (!hasC6buff) {
+            character.normalAttack1.Element = "AnemoDMGBonus";
+            character.normalAttack2.Element = "AnemoDMGBonus";
+            character.normalAttack3.Element = "AnemoDMGBonus";
+            character.chargedAttack.Element = "AnemoDMGBonus";
+            character.normalAttack1.isReaction = true;
+            character.chargedAttack.isReaction = true;
+            character.currentBuffs.push({ Type: "AnemoDMGBonus", Value: 20, Source: "C6" });
+        }
+
+
+    }
     return dmg;
 }
 

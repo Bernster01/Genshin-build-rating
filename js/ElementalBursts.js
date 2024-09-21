@@ -5659,6 +5659,10 @@ function magicTrickAstonishingShift(character) {
     let vividShot = { Multiplier: vividShotDMG, Element: supportingElement + "DMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     let supportedElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    let c2 = false;
+    if (character.constellations >= 2) {
+        c2 = true
+    }
     for (let i = 0; i < 11; i++) {
         if (i % 3 == 0) {
             boogleCatBox.isReaction = true;
@@ -5671,6 +5675,9 @@ function magicTrickAstonishingShift(character) {
             if (supportedElements.includes(supportingElement)) {
                 vividShot.Element = supportingElement + "DMGBonus";
                 dmg += dmgCalc(vividShot, character) * numberOfEnemies;
+                if(c2){
+                    dmg += dmgCalc(vividShot, character) * numberOfEnemies;
+                }
             }
         }
         dmg += dmgCalc(boogleCatBox, character) * numberOfEnemies;

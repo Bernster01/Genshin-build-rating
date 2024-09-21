@@ -1612,14 +1612,19 @@ function Simulation(character) {
             if (Character.constellations >= 2) {
                 Character.energyOffset -= 30;
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"ElementalSkill", Value:40, Source:"C6"});
-                Character.currentBuffs.push({Type:"ElementalBurst", Value:40, Source:"C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 40, Source: "C6" });
+                Character.currentBuffs.push({ Type: "ElementalBurst", Value: 40, Source: "C6" });
             }
             break;
         case "Lisa":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
+            }
+            break;
+        case "Lynette":
+            if (Character.constellations >= 4) {
+                Character.sequence[role].push("E");
             }
             break;
     }
@@ -2867,7 +2872,7 @@ function Simulation(character) {
             }
             break;
         case "Layla":
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 atkBuff += Character.HP() * (5 / 100);
             }
             break;
@@ -4217,50 +4222,50 @@ function vaporizeTriggerd(character) {
     }
 }
 
-function kleeC1Test(times){
+function kleeC1Test(times) {
     let attacks = 12;
     let total = 0;
-    for(let i = 0; i < times; i++){
-       let currentChance = 0;
-         for(let j = 0; j < attacks; j++){
-              //Roll for extra attack
-                let roll = Math.floor(Math.random() * 100);
-                if(roll < currentChance){
-                    total++;
-                    currentChance = 0;
-                    continue;
-                }
-                currentChance += 8;
-         }
+    for (let i = 0; i < times; i++) {
+        let currentChance = 0;
+        for (let j = 0; j < attacks; j++) {
+            //Roll for extra attack
+            let roll = Math.floor(Math.random() * 100);
+            if (roll < currentChance) {
+                total++;
+                currentChance = 0;
+                continue;
+            }
+            currentChance += 8;
+        }
     }
-    console.log(total/times);
+    console.log(total / times);
 }
-function liasC4test(times){
+function liasC4test(times) {
     let attacks = 29
     let total = 0
-    for(let i = 0; i < times; i++){
-        for(let j = 0; j < attacks; j++){
+    for (let i = 0; i < times; i++) {
+        for (let j = 0; j < attacks; j++) {
             let random = Math.floor(Math.random() * 100);
-            if(j==0){
-                if(random < 50){
+            if (j == 0) {
+                if (random < 50) {
                     total++;
                 }
-                else if (random >= 50){
+                else if (random >= 50) {
                     total += 2;
                 }
                 continue;
             }
-            
-            if(random <= 25){
+
+            if (random <= 25) {
                 total++;
             }
-            else if (random <= 75 && random > 25){
+            else if (random <= 75 && random > 25) {
                 total += 2;
             }
-            else if (random <= 100 && random > 75){
+            else if (random <= 100 && random > 75) {
                 total += 3;
             }
         }
     }
-    console.log((total/times)-attacks);
+    console.log((total / times) - attacks);
 }
