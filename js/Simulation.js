@@ -1617,6 +1617,11 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type:"ElementalBurst", Value:40, Source:"C6"});
             }
             break;
+        case "Lisa":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 10;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -4212,21 +4217,50 @@ function vaporizeTriggerd(character) {
     }
 }
 
-// function kleeC1Test(times){
-//     let attacks = 12;
-//     let total = 0;
-//     for(let i = 0; i < times; i++){
-//        let currentChance = 0;
-//          for(let j = 0; j < attacks; j++){
-//               //Roll for extra attack
-//                 let roll = Math.floor(Math.random() * 100);
-//                 if(roll < currentChance){
-//                     total++;
-//                     currentChance = 0;
-//                     continue;
-//                 }
-//                 currentChance += 8;
-//          }
-//     }
-//     console.log(total/times);
-// }
+function kleeC1Test(times){
+    let attacks = 12;
+    let total = 0;
+    for(let i = 0; i < times; i++){
+       let currentChance = 0;
+         for(let j = 0; j < attacks; j++){
+              //Roll for extra attack
+                let roll = Math.floor(Math.random() * 100);
+                if(roll < currentChance){
+                    total++;
+                    currentChance = 0;
+                    continue;
+                }
+                currentChance += 8;
+         }
+    }
+    console.log(total/times);
+}
+function liasC4test(times){
+    let attacks = 29
+    let total = 0
+    for(let i = 0; i < times; i++){
+        for(let j = 0; j < attacks; j++){
+            let random = Math.floor(Math.random() * 100);
+            if(j==0){
+                if(random < 50){
+                    total++;
+                }
+                else if (random >= 50){
+                    total += 2;
+                }
+                continue;
+            }
+            
+            if(random <= 25){
+                total++;
+            }
+            else if (random <= 75 && random > 25){
+                total += 2;
+            }
+            else if (random <= 100 && random > 75){
+                total += 3;
+            }
+        }
+    }
+    console.log((total/times)-attacks);
+}

@@ -1435,10 +1435,22 @@ function lightningRose(Character) {
             Multiplier = 77.69 / 100;
             break;
     }
-    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let attack = { Multiplier: 10/100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    attack.Multiplier = Multiplier;
+    
     Character.currentBuffs.push({ Type: "defReduction", Value: 15 });
-    dmg += dmgCalc(attack, Character) * 29;
+    let extraAttacks = 0;
+    if(Character.constellations >= 4){
+        extraAttacks = 28;
+    }
+    for(let i = 0; i < 29+extraAttacks; i++){
+        attack.isReaction = false;
+        if(i % 3 == 0){
+            attack.isReaction = true;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 }
 
