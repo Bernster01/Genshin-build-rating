@@ -5269,6 +5269,9 @@ function paintedDome(character) {
     character.normalAttack1.Element = "DendroDMGBonus";
     character.normalAttack2.Element = "DendroDMGBonus";
     character.normalAttack3.Element = "DendroDMGBonus";
+    if(character.constellations >= 2){
+        character.currentBuffs.push({ Type: "ATK%", Value: 15, for: "NormalAttack" });
+    }
     return dmg;
 }
 

@@ -1569,8 +1569,13 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "CritRate", Value: 15, Source: "C1", for: "NormalAttack" });
                 Character.currentBuffs.push({ Type: "CritRate", Value: 15, Source: "C1", for: "ChargedAttack" });
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.energyOffset -= 25;
+            }
+            break;
+        case "Kaveh":
+            if (Character.constellations >= 1) {
+                Character.advancedstats.healingBonus += 25;
             }
             break;
     }
@@ -2764,6 +2769,17 @@ function Simulation(character) {
                 shield += extraShield_Baizhu;
             }
             break;
+        case "Kaveh":
+            if (Character.constellations >= 6) {
+                if (role == "Dps") {
+                    let extraAttack = { Multiplier: 61.8 / 100, Element: "DendroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Kaveh" };
+                    let AdditonalDMG_Kaveh = dmgCalc(extraAttack, Character) * numberOfEnemies * 3;
+                    totalDmg += AdditonalDMG_Kaveh;
+                    dmgSources.other.push({ dmg: AdditonalDMG_Kaveh, label: "C6" });
+                }
+
+            }
+            break;
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
@@ -3687,6 +3703,13 @@ function burning(em, lvl, element, character, burningBonus) {
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
     const bloomEM = 1 + (16 * (em / (em + 1200))) + bloomBonus;
+    switch (character.name) {
+        case "Kaveh":
+            if (character.constellations >= 4) {
+                bloomBonus += 60;
+            }
+            break;
+    }
     hasTriggerdABloomTypeReaction(character);
     return (bloomBaseDmg * bloomEM) * resCalc(character, element) * 2 * 2;//2 hits 2 cores
 }
