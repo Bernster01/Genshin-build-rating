@@ -1,3 +1,5 @@
+
+
 function soumetsu(Character) {
     let Multiplier = 0;
     let Multiplier2 = 0;
@@ -5275,7 +5277,7 @@ function paintedDome(character) {
     return dmg;
 }
 
-function secretArtSurpriseDispatch(character) {
+function secretArtSurpriseDispatch(character, shouldGiveMultiplier = false) {
     let skillDMG = 0;
     let catGrassCardamomExplosioinDMG = 0;
     switch (character.elementalBurst.Level) {
@@ -5332,6 +5334,9 @@ function secretArtSurpriseDispatch(character) {
             catGrassCardamomExplosioinDMG = 75.73 / 100;
             break;
     }
+    if(shouldGiveMultiplier){
+        return catGrassCardamomExplosioinDMG;
+    }
     let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: catGrassCardamomExplosioinDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     for (buff of character.currentBuffs) {
@@ -5341,7 +5346,13 @@ function secretArtSurpriseDispatch(character) {
         }
     }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    for (let i = 0; i < 6; i++) {
+    let extraCats = 0;
+    if(character.constellations >= 1){
+        extraCats += Math.floor(character.HP()/8000);
+        if(extraCats>4)
+            extraCats = 4;
+    }
+    for (let i = 0; i < 6+extraCats; i++) {
         if (i == 0 || i % 3 == 0) {
             attack2.isReaction = true;
         }
