@@ -1627,6 +1627,14 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
+        case "Lyney":
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 60, Source: "C2" });
+            }
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "PyroDMGBonus", Source: "C4" });
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1800,8 +1808,27 @@ function Simulation(character) {
                                 }
                             }
                             let extraDmg = dmgCalc(extraAttack, Character);
+                            if (Character.constellations >= 1) {
+                                extraDmg = extraDmg * 2;
+                            }
+                            
                             totalDmg += extraDmg;
                             dmgSources.c += extraDmg;
+                            if(Character.constellations >= 6){
+                                let c6Attack = { Multiplier: Character.chargedAttack.extraMultiplier(2)*0.8, Element: "PyroDMGBonus", isReaction: false, Scaling: "ATK", type: "ChargedAttack" };
+                                let c6Dmg = dmgCalc(c6Attack, Character);
+                                totalDmg += c6Dmg;
+                                let hasC6Source = false;
+                                dmgSources.other.forEach(source => {
+                                    if(source.Source == "C6"){
+                                        hasC6Source = true;
+                                        source.dmg += c6Dmg;
+                                    }
+                                });
+                                if(!hasC6Source){
+                                    dmgSources.other.push({label:"C6",dmg:c6Dmg,Source:"C6"});
+                                }
+                            }
                             if (hatBuff != undefined) {
                                 Character.currentBuffs.pop(hatBuff);
                             }
