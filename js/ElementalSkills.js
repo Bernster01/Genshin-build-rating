@@ -5453,8 +5453,12 @@ function sanctifyingRing(character) {
         character.currentBuffs.push({ Type: "FlatDMG", Value: (25 / 100) * character.EM(), Source: "Heart's Repose", for: "ElementalSkill" });
         grassRingofSancitifactionHealing += ((75 / 100) * character.EM());
     }
+    let extraAttacks = 0;
+    if(character.constellations >= 2){
+        extraAttacks = 2;
+    }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8+extraAttacks; i++) {
         if (i % 2 == 0) {
             grassRingofSancitifaction.isReaction = true;
         }
@@ -5464,7 +5468,7 @@ function sanctifyingRing(character) {
         dmg += dmgCalc(grassRingofSancitifaction, character) * numberOfEnemies;
     }
     healingHasOccured(character);
-    return { dmg: dmg, healing: grassRingofSancitifactionHealing };
+    return { dmg: dmg, healing: grassRingofSancitifactionHealing*(8+extraAttacks) };
 }
 
 function bestialAscent(character) {

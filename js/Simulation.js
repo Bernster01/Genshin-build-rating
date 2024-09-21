@@ -1603,6 +1603,11 @@ function Simulation(character) {
                 atkBuff += 12;
             }
             break;
+        case "Kuki":
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"ElementalMastery", Value:150, Source:"C6"});
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -2839,6 +2844,13 @@ function Simulation(character) {
                 atkBuff += 60;
             }
             break;
+        case "Kuki":
+            if(Character.constellations >=4){
+                let extraAttack = { Multiplier: 9.7 / 100, Element: "ElectroDMGBonus", Scaling: "HP", type: "ElementalSkill", isReaction: true, Source: "Kuki" };
+                let AdditonalDMG_Kuki = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                totalDmg += AdditonalDMG_Kuki;
+                dmgSources.other.push({ dmg: AdditonalDMG_Kuki, label: "C4" });
+            }
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
