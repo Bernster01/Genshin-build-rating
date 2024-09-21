@@ -1578,6 +1578,25 @@ function Simulation(character) {
                 Character.advancedstats.healingBonus += 25;
             }
             break;
+        case "Keqing":
+            if (Character.constellations >= 1) {
+                let extraAttack = { Multiplier: 50 / 100, Element: "ElectroDMGBonus", isReaction: false, Scaling: "ATK", type: "ElementalSkill" };
+                let extraDmg = dmgCalc(extraAttack, Character)*numberOfEnemies*2;
+                totalDmg += extraDmg;
+                dmgSources.e += extraDmg;
+            }
+            if(Character.constellations >= 2){
+                Character.energyOffset -= 15;
+            }
+            if(Character.constellations >= 4){
+                if(supportingElement!= "noElement"){
+                    Character.currentBuffs.push({Type:"ATK%", Value:25, Source:"C4"});
+                }
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"ElectroDMGBonus", Value:24, Source:"C6"});
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
