@@ -1330,7 +1330,7 @@ function baneOfAllEvil(Character) {
     return 0;
 }
 
-function sparksnSplash(Character) {
+function sparksnSplash(Character, shouldReturnMultiplier = false) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
@@ -1372,6 +1372,9 @@ function sparksnSplash(Character) {
         case 13:
             Multiplier = 90.61 / 100;
             break;
+    }
+    if(shouldReturnMultiplier){
+        return Multiplier;
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;

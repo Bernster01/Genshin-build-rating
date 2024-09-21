@@ -2813,6 +2813,27 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Kirara, label: "C4" });
             }
             break;
+        case "Klee":
+            if (Character.constellations >= 1) {
+                if (role == "Dps") {
+                    let extraAttack = { Multiplier: (120 / 100) * Character.elementalBurst.Skill(Character, true), Element: "PyroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Klee" };
+                    let AdditonalDMG_Klee = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                    totalDmg += AdditonalDMG_Klee;
+                    dmgSources.other.push({ dmg: AdditonalDMG_Klee, label: "C1" });
+                }
+            }
+            if (Character.constellations >= 4) {
+                if (role == "Support") {
+                    let extraAttack = { Multiplier: 555 / 100, Element: "PyroDMGBonus", Scaling: "ATK", type: "special", isReaction: true, Source: "Klee" };
+                    let AdditonalDMG_Klee = dmgCalc(extraAttack, Character) * numberOfEnemies;
+                    totalDmg += AdditonalDMG_Klee;
+                    dmgSources.other.push({ dmg: AdditonalDMG_Klee, label: "C4" });
+                }
+            }
+            if (Character.constellations >= 6) {
+                atkBuff += 10;
+            }
+            break;
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
@@ -4158,3 +4179,22 @@ function vaporizeTriggerd(character) {
             }
     }
 }
+
+// function kleeC1Test(times){
+//     let attacks = 12;
+//     let total = 0;
+//     for(let i = 0; i < times; i++){
+//        let currentChance = 0;
+//          for(let j = 0; j < attacks; j++){
+//               //Roll for extra attack
+//                 let roll = Math.floor(Math.random() * 100);
+//                 if(roll < currentChance){
+//                     total++;
+//                     currentChance = 0;
+//                     continue;
+//                 }
+//                 currentChance += 8;
+//          }
+//     }
+//     console.log(total/times);
+// }

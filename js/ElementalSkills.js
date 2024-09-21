@@ -1307,6 +1307,15 @@ function jumpyDumpty(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    if(Character.constellations >= 2){
+        let has = false;
+        Character.currentBuffs.forEach(buff => {
+            if(buff.Source == "C2")
+                has = true;
+        });
+        if(!has)
+            Character.currentBuffs.push({ Type: "defReduction", Value: 23, Source: "C2" });
+    }
     attack.isReaction = false;
     dmg += dmgCalc(attack, Character) * numberOfEnemies;
     dmg += dmgCalc(attack, Character) * numberOfEnemies;
