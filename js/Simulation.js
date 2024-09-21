@@ -2834,6 +2834,11 @@ function Simulation(character) {
                 atkBuff += 10;
             }
             break;
+        case "Sara":
+            if (Character.constellations >= 6) {
+                atkBuff += 60;
+            }
+            break;
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);

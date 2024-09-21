@@ -3289,9 +3289,12 @@ function tenguStormcall(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    if(Character.constellations >= 2){
+        dmg += dmgCalc(attack, Character) * numberOfEnemies * 0.3;
+    }
     let buff = skillMultiplier2 * Character.baseattack;
     Character.currentBuffs.push({ Type: "TenguAmbush", Value: buff })
-    return { dmg: dmg, atkBuff: buff };
+    return { dmg: dmg, attackBuff: buff };
 
 }
 

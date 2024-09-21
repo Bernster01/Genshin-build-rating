@@ -3405,7 +3405,11 @@ function koukouSendou(Character) {
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.isReaction = false;
     attack.Multiplier = multiplier2;
-    dmg += dmgCalc(attack, Character) * numberOfEnemies;
+    let extraEnemies = 0;
+    if(Character.constellations >=4){
+        extraEnemies = 2
+    }
+    dmg += dmgCalc(attack, Character) * (numberOfEnemies + extraEnemies);
 
     return { dmg: dmg };
 }
