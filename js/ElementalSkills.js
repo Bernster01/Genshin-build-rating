@@ -941,7 +941,7 @@ function guideToAtferlife(Character, shouldReturnMultiplier = false) {
             atkIncrease = 7.15 / 100;
             break;
     }
-    if(shouldReturnMultiplier){
+    if (shouldReturnMultiplier) {
         return skillMultiplier;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
@@ -950,13 +950,13 @@ function guideToAtferlife(Character, shouldReturnMultiplier = false) {
     if (atkIncrease > atkIncreaseRoof)
         atkIncrease = atkIncreaseRoof;
     Character.currentBuffs.push({ Type: "ATKflat", Value: atkIncrease });
-   
+
     let dmg = dmgCalc(attack, Character) * numberOfEnemies * 2;
     Character.chargedAttack.Element = "PyroDMGBonus";
     Character.chargedAttack.isReaction = true;
     Character.normalAttack1.Element = "PyroDMGBonus";
     Character.normalAttack1.isReaction = true;
-    
+
     return dmg;
 }
 
@@ -1112,12 +1112,21 @@ function chihayaburu(Character) {
         Character.currentBuffs.forEach(buff => {
             if (buff.Type == "Soumon Sowrdmanship") {
                 const a1passiveAttack = { Multiplier: 200 / 100, Element: supportingElement, Scaling: "ATK", isReaction: true, Type: "PlungingAttack" }
-                dmg += dmgCalc(attack, Character) * numberOfEnemies;
+                dmg += dmgCalc(a1passiveAttack, Character) * numberOfEnemies;
 
             }
         });
     }
     attack.Type = "PlungingAttack";
+    if (Character.constellations >= 6) {
+        if (!kazuhaC6Buff) {
+            const buffValue = Character.EM() * 0.2;
+            Character.currentBuffs.push({ Type: "NormalAttack", Value: buffValue, Source: "C6" });
+            Character.currentBuffs.push({ Type: "ChargedAttack", Value: buffValue, Source: "C6" });
+            Character.currentBuffs.push({ Type: "PlungeAttack", Value: buffValue, Source: "C6" });
+            kazuhaC6Buff = true;
+        }
+    }
     dmg += dmgCalc(attack, Character) * numberOfEnemies; //Plunge Attack
     return { dmg: dmg };
 }
@@ -4211,7 +4220,7 @@ function salonSolitaire(character) {
     let dmg = 0;
     for (let i = 0; i < 20; i++) {
         if (character.constellations >= 6 && role == "Dps" && i == 16) {
-            character.currentBuffs.push({ Type: "HP%", Value: 140/5, Source: "C2" });
+            character.currentBuffs.push({ Type: "HP%", Value: 140 / 5, Source: "C2" });
             break;
         }
         if (i % 2 == 0) {
@@ -4228,8 +4237,8 @@ function salonSolitaire(character) {
         if (i % 4 == 0) {
             dmg += dmgCalc(mademaoselleCrabalettaAttack, character) * numberOfEnemies;
         }
-        if(i % 4 == 0 && character.constellations >= 2){
-                character.currentBuffs.push({ Type: "HP%", Value: 140/5, Source: "C2" });
+        if (i % 4 == 0 && character.constellations >= 2) {
+            character.currentBuffs.push({ Type: "HP%", Value: 140 / 5, Source: "C2" });
         }
         dmg += dmgCalc(surintendanteChevalmarinAttack, character) * numberOfEnemies;
         character.removeHP(character.HP() * 0.02);

@@ -87,6 +87,7 @@ let hasRingofYaxcheBuff = false;
 let footprintOfTheRainbowBuff = false;
 let cynoC6Stacks = 0;
 let HoD = false;
+let kazuhaC6Buff = false;
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -1214,6 +1215,7 @@ function resetVariables() {
     archaicPetraBuff = false;
     obsidianCodexBuff = false;
     obsidianCodexBuff2 = false;
+    kazuhaC6Buff = false;
     if(document.getElementById("partyGivesShield").checked){
         hasShield = true;
     }
@@ -1545,6 +1547,23 @@ function Simulation(character) {
                     dmgSources.other.push({label:"C6", dmg:c6Dmg});
                 }
             }
+            break;
+        case "Kazuha":
+            if(Character.constellations >= 1){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 6){
+                Character.sequence[role].push("N1","N2","N3","N4","N1","N2","N3","N4",);
+                Character.normalAttack1.Element = "AnemoDMGBonus";
+                Character.normalAttack2.Element = "AnemoDMGBonus";
+                Character.normalAttack3.Element = "AnemoDMGBonus";
+                Character.normalAttack4.Element = "AnemoDMGBonus";
+                Character.normalAttack5.Element = "AnemoDMGBonus";
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 

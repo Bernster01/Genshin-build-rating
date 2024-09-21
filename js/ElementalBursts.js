@@ -1142,6 +1142,11 @@ function kazuhaSlash(Character) {
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies; //Initial hit
     attack.Multiplier = dOT;
+    let c2Buff = 0;
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({Type:"ElementalMastery",Value:200});
+        c2Buff = 200;
+    }
     let elementalAttack = { Multiplier: 0, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     const swirlableElements = ["Pyro", "Hydro", "Electro", "Cryo"];
     if (swirlableElements.includes(supportingElement)) {
@@ -1154,7 +1159,7 @@ function kazuhaSlash(Character) {
         dmg += dmgCalc(elementalAttack, Character) * numberOfEnemies;
 
     }
-    return { dmg: dmg };
+    return { dmg: dmg,attackBuff:c2Buff };
 }
 
 function starwardSword(Character) {

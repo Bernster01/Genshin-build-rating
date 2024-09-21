@@ -13080,11 +13080,11 @@ const Kazuha = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 135,
+    energyOffset: 185,
     supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
-        ["Support"]: ["E", "P", "Q"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Sword",
     normalAttack1: {
