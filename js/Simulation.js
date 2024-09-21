@@ -274,7 +274,7 @@ async function findBestBuildLoop(baseChar, times) {
                     improvements++;
                     updateImprovements(improvements);
                     latestBuildTime = Date.now();
-                    
+
                 }
                 newCharacter = null;
                 //Test all 2 piece combos
@@ -319,23 +319,23 @@ async function findBestBuildLoop(baseChar, times) {
             document.getElementById("timeLeft").innerText = formatTime(Math.floor((Date.now() - startTime) / index * (times - index) / 1000));
             document.getElementById("loadingPaimon").style.left = Math.floor(index / times * 100) + "%";
             //
-          
+
             await delay(4);
         }
 
     }
-    
+
     return bestScore;
 }
-async function updateImprovements(number){
+async function updateImprovements(number) {
     await delay(4);
     const improvements = document.getElementById("build_improvements");
     improvements.innerText = number;
-   
+
 
 }
 function formatTime(seconds) {
-    if(seconds <1){
+    if (seconds < 1) {
         return "< 1 second";
     }
     seconds = Math.floor(seconds);
@@ -1009,7 +1009,7 @@ function applyBonuses(character) {
     if (partyHasDeepwoodMemories) {
         character.currentBuffs.push({ Type: "ResShred", Value: 30, Element: "DendroDMGBonus" });
     }
-  
+
 }
 function getSetBonus(array, character) {
     let setsDone = [];
@@ -1216,7 +1216,7 @@ function resetVariables() {
     obsidianCodexBuff = false;
     obsidianCodexBuff2 = false;
     kazuhaC6Buff = false;
-    if(document.getElementById("partyGivesShield").checked){
+    if (document.getElementById("partyGivesShield").checked) {
         hasShield = true;
     }
 }
@@ -1517,51 +1517,60 @@ function Simulation(character) {
             }
             break;
         case "Jean":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type:"ATK%", Value:15, Source:"C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ATK%", Value: 15, Source: "C2" });
                 atkBuff += 15;
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"ResShred", Value:40, Element:"AnemoDMGBonus", Source:"C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 40, Element: "AnemoDMGBonus", Source: "C4" });
                 atkBuff += 40;
             }
             if (Character.constellations >= 6) {
                 let health = 14000;
-                let extraShield = 14000*(1-0.35);
+                let extraShield = 14000 * (1 - 0.35);
                 shield += extraShield;
             }
             break;
         case "Kachina":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"DEF%", Value:16, Source:"C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "DEF%", Value: 16, Source: "C4" });
                 atkBuff += 16;
             }
-            if(Character.constellations >= 6){
-                if(hasShield){
-                    let c6Attack = {Multiplier: 200/100, Element: "GeoDMGBonus", isReaction: false, Scaling: "DEF", type: "Special"};
+            if (Character.constellations >= 6) {
+                if (hasShield) {
+                    let c6Attack = { Multiplier: 200 / 100, Element: "GeoDMGBonus", isReaction: false, Scaling: "DEF", type: "Special" };
                     let c6Dmg = dmgCalc(c6Attack, Character);
                     totalDmg += c6Dmg;
-                    dmgSources.other.push({label:"C6", dmg:c6Dmg});
+                    dmgSources.other.push({ label: "C6", dmg: c6Dmg });
                 }
             }
             break;
         case "Kazuha":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 6){
-                Character.sequence[role].push("N1","N2","N3","N4","N1","N2","N3","N4",);
+            if (Character.constellations >= 6) {
+                Character.sequence[role].push("N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4",);
                 Character.normalAttack1.Element = "AnemoDMGBonus";
                 Character.normalAttack2.Element = "AnemoDMGBonus";
                 Character.normalAttack3.Element = "AnemoDMGBonus";
                 Character.normalAttack4.Element = "AnemoDMGBonus";
                 Character.normalAttack5.Element = "AnemoDMGBonus";
+            }
+            break;
+        case "Kaeya":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 15, Source: "C1", for: "NormalAttack" });
+                Character.currentBuffs.push({ Type: "CritRate", Value: 15, Source: "C1", for: "ChargedAttack" });
+            }
+            if(Character.constellations >= 6){
+                Character.energyOffset -= 25;
             }
             break;
     }
@@ -3133,9 +3142,9 @@ function getFlatDamage(character, attackAction) {
             }
             break;
         case "Hu Tao":
-            if(character.constellations>=2){
-                if(attackAction.type=="ElementalSkill"){
-                    flatDamage+=character.HP()*(0.10/100);
+            if (character.constellations >= 2) {
+                if (attackAction.type == "ElementalSkill") {
+                    flatDamage += character.HP() * (0.10 / 100);
                 }
             }
             break;

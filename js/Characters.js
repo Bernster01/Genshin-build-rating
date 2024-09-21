@@ -12424,7 +12424,7 @@ const Kaeya = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 130,
+    energyOffset: 170,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "E"],
