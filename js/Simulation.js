@@ -92,6 +92,7 @@ let nahidaC2Buff = false;
 let triggerHyperbloom = false;
 let triggerBurgeoning = false;
 let partyElementalMasteryBonus = 0;
+let nighttimeWhispersBuff = false;
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -1222,6 +1223,7 @@ function resetVariables() {
     kazuhaC6Buff = false;
     nahidaC2Buff = false;
     partyElementalMasteryBonus = 0;
+    nighttimeWhispersBuff = false;
     if (document.getElementById("partyGivesShield").checked) {
         hasShield = true;
     }
@@ -1688,14 +1690,52 @@ function Simulation(character) {
                     Character.currentBuffs.push({ Type: "defReduction", Value: 30, Source: "C2" });
                 }
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"ElementalMastery", Value:140, Source:"C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ElementalMastery", Value: 140, Source: "C4" });
             }
             break;
+        case "Navia":
+            if (Character.constellations >= 1) {
+                Character.energyOffset -= 35;
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 36, for: "ElementalSkill", Source: "C2" });
+            }
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 135, for: "ElementalSkill", Source: "C6" });
+            }
+            let hasA4 = false;
+            for (let buff of Character.currentBuffs) {
+                if (buff.Type == "A4") {
+                    hasA4 = true;
+                }
+            }
+            if (hasA4) {
+                partyMemberElements.forEach(element => {
+                    if (element == "HydroCharacter" || element == "ElectroCharacter" || element == "CryoCharacter" || element == "PyroCharacter") {
+                        Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "A4" });
+                    }
+                });
+            }
+            break;
+
     }
     switch (Character.weapon.name) {
         case "A Thousand Floating Dreams":
             partyElementalMasteryBonus += 40;
+            break;
+        case "Beacon of the Reed Sea":
+            let willHaveShield = false;
+            if (supportingElement != "noElement" && supportingElement != "Geo" && supportingElement != "Dendro" && Character.Element == "GeoCharacter") {
+                willHaveShield = true;
+            }
+            if (Character.Element != "Dendro" && Character.Element != "Geo" && Character.Element != "noElement") {
+                willHaveShield = true;
+            }
+            if (hasShield || willHaveShield) {
+                Character.currentBuffs.push({ Type: "ATK%", Value: -20, Source: "Beacon of the Reed Sea" });
+                Character.currentBuffs.push({ Type: "HP%", Value: -32, Source: "Beacon of the Reed Sea" });
+            }
             break;
     }
     Character.sequence[role].forEach(action => {
@@ -2656,7 +2696,7 @@ function Simulation(character) {
                         break;
                     case "Nighttime Whispers in the Echoing Woods":
                         if (!nighttimeWhispersInTheEchoingWoodsBuff) {
-                            character.currentBuffs.push({ Type: "ElementalDMG", Value: (hasShield) ? 50 : 20, Source: "Nighttime Whispers in the Echoing Woods" });
+                            character.currentBuffs.push({ Type: "GeoDMGBonus", Value: 20, Source: "Nighttime Whispers in the Echoing Woods" });
                             nighttimeWhispersInTheEchoingWoodsBuff = true;
                         }
                         break;
@@ -2989,13 +3029,21 @@ function Simulation(character) {
                     elementalDMGSources.hyperbloomDMG += extraDMG;
                 }
             }
-            if(Character.constellations >= 6){
-                let extraAttack = { Multiplier: (Character.attack()*(200/100))+(Character.EM()*(400/100)), Element: "DendroDMGBonus", Scaling: "Combined", type: "ElementalSkill", isReaction: false, Source: "Nahida" };
+            if (Character.constellations >= 6) {
+                let extraAttack = { Multiplier: (Character.attack() * (200 / 100)) + (Character.EM() * (400 / 100)), Element: "DendroDMGBonus", Scaling: "Combined", type: "ElementalSkill", isReaction: false, Source: "Nahida" };
                 let AdditonalDMG_Nahida = dmgCalc(extraAttack, Character) * numberOfEnemies * 4;
                 extraAttack.isReaction = true;
                 AdditonalDMG_Nahida += dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
                 totalDmg += AdditonalDMG_Nahida;
                 dmgSources.other.push({ dmg: AdditonalDMG_Nahida, label: "C6" });
+            }
+            break;
+        case "Navia":
+            if (Character.constellations >= 2) {
+                let extraAttack = { Multiplier: Character.elementalBurst.Skill(Character, true), Element: "GeoDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: true, Source: "Navia" };
+                let AdditonalDMG_Navia = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                totalDmg += AdditonalDMG_Navia;
+                dmgSources.other.push({ dmg: AdditonalDMG_Navia, label: "C2" });
             }
             break;
 
@@ -3937,7 +3985,7 @@ function burning(em, lvl, element, character, burningBonus) {
     targetsBurning = true;
     hitBurningTarget(character, "Burning");
     let dmg = (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
-    if(nahidaC2Buff){
+    if (nahidaC2Buff) {
         dmg = bloomCrit(dmg, 20, 100);
     }
     return dmg;
@@ -4026,8 +4074,22 @@ function crystalized(character, element) {
     switch (character.artifactFourPiece) {
         case "Archaic Petra":
             if (!archaicPetraBuff) {
-                character.currentBuffs.push({ Type: element + "DMGBonus", Source: "Archaic Petra", Value: 35 });
+                character.currentBuffs.push({ Type: supportingElement + "DMGBonus", Source: "Archaic Petra", Value: 35 });
                 archaicPetraBuff = true;
+            }
+            break;
+        case "Nighttime Whispers in the Echoing Woods":
+            if (!nighttimeWhispersBuff) {
+                let hasPrevious = false;
+                character.currentBuffs.forEach(buff => {
+                    if (buff.Source == "Nighttime Whispers in the Echoing Woods" && buff.Type == "GeoDMGBonus") {
+                        hasPrevious = true;
+                    }
+                });
+                if (hasPrevious) {
+                    character.currentBuffs.push({ Type: "GeoDMGBonus", Source: "Nighttime Whispers in the Echoing Woods", Value: 30 });
+                    nighttimeWhispersBuff = true;
+                }
             }
             break;
     }

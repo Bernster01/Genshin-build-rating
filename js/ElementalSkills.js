@@ -6459,6 +6459,8 @@ function ceremonialCrystalshot(character) {
     let rosulaShardshot = { Multiplier: rosulaShardshotDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let totalShots = 0;
     let dmgBonus = 0;
+    if(shardsInPossession>6)
+        shardsInPossession = 6;
     switch (shardsInPossession) {
         case 0:
             totalShots = 5;
@@ -6491,11 +6493,16 @@ function ceremonialCrystalshot(character) {
             dmgBonus = 45;
             rosulaShardshot.Multiplier *= (200 / 100);
             break;
+        
     }
     let buff = { Type: "ElementalSkill", Value: dmgBonus, for: "ElementalSkill" };
     character.currentBuffs.push(buff);
     let dmg = 0;
+
     shardsInPossession = 0;
+    if (character.constellations >= 6) {
+        shardsInPossession = 3;
+    }
     dmg = dmgCalc(rosulaShardshot, character) * numberOfEnemies;
 
     character.currentBuffs.pop(buff);
@@ -6509,7 +6516,7 @@ function ceremonialCrystalshot(character) {
             hasBuff = true;
         }
     }
-    if (!hasA1 && !hasBuff) {
+    if (hasA1 && !hasBuff) {
         character.currentBuffs.push({ Type: "NormalAttack", Value: 40, Source: "A1" });
         character.normalAttack1.Element = "GeoDMGBonus";
         character.normalAttack1.isReaction = true;

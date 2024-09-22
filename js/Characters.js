@@ -17698,11 +17698,11 @@ const Navia = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "Q"],//Assuming enough shard from start
-        ["Support"]: ["E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "Q"],
+        ["Dps"]: ["Q","E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2"],//Assuming enough shard from start
+        ["Support"]: ["Q","E"],
     },
     weaponType: "Claymore",
     normalAttack1: {

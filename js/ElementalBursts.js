@@ -6136,7 +6136,7 @@ function moonjadeDescent(character) {
     return { dmg: dmg, healing: healing };
 }
 
-function astheSunlitSkysSingingSalute(character) {
+function astheSunlitSkysSingingSalute(character, shouldReturnMultiplier = false) {
     let skillDMG = 0;
     let cannonFireSupportDMG = 0;
     switch (character.elementalBurst.Level) {
@@ -6193,9 +6193,15 @@ function astheSunlitSkysSingingSalute(character) {
             cannonFireSupportDMG = 91.69 / 100;
             break;
     }
+    if(shouldReturnMultiplier){
+        return cannonFireSupportDMG;
+    }
     let attack = { Multiplier: skillDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: cannonFireSupportDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    if(character.constellations >= 4){
+        character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "GeoDMGBonus" });
+    }
     for (let i = 0; i < 16; i++) {
         if (i % 3 == 0) {
             attack2.isReaction = true;
