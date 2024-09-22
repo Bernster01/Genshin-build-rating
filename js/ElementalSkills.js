@@ -5831,8 +5831,8 @@ function allSchemestoKnow(character) {
     let hasA4 = false;
     for (buff of character.currentBuffs) {
         if (buff.Type == "Illusory Heart") {
-            dmgBonus = buff.pyroBonus
-            intervalBonus = buff.electroBonus;
+            dmgBonus += buff.pyroBonus
+            intervalBonus += buff.electroBonus;
             continue;
         } else if (buff.Type == "ElementalSkill" && buff.for == "tri-karma") {
             hasBuff = true;

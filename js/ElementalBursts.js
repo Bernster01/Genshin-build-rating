@@ -5442,71 +5442,113 @@ function dreamoftheStarStreamShaker(character) {
 }
 function illusoryHeart(character) {
     let pyroBonus = 0;
+    let pyroSmallBonus = 0;
     let electroBonus = 0;
+    let electroSmallBonus = 0;
     switch (character.elementalBurst.Level) {
         case 1:
+            pyroSmallBonus = 14.88;
+            electroSmallBonus = 0.248;
             pyroBonus = 22.32;
             electroBonus = 0.372;
             break;
         case 2:
+            pyroSmallBonus = 16;
+            electroSmallBonus = 0.267;
             pyroBonus = 23.99;
             electroBonus = 0.399;
             break;
         case 3:
+            pyroSmallBonus = 17.11;
+            electroSmallBonus = 0.285;
             pyroBonus = 25.67;
             electroBonus = 0.428;
             break;
         case 4:
+            pyroSmallBonus = 18.6;
+            electroSmallBonus = 0.31;
             pyroBonus = 27.9;
             electroBonus = 0.465;
             break;
         case 5:
+            pyroSmallBonus = 19.72;
+            electroSmallBonus = 0.329;
             pyroBonus = 29.57;
             electroBonus = 0.493;
             break;
         case 6:
+            pyroSmallBonus = 20.83;
+            electroSmallBonus = 0.347;
             pyroBonus = 31.25;
             electroBonus = 0.521;
             break;
         case 7:
+            pyroSmallBonus = 22.32;
+            electroSmallBonus = 0.372;
             pyroBonus = 33.48;
             electroBonus = 0.558;
             break;
         case 8:
+            pyroSmallBonus = 23.81;
+            electroSmallBonus = 0.397;
             pyroBonus = 35.71;
             electroBonus = 0.595;
             break;
         case 9:
+            pyroSmallBonus = 25.3;
+            electroSmallBonus = 0.422;
             pyroBonus = 37.94;
             electroBonus = 0.632;
             break;
         case 10:
+            pyroSmallBonus = 26.78;
+            electroSmallBonus = 0.446;
             pyroBonus = 40.18;
             electroBonus = 0.669;
             break;
         case 11:
+            pyroSmallBonus = 28.27;
+            electroSmallBonus = 0.471;
             pyroBonus = 42.41;
             electroBonus = 0.707;
             break;
         case 12:
+            pyroSmallBonus = 29.76;
+            electroSmallBonus = 0.496;
             pyroBonus = 44.64;
             electroBonus = 0.744;
             break;
         case 13:
+            pyroSmallBonus = 31.62;
+            electroSmallBonus = 	0.527;
             pyroBonus = 47.43;
             electroBonus = 0.791;
             break;
     }
-    switch (supportingElement) {
-        case "Pyro":
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
-            break;
-        case "Electro":
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroBonus });
-            break;
-        default:
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: 0 });
-            break;
+    let pyroNum = 0;
+    let electroNum = 0;
+    partyMemberElements.forEach(element => {
+        if (element == "PyroCharacter") {
+            pyroNum++;
+        }
+        else if (element == "ElectroCharacter") {
+            electroNum++;
+        }
+    });
+    if(character.constellations >= 1){
+        pyroNum++;
+        electroNum++;
+    }
+    if (pyroNum == 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroSmallBonus, electroBonus: 0 });
+    } else if (pyroNum > 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
+    }
+    if (electroNum == 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroSmallBonus });
+    }
+    else if (electroNum > 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroBonus });
     }
     return 0;
 }

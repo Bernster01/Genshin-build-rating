@@ -731,7 +731,22 @@
 									shields?</label>
 								<input type="checkbox" id="partyGivesShield">
 							</div>
-
+							<div id="nahidaSettings">
+								<h3>Nahida Settings</h3>
+								<div>
+									<label for="nahida_hyperbloom">Does party trigger Hyperbloom?</label>
+									<select id="nahida_hyperbloom" onchange="nahidaSettings(this.id)">
+										<option value="0">No</option>
+										<option value="1">Yes</option>
+									</select>
+									<br>
+									<label for="nahida_burgeoning">Does party trigger Burgeon?</label>
+									<select id="nahida_burgeoning" onchange="nahidaSettings(this.id)">
+										<option value="0">No</option>
+										<option value="1">Yes</option>
+									</select>
+								</div>
+							</div>
 
 							<label for="simulationRuns">Simulation Runs</label>
 							<input type="number" id="simulationRuns" placeholder="default 25">
@@ -871,10 +886,14 @@
 					option13.value = 13;
 					select.add(option13);
 					break;
+				case "Nahida":
+					//Reveal hidden settings
+					document.getElementById("nahidaSettings").style.display = "block";
+					break;
 				default:
 					//Reset options for normal attack to 10
 					const select2 = document.getElementById("normal_attack");
-					if(select2.length > 10){
+					if (select2.length > 10) {
 						select2.innerHTML = `
 										<option value="1">Level 1</option>
 										<option value="2">Level 2</option>
@@ -888,7 +907,8 @@
 										<option value="10">Level 10</option>
 					`;
 					}
-					
+					//Hide hidden settings
+					document.getElementById("nahidaSettings").style.display = "none";
 
 					break;
 			}

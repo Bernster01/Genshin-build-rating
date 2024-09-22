@@ -88,6 +88,10 @@ let footprintOfTheRainbowBuff = false;
 let cynoC6Stacks = 0;
 let HoD = false;
 let kazuhaC6Buff = false;
+let nahidaC2Buff = false;
+let triggerHyperbloom = false;
+let triggerBurgeoning = false;
+let partyElementalMasteryBonus = 0;
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -1216,6 +1220,8 @@ function resetVariables() {
     obsidianCodexBuff = false;
     obsidianCodexBuff2 = false;
     kazuhaC6Buff = false;
+    nahidaC2Buff = false;
+    partyElementalMasteryBonus = 0;
     if (document.getElementById("partyGivesShield").checked) {
         hasShield = true;
     }
@@ -1654,26 +1660,42 @@ function Simulation(character) {
                     atkBuff += 15;
                 }
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.sequence["Dps"].push("C");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 atkBuff += 15;
             }
             break;
         case "Mualani":
-            if(Character.constellations >= 1 && Character.constellations != 6){
-                Character.currentBuffs.push({Type:"FlatDMG", Value:Character.HP()*(66/100), for:"ChargedAttack",Source:"C1"});
-            }   
-            if(Character.constellations >= 2){
-                Character.sequence["Dps"].push("N1","N2");
+            if (Character.constellations >= 1 && Character.constellations != 6) {
+                Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.HP() * (66 / 100), for: "ChargedAttack", Source: "C1" });
+            }
+            if (Character.constellations >= 2) {
+                Character.sequence["Dps"].push("N1", "N2");
+            }
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ElementalBurst", Value: 75, Source: "C4" });
+            }
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.HP() * (66 / 100), for: "ChargedAttack", Source: "C1" });
+            }
+            break;
+        case "Nahida":
+            if (Character.constellations >= 2) {
+                nahidaC2Buff = true;
+                if (supportingElement == "Electro") {
+                    Character.currentBuffs.push({ Type: "defReduction", Value: 30, Source: "C2" });
+                }
             }
             if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"ElementalBurst", Value:75, Source:"C4"});
+                Character.currentBuffs.push({Type:"ElementalMastery", Value:140, Source:"C4"});
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"FlatDMG", Value:Character.HP()*(66/100), for:"ChargedAttack",Source:"C1"});
-            }
+            break;
+    }
+    switch (Character.weapon.name) {
+        case "A Thousand Floating Dreams":
+            partyElementalMasteryBonus += 40;
             break;
     }
     Character.sequence[role].forEach(action => {
@@ -1874,7 +1896,7 @@ function Simulation(character) {
                             }
 
                         }
-                    
+
                         break;
 
                     case "P":
@@ -2290,11 +2312,11 @@ function Simulation(character) {
                         }
                         break;
                     case "Mualani":
-                        if(Character.constellations >=1 && Character.constellations != 6){
-                            if(action == "N2"){
+                        if (Character.constellations >= 1 && Character.constellations != 6) {
+                            if (action == "N2") {
                                 //Remove C1 buff
                                 Character.currentBuffs.forEach(buff => {
-                                    if(buff.Source == "C1"){
+                                    if (buff.Source == "C1") {
                                         buff.Value = 0;
                                     }
                                 });
@@ -2956,7 +2978,27 @@ function Simulation(character) {
                 atkBuff += Character.HP() * (5 / 100);
             }
             break;
-        
+        case "Nahida":
+            if (role == "Support") {
+                if (triggerBurgeoning) {
+                    let extraDMG = burgeoning(800, 90, "Dendro", Character, 40) * numberOfEnemies * 5;//5 cores
+                    elementalDMGSources.burgeoningDMG += extraDMG;
+                }
+                if (triggerHyperbloom) {
+                    let extraDMG = hyperbloom(800, 90, "Dendro", Character, 40) * numberOfEnemies * 5;//5 cores
+                    elementalDMGSources.hyperbloomDMG += extraDMG;
+                }
+            }
+            if(Character.constellations >= 6){
+                let extraAttack = { Multiplier: (Character.attack()*(200/100))+(Character.EM()*(400/100)), Element: "DendroDMGBonus", Scaling: "Combined", type: "ElementalSkill", isReaction: false, Source: "Nahida" };
+                let AdditonalDMG_Nahida = dmgCalc(extraAttack, Character) * numberOfEnemies * 4;
+                extraAttack.isReaction = true;
+                AdditonalDMG_Nahida += dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                totalDmg += AdditonalDMG_Nahida;
+                dmgSources.other.push({ dmg: AdditonalDMG_Nahida, label: "C6" });
+            }
+            break;
+
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
@@ -3486,7 +3528,6 @@ function defCalc(character) {
 function resCalc(character, element) {
     let res = 10;
     let resShred = 0;
-
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "ResShred") {
             if (buff.Element == element) {
@@ -3895,7 +3936,11 @@ function burning(em, lvl, element, character, burningBonus) {
     const burningEM = 1 + (16 * (em / (em + 1200))) + burningBonus;
     targetsBurning = true;
     hitBurningTarget(character, "Burning");
-    return (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
+    let dmg = (burningBaseDmg * burningEM) * resCalc(character, element) * 3;//about 3 ticks per attack on avg
+    if(nahidaC2Buff){
+        dmg = bloomCrit(dmg, 20, 100);
+    }
+    return dmg;
 }
 function bloom(em, lvl, element, character, bloomBonus) {
     const bloomBaseDmg = 2 * LvlMultiplier[character.level];
@@ -3917,16 +3962,49 @@ function bountifulCore(em, lvl, element, character, bloomBonus) {
     return (bloomBaseDmg * bloomEM) * resCalc(character, element) * numberOfEnemies * 2;//big aoe
 }
 function burgeoning(em, lvl, element, character, burgeoningBonus) {
+    if (triggerBurgeoning) {
+        //Kuki with 800 em with flower of lost paradise
+        em = 800 + partyElementalMasteryBonus;
+        const burgeoningBaseDmg = 3 * LvlMultiplier["90b"];
+        const burgeoningEM = 1 + (16 * (em / (em + 1200))) + 0.4;
+        hasTriggerdABloomTypeReaction(character);
+        let dmg = (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element + "DMGBonus") * 3;//1 hit on 3 enemies
+        if (nahidaC2Buff) {
+            dmg = bloomCrit(dmg, 20, 100);
+        }
+        return dmg;
+    }
     const burgeoningBaseDmg = 3 * LvlMultiplier[character.level];
     const burgeoningEM = 1 + (16 * (em / (em + 1200))) + burgeoningBonus;
     hasTriggerdABloomTypeReaction(character);
-    return (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element) * 3;//1 hit on 3 enemies
+    let dmg = (burgeoningBaseDmg * burgeoningEM) * resCalc(character, element + "DMGBonus") * 3;//1 hit on 3 enemies
+    return dmg;
 }
 function hyperbloom(em, lvl, element, character, hyperbloomBonus) {
+    if (triggerHyperbloom) {
+        //Kuki with 800 em with flower of lost paradise
+        em = 800 + partyElementalMasteryBonus;
+        const hyperBloomBaseDmg = 3 * LvlMultiplier["90b"];
+        const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + 0.4;
+        hasTriggerdABloomTypeReaction(character);
+        let dmg = (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element + "DMGBonus") * 2 * 2;//2 hits and 2 enemies within 1m
+
+        if (nahidaC2Buff) {
+            dmg = bloomCrit(dmg, 20, 100);
+        }
+        return dmg;
+    }
     const hyperBloomBaseDmg = 3 * LvlMultiplier[character.level];
     const hyperBloomEM = 1 + (16 * (em / (em + 1200))) + hyperbloomBonus;
     hasTriggerdABloomTypeReaction(character);
-    return (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element) * 2 * 2;//2 hits and 2 enemies within 1m
+    let dmg = (hyperBloomBaseDmg * hyperBloomEM) * resCalc(character, element + "DMGBonus") * 2 * 2;//2 hits and 2 enemies within 1m
+
+    return dmg;
+}
+function bloomCrit(dmg, critRate, critDMG) {
+    //Calc average crit
+    let crit = 1 + (((critRate / 100) * (critDMG / 100)));
+    return dmg * crit;
 }
 function crystalized(character, element) {
     shieldCreated(character);
