@@ -207,7 +207,7 @@ const artifactSets = {
     }, 
     ["Obsidian_Codex"]: {
         Type: "Obsidian Codex",
-        twoPiece: { Type: "Obsidian_Codex", Value: null },
+        twoPiece: { Type: "AddativeBonusDMG", Value: 15 },
         fourPiece: { Type: "Obsidian_Codex", Value: null }
 
     },
