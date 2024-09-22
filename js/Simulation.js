@@ -1639,8 +1639,26 @@ function Simulation(character) {
             if (Character.constellations >= 4) {
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 6){
-                atkBuff += 20+60;
+            if (Character.constellations >= 6) {
+                atkBuff += 20 + 60;
+            }
+            break;
+        case "Mona":
+            if (Character.constellations >= 1) {
+                if (role == "Support") {
+                    Character.currentBuffs.push({ Type: "ElectroChargedBonus", Value: 15, Source: "Support" });
+                    Character.currentBuffs.push({ Type: "VaporizeBonus", Value: 15, Source: "Support" });
+                    if (supportingElement == "Anemo") {
+                        Character.currentBuffs.push({ Type: "SwirlBonus", Value: 15, Source: "Support" });
+                    }
+                    atkBuff += 15;
+                }
+            }
+            if(Character.constellations >= 2){
+                Character.sequence["Dps"].push("C");
+            }
+            if(Character.constellations >= 4){
+                atkBuff += 15;
             }
             break;
     }
@@ -2911,6 +2929,7 @@ function Simulation(character) {
                 atkBuff += Character.HP() * (5 / 100);
             }
             break;
+        
     }
 
     // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
@@ -3538,6 +3557,26 @@ function elementalMasteryCalc(incomingDmg, type, character) {
                 bloomBonus += buff.Value;
                 hyperbloomBonus += buff.Value;
                 burgeoningBonus += buff.value;
+            } else if (buff.Type == "BurningBonus") {
+                burningBonus += buff.Value;
+            }
+            else if (buff.Type == "OverloadedBonus") {
+                overloadedBonus += buff.Value;
+            }
+            else if (buff.Type == "SuperconductBonus") {
+                superconductBonus += buff.Value;
+            }
+            else if (buff.Type == "ElectroChargedBonus") {
+                electroChargedBonus += buff.Value;
+            }
+            else if (buff.Type == "SwirlBonus") {
+                swirlBonus += buff.Value;
+            }
+            else if (buff.Type == "MeltBonus") {
+                meltBonus += buff.Value;
+            }
+            else if (buff.Type == "VaporizeBonus") {
+                vaporizeBonus += buff.Value;
             }
         });
         vaporizeBonus = (vaporizeBonus == 0) ? 0 : vaporizeBonus / 100;
