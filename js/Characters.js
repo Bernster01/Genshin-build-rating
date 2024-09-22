@@ -18240,8 +18240,8 @@ const Neuvillette = {
         Level: 1
     },
     passive1: {
-        Type: "Heir to the Ancient Sea's Authority",
-        Value: { Type: "ChargedAttack", value: 160 }
+        Type: "A1",
+        Value: null
     },
     passive2: {
         Type: "Discipline of the Supreme Arbitration",

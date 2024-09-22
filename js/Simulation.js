@@ -1718,6 +1718,40 @@ function Simulation(character) {
                 });
             }
             break;
+        case "Neuvillette":
+            if (supportingElement != "noElement" && supportingElement != "Hydro") {
+                let hasA1 = false;
+                for (let buff of Character.currentBuffs) {
+                    if (buff.Type == "A1") {
+                        hasA1 = true;
+                    }
+                }
+                if (hasA1) {
+                    let multiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel) * 1.6;
+                    Character.chargedAttack.Multiplier = function(){return multiplier}
+                }
+                if(Character.constellations >= 2){
+                    Character.currentBuffs.push({Type:"CritDMG", Value: 42, Source: "C2"});
+                }
+            }
+            if(Character.constellations >= 1 && (supportingElement == "Hydro" || supportingElement == "noElement")){
+                let hasA1 = false;
+                for (let buff of Character.currentBuffs) {
+                    if (buff.Type == "A1") {
+                        hasA1 = true;
+                    }
+                }
+                if (hasA1) {
+                    Character.chargedAttack.Multiplier(Character.normalAttackLevel) *= 1.1;
+                }
+                if(Character.constellations >= 2){
+                    Character.currentBuffs.push({Type:"CritDMG", Value: 14, Source: "C2"});
+                }
+            }
+            if(Character.constellations >= 6){
+                Character.sequence[role].push("C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C");
+            }
+            break;
 
     }
     switch (Character.weapon.name) {
@@ -1827,6 +1861,10 @@ function Simulation(character) {
                         }
                         else if (Character.name == "Neuvillette") {
                             for (buff of character.currentBuffs) {
+                                if(Character.currentHP > 0.5 * Character.HP()){
+                                    const hpToLose = (8/100) *  Character.HP();
+                                    Character.removeHP(hpToLose);
+                                }
                                 if (buff.Type == "Discipline of the Supreme Arbitration") {
                                     let currentBonus = buff.Value;
                                     let currentHP = buff.currentHP;
@@ -3044,6 +3082,14 @@ function Simulation(character) {
                 let AdditonalDMG_Navia = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
                 totalDmg += AdditonalDMG_Navia;
                 dmgSources.other.push({ dmg: AdditonalDMG_Navia, label: "C2" });
+            }
+            break;
+        case "Neuvillette":
+            if (Character.constellations >= 6) {
+                let extraAttack = { Multiplier: 10/100, Element: "HydroDMGBonus", Scaling: "HP", type: "ElementalSkill", isReaction: false, Source: "Neuvillette" };
+                let AdditonalDMG_Neuvillette = dmgCalc(extraAttack, Character) * 12;
+                totalDmg += AdditonalDMG_Neuvillette;
+                dmgSources.other.push({ dmg: AdditonalDMG_Neuvillette, label: "C6" });
             }
             break;
 

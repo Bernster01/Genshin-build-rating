@@ -3832,16 +3832,19 @@ function oTearsIShallRepay(character) {
     let attack = { Multiplier: multiplier1, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalSkill" }
     let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
+    let sourewaterDroplets = 3;
+    let healing = character.HP() * 0.16 * sourewaterDroplets;
+    healingHasOccured(character);
     for (buff of character.currentBuffs) {
         if (buff.Type == "Discipline of the Supreme Arbitration") {
             let currentBonus = buff.Value;
-            let sourewaterDroplets = 3;
+       
             let currentHP = buff.currentHP;
             character.advancedstats.elementalBonuses[1].Value -= currentBonus;
             //Calc new bonus
-            let healing = character.HP() * 0.16 * sourewaterDroplets;
-            healingHasOccured(character);
+            
             currentHP = currentHP + healing;
             if (currentHP > character.HP())
                 currentHP = character.HP();
