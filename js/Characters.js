@@ -16336,7 +16336,7 @@ const Mika = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 135,
+    energyOffset: 180,
     supportType: "Buffer",
     supportType2: "Healer",
     sequence: {

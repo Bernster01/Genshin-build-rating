@@ -6510,7 +6510,12 @@ function skyfeatherSong(character) {
     }
     castHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    let extraHealing = 1;
+    if(character.constellations >=1){
+        extraHealing = 2;
+    }
     eagleplumeHealing *= 6;
+   
     healingHasOccured(character);
     return { healing: castHealing + eagleplumeHealing };
 }

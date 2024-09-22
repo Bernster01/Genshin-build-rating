@@ -1635,6 +1635,14 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "PyroDMGBonus", Source: "C4" });
             }
             break;
+        case "Mika":
+            if (Character.constellations >= 4) {
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 6){
+                atkBuff += 20+60;
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1811,22 +1819,22 @@ function Simulation(character) {
                             if (Character.constellations >= 1) {
                                 extraDmg = extraDmg * 2;
                             }
-                            
+
                             totalDmg += extraDmg;
                             dmgSources.c += extraDmg;
-                            if(Character.constellations >= 6){
-                                let c6Attack = { Multiplier: Character.chargedAttack.extraMultiplier(2)*0.8, Element: "PyroDMGBonus", isReaction: false, Scaling: "ATK", type: "ChargedAttack" };
+                            if (Character.constellations >= 6) {
+                                let c6Attack = { Multiplier: Character.chargedAttack.extraMultiplier(2) * 0.8, Element: "PyroDMGBonus", isReaction: false, Scaling: "ATK", type: "ChargedAttack" };
                                 let c6Dmg = dmgCalc(c6Attack, Character);
                                 totalDmg += c6Dmg;
                                 let hasC6Source = false;
                                 dmgSources.other.forEach(source => {
-                                    if(source.Source == "C6"){
+                                    if (source.Source == "C6") {
                                         hasC6Source = true;
                                         source.dmg += c6Dmg;
                                     }
                                 });
-                                if(!hasC6Source){
-                                    dmgSources.other.push({label:"C6",dmg:c6Dmg,Source:"C6"});
+                                if (!hasC6Source) {
+                                    dmgSources.other.push({ label: "C6", dmg: c6Dmg, Source: "C6" });
                                 }
                             }
                             if (hatBuff != undefined) {

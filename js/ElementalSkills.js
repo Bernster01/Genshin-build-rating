@@ -6928,7 +6928,8 @@ function starfrostSwirl(character) {
     dmg += dmgCalc(rimestarShard, character) * numberOfEnemies;
     rimestarFlare.isReaction = true;
     dmg += dmgCalc(rimestarFlare, character) * numberOfEnemies;
-    return { dmg: dmg, attackBuff: atkSPDBonus };
+
+    return { dmg: dmg, attackBuff: atkSPDBonus + 30 };
 }
 
 function bewilderingLights(character) {
