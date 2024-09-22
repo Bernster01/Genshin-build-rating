@@ -16974,11 +16974,11 @@ const Mualani = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 100,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N1", "N2", "N1", "N2", "Q"],//N2 is mini sharks from N1
-        ["Support"]: ["E", "N1", "N", "Q"],
+        ["Support"]:["Q"],
     },
     weaponType: "Catalyst",
     normalAttack1: {

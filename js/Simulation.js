@@ -1661,6 +1661,20 @@ function Simulation(character) {
                 atkBuff += 15;
             }
             break;
+        case "Mualani":
+            if(Character.constellations >= 1 && Character.constellations != 6){
+                Character.currentBuffs.push({Type:"FlatDMG", Value:Character.HP()*(66/100), for:"ChargedAttack",Source:"C1"});
+            }   
+            if(Character.constellations >= 2){
+                Character.sequence["Dps"].push("N1","N2");
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"ElementalBurst", Value:75, Source:"C4"});
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"FlatDMG", Value:Character.HP()*(66/100), for:"ChargedAttack",Source:"C1"});
+            }
+            break;
     }
     Character.sequence[role].forEach(action => {
 
@@ -1860,6 +1874,7 @@ function Simulation(character) {
                             }
 
                         }
+                    
                         break;
 
                     case "P":
@@ -2271,6 +2286,18 @@ function Simulation(character) {
                                     dmgSources.other.push({ label: "C1 - Oz Coordinated", source: "C1", dmg: extraOzDmg });
                                 }
 
+                            }
+                        }
+                        break;
+                    case "Mualani":
+                        if(Character.constellations >=1 && Character.constellations != 6){
+                            if(action == "N2"){
+                                //Remove C1 buff
+                                Character.currentBuffs.forEach(buff => {
+                                    if(buff.Source == "C1"){
+                                        buff.Value = 0;
+                                    }
+                                });
                             }
                         }
                         break;
