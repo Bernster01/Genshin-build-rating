@@ -1752,6 +1752,24 @@ function Simulation(character) {
                 Character.sequence[role].push("C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C");
             }
             break;
+        case "Nilou":
+            if(Character.constellations >= 1){
+                Character.currentBuffs.push({Type:"ElementalSkill", Value: 65, Source: "C1"});
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element:"HydroDMGBonus", Source: "C2" });
+                if(supportingElement == "Dendro"){
+                    Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element:"DendroDMGBonus", Source: "C2" });
+                }
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 25;
+                Character.currentBuffs.push({Type:"ElementalBurst", Value: 50, Source: "C4"});
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*0.6, Source: "C6"});
+                Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*1.2, Source: "C6"});
+            }
 
     }
     switch (Character.weapon.name) {
