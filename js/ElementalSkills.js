@@ -1577,6 +1577,9 @@ function breastplate(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    if(Character.constellations >= 1){
+        chance = 100;
+    }
     let heal = healing * (chance / 100) * 12;
     shield *= (1 + (Character.advancedstats.shieldStrength / 100));
     healingHasOccured(Character);

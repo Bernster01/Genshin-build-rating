@@ -1647,6 +1647,9 @@ function sweepingTime(Character) {
     Character.normalAttack2.element = "GeoDMGBonus";
     Character.normalAttack3.element = "GeoDMGBonus";
     Character.normalAttack4.element = "GeoDMGBonus";
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "ATKflat", Value: Character.DEF() * (50/100) });
+    }
     return { dmg: dmg };
 }
 

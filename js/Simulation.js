@@ -1728,13 +1728,13 @@ function Simulation(character) {
                 }
                 if (hasA1) {
                     let multiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel) * 1.6;
-                    Character.chargedAttack.Multiplier = function(){return multiplier}
+                    Character.chargedAttack.Multiplier = function () { return multiplier }
                 }
-                if(Character.constellations >= 2){
-                    Character.currentBuffs.push({Type:"CritDMG", Value: 42, Source: "C2"});
+                if (Character.constellations >= 2) {
+                    Character.currentBuffs.push({ Type: "CritDMG", Value: 42, Source: "C2" });
                 }
             }
-            if(Character.constellations >= 1 && (supportingElement == "Hydro" || supportingElement == "noElement")){
+            if (Character.constellations >= 1 && (supportingElement == "Hydro" || supportingElement == "noElement")) {
                 let hasA1 = false;
                 for (let buff of Character.currentBuffs) {
                     if (buff.Type == "A1") {
@@ -1744,35 +1744,35 @@ function Simulation(character) {
                 if (hasA1) {
                     Character.chargedAttack.Multiplier(Character.normalAttackLevel) *= 1.1;
                 }
-                if(Character.constellations >= 2){
-                    Character.currentBuffs.push({Type:"CritDMG", Value: 14, Source: "C2"});
+                if (Character.constellations >= 2) {
+                    Character.currentBuffs.push({ Type: "CritDMG", Value: 14, Source: "C2" });
                 }
             }
-            if(Character.constellations >= 6){
-                Character.sequence[role].push("C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C","C");
+            if (Character.constellations >= 6) {
+                Character.sequence[role].push("C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C", "C");
             }
             break;
         case "Nilou":
-            if(Character.constellations >= 1){
-                Character.currentBuffs.push({Type:"ElementalSkill", Value: 65, Source: "C1"});
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 65, Source: "C1" });
             }
             if (Character.constellations >= 2) {
-                Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element:"HydroDMGBonus", Source: "C2" });
-                if(supportingElement == "Dendro"){
-                    Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element:"DendroDMGBonus", Source: "C2" });
+                Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element: "HydroDMGBonus", Source: "C2" });
+                if (supportingElement == "Dendro") {
+                    Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element: "DendroDMGBonus", Source: "C2" });
                 }
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 25;
-                Character.currentBuffs.push({Type:"ElementalBurst", Value: 50, Source: "C4"});
+                Character.currentBuffs.push({ Type: "ElementalBurst", Value: 50, Source: "C4" });
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*0.6, Source: "C6"});
-                Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*1.2, Source: "C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: Math.floor(Character.HP() / 1000) * 0.6, Source: "C6" });
+                Character.currentBuffs.push({ Type: "CritRate", Value: Math.floor(Character.HP() / 1000) * 1.2, Source: "C6" });
             }
             break;
         case "Ningguang":
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.energyOffset -= 20;
                 Character.sequence[role].push("E");
             }
@@ -1885,8 +1885,8 @@ function Simulation(character) {
                         }
                         else if (Character.name == "Neuvillette") {
                             for (buff of character.currentBuffs) {
-                                if(Character.currentHP > 0.5 * Character.HP()){
-                                    const hpToLose = (8/100) *  Character.HP();
+                                if (Character.currentHP > 0.5 * Character.HP()) {
+                                    const hpToLose = (8 / 100) * Character.HP();
                                     Character.removeHP(hpToLose);
                                 }
                                 if (buff.Type == "Discipline of the Supreme Arbitration") {
@@ -2131,8 +2131,8 @@ function Simulation(character) {
                                 break;
                         }
                     }
-                    if(Character.name == "Ningguang"){
-                        if(Character.constellations >=1){
+                    if (Character.name == "Ningguang") {
+                        if (Character.constellations >= 1) {
                             enemies = numberOfEnemies;
                         }
                     }
@@ -3115,21 +3115,32 @@ function Simulation(character) {
             break;
         case "Neuvillette":
             if (Character.constellations >= 6) {
-                let extraAttack = { Multiplier: 10/100, Element: "HydroDMGBonus", Scaling: "HP", type: "ElementalSkill", isReaction: false, Source: "Neuvillette" };
+                let extraAttack = { Multiplier: 10 / 100, Element: "HydroDMGBonus", Scaling: "HP", type: "ElementalSkill", isReaction: false, Source: "Neuvillette" };
                 let AdditonalDMG_Neuvillette = dmgCalc(extraAttack, Character) * 12;
                 totalDmg += AdditonalDMG_Neuvillette;
                 dmgSources.other.push({ dmg: AdditonalDMG_Neuvillette, label: "C6" });
             }
             break;
         case "Ningguang":
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 let baseMultiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel);
-                let extraMultiplier = Character.chargedAttack.extraMultiplier(Character.normalAttackLevel)*7;
+                let extraMultiplier = Character.chargedAttack.extraMultiplier(Character.normalAttackLevel) * 7;
                 let extraAttack = { Multiplier: baseMultiplier + extraMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: true, Source: "Ningguang" };
                 let AdditonalDMG_Ningguang = dmgCalc(extraAttack, Character) * numberOfEnemies;
                 totalDmg += AdditonalDMG_Ningguang;
                 dmgSources.other.push({ dmg: AdditonalDMG_Ningguang, label: "C6" });
             }
+            break;
+        case "Noelle":
+            if (Character.constellations >= 4) {
+                let extraAttack = { Multiplier: 400 / 100, Element: "GeoDMGBonus", Scaling: "ATK", type: "ElementalBurst", isReaction: true, Source: "Noelle" };
+                let AdditonalDMG_Noelle = dmgCalc(extraAttack, Character) * numberOfEnemies;
+                totalDmg += AdditonalDMG_Noelle;
+                dmgSources.other.push({ dmg: AdditonalDMG_Noelle, label: "C4" });
+
+            }
+            break;
+
 
     }
 
