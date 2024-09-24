@@ -1776,6 +1776,16 @@ function Simulation(character) {
                 Character.energyOffset -= 20;
                 Character.sequence[role].push("E");
             }
+            break;
+        case "Qiqi":
+            if (Character.constellations >= 1) {
+                Character.energyOffset -= 10;
+            }
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type:"NormalAttack", Value:15, Source:"C2"});
+                Character.currentBuffs.push({Type:"ChargedAttack", Value:15, Source:"C2"});
+            }
+            break;
 
     }
     switch (Character.weapon.name) {
