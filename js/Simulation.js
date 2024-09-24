@@ -1088,11 +1088,11 @@ function getSetBonus(array, character) {
                     }
                 } else if (currentSet == "Lavawalker") {
                     if (character.element == "PyroCharacter" || supportingElement == "Pyro") {
-                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35 * 0.6, Source: "Lavawalker" });
+                        character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 35 * 0.4, Source: "Lavawalker" });
                     }
                 } else if (currentSet == "Thundersoother") {
                     if (character.element == "ElectroCharacter" || supportingElement == "Electro") {
-                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35 * 0.6, Source: "Thunder Soother" });
+                        character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 35 * 0.4, Source: "Thunder Soother" });
                     }
                 } else if (currentSet == "Vourukashas_Glow") {
                     if (role == "dps" || (role == "Support" && character.name == "Dehya")) {
@@ -1781,9 +1781,14 @@ function Simulation(character) {
             if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
             }
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type:"NormalAttack", Value:15, Source:"C2"});
-                Character.currentBuffs.push({Type:"ChargedAttack", Value:15, Source:"C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "NormalAttack", Value: 15, Source: "C2" });
+                Character.currentBuffs.push({ Type: "ChargedAttack", Value: 15, Source: "C2" });
+            }
+            break;
+        case "Raiden":
+            if(Character.constellations >= 4){
+                atkBuff += 30;
             }
             break;
 
@@ -3669,14 +3674,17 @@ function getCrit(character, attackAction) {
 }
 function defCalc(character) {
     let defReduction = 0;
+    let defIgnore = 0;
     character.currentBuffs.forEach(buff => {
         if (buff.Type == "defReduction") {
             defReduction += 1 + (buff.Value / 100);
+        } else if (buff.Type == "defIgnore") {
+            defIgnore += buff.Value/100;
         }
     });
     let characterLevel = Number.parseInt(character.level.slice(0, character.level.length - 1));
 
-    return (characterLevel + 100) / ((1 - defReduction) * 190 + characterLevel + 100);
+    return (characterLevel + 100) / (((1 - defReduction) *190 + characterLevel + 100)*(1 - defIgnore));
 }
 function resCalc(character, element) {
     let res = 10;

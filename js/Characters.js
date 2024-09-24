@@ -19558,8 +19558,8 @@ const Raiden = {
     energyOffset: 160,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "C", "N1", "C", "N1", "C"],
-        ["Support"]: ["E", "Q"],
+        ["Dps"]: ["E", "Q",],
+        ["Support"]: ["E"],
     },
     weaponType: "Polearm",
     normalAttack1: {

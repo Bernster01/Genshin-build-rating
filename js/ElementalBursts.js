@@ -3309,6 +3309,9 @@ function musouShinsetsu(Character) {
     Multiplier = (Multiplier + (60 * resolveBase)) / 100;
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
 
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "defIgnore", Value: 60 });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     for (let i = 0; i < 6; i++) {
         switch (i % 6) {
@@ -3356,6 +3359,7 @@ function musouShinsetsu(Character) {
         }
 
     }
+   
     return dmg;
 }
 
