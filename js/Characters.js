@@ -18718,10 +18718,10 @@ const Ningguang = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 135,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C", "N1", "N1", "N1", "C"],
+        ["Dps"]: ["E", "Q", "N1", "N2","C", "N1", "N2", "C", "N1", "N2", "C"],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Catalyst",
@@ -18792,25 +18792,49 @@ const Ningguang = {
         Multiplier: function (level) {
             switch (level) {
                 case 1:
-                    return (174.08 + (49.6 * 3)) / 100;
+                    return (174.08 + (49.6 * 2)) / 100;
                 case 2:
-                    return (187.14 + (53.32 * 3)) / 100;
+                    return (187.14 + (53.32 * 2)) / 100;
                 case 3:
                     return (200.19 + (57.04 * 3)) / 100;
                 case 4:
-                    return (217.6 + (62 * 3)) / 100;
+                    return (217.6 + (62 * 2)) / 100;
                 case 5:
-                    return (230.66 + (65.72 * 3)) / 100;
+                    return (230.66 + (65.72 * 2)) / 100;
                 case 6:
-                    return (243.71 + (69.44 * 3)) / 100;
+                    return (243.71 + (69.44 * 2)) / 100;
                 case 7:
-                    return (261.12 + (74.4 * 3)) / 100;
+                    return (261.12 + (74.4 * 2)) / 100;
                 case 8:
-                    return (278.53 + (79.36 * 3)) / 100;
+                    return (278.53 + (79.36 * 2)) / 100;
                 case 9:
-                    return (295.94 + (84.32 * 3)) / 100;
+                    return (295.94 + (84.32 * 2)) / 100;
                 case 10:
-                    return (313.34 + (89.28 * 3)) / 100;
+                    return (313.34 + (89.28 * 2)) / 100;
+            }
+        },
+        extraMultiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return  (49.6 ) / 100;
+                case 2:
+                    return  (53.32 ) / 100;
+                case 3:
+                    return  (57.04) / 100;
+                case 4:
+                    return  (62 ) / 100;
+                case 5:
+                    return  (65.72 ) / 100;
+                case 6:
+                    return  (69.44) / 100;
+                case 7:
+                    return (74.4) / 100;
+                case 8:
+                    return (79.36 ) / 100;
+                case 9:
+                    return (84.32) / 100;
+                case 10:
+                    return (89.28 ) / 100;
             }
         },
         Element: "GeoDMGBonus",

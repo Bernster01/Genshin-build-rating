@@ -1770,6 +1770,12 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*0.6, Source: "C6"});
                 Character.currentBuffs.push({Type:"CritRate", Value: Math.floor(Character.HP()/1000)*1.2, Source: "C6"});
             }
+            break;
+        case "Ningguang":
+            if(Character.constellations >= 2){
+                Character.energyOffset -= 20;
+                Character.sequence[role].push("E");
+            }
 
     }
     switch (Character.weapon.name) {
@@ -2123,6 +2129,11 @@ function Simulation(character) {
                                     attackAction.isReaction = true;
                                 }
                                 break;
+                        }
+                    }
+                    if(Character.name == "Ningguang"){
+                        if(Character.constellations >=1){
+                            enemies = numberOfEnemies;
                         }
                     }
                     if (Character.weapon.name == "Mistsplitter Reforged" && mistSplitterNormalStack != true) {
@@ -3110,6 +3121,15 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Neuvillette, label: "C6" });
             }
             break;
+        case "Ningguang":
+            if(Character.constellations >= 6){
+                let baseMultiplier = Character.chargedAttack.Multiplier(Character.normalAttackLevel);
+                let extraMultiplier = Character.chargedAttack.extraMultiplier(Character.normalAttackLevel)*7;
+                let extraAttack = { Multiplier: baseMultiplier + extraMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: true, Source: "Ningguang" };
+                let AdditonalDMG_Ningguang = dmgCalc(extraAttack, Character) * numberOfEnemies;
+                totalDmg += AdditonalDMG_Ningguang;
+                dmgSources.other.push({ dmg: AdditonalDMG_Ningguang, label: "C6" });
+            }
 
     }
 
