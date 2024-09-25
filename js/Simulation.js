@@ -1799,7 +1799,16 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type:"defReduction", Value:10, for:"ElementalSkill",Source:"C6"});
             }
             break;
-
+        case "Rosaria":
+            if(Character.constellations >= 1){
+                Character.currentBuffs.push({Type:"NormalAttack", Value:10, Source:"C1"});
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 10;
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"ResShred", Value:20, Element:"PhysicalDMGBonus", Source:"C6"});
+            }
 
     }
     switch (Character.weapon.name) {

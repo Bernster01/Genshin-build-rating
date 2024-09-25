@@ -1849,7 +1849,11 @@ function ritesofTermination(Character) {
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 6; index++) {
+    let c2extra = 0;
+    if(Character.constellations >= 2){
+        c2extra = 2;
+    }
+    for (let index = 0; index < 6+c2extra; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character);
