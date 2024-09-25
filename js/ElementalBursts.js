@@ -3526,7 +3526,11 @@ function divineMaidensDeliverance(Character) {
     attack.Multiplier = multiplier2;
     Character.currentBuffs.push({ Type: "ResShred", Element: "CryoDMGBonus", Value: res });
     Character.currentBuffs.push({ Type: "ResShred", Element: "PhysicalDMGBonus", Value: res });
-    for (let index = 0; index < 12; index++) {
+    let extraAttack = 0;
+    if(Character.constellations >= 2){
+        extraAttack = 6;
+    }
+    for (let index = 0; index < 12+extraAttack; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
 
     }

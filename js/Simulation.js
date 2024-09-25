@@ -1787,60 +1787,73 @@ function Simulation(character) {
             }
             break;
         case "Raiden":
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 atkBuff += 30;
             }
             break;
         case "Razor":
-            if(Character.constellations >= 1){
-                Character.currentBuffs.push({Type:"AddativeBonusDMG", Value:10, Source:"C1"});
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 10, Source: "C1" });
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"defReduction", Value:10, for:"ElementalSkill",Source:"C6"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "defReduction", Value: 10, for: "ElementalSkill", Source: "C6" });
             }
             break;
         case "Rosaria":
-            if(Character.constellations >= 1){
-                Character.currentBuffs.push({Type:"NormalAttack", Value:10, Source:"C1"});
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "NormalAttack", Value: 10, Source: "C1" });
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 10;
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"ResShred", Value:20, Element:"PhysicalDMGBonus", Source:"C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "PhysicalDMGBonus", Source: "C6" });
             }
             break;
         case "Kokomi":
-            if(Character.constellations >= 4){
-                Character.sequence[role].push("N1","N2","N3");
+            if (Character.constellations >= 4) {
+                Character.sequence[role].push("N1", "N2", "N3");
                 Character.energyOffset -= 15;
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type:"HydroDMGBonus", Value:40, Source:"C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 40, Source: "C6" });
             }
             break;
         case "Sayu":
-            if(Character.constellation >=2){
-                Character.currentBuffs.push({Type:"ElementalSkill", Value:66, Source:"C2"});
+            if (Character.constellation >= 2) {
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 66, Source: "C2" });
             }
-            if(Character.constellation >=4){
-                const swirlableElements = ["Pyro","Electro","Cryo","Hydro"];
-                if(swirlableElements.includes(supportingElement)){
-                    Character.energyOffset-=20;
+            if (Character.constellation >= 4) {
+                const swirlableElements = ["Pyro", "Electro", "Cryo", "Hydro"];
+                if (swirlableElements.includes(supportingElement)) {
+                    Character.energyOffset -= 20;
                 }
             }
             break;
         case "Sethos":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type:"ElectroDMGBonus", Value:20, Source:"C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 20, Source: "C2" });
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 atkBuff += 80;
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.energyOffset -= 20;
             }
             break;
+        case "Shenhe":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 10;
+            }
+            if(Character.constellations >= 2){
+                atkBuff += 15;
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"ElementalSkill", Value:85, Source:"C4"});
+            }
+            break;
+    
+
 
     }
     switch (Character.weapon.name) {
@@ -3206,7 +3219,7 @@ function Simulation(character) {
             }
             break;
         case "Razor":
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 let extraAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Razor" };
                 let AdditonalDMG_Razor = dmgCalc(extraAttack, Character) * numberOfEnemies;
                 totalDmg += AdditonalDMG_Razor;
@@ -3214,10 +3227,10 @@ function Simulation(character) {
             }
             break;
         case "Kokomi":
-            if(Character.constellations >=1){
+            if (Character.constellations >= 1) {
                 let extraAttack = { Multiplier: 30 / 100, Element: "HydroDMGBonus", Scaling: "HP", type: "Special", isReaction: true, Source: "Kokomi" };
                 let AdditonalDMG_Kokomi = dmgCalc(extraAttack, Character) * numberOfEnemies;
-                if(role =="Dps") AdditonalDMG_Kokomi * 4
+                if (role == "Dps") AdditonalDMG_Kokomi * 4
                 else if (role == "Support") AdditonalDMG_Kokomi * 2
                 totalDmg += AdditonalDMG_Kokomi;
                 dmgSources.other.push({ dmg: AdditonalDMG_Kokomi, label: "C1" });
@@ -3745,12 +3758,12 @@ function defCalc(character) {
         if (buff.Type == "defReduction") {
             defReduction += 1 + (buff.Value / 100);
         } else if (buff.Type == "defIgnore") {
-            defIgnore += buff.Value/100;
+            defIgnore += buff.Value / 100;
         }
     });
     let characterLevel = Number.parseInt(character.level.slice(0, character.level.length - 1));
 
-    return (characterLevel + 100) / (((1 - defReduction) *190 + characterLevel + 100)*(1 - defIgnore));
+    return (characterLevel + 100) / (((1 - defReduction) * 190 + characterLevel + 100) * (1 - defIgnore));
 }
 function resCalc(character, element) {
     let res = 10;
