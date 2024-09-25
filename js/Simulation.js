@@ -1791,6 +1791,15 @@ function Simulation(character) {
                 atkBuff += 30;
             }
             break;
+        case "Razor":
+            if(Character.constellations >= 1){
+                Character.currentBuffs.push({Type:"AddativeBonusDMG", Value:10, Source:"C1"});
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type:"defReduction", Value:10, for:"ElementalSkill",Source:"C6"});
+            }
+            break;
+
 
     }
     switch (Character.weapon.name) {
@@ -3153,6 +3162,14 @@ function Simulation(character) {
                 totalDmg += AdditonalDMG_Noelle;
                 dmgSources.other.push({ dmg: AdditonalDMG_Noelle, label: "C4" });
 
+            }
+            break;
+        case "Razor":
+            if(Character.constellations >= 6){
+                let extraAttack = { Multiplier: 100 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Razor" };
+                let AdditonalDMG_Razor = dmgCalc(extraAttack, Character) * numberOfEnemies;
+                totalDmg += AdditonalDMG_Razor;
+                dmgSources.other.push({ dmg: AdditonalDMG_Razor, label: "C6" });
             }
             break;
 
