@@ -10790,7 +10790,7 @@ const Heizou = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 125,
+    energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "C", "Q", "N1", "E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],

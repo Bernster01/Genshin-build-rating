@@ -1842,17 +1842,26 @@ function Simulation(character) {
             }
             break;
         case "Shenhe":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 atkBuff += 15;
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type:"ElementalSkill", Value:85, Source:"C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 85, Source: "C4" });
             }
             break;
-    
+        case "Heizou":
+            if (Character.constellations >= 4) {
+                Character.energyOffset -= 30;
+            }
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ElementalSkillCritRate", Value: 16, Source: "C6" });
+                Character.currentBuffs.push({ Type: "ElementalSkillCritDMG", Value: 32, Source: "C6" });
+            }
+            break;
+
 
 
     }
@@ -3724,6 +3733,7 @@ function getDamageBonus(character, attackAction) {
 function getCrit(character, attackAction) {
     if (character.critRate() >= 0) {
         let bonusCritRate = 0;
+        let bonusCritDMG = 0;
         if (character.name == "Ganyu") {
             character.currentBuffs.forEach(buff => {
                 if (buff.Source == "Undivided Heart") {
@@ -3732,21 +3742,23 @@ function getCrit(character, attackAction) {
             });
         }
         character.currentBuffs.forEach(buff => {
-            if (buff.Type === "PlungeAttackCritRate" && attackAction.type === "PlungeAttack") {
+            if (buff.Type === "PlungeAttackCritRate" && attackAction.type == "PlungeAttack") {
                 bonusCritRate += buff.Value;
             }
-            else if (buff.Type === "ElementalSkillCritRate" && attackAction.type === "ElementalSkill") {
+            else if (buff.Type === "ElementalSkillCritRate" && attackAction.type == "ElementalSkill") {
                 bonusCritRate += buff.Value;
             }
             else if (buff.Type == "ElementalBurstCritRate" && attackAction.type == "ElementalBurst") {
                 bonusCritRate += buff.Value;
+            } else if (buff.Type == "ElementalSkillCritDMG" && attackAction.type == "ElementalSkill") {
+                bonusCritDMG += buff.Value;
             }
         });
         if (character.critRate() + bonusCritRate > 100) {
 
             bonusCritRate -= character.critRate() + bonusCritRate - 100;
         }
-        return (1 + (((character.critRate() + bonusCritRate) / 100) * (character.critDMG() / 100)));
+        return (1 + (((character.critRate() + bonusCritRate) / 100) * ((character.critDMG() + bonusCritDMG) / 100)));
     } else {
         return 1;
     }
