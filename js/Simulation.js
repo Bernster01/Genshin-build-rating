@@ -1809,7 +1809,16 @@ function Simulation(character) {
             if(Character.constellations >= 6){
                 Character.currentBuffs.push({Type:"ResShred", Value:20, Element:"PhysicalDMGBonus", Source:"C6"});
             }
-
+            break;
+        case "Kokomi":
+            if(Character.constellations >= 4){
+                Character.sequence[role].push("N1","N2","N3");
+                Character.energyOffset -= 15;
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type:"HydroDMGBonus", Value:40, Source:"C6"});
+            }
+            break;
     }
     switch (Character.weapon.name) {
         case "A Thousand Floating Dreams":
@@ -3181,11 +3190,19 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Razor, label: "C6" });
             }
             break;
+        case "Kokomi":
+            if(Character.constellations >=1){
+                let extraAttack = { Multiplier: 30 / 100, Element: "HydroDMGBonus", Scaling: "HP", type: "Special", isReaction: true, Source: "Kokomi" };
+                let AdditonalDMG_Kokomi = dmgCalc(extraAttack, Character) * numberOfEnemies;
+                if(role =="Dps") AdditonalDMG_Kokomi * 4
+                else if (role == "Support") AdditonalDMG_Kokomi * 2
+                totalDmg += AdditonalDMG_Kokomi;
+                dmgSources.other.push({ dmg: AdditonalDMG_Kokomi, label: "C1" });
+            }
 
 
     }
 
-    // console.log(totalDmg, heal, atkBuff, shield, dmgSources);
     let bonusMultiplier = 0;
     if (character.weapon.name == "Thrilling Tales of Dragon Slayers")
         if (character.supportType == "ATKBooster") {
