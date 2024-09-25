@@ -1819,6 +1819,18 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type:"HydroDMGBonus", Value:40, Source:"C6"});
             }
             break;
+        case "Sayu":
+            if(Character.constellation >=2){
+                Character.currentBuffs.push({Type:"ElementalSkill", Value:66, Source:"C2"});
+            }
+            if(Character.constellation >=4){
+                const swirlableElements = ["Pyro","Electro","Cryo","Hydro"];
+                if(swirlableElements.includes(supportingElement)){
+                    Character.energyOffset-=20;
+                }
+            }
+            break;
+
     }
     switch (Character.weapon.name) {
         case "A Thousand Floating Dreams":

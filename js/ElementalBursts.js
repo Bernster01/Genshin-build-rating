@@ -1952,6 +1952,13 @@ function mujinaaFlurry(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let flatHeal = 0;
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.attack() * ((0.6/100)*Character.EM()), for:"ElementalBurst" });
+        flatHeal = 3 * Character.EM();
+        if(flatHeal>6000)
+            flatHeal = 6000;
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     let passive = false;
     Character.currentBuffs.forEach(buff => {
@@ -1959,9 +1966,15 @@ function mujinaaFlurry(Character) {
             passive = true;
         }
     })
-    let healing = healActive + (healCont * 7);
+    let healpercent = 0.5;
+    let dmgPercent = 0.5
+    if(Character.constellations >= 1){
+        healpercent = 1;
+        dmgPercent = 1;
+    }
+    let healing = healActive + ((healCont+flatHeal) * 7)*healpercent;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 7*dmgPercent; index++) {
 
         dmg += dmgCalc(attack, Character);
         if (passive) {
