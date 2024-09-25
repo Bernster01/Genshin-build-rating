@@ -1830,6 +1830,17 @@ function Simulation(character) {
                 }
             }
             break;
+        case "Sethos":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type:"ElectroDMGBonus", Value:20, Source:"C2"});
+            }
+            if(Character.constellations >= 4){
+                atkBuff += 80;
+            }
+            if(Character.constellations >= 6){
+                Character.energyOffset -= 20;
+            }
+            break;
 
     }
     switch (Character.weapon.name) {
