@@ -6100,10 +6100,19 @@ function starsGatheratDusk(character) {
     let atkBuff = 0;
     for (buff of character.currentBuffs) {
         if (buff.Type == "Consider, the Adeptus in Her Realm") {
-            atkBuff = character.attack() * (200 / 100);
-            if (atkBuff > 9000)
-                atkBuff = 9000;
-            character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            if(character.constellations >= 2){
+                atkBuff = character.attack() * (400 / 100);
+                if (atkBuff > 18000)
+                    atkBuff = 18000;
+                character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            }
+            else{
+                atkBuff = character.attack() * (200 / 100);
+                if (atkBuff > 9000)
+                    atkBuff = 9000;
+                character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            }
+            
             break;
         }
     }

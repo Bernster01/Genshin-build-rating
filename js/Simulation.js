@@ -1996,6 +1996,18 @@ function Simulation(character) {
                 atkBuff += 15;
             }
             break;
+        case "Xianyun":
+            if(Character.constellations >= 1){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "C2" });
+            }
+            if(Character.constellations >= 6){
+                Character.sequence[role].push("E","E","E","E","E","E","E","E")
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6", for:"Driftcloud Wave" });
+            }
+            break;
 
 
 
@@ -3955,6 +3967,9 @@ function getCrit(character, attackAction) {
                 bonusCritRate += buff.Value;
             } else if (buff.Type == "CritDMG" && buff.for == attackAction.type) {
                 bonusCritDMG += buff.Value;
+            }
+            else if (buff.Type == "CritRate" && buff.for == attackAction.type2) {
+                bonusCritRate += buff.Value;
             }
             else if (buff.Type == "CritRate") {
                 bonusCritRate += buff.Value;

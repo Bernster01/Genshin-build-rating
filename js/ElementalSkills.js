@@ -6329,7 +6329,7 @@ function whiteCloudsatDawn(character) {
             break;
     }
     let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let driftcloudWave = { Multiplier: driftcloudWaveDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "PlungeAttack" }
+    let driftcloudWave = { Multiplier: driftcloudWaveDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "PlungeAttack", type2:"Driftcloud Wave"}
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     dmg += dmgCalc(driftcloudWave, character) * numberOfEnemies;
     for (buff of character.currentBuffs) {
@@ -6337,7 +6337,11 @@ function whiteCloudsatDawn(character) {
             character.currentBuffs.push({ Type: "PlungeAttackCritRate", Value: 10, for: "PlungeAttack" });// Full buff
         }
     }
-    return { dmg: dmg };
+    let heal = 0;
+    if(character.constellations >= 4){
+        heal = character.attack() * (50 / 100);
+    }
+    return { dmg: dmg, healing: heal };
 }
 
 function raphanusSkyCluster(character) {
