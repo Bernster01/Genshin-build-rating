@@ -27819,7 +27819,31 @@ const Yanfei = {
         },
         Element: "PyroDMGBonus",
         isReaction: true,
-        scaling: "ATK"
+        scaling: "ATK", 
+        extraMultiplier: function (level) {
+            switch (level) {
+                case 1:
+                    return 167.57 / 100;
+                case 2:
+                    return 177.6 / 100;
+                case 3:
+                    return 187.64 / 100;
+                case 4:
+                    return 200.68 / 100;
+                case 5:
+                    return 210.71 / 100;
+                case 6:
+                    return 220.75 / 100;
+                case 7:
+                    return 233.79 / 100;
+                case 8:
+                    return 246.84 / 100;
+                case 9:
+                    return 259.88 / 100;
+                case 10:
+                    return 272.92 / 100;
+            }
+        },
     },
     plungeAttack: {
         Multiplier: function (level) {

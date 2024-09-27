@@ -2036,12 +2036,20 @@ function Simulation(character) {
             }
             break;
         case "Yae Miko":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 40;
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type: "ElectroDMGBonus", Value: 20, Source: "C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ElectroDMGBonus", Value: 20, Source: "C4" });
                 atkBuff += 20;
+            }
+            break;
+        case "Yanfei":
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 20, for: "ChargedAttack", Source: "C1" });
+            }
+            if (Character.constellations >= 6) {
+                Character.chargedAttack.Multiplier = Character.chargedAttack.extraMultiplier;
             }
             break;
 
@@ -3487,6 +3495,12 @@ function Simulation(character) {
                     totalDmg += AdditonalDMG_Xiangling;
                     dmgSources.other.push({ dmg: AdditonalDMG_Xiangling, label: "C2" });
                 }
+            }
+            break;
+        case "Yanfei":
+            if (Character.constellations >= 4) {
+                let extraShield = Character.HP() * (45 / 100);
+                shield += extraShield;
             }
             break;
 
