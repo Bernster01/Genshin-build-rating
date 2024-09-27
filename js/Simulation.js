@@ -2060,6 +2060,14 @@ function Simulation(character) {
                 Character.energyOffset -= 40;
             }
             break;
+        case "Yelan":
+            if(Character.constellations >= 1){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type: "HP%", Value: 40, Source: "C4"});
+            }
+            break;
 
 
     }
@@ -3521,6 +3529,20 @@ function Simulation(character) {
                 heal += extraHeal;
             }
             break;
+        case "Yelan":
+            if(Character.constellations >= 6){
+                let extraAttacks = {Multiplier: Character.chargedAttack.Skill()*(156/100), Element: "Hydro", Scaling: "HP", type: "ChargedAttack", isReaction: true, Source: "Yelan"};
+                let AdditonalDMG_Yelan = dmgCalc(extraAttacks, Character) * numberOfEnemies;
+                AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
+                extraAttacks.isReaction = false;
+                AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
+                AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
+                AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
+
+                totalDmg += AdditonalDMG_Yelan;
+                dmgSources.other.push({dmg: AdditonalDMG_Yelan, label: "C6"});
+            
+            }
 
 
 

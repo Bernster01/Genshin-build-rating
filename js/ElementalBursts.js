@@ -4276,7 +4276,7 @@ function depthClarionDice(character) {
     let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;//Initial
     let hasBuff = false;
-    for (buff of character.currentBuffs) {
+    for (let buff of character.currentBuffs) {
         if (buff.Type == "Adapt With Ease") {
             hasBuff = true;
             character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 1 });
@@ -4294,6 +4294,11 @@ function depthClarionDice(character) {
             character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 3.5 });
         }
 
+    }
+    if(character.constellations >= 2){
+        for(let index = 0; index < 7; index++){
+            dmg += dmgCalc(attack2, character);
+        }
     }
     return dmg;
 }

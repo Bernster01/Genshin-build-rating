@@ -28522,11 +28522,32 @@ const Yelan = {
     },
     chargedAttack: {
         Multiplier: function (level) {
-            return 0;
+            switch (level) {
+                case 1:
+                    return 11.58 / 100;
+                case 2:
+                    return 12.44 / 100;
+                case 3:
+                    return 13.31 / 100;
+                case 4:
+                    return 14.47 / 100;
+                case 5:
+                    return 15.34 / 100;
+                case 6:
+                    return 16.21 / 100;
+                case 7:
+                    return 17.36 / 100;
+                case 8:
+                    return 18.52 / 100;
+                case 9:
+                    return 19.68 / 100;
+                case 10:
+                    return 20.84 / 100;
+            }
         },
         Element: "HydroDMGBonus",
         isReaction: true,
-        scaling: "ATK"
+        scaling: "HP"
     },
     plungeAttack: {
         Multiplier: function (level) {
