@@ -28000,7 +28000,7 @@ const Yaoyao = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 240,
     supportType: "Healer",
     supportType2: "Sub-dps",
     sequence: {

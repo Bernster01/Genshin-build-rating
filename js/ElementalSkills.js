@@ -6443,6 +6443,12 @@ function raphanusSkyCluster(character) {
     }
     healingHasOccured(character);
     healing *= 1 + (character.advancedstats.healingBonus / 100);
+    if(character.constellations >= 4){
+        let buffValue = character.HP() * (0.3 / 100);
+        if(buffValue > 120)
+            buffValue = 120; 
+        character.currentBuffs.push({ Type: "ElementalMastery", Value: buffValue, for: "ElementalSkill" });
+    }
     return { dmg: dmg, healing: healing };
 }
 

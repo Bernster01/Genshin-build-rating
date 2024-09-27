@@ -2052,6 +2052,14 @@ function Simulation(character) {
                 Character.chargedAttack.Multiplier = Character.chargedAttack.extraMultiplier;
             }
             break;
+        case "Yaoyao":
+            if (Character.constellations >= 1) {
+                atkBuff += 15;
+            }
+            if (Character.constellations >= 2) {
+                Character.energyOffset -= 40;
+            }
+            break;
 
 
     }
@@ -3501,6 +3509,16 @@ function Simulation(character) {
             if (Character.constellations >= 4) {
                 let extraShield = Character.HP() * (45 / 100);
                 shield += extraShield;
+            }
+            break;
+        case "Yaoyao":
+            if (Character.constellations >= 6) {
+                let extraAttack = { Multiplier: 75 / 100, Element: "DendroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: true, Source: "Yaoyao" };
+                let AdditonalDMG_Yaoyao = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                totalDmg += AdditonalDMG_Yaoyao;
+                dmgSources.e += AdditonalDMG_Yaoyao;
+                let extraHeal = Character.HP() * (7.5 / 100) * 2;
+                heal += extraHeal;
             }
             break;
 
