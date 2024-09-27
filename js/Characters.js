@@ -21989,7 +21989,7 @@ const Sucrose = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 160,
     supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4", "N1", "N2", "N3", "N4"],

@@ -2046,7 +2046,11 @@ function forbiddenCreation(Character) {
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
     let emBuff = 0;
-    for (let index = 0; index < 3; index++) {
+    let extraAttack = 0;
+    if(Character.constellations >= 2){
+        extraAttack = 1;
+    }
+    for (let index = 0; index < 3+extraAttack; index++) {
         attack.Multiplier = Multiplier;
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
         attack.Multiplier = Multiplier2;

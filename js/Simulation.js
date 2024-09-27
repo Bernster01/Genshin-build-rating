@@ -1861,6 +1861,19 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "ElementalSkillCritDMG", Value: 32, Source: "C6" });
             }
             break;
+        case "Sucrose":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("E");
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 4){
+                Character.sequence["Dps"].push("E");
+            }
+            if(Character.constellations >= 6){
+                atkBuff += 20;
+            }
+            break;
+
 
 
 
