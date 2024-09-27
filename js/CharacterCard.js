@@ -67,7 +67,7 @@ function generateCharacterCard(character, score, supportingElement, role, resona
                 <h4 style="border:none;">Date: ${date}</h4>
             </div>
             <div class="result-splash-top-info-part">
-                <h1 id="result-splash-name" style="margin:0;">${character.name}</h1>
+                <h1 id="result-splash-name" style="margin:0;">C${character.constellations} ${character.name}</h1>
                 <span id="result-splash-grade" style="font-size:32pt;">Grade: ${grade} tier</span>
                 <span id="result-splash-score" style="font-size:14pt; margin-top: -1rem;">Score: ${score}/100</span>
             </div>
@@ -488,37 +488,7 @@ function getResonance(resonances) {
     
     return htmlCode;
 }
-function getGrade(score) {
-    let grade;
-    if (score >= 0 && score < 30) {
-        grade = "F";
-    }
-    else if (score >= 30 && score <= 35) {
-        grade = "E";
-    }
-    else if (score >= 35 && score < 45) {
-        grade = "D";
-    }
-    else if (score >= 45 && score < 55) {
-        grade = "C";
-    }
-    else if (score >= 55 && score < 65) {
-        grade = "B";
-    }
-    else if (score >= 65 && score < 75) {
-        grade = "A";
-    }
-    else if (score >= 75 && score < 85) {
-        grade = "S";
-    }
-    else if (score >= 85 && score <= 100) {
-        grade = "S+";
-    }
-    else if (score >= 101) {
-        grade = "God";
-    }
-    return grade;
-}
+
 function switchCharacterCardContainer() {
     if (characterCardContainerIsOpen) {
         characterCardContainerIsOpen = false;

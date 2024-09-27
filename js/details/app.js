@@ -11,7 +11,7 @@ function starterFunction() {
     role = builds.user.role;
     charts = circleGraph(builds.user, builds.build);
     let damageGrahp = barGraphDamage(builds.user, builds.build);
-    if(role == "Support"){
+    if (role == "Support") {
         let supportGraph = barGraphSupport(builds.user, builds.build);
     }
     else {
@@ -20,7 +20,9 @@ function starterFunction() {
     // applyBackgrounds(builds);
     document.getElementById("character_name").innerText = builds.user.character.name;
     document.getElementById("character_img").src = `${builds.user.character.splashArt}`;
-    const characters = simulateOnce(builds);
+    const character1 = getStats(builds.user);
+    const character2 = getStats(builds.build);
+    const characters = { user: character1, build: character2 };
     const table = tableBuilder(characters);
     document.getElementById("table_container").insertAdjacentElement("afterbegin", table);
     const userArtifact = artifactBuilder(builds.user, "Your");
@@ -28,9 +30,9 @@ function starterFunction() {
     document.getElementById("artifacts").appendChild(userArtifact);
     document.getElementById("artifacts").appendChild(buildArtifact);
     let text = `You got a Score of ${Math.floor(builds.user.buildScore)} resulting in a grade of "${getGrade(builds.user.buildScore)}-tier".`;
-    let energyPercent = Math.floor((characters.user.energyRecharge() / characters.user.energyOffset) * 100);
+    let energyPercent = Math.floor((characters.user.energyRecharge() / builds.user.character.energyOffset) * 100);
     if (energyPercent < 100) {
-        text += `\n  Your energy recharge is ${energyPercent}% of the recommended amount of ${characters.user.energyOffset}. Your score suffered negatively because of this.`;
+        text += `\n  Your energy recharge is ${energyPercent}% of the recommended amount of ${builds.user.character.energyOffset}. Your score suffered negatively because of this.`;
     }
     document.getElementById("result_info").innerText = text
 }
@@ -67,21 +69,21 @@ function tableBuilder(builds) {
     let user = builds.user;
     let build = builds.build;
     console.log(user);
-   
+
     let table = document.createElement("table");
     // build.weapon.level = convertBuildLevel(build.weapon.level);
-  
+
     let userIsHigherImg = `<img src="Assets/Icons/arrow-up.svg" style="width: 20px; height: 20px; title="You have higer" alt="Green arrow pointing up">`;
     let buildIsHigherImg = `<img src="Assets/Icons/arrow-down.svg" style="width: 20px; height: 20px;" title="You have lower" alt="Red arrow pointing Down">`;
-    const usersLevelIsHigherLowerOrEqual =  convertBuildLevel(user.level).Value > convertBuildLevel(build.level).Value ? userIsHigherImg :  convertBuildLevel(user.level).Value <  convertBuildLevel(build.level).Value ? buildIsHigherImg : "-";
+    const usersLevelIsHigherLowerOrEqual = convertBuildLevel(user.level).Value > convertBuildLevel(build.level).Value ? userIsHigherImg : convertBuildLevel(user.level).Value < convertBuildLevel(build.level).Value ? buildIsHigherImg : "-";
     const usersNormalAttackIsHigherLowerOrEqual = user.normalAttackLevel > build.normalAttackLevel ? userIsHigherImg : user.normalAttackLevel < build.normalAttackLevel ? buildIsHigherImg : "-";
     const usersElementalSkillIsHigherLowerOrEqual = user.elementalSkill.Level > build.elementalSkill.Level ? userIsHigherImg : user.elementalSkill.Level < build.elementalSkill.Level ? buildIsHigherImg : "-";
     const usersElementalBurstIsHigherLowerOrEqual = user.elementalBurst.Level > build.elementalBurst.Level ? userIsHigherImg : user.elementalBurst.Level < build.elementalBurst.Level ? buildIsHigherImg : "-";
-    const usersWeaponIsHigherLowerOrEqual =  convertBuildLevel(user.weapon.level).Value > convertBuildLevel(build.weapon.level).Value ? userIsHigherImg : convertBuildLevel(user.weapon.level).Value < convertBuildLevel(build.weapon.level).Value ? buildIsHigherImg : "-";
+    const usersWeaponIsHigherLowerOrEqual = convertBuildLevel(user.weapon.level).Value > convertBuildLevel(build.weapon.level).Value ? userIsHigherImg : convertBuildLevel(user.weapon.level).Value < convertBuildLevel(build.weapon.level).Value ? buildIsHigherImg : "-";
     const usersHP = user.HP() > build.HP() ? userIsHigherImg : user.HP() < build.HP() ? buildIsHigherImg : "-";
     const usersATK = user.attack() > build.attack() ? userIsHigherImg : user.attack() < build.attack() ? buildIsHigherImg : "-";
     const usersDEF = user.DEF() > build.DEF() ? userIsHigherImg : user.DEF() < build.DEF() ? buildIsHigherImg : "-";
-  
+
     const usersCritRate = user.critRate() > build.critRate() ? userIsHigherImg : user.critRate() < build.critRate() ? buildIsHigherImg : "-";
     const usersCritDMG = user.critDMG() > build.critDMG() ? userIsHigherImg : user.critDMG() < build.critDMG() ? buildIsHigherImg : "-";
     const usersEM = user.EM() > build.EM() ? userIsHigherImg : user.EM() < build.EM() ? buildIsHigherImg : "-";
@@ -144,106 +146,106 @@ function tableBuilder(builds) {
             </tr>
             <tr>
                 <td>HP</td>
-                <td>${round(user.HP(),1)}</td>
+                <td>${round(user.HP(), 1)}</td>
                 <td>${usersHP}</td>
-                <td>${round(build.HP(),1)}</td>
+                <td>${round(build.HP(), 1)}</td>
             </tr>
             <tr>
                 <td>ATK</td>
-                <td>${round(user.attack(),1)}</td>
+                <td>${round(user.attack(), 1)}</td>
                 <td>${usersATK}</td>
-                <td>${round(build.attack(),1)}</td>
+                <td>${round(build.attack(), 1)}</td>
             </tr>
             <tr>
                 <td>DEF</td>
-                <td>${round(user.DEF(),1)}</td>
+                <td>${round(user.DEF(), 1)}</td>
                 <td>${usersDEF}</td>
-                <td>${round(build.DEF(),1)}</td>
+                <td>${round(build.DEF(), 1)}</td>
             </tr>
             <tr>
                 <td>Crit Rate</td>
-                <td>${round(user.critRate(),1)}%</td>
+                <td>${round(user.critRate(), 1)}%</td>
                 <td>${usersCritRate}</td>
-                <td>${round(build.critRate(),1)}%</td>
+                <td>${round(build.critRate(), 1)}%</td>
             </tr>
             <tr>
                 <td>Crit Damage</td>
-                <td>${round(user.critDMG(),1)}%</td>
+                <td>${round(user.critDMG(), 1)}%</td>
                 <td>${usersCritDMG}</td>
-                <td>${round(build.critDMG(),1)}%</td>
+                <td>${round(build.critDMG(), 1)}%</td>
             </tr>
             <tr>
                 <td>Elemental Mastery</td>
-                <td>${round(user.EM(),1)}</td>
+                <td>${round(user.EM(), 1)}</td>
                 <td>${usersEM}</td>
-                <td>${round(build.EM(),1)}</td>
+                <td>${round(build.EM(), 1)}</td>
             </tr>
             <tr>
                 <td>Energy Recharge</td>
-                <td>${round(user.advancedstats.energyRecharge,1)}%</td>
+                <td>${round(user.advancedstats.energyRecharge, 1)}%</td>
                 <td>${usersEnergyRecharge}</td>
-                <td>${round(build.advancedstats.energyRecharge,1)}%</td>
+                <td>${round(build.advancedstats.energyRecharge, 1)}%</td>
             </tr>
             <tr>
                 <td>Healing Bonus</td>
-                <td>${round(user.advancedstats.healingBonus,1)}%</td>
+                <td>${round(user.advancedstats.healingBonus, 1)}%</td>
                 <td>${usersHealingBonus}</td>
-                <td>${round(build.advancedstats.healingBonus,1)}%</td>
+                <td>${round(build.advancedstats.healingBonus, 1)}%</td>
             </tr>
             <tr>
                 <td>Shield Strength</td>
-                <td>${round(user.advancedstats.shieldStrength,1)}</td>
+                <td>${round(user.advancedstats.shieldStrength, 1)}</td>
                 <td>${usersShieldStrength}</td>
-                <td>${round(build.advancedstats.shieldStrength,1)}</td>
+                <td>${round(build.advancedstats.shieldStrength, 1)}</td>
             </tr>
             
             <tr>
                 <td>Pyro DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[0].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[0].Value, 1)}%</td>
                 <td>${usersPyroDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[0].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[0].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Hydro DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[1].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[1].Value, 1)}%</td>
                 <td>${usersHydroDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[1].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[1].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Dendro DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[2].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[2].Value, 1)}%</td>
                 <td>${usersDendroDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[2].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[2].Value, 1)}%</td>
             </tr>
              <tr>
                 <td>Electro DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[3].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[3].Value, 1)}%</td>
                 <td>${usersElectroDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[3].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[3].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Anemo DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[4].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[4].Value, 1)}%</td>
                 <td>${usersAnemoDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[4].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[4].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Cryo DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[5].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[5].Value, 1)}%</td>
                 <td>${usersCryoDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[5].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[5].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Geo DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[6].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[6].Value, 1)}%</td>
                 <td>${usersGeoDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[6].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[6].Value, 1)}%</td>
             </tr>
             <tr>
                 <td>Physical DMG Bonus</td>
-                <td>${round(user.advancedstats.elementalBonuses[7].Value,1)}%</td>
+                <td>${round(user.advancedstats.elementalBonuses[7].Value, 1)}%</td>
                 <td>${usersPhysicalDMGBonus}</td>
-                <td>${round(build.advancedstats.elementalBonuses[7].Value,1)}%</td>
+                <td>${round(build.advancedstats.elementalBonuses[7].Value, 1)}%</td>
             </tr>
 
 
@@ -364,70 +366,60 @@ function artifactBuilder(character, type) {
     return artifactContainer;
 
 }
-function simulateOnce(builds) {
-    let baseCharacter = AllCharacters[builds.user.character.name];
-    let character1 = deepClone(baseCharacter);
-    let character2 = deepClone(baseCharacter);
-    //Replace &#39 with ' for the weapon name
-    builds.user.weapon.name = builds.user.weapon.name.replace("&#39", "'");
-    builds.build.weapon.name = builds.build.weapon.name.replace("&#39", "'");
-    let weapon1 = deepClone(AllWeapons[builds.user.weapon.name]);
-    weapon1.level = builds.user.weapon.level;
-    let weapon2 = deepClone(AllWeapons[builds.build.weapon.name]);
-    weapon2.level = builds.build.weapon.level;
-    character1.level = builds.user.character.level;
-    character1.elementalSkill.Level = builds.user.character.elementalSkillLevel.Level;
-    character1.elementalBurst.Level = builds.user.character.elementalBurstLevel.Level;
-    character1.normalAttackLevel = builds.user.character.normalAttackLevel;
+function getStats(build) {
+    let Character = {
+        HP: function () {
+            return build.character.hp;
+        },
+        attack: function () {
+            return build.character.attack;
+        },
+        DEF: function () {
+            return build.character.def;
+        },
+        critRate: function () {
+            return build.character.critRate;
+        },
+        critDMG: function () {
+            return build.character.critDMG;
+        },
+        EM: function () {
+            return build.character.em;
+        },
+        energyRecharge: function () {
+            return build.character.energyRecharge;
+        },
+        advancedstats: {
+            energyRecharge: build.character.energyRecharge,
+            healingBonus: build.character.healingBonus,
+            shieldStrength: build.character.shieldStrength,
+            elementalBonuses: [
+                build.character.pyroDMGBonus,
+                build.character.hydroDMGBonus,
+                build.character.dendroDMGBonus,
+                build.character.electroDMGBonus,
+                build.character.anemoDMGBonus,
+                build.character.cryoDMGBonus,
+                build.character.geoDMGBonus,
+                build.character.physicalDMGBonus
+            ]
+        },
+        level: build.character.level,
+        elementalSkill: {
+            Level: build.character.elementalSkillLevel.Level
+        },
+        elementalBurst: {
+            Level: build.character.elementalBurstLevel.Level
+        },
+        normalAttackLevel: build.character.normalAttackLevel,
+        weapon: {
+            name: build.weapon.name,
+            level: build.weapon.level,
+        },
+        name: build.character.name,
 
-    character2.level = builds.build.character.level;
-    character2.elementalSkill.Level = builds.build.character.elementalSkillLevel.Level;
-    character2.elementalBurst.Level = builds.build.character.elementalBurstLevel.Level;
-    character2.normalAttackLevel = builds.build.character.normalAttackLevel;
-    let userCharacter = new Createcharacter(
-        character1,
-        weapon1,
-        builds.user.artifacts,
-    );
-    let siteCharacter = new Createcharacter(
-        character2,
-        weapon2,
-        builds.build.artifacts,
-    );
-    applyBonuses(userCharacter);
-    applyBonuses(siteCharacter);
-    return { user: userCharacter, build: siteCharacter };
-}
-function getGrade(score) {
-    let grade;
-    if (score >= 0 && score < 30) {
-        grade = "F";
     }
-    else if (score >= 30 && score <= 35) {
-        grade = "E";
-    }
-    else if (score >= 35 && score < 45) {
-        grade = "D";
-    }
-    else if (score >= 45 && score < 55) {
-        grade = "C";
-    }
-    else if (score >= 55 && score < 65) {
-        grade = "B";
-    }
-    else if (score >= 65 && score < 75) {
-        grade = "A";
-    }
-    else if (score >= 75 && score < 85) {
-        grade = "S";
-    }
-    else if (score >= 85 && score <= 100) {
-        grade = "S+";
-    }
-    else if (score >= 101) {
-        grade = "God";
-    }
-    return grade;
+    return Character;
 }
 function deepClone(obj, hash = new WeakMap()) {
     if (Object(obj) !== obj || typeof obj === 'function') return obj; // Handle primitives and functions

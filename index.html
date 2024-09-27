@@ -148,13 +148,13 @@
 								<div>
 									<label for="constellation">Constellation</label>
 									<select class="select" id="constellation">
-										<option value="0">C0 (Not supported)</option>
-										<option value="1">C1 (Not supported)</option>
-										<option value="2">C2 (Not supported)</option>
-										<option value="3">C3 (Not supported)</option>
-										<option value="4">C4 (Not supported)</option>
-										<option value="5">C5 (Not supported)</option>
-										<option value="6">C6 (Not supported)</option>
+										<option value="0">C0</option>
+										<option value="1">C1</option>
+										<option value="2">C2</option>
+										<option value="3">C3</option>
+										<option value="4">C4</option>
+										<option value="5">C5</option>
+										<option value="6">C6</option>
 									</select>
 								</div>
 							</div>
@@ -731,7 +731,22 @@
 									shields?</label>
 								<input type="checkbox" id="partyGivesShield">
 							</div>
-
+							<div id="nahidaSettings">
+								<h3>Nahida Settings</h3>
+								<div>
+									<label for="nahida_hyperbloom">Does party trigger Hyperbloom?</label>
+									<select id="nahida_hyperbloom" onchange="nahidaSettings(this.id)">
+										<option value="0">No</option>
+										<option value="1">Yes</option>
+									</select>
+									<br>
+									<label for="nahida_burgeoning">Does party trigger Burgeon?</label>
+									<select id="nahida_burgeoning" onchange="nahidaSettings(this.id)">
+										<option value="0">No</option>
+										<option value="1">Yes</option>
+									</select>
+								</div>
+							</div>
 
 							<label for="simulationRuns">Simulation Runs</label>
 							<input type="number" id="simulationRuns" placeholder="default 25">
@@ -805,6 +820,8 @@
 		<div class="sim-running-box">
 			<p>Simulating... Run: <span id="currentSimRun"></span>/<span id="howManySimRuns"></span> (<span
 					id="percentDone"></span>%)</p>
+			<p>Build Improvements: <span id="build_improvements"></span></p>
+			<p>Time since last improvement <span id="build_improvements_time"></span></p>
 			<div id="loadingPaimon-wrapper">
 				<div id="loadingPaimon-container">
 					<figure id="loadingPaimon">
@@ -824,6 +841,7 @@
 	<script src="js/Math.js"></script>
 	<script src="js/Characters.js"></script>
 	<script src="js/SimulationTranslationLayer.js"></script>
+	<script src="js/grade.js"></script>
 	<script>
 		function displayArtifact(element) {
 			let parent = element.parentElement;
@@ -843,6 +861,57 @@
 			loadWeapons(character.title);
 			//set weapon to default
 			resetWeaponToDeafault();
+			switch (target.title) {
+				case "Tartaglia":
+					//Increase options for normal attack
+					const selectT = document.getElementById("normal_attack");
+					const option11_tartaglia = document.createElement("option");
+					option11_tartaglia.text = "Level 11";
+					option11_tartaglia.value = 11;
+					selectT.add(option11_tartaglia);
+					break;
+				case "Arlecchino":
+					//Increase options for normal attack
+					const select = document.getElementById("normal_attack");
+					const option11 = document.createElement("option");
+					option11.text = "Level 11";
+					option11.value = 11;
+					select.add(option11);
+					const option12 = document.createElement("option");
+					option12.text = "Level 12";
+					option12.value = 12;
+					select.add(option12);
+					const option13 = document.createElement("option");
+					option13.text = "Level 13";
+					option13.value = 13;
+					select.add(option13);
+					break;
+				case "Nahida":
+					//Reveal hidden settings
+					document.getElementById("nahidaSettings").style.display = "block";
+					break;
+				default:
+					//Reset options for normal attack to 10
+					const select2 = document.getElementById("normal_attack");
+					if (select2.length > 10) {
+						select2.innerHTML = `
+										<option value="1">Level 1</option>
+										<option value="2">Level 2</option>
+										<option value="3">Level 3</option>
+										<option value="4">Level 4</option>
+										<option value="5">Level 5</option>
+										<option value="6">Level 6</option>
+										<option value="7">Level 7</option>
+										<option value="8">Level 8</option>
+										<option value="9">Level 9</option>
+										<option value="10">Level 10</option>
+					`;
+					}
+					//Hide hidden settings
+					document.getElementById("nahidaSettings").style.display = "none";
+
+					break;
+			}
 		}
 		function resetWeaponToDeafault() {
 			let img = document.getElementById("SelectWeaponImg");

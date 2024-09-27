@@ -9,7 +9,7 @@ async function prepare(button) {
     const partyMemberElement1 = document.getElementById("partyMemberElement1").value;
     const partyMemberElement2 = document.getElementById("partyMemberElement2").value;
     const partyMemberElement3 = document.getElementById("partyMemberElement3").value;
-    let partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
+    partyMemberElements = [partyMemberElement1, partyMemberElement2, partyMemberElement3];
     if (runs === "" || runs === null || runs === undefined) {
         runs = 25;
     }
@@ -23,7 +23,7 @@ async function prepare(button) {
     baseCharacter.level = document.getElementById("character_level").value;
     weapon.level = document.getElementById("weapon_level").value;
     //Set constellation
-    /*TODO: Add constellation*/
+    let constellations = document.getElementById("constellation").value;
     //Set weapon refinement
     /*TODO: Add weapon refinement*/
     //Set talents
@@ -35,13 +35,15 @@ async function prepare(button) {
     //run simulation
     simScreen.style.display = "grid";
     document.getElementById("howManySimRuns").innerText = runs;
-    await delay(200);
+    await delay(100);
     if (getJSON) {
         await getBestBuildForCharacter(baseCharacter, runs);
         simScreen.style.display = "none";
     }
     else {
-        await runSimulation(baseCharacter, weapon, artifacts, runs);
+        bestSupportScore = 0;
+        bestDMG = 0;
+        await runSim(baseCharacter, weapon, artifacts, runs, constellations);
         simScreen.style.display = "none";
     }
 
@@ -161,16 +163,15 @@ function getArtifacts() {
 
     return [circlet, flower, plume, sands, goblet];
 }
-function runSimulation(character, weapon, artifacts, runs) {
-    // console.log("Running simulation");
-    // console.log(character);
-    // console.log(weapon);
-    // console.log(artifacts);
-    bestSupportScore = 0;
-    bestDMG = 0;
-    // validateAllCharacters();
-    return runSim(character, weapon, artifacts, runs);
-}
+// function runSimulation(character, weapon, artifacts, runs) {
+//     // console.log("Running simulation");
+//     // console.log(character);
+//     // console.log(weapon);
+//     // console.log(artifacts);
+   
+//     // validateAllCharacters();
+//     return runSim(character, weapon, artifacts, runs);
+// }
 
 function sendBuild() {
     //Go to details.html with a post package

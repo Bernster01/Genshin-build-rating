@@ -256,7 +256,20 @@ const artifactTypes = {
         substats: ["HPflat", "HP%", "ATKflat", "ATK%", "DEFflat", "DEF%", "CritRate", "CritDMG", "EnergyRecharge", "ElementalMastery"]
     },
 }
-
+function nahidaSettings(id) {
+    const burgeon = document.getElementById('nahida_burgeoning').value
+    const hyperbloom = document.getElementById('nahida_hyperbloom').value
+    if(burgeon == 1 && id == 'nahida_burgeoning') {
+        document.getElementById('nahida_hyperbloom').value = 0
+        triggerBurgeoning = true
+        triggerHyperbloom = false
+    }
+    if(hyperbloom == 1 && id == 'nahida_hyperbloom') {
+        document.getElementById('nahida_burgeoning').value = 0
+        triggerBurgeoning = false
+        triggerHyperbloom = true
+    }
+}
 function updateArtifactBefore() {
     let artifacts = document.querySelectorAll(".artifact");
     //change the ::before content of the artifact to the element's id

@@ -1,3 +1,5 @@
+
+
 function soumetsu(Character) {
     let Multiplier = 0;
     let Multiplier2 = 0;
@@ -57,11 +59,19 @@ function soumetsu(Character) {
     }
     let attack = { Multiplier: Multiplier2, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if (Character.constellations >= 4) {
+        Character.currentBuffs.push({ Type: "defReduction", Value: 30 });
+    }
     for (let index = 0; index < 7; index++) {
         attack.Multiplier = Multiplier;
         dmg += dmgCalc(attack, Character) * numberOfEnemies
 
+    }
+    if (Character.constellations >= 2) {
+        extraAttack = { Multiplier: Multiplier * 0.2, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+        for (let index = 0; index < 7; index++) {
+            dmg += dmgCalc(extraAttack, Character) * numberOfEnemies * 2
+        }
     }
 
 
@@ -126,6 +136,11 @@ function tectonicTide(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    //C2
+    if (Character.constellation >= 2) {
+        const flatDMG = Character.DEF() * 0.3 * 4;
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: flatDMG, for: "ElementalBurst" });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack = { Multiplier: Multiplier2, Element: "GeoDMGBonus", Scaling: "ATK" }
     dmg += dmgCalc(attack, Character) * numberOfEnemies * 7;
@@ -180,7 +195,9 @@ function fieryRain(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if (Character.constellations >= 6) {
+        Character.currentBuffs.push({ Type: "ATK%", Value: 15 });
+    }
 
 
     return dmg;
@@ -293,13 +310,17 @@ function stormbreaker(Character) {
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let attack2 = { Multiplier: Multiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    for (let i = 1; i >= 15; i++) {
-        if (i % 2) {
+    let extraArcs = 0;
+    if (Character.constellations >= 2) {
+        extraArcs = 2;
+    }
+    for (let i = 1; i <= 15; i++) {
+        if (i % 3 == 0) {
             attack2.isReaction = true;
-            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+            dmg += dmgCalc(attack, Character) * (numberOfEnemies + extraArcs);
         } else {
-            attack2.isReaction = true;
-            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+            attack2.isReaction = false;
+            dmg += dmgCalc(attack, Character) * (numberOfEnemies + extraArcs);
         }
     }
     return dmg;
@@ -380,7 +401,22 @@ function fantasticVoyage(Character) {
     let healing = Multiplier2 * 5 * (1 + (Character.advancedstats.healingBonus / 100));
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     let attackBuff = Multiplier3;
+    if (Character.constellations >= 1) {
+        attackBuff += 0.2 * Character.baseAttack;
+    }
+    Character.currentBuffs.push({ Type: "ATKflat", Value: attackBuff });
+    if (Character.constellations >= 6) {
+        Character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 15 });
+        Character.normalAttack1.Element = "PyroDMGBonus";
+        Character.normalAttack1.isReaction = true;
+        Character.normalAttack2.Element = "PyroDMGBonus";
+        Character.normalAttack2.isReaction = false;
+        Character.normalAttack3.Element = "PyroDMGBonus";
+        Character.normalAttack3.isReaction = false;
+        Character.normalAttack4.Element = "PyroDMGBonus";
+        Character.normalAttack4.isReaction = false;
 
+    }
     return { dmg: dmg, healing: healing, attackBuff: attackBuff };
 }
 
@@ -429,8 +465,13 @@ function cloudPartingStar(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
-    for (let i = 1; i <= 3; i++) {
-        for (let n = 1; n <= 3; n++) {
+    let extraSword = 0
+    if (Character.constellations >= 6) {
+        extraSword = 1;
+        Character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 15, for: "ElementalBurst" });
+    }
+    for (let i = 1; i <= 3 + extraSword; i++) {
+        for (let n = 1; n <= 3 + extraSword; n++) {
             if (n % 3 == 0) {
                 attack.isReaction = true;
                 dmg += dmgCalc(attack, Character);
@@ -548,7 +589,7 @@ function dawn(Character) {
 function signatureMix(Character) {
     let Multiplier = 0;
     let Multiplier2 = 0;
-    let Multiplier3 = 0;
+    let Multipler3 = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
             Multiplier = 80 / 100;
@@ -622,8 +663,13 @@ function signatureMix(Character) {
     for (let i = 1; i <= 6; i++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
     }
-    let heal = Multiplier3 * 6;
-    return { dmg: dmg, heal, heal };
+    let heal = Multipler3 * 6;
+    if (Character.constellations >= 6) {
+
+        heal *= 1 + ((30 / 100) / 2);
+
+    }
+    return { dmg: dmg, healing: heal };
 }
 
 function glacialIllumination(Character) {
@@ -699,10 +745,12 @@ function glacialIllumination(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    let tmp = dmg;
     let stacks = 13;
     if (Character.weapon.name == "Song of Broken Pines") {
         stacks += 1
+    }
+    if (Character.constellations >= 6) {
+        stacks += 11;
     }
     attack.Multiplier = Multiplier2 + (Multiplier3 * stacks);
     attack.isReaction = false;
@@ -770,20 +818,12 @@ function midnightPhantasmagoria(Character) {
     }
     let attack = { Multiplier: Multiplier2, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    // attack.Multiplier = Multiplier;
-    // attack.type = "ElementalSkill";
-    // for (let i = 1; i <= 12; i++) {
-    //     //Fischl have different ICD
-    //     if (i % 4 == 0) {
-    //         attack.isReaction = true;
-    //         dmg += dmgCalc(attack, Character);
-    //     }
-    //     else {
-    //         attack.isReaction = false;
-    //         dmg += dmgCalc(attack, Character);
-    //     }
-
-    // }
+    if (Character.constellations >= 4) {
+        let extraDmgAttack = { Multiplier: 222 / 100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+        dmg += dmgCalc(extraDmgAttack, Character);
+        dmg += dmgCalc(extraDmgAttack, Character);
+        dmg += dmgCalc(extraDmgAttack, Character);
+    }
 
     return dmg;
 }
@@ -896,7 +936,10 @@ function spiritSoother(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-
+    if (Character.constellations >= 2) {
+        let blood_blossom = { Multiplier: Character.elementalSkill.Skill(Character, true), Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" };
+        dmg += dmgCalc(blood_blossom, Character) * numberOfEnemies * 2;
+    }
     return dmg;
 }
 
@@ -1022,7 +1065,25 @@ function glacialWaltz(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
-    let dmg = dmgCalc(attack, Character) * numberOfEnemies * 4;
+    let dmg = 0;
+    let extraInstances = 0;
+    if (Character.constellations >= 2) {
+        extraInstances = 9;
+    }
+    if(Character.constellations >= 6){
+        extraInstances += 8;
+    }
+    for (let i = 1; i <= 15 + extraInstances; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+        }
+        else {
+            attack.isReaction = false;
+            dmg += dmgCalc(attack, Character) * numberOfEnemies;
+        }
+
+    }
 
     return dmg;
 }
@@ -1101,6 +1162,11 @@ function kazuhaSlash(Character) {
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies; //Initial hit
     attack.Multiplier = dOT;
+    let c2Buff = 0;
+    if (Character.constellations >= 2) {
+        Character.currentBuffs.push({ Type: "ElementalMastery", Value: 200 });
+        c2Buff = 200;
+    }
     let elementalAttack = { Multiplier: 0, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     const swirlableElements = ["Pyro", "Hydro", "Electro", "Cryo"];
     if (swirlableElements.includes(supportingElement)) {
@@ -1113,7 +1179,7 @@ function kazuhaSlash(Character) {
         dmg += dmgCalc(elementalAttack, Character) * numberOfEnemies;
 
     }
-    return { dmg: dmg };
+    return { dmg: dmg, attackBuff: c2Buff };
 }
 
 function starwardSword(Character) {
@@ -1264,7 +1330,7 @@ function baneOfAllEvil(Character) {
     return 0;
 }
 
-function sparksnSplash(Character) {
+function sparksnSplash(Character, shouldReturnMultiplier = false) {
     let Multiplier = 0;
     switch (Character.elementalBurst.Level) {
         case 1:
@@ -1306,6 +1372,9 @@ function sparksnSplash(Character) {
         case 13:
             Multiplier = 90.61 / 100;
             break;
+    }
+    if(shouldReturnMultiplier){
+        return Multiplier;
     }
     let attack = { Multiplier: Multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
@@ -1366,10 +1435,22 @@ function lightningRose(Character) {
             Multiplier = 77.69 / 100;
             break;
     }
-    let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let attack = { Multiplier: 10/100, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    attack.Multiplier = Multiplier;
+    
     Character.currentBuffs.push({ Type: "defReduction", Value: 15 });
-    dmg += dmgCalc(attack, Character) * 29;
+    let extraAttacks = 0;
+    if(Character.constellations >= 4){
+        extraAttacks = 28;
+    }
+    for(let i = 0; i < 29+extraAttacks; i++){
+        attack.isReaction = false;
+        if(i % 3 == 0){
+            attack.isReaction = true;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 }
 
@@ -1566,6 +1647,9 @@ function sweepingTime(Character) {
     Character.normalAttack2.element = "GeoDMGBonus";
     Character.normalAttack3.element = "GeoDMGBonus";
     Character.normalAttack4.element = "GeoDMGBonus";
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "ATKflat", Value: Character.DEF() * (50/100) });
+    }
     return { dmg: dmg };
 }
 
@@ -1765,7 +1849,11 @@ function ritesofTermination(Character) {
     let attack = { Multiplier: Multiplier, Element: "CryoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 6; index++) {
+    let c2extra = 0;
+    if(Character.constellations >= 2){
+        c2extra = 2;
+    }
+    for (let index = 0; index < 6+c2extra; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character);
@@ -1864,6 +1952,13 @@ function mujinaaFlurry(Character) {
             break;
     }
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    let flatHeal = 0;
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.attack() * ((0.6/100)*Character.EM()), for:"ElementalBurst" });
+        flatHeal = 3 * Character.EM();
+        if(flatHeal>6000)
+            flatHeal = 6000;
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     let passive = false;
     Character.currentBuffs.forEach(buff => {
@@ -1871,9 +1966,15 @@ function mujinaaFlurry(Character) {
             passive = true;
         }
     })
-    let healing = healActive + (healCont * 7);
+    let healpercent = 0.5;
+    let dmgPercent = 0.5
+    if(Character.constellations >= 1){
+        healpercent = 1;
+        dmgPercent = 1;
+    }
+    let healing = healActive + ((healCont+flatHeal) * 7)*healpercent;
     attack.Multiplier = Multipler2;
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 7*dmgPercent; index++) {
 
         dmg += dmgCalc(attack, Character);
         if (passive) {
@@ -1945,7 +2046,11 @@ function forbiddenCreation(Character) {
     let attack = { Multiplier: Multiplier, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
     let emBuff = 0;
-    for (let index = 0; index < 3; index++) {
+    let extraAttack = 0;
+    if(Character.constellations >= 2){
+        extraAttack = 1;
+    }
+    for (let index = 0; index < 3+extraAttack; index++) {
         attack.Multiplier = Multiplier;
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
         attack.Multiplier = Multiplier2;
@@ -2227,7 +2332,27 @@ function bellowingThunder(Character) {
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = Multiplier2;
-    dmg += dmgCalc(attack, Character) * 16;
+    for (let index = 0; index < 9; index++) {
+        if (index % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200});
+    }
+    for (let index = 0; index < 5; index++) {
+        if (index % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 }
 
@@ -2400,8 +2525,12 @@ function pyronado(Character) {
     attack.Multiplier = Multiplier3;
     dmg += dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = pyronado;
-    for (let index = 0; index < 7; index++) {
-        dmg += dmgCalc(attack, Character) * numberOfEnemies;
+    let spins = 7;
+    if(Character.constellations >= 4){
+        spins = 12;
+    }
+    for (let index = 0; index < spins*numberOfEnemies; index++) {
+        dmg += dmgCalc(attack, Character);
     }
 
     return dmg;
@@ -2452,7 +2581,17 @@ function raincutter(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = 0;
-    for (let index = 0; index < 37; index++) {
+    let baseAttacks = 15;
+    let numberOfSwordsPerThreeAttacks = 7;
+    if(Character.constellations >= 2){
+        baseAttacks = 18;
+    }
+    if(Character.constellations >= 6){
+        numberOfSwordsPerThreeAttacks = 10;
+    }
+    let attacks = (baseAttacks/3)*numberOfSwordsPerThreeAttacks;
+
+    for (let index = 0; index < attacks; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");
@@ -2523,9 +2662,15 @@ function riffRevolution(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "CritRate", Value: 100});
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "CritRate", Value: -100});
+    }
     attack.Multiplier = skillMultiplier2;
-    attack.element = "PyroDMGBonus";
+    attack.Element = "PyroDMGBonus";
     for (let index = 0; index < 5; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
     }
@@ -2661,7 +2806,13 @@ function ryuukinSaxifrage(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = skillMultiplier2;
-    dmg += dmgCalc(attack, Character) * 5 * numberOfEnemies;
+    let time = 5;
+    if(Character.constellations >= 1){
+        time = 7;
+    }
+    for(let index = 0; index < time*numberOfEnemies; index++){
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 
 }
@@ -3225,6 +3376,9 @@ function musouShinsetsu(Character) {
     Multiplier = (Multiplier + (60 * resolveBase)) / 100;
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
 
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "defIgnore", Value: 60 });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     for (let i = 0; i < 6; i++) {
         switch (i % 6) {
@@ -3272,6 +3426,7 @@ function musouShinsetsu(Character) {
         }
 
     }
+   
     return dmg;
 }
 
@@ -3336,7 +3491,11 @@ function koukouSendou(Character) {
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.isReaction = false;
     attack.Multiplier = multiplier2;
-    dmg += dmgCalc(attack, Character) * numberOfEnemies;
+    let extraEnemies = 0;
+    if(Character.constellations >=4){
+        extraEnemies = 2
+    }
+    dmg += dmgCalc(attack, Character) * (numberOfEnemies + extraEnemies);
 
     return { dmg: dmg };
 }
@@ -3417,7 +3576,11 @@ function divineMaidensDeliverance(Character) {
     attack.Multiplier = multiplier2;
     Character.currentBuffs.push({ Type: "ResShred", Element: "CryoDMGBonus", Value: res });
     Character.currentBuffs.push({ Type: "ResShred", Element: "PhysicalDMGBonus", Value: res });
-    for (let index = 0; index < 12; index++) {
+    let extraAttack = 0;
+    if(Character.constellations >= 2){
+        extraAttack = 6;
+    }
+    for (let index = 0; index < 12+extraAttack; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
 
     }
@@ -3513,7 +3676,11 @@ function crimsonOoyoroi(Character) {
         shield *= 1 + (Character.advancedstats.shieldStrength / 100);
     }
     attack.Multiplier = multiplier2;
-    for (let index = 0; index < 15; index++) {
+    let extraAttacks = 0;
+    if(Character.constellations >= 2){
+        extraAttacks = 3;
+    }
+    for (let index = 0; index < 15+extraAttacks; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies + (hasPassive2 ? (Character.HP() * (2.2 / 100)) : 0);
     }
 
@@ -3708,7 +3875,7 @@ function ParticularFieldFettersOfPhenomena(Character) {
             multiplier2 = 206.72 / 100;
             break;
     }
-    let attack1 = { Multiplier: (multiplier1*character.ATK())+(multiplier2*character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
+    let attack1 = { Multiplier: (multiplier1 * character.ATK()) + (multiplier2 * character.EM()), Element: "DendroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Mysteries Laid Bare") {
             let buffAmount = Character.EM() * 0.1;
@@ -3717,12 +3884,20 @@ function ParticularFieldFettersOfPhenomena(Character) {
             Character.currentBuffs.push({ Type: "ElementalBurst", Value: buffAmount });
         }
     });
+    //C2, C4
+    if (Character.constellation >= 2) {
+        Character.currentBuffs.push({ Type: "ElementalMastery", Value: 200 });
+    }
+    if (Character.constellation >= 4) {
+        Character.currentBuffs.push({ Type: "DendroDMGBonus", Value: 30 });
+    }
+
     let dmg = 0;
     let instances = 4;
-    if(role == "Support")
-        instances +=10;
+    if (role == "Support")
+        instances += 10;
     for (let i = 0; i < instances; i++) {
-        if(i%3==0 || i == 0)
+        if (i % 3 == 0 || i == 0)
             attack1.isReaction = true;
         else
             attack1.isReaction = false;
@@ -3775,6 +3950,9 @@ function BalemoonRising(Character) {
             break;
     }
     let attack = { Multiplier: multiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if (Character.constellations >= 6) {
+        Character.currentBuffs.push({ Type: "FlatDMG", Value: Character.attack() * ((700 / 100) * Character.bondOfLife), for: "ElementalBurst" });
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     //Absorb blood directive
     let buffToRemove = "";
@@ -3957,6 +4135,9 @@ function holisticRevivification(character) {
             break;
     }
     let attack1 = { Multiplier: multiplier1, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if (character.constellations >= 6) {
+        character.currentBuffs.push({ Type: "FlatDMG", Value: character.HP() * (8 / 100), for: "ElementalBurst" });
+    }
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     for (buff of character.currentBuffs) {
         if (buff.Type == "All things Are of the Earth") {
@@ -3972,8 +4153,8 @@ function holisticRevivification(character) {
         }
     }
     dmg = dmgCalc(attack1, character) * numberOfEnemies * 4;
-    shield = shield * character.advancedstats.shieldStrength * 5;
-    let heal = healing * character.advancedstats.healingBonus * 5;
+    shield = shield * (1 + (character.advancedstats.shieldStrength > 0 ? character.advancedstats.shieldStrength / 100 : 0)) * 5;
+    let heal = healing * (1 + (character.advancedstats.healingBonus > 0 ? character.advancedstats.healingBonus / 100 : 0)) * 5;
     return { dmg: dmg, shield: shield, heal: heal };
 }
 
@@ -4101,7 +4282,7 @@ function depthClarionDice(character) {
     let attack2 = { Multiplier: multiplier2, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;//Initial
     let hasBuff = false;
-    for (buff of character.currentBuffs) {
+    for (let buff of character.currentBuffs) {
         if (buff.Type == "Adapt With Ease") {
             hasBuff = true;
             character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 1 });
@@ -4119,6 +4300,11 @@ function depthClarionDice(character) {
             character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 3.5 });
         }
 
+    }
+    if(character.constellations >= 2){
+        for(let index = 0; index < 7; index++){
+            dmg += dmgCalc(attack2, character);
+        }
     }
     return dmg;
 }
@@ -4182,58 +4368,104 @@ function leonineBite(character) {
     }
     let attack1 = { Multiplier: flameManesFistDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: false, type: "ElementalBurst" };
     let attack2 = { Multiplier: incinerationDriveDMG, Element: "PyroDMGBonus", Scaling: "Combined", isReaction: true, type: "ElementalBurst" };
-
-    let dmg = dmgCalc(attack1, character) * numberOfEnemies * 10;
+    let extraAttacks = 0;
+    if (character.constellations >= 6) {
+        character.currentBuffs.push({ Type: "CritRate", Value: 10, for: "ElementalBurst" });
+        extraAttacks = 5;
+    }
+    let dmg = 0;
+    for (let i = 0; i < 10 + extraAttacks; i++) {
+        dmg += dmgCalc(attack1, character) * numberOfEnemies
+        if (i < 4) {
+            character.currentBuffs.push({ Type: "CritDMG", Value: 15, for: "ElementalBurst" });
+        }
+    }
     dmg += dmgCalc(attack2, character) * numberOfEnemies;
     return { dmg: dmg };
 }
 
 function letThePeopleRejoice(character) {
     let skillDMG = 0;
+    let dmgBonus = 0;
+    let healingBonus = 0;
     switch (character.elementalBurst.Level) {
         case 1:
             skillDMG = 11.41 / 100;
+            dmgBonus = 0.07;
+            healingBonus = 0.01;
             break;
         case 2:
             skillDMG = 12.26 / 100;
+            dmgBonus = 0.09;
+            healingBonus = 0.02;
             break;
         case 3:
             skillDMG = 13.12 / 100;
+            dmgBonus = 0.11;
+            healingBonus = 0.03;
             break;
         case 4:
             skillDMG = 14.26 / 100;
+            dmgBonus = 0.13;
+            healingBonus = 0.04;
             break;
         case 5:
             skillDMG = 15.11 / 100;
+            dmgBonus = 0.15;
+            healingBonus = 0.05;
             break;
         case 6:
             skillDMG = 15.97 / 100;
+            dmgBonus = 0.17;
+            healingBonus = 0.06;
             break;
         case 7:
             skillDMG = 17.11 / 100;
+            dmgBonus = 0.19;
+            healingBonus = 0.07;
             break;
         case 8:
             skillDMG = 18.25 / 100;
+            dmgBonus = 0.21;
+            healingBonus = 0.08;
             break;
         case 9:
             skillDMG = 19.39 / 100;
+            dmgBonus = 0.23;
+            healingBonus = 0.09;
             break;
         case 10:
             skillDMG = 20.53 / 100;
+            dmgBonus = 0.25;
+            healingBonus = 0.1;
             break;
         case 11:
             skillDMG = 21.67 / 100;
+            dmgBonus = 0.27;
+            healingBonus = 0.11;
             break;
         case 12:
             skillDMG = 22.81 / 100;
+            dmgBonus = 0.29;
+            healingBonus = 0.12;
             break;
         case 13:
             skillDMG = 24.24 / 100;
+            dmgBonus = 0.31;
+            healingBonus = 0.13;
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    return { dmg: dmg };
+    let fanfare = 300;
+    if (character.constellations >= 1) {
+        fanfare = 400;
+    }
+
+    character.advancedstats.healingBonus += healingBonus * fanfare;
+    let buff = fanfare * dmgBonus;
+    character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: buff });
+    return { dmg: dmg, attackBuff: buff };
 
 
 }
@@ -4392,6 +4624,10 @@ function stillPhotoComprehensiveConfirmation(character) {
     let totalHeal = castHealing + (continHealing * 9) * (1 + (character.advancedstats.healingBonus / 100));
     let dmg = dmgCalc(attack1, character) * numberOfEnemies;
     dmg += dmgCalc(attack2, character) * numberOfEnemies * 9;
+    if (character.constellations >= 1) {
+        let extraHeal = character.attack() * (80 / 100) * 3;
+        totalHeal += extraHeal * (1 + (character.advancedstats.healingBonus / 100));
+    }
     return { dmg: dmg, healing: totalHeal };
 }
 
@@ -4583,6 +4819,12 @@ function lastLightFall(character) {
     let attack = { Multiplier: skillDMG, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = 0;
     character.applyBondOfLife(bondOfLifeGain);
+    if (character.constellations >= 4) {
+        let buff = 2 * character.bondOfLife;
+        if (buff > 200)
+            buff = 200;
+        character.currentBuffs.push({ Type: "ElementalBurst", Value: buff });
+    }
     for (let i = 0; i < 5; i++) {
         if (i == 0 || i % 3) {
             attack.isReaction = true;
@@ -4692,6 +4934,7 @@ function sacredRiteWolfsSwiftness(character) {
 
     //Buffs
     character.currentBuffs.push({ Type: "Pactsworn Pathclearer", Value: 0 });//ult state for skill
+    character.currentBuffs.push({ Type: "ElementalMastery", Value: 100 });
     let hasA4 = false;
     for (buff of character.currentBuffs) {
         if (buff.Type == "Authority Over the Nine Bows") {
@@ -4705,6 +4948,9 @@ function sacredRiteWolfsSwiftness(character) {
         let flatDamage2 = (150 / 100) * character.EM();
         character.currentBuffs.push({ Type: "FlatDMG", Value: flatDamage2, for: "NormalAttack" });
     }
+    cynoC6Stacks += 4;
+    if (cynoC6Stacks > 8)
+        cynoC6Stacks = 8;
     return 0;
 }
 
@@ -4775,7 +5021,9 @@ function alcazarzaraysExactitude(character) {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, character) * numberOfEnemies;
+
     }
+
     return { dmg: dmg, healing: conHealing * 6 };
 }
 
@@ -4824,9 +5072,21 @@ function aromaticExplication(character) {
     }
     let attack = { Multiplier: lumiDouceCaselvl3DMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for (let i = 0; i < 9; i++) {
-        dmg += dmgCalc(attack, character) * (numberOfEnemies - 1);//-1 because cooldown on targetable
-        attack.isReaction = false;
+    let c6 = 0;
+    let c6extraAttacks = 0;
+    if (character.constellations >= 6) {
+        c6 = 1;
+        c6extraAttacks = 7;
+    }
+    for (let i = 0; i < 9 + c6extraAttacks; i++) {
+        if (i == 0 || i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * (numberOfEnemies - 1 + c6);//-1 because cooldown on targetable
+
     }
     return dmg;
 }
@@ -4888,6 +5148,9 @@ function theWindsSecretWay(character) {
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
+    if (character.constellations >= 2) {
+        attack.Multiplier *= 1 + (3 / 7);
+    }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     character.currentBuffs.push({ Type: "AnemoBonus", Value: anemoBonus });
     let atkBuff = 0;
@@ -5114,10 +5377,13 @@ function paintedDome(character) {
     character.normalAttack1.Element = "DendroDMGBonus";
     character.normalAttack2.Element = "DendroDMGBonus";
     character.normalAttack3.Element = "DendroDMGBonus";
+    if(character.constellations >= 2){
+        character.currentBuffs.push({ Type: "ATK%", Value: 15, for: "NormalAttack" });
+    }
     return dmg;
 }
 
-function secretArtSurpriseDispatch(character) {
+function secretArtSurpriseDispatch(character, shouldGiveMultiplier = false) {
     let skillDMG = 0;
     let catGrassCardamomExplosioinDMG = 0;
     switch (character.elementalBurst.Level) {
@@ -5174,6 +5440,9 @@ function secretArtSurpriseDispatch(character) {
             catGrassCardamomExplosioinDMG = 75.73 / 100;
             break;
     }
+    if(shouldGiveMultiplier){
+        return catGrassCardamomExplosioinDMG;
+    }
     let attack = { Multiplier: skillDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: catGrassCardamomExplosioinDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     for (buff of character.currentBuffs) {
@@ -5183,7 +5452,13 @@ function secretArtSurpriseDispatch(character) {
         }
     }
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
-    for (let i = 0; i < 6; i++) {
+    let extraCats = 0;
+    if(character.constellations >= 1){
+        extraCats += Math.floor(character.HP()/8000);
+        if(extraCats>4)
+            extraCats = 4;
+    }
+    for (let i = 0; i < 6+extraCats; i++) {
         if (i == 0 || i % 3 == 0) {
             attack2.isReaction = true;
         }
@@ -5254,71 +5529,113 @@ function dreamoftheStarStreamShaker(character) {
 }
 function illusoryHeart(character) {
     let pyroBonus = 0;
+    let pyroSmallBonus = 0;
     let electroBonus = 0;
+    let electroSmallBonus = 0;
     switch (character.elementalBurst.Level) {
         case 1:
+            pyroSmallBonus = 14.88;
+            electroSmallBonus = 0.248;
             pyroBonus = 22.32;
             electroBonus = 0.372;
             break;
         case 2:
+            pyroSmallBonus = 16;
+            electroSmallBonus = 0.267;
             pyroBonus = 23.99;
             electroBonus = 0.399;
             break;
         case 3:
+            pyroSmallBonus = 17.11;
+            electroSmallBonus = 0.285;
             pyroBonus = 25.67;
             electroBonus = 0.428;
             break;
         case 4:
+            pyroSmallBonus = 18.6;
+            electroSmallBonus = 0.31;
             pyroBonus = 27.9;
             electroBonus = 0.465;
             break;
         case 5:
+            pyroSmallBonus = 19.72;
+            electroSmallBonus = 0.329;
             pyroBonus = 29.57;
             electroBonus = 0.493;
             break;
         case 6:
+            pyroSmallBonus = 20.83;
+            electroSmallBonus = 0.347;
             pyroBonus = 31.25;
             electroBonus = 0.521;
             break;
         case 7:
+            pyroSmallBonus = 22.32;
+            electroSmallBonus = 0.372;
             pyroBonus = 33.48;
             electroBonus = 0.558;
             break;
         case 8:
+            pyroSmallBonus = 23.81;
+            electroSmallBonus = 0.397;
             pyroBonus = 35.71;
             electroBonus = 0.595;
             break;
         case 9:
+            pyroSmallBonus = 25.3;
+            electroSmallBonus = 0.422;
             pyroBonus = 37.94;
             electroBonus = 0.632;
             break;
         case 10:
+            pyroSmallBonus = 26.78;
+            electroSmallBonus = 0.446;
             pyroBonus = 40.18;
             electroBonus = 0.669;
             break;
         case 11:
+            pyroSmallBonus = 28.27;
+            electroSmallBonus = 0.471;
             pyroBonus = 42.41;
             electroBonus = 0.707;
             break;
         case 12:
+            pyroSmallBonus = 29.76;
+            electroSmallBonus = 0.496;
             pyroBonus = 44.64;
             electroBonus = 0.744;
             break;
         case 13:
+            pyroSmallBonus = 31.62;
+            electroSmallBonus = 	0.527;
             pyroBonus = 47.43;
             electroBonus = 0.791;
             break;
     }
-    switch (supportingElement) {
-        case "Pyro":
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
-            break;
-        case "Electro":
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroBonus });
-            break;
-        default:
-            character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: 0 });
-            break;
+    let pyroNum = 0;
+    let electroNum = 0;
+    partyMemberElements.forEach(element => {
+        if (element == "PyroCharacter") {
+            pyroNum++;
+        }
+        else if (element == "ElectroCharacter") {
+            electroNum++;
+        }
+    });
+    if(character.constellations >= 1){
+        pyroNum++;
+        electroNum++;
+    }
+    if (pyroNum == 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroSmallBonus, electroBonus: 0 });
+    } else if (pyroNum > 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: pyroBonus, electroBonus: 0 });
+    }
+    if (electroNum == 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroSmallBonus });
+    }
+    else if (electroNum > 1) {
+        character.currentBuffs.push({ Type: "Illusory Heart", pyroBonus: 0, electroBonus: electroBonus });
     }
     return 0;
 }
@@ -5471,6 +5788,10 @@ function magicTrickAstonishingShift(character) {
     let vividShot = { Multiplier: vividShotDMG, Element: supportingElement + "DMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
     let supportedElements = ["Pyro", "Hydro", "Electro", "Cryo"];
+    let c2 = false;
+    if (character.constellations >= 2) {
+        c2 = true
+    }
     for (let i = 0; i < 11; i++) {
         if (i % 3 == 0) {
             boogleCatBox.isReaction = true;
@@ -5483,6 +5804,9 @@ function magicTrickAstonishingShift(character) {
             if (supportedElements.includes(supportingElement)) {
                 vividShot.Element = supportingElement + "DMGBonus";
                 dmg += dmgCalc(vividShot, character) * numberOfEnemies;
+                if(c2){
+                    dmg += dmgCalc(vividShot, character) * numberOfEnemies;
+                }
             }
         }
         dmg += dmgCalc(boogleCatBox, character) * numberOfEnemies;
@@ -5614,9 +5938,13 @@ function surgentManifestation(character) {
     let attack = { Multiplier: leaLotusLampAttackDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: explosionDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    let hits = 8;
+    let time = 12;
+    if(character.constellations >= 2){
+        time = 15;
+    }
+    let hits = time / 1.5;
     if (supportingElement == "Electro")
-        hits = 13;
+        hits = time / 0.9;
     for (let i = 0; i < hits; i++) {
         if (i % 2 == 0) {
             attack.isReaction = true;
@@ -5679,7 +6007,11 @@ function risingWaters(character) {
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for (let i = 0; i < 8; i++) {
+    let extraAttacks = 0;
+    if (character.constellations >=2){
+        extraAttacks = 6;
+    }
+    for (let i = 0; i < 8+extraAttacks; i++) {
         if (i % 4 == 0) {
             attack.isReaction = true;
         }
@@ -5795,10 +6127,19 @@ function starsGatheratDusk(character) {
     let atkBuff = 0;
     for (buff of character.currentBuffs) {
         if (buff.Type == "Consider, the Adeptus in Her Realm") {
-            atkBuff = character.attack() * (200 / 100);
-            if (atkBuff > 9000)
-                atkBuff = 9000;
-            character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            if(character.constellations >= 2){
+                atkBuff = character.attack() * (400 / 100);
+                if (atkBuff > 18000)
+                    atkBuff = 18000;
+                character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            }
+            else{
+                atkBuff = character.attack() * (200 / 100);
+                if (atkBuff > 9000)
+                    atkBuff = 9000;
+                character.currentBuffs.push({ Type: "FlatDMG", Value: atkBuff, for: "PlungeAttack" });
+            }
+            
             break;
         }
     }
@@ -5899,7 +6240,7 @@ function moonjadeDescent(character) {
     return { dmg: dmg, healing: healing };
 }
 
-function astheSunlitSkysSingingSalute(character) {
+function astheSunlitSkysSingingSalute(character, shouldReturnMultiplier = false) {
     let skillDMG = 0;
     let cannonFireSupportDMG = 0;
     switch (character.elementalBurst.Level) {
@@ -5956,9 +6297,15 @@ function astheSunlitSkysSingingSalute(character) {
             cannonFireSupportDMG = 91.69 / 100;
             break;
     }
+    if(shouldReturnMultiplier){
+        return cannonFireSupportDMG;
+    }
     let attack = { Multiplier: skillDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: cannonFireSupportDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" };
     let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    if(character.constellations >= 4){
+        character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "GeoDMGBonus" });
+    }
     for (let i = 0; i < 16; i++) {
         if (i % 3 == 0) {
             attack2.isReaction = true;
@@ -6204,7 +6551,20 @@ function superSaturatedSyringing(character) {
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
-    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let dmg = 0;
+    let attacks = 5;
+    if(character.constellations >= 4){
+        attacks += 6;
+    }
+    for (let i = 0; i < attacks; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+    }
     return { dmg: dmg };
 }
 
@@ -6315,7 +6675,12 @@ function skyfeatherSong(character) {
     }
     castHealing *= 1 + (character.advancedstats.healingBonus / 100);
     eagleplumeHealing *= 1 + (character.advancedstats.healingBonus / 100);
+    let extraHealing = 1;
+    if(character.constellations >=1){
+        extraHealing = 2;
+    }
     eagleplumeHealing *= 6;
+   
     healingHasOccured(character);
     return { healing: castHealing + eagleplumeHealing };
 }
