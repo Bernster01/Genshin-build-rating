@@ -2662,9 +2662,15 @@ function riffRevolution(Character) {
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "PhysicalDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "CritRate", Value: 100});
+    }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
+    if(Character.constellations >= 2){
+        Character.currentBuffs.push({ Type: "CritRate", Value: -100});
+    }
     attack.Multiplier = skillMultiplier2;
-    attack.element = "PyroDMGBonus";
+    attack.Element = "PyroDMGBonus";
     for (let index = 0; index < 5; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies;
     }

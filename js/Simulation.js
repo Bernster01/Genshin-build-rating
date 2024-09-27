@@ -1966,70 +1966,74 @@ function Simulation(character) {
             if (Character.constellations >= 2) {
                 Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200, Source: "C2" });
             }
-            if (Character.constellations >= 6) { 
-                Character.sequence[role].push("C","N1", "N2","C");
+            if (Character.constellations >= 6) {
+                Character.sequence[role].push("C", "N1", "N2", "C");
             }
             break;
         case "Wriothesley":
-            if(Character.constellations >= 1){   
-                Character.sequence[role] = ["E", "N1", "N2", "N3","N4","N5", "C", "N1", "N2", "N3","N4","N5", "C", "N1", "N2", "N3","N4","N5", "C", "Q"]
+            if (Character.constellations >= 1) {
+                Character.sequence[role] = ["E", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5", "C", "N1", "N2", "N3", "N4", "N5", "C", "Q"]
 
-            } 
-            if(Character.constellations >= 2){
+            }
+            if (Character.constellations >= 2) {
                 Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200, Source: "C2" });
             }
-            if(Character.constellations >= 4){
-                Character.sequence[role].push("N1","N2","N3");
+            if (Character.constellations >= 4) {
+                Character.sequence[role].push("N1", "N2", "N3");
 
             }
-            if(Character.constellations >= 6){
-                Character.sequence[role].push("C","C","C");
-                Character.currentBuffs.push({ Type: "CritRate", Value: 10, Source: "C6", for:"ChargedAttack" });
-                Character.currentBuffs.push({ Type: "CritDMG", Value: 80, Source: "C6", for:"ChargedAttack" });
+            if (Character.constellations >= 6) {
+                Character.sequence[role].push("C", "C", "C");
+                Character.currentBuffs.push({ Type: "CritRate", Value: 10, Source: "C6", for: "ChargedAttack" });
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 80, Source: "C6", for: "ChargedAttack" });
             }
-        break;
+            break;
         case "Xiangling":
-            if(Character.constellations >= 1){
-                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element:"PyroDMGBonus", Source: "C1" });
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element: "PyroDMGBonus", Source: "C1" });
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 atkBuff += 15;
             }
             break;
         case "Xianyun":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "C2" });
             }
-            if(Character.constellations >= 6){
-                Character.sequence[role].push("E","E","E","E","E","E","E","E")
-                Character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6", for:"Driftcloud Wave" });
+            if (Character.constellations >= 6) {
+                Character.sequence[role].push("E", "E", "E", "E", "E", "E", "E", "E")
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6", for: "Driftcloud Wave" });
             }
             break;
         case "Xiao":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.energyOffset -= 5;
             }
-            if(Character.constellations >= 6){
-                Character.sequence["Dps"] = ["E","E","Q","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P",]
+            if (Character.constellations >= 6) {
+                Character.sequence["Dps"] = ["E", "E", "Q", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P", "E", "E", "E", "E", "P",]
             }
             break;
         case "Xingqiu":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({ Type: "ResShred", Value: 15,Element:"HydroDMGBonus", Source: "C2" });
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element: "HydroDMGBonus", Source: "C2" });
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.currentBuffs.push({ Type: "ElementalSkill", Value: 50, Source: "C4" });
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 Character.energyOffset -= 15;
             }
             break;
+        case "Xinyan":
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element: "PhysicalDMGBonus", Source: "C1" });
+            }
 
 
 
@@ -3443,10 +3447,10 @@ function Simulation(character) {
                     hasA4 = true;
                 }
             }
-            if(hasA4){
-                let windAttack = { Multiplier: 35/100, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
-                if(Character.constellations >= 1){
-                    windAttack.Multiplier = 60/100;
+            if (hasA4) {
+                let windAttack = { Multiplier: 35 / 100, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
+                if (Character.constellations >= 1) {
+                    windAttack.Multiplier = 60 / 100;
                 }
                 let AdditonalDMG_Wanderer = dmgCalc(windAttack, Character) * numberOfEnemies;
                 for (let i = 0; i < 7; i++) {
@@ -3455,27 +3459,27 @@ function Simulation(character) {
                 totalDmg += AdditonalDMG_Wanderer;
                 dmgSources.other.push({ dmg: AdditonalDMG_Wanderer, label: "A4" });
             }
-            if(Character.constellations >= 6){
-                let extraN1 = { Multiplier: Character.normalAttack1.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
-                let extraN2 = { Multiplier: Character.normalAttack2.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Wanderer" };
+            if (Character.constellations >= 6) {
+                let extraN1 = { Multiplier: Character.normalAttack1.Multiplier(Character.normalAttackLevel) * 0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
+                let extraN2 = { Multiplier: Character.normalAttack2.Multiplier(Character.normalAttackLevel) * 0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Wanderer" };
 
                 let AdditonalDMG_Wanderer = dmgCalc(extraN1, Character) * numberOfEnemies * 5;
                 AdditonalDMG_Wanderer += dmgCalc(extraN2, Character) * numberOfEnemies * 5;
                 totalDmg += AdditonalDMG_Wanderer;
                 dmgSources.other.push({ dmg: AdditonalDMG_Wanderer, label: "C6" });
 
-            }    
-        break;
+            }
+            break;
         case "Xiangling":
-            if(Character.constellations >= 2){
-                if(role == "Dps"){
-                    let extraAttack = { Multiplier: 75/100, Element: "PyroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Xiangling" };
+            if (Character.constellations >= 2) {
+                if (role == "Dps") {
+                    let extraAttack = { Multiplier: 75 / 100, Element: "PyroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Xiangling" };
                     let AdditonalDMG_Xiangling = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
                     totalDmg += AdditonalDMG_Xiangling;
                     dmgSources.other.push({ dmg: AdditonalDMG_Xiangling, label: "C2" });
                 }
-            }    
-        break;
+            }
+            break;
 
 
 
@@ -3859,6 +3863,13 @@ function getFlatDamage(character, attackAction) {
             if (character.constellations >= 2) {
                 if (attackAction.type == "ElementalSkill") {
                     flatDamage += character.HP() * (0.10 / 100);
+                }
+            }
+            break;
+        case "Xinyan":
+            if (character.constellations >= 6) {
+                if (attackAction.type == "ChargedAttack") {
+                    flatDamage += character.DEF() * (50 / 100);
                 }
             }
             break;
