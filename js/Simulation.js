@@ -1866,19 +1866,34 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.sequence["Dps"].push("E");
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 atkBuff += 20;
             }
             break;
         case "Thoma":
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 20;
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 atkBuff += 15;
+            }
+            break;
+        case "Tighnari":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 15, for: "ChargedAttack", Source: "C1" });
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "DendroDMGBonus", Value: 20, Source: "C2" });
+            }
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "ElementalMastery", Value: 60, Source: "C4" });
+                const elements = ["Pyro", "Electro", "Hydro"];
+                if (elements.includes(supportingElement)) {
+                    Character.currentBuffs.push({ Type: "ElementalMastery", Value: 60, Source: "C4" });
+                }
             }
             break;
 
@@ -3265,6 +3280,16 @@ function Simulation(character) {
                 totalDmg += AdditonalDMG_Kokomi;
                 dmgSources.other.push({ dmg: AdditonalDMG_Kokomi, label: "C1" });
             }
+            break;
+        case "Tighnari":
+            if(Character.constellations >= 6){
+                let extraAttack = { Multiplier: Character.chargedAttack.extraMultiplier(Character.normalAttackLevel), Element: "DendroDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: false, Source: "Tighnari" };
+                let AdditonalDMG_Tighnari = dmgCalc(extraAttack, Character) * numberOfEnemies * 3;
+                totalDmg += AdditonalDMG_Tighnari;
+                dmgSources.other.push({ dmg: AdditonalDMG_Tighnari, label: "C6" });
+            }
+            break;
+
 
 
     }
@@ -3772,6 +3797,15 @@ function getCrit(character, attackAction) {
             else if (buff.Type == "ElementalBurstCritRate" && attackAction.type == "ElementalBurst") {
                 bonusCritRate += buff.Value;
             } else if (buff.Type == "ElementalSkillCritDMG" && attackAction.type == "ElementalSkill") {
+                bonusCritDMG += buff.Value;
+            } else if (buff.Type == "CritRate" && buff.for == attackAction.type) {
+                bonusCritRate += buff.Value;
+            } else if (buff.Type == "CritDMG" && buff.for == attackAction.type) {
+                bonusCritDMG += buff.Value;
+            }
+            else if (buff.Type == "CritRate") {
+                bonusCritRate += buff.Value;
+            } else if (buff.Type == "CritDMG") {
                 bonusCritDMG += buff.Value;
             }
         });
