@@ -1877,6 +1877,11 @@ function Simulation(character) {
                 atkBuff += 20;
             }
             break;
+        case "Tartaglia":
+            if (Character.constellations >= 2) {
+                Character.energyOffset -= 10;
+            }
+            break;
         case "Thoma":
             if (Character.constellations >= 4) {
                 Character.energyOffset -= 20;
@@ -3467,6 +3472,14 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Kokomi, label: "C1" });
             }
             break;
+        case "Tartaglia":
+            if (Character.constellations >= 4) {
+                let extraAttack = { Multiplier: Character.elementalSkill.Skill(Character,true), Element: "HydroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: false, Source: "Tartaglia" };
+                let AdditonalDMG_Tartaglia = dmgCalc(extraAttack, Character) * numberOfEnemies * 7;
+                totalDmg += AdditonalDMG_Tartaglia;
+                dmgSources.other.push({ dmg: AdditonalDMG_Tartaglia, label: "C4" });
+            }
+            break;
         case "Tighnari":
             if (Character.constellations >= 6) {
                 let extraAttack = { Multiplier: Character.chargedAttack.extraMultiplier(Character.normalAttackLevel), Element: "DendroDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: false, Source: "Tighnari" };
@@ -3599,7 +3612,7 @@ function Simulation(character) {
             break;
         case "Zhongli":
             if (Character.constellations >= 6) {
-                heal += 2500*4;
+                heal += 2500 * 4;
             }
             break;
 

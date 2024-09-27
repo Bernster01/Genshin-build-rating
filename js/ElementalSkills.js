@@ -1914,7 +1914,7 @@ function astableAnemohypostasisCreation(Character) {
     return { dmg: dmg };
 }
 
-function ragingTide(Character) {
+function ragingTide(Character, shouldReturnMultiplier = false) {
     let skillMultiplier = 0;
     let oneHit = 0;
     let twoHit = 0;
@@ -2039,6 +2039,9 @@ function ragingTide(Character) {
             charged2 = 172.42 / 100;
             riptideSlash = 60.2 / 100;
             break;
+    }
+    if(shouldReturnMultiplier){
+        return riptideSlash;
     }
     let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
