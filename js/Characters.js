@@ -27396,7 +27396,7 @@ const Yae_Miko = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 135,
+    energyOffset: 160,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "N1", "N2", "N3", "C", "E"],

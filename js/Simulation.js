@@ -2034,7 +2034,16 @@ function Simulation(character) {
             if (Character.constellations >= 4) {
                 Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element: "PhysicalDMGBonus", Source: "C1" });
             }
-
+            break;
+        case "Yae Miko":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 40;
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type: "ElectroDMGBonus", Value: 20, Source: "C4"});
+                atkBuff += 20;
+            }
+            break;
 
 
     }

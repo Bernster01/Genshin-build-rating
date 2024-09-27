@@ -3434,50 +3434,70 @@ function blazingBlessing(Character) {
 
 function sesshouSakura(Character) {
     let skillMultiplier = 0;
+    let skillMultiplierC2 = 0;
     switch (Character.elementalSkill.Level) {
         case 1:
             skillMultiplier = 94.8 / 100;
+            skillMultiplierC2 = 118.5 / 100;
             break;
         case 2:
             skillMultiplier = 101.91 / 100;
+            skillMultiplierC2 = 127.39 / 100;
             break;
         case 3:
             skillMultiplier = 109.02 / 100;
+            skillMultiplierC2 = 136.27 / 100;
             break;
         case 4:
             skillMultiplier = 118.5 / 100;
+            skillMultiplierC2 = 148.13 / 100;
             break;
         case 5:
             skillMultiplier = 125.61 / 100;
+            skillMultiplierC2 = 157.01 / 100;
             break;
         case 6:
             skillMultiplier = 132.72 / 100;
+            skillMultiplierC2 = 165.9 / 100;
             break;
         case 7:
             skillMultiplier = 142.2 / 100;
+            skillMultiplierC2 = 177.75 / 100;
             break;
         case 8:
             skillMultiplier = 151.68 / 100;
+            skillMultiplierC2 = 189.6 / 100;
             break;
         case 9:
             skillMultiplier = 161.16 / 100;
+            skillMultiplierC2 = 201.45 / 100;
             break;
         case 10:
             skillMultiplier = 170.64 / 100;
+            skillMultiplierC2 = 213.3 / 100;
             break;
         case 11:
             skillMultiplier = 180.12 / 100;
+            skillMultiplierC2 = 225.15 / 100;
             break;
         case 12:
             skillMultiplier = 189.6 / 100;
+            skillMultiplierC2 = 237 / 100;
             break;
         case 13:
             skillMultiplier = 201.45 / 100;
+            skillMultiplierC2 = 251.81 / 100;
             break;
     }
     let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
     let hasPassive = false;
+    if(Character.constellations >= 2){
+        attack.Multiplier = skillMultiplierC2;
+    }
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({Type: "defIgnore", Value: 60});
+    }
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Enlightened Blessing") {
             hasPassive = true;
@@ -3490,6 +3510,9 @@ function sesshouSakura(Character) {
             attack.isReaction = false;
         }
         dmg += dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
+    }
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({Type: "defIgnore", Value: -60});
     }
     return dmg;
 
