@@ -6551,7 +6551,20 @@ function superSaturatedSyringing(character) {
             break;
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: true, type: "ElementalBurst" };
-    let dmg = dmgCalc(attack, character) * numberOfEnemies;
+    let dmg = 0;
+    let attacks = 5;
+    if(character.constellations >= 4){
+        attacks += 6;
+    }
+    for (let i = 0; i < attacks; i++) {
+        if (i % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, character) * numberOfEnemies;
+    }
     return { dmg: dmg };
 }
 

@@ -6833,7 +6833,11 @@ function reboundHydrotherapy(character) {
     }
     let bolsteringBubblebalm = { Multiplier: bolsteringBubblebalmDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalSkill" }
     let dmg = 0;
-    for (let i = 0; i < 5; i++) {
+    let attacks = 5;
+    if(character.constellations >= 1){
+        attacks = 15;
+    }
+    for (let i = 0; i < attacks; i++) {
         dmg += dmgCalc(bolsteringBubblebalm, character);
     }
     bolsteringBubblebalmHealing *= 1 + (character.advancedstats.healingBonus / 100);
@@ -6845,7 +6849,13 @@ function reboundHydrotherapy(character) {
     }
     let atkbuff
     if (hasA1) {
-        atkbuff = Math.max(((Math.max((character.HP() - 30000), 0) / 1000) * 80), 2800) * 10;
+        let max = 2800;
+        let increase = 80;
+        if(character.constellations >= 1){
+            max = 3500;
+            increase = 100;
+        }
+        atkbuff = Math.max(((Math.max((character.HP() - 30000), 0) / 1000) * increase), max) * 10;
         character.currentBuffs.push({ Type: "HydroDMGBonus", Value: 8, Source: "Rebound Hydrotherapy" });
     }
     healingHasOccured(character);

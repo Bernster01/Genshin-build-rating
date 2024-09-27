@@ -1877,6 +1877,15 @@ function Simulation(character) {
                 atkBuff += 20;
             }
             break;
+        case "Sigewinne":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type: "ResShred", Value: 35,Element:"HydroDMGBonus", Source: "C2"});
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type: "CritRate", Value: 20, for:"ElementalBurst",Source: "C6"});
+                Character.currentBuffs.push({Type: "CritDMG", Value: 110, for:"ElementalBurst",Source: "C6"});
+            }
+            break;
         case "Tartaglia":
             if (Character.constellations >= 2) {
                 Character.energyOffset -= 10;
@@ -3572,6 +3581,7 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Yelan, label: "C6" });
 
             }
+            break;
         case "Yoimiya":
             if (Character.constellations >= 6) {
                 let extraAttack_n1 = { Multiplier: Character.normalAttack1.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Yoimiya" };
