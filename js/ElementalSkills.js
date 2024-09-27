@@ -6659,17 +6659,30 @@ function hanegaSongoftheWind(character) {
         switch (supportingElement) {
             case "Pyro":
                 character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
+                if(character.constellations>=4){    
+                    character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Song of the Wind" });
+
+                }
                 break;
             case "Cryo":
                 character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Song of the Wind" });
+                if(character.constellations>=4){    
+                    character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
+                }
                 break;
             case "Electro":
                 character.currentBuffs.push({ Type: "EnergyRecharge", Value: 20, Source: "Song of the Wind" });
+                if(character.constellations>=4){    
+                    character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
+                }
                 break;
             case "Hydro":
                 let sequenceToAdd = ["N1", "N2", "N3", "C"];
                 character.sequence["Dps"] = character.sequence["Dps"].concat(sequenceToAdd);
                 character.sequence["Support"] = character.sequence["Support"].concat(sequenceToAdd);
+                if(character.constellations>=4){    
+                    character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
+                }
                 break;
         }
     }

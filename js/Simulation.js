@@ -1335,14 +1335,14 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
-        case "Chongyun": 
+        case "Chongyun":
             if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
             if (Character.constellations >= 4) {
                 Character.energyOffset -= 10;
             }
-        
+
             break;
         case "Collei":
             if (Character.constellations >= 1) {
@@ -1898,68 +1898,78 @@ function Simulation(character) {
             }
             break;
         case "Traveler (Anemo)":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type: "EnergyRecharge", Value: 16, Source: "C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "EnergyRecharge", Value: 16, Source: "C2" });
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:"AnemoDMGBonus", Source: "C6"});
-                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:supportingElement+"DMGBonus", Source: "C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "AnemoDMGBonus", Source: "C6" });
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: supportingElement + "DMGBonus", Source: "C6" });
             }
             break;
         case "Traveler (Geo)":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 atkBuff += 10;
             }
-            if(Character.constellations >= 2){
+            if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 40;
             }
-        break;
+            break;
         case "Traveler (Electro)":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 15;
             }
-            if(Character.constellations >=2){
-                Character.currentBuffs.push({Type: "ResShred", Value: 15, Element:"ElectroDMGBonus", Source: "C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element: "ElectroDMGBonus", Source: "C2" });
             }
-            if(Character.constellations >= 4){
+            if (Character.constellations >= 4) {
                 Character.energyOffset -= 15;
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
 
             }
             break;
         case "Traveler (Dendro)":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type: "DendroDMGBonus", Value: 12, Source: "C2"});
-                Character.currentBuffs.push({Type: supportingElement+"DMGBonus", Value: 12, Source: "C2"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "DendroDMGBonus", Value: 12, Source: "C2" });
+                Character.currentBuffs.push({ Type: supportingElement + "DMGBonus", Value: 12, Source: "C2" });
                 atkBuff += 12;
             }
             break;
         case "Traveler (Hydro)":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.energyOffset -= 10;
             }
             break;
         case "Venti":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type: "ResShred", Value: 12, Element:"AnemoDMGBonus",Source: "C1"});
-                Character.currentBuffs.push({Type: "ResShred", Value: 12, Element:"PhysicalDMGBonus",Source: "C1"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 12, Element: "AnemoDMGBonus", Source: "C1" });
+                Character.currentBuffs.push({ Type: "ResShred", Value: 12, Element: "PhysicalDMGBonus", Source: "C1" });
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type: "AnemoDMGBonus", Value: 25, Source: "C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "AnemoDMGBonus", Value: 25, Source: "C4" });
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:"AnemoDMGBonus",Source: "C1"});
-                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:supportingElement+"DMGBonus",Source: "C1"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: "AnemoDMGBonus", Source: "C1" });
+                Character.currentBuffs.push({ Type: "ResShred", Value: 20, Element: supportingElement + "DMGBonus", Source: "C1" });
             }
             break;
-
+        case "Wanderer":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("N1", "N2");
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200, Source: "C2" });
+            }
+            if (Character.constellations >= 6) { 
+                Character.sequence[role].push("C","N1", "N2","C");
+            }
+            break;
 
 
 
@@ -3353,17 +3363,29 @@ function Simulation(character) {
             }
             break;
         case "Traveler (Hydro)":
-            if(Character.constellations >= 6){
-                let extraHeal = (6/100)*16000;
-                heal += extraHeal;   
+            if (Character.constellations >= 6) {
+                let extraHeal = (6 / 100) * 16000;
+                heal += extraHeal;
             }
             break;
         case "Venti":
-            if(Character.constellations >= 1){
-                let extraArrow = { Multiplier: Character.chargedAttack(Character.normalAttackLevel)*0.33, Element: "AnemoDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: true, Source: "Venti" };
+            if (Character.constellations >= 1) {
+                let extraArrow = { Multiplier: Character.chargedAttack(Character.normalAttackLevel) * 0.33, Element: "AnemoDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: true, Source: "Venti" };
                 let AdditonalDMG_Venti = dmgCalc(extraArrow, Character) * numberOfEnemies * 2 * 5;
                 totalDmg += AdditonalDMG_Venti;
                 dmgSources.other.push({ dmg: AdditonalDMG_Venti, label: "C1" });
+            }
+            break;
+        case "Wanderer":
+            if(Character.constellations >= 6){
+                let extraN1 = { Multiplier: Character.normalAttack1.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
+                let extraN2 = { Multiplier: Character.normalAttack2.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Wanderer" };
+
+                let AdditonalDMG_Wanderer = dmgCalc(extraN1, Character) * numberOfEnemies * 5;
+                AdditonalDMG_Wanderer += dmgCalc(extraN2, Character) * numberOfEnemies * 5;
+                totalDmg += AdditonalDMG_Wanderer;
+                dmgSources.other.push({ dmg: AdditonalDMG_Wanderer, label: "C6" });
+
             }    
         break;
 
