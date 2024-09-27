@@ -93,6 +93,8 @@ let triggerHyperbloom = false;
 let triggerBurgeoning = false;
 let partyElementalMasteryBonus = 0;
 let nighttimeWhispersBuff = false;
+let Yun_JinC4Buff = false;
+
 function getBuild(build, score) {
     let character = build.character;
     let b = {
@@ -1224,6 +1226,7 @@ function resetVariables() {
     nahidaC2Buff = false;
     partyElementalMasteryBonus = 0;
     nighttimeWhispersBuff = false;
+    Yun_JinC4Buff = false;
     if (document.getElementById("partyGivesShield").checked) {
         hasShield = true;
     }
@@ -3579,7 +3582,15 @@ function Simulation(character) {
                 totalDmg += AdditonalDMG_Yoimiya;
                 dmgSources.other.push({ dmg: AdditonalDMG_Yoimiya, label: "C6" });
             }
-
+            break;
+        case "Yun Jin":
+            if (Character.constellations >= 2) {
+                atkBuff *= 1.15;
+            }
+            if(Character.constellations >= 6){
+                atkBuff *= 1.05;
+            }
+            break;
 
 
     }
@@ -4649,6 +4660,14 @@ function crystalized(character, element) {
                     character.currentBuffs.push({ Type: "GeoDMGBonus", Source: "Nighttime Whispers in the Echoing Woods", Value: 30 });
                     nighttimeWhispersBuff = true;
                 }
+            }
+            break;
+    }
+    switch(character.name){
+        case "Yun Jin":
+            if(character.constellations >= 4 && !Yun_JinC4Buff){
+                character.currentBuffs.push({Type: "DEF%", Value: 20, Source: "A4"});
+                Yun_JinC4Buff = true;
             }
             break;
     }
