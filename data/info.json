@@ -1,6 +1,6 @@
 {
     "name": "Gacha Build Rating - Genshin Impact",
-    "version": "1.4.1",
+    "version": "2.0",
     "description": "A website that will rate your characters from the game Genshin Impact",
     "full_description": "Genshin Impact build rating website that will rate your characters based on the artifacts you have equipped on them. you can also see build and damage breakdowns.",
     "image": "https://bernster01.github.io/Genshin-build-rating/data/site.webp",
