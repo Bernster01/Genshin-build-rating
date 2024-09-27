@@ -2008,6 +2008,17 @@ function Simulation(character) {
                 Character.currentBuffs.push({ Type: "CritDMG", Value: 70, Source: "C6", for:"Driftcloud Wave" });
             }
             break;
+        case "Xiao":
+            if(Character.constellations >= 1){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 2){
+                Character.energyOffset -= 5;
+            }
+            if(Character.constellations >= 6){
+                Character.sequence["Dps"] = ["E","E","Q","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P",]
+            }
+            break;
 
 
 
