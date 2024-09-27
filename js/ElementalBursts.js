@@ -2581,7 +2581,17 @@ function raincutter(Character) {
     }
     let attack = { Multiplier: Multiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: false, type: "ElementalBurst" }
     let dmg = 0;
-    for (let index = 0; index < 37; index++) {
+    let baseAttacks = 15;
+    let numberOfSwordsPerThreeAttacks = 7;
+    if(Character.constellations >= 2){
+        baseAttacks = 18;
+    }
+    if(Character.constellations >= 6){
+        numberOfSwordsPerThreeAttacks = 10;
+    }
+    let attacks = (baseAttacks/3)*numberOfSwordsPerThreeAttacks;
+
+    for (let index = 0; index < attacks; index++) {
         if (index % 3 == 0) {
             attack.isReaction = true;
             dmg += dmgCalc(attack, Character, "ElementalBurst");

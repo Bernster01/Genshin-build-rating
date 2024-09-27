@@ -2019,6 +2019,17 @@ function Simulation(character) {
                 Character.sequence["Dps"] = ["E","E","Q","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P","E","E","E","E","P",]
             }
             break;
+        case "Xingqiu":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15,Element:"HydroDMGBonus", Source: "C2" });
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({ Type: "ElementalSkill", Value: 50, Source: "C4" });
+            }
+            if(Character.constellations >= 6){
+                Character.energyOffset -= 15;
+            }
+            break;
 
 
 
