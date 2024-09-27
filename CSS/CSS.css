@@ -7,7 +7,15 @@
 	--font-color: #010101;
 	--font-family: 'Carter One', cursive;
 }
-
+.cc-nb-main-container {
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.75);
+	height: 100%;
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 * {
 	box-sizing: border-box;
 }
