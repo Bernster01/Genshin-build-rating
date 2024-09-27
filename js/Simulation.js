@@ -2078,6 +2078,12 @@ function Simulation(character) {
             if (Character.constellations >= 2) {
                 Character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 25, Source: "C2" });
             }
+            break;
+        case "Zhongli":
+            if (Character.constellations >= 1) {
+                Character.sequence[role].push("E");
+            }
+            break;
 
 
     }
@@ -3587,8 +3593,13 @@ function Simulation(character) {
             if (Character.constellations >= 2) {
                 atkBuff *= 1.15;
             }
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 atkBuff *= 1.05;
+            }
+            break;
+        case "Zhongli":
+            if (Character.constellations >= 6) {
+                heal += 2500*4;
             }
             break;
 
@@ -4663,10 +4674,10 @@ function crystalized(character, element) {
             }
             break;
     }
-    switch(character.name){
+    switch (character.name) {
         case "Yun Jin":
-            if(character.constellations >= 4 && !Yun_JinC4Buff){
-                character.currentBuffs.push({Type: "DEF%", Value: 20, Source: "A4"});
+            if (character.constellations >= 4 && !Yun_JinC4Buff) {
+                character.currentBuffs.push({ Type: "DEF%", Value: 20, Source: "A4" });
                 Yun_JinC4Buff = true;
             }
             break;
