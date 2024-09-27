@@ -1873,6 +1873,14 @@ function Simulation(character) {
                 atkBuff += 20;
             }
             break;
+        case "Thoma":
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 20;
+            }
+            if(Character.constellations >= 6){
+                atkBuff += 15;
+            }
+            break;
 
 
 

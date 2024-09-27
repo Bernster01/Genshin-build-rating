@@ -3630,7 +3630,11 @@ function crimsonOoyoroi(Character) {
         shield *= 1 + (Character.advancedstats.shieldStrength / 100);
     }
     attack.Multiplier = multiplier2;
-    for (let index = 0; index < 15; index++) {
+    let extraAttacks = 0;
+    if(Character.constellations >= 2){
+        extraAttacks = 3;
+    }
+    for (let index = 0; index < 15+extraAttacks; index++) {
         dmg += dmgCalc(attack, Character) * numberOfEnemies + (hasPassive2 ? (Character.HP() * (2.2 / 100)) : 0);
     }
 
