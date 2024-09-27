@@ -3377,6 +3377,24 @@ function Simulation(character) {
             }
             break;
         case "Wanderer":
+            let hasA4 = false;
+            for (let buff of Character.currentBuffs) {
+                if (buff.Source == "Gales of Reverie") {
+                    hasA4 = true;
+                }
+            }
+            if(hasA4){
+                let windAttack = { Multiplier: 35/100, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
+                if(Character.constellations >= 1){
+                    windAttack.Multiplier = 60/100;
+                }
+                let AdditonalDMG_Wanderer = dmgCalc(windAttack, Character) * numberOfEnemies;
+                for (let i = 0; i < 7; i++) {
+                    AdditonalDMG_Wanderer += dmgCalc(windAttack, Character) * numberOfEnemies;
+                }
+                totalDmg += AdditonalDMG_Wanderer;
+                dmgSources.other.push({ dmg: AdditonalDMG_Wanderer, label: "A4" });
+            }
             if(Character.constellations >= 6){
                 let extraN1 = { Multiplier: Character.normalAttack1.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Wanderer" };
                 let extraN2 = { Multiplier: Character.normalAttack2.Multiplier(Character.normalAttackLevel)*0.4, Element: "AnemoDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Wanderer" };
