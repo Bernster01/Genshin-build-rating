@@ -2061,13 +2061,20 @@ function Simulation(character) {
             }
             break;
         case "Yelan":
-            if(Character.constellations >= 1){
+            if (Character.constellations >= 1) {
                 Character.sequence[role].push("E");
             }
-            if(Character.constellations >= 4){
-                Character.currentBuffs.push({Type: "HP%", Value: 40, Source: "C4"});
+            if (Character.constellations >= 4) {
+                Character.currentBuffs.push({ Type: "HP%", Value: 40, Source: "C4" });
             }
             break;
+        case "Yoimiya":
+            if (Character.constellations >= 1) {
+                Character.currentBuffs.push({ Type: "ATK%", Value: 20, Source: "C1" });
+            }
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "PyroDMGBonus", Value: 25, Source: "C2" });
+            }
 
 
     }
@@ -3530,8 +3537,8 @@ function Simulation(character) {
             }
             break;
         case "Yelan":
-            if(Character.constellations >= 6){
-                let extraAttacks = {Multiplier: Character.chargedAttack.Skill()*(156/100), Element: "Hydro", Scaling: "HP", type: "ChargedAttack", isReaction: true, Source: "Yelan"};
+            if (Character.constellations >= 6) {
+                let extraAttacks = { Multiplier: Character.chargedAttack.Skill() * (156 / 100), Element: "Hydro", Scaling: "HP", type: "ChargedAttack", isReaction: true, Source: "Yelan" };
                 let AdditonalDMG_Yelan = dmgCalc(extraAttacks, Character) * numberOfEnemies;
                 AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
                 extraAttacks.isReaction = false;
@@ -3540,8 +3547,37 @@ function Simulation(character) {
                 AdditonalDMG_Yelan += dmgCalc(extraAttacks, Character) * numberOfEnemies;
 
                 totalDmg += AdditonalDMG_Yelan;
-                dmgSources.other.push({dmg: AdditonalDMG_Yelan, label: "C6"});
-            
+                dmgSources.other.push({ dmg: AdditonalDMG_Yelan, label: "C6" });
+
+            }
+        case "Yoimiya":
+            if (Character.constellations >= 6) {
+                let extraAttack_n1 = { Multiplier: Character.normalAttack1.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Yoimiya" };
+                let extraAttack_n2 = { Multiplier: Character.normalAttack2.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Yoimiya" };
+                let extraAttack_n3 = { Multiplier: Character.normalAttack3.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Yoimiya" };
+                let extraAttack_n4 = { Multiplier: Character.normalAttack4.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Yoimiya" };
+                let extraAttack_n5 = { Multiplier: Character.normalAttack5.Skill(60 / 100), Element: "Pyro", Scaling: "ATK", type: "NormalAttack", isReaction: false, Source: "Yoimiya" };
+                let AdditonalDMG_Yoimiya = 0;
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n1, Character);
+
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n1, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n1, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n2, Character);
+
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n2, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n3, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n3, Character);
+
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n4, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n4, Character);
+
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n4, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n5, Character);
+                AdditonalDMG_Yoimiya += dmgCalc(extraAttack_n5, Character);
+
+
+                totalDmg += AdditonalDMG_Yoimiya;
+                dmgSources.other.push({ dmg: AdditonalDMG_Yoimiya, label: "C6" });
             }
 
 

@@ -2806,7 +2806,13 @@ function ryuukinSaxifrage(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "PyroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = skillMultiplier2;
-    dmg += dmgCalc(attack, Character) * 5 * numberOfEnemies;
+    let time = 5;
+    if(Character.constellations >= 1){
+        time = 7;
+    }
+    for(let index = 0; index < time*numberOfEnemies; index++){
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 
 }
