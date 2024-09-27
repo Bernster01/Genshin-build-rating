@@ -1970,6 +1970,32 @@ function Simulation(character) {
                 Character.sequence[role].push("C","N1", "N2","C");
             }
             break;
+        case "Wriothesley":
+            if(Character.constellations >= 1){   
+                Character.sequence[role] = ["E", "N1", "N2", "N3","N4","N5", "C", "N1", "N2", "N3","N4","N5", "C", "N1", "N2", "N3","N4","N5", "C", "Q"]
+
+            } 
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200, Source: "C2" });
+            }
+            if(Character.constellations >= 4){
+                Character.sequence[role].push("N1","N2","N3");
+
+            }
+            if(Character.constellations >= 6){
+                Character.sequence[role].push("C","C","C");
+                Character.currentBuffs.push({ Type: "CritRate", Value: 10, Source: "C6", for:"ChargedAttack" });
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 80, Source: "C6", for:"ChargedAttack" });
+            }
+        break;
+        case "Xiangling":
+            if(Character.constellations >= 1){
+                Character.currentBuffs.push({ Type: "ResShred", Value: 15, Element:"PyroDMGBonus", Source: "C1" });
+            }
+            if(Character.constellations >= 6){
+                atkBuff += 15;
+            }
+            break;
 
 
 
@@ -3404,6 +3430,16 @@ function Simulation(character) {
                 totalDmg += AdditonalDMG_Wanderer;
                 dmgSources.other.push({ dmg: AdditonalDMG_Wanderer, label: "C6" });
 
+            }    
+        break;
+        case "Xiangling":
+            if(Character.constellations >= 2){
+                if(role == "Dps"){
+                    let extraAttack = { Multiplier: 75/100, Element: "PyroDMGBonus", Scaling: "ATK", type: "NormalAttack", isReaction: true, Source: "Xiangling" };
+                    let AdditonalDMG_Xiangling = dmgCalc(extraAttack, Character) * numberOfEnemies * 2;
+                    totalDmg += AdditonalDMG_Xiangling;
+                    dmgSources.other.push({ dmg: AdditonalDMG_Xiangling, label: "C2" });
+                }
             }    
         break;
 

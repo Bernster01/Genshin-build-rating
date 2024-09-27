@@ -2525,8 +2525,12 @@ function pyronado(Character) {
     attack.Multiplier = Multiplier3;
     dmg += dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = pyronado;
-    for (let index = 0; index < 7; index++) {
-        dmg += dmgCalc(attack, Character) * numberOfEnemies;
+    let spins = 7;
+    if(Character.constellations >= 4){
+        spins = 12;
+    }
+    for (let index = 0; index < spins*numberOfEnemies; index++) {
+        dmg += dmgCalc(attack, Character);
     }
 
     return dmg;

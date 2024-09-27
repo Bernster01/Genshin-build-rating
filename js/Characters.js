@@ -10267,7 +10267,7 @@ const Ganyu = {
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["Q", "E", "C", "C", "C", "E", "C", "C", "C"],
-        ["Support"]: ["E","Q"]
+        ["Support"]: ["E", "Q"]
     },
     weaponType: "Bow",
     normalAttack1: {
@@ -11156,7 +11156,7 @@ const Hu_Tao = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C","N1", "C","N1", "C", "Q"],
+        ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "Q"],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Polearm",
@@ -16978,7 +16978,7 @@ const Mualani = {
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "N2", "N1", "N2", "N1", "N2", "Q"],//N2 is mini sharks from N1
-        ["Support"]:["Q"],
+        ["Support"]: ["Q"],
     },
     weaponType: "Catalyst",
     normalAttack1: {
@@ -17701,8 +17701,8 @@ const Navia = {
     energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q","E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2"],//Assuming enough shard from start
-        ["Support"]: ["Q","E"],
+        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2", "E", "N1", "N2", "N3", "N3", "N3", "N1", "N2"],//Assuming enough shard from start
+        ["Support"]: ["Q", "E"],
     },
     weaponType: "Claymore",
     normalAttack1: {
@@ -18721,7 +18721,7 @@ const Ningguang = {
     energyOffset: 130,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["E", "Q", "N1", "N2","C", "N1", "N2", "C", "N1", "N2", "C"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "C", "N1", "N2", "C", "N1", "N2", "C"],
         ["Support"]: ["E", "Q"],
     },
     weaponType: "Catalyst",
@@ -18816,25 +18816,25 @@ const Ningguang = {
         extraMultiplier: function (level) {
             switch (level) {
                 case 1:
-                    return  (49.6 ) / 100;
+                    return (49.6) / 100;
                 case 2:
-                    return  (53.32 ) / 100;
+                    return (53.32) / 100;
                 case 3:
-                    return  (57.04) / 100;
+                    return (57.04) / 100;
                 case 4:
-                    return  (62 ) / 100;
+                    return (62) / 100;
                 case 5:
-                    return  (65.72 ) / 100;
+                    return (65.72) / 100;
                 case 6:
-                    return  (69.44) / 100;
+                    return (69.44) / 100;
                 case 7:
                     return (74.4) / 100;
                 case 8:
-                    return (79.36 ) / 100;
+                    return (79.36) / 100;
                 case 9:
                     return (84.32) / 100;
                 case 10:
-                    return (89.28 ) / 100;
+                    return (89.28) / 100;
             }
         },
         Element: "GeoDMGBonus",
@@ -25833,11 +25833,11 @@ const Xiangling = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 155,
+    energyOffset: 240,
     supportType: "Sub-dps",
     sequence: {
-        ["Dps"]: ["Q", "E", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
-        ["Support"]: ["Q", "E"],
+        ["Dps"]: ["E", "Q", "N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5"],
+        ["Support"]: ["E", "Q"],
     },
     weaponType: "Polearm",
     normalAttack1: {
