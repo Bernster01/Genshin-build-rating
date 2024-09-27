@@ -1896,6 +1896,16 @@ function Simulation(character) {
                 }
             }
             break;
+        case "Traveler (Anemo)":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type: "EnergyRecharge", Value: 16, Source: "C2"});
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:"AnemoDMGBonus", Source: "C6"});
+                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:supportingElement+"DMGBonus", Source: "C6"});
+            }
+            break;
+
 
 
 
@@ -3282,7 +3292,7 @@ function Simulation(character) {
             }
             break;
         case "Tighnari":
-            if(Character.constellations >= 6){
+            if (Character.constellations >= 6) {
                 let extraAttack = { Multiplier: Character.chargedAttack.extraMultiplier(Character.normalAttackLevel), Element: "DendroDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: false, Source: "Tighnari" };
                 let AdditonalDMG_Tighnari = dmgCalc(extraAttack, Character) * numberOfEnemies * 3;
                 totalDmg += AdditonalDMG_Tighnari;
