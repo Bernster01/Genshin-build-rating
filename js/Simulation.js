@@ -1335,14 +1335,15 @@ function Simulation(character) {
                 Character.sequence[role].push("E");
             }
             break;
-        case "Chongyun": {
+        case "Chongyun": 
             if (Character.constellations >= 2) {
                 Character.sequence[role].push("E");
             }
             if (Character.constellations >= 4) {
                 Character.energyOffset -= 10;
             }
-        }
+        
+            break;
         case "Collei":
             if (Character.constellations >= 1) {
                 if (role == "Support") {
@@ -1945,7 +1946,19 @@ function Simulation(character) {
                 Character.energyOffset -= 10;
             }
             break;
-
+        case "Venti":
+            if(Character.constellations >= 2){
+                Character.currentBuffs.push({Type: "ResShred", Value: 12, Element:"AnemoDMGBonus",Source: "C1"});
+                Character.currentBuffs.push({Type: "ResShred", Value: 12, Element:"PhysicalDMGBonus",Source: "C1"});
+            }
+            if(Character.constellations >= 4){
+                Character.currentBuffs.push({Type: "AnemoDMGBonus", Value: 25, Source: "C4"});
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:"AnemoDMGBonus",Source: "C1"});
+                Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:supportingElement+"DMGBonus",Source: "C1"});
+            }
+            break;
 
 
 
@@ -3345,6 +3358,15 @@ function Simulation(character) {
                 heal += extraHeal;   
             }
             break;
+        case "Venti":
+            if(Character.constellations >= 1){
+                let extraArrow = { Multiplier: Character.chargedAttack(Character.normalAttackLevel)*0.33, Element: "AnemoDMGBonus", Scaling: "ATK", type: "ChargedAttack", isReaction: true, Source: "Venti" };
+                let AdditonalDMG_Venti = dmgCalc(extraArrow, Character) * numberOfEnemies * 2 * 5;
+                totalDmg += AdditonalDMG_Venti;
+                dmgSources.other.push({ dmg: AdditonalDMG_Venti, label: "C1" });
+            }    
+        break;
+
 
 
     }
