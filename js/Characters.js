@@ -24213,7 +24213,7 @@ const Traveler_Geo = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 140,
+    energyOffset: 150,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["N1", "N2", "N3", "N4", "N5", "N1", "N2", "N3", "N4", "N5", "E", "Q"],

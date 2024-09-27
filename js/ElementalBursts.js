@@ -2332,7 +2332,27 @@ function bellowingThunder(Character) {
     let attack = { Multiplier: Multiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
     attack.Multiplier = Multiplier2;
-    dmg += dmgCalc(attack, Character) * 16;
+    for (let index = 0; index < 9; index++) {
+        if (index % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
+    if(Character.constellations >= 6){
+        Character.currentBuffs.push({ Type: "ElementalBurst", Value: 200});
+    }
+    for (let index = 0; index < 5; index++) {
+        if (index % 3 == 0) {
+            attack.isReaction = true;
+        }
+        else {
+            attack.isReaction = false;
+        }
+        dmg += dmgCalc(attack, Character);
+    }
     return dmg;
 }
 
@@ -5887,9 +5907,13 @@ function surgentManifestation(character) {
     let attack = { Multiplier: leaLotusLampAttackDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let attack2 = { Multiplier: explosionDMG, Element: "DendroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    let hits = 8;
+    let time = 12;
+    if(character.constellations >= 2){
+        time = 15;
+    }
+    let hits = time / 1.5;
     if (supportingElement == "Electro")
-        hits = 13;
+        hits = time / 0.9;
     for (let i = 0; i < hits; i++) {
         if (i % 2 == 0) {
             attack.isReaction = true;
@@ -5952,7 +5976,11 @@ function risingWaters(character) {
     }
     let attack = { Multiplier: skillDMG, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalBurst" };
     let dmg = 0;
-    for (let i = 0; i < 8; i++) {
+    let extraAttacks = 0;
+    if (character.constellations >=2){
+        extraAttacks = 6;
+    }
+    for (let i = 0; i < 8+extraAttacks; i++) {
         if (i % 4 == 0) {
             attack.isReaction = true;
         }

@@ -1905,6 +1905,46 @@ function Simulation(character) {
                 Character.currentBuffs.push({Type: "ResShred", Value: 20, Element:supportingElement+"DMGBonus", Source: "C6"});
             }
             break;
+        case "Traveler (Geo)":
+            if(Character.constellations >= 1){
+                atkBuff += 10;
+            }
+            if(Character.constellations >= 2){
+                Character.sequence[role].push("E");
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 40;
+            }
+        break;
+        case "Traveler (Electro)":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 15;
+            }
+            if(Character.constellations >=2){
+                Character.currentBuffs.push({Type: "ResShred", Value: 15, Element:"ElectroDMGBonus", Source: "C2"});
+            }
+            if(Character.constellations >= 4){
+                Character.energyOffset -= 15;
+            }
+            if(Character.constellations >= 6){
+
+            }
+            break;
+        case "Traveler (Dendro)":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 10;
+            }
+            if(Character.constellations >= 6){
+                Character.currentBuffs.push({Type: "DendroDMGBonus", Value: 12, Source: "C2"});
+                Character.currentBuffs.push({Type: supportingElement+"DMGBonus", Value: 12, Source: "C2"});
+                atkBuff += 12;
+            }
+            break;
+        case "Traveler (Hydro)":
+            if(Character.constellations >= 1){
+                Character.energyOffset -= 10;
+            }
+            break;
 
 
 
@@ -3299,7 +3339,12 @@ function Simulation(character) {
                 dmgSources.other.push({ dmg: AdditonalDMG_Tighnari, label: "C6" });
             }
             break;
-
+        case "Traveler (Hydro)":
+            if(Character.constellations >= 6){
+                let extraHeal = (6/100)*16000;
+                heal += extraHeal;   
+            }
+            break;
 
 
     }
