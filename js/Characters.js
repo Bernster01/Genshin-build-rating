@@ -26771,7 +26771,7 @@ const Xilonen = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 150,
+    energyOffset: 120, //Needs testing
     supportType: "ResShreder",
     sequence: {
         ["Dps"]: ["E","N1","N2","N3","N1","N2","N3","N1","N2","N3","N1","N2","N3","N1","N2","N3","Q"],

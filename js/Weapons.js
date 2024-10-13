@@ -505,7 +505,32 @@ const MistsplitterReforged = {
         return this;
     }
 }.Init();
+const PeakPatrolSong = {
+    name: "Peak Patrol Song",
+    src: "Weapons/Weapon_Peak_Patrol_Song.webp",
+    weaponType: "Sword",
+    rarity: 5,
+    level: "1b",
+    characterEquiping: null,
+    baseAttackType: "baseAttack44b",
+    baseAttack: function () {
+        return GetBaseAttack(this);
+    },
+    subStat: {
+        Type: "DEF%",
+        startValue: "18%",
+        Value: function () {
+            return getSubStat(this);
+        }
+    },
 
+    passive: function () { return [] },
+    Init: function () {
+        this.subStat.Parent = this;
+        delete this.Init;
+        return this;
+    }
+}.Init();
 const PrimordialJadeCutter = {
     name: "Primordial Jade Cutter",
     src: "Weapons/Weapon_Primordial_Jade_Cutter.webp",
@@ -4359,6 +4384,7 @@ const AllWeapons = {
     ["Moonpiecer"]: Moonpiercer,
     ["Mouuns Moon"]: MouunsMoon,
     ["Oathsworn Eye"]: OathswornEye,
+    ["Peak Patrol Song"]: PeakPatrolSong,
     ["Polar Star"]: PolarStar,
     ["Portable Power Saw"]: PortablePowerSaw,
     ["Predator"]: Predator,
@@ -4520,6 +4546,7 @@ const AllWeapons = {
         "Moonpiecer",
         "Mouuns Moon",
         "Oathsworn Eye",
+        "Peak Patrol Song",
         "Polar Star",
         "Portable Power Saw",
         "Predator",
@@ -4619,6 +4646,7 @@ const AllWeapons = {
         "Light of Foliar Incision",
         "Lions Roar",
         "Mistsplitter Reforged",
+        "Peak Patrol Song",
         "Primordial Jade Cutter",
         "Prototype Rancour",
         "Royal Longsword",

@@ -7321,6 +7321,6 @@ function yohualsScratch(character) {
     character.normalAttack3.Element = "GeoDMGBonus";
     character.normalAttack3.Scaling = "DEF";
 
-    return { dmg: dmg, atkBuff: resShred + extraBuff, healing: healing };
+    return { dmg: dmg, attackBuff: resShred + extraBuff, healing: healing };
 
 }

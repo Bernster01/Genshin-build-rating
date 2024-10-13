@@ -94,6 +94,8 @@ let triggerBurgeoning = false;
 let partyElementalMasteryBonus = 0;
 let nighttimeWhispersBuff = false;
 let Yun_JinC4Buff = false;
+let peakPatrolStacks = 0;
+
 
 function getBuild(build, score) {
     let character = build.character;
@@ -1163,6 +1165,7 @@ function resetVariables() {
     HoD = false;
     shouldGenerateBountifulCores = false;
     hasUrakuMisugiriBuff = false;
+    peakPatrolStacks = 0;
     shardsInPossession = 6;
     propSurplusStacks = 0;
 
@@ -1878,12 +1881,12 @@ function Simulation(character) {
             }
             break;
         case "Sigewinne":
-            if(Character.constellations >= 2){
-                Character.currentBuffs.push({Type: "ResShred", Value: 35,Element:"HydroDMGBonus", Source: "C2"});
+            if (Character.constellations >= 2) {
+                Character.currentBuffs.push({ Type: "ResShred", Value: 35, Element: "HydroDMGBonus", Source: "C2" });
             }
-            if(Character.constellations >= 6){
-                Character.currentBuffs.push({Type: "CritRate", Value: 20, for:"ElementalBurst",Source: "C6"});
-                Character.currentBuffs.push({Type: "CritDMG", Value: 110, for:"ElementalBurst",Source: "C6"});
+            if (Character.constellations >= 6) {
+                Character.currentBuffs.push({ Type: "CritRate", Value: 20, for: "ElementalBurst", Source: "C6" });
+                Character.currentBuffs.push({ Type: "CritDMG", Value: 110, for: "ElementalBurst", Source: "C6" });
             }
             break;
         case "Tartaglia":
@@ -2603,6 +2606,26 @@ function Simulation(character) {
                                     if (buff.Type == "NormalAttack") {
                                         buff.Value = 12 * surfUpBuffStacks;
                                     }
+                                }
+                            }
+                        }
+                        break;
+                    case "Peak Patrol Song":
+                        if (peakPatrolStacks < 2) {
+                            if (attackAction.type == "PlungeAttack" || attackAction.type == "NormalAttack") {
+                                peakPatrolStacks++;
+                                character.currentBuffs.push({ Type: "DEF%", Value: 8, Source: "Peak Patrol Song" });
+                                const elements = ["Pyro", "Hydro", "Electro", "Cryo", "Geo", "Anemo", "Dendro"];
+                                elements.forEach(element => {
+                                    character.currentBuffs.push({ Type: element + "DMGBonus", Value: 10, Source: "Peak Patrol Song" });
+                                });
+                                if(peakPatrolStacks == 2){
+                                    let buff = 8*(character.DEF()/1000);
+                                    if(buff > 25.6){
+                                        buff = 25.6;
+                                    }
+                                    atkBuff += buff;
+                                    character.currentBuffs.push({ Type: character.element.slice(0,-9)+"DMGBonus", Value: buff, Source: "Peak Patrol Song" });
                                 }
                             }
                         }
@@ -3483,7 +3506,7 @@ function Simulation(character) {
             break;
         case "Tartaglia":
             if (Character.constellations >= 4) {
-                let extraAttack = { Multiplier: Character.elementalSkill.Skill(Character,true), Element: "HydroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: false, Source: "Tartaglia" };
+                let extraAttack = { Multiplier: Character.elementalSkill.Skill(Character, true), Element: "HydroDMGBonus", Scaling: "ATK", type: "ElementalSkill", isReaction: false, Source: "Tartaglia" };
                 let AdditonalDMG_Tartaglia = dmgCalc(extraAttack, Character) * numberOfEnemies * 7;
                 totalDmg += AdditonalDMG_Tartaglia;
                 dmgSources.other.push({ dmg: AdditonalDMG_Tartaglia, label: "C4" });
