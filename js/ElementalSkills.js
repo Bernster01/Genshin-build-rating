@@ -1577,7 +1577,7 @@ function breastplate(Character) {
     }
     let attack = { Multiplier: skillMultiplier, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(attack, Character) * numberOfEnemies;
-    if(Character.constellations >= 1){
+    if (Character.constellations >= 1) {
         chance = 100;
     }
     let heal = healing * (chance / 100) * 12;
@@ -2040,7 +2040,7 @@ function ragingTide(Character, shouldReturnMultiplier = false) {
             riptideSlash = 60.2 / 100;
             break;
     }
-    if(shouldReturnMultiplier){
+    if (shouldReturnMultiplier) {
         return riptideSlash;
     }
     let attack = { Multiplier: skillMultiplier, Element: "HydroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
@@ -3495,11 +3495,11 @@ function sesshouSakura(Character) {
     let attack = { Multiplier: skillMultiplier, Element: "ElectroDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let dmg = 0;
     let hasPassive = false;
-    if(Character.constellations >= 2){
+    if (Character.constellations >= 2) {
         attack.Multiplier = skillMultiplierC2;
     }
-    if(Character.constellations >= 6){
-        Character.currentBuffs.push({Type: "defIgnore", Value: 60});
+    if (Character.constellations >= 6) {
+        Character.currentBuffs.push({ Type: "defIgnore", Value: 60 });
     }
     Character.currentBuffs.forEach(buff => {
         if (buff.Type == "Enlightened Blessing") {
@@ -3514,8 +3514,8 @@ function sesshouSakura(Character) {
         }
         dmg += dmgCalc(attack, Character) * numberOfEnemies * (hasPassive ? (1 + (Character.EM() * (0.15 / 100))) : 1);
     }
-    if(Character.constellations >= 6){
-        Character.currentBuffs.push({Type: "defIgnore", Value: -60});
+    if (Character.constellations >= 6) {
+        Character.currentBuffs.push({ Type: "defIgnore", Value: -60 });
     }
     return dmg;
 
@@ -3869,11 +3869,11 @@ function oTearsIShallRepay(character) {
     for (buff of character.currentBuffs) {
         if (buff.Type == "Discipline of the Supreme Arbitration") {
             let currentBonus = buff.Value;
-       
+
             let currentHP = buff.currentHP;
             character.advancedstats.elementalBonuses[1].Value -= currentBonus;
             //Calc new bonus
-            
+
             currentHP = currentHP + healing;
             if (currentHP > character.HP())
                 currentHP = character.HP();
@@ -6355,7 +6355,7 @@ function whiteCloudsatDawn(character) {
             break;
     }
     let skillAttack = { Multiplier: skillDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
-    let driftcloudWave = { Multiplier: driftcloudWaveDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "PlungeAttack", type2:"Driftcloud Wave"}
+    let driftcloudWave = { Multiplier: driftcloudWaveDMG, Element: "AnemoDMGBonus", Scaling: "ATK", isReaction: true, type: "PlungeAttack", type2: "Driftcloud Wave" }
     let dmg = dmgCalc(skillAttack, character) * numberOfEnemies;
     dmg += dmgCalc(driftcloudWave, character) * numberOfEnemies;
     for (buff of character.currentBuffs) {
@@ -6364,7 +6364,7 @@ function whiteCloudsatDawn(character) {
         }
     }
     let heal = 0;
-    if(character.constellations >= 4){
+    if (character.constellations >= 4) {
         heal = character.attack() * (50 / 100);
     }
     return { dmg: dmg, healing: heal };
@@ -6446,10 +6446,10 @@ function raphanusSkyCluster(character) {
     }
     healingHasOccured(character);
     healing *= 1 + (character.advancedstats.healingBonus / 100);
-    if(character.constellations >= 4){
+    if (character.constellations >= 4) {
         let buffValue = character.HP() * (0.3 / 100);
-        if(buffValue > 120)
-            buffValue = 120; 
+        if (buffValue > 120)
+            buffValue = 120;
         character.currentBuffs.push({ Type: "ElementalMastery", Value: buffValue, for: "ElementalSkill" });
     }
     return { dmg: dmg, healing: healing };
@@ -6501,7 +6501,7 @@ function ceremonialCrystalshot(character) {
     let rosulaShardshot = { Multiplier: rosulaShardshotDMG, Element: "GeoDMGBonus", Scaling: "ATK", isReaction: true, type: "ElementalSkill" }
     let totalShots = 0;
     let dmgBonus = 0;
-    if(shardsInPossession>6)
+    if (shardsInPossession > 6)
         shardsInPossession = 6;
     switch (shardsInPossession) {
         case 0:
@@ -6535,7 +6535,7 @@ function ceremonialCrystalshot(character) {
             dmgBonus = 45;
             rosulaShardshot.Multiplier *= (200 / 100);
             break;
-        
+
     }
     let buff = { Type: "ElementalSkill", Value: dmgBonus, for: "ElementalSkill" };
     character.currentBuffs.push(buff);
@@ -6695,20 +6695,20 @@ function hanegaSongoftheWind(character) {
         switch (supportingElement) {
             case "Pyro":
                 character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
-                if(character.constellations>=4){    
+                if (character.constellations >= 4) {
                     character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Song of the Wind" });
 
                 }
                 break;
             case "Cryo":
                 character.currentBuffs.push({ Type: "CritRate", Value: 20, Source: "Song of the Wind" });
-                if(character.constellations>=4){    
+                if (character.constellations >= 4) {
                     character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
                 }
                 break;
             case "Electro":
                 character.currentBuffs.push({ Type: "EnergyRecharge", Value: 20, Source: "Song of the Wind" });
-                if(character.constellations>=4){    
+                if (character.constellations >= 4) {
                     character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
                 }
                 break;
@@ -6716,7 +6716,7 @@ function hanegaSongoftheWind(character) {
                 let sequenceToAdd = ["N1", "N2", "N3", "C"];
                 character.sequence["Dps"] = character.sequence["Dps"].concat(sequenceToAdd);
                 character.sequence["Support"] = character.sequence["Support"].concat(sequenceToAdd);
-                if(character.constellations>=4){    
+                if (character.constellations >= 4) {
                     character.currentBuffs.push({ Type: "ATK%", Value: 30, Source: "Song of the Wind" });
                 }
                 break;
@@ -6834,7 +6834,7 @@ function reboundHydrotherapy(character) {
     let bolsteringBubblebalm = { Multiplier: bolsteringBubblebalmDMG, Element: "HydroDMGBonus", Scaling: "HP", isReaction: false, type: "ElementalSkill" }
     let dmg = 0;
     let attacks = 5;
-    if(character.constellations >= 1){
+    if (character.constellations >= 1) {
         attacks = 15;
     }
     for (let i = 0; i < attacks; i++) {
@@ -6851,7 +6851,7 @@ function reboundHydrotherapy(character) {
     if (hasA1) {
         let max = 2800;
         let increase = 80;
-        if(character.constellations >= 1){
+        if (character.constellations >= 1) {
             max = 3500;
             increase = 100;
         }
@@ -7206,5 +7206,121 @@ function goGoTurboTwirly(character) {
             return dmg;
     }
     return 0;
+
+}
+
+function yohualsScratch(character) {
+    let rushDMG = 0;
+    let resShred = 0;
+    switch (character.elementalSkill.Level) {
+        case 1:
+            rushDMG = 179.2 / 100;
+            resShred = 9;
+            break;
+        case 2:
+            rushDMG = 192.64 / 100;
+            resShred = 12;
+            break;
+        case 3:
+            rushDMG = 206.08 / 100;
+            resShred = 15;
+            break;
+        case 4:
+            rushDMG = 224 / 100;
+            resShred = 18;
+            break;
+        case 5:
+            rushDMG = 237.44 / 100;
+            resShred = 21;
+            break;
+        case 6:
+            rushDMG = 250.88 / 100;
+            resShred = 24;
+            break;
+        case 7:
+            rushDMG = 268.8 / 100;
+            resShred = 27;
+            break;
+        case 8:
+            rushDMG = 286.72 / 100;
+            resShred = 30;
+            break;
+        case 9:
+            rushDMG = 304.64 / 100;
+            resShred = 33;
+            break;
+        case 10:
+            rushDMG = 322.56 / 100;
+            resShred = 36;
+            break;
+        case 11:
+            rushDMG = 340.48 / 100;
+            resShred = 39;
+            break;
+        case 12:
+            rushDMG = 358.4 / 100;
+            resShred = 42;
+            break;
+        case 13:
+            rushDMG = 380.8 / 100;
+            resShred = 45;
+            break;
+    }
+    let rushAttack = { Multiplier: rushDMG, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: true, type: "ElementalSkill" }
+    let dmg = dmgCalc(rushAttack, character) * numberOfEnemies;
+    let samples = 0;
+    const elements = ["Pyro", "Cryo", "Electro", "Hydro"];
+    let elementSamples = [];
+    for (let element of partyMemberElements) {
+        //Remove "Character" from element
+        element = element.slice(0, -9);
+        if (elements.includes(element)) {
+            samples++;
+            if (!elementSamples.includes(element)) {
+                elementSamples.push(element);
+                character.currentBuffs.push({ Type: "ResShred", Value: resShred, Element: element + "DMGBonus", Source: "Yohual's Scratch" });
+            }
+        }
+    }
+    let extraBuff = 0;
+    let healing = 0;
+    if (character.constellations >= 2) {
+        character.currentBuffs.push({ Type: "ResShred", Value: resShred, Element: "GeoDMGBonus", Source: "Yohual's Scratch" });
+        extraBuff = 50;
+        character.currentBuffs.push({ Type: "AddativeBonusDMG", Value: 50, Source: "C2" });
+    }
+    if(character.constellations >= 4){
+        extraBuff += character.DEF() * (65/100);
+    }
+    if(character.constellations >= 6){
+        character.currentBuffs.push({Type: "FlatDMG", Value: character.DEF()*(300/100), for: "NormalAttack", Source: "Yohual's Scratch"});
+        healing = character.DEF() * (120/100) * (1 + (character.advancedstats.healingBonus / 100)) * 10;
+    }
+    if (samples <= 2) {
+        if (character.constellations <= 1) {
+            character.currentBuffs.push({ Type: "ResShred", Value: resShred, Element: "GeoDMGBonus", Source: "Yohual's Scratch" });
+        }
+        if (samples <= 1) {
+            let hasA1 = false;
+            for (let buff of character.currentBuffs) {
+                if (buff.Type == "A1") {
+                    hasA1 = true;
+                }
+            }
+            if (hasA1) {
+                character.currentBuffs.push({ Type: "NormalAttack", Value: 30, Source: "Yohual's Scratch" });
+            }
+
+        }
+    }
+    character.normalAttack1.Element = "GeoDMGBonus";
+    character.normalAttack1.isReaction = true;
+    character.normalAttack1.Scaling = "DEF";
+    character.normalAttack2.Element = "GeoDMGBonus";
+    character.normalAttack2.Scaling = "DEF";
+    character.normalAttack3.Element = "GeoDMGBonus";
+    character.normalAttack3.Scaling = "DEF";
+
+    return { dmg: dmg, atkBuff: resShred + extraBuff, healing: healing };
 
 }
