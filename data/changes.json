@@ -27,7 +27,7 @@
     {
         "date": "October 14 2024",
         "version": "2.0.1",
-        "description": "Added Xilonen. <br> Added the sword <i>Peak Patrol Song</i>. <br> Added artifact Scroll of the Hero of Cinder City. <br> Fixed some artifact scaling options not working correctly, now more accurate result will come at lower simulation runs for pure HP scalers and DEF scalers."
+        "description": "Added Xilonen. <br> Added the sword <i>Peak Patrol Song</i>. <br> Added artifact Scroll of the Hero of Cinder City. <br> Fixed some artifact scaling options not working correctly, now more accurate result will come at lower simulation runs for pure HP scalers and DEF scalers. <br> Made all 4 star character C6 for the generated builds"
     }
 
 ]

@@ -18,7 +18,7 @@ function starterFunction() {
         document.getElementById("supportGraph_section").style.display = "none";
     }
     // applyBackgrounds(builds);
-    document.getElementById("character_name").innerText = builds.user.character.name;
+    document.getElementById("character_name").innerText = builds.user.character.name +" (C"+builds.user.character.constellation+" vs "+"C"+builds.build.character.constellation+")";
     document.getElementById("character_img").src = `${builds.user.character.splashArt}`;
     const character1 = getStats(builds.user);
     const character2 = getStats(builds.build);
@@ -104,9 +104,9 @@ function tableBuilder(builds) {
     let innerHTML = `
         <tbody>
             <th>Stat</th>
-            <th>Your ${user.name}</th>
+            <th>Your C${user.constellation} ${user.name} </th>
             <th> Comparing </th>
-            <th>Our ${build.name}</th>
+            <th>Our C${build.constellation} ${build.name}</th>
             <tr>
                 <td>Character Level</td>
                 <td>${convertBuildLevel(user.level).Level}</td>
@@ -404,6 +404,7 @@ function getStats(build) {
                 build.character.physicalDMGBonus
             ]
         },
+        constellation: build.character.constellation,
         level: build.character.level,
         elementalSkill: {
             Level: build.character.elementalSkillLevel.Level

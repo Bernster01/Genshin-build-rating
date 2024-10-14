@@ -4,9 +4,9 @@ function LoadCharacters() {
     AllCharacters.index.forEach(character => {
         let htmlCode = "";
         if(AllCharacters[character].name == "Traveler (Anemo)" || AllCharacters[character].name =="Traveler (Geo)" || AllCharacters[character].name == "Traveler (Electro)" || AllCharacters[character].name == "Traveler (Dendro)"|| AllCharacters[character].name == "Traveler (Cryo)"|| AllCharacters[character].name == "Traveler (Pyro)"|| AllCharacters[character].name == "Traveler (Hydro)"){
-            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>Traveler</span></div></div>";
+            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' style='background-image:url(Assets/Rarity_Backgrounds/Background_Item_"+AllCharacters[character].rarity+"_Star.webp)' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>Traveler</span></div></div>";
         }else{
-            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>" + AllCharacters[character].name + "</span></div></div>";
+            htmlCode = "<div class='Character' title='" + AllCharacters[character].name + "' style='background-image:url(Assets/Rarity_Backgrounds/Background_Item_"+AllCharacters[character].rarity+"_Star.webp)' onmouseup='selectCharacter(this)'> <img src='" + AllCharacters[character].src + "' alt='" + AllCharacters[character].name + "'> <div class='" + AllCharacters[character].element + "'><span>" + AllCharacters[character].name + "</span></div></div>";
         }
          doc.insertAdjacentHTML("beforeend", htmlCode);
 

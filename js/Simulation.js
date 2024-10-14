@@ -111,6 +111,7 @@ function getBuild(build, score) {
             element: character.element,
             splashArt: character.card,
             energyOffset: character.energyOffset,
+            constellation: character.constellations,
             hp: character.HP(),
             attack: character.attack(),
             critRate: character.critRate(),
@@ -262,7 +263,7 @@ async function findBestBuildLoop(baseChar, times) {
                 character.normalAttackLevel = 11;
 
             }
-
+            
             //Go through each artifact set 4piece combo and 2piece combos
             setsList.forEach(set => {
                 let newCharacter = new Createcharacter(
@@ -270,6 +271,9 @@ async function findBestBuildLoop(baseChar, times) {
                     deepClone(weapon),
                     artifacts
                 );
+                if(newCharacter.rarity == 4){
+                    newCharacter.constellations = 6;
+                }
                 //test the 4 piece set
                 newCharacter.artifacts = changeSet4piece(set, newCharacter.artifacts);
                 applyBonuses(newCharacter);
@@ -298,11 +302,14 @@ async function findBestBuildLoop(baseChar, times) {
                     if (alreadyTested) {
                         return;
                     }
-                    newCharacter2 = new Createcharacter(
+                    let newCharacter2 = new Createcharacter(
                         deepClone(character),
                         deepClone(weapon),
                         artifacts
                     );
+                    if(newCharacter2.rarity == 4){
+                        newCharacter2.constellations = 6;
+                    }
                     newCharacter2.artifacts = changeSet2piece([set, set2], newCharacter2.artifacts);
                     applyBonuses(newCharacter2);
 
@@ -458,6 +465,7 @@ class Createcharacter {
         this.ExtraMultiplier = baseCharacter.ExtraMultiplier || [];
         this.advancedstats = baseCharacter.advancedstats;
         this.ascensionstats = baseCharacter.ascensionStat;
+        this.rarity = baseCharacter.rarity || "unknown";
         this.constellations = 0;
         this.baseHP = this.baseHP();
         this.currentHP = this.HP();

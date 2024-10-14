@@ -4,6 +4,7 @@ const Albedo = {
     card: "Assets/Characters/Albedo/Character_Albedo_Portrait.webp",
     element: "GeoCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -340,6 +341,7 @@ const Alhaitham = {
     card: "Assets/Characters/Alhaitham/Character_Alhaitham_Portrait.webp",
     element: "DendroCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24.39,
@@ -676,6 +678,7 @@ const Aloy = {
     card: "Assets/Characters/Aloy/Character_Aloy_Portrait.webp",
     element: "CryoCharacter",
     level: "1b",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -970,6 +973,7 @@ const Amber = {
     card: "Assets/Characters/Amber/Character_Amber_Portrait.webp",
     element: "PyroCharacter",
     level: "1b",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -1309,6 +1313,7 @@ const Arlecchino = {
     card: "Assets/Characters/Arlecchino/Character_Arlecchino_Portrait.webp",
     element: "PyroCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26.63,
@@ -1684,6 +1689,7 @@ const Ayaka = {
     card: "Assets/Characters/Ayaka/Character_Kamisato_Ayaka_Portrait.webp",
     element: "CryoCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 27,
@@ -2018,6 +2024,7 @@ const Ayato = {
     card: "Assets/Characters/Ayato/Character_Kamisato_Ayato_Portrait.webp",
     element: "HydroCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24,
@@ -2333,6 +2340,7 @@ const Baizhu = {
     card: "Assets/Characters/Baizhu/Character_Baizhu_Portrait.webp",
     element: "DendroCharacter",
     level: "1b",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 14.99,
@@ -2649,6 +2657,7 @@ const Barbara = {
     card: "Assets/Characters/Barbara/Character_Barbara_Portrait.webp",
     element: "HydroCharacter",
     level: "1b",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 13,
@@ -2964,6 +2973,7 @@ const Beidou = {
     card: "Assets/Characters/Beidou/Character_Beidou_Portrait.webp",
     element: "ElectroCharacter",
     level: "1b",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -3279,6 +3289,7 @@ const Bennett = {
     src: "Assets/Characters/Bennet/Bennett.webp",
     card: "Assets/Characters/Bennet/Character_Bennett_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16,
@@ -3595,6 +3606,7 @@ const Candace = {
     src: "Assets/Characters/Candace/Candace.webp",
     card: "Assets/Characters/Candace/Character_Candace_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 17.81,
@@ -3909,6 +3921,7 @@ const Charlotte = {
     src: "Assets/Characters/Charlotte/Charlotte.webp",
     card: "Assets/Characters/Charlotte/Character_Charlotte_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 14.51,
@@ -4272,6 +4285,7 @@ const Chevreuse = {
     src: "Assets/Characters/Chevreuse/Chevreuse.webp",
     card: "Assets/Characters/Chevreuse/Character_Chevreuse_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16.21,
@@ -4636,6 +4650,7 @@ const Chiori = {
     src: "Assets/Characters/Chiori/Chiori.webp",
     card: "Assets/Characters/Chiori/Character_Chiori_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 25.14,
@@ -4998,6 +5013,7 @@ const Chongyun = {
     src: "Assets/Characters/Chongyun/Chongyun.webp",
     card: "Assets/Characters/Chongyun/Character_Chongyun_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -5292,6 +5308,7 @@ const Clorinde = {
     src: "Assets/Characters/Clorinde/Clorinde.webp",
     card: "Assets/Characters/Clorinde/Character_Clorinde_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26.25,
@@ -5654,6 +5671,7 @@ const Collei = {
     src: "Assets/Characters/Collei/Collei.webp",
     card: "Assets/Characters/Collei/Character_Collei_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16.74,
@@ -6016,6 +6034,7 @@ const Cyno = {
     src: "Assets/Characters/Cyno/Cyno.webp",
     card: "Assets/Characters/Cyno/Character_Cyno_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24.76,
@@ -6378,6 +6397,7 @@ const Dehya = {
     src: "Assets/Characters/Dehya/Dehya.webp",
     card: "Assets/Characters/Dehya/Character_Dehya_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20.67,
@@ -6742,6 +6762,7 @@ const Diluc = {
     src: "Assets/Characters/Diluc/Diluc.webp",
     card: "Assets/Characters/Diluc/Character_Diluc_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26,
@@ -7037,6 +7058,7 @@ const Diona = {
     src: "Assets/Characters/Diona/Diona.webp",
     card: "Assets/Characters/Diona/Character_Diona_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -7373,6 +7395,7 @@ const Dori = {
     src: "Assets/Characters/Dori/Dori.webp",
     card: "Assets/Characters/Dori/Character_Dori_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.70,
@@ -7737,6 +7760,7 @@ const Emilie = {
     src: "Assets/Characters/Emilie/Emilie.webp",
     card: "Assets/Characters/Emilie/Character_Emilie_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26.07,
@@ -8099,6 +8123,7 @@ const Eula = {
     src: "Assets/Characters/Eula/Eula.webp",
     card: "Assets/Characters/Eula/Character_Eula_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 27,
@@ -8414,6 +8439,7 @@ const Faruzan = {
     src: "Assets/Characters/Faruzan/Faruzan.webp",
     card: "Assets/Characters/Faruzan/Character_Faruzan_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16.47,
@@ -8776,6 +8802,7 @@ const Fischl = {
     src: "Assets/Characters/Fischl/Fischl.webp",
     card: "Assets/Characters/Fischl/Character_Fischl_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -9090,6 +9117,7 @@ const Freminet = {
     src: "Assets/Characters/Freminet/Freminet.webp",
     card: "Assets/Characters/Freminet/Character_Freminet_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 21.37,
@@ -9453,6 +9481,7 @@ const Furina = {
     src: "Assets/Characters/Furina/Furina.webp",
     card: "Assets/Characters/Furina/Character_Furina_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.99,
@@ -9817,6 +9846,7 @@ const Gaming = {
     src: "Assets/Characters/Gaming/Gaming.webp",
     card: "Assets/Characters/Gaming/Character_Gaming_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 25.29,
@@ -10179,6 +10209,7 @@ const Ganyu = {
     src: "Assets/Characters/Ganyu/Ganyu.webp",
     card: "Assets/Characters/Ganyu/Character_Ganyu_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26,
@@ -10411,6 +10442,7 @@ const Gorou = {
     src: "Assets/Characters/Gorou/Gorou.webp",
     card: "Assets/Characters/Gorou/Character_Gorou_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 4,
     level: "1b",
     baseAttack: function () {
         let baseattack = {
@@ -10706,6 +10738,7 @@ const Heizou = {
     src: "Assets/Characters/Heizou/Heizou.webp",
     card: "Assets/Characters/Heizou/Character_Heizou_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.88,
@@ -11068,6 +11101,7 @@ const Hu_Tao = {
     src: "Assets/Characters/Hu_Tao/Hu_Tao.webp",
     card: "Assets/Characters/Hu_Tao/Character_Hu_Tao_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     weaponType: "Polearm",
     baseAttack: function () {
         let baseattack = {
@@ -11322,6 +11356,7 @@ const Itto = {
     src: "Assets/Characters/Itto/Itto.webp",
     card: "Assets/Characters/Itto/Character_Arataki_Itto_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     level: "1b",
     baseAttack: function () {
         let baseattack = {
@@ -11661,6 +11696,7 @@ const Jean = {
     src: "Assets/Characters/Jean/Jean.webp",
     card: "Assets/Characters/Jean/Character_Jean_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -11977,6 +12013,7 @@ const Kachina = {
     src: "Assets/Characters/Kachina/Kachina.webp",
     card: "Assets/Characters/Kachina/Character_Kachina_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 4,
     origin: "Natlan",
     baseAttack: function () {
         let baseattack = {
@@ -12340,6 +12377,7 @@ const Kaeya = {
     src: "Assets/Characters/Kaeya/Kaeya.webp",
     card: "Assets/Characters/Kaeya/Character_Kaeya_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -12635,6 +12673,7 @@ const Kaveh = {
     src: "Assets/Characters/Kaveh/Kaveh.webp",
     card: "Assets/Characters/Kaveh/Character_Kaveh_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19.59,
@@ -12997,6 +13036,7 @@ const Kazuha = {
     src: "Assets/Characters/Kazuha/Kazuha.webp",
     card: "Assets/Characters/Kazuha/Character_Kaedehara_Kazuha_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 23,
@@ -13314,6 +13354,7 @@ const Keqing = {
     src: "Assets/Characters/Keqing/Keqing.webp",
     card: "Assets/Characters/Keqing/Character_Keqing_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 25,
@@ -13568,6 +13609,7 @@ const Kirara = {
     src: "Assets/Characters/Kirara/Kirara.webp",
     card: "Assets/Characters/Kirara/Character_Kirara_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.70,
@@ -13931,6 +13973,7 @@ const Klee = {
     src: "Assets/Characters/Klee/Klee.webp",
     card: "Assets/Characters/Klee/Character_Klee_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24,
@@ -14206,6 +14249,7 @@ const Kokomi = {
     src: "Assets/Characters/Kokomi/Kokomi.webp",
     card: "Assets/Characters/Kokomi/Character_Sangonomiya_Kokomi_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     level: "1b",
 
     baseAttack: function () {
@@ -14503,6 +14547,7 @@ const Kuki = {
     src: "Assets/Characters/Kuki/Kuki.webp",
     card: "Assets/Characters/Kuki/Character_Kuki_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 17.81,
@@ -14867,6 +14912,7 @@ const Layla = {
     src: "Assets/Characters/Layla/Layla.webp",
     card: "Assets/Characters/Layla/Character_Layla_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.16,
@@ -15230,6 +15276,7 @@ const Lisa = {
     src: "Assets/Characters/Lisa/Lisa.webp",
     card: "Assets/Characters/Lisa/Character_Lisa_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -15505,6 +15552,7 @@ const Lynette = {
     src: "Assets/Characters/Lynette/Lynette.webp",
     card: "Assets/Characters/Lynette/Character_Lynette_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19.41,
@@ -15867,6 +15915,7 @@ const Lyney = {
     src: "Assets/Characters/Lyney/Lyney.webp",
     card: "Assets/Characters/Lyney/Character_Lyney_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24.76,
@@ -16253,6 +16302,7 @@ const Mika = {
     src: "Assets/Characters/Mika/Mika.webp",
     card: "Assets/Characters/Mika/Character_Mika_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.70,
@@ -16616,6 +16666,7 @@ const Mona = {
     src: "Assets/Characters/Mona/Mona.webp",
     card: "Assets/Characters/Mona/Character_Mona_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 22,
@@ -16891,6 +16942,7 @@ const Mualani = {
     src: "Assets/Characters/Mualani/Mualani.webp",
     card: "Assets/Characters/Mualani/Character_Mualani_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     origin: "Natlan",
     baseAttack: function () {
         let baseattack = {
@@ -17254,6 +17306,7 @@ const Nahida = {
     src: "Assets/Characters/Nahida/Nahida.webp",
     card: "Assets/Characters/Nahida/Character_Nahida_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 23.28,
@@ -17616,6 +17669,7 @@ const Navia = {
     src: "Assets/Characters/Navia/Navia.webp",
     card: "Assets/Characters/Navia/Character_Navia_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 27.37,
@@ -17978,6 +18032,7 @@ const Neuvillette = {
     src: "Assets/Characters/Neuvillette/Neuvillette.webp",
     card: "Assets/Characters/Neuvillette/Character_Neuvillette_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16.22,
@@ -18274,6 +18329,7 @@ const Nilou = {
     src: "Assets/Characters/Nilou/Nilou.webp",
     card: "Assets/Characters/Nilou/Character_Nilou_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 17.88,
@@ -18636,6 +18692,7 @@ const Ningguang = {
     src: "Assets/Characters/Ningguang/Ningguang.webp",
     card: "Assets/Characters/Ningguang/Character_Ningguang_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -18914,6 +18971,7 @@ const Noelle = {
     src: "Assets/Characters/Noelle/Noelle.webp",
     card: "Assets/Characters/Noelle/Character_Noelle_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 16,
@@ -19214,6 +19272,7 @@ const Qiqi = {
     src: "Assets/Characters/Qiqi/Qiqi.webp",
     card: "Assets/Characters/Qiqi/Character_Qiqi_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 22,
@@ -19472,6 +19531,7 @@ const Raiden = {
     src: "Assets/Characters/Raiden/Raiden.webp",
     card: "Assets/Characters/Raiden/Character_Raiden_Shogun_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     level: "1b",
     baseAttack: function () {
         let baseattack = {
@@ -19724,6 +19784,7 @@ const Razor = {
     src: "Assets/Characters/Razor/Razor.webp",
     card: "Assets/Characters/Razor/Character_Razor_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -20003,6 +20064,7 @@ const Rosaria = {
     src: "Assets/Characters/Rosaria/Rosaria.webp",
     card: "Assets/Characters/Rosaria/Character_Rosaria_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -20282,6 +20344,7 @@ const Sara = {
     src: "Assets/Characters/Sara/Sara.webp",
     card: "Assets/Characters/Sara/Character_Kujou_Sara_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     level: "1b",
     baseAttack: function () {
         let baseattack = {
@@ -20582,6 +20645,7 @@ const Sayu = {
     src: "Assets/Characters/Sayu/Sayu.webp",
     card: "Assets/Characters/Sayu/Character_Sayu_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -20881,6 +20945,7 @@ const Sethos = {
     src: "Assets/Characters/Sethos/Sethos.webp",
     card: "Assets/Characters/Sethos/Character_Sethos_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19.05,
@@ -21243,6 +21308,7 @@ const Shenhe = {
     src: "Assets/Characters/Shenhe/Shenhe.webp",
     card: "Assets/Characters/Shenhe/Character_Shenhe_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 5,
     level: "1b",
 
     baseAttack: function () {
@@ -21544,6 +21610,7 @@ const Sigewinne = {
     src: "Assets/Characters/Sigewinne/Sigewinne.webp",
     card: "Assets/Characters/Sigewinne/Character_Sigewinne_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 14.99,
@@ -21907,6 +21974,7 @@ const Sucrose = {
     src: "Assets/Characters/Sucrose/Sucrose.webp",
     card: "Assets/Characters/Sucrose/Character_Sucrose_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 14,
@@ -22206,6 +22274,7 @@ const Thoma = {
     src: "Assets/Characters/Thoma/Thoma.webp",
     card: "Assets/Characters/Thoma/Character_Thoma_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     level: "1b",
 
     baseAttack: function () {
@@ -22507,6 +22576,7 @@ const Tighnari = {
     src: "Assets/Characters/Tighnari/Tighnari.webp",
     card: "Assets/Characters/Tighnari/Character_Tighnari_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20.85,
@@ -22893,6 +22963,7 @@ const Tartaglia = {
     src: "Assets/Characters/Tartaglia/Tartaglia.webp",
     card: "Assets/Characters/Tartaglia/Character_Tartaglia_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 23,
@@ -23170,6 +23241,7 @@ const Traveler_Anemo = {
     src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -23490,6 +23562,7 @@ const Traveler_Dendro = {
     src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -23810,6 +23883,7 @@ const Traveler_Electro = {
     src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -24130,6 +24204,7 @@ const Traveler_Geo = {
     src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -24450,6 +24525,7 @@ const Traveler_Hydro = {
     src: "Assets/Characters/Traveler/Traveler.webp",
     card: "Assets/Characters/Traveler/Character_Traveler_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18,
@@ -24770,6 +24846,7 @@ const Venti = {
     src: "Assets/Characters/Venti/Venti.webp",
     card: "Assets/Characters/Venti/Character_Venti_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -25026,6 +25103,7 @@ const Wanderer = {
     src: "Assets/Characters/Wanderer/Wanderer.webp",
     card: "Assets/Characters/Wanderer/Character_Wanderer_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 25.51,
@@ -25388,6 +25466,7 @@ const Wriothesley = {
     src: "Assets/Characters/Wriothesley/Wriothesley.webp",
     card: "Assets/Characters/Wriothesley/Character_Wriothesley_Portrait.webp",
     element: "CryoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 24.21,
@@ -25750,6 +25829,7 @@ const Xiangling = {
     src: "Assets/Characters/Xiangling/Xiangling.webp",
     card: "Assets/Characters/Xiangling/Character_Xiangling_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 19,
@@ -26072,6 +26152,7 @@ const Xianyun = {
     src: "Assets/Characters/Xianyun/Xianyun.webp",
     card: "Assets/Characters/Xianyun/Character_Xianyun_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 26.07,
@@ -26436,6 +26517,7 @@ const Xiao = {
     src: "Assets/Characters/Xiao/Xiao.webp",
     card: "Assets/Characters/Xiao/Character_Xiao_Portrait.webp",
     element: "AnemoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 27,
@@ -26689,7 +26771,9 @@ const Xilonen = {
     src: "Assets/Characters/Xilonen/Xilonen.webp",
     card: "Assets/Characters/Xilonen/Character_Xilonen_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     origin: "Natlan",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 21.41,
@@ -27052,6 +27136,7 @@ const Xingqiu = {
     src: "Assets/Characters/Xingqiu/Xingqiu.webp",
     card: "Assets/Characters/Xingqiu/Character_Xingqiu_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 17,
@@ -27374,6 +27459,7 @@ const Xinyan = {
     src: "Assets/Characters/Xinyan/Xinyan.webp",
     card: "Assets/Characters/Xinyan/Character_Xinyan_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 21,
@@ -27676,6 +27762,7 @@ const Yae_Miko = {
     src: "Assets/Characters/Yae_Miko/Yae_Miko.webp",
     card: "Assets/Characters/Yae_Miko/Character_Yae_Miko_Portrait.webp",
     element: "ElectroCharacter",
+    rarity: 5,
     level: "1b",
     baseAttack: function () {
         let baseattack = {
@@ -27977,6 +28064,7 @@ const Yanfei = {
     src: "Assets/Characters/Yanfei/Yanfei.webp",
     card: "Assets/Characters/Yanfei/Character_Yanfei_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -28281,6 +28369,7 @@ const Yaoyao = {
     src: "Assets/Characters/Yaoyao/Yaoyao.webp",
     card: "Assets/Characters/Yaoyao/Character_Yaoyao_Portrait.webp",
     element: "DendroCharacter",
+    rarity: 4,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 17.81,
@@ -28644,6 +28733,7 @@ const Yelan = {
     src: "Assets/Characters/Yelan/Yelan.webp",
     card: "Assets/Characters/Yelan/Character_Yelan_Portrait.webp",
     element: "HydroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.99,
@@ -28985,6 +29075,7 @@ const Yoimiya = {
     src: "Assets/Characters/Yoimiya/Yoimiya.webp",
     card: "Assets/Characters/Yoimiya/Character_Yoimiya_Portrait.webp",
     element: "PyroCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 25,
@@ -29305,6 +29396,7 @@ const Yun_Jin = {
     src: "Assets/Characters/Yun_Jin/Yun_Jin.webp",
     card: "Assets/Characters/Yun_Jin/Character_Yun_Jin_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 4,
     level: "1b",
 
     baseAttack: function () {
@@ -29629,6 +29721,7 @@ const Zhongli = {
     src: "Assets/Characters/Zhongli/Zhongli.webp",
     card: "Assets/Characters/Zhongli/Character_Zhongli_Portrait.webp",
     element: "GeoCharacter",
+    rarity: 5,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 20,
@@ -29908,6 +30001,7 @@ const Empty = {
     src: "Assets/Characters/Name/Name.webp",
     card: "Assets/Characters/Name/Character_Name_Portrait.webp",
     element: "ElementCharacter",
+    rarity: 0,
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 0,
