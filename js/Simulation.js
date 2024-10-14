@@ -95,7 +95,8 @@ let partyElementalMasteryBonus = 0;
 let nighttimeWhispersBuff = false;
 let Yun_JinC4Buff = false;
 let peakPatrolStacks = 0;
-
+let scrollOfTheHeroOfCinderCityBuff = false;
+let scrollOfTheHeroOfCinderCityBuffBig = false;
 
 function getBuild(build, score) {
     let character = build.character;
@@ -429,6 +430,7 @@ class Createcharacter {
         this.card = baseCharacter.card;
         this.supportType = baseCharacter.supportType;
         this.supportType2 = baseCharacter.supportType2 || "null";
+        this.origin = baseCharacter.origin || "unknown";
         this.element = baseCharacter.element;
         this.level = baseCharacter.level;
         this.energyOffset = baseCharacter.energyOffset;
@@ -1109,6 +1111,7 @@ function getSetBonus(array, character) {
                     if ((character.element == "ElectroCharacter" && supportingElement == "Dendro") || (character.element == "DendroCharacter" && supportingElement == "Electro")) {
                         character.sequence[role].push("E");
                     }
+
                 }
                 else {
                     if (artifactSets[array[i]].fourPiece.Type == undefined) {
@@ -1131,6 +1134,11 @@ function getSetBonus(array, character) {
                 artifactSets[array[i]].twoPiece.forEach(buff => {
                     character.currentBuffs.push(buff);
                 });
+            }
+            else if (currentSet == "Scroll_of_the_Hero_of_Cinder_City") {
+                if (character.origin == "Natlan") {
+                    character.energyOffset -= 10;
+                }
             }
             else {
                 character.currentBuffs.push(artifactSets[array[i]].twoPiece);
@@ -1230,6 +1238,8 @@ function resetVariables() {
     partyElementalMasteryBonus = 0;
     nighttimeWhispersBuff = false;
     Yun_JinC4Buff = false;
+    scrollOfTheHeroOfCinderCityBuff = false;
+    scrollOfTheHeroOfCinderCityBuffBig = false;
     if (document.getElementById("partyGivesShield").checked) {
         hasShield = true;
     }
@@ -2619,13 +2629,13 @@ function Simulation(character) {
                                 elements.forEach(element => {
                                     character.currentBuffs.push({ Type: element + "DMGBonus", Value: 10, Source: "Peak Patrol Song" });
                                 });
-                                if(peakPatrolStacks == 2){
-                                    let buff = 8*(character.DEF()/1000);
-                                    if(buff > 25.6){
+                                if (peakPatrolStacks == 2) {
+                                    let buff = 8 * (character.DEF() / 1000);
+                                    if (buff > 25.6) {
                                         buff = 25.6;
                                     }
                                     atkBuff += buff;
-                                    character.currentBuffs.push({ Type: character.element.slice(0,-9)+"DMGBonus", Value: buff, Source: "Peak Patrol Song" });
+                                    character.currentBuffs.push({ Type: character.element.slice(0, -9) + "DMGBonus", Value: buff, Source: "Peak Patrol Song" });
                                 }
                             }
                         }
@@ -3697,6 +3707,13 @@ function Simulation(character) {
             break;
 
 
+    }
+    if (scrollOfTheHeroOfCinderCityBuff) {
+        atkBuff += 12;
+        if (scrollOfTheHeroOfCinderCityBuffBig) {
+            atkBuff += 28
+            
+        }
     }
     return { dmg: Math.floor(totalDmg), character: Character, healing: heal, buff: atkBuff + bonusMultiplier, shield: shield, dmgSources: dmgSources };
 
@@ -4814,6 +4831,16 @@ function hasTriggerdAReaction(character) {
                 character.currentBuffs.push({ Type: "ElementalMastery", Value: 75 * differentElement, Source: "Gilded Dreams" });
                 character.currentBuffs.push({ Type: "ATK%", Value: 21 * sameElement, Source: "Gilded Dreams" });
                 gildedDreamsBuff = true;
+            }
+            break;
+        case "Scroll of the Hero of Cinder City":
+            if (!scrollOfTheHeroOfCinderCityBuff) {
+                character.currentBuffs.push({ Type: "ElementalDMG", Value: 12, Source: "Scroll of the Hero of Cinder City" });
+                if (character.nightsoul) {
+                    character.currentBuffs.push({ Type: "ElementalDMG", Value: 28, Source: "Scroll of the Hero of Cinder City" });
+                    scrollOfTheHeroOfCinderCityBuffBig = true;
+                }
+                scrollOfTheHeroOfCinderCityBuff = true;
             }
             break;
     }

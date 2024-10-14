@@ -7266,6 +7266,7 @@ function yohualsScratch(character) {
             resShred = 45;
             break;
     }
+    character.nightsoul = true;
     let rushAttack = { Multiplier: rushDMG, Element: "GeoDMGBonus", Scaling: "DEF", isReaction: true, type: "ElementalSkill" }
     let dmg = dmgCalc(rushAttack, character) * numberOfEnemies;
     let samples = 0;
@@ -7320,7 +7321,6 @@ function yohualsScratch(character) {
     character.normalAttack2.Scaling = "DEF";
     character.normalAttack3.Element = "GeoDMGBonus";
     character.normalAttack3.Scaling = "DEF";
-
     return { dmg: dmg, attackBuff: resShred + extraBuff, healing: healing };
 
 }

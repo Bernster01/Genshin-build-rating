@@ -11977,6 +11977,7 @@ const Kachina = {
     src: "Assets/Characters/Kachina/Kachina.webp",
     card: "Assets/Characters/Kachina/Character_Kachina_Portrait.webp",
     element: "GeoCharacter",
+    origin: "Natlan",
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 18.16,
@@ -16890,6 +16891,7 @@ const Mualani = {
     src: "Assets/Characters/Mualani/Mualani.webp",
     card: "Assets/Characters/Mualani/Character_Mualani_Portrait.webp",
     element: "HydroCharacter",
+    origin: "Natlan",
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 14.15,
@@ -26687,6 +26689,7 @@ const Xilonen = {
     src: "Assets/Characters/Xilonen/Xilonen.webp",
     card: "Assets/Characters/Xilonen/Character_Xilonen_Portrait.webp",
     element: "GeoCharacter",
+    origin: "Natlan",
     baseAttack: function () {
         let baseattack = {
             ["1b"]: 21.41,
@@ -26772,7 +26775,7 @@ const Xilonen = {
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
     energyOffset: 120, //Needs testing
-    supportType: "ResShreder",
+    supportType: "Buffer",
     sequence: {
         ["Dps"]: ["E","N1","N2","N3","N1","N2","N3","N1","N2","N3","N1","N2","N3","N1","N2","N3","Q"],
         ["Support"]: ["E","N1","N2","Q"],

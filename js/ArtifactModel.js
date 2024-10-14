@@ -37,16 +37,17 @@ const sets = {
     [22]:"Ocean-Hued_Clam",
     [23]:"Pale_Flame",
     [24]:"Retracing_Bolide",
-    [25]:"Shimenawas_Reminiscence",
-    [26]:"Song_of_Days_Past",
-    [27]:"Tenacity_of_the_Millelith",
-    [28]:"Thundering_Fury",
-    [29]:"Thundersoother",
-    [30]:"Unfinished_Reverie",
-    [31]:"Vermillion_Hereafter",
-    [32]:"Viridescent_Venerer",
-    [33]:"Vourukashas_Glow",
-    [34]:"Wanderers_Troupe"
+    [25]:"Scroll_of_the_Hero_of_Cinder_City",
+    [26]:"Shimenawas_Reminiscence",
+    [27]:"Song_of_Days_Past",
+    [28]:"Tenacity_of_the_Millelith",
+    [29]:"Thundering_Fury",
+    [30]:"Thundersoother",
+    [31]:"Unfinished_Reverie",
+    [32]:"Vermillion_Hereafter",
+    [33]:"Viridescent_Venerer",
+    [34]:"Vourukashas_Glow",
+    [35]:"Wanderers_Troupe"
 }
 const setsList = [
     "Archaic_Petra",
@@ -74,6 +75,7 @@ const setsList = [
     "Ocean-Hued_Clam",
     "Pale_Flame",
     "Retracing_Bolide",
+    "Scroll_of_the_Hero_of_Cinder_City",
     "Shimenawas_Reminiscence",
     "Song_of_Days_Past",
     "Tenacity_of_the_Millelith",
@@ -227,6 +229,11 @@ const artifactSets = {
         twoPiece: { Type: "ShieldStrength", Value: 35 },
         fourPiece: { Type: "Retracing Bolide", Value: null }
        
+    },
+    ["Scroll_of_the_Hero_of_Cinder_City"]: {
+        Type: "Scroll of the Hero of Cinder City",
+        twoPiece: { Type: "", Value: null },
+        fourPiece: { Type: "Scroll of the Hero of Cinder City", Value: null }
     },
     ["Shimenawas_Reminiscence"]: {
         Type: "Shimenawas Reminiscence",
