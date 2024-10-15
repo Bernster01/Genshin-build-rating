@@ -1543,7 +1543,7 @@ function Simulation(character) {
             break;
         case "Hu Tao":
             if (Character.constellations >= 1) {
-                Character.sequence["Dps"].push("N1", "C", "N1", "C", "N1", "C");
+                Character.sequence["Dps"].push("N1", "C", "N1", "C");
             }
             if (Character.constellations >= 6) {
                 Character.currentBuffs.push({ Type: "CritRate", Value: 100, Source: "C2" });
