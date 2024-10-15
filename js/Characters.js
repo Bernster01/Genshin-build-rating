@@ -11187,7 +11187,7 @@ const Hu_Tao = {
     normalAttackTalent: 1,
     elementalSkillTalent: 1,
     elementalBurstTalent: 1,
-    energyOffset: 130,
+    energyOffset: 100,
     supportType: "Sub-dps",
     sequence: {
         ["Dps"]: ["E", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "N1", "C", "Q"],

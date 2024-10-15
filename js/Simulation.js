@@ -3170,7 +3170,7 @@ function Simulation(character) {
                                     { Type: "ChargedAttack", Value: 50 },
                                     { Type: "NormalAttack", Value: 50 },
                                     { Type: "PlungeAttack", Value: 50 },
-                                    { Type: "EnergyRecharge", Value: -20 }];
+                                ];
                                 buffs.forEach(buff => {
                                     character.currentBuffs.push(buff);
                                 });
@@ -3709,9 +3709,9 @@ function Simulation(character) {
             atkBuff *= (8 / 100);
             break;
         case "Shimenawas Reminiscence":
-            let dmgToReduce = dmgSources.q * 0.25;
-            dmgSources.q -= dmgToReduce;
-            totalDmg -= dmgToReduce;
+            if (Character.energyOffset >100){
+                Character.energyOffset += 30;
+            }
             break;
 
 
